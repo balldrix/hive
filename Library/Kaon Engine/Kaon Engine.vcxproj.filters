@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{4b956fe4-96d8-46da-a333-38856598c319}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{28a90619-7a3a-47be-b2b8-e0653afd7341}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{81b41e1a-f317-4510-a5c8-d9d0a1447da1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Timer">
+      <UniqueIdentifier>{10705175-3081-4280-a45c-e767aecf79df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2D Maths">
+      <UniqueIdentifier>{f013e54c-dfa3-4338-a9c2-9fa8968cccb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lists">
+      <UniqueIdentifier>{804e07f5-8876-4a7e-b56c-968fd761c275}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameStates">
+      <UniqueIdentifier>{ba30711e-7ddb-4c6e-afea-217c93968dea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Sprite">
+      <UniqueIdentifier>{6108355f-32fc-4a0b-89d1-13caa2d4c3fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Font">
+      <UniqueIdentifier>{e4595bf0-0ad9-4e78-a735-0d3ef6617111}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Sprite\Animated Sprite">
+      <UniqueIdentifier>{90f363f8-7f73-4375-88d0-ba8875b29c31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collisions">
+      <UniqueIdentifier>{32ebc92d-2e4e-4d4f-9f51-59ceac313e45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collisions\AABB">
+      <UniqueIdentifier>{8afe2d4e-ae1c-4afa-aa28-4ec58ca09f5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Randomiser">
+      <UniqueIdentifier>{09365707-b36b-491f-bdf4-5863ecac83c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Texture Manager">
+      <UniqueIdentifier>{89ce128a-05f7-4e90-aed8-da634020de09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Transform">
+      <UniqueIdentifier>{1241da66-3ce2-4545-97ac-006cacaa70ca}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Graphics.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Game.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Input.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Timer.h">
+      <Filter>Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Controls.h" />
+    <ClInclude Include="..\Sprite.h">
+      <Filter>Graphics\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Font.h">
+      <Filter>Graphics\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Vector2D.h">
+      <Filter>2D Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ListNode.h">
+      <Filter>Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LinkedList.h">
+      <Filter>Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameState.h">
+      <Filter>GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameStateManager.h">
+      <Filter>GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Listnode.inl">
+      <Filter>Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Constants.h" />
+    <ClInclude Include="..\AnimatedSprite.h">
+      <Filter>Graphics\Sprite\Animated Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UnitVectors.h">
+      <Filter>2D Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Colours.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AABB.h">
+      <Filter>Collisions\AABB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Randomiser.h">
+      <Filter>Randomiser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TextureManager.h">
+      <Filter>Graphics\Texture Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Transform.h">
+      <Filter>Transform</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Graphics.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Game.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Input.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Timer.cpp">
+      <Filter>Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sprite.cpp">
+      <Filter>Graphics\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Font.cpp">
+      <Filter>Graphics\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Vector2D.cpp">
+      <Filter>2D Maths</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameState.cpp">
+      <Filter>GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameStateManager.cpp">
+      <Filter>GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AnimatedSprite.cpp">
+      <Filter>Graphics\Sprite\Animated Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AABB.cpp">
+      <Filter>Collisions\AABB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Randomiser.cpp">
+      <Filter>Randomiser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TextureManager.cpp">
+      <Filter>Graphics\Texture Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Transform.cpp">
+      <Filter>Transform</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\LinkedList.inl">
+      <Filter>Lists</Filter>
+    </None>
+  </ItemGroup>
+</Project>

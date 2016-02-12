@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Source\FrontEnd.cpp">
+      <Filter>Game\States\FrontEnd</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameOver.cpp">
+      <Filter>Game\States\GameOver</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Running.cpp">
+      <Filter>Game\States\Running</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ControlScreen.cpp">
+      <Filter>Game\States\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\Hive.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Player.cpp">
+      <Filter>GameObjects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Bullet.cpp">
+      <Filter>GameObjects\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Enemy.cpp">
+      <Filter>GameObjects\Enemy</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Game">
+      <UniqueIdentifier>{43da8bb6-5f57-4623-a358-34df94ac46c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\States">
+      <UniqueIdentifier>{79dc8797-5c85-46ea-8d57-312e9edba92e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\States\FrontEnd">
+      <UniqueIdentifier>{d2e4cba8-2e04-47a2-8d0d-e9746d2d3844}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\States\GameOver">
+      <UniqueIdentifier>{61392a2b-e3a0-4b1a-8020-06c64c991f50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\States\Running">
+      <UniqueIdentifier>{5f7f98cd-911d-459e-8ecc-8889aebbdd30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\States\Controls">
+      <UniqueIdentifier>{040b36b1-14f1-4409-acdc-486fc8531e5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects">
+      <UniqueIdentifier>{1f038420-2f08-450e-a081-910749b19e90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Player">
+      <UniqueIdentifier>{4dceaaf2-ab28-473f-94ae-22b9f52f368b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Bullet">
+      <UniqueIdentifier>{e65975bf-9711-4f8f-bb1a-1e06a1775636}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Enemy">
+      <UniqueIdentifier>{c60fa7d2-bcbc-4d5c-a92f-dc90c7226a7f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\FrontEnd.h">
+      <Filter>Game\States\FrontEnd</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameOver.h">
+      <Filter>Game\States\GameOver</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Running.h">
+      <Filter>Game\States\Running</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ControlScreen.h">
+      <Filter>Game\States\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resources.h" />
+    <ClInclude Include="Source\Hive.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Player.h">
+      <Filter>GameObjects\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Bullet.h">
+      <Filter>GameObjects\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy.h">
+      <Filter>GameObjects\Enemy</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
