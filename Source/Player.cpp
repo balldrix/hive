@@ -55,8 +55,8 @@ void
 Player::Update(float deltaTime)
 {
 	AnimatedSprite::Update(deltaTime);
-
 	AnimatedSprite::FlipSprite();
+	Transform::Update(deltaTime);
 	
 	// set collision box for melee attack
 	m_meleeHitBox = m_collisionBox;

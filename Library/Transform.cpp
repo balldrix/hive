@@ -15,9 +15,17 @@ void
 Transform::Update(float deltaTime)
 {
 	float speed;
+	float velocityX;
+	float velocityY;
+
 	speed = Lerp(m_targetMovementSpeed, m_currentMovementSpeed, deltaTime);
+	
+	
+	velocityX = Lerp(m_targetVelocity.x, m_currentVelocity.x, deltaTime);
+	velocityY = Lerp(m_targetVelocity.y, m_currentVelocity.y, deltaTime);
 
 	SetCurrentMovementSpeed(speed);
+	SetCurrentVelocity(velocityX, velocityY);
 
 	m_position += (m_currentVelocity * speed) * deltaTime;
 }
