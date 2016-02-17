@@ -82,7 +82,7 @@ private:
 	Enemy				m_enemy[MAX_ENEMY];
 
 	//TextureManager		m_enemyTexture;
-	//TextureManager		m_bulletTexture;
+	TextureManager		m_bulletTexture;
 	TextureManager		m_playerTexture;
 
 	void				LoadAssets();

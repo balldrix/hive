@@ -3,6 +3,9 @@
 #include "Constants.h"
 
 Bullet::Bullet() :
+AnimatedSprite(),
+Transform(),
+AABB(),
 m_pBulletTexture(NULL),
 m_bulletState(STATIC)
 {
@@ -14,11 +17,14 @@ Bullet::~Bullet()
 }
 
 void
-Bullet::Init(TextureManager* texture)
+Bullet::Init(Graphics* graphics, TextureManager* texture)
 {
+	m_pGraphics = graphics;
 	m_pBulletTexture = texture;
 
-	//m_currentMovementSpeed = SPEED;
+	AnimatedSprite::Init(graphics, texture, "Bullet", BULLET, NUM_BULLET_ANIM_FRAMES, BULLET_ANIM_FRAME_DELAY);
+
+	m_currentMovementSpeed = BULLET_SPEED;
 }
 
 void

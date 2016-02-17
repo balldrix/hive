@@ -42,12 +42,11 @@ Running::OnExit()
 void
 Running::LoadAssets()
 {
-
 	m_playerTexture.Init(m_pGraphics, PLAYER);
-	//m_bulletTexture.Init(m_pGraphics, "Bullet");
+	m_bulletTexture.Init(m_pGraphics, BULLET);
 	//m_enemyTexture.Init(m_pGraphics, "ENEMY");
 	
-	m_player.Init(m_pGraphics, &m_playerTexture);
+	m_player.Init(m_pGraphics, &m_playerTexture, &m_bulletTexture);
 
 	//for(int index = 0; index < MAX_ENEMY; index++)
 	//{

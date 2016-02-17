@@ -5,7 +5,7 @@ Player::Player() :
 AnimatedSprite(),
 Transform(),
 m_pGraphics(NULL),
-m_pTextureManager(NULL),
+m_pPlayerTexture(NULL),
 m_collisionBox(AABB()),
 m_meleeHitBox(AABB()),
 m_playerState(IDLE),
@@ -24,19 +24,17 @@ Player::~Player()
 }
 
 void
-Player::Init(Graphics* graphics, TextureManager* textureManager)
+Player::Init(Graphics* graphics, TextureManager* playerTexture, TextureManager* bulletTexture)
 {
 	m_pGraphics = graphics;
-	m_pTextureManager = textureManager;
+	m_pPlayerTexture = playerTexture;
 
-	AnimatedSprite::Init(m_pGraphics, m_pTextureManager, "PLAYER", PLAYER, NUM_PLAYER_ANIM_FRAMES, PLAYER_ANIM_FRAME_DELAY);
+	AnimatedSprite::Init(m_pGraphics, m_pPlayerTexture, "PLAYER", PLAYER, NUM_PLAYER_ANIM_FRAMES, PLAYER_ANIM_FRAME_DELAY);
 
-	//m_pBulletSprite = bulletSprite;
-
-	//for(int index = 0; index < MAX_BULLETS_ON_SCREEN; index++)
-	//{
-	//	m_bullets[index].Init(bulletSprite);
-	//}
+	for(int index = 0; index < MAX_BULLETS_ON_SCREEN; index++)
+	{
+		m_bullet[index].Init(m_pGraphics, bulletTexture);
+	}
 
 	Transform::SetCurrentMovementSpeed(PLAYER_WALK_SPEED);
 	
