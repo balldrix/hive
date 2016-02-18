@@ -18,10 +18,10 @@ public:
 	~Sprite();
 	virtual bool				Init(Graphics* graphics, TextureManager* textureManager, const char* ID, const char* fileName);
 	virtual void				Update(float deltaTime);
-	virtual	void				RenderSprite();
-	virtual	void				RenderSprite(Vector2D position);
-	virtual	void				RenderSprite(Vector2D position, RECT rect);
-	void						RenderHitBox(Graphics* graphics, AABB box);
+	virtual	void				Render();
+	virtual	void				Render(Vector2D position);
+	virtual	void				Render(Vector2D position, RECT rect);
+	void						RenderHitBox(AABB box);
 
 	virtual	void				SetID(const char* ID);
 	virtual	void				SetTransKey(int r, int g, int b);

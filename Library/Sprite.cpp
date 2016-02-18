@@ -64,7 +64,7 @@ Sprite::Update(float deltaTime)
 }
 	
 void
-Sprite::RenderSprite()
+Sprite::Render()
 {
 	if (m_pGraphics != NULL && m_pTextureManager != NULL )
 	{
@@ -73,25 +73,25 @@ Sprite::RenderSprite()
 }
 
 void
-Sprite::RenderSprite(Vector2D position)
+Sprite::Render(Vector2D position)
 {
 	m_spriteData.position = position;
 
-	RenderSprite();
+	Sprite::Render();
 }
 
 
 void
-Sprite::RenderSprite(Vector2D position, RECT rect)
+Sprite::Render(Vector2D position, RECT rect)
 {
 	m_spriteData.position = position;
 	SetRect(rect);
 
-	RenderSprite();
+	Sprite::Render();
 }
 
 void
-Sprite::RenderHitBox(Graphics* graphics, AABB box)
+Sprite::RenderHitBox(AABB box)
 {
 	// draw primitives using graphics pointer
 
@@ -132,9 +132,9 @@ Sprite::RenderHitBox(Graphics* graphics, AABB box)
 	m_vertex[4].rhw = 1.0f;
 	m_vertex[4].colour = colourNS::LIME;
 
-	graphics->CreateVertexBuffer(m_vertex, sizeof m_vertex, m_vertexBuffer);
+	m_pGraphics->CreateVertexBuffer(m_vertex, sizeof m_vertex, m_vertexBuffer);
 
-	graphics->RenderQuad(m_vertexBuffer);
+	m_pGraphics->RenderQuad(m_vertexBuffer);
 }
 
 void

@@ -25,20 +25,23 @@ public:
 	Bullet();
 	~Bullet();
 
-	void Init(Graphics* graphics, TextureManager* texture);
-	void Update(float deltaTime);
-	void Render();
+	void				Init(Graphics* graphics, TextureManager* texture);
+	void				Update(float deltaTime);
+	void				Render();
 
-	void Reset();
+	void				Reset();
 
-	void SetBulletState(BULLET_STATE state);
+	void				SetBulletState(BULLET_STATE state);
+	void				SetActive(bool active);
 
-	BULLET_STATE		GetBulletState() const { return m_bulletState; }
+	BULLET_STATE		GetBulletState()	const { return m_bulletState; }
+	bool				GetActive()			const { return m_active; }
 
 private:
 	Graphics*			m_pGraphics;
 	TextureManager*		m_pBulletTexture;
 	BULLET_STATE		m_bulletState;
+	bool				m_active;
 };
 
 #endif _BULLET_H_

@@ -69,13 +69,13 @@ Player::Update(float deltaTime)
 	}
 
 	// Update Bullets
- //	for (int index = 0; index < MAX_BULLETS_ON_SCREEN; index++)
-	//{
-	//	if(m_bullets[index].IsActive())
-	//	{
-	//		m_bullets[index].Update(deltaTime);
-	//	}
- //	}
+ 	for (int index = 0; index < MAX_BULLETS_ON_SCREEN; index++)
+	{
+		if(m_bullet[index].GetActive())
+		{
+			m_bullet[index].Update(deltaTime);
+		}
+ 	}
 
 	///////////////////////////////////////////
 	// handle bullets delay
@@ -111,12 +111,12 @@ Player::Update(float deltaTime)
 void
 Player::Render()
 {
-	Sprite::RenderSprite(m_position, m_spriteData.rect);
+	Sprite::Render(m_position, m_spriteData.rect);
 
-	//for (int index = 0; index < MAX_BULLETS_ON_SCREEN; index++)
-	//{
-	//	m_bullets[index].Render();
-	//}
+	for (int index = 0; index < MAX_BULLETS_ON_SCREEN; index++)
+	{
+		m_bullet[index].Render();
+	}
 
 	//if(m_showHitBox)
 	//{
@@ -131,7 +131,7 @@ Player::Render()
 void
 Player::Shoot()
 {
-	/*if (!m_firedGun)
+	if (!m_firedGun)
 	{
 		m_firedGun = true;
 		m_shootingTimer = SHOOTING_DELAY;
@@ -139,31 +139,31 @@ Player::Shoot()
 		for (int index = 0; index < MAX_BULLETS_ON_SCREEN; index++)
 		{
 			
-			if (!m_bullets[index].IsActive())
+			if (!m_bullet[index].GetActive())
 			{
-				m_bullets[index].SetActive(true);
-				m_bullets[index].SetFacingDirection(m_facingDirection);
-				m_bullets[index].SetCurrentAnimFrame(0);
-				m_bullets[index].SetAnimDone(false);
+				m_bullet[index].SetActive(true);
+				m_bullet[index].SetFacingDirection(m_facingDirection);
+				m_bullet[index].SetCurrentFrame(0);
+				m_bullet[index].SetAnimDone(false);
 				
 				if (m_facingDirection == RIGHT)
 				{
-					m_bullets[index].SetPosition(m_position + Vector2D(8.0f, 0.0f));
-					m_bullets[index].SetCurrentVelocity(directionNS::RIGHT);
+					m_bullet[index].SetPosition(m_position + Vector2D(8.0f, 0.0f));
+					m_bullet[index].SetCurrentVelocity(directionNS::RIGHT);
 					m_position.x -= PLAYER_KICKBACK;
 
 				}
 				else
 				{
-					m_bullets[index].SetPosition(m_position - Vector2D(8.0f, 0.0f));
-					m_bullets[index].SetCurrentVelocity(directionNS::LEFT);
+					m_bullet[index].SetPosition(m_position - Vector2D(8.0f, 0.0f));
+					m_bullet[index].SetCurrentVelocity(directionNS::LEFT);
 					m_position.x += PLAYER_KICKBACK;
 				}
-				m_bullets[index].FlipSprite(m_bullets[index].GetSprite(), m_facingDirection);
+				m_bullet[index].FlipSprite();
 				break;
 			}
 		}
-	}*/
+	}
 }
 
 void 
@@ -190,10 +190,10 @@ Player::Reset()
 	SetPosition(START_X, START_Y);
 	SetActive(true);
 
-	//for (int index = 0; index < MAX_BULLETS_ON_SCREEN; index++)
-	//{
-	//	m_bullets[index].SetActive(false);
-	//}
+	for (int index = 0; index < MAX_BULLETS_ON_SCREEN; index++)
+	{
+		m_bullet[index].SetActive(false);
+	}
 }
 
 void 
