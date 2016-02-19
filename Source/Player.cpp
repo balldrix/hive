@@ -36,8 +36,7 @@ Player::Init(Graphics* graphics, TextureManager* playerTexture, TextureManager* 
 		m_bullet[index].Init(m_pGraphics, bulletTexture);
 	}
 
-	Transform::SetCurrentMovementSpeed(PLAYER_WALK_SPEED);
-	
+	m_currentMovementSpeed = PLAYER_WALK_SPEED;
 	
 	m_collisionBox.SetAABB(m_position, m_position + Vector2D(TILE_SIZE, TILE_SIZE));
 
@@ -47,6 +46,8 @@ Player::Init(Graphics* graphics, TextureManager* playerTexture, TextureManager* 
 
 	m_shootingTimer = SHOOTING_DELAY;
 	m_meleeTimer = MELEE_DELAY;
+	
+	m_isLerper = true;
 }
 
 void
@@ -145,6 +146,7 @@ Player::Shoot()
 				m_bullet[index].SetFacingDirection(m_facingDirection);
 				m_bullet[index].SetCurrentFrame(0);
 				m_bullet[index].SetAnimDone(false);
+				m_bullet[index].SetCurrentMovementSpeed(BULLET_SPEED);
 				
 				if (m_facingDirection == RIGHT)
 				{
@@ -192,7 +194,7 @@ Player::Reset()
 
 	for (int index = 0; index < MAX_BULLETS_ON_SCREEN; index++)
 	{
-		m_bullet[index].SetActive(false);
+		m_bullet[index].Reset();
 	}
 }
 

@@ -52,6 +52,9 @@ protected:
 
 	float		m_currentMovementSpeed;
 	float		m_targetMovementSpeed;
+
+	// does object need interpolation for movements
+	bool		m_isLerper;
 };
 
 #endif	_TRANSFORM_H_

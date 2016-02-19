@@ -31,20 +31,22 @@ Bullet::Init(Graphics* graphics, TextureManager* texture)
 void
 Bullet::Update(float deltaTime)
 {
-	AnimatedSprite::Update(deltaTime);
-	AnimatedSprite::FlipSprite();
-	Transform::Update(deltaTime);
-
-	// set hit box position
-	m_collisionBox.SetAABB(m_position, m_position + Vector2D(TILE_SIZE, TILE_SIZE));
-	
-
-	if (m_position.x > GAME_WIDTH ||
-		m_position.x < 0)
+	if(m_active)
 	{
-		m_active = false;
-		SetAnimDone(false);
-		SetCurrentFrame(0);
+		AnimatedSprite::Update(deltaTime);
+		AnimatedSprite::FlipSprite();
+		Transform::Update(deltaTime);
+
+		// set hit box position
+		m_collisionBox.SetAABB(m_position, m_position + Vector2D(TILE_SIZE, TILE_SIZE));
+	
+		if (m_position.x > GAME_WIDTH ||
+			m_position.x < 0)
+		{
+			m_active = false;
+			SetAnimDone(false);
+			SetCurrentFrame(0);
+		}
 	}
 }
 
@@ -69,6 +71,10 @@ Bullet::Render()
 void
 Bullet::Reset()
 {
+	Transform::Reset();
+	AnimatedSprite::Reset();
+
+	SetActive(false);
 	SetBulletState(STATIC);
 	SetPosition(0.0f, 0.0f);
 }

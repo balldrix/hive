@@ -5,7 +5,8 @@ m_position(0.0f,0.0f),
 m_currentVelocity(0.0f,0.0f),
 m_targetVelocity(0.0f,0.0f),
 m_currentMovementSpeed(0.0f),
-m_targetMovementSpeed(0.0f)
+m_targetMovementSpeed(0.0f),
+m_isLerper(false)
 {}
 
 Transform::~Transform()
@@ -14,20 +15,24 @@ Transform::~Transform()
 void
 Transform::Update(float deltaTime)
 {
-	float speed;
-	float velocityX;
-	float velocityY;
+	if(m_isLerper) 
+	{
+		float speed;
+		float velocityX;
+		float velocityY;
 
-	speed = Lerp(m_targetMovementSpeed, m_currentMovementSpeed, deltaTime);
-	
-	
-	velocityX = Lerp(m_targetVelocity.x, m_currentVelocity.x, deltaTime);
-	velocityY = Lerp(m_targetVelocity.y, m_currentVelocity.y, deltaTime);
+		// interpolate object's speed
+		speed = Lerp(m_targetMovementSpeed, m_currentMovementSpeed, deltaTime);
 
-	SetCurrentMovementSpeed(speed);
-	SetCurrentVelocity(velocityX, velocityY);
+		// interpolate objects velocity		
+		velocityX = Lerp(m_targetVelocity.x, m_currentVelocity.x, deltaTime);
+		velocityY = Lerp(m_targetVelocity.y, m_currentVelocity.y, deltaTime);
 
-	m_position += (m_currentVelocity * speed) * deltaTime;
+		SetCurrentMovementSpeed(speed);
+		SetCurrentVelocity(velocityX, velocityY);
+	}
+	// update position with new values
+	m_position += (m_currentVelocity * m_currentMovementSpeed) * deltaTime;
 }
 
 float
