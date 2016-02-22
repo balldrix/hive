@@ -17,7 +17,7 @@ public:
 	void SetRect();
 	void Reset();
 
-private:
+protected:
 	float			m_frameDelay;
 	unsigned int	m_numOfFrames;
 	unsigned int	m_currentAnimation;
