@@ -23,7 +23,7 @@ Bullet::Init(Graphics* graphics, TextureManager* texture)
 	m_pGraphics = graphics;
 	m_pBulletTexture = texture;
 
-	AnimatedSprite::Init(graphics, texture, "Bullet", BULLET, NUM_BULLET_ANIM_FRAMES, BULLET_ANIM_FRAME_DELAY);
+	AnimatedSprite::Init(graphics, texture, NUM_BULLET_ANIM_FRAMES, BULLET_ANIM_FRAME_DELAY);
 
 	m_currentMovementSpeed = BULLET_SPEED;
 	m_loop = false;
@@ -67,7 +67,6 @@ Bullet::Render()
 		//}
 	}
 }
-
 
 void
 Bullet::Reset()

@@ -3,9 +3,15 @@
 #include "UnitVectors.h"
 
 Enemy::Enemy() :
+AnimatedSprite(),
+Transform(),
+AABB(),
+m_pGraphics(NULL),
+m_pEnemyTexture(NULL),
 m_ID(""),
 m_enemyState(ENEMY_STATE_ROAM),
-m_aiTimer(0.0f)
+m_aiTimer(0.0f),
+m_active(false)
 {
 }
 
@@ -14,11 +20,12 @@ Enemy::~Enemy()
 }
 
 void 
-Enemy::Init(Graphics* graphics, TextureManager* texture)
+Enemy::Init(Graphics* graphics, TextureManager* enemyTexture)
 {
-//	GameObject::Init();
+	m_pGraphics = graphics;
+	m_pEnemyTexture = enemyTexture;
 
-//	m_pEnemySprite = sprite;
+	AnimatedSprite::Init(m_pGraphics, m_pEnemyTexture, NUM_ENEMY_ANIM_FRAMES, ENEMY_ANIM_FRAME_DELAY);
 	
 	m_aiTimer = AI_THINKING_TIME;
 	
@@ -28,36 +35,41 @@ Enemy::Init(Graphics* graphics, TextureManager* texture)
 void 
 Enemy::Update(float deltaTime)
 {
-	switch(m_enemyState)
+	if(m_active)
 	{
-		case ENEMY_STATE_IDLE:
+
+		Transform::Update(deltaTime);
+
+		switch(m_enemyState)
 		{
-			SetEnemyState(Idle());
-			break;
-		}
-		case ENEMY_STATE_ROAM:
-		{
-			SetEnemyState(Roam());
-			break;
-		}
-		case ENEMY_STATE_ATTACKING:
-		{
-			SetEnemyState(Attack());
-			break;
-		}
-		case ENEMY_STATE_DEATH:
-		{
-			SetEnemyState(Die());
-			break;
-		}
-		case ENEMY_STATE_DEAD:
-		{
-			SetEnemyState(Dead());
-			break;
+			case ENEMY_STATE_IDLE:
+			{
+				SetEnemyState(Idle());
+				break;
+			}
+			case ENEMY_STATE_ROAM:
+			{
+				SetEnemyState(Roam());
+				break;
+			}
+			case ENEMY_STATE_ATTACKING:
+			{
+				SetEnemyState(Attack());
+				break;
+			}
+			case ENEMY_STATE_DEATH:
+			{
+				SetEnemyState(Die());
+				break;
+			}
+			case ENEMY_STATE_DEAD:
+			{
+				SetEnemyState(Dead());
+				break;
+			}
 		}
 	}
 
-//	GameObject::Update(deltaTime);
 	
 //	m_pEnemySprite->Update(deltaTime);
 	
@@ -88,6 +100,15 @@ Enemy::Render()
 	{
 	//	DrawHitBox(m_pEnemySprite, m_collisionBox);
 	}
+}
+
+void
+Enemy::Reset()
+{
+	//m_active = false;
+	m_position = Vector2D(0.0f, 0.0f);
+	m_targetMovementSpeed = ENEMY_WALK_SPEED;
+	SetEnemyState(ENEMY_STATE_ROAM);
 }
 
 Enemy::ENEMY_STATE
@@ -124,16 +145,6 @@ Enemy::Dead()
 //	m_pEnemySprite->SetAnimation(ENEMY_STATE_DEAD);
 	return m_enemyState;
 }
-
-void
-Enemy::Reset()
-{
-	//m_active = false;
-	m_position = Vector2D(0.0f,0.0f);
-	m_targetMovementSpeed = ENEMY_WALK_SPEED;
-	SetEnemyState(ENEMY_STATE_ROAM);
-}
-
 
 void
 Enemy::SetEnemyState(ENEMY_STATE state)
@@ -183,3 +194,8 @@ void Enemy::SetRandomDirection()
 	}
 }
 
+void
+Enemy::SetActive(bool active)
+{
+	m_active = active;
+}

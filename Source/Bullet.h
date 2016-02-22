@@ -28,7 +28,6 @@ public:
 	void				Init(Graphics* graphics, TextureManager* texture);
 	void				Update(float deltaTime);
 	void				Render();
-
 	void				Reset();
 
 	void				SetBulletState(BULLET_STATE state);

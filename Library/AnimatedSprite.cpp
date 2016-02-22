@@ -18,10 +18,9 @@ AnimatedSprite::~AnimatedSprite()
 }
 
 void
-AnimatedSprite::Init(Graphics* graphics, TextureManager* textureManager, const char* ID, const char* fileName,
-					 unsigned int frames, float frameDelay)
+AnimatedSprite::Init(Graphics* graphics, TextureManager* textureManager, unsigned int frames, float frameDelay)
 {
-	Sprite::Init(graphics, textureManager, ID, fileName);
+	Sprite::Init(graphics, textureManager);
 
 	m_numOfFrames = frames;
 	m_frameDelay = frameDelay;
@@ -64,6 +63,14 @@ AnimatedSprite::Update(float deltaTime)
 }
 
 void
+AnimatedSprite::Reset()
+{
+	Sprite::Reset();
+	m_animDone = false;
+	m_frameTime = 0;
+}
+
+void
 AnimatedSprite::SetAnimation(unsigned int animation)
 {
 	m_currentAnimation = animation;
@@ -88,12 +95,4 @@ AnimatedSprite::SetRect()
 	m_spriteData.rect.right = m_spriteData.rect.left + m_spriteData.width;
 	m_spriteData.rect.top = m_currentAnimation * m_spriteData.height;
 	m_spriteData.rect.bottom = m_spriteData.rect.top + m_spriteData.height;
-}
-
-void 
-AnimatedSprite::Reset()
-{
-	Sprite::Reset();
-	m_animDone = false;
-	m_frameTime = 0;
 }

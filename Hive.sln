@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Hive", "Hive.vcxproj", "{F07D24C5-CADD-4262-80F1-7370DF167E8E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Kaon Engine", "Library\Kaon Engine\Kaon Engine.vcxproj", "{7517D5C5-7EB2-4A8F-B371-1B97D2103B8C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F07D24C5-CADD-4262-80F1-7370DF167E8E}.Debug|x86.ActiveCfg = Debug|Win32
+		{F07D24C5-CADD-4262-80F1-7370DF167E8E}.Debug|x86.Build.0 = Debug|Win32
+		{F07D24C5-CADD-4262-80F1-7370DF167E8E}.Release|x86.ActiveCfg = Release|Win32
+		{F07D24C5-CADD-4262-80F1-7370DF167E8E}.Release|x86.Build.0 = Release|Win32
+		{7517D5C5-7EB2-4A8F-B371-1B97D2103B8C}.Debug|x86.ActiveCfg = Debug|Win32
+		{7517D5C5-7EB2-4A8F-B371-1B97D2103B8C}.Debug|x86.Build.0 = Debug|Win32
+		{7517D5C5-7EB2-4A8F-B371-1B97D2103B8C}.Release|x86.ActiveCfg = Release|Win32
+		{7517D5C5-7EB2-4A8F-B371-1B97D2103B8C}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

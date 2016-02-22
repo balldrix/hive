@@ -9,6 +9,8 @@ public:
 	AABB();
 	~AABB();
 	
+	virtual void		Reset();
+
 	const Vector2D&		GetMin() const { return m_min; }
 	const Vector2D&		GetMax() const { return m_max; }
 	

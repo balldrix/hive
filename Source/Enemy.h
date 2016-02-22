@@ -40,9 +40,10 @@ public:
 	Enemy();
 	virtual ~Enemy();
 
-	void				Init(Graphics* graphics, TextureManager* texture);
+	void				Init(Graphics* graphics, TextureManager* enemyTexture);
 	void				Update(float deltaTime);
 	void				Render();
+	void				Reset();
 	
 	//	methods to proces ai states
 	ENEMY_STATE			Idle();
@@ -52,14 +53,14 @@ public:
 	ENEMY_STATE			Dead();
 
 	///////////////////////////////
-
-	void				Reset();
 	
 	void				SetEnemyState(ENEMY_STATE state);
 	
 	ENEMY_STATE			GetEnemyState() const { return m_enemyState; }
 	
 	void				SetRandomDirection();
+
+	void				SetActive(bool active);
 
 private:
 	Graphics*			m_pGraphics;
@@ -69,6 +70,7 @@ private:
 	ENEMY_STATE			m_enemyState;
 	//ANIMATION_STATE	m_animState;
 	float				m_aiTimer;
+	bool				m_active;
 };
 
 #endif _ENEMY_H_

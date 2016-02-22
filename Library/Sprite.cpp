@@ -4,8 +4,6 @@
 Sprite::Sprite() : 
 m_pGraphics(NULL),
 m_pTextureManager(NULL),
-m_ID(""),
-m_fileName(""),
 m_numCols(1),
 m_currentFrame(0),
 m_initialised(false),
@@ -22,19 +20,15 @@ Sprite::~Sprite()
 {
 }
 
-bool
-Sprite::Init(Graphics* graphics, TextureManager* textureManager, const char* ID, const char* fileName)
+void
+Sprite::Init(Graphics* graphics, TextureManager* textureManager)
 {
 	m_pGraphics = graphics;
 	m_pTextureManager = textureManager;
 
-	m_ID = ID;
-	m_fileName = fileName;
-
-	if (fileName == NULL)
+	if (m_pTextureManager == NULL)
 	{
-		m_pTextureManager = NULL;
-		return false;
+		return;
 	}
 
 	m_spriteData.width = m_pTextureManager->GetWidth();
@@ -51,11 +45,8 @@ Sprite::Init(Graphics* graphics, TextureManager* textureManager, const char* ID,
 	m_spriteData.texture = m_pTextureManager->GetTexture();
 
 	m_numCols = m_spriteData.width / TILE_SIZE;
-	
 
 	m_initialised = true;
-
-	return true;
 }
 
 void
@@ -66,10 +57,7 @@ Sprite::Update(float deltaTime)
 void
 Sprite::Render()
 {
-	if (m_pGraphics != NULL && m_pTextureManager != NULL )
-	{
-		m_pGraphics->RenderSprite(m_spriteData, m_colourFilter);
-	}
+
 }
 
 void
@@ -77,7 +65,10 @@ Sprite::Render(Vector2D position)
 {
 	m_spriteData.position = position;
 
-	Sprite::Render();
+	if(m_pGraphics != NULL && m_pTextureManager != NULL)
+	{
+		m_pGraphics->RenderSprite(m_spriteData, m_colourFilter);
+	}
 }
 
 
@@ -87,7 +78,10 @@ Sprite::Render(Vector2D position, RECT rect)
 	m_spriteData.position = position;
 	SetRect(rect);
 
-	Sprite::Render();
+	if(m_pGraphics != NULL && m_pTextureManager != NULL)
+	{
+		m_pGraphics->RenderSprite(m_spriteData, m_colourFilter);
+	}
 }
 
 void
@@ -135,12 +129,6 @@ Sprite::RenderHitBox(AABB box)
 	m_pGraphics->CreateVertexBuffer(m_vertex, sizeof m_vertex, m_vertexBuffer);
 
 	m_pGraphics->RenderQuad(m_vertexBuffer);
-}
-
-void
-Sprite::SetID(const char* ID)
-{
-	m_ID = ID;
 }
 
 void
