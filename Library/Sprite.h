@@ -16,7 +16,7 @@ class Sprite
 public:
 	Sprite();
 	~Sprite();
-	virtual bool				Init(Graphics* graphics, TextureManager* textureManager, const char* ID, const char* fileName);
+	virtual bool				Init(Graphics* graphics, TextureManager* textureManager);
 	virtual void				Update(float deltaTime);
 	virtual	void				Render();
 	virtual	void				Render(Vector2D position);
@@ -41,9 +41,6 @@ public:
 	void						FlipSprite();
 	virtual void				Reset();
 
-	virtual	const char*			GetID()						const { return m_ID; }
-	virtual	const char*			GetFileName()				const { return m_fileName; }
-
 	virtual	RECT				GetRect()					const { return m_spriteData.rect; }
 	AABB						GetAABB()					const { return m_collisionBox; }
 	bool						GetShowHitBox()				const { return m_showHitBox; }
@@ -62,9 +59,6 @@ protected:
 	TextureManager*				m_pTextureManager;
 	
 	SpriteData					m_spriteData;
-
-	const char*					m_ID;
-	const char*					m_fileName;
 
 	unsigned int				m_numCols;
 	unsigned int				m_currentFrame;

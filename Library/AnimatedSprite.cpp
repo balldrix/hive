@@ -18,10 +18,9 @@ AnimatedSprite::~AnimatedSprite()
 }
 
 void
-AnimatedSprite::Init(Graphics* graphics, TextureManager* textureManager, const char* ID, const char* fileName,
-					 unsigned int frames, float frameDelay)
+AnimatedSprite::Init(Graphics* graphics, TextureManager* textureManager, unsigned int frames, float frameDelay)
 {
-	Sprite::Init(graphics, textureManager, ID, fileName);
+	Sprite::Init(graphics, textureManager);
 
 	m_numOfFrames = frames;
 	m_frameDelay = frameDelay;

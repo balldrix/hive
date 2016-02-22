@@ -4,8 +4,6 @@
 Sprite::Sprite() : 
 m_pGraphics(NULL),
 m_pTextureManager(NULL),
-m_ID(""),
-m_fileName(""),
 m_numCols(1),
 m_currentFrame(0),
 m_initialised(false),
@@ -23,17 +21,13 @@ Sprite::~Sprite()
 }
 
 bool
-Sprite::Init(Graphics* graphics, TextureManager* textureManager, const char* ID, const char* fileName)
+Sprite::Init(Graphics* graphics, TextureManager* textureManager)
 {
 	m_pGraphics = graphics;
 	m_pTextureManager = textureManager;
 
-	m_ID = ID;
-	m_fileName = fileName;
-
-	if (fileName == NULL)
+	if (m_pTextureManager == NULL)
 	{
-		m_pTextureManager = NULL;
 		return false;
 	}
 
@@ -135,12 +129,6 @@ Sprite::RenderHitBox(AABB box)
 	m_pGraphics->CreateVertexBuffer(m_vertex, sizeof m_vertex, m_vertexBuffer);
 
 	m_pGraphics->RenderQuad(m_vertexBuffer);
-}
-
-void
-Sprite::SetID(const char* ID)
-{
-	m_ID = ID;
 }
 
 void

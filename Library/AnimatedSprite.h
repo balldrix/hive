@@ -9,7 +9,7 @@ public:
 	AnimatedSprite();
 	virtual ~AnimatedSprite();
 
-	void Init(Graphics* graphics, TextureManager* textureManager, const char* ID, const char* fileName, unsigned int frames, float frameDelay);
+	void Init(Graphics* graphics, TextureManager* textureManager, unsigned int frames, float frameDelay);
 	void Update(float deltaTime);
 	void SetAnimation(unsigned int animation);
 	void SetLoop(bool loop);

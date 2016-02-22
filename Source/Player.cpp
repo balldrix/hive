@@ -29,7 +29,7 @@ Player::Init(Graphics* graphics, TextureManager* playerTexture, TextureManager* 
 	m_pGraphics = graphics;
 	m_pPlayerTexture = playerTexture;
 
-	AnimatedSprite::Init(m_pGraphics, m_pPlayerTexture, "PLAYER", PLAYER, NUM_PLAYER_ANIM_FRAMES, PLAYER_ANIM_FRAME_DELAY);
+	AnimatedSprite::Init(m_pGraphics, m_pPlayerTexture, NUM_PLAYER_ANIM_FRAMES, PLAYER_ANIM_FRAME_DELAY);
 
 	for(int index = 0; index < MAX_BULLETS_ON_SCREEN; index++)
 	{

@@ -40,7 +40,7 @@ public:
 	Enemy();
 	virtual ~Enemy();
 
-	void				Init(Graphics* graphics, TextureManager* texture);
+	void				Init(Graphics* graphics, TextureManager* enemyTexture);
 	void				Update(float deltaTime);
 	void				Render();
 	
@@ -61,6 +61,8 @@ public:
 	
 	void				SetRandomDirection();
 
+	void				SetActive(bool active);
+
 private:
 	Graphics*			m_pGraphics;
 	TextureManager*		m_pEnemyTexture;
@@ -69,6 +71,7 @@ private:
 	ENEMY_STATE			m_enemyState;
 	//ANIMATION_STATE	m_animState;
 	float				m_aiTimer;
+	bool				m_active;
 };
 
 #endif _ENEMY_H_
