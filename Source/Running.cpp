@@ -44,14 +44,14 @@ Running::LoadAssets()
 {
 	m_playerTexture.Init(m_pGraphics, PLAYER);
 	m_bulletTexture.Init(m_pGraphics, BULLET);
-	//m_enemyTexture.Init(m_pGraphics, "ENEMY");
+	m_enemyTexture.Init(m_pGraphics, ENEMY);
 	
 	m_player.Init(m_pGraphics, &m_playerTexture, &m_bulletTexture);
 
-	//for(int index = 0; index < MAX_ENEMY; index++)
-	//{
-	//	m_pEnemy[index].Init(m_pEnemySprite);
-	//}
+	for(int index = 0; index < MAX_ENEMY; index++)
+	{
+		m_enemy[index].Init(m_pGraphics, &m_enemyTexture);
+	}
 
 	NewGame();
 }
