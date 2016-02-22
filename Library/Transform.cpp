@@ -35,6 +35,16 @@ Transform::Update(float deltaTime)
 	m_position += (m_currentVelocity * m_currentMovementSpeed) * deltaTime;
 }
 
+void
+Transform::Reset()
+{
+	SetPosition(0, 0);
+	SetCurrentVelocity(0.0f, 0.0f);
+	SetTargetVelocity(0.0f, 0.0f);
+	SetCurrentMovementSpeed(0.0f);
+	SetTargetMovementSpeed(0.0f);
+}
+
 float
 Transform::Lerp(float target, float current, float deltaTime)
 {
@@ -127,14 +137,4 @@ void
 Transform::SetTargetVelocityY(float y)
 {
 	m_targetVelocity.y = y;
-}
-
-void
-Transform::Reset()
-{
-	SetPosition(0, 0);
-	SetCurrentVelocity(0.0f, 0.0f);
-	SetTargetVelocity(0.0f, 0.0f);
-	SetCurrentMovementSpeed(0.0f);
-	SetTargetMovementSpeed(0.0f);
 }

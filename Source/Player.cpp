@@ -29,7 +29,7 @@ Player::Init(Graphics* graphics, TextureManager* playerTexture, TextureManager* 
 	m_pGraphics = graphics;
 	m_pPlayerTexture = playerTexture;
 
-	AnimatedSprite::Init(m_pGraphics, m_pPlayerTexture, "PLAYER", PLAYER, NUM_PLAYER_ANIM_FRAMES, PLAYER_ANIM_FRAME_DELAY);
+	AnimatedSprite::Init(m_pGraphics, m_pPlayerTexture, NUM_PLAYER_ANIM_FRAMES, PLAYER_ANIM_FRAME_DELAY);
 
 	for(int index = 0; index < MAX_BULLETS_ON_SCREEN; index++)
 	{
@@ -130,6 +130,22 @@ Player::Render()
 }
 
 void
+Player::Reset()
+{
+	Transform::Reset();
+	AnimatedSprite::Reset();
+
+	SetPlayerState(IDLE);
+	SetPosition(START_X, START_Y);
+	SetActive(true);
+
+	for(int index = 0; index < MAX_BULLETS_ON_SCREEN; index++)
+	{
+		m_bullet[index].Reset();
+	}
+}
+
+void
 Player::Shoot()
 {
 	if (!m_firedGun)
@@ -179,22 +195,6 @@ Player::Melee()
 		//SetAnimState(MELEE);
 		
 		// draw swing weapon effect
-	}
-}
-
-void
-Player::Reset()
-{
-	Transform::Reset();
-	AnimatedSprite::Reset();
-
-	SetPlayerState(IDLE);
-	SetPosition(START_X, START_Y);
-	SetActive(true);
-
-	for (int index = 0; index < MAX_BULLETS_ON_SCREEN; index++)
-	{
-		m_bullet[index].Reset();
 	}
 }
 
