@@ -43,6 +43,7 @@ public:
 	void				Init(Graphics* graphics, TextureManager* enemyTexture);
 	void				Update(float deltaTime);
 	void				Render();
+	void				Reset();
 	
 	//	methods to proces ai states
 	ENEMY_STATE			Idle();
@@ -52,8 +53,6 @@ public:
 	ENEMY_STATE			Dead();
 
 	///////////////////////////////
-
-	void				Reset();
 	
 	void				SetEnemyState(ENEMY_STATE state);
 	

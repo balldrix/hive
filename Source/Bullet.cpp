@@ -68,7 +68,6 @@ Bullet::Render()
 	}
 }
 
-
 void
 Bullet::Reset()
 {

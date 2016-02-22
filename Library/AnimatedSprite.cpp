@@ -63,6 +63,14 @@ AnimatedSprite::Update(float deltaTime)
 }
 
 void
+AnimatedSprite::Reset()
+{
+	Sprite::Reset();
+	m_animDone = false;
+	m_frameTime = 0;
+}
+
+void
 AnimatedSprite::SetAnimation(unsigned int animation)
 {
 	m_currentAnimation = animation;
@@ -87,12 +95,4 @@ AnimatedSprite::SetRect()
 	m_spriteData.rect.right = m_spriteData.rect.left + m_spriteData.width;
 	m_spriteData.rect.top = m_currentAnimation * m_spriteData.height;
 	m_spriteData.rect.bottom = m_spriteData.rect.top + m_spriteData.height;
-}
-
-void 
-AnimatedSprite::Reset()
-{
-	Sprite::Reset();
-	m_animDone = false;
-	m_frameTime = 0;
 }

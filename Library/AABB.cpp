@@ -11,6 +11,13 @@ AABB::~AABB()
 }
 
 void
+AABB::Reset()
+{
+	m_min.Zero();
+	m_max.Zero();
+}
+
+void
 AABB::SetAABB(const Vector2D &min, const Vector2D &max)
 {
 	m_min = min;

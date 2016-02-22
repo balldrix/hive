@@ -15,43 +15,38 @@ class Sprite
 {
 public:
 	Sprite();
-	~Sprite();
-	bool				Init(Graphics* graphics, TextureManager* textureManager);
-	void				Update(float deltaTime);
-	void				Render();
-	void				Render(Vector2D position);
-	void				Render(Vector2D position, RECT rect);
+	virtual ~Sprite();
+	virtual void				Init(Graphics* graphics, TextureManager* textureManager);
+	virtual void				Update(float deltaTime);
+	virtual void				Render();
+	virtual void				Render(Vector2D position);
+	virtual void				Render(Vector2D position, RECT rect);
+	virtual void				Reset();
+	
 	void						RenderHitBox(AABB box);
 
-	void				SetTransKey(int r, int g, int b);
-	void				SetRect();
-	void				SetRect(RECT rect);
-	void				SetRect(int left, int right, int top , int bottom);
-	void				SetVerticalFlip(bool vFlip);
-	void				SetHorizontalFlip(bool hFlip);
+	void						SetTransKey(int r, int g, int b);
+	void						SetRect();
+	void						SetRect(RECT rect);
+	void						SetRect(int left, int right, int top , int bottom);
+	void						SetVerticalFlip(bool vFlip);
+	void						SetHorizontalFlip(bool hFlip);
 
-	void				SetWidth(int w);
-	void				SetHeight(int h);
+	void						SetWidth(int w);
+	void						SetHeight(int h);
 
 	void						SetCurrentFrame(unsigned int frame);
 	void						SetShowHitBox(bool showHitBox);
 
 	void						SetFacingDirection(FACING_DIRECTION direction);
 	void						FlipSprite();
-	void				Reset();
 
 	virtual	RECT				GetRect()					const { return m_spriteData.rect; }
 	AABB						GetAABB()					const { return m_collisionBox; }
 	bool						GetShowHitBox()				const { return m_showHitBox; }
 
-	virtual	unsigned int		GetWidth()					const
-	{
-		return m_spriteData.width;
-	}
-	virtual	unsigned int		GetHeight()					const
-	{
-		return m_spriteData.height;
-	}
+	unsigned int				GetWidth()					const {	return m_spriteData.width; }
+	unsigned int				GetHeight()					const { return m_spriteData.height; }
 
 protected:
 	Graphics*					m_pGraphics;

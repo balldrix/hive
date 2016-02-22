@@ -9,13 +9,14 @@ public:
 	AnimatedSprite();
 	virtual ~AnimatedSprite();
 
-	void Init(Graphics* graphics, TextureManager* textureManager, unsigned int frames, float frameDelay);
-	void Update(float deltaTime);
-	void SetAnimation(unsigned int animation);
-	void SetLoop(bool loop);
-	void SetAnimDone(bool done);
-	void SetRect();
-	void Reset();
+	virtual void	Init(Graphics* graphics, TextureManager* textureManager, unsigned int frames, float frameDelay);
+	virtual void	Update(float deltaTime);
+	virtual	void	Reset();
+
+	void			SetAnimation(unsigned int animation);
+	void			SetLoop(bool loop);
+	void			SetAnimDone(bool done);
+	void			SetRect();
 
 protected:
 	float			m_frameDelay;

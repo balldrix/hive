@@ -20,7 +20,7 @@ Sprite::~Sprite()
 {
 }
 
-bool
+void
 Sprite::Init(Graphics* graphics, TextureManager* textureManager)
 {
 	m_pGraphics = graphics;
@@ -28,7 +28,7 @@ Sprite::Init(Graphics* graphics, TextureManager* textureManager)
 
 	if (m_pTextureManager == NULL)
 	{
-		return false;
+		return;
 	}
 
 	m_spriteData.width = m_pTextureManager->GetWidth();
@@ -45,11 +45,8 @@ Sprite::Init(Graphics* graphics, TextureManager* textureManager)
 	m_spriteData.texture = m_pTextureManager->GetTexture();
 
 	m_numCols = m_spriteData.width / TILE_SIZE;
-	
 
 	m_initialised = true;
-
-	return true;
 }
 
 void
@@ -60,10 +57,7 @@ Sprite::Update(float deltaTime)
 void
 Sprite::Render()
 {
-	if (m_pGraphics != NULL && m_pTextureManager != NULL )
-	{
-		m_pGraphics->RenderSprite(m_spriteData, m_colourFilter);
-	}
+
 }
 
 void
@@ -71,7 +65,10 @@ Sprite::Render(Vector2D position)
 {
 	m_spriteData.position = position;
 
-	Sprite::Render();
+	if(m_pGraphics != NULL && m_pTextureManager != NULL)
+	{
+		m_pGraphics->RenderSprite(m_spriteData, m_colourFilter);
+	}
 }
 
 
@@ -81,7 +78,10 @@ Sprite::Render(Vector2D position, RECT rect)
 	m_spriteData.position = position;
 	SetRect(rect);
 
-	Sprite::Render();
+	if(m_pGraphics != NULL && m_pTextureManager != NULL)
+	{
+		m_pGraphics->RenderSprite(m_spriteData, m_colourFilter);
+	}
 }
 
 void

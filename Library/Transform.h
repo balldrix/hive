@@ -12,39 +12,32 @@ public:
 	~Transform();
 
 	virtual void				Update(float deltaTime);
+	virtual	void				Reset();
+
 	// create smooth movement with linear interpolation
 	float						Lerp(float target, float current, float deltaTime);
-
-	virtual	void				SetPositionX(unsigned int x);
-	virtual	void				SetPositionY(unsigned int y);
-	virtual	void				SetPosition(unsigned int x, unsigned int y);
-	virtual	void				SetPosition(Vector2D position);
-
+		
+	void						SetPositionX(unsigned int x);
+	void						SetPositionY(unsigned int y);
+	void						SetPosition(unsigned int x, unsigned int y);
+	void						SetPosition(Vector2D position);
 	void						SetTargetMovementSpeed(unsigned int speed);
 	void						SetCurrentMovementSpeed(unsigned int speed);
-
 	void						SetCurrentVelocity(float x, float y);
 	void						SetCurrentVelocity(Vector2D velocity);
-
 	void						SetTargetVelocity(float x, float y);
 	void						SetTargetVelocity(Vector2D velocity);
-
 	void						SetTargetVelocityX(float x);
 	void						SetTargetVelocityY(float y);
 
 	unsigned int				GetPositionX() const { return m_position.x;	}
-	
 	unsigned int				GetPositionY() const { return m_position.y; }
-
 	Vector2D					GetPosition() const { return m_position; }
-
 	Vector2D					GetCurrentVelocity() const { return m_currentVelocity; }
 	Vector2D					GetTargetVelocity() const {	return m_targetVelocity; }
 	float						GetTargetMovementSpeed() const { return m_targetMovementSpeed; } 
 	float						GetCurrentMovementSpeed()	const { return m_currentMovementSpeed;	}
 	
-	void						Reset();
-
 protected:
 	Vector2D	m_position;
 	Vector2D	m_currentVelocity;

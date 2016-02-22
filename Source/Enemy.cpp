@@ -102,6 +102,15 @@ Enemy::Render()
 	}
 }
 
+void
+Enemy::Reset()
+{
+	//m_active = false;
+	m_position = Vector2D(0.0f, 0.0f);
+	m_targetMovementSpeed = ENEMY_WALK_SPEED;
+	SetEnemyState(ENEMY_STATE_ROAM);
+}
+
 Enemy::ENEMY_STATE
 Enemy::Idle()
 {
@@ -136,16 +145,6 @@ Enemy::Dead()
 //	m_pEnemySprite->SetAnimation(ENEMY_STATE_DEAD);
 	return m_enemyState;
 }
-
-void
-Enemy::Reset()
-{
-	//m_active = false;
-	m_position = Vector2D(0.0f,0.0f);
-	m_targetMovementSpeed = ENEMY_WALK_SPEED;
-	SetEnemyState(ENEMY_STATE_ROAM);
-}
-
 
 void
 Enemy::SetEnemyState(ENEMY_STATE state)
