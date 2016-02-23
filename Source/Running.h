@@ -81,7 +81,7 @@ private:
 	Player				m_player;
 	Enemy				m_enemy[MAX_ENEMY];
 
-	//TextureManager		m_enemyTexture;
+	TextureManager		m_enemyTexture;
 	TextureManager		m_bulletTexture;
 	TextureManager		m_playerTexture;
 
