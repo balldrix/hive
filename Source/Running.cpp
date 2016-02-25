@@ -344,38 +344,33 @@ Running::ResetAll()
 
 	m_player.Reset();
 
-	//for(int index = 0; index < MAX_ENEMY; index++)
-	//{
-	//	m_pEnemy[index].Reset();
-	//}
+	for(int index = 0; index < MAX_ENEMY; index++)
+	{
+		m_enemy[index].Reset();
+	}
 }
 
 void
 Running::SpawnEnemy()
 {
-
 	// loop through enemy array
-	for(int index = 0; index < MAX_ENEMY - 1; index++)
+	for(int index = 0; index < MAX_ENEMY; index++)
 	{
 		// loop through remaining array
 		for(int j = index; j < MAX_ENEMY; j++)
 		{
-			// no point checking against itself
-			if(index != j)
 			{	// loop while there is a collision
 				while(m_enemy[index].Collision(m_enemy[j].GetAABB()))
 				{
 					m_enemySpawnPosition = SetSpawnLocation();
 					m_enemy[j].SetPosition(m_enemySpawnPosition);
 					m_enemy[j].SetAABB(m_enemySpawnPosition, Vector2D(m_enemySpawnPosition.x + TILE_SIZE, m_enemySpawnPosition.y + TILE_SIZE));
-
 				}
 			}
 		}
 		// set spawned enemy to active
 		m_enemy[index].SetActive(true);
 	}
-
 }
 
 Vector2D
