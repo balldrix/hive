@@ -22,6 +22,6 @@ const float				KEY_DELAY		= 5.0f;
 const int				TILE_SIZE		= 32;
 
 // maximum number of enemies on screen
-const unsigned int		MAX_ENEMY = 100;
+const unsigned int		MAX_ENEMY = 50;
 
 #endif _CONSTANTS_H_
