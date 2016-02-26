@@ -9,11 +9,14 @@ m_currentFrame(0),
 m_initialised(false),
 m_showHitBox(false),
 m_colourFilter(colourNS::WHITE),
-m_transKey(colourNS::MAGENTA)
+m_transKey(colourNS::MAGENTA),
+m_facingDirection(RIGHT)
 {
 	// initialise the spriteData struct
 	m_spriteData = { 0, 0, Vector2D(0.0f, 0.0f),
 		0.0f, 0.0f, RECT(), NULL, false, false };
+
+	m_tileSize = { 0, 0 };
 }
 
 Sprite::~Sprite()
@@ -44,7 +47,7 @@ Sprite::Init(Graphics* graphics, TextureManager* textureManager)
 	m_spriteData.flipVertical = false;
 	m_spriteData.texture = m_pTextureManager->GetTexture();
 
-	m_numCols = m_spriteData.width / TILE_SIZE;
+	m_numCols = m_spriteData.width / m_tileSize.x;
 
 	m_initialised = true;
 }

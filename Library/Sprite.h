@@ -11,6 +11,12 @@ enum FACING_DIRECTION
 	RIGHT
 };
 
+struct TileSize
+{
+	unsigned int x;
+	unsigned int y;
+};
+
 class Sprite
 {
 public:
@@ -68,6 +74,7 @@ protected:
 	D3DCOLOR					m_transKey;
 
 	FACING_DIRECTION			m_facingDirection;
+	TileSize					m_tileSize;
 
 	CustomVertex				m_vertex[5];
 	LPDIRECT3DVERTEXBUFFER9		m_vertexBuffer;

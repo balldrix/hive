@@ -364,7 +364,7 @@ Running::SpawnEnemy()
 				{
 					m_enemySpawnPosition = SetSpawnLocation();
 					m_enemy[j].SetPosition(m_enemySpawnPosition);
-					m_enemy[j].SetAABB(m_enemySpawnPosition, Vector2D(m_enemySpawnPosition.x + TILE_SIZE, m_enemySpawnPosition.y + TILE_SIZE));
+					m_enemy[j].SetAABB(m_enemySpawnPosition, Vector2D(m_enemySpawnPosition.x + m_enemy[j].GetWidth(), m_enemySpawnPosition.y + m_enemy[j].GetHeight()));
 				}
 			}
 		}

@@ -25,8 +25,8 @@ AnimatedSprite::Init(Graphics* graphics, TextureManager* textureManager, unsigne
 	m_numOfFrames = frames;
 	m_frameDelay = frameDelay;
 
-	m_spriteData.width = TILE_SIZE;
-	m_spriteData.height = TILE_SIZE;
+	m_spriteData.width = m_tileSize.x;
+	m_spriteData.height = m_tileSize.y;
 	SetRect();
 }
 

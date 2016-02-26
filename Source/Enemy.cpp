@@ -25,6 +25,8 @@ Enemy::Init(Graphics* graphics, TextureManager* enemyTexture)
 	m_pGraphics = graphics;
 	m_pEnemyTexture = enemyTexture;
 
+	m_tileSize = { 128, 128 };
+	
 	AnimatedSprite::Init(m_pGraphics, m_pEnemyTexture, NUM_ENEMY_ANIM_FRAMES, ENEMY_ANIM_FRAME_DELAY);
 	
 	m_aiTimer = AI_THINKING_TIME;
@@ -79,8 +81,8 @@ Enemy::Update(float deltaTime)
 		m_aiTimer = AI_THINKING_TIME;
 	}
 
-	if (m_position.x < TILE_SIZE || m_position.x + TILE_SIZE > GAME_WIDTH
-		|| m_position.y < TILE_SIZE || m_position.y + TILE_SIZE > GAME_HEIGHT)
+	if (m_position.x < m_tileSize.x || m_position.x + m_tileSize.x > GAME_WIDTH
+		|| m_position.y < m_tileSize.y || m_position.y + m_tileSize.y > GAME_HEIGHT)
 	{
 		SetRandomDirection();
 		//SetTargetVelocity(Vector2D(m_currentVelocity.x *-1, m_currentVelocity.y *-1));

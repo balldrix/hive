@@ -39,8 +39,8 @@ const unsigned int		ENEMY_SPAWN__AREA1_MAX_Y	= 88;
 const unsigned int		ENEMY_SPAWN__AREA2_MIN_X	= 960;
 const unsigned int		ENEMY_SPAWN__AREA2_MIN_Y	= 480;
 
-const unsigned int		ENEMY_SPAWN__AREA2_MAX_X	= GAME_WIDTH - TILE_SIZE;
-const unsigned int		ENEMY_SPAWN__AREA2_MAX_Y	= GAME_HEIGHT - TILE_SIZE;
+const unsigned int		ENEMY_SPAWN__AREA2_MAX_X	= GAME_WIDTH;
+const unsigned int		ENEMY_SPAWN__AREA2_MAX_Y	= GAME_HEIGHT;
 
 // delay between spawning enemy
 const float				ENEMY_SPAWN_DELAY = 0.2f;

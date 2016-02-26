@@ -29,6 +29,8 @@ Player::Init(Graphics* graphics, TextureManager* playerTexture, TextureManager* 
 	m_pGraphics = graphics;
 	m_pPlayerTexture = playerTexture;
 
+	m_tileSize = { 128, 128 };
+
 	AnimatedSprite::Init(m_pGraphics, m_pPlayerTexture, NUM_PLAYER_ANIM_FRAMES, PLAYER_ANIM_FRAME_DELAY);
 
 	for(int index = 0; index < MAX_BULLETS_ON_SCREEN; index++)
@@ -38,7 +40,7 @@ Player::Init(Graphics* graphics, TextureManager* playerTexture, TextureManager* 
 
 	m_currentMovementSpeed = PLAYER_WALK_SPEED;
 	
-	m_collisionBox.SetAABB(m_position, m_position + Vector2D(TILE_SIZE, TILE_SIZE));
+	m_collisionBox.SetAABB(m_position, m_position + Vector2D(m_tileSize.x, m_tileSize.y));
 
 	m_meleeHitBox = m_collisionBox;
 		
@@ -62,11 +64,11 @@ Player::Update(float deltaTime)
 
 	if(m_facingDirection == RIGHT)
 	{
-		m_meleeHitBox.OffSetAABB(TILE_SIZE / 2, 0.0f);
+		m_meleeHitBox.OffSetAABB(m_tileSize.x / 2, 0.0f);
 	}
 	else
 	{
-		m_meleeHitBox.OffSetAABB((TILE_SIZE / 2) * -1, 0.0f);
+		m_meleeHitBox.OffSetAABB((m_tileSize.x / 2) * -1, 0.0f);
 	}
 
 	// Update Bullets

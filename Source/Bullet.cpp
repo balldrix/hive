@@ -23,6 +23,8 @@ Bullet::Init(Graphics* graphics, TextureManager* texture)
 	m_pGraphics = graphics;
 	m_pBulletTexture = texture;
 
+	m_tileSize = { 32, 32 };
+
 	AnimatedSprite::Init(graphics, texture, NUM_BULLET_ANIM_FRAMES, BULLET_ANIM_FRAME_DELAY);
 
 	m_currentMovementSpeed = BULLET_SPEED;
@@ -39,7 +41,7 @@ Bullet::Update(float deltaTime)
 		Transform::Update(deltaTime);
 
 		// set hit box position
-		m_collisionBox.SetAABB(m_position, m_position + Vector2D(TILE_SIZE, TILE_SIZE));
+		m_collisionBox.SetAABB(m_position, m_position + Vector2D(m_tileSize.x, m_tileSize.y));
 	
 		if (m_position.x > GAME_WIDTH ||
 			m_position.x < 0)
