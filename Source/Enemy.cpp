@@ -37,7 +37,6 @@ Enemy::Update(float deltaTime)
 {
 	if(m_active)
 	{
-
 		Transform::Update(deltaTime);
 
 		switch(m_enemyState)
@@ -94,7 +93,10 @@ Enemy::Update(float deltaTime)
 void
 Enemy::Render()
 {
-//	m_pEnemySprite->Render(D3DXVECTOR2(m_position.x, m_position.y));
+	if(m_active)
+	{
+		Sprite::Render(m_position);
+	}
 
 	if(m_showHitBox)
 	{
@@ -105,7 +107,10 @@ Enemy::Render()
 void
 Enemy::Reset()
 {
-	//m_active = false;
+	Transform::Reset();
+	AnimatedSprite::Reset();
+	AABB::Reset();
+	m_active = false;
 	m_position = Vector2D(0.0f, 0.0f);
 	m_targetMovementSpeed = ENEMY_WALK_SPEED;
 	SetEnemyState(ENEMY_STATE_ROAM);

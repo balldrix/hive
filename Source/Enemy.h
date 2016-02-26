@@ -54,12 +54,11 @@ public:
 
 	///////////////////////////////
 	
-	void				SetEnemyState(ENEMY_STATE state);
-	
 	ENEMY_STATE			GetEnemyState() const { return m_enemyState; }
-	
-	void				SetRandomDirection();
+	bool				GetIsActive() const { return m_active; }
 
+	void				SetEnemyState(ENEMY_STATE state);
+	void				SetRandomDirection();
 	void				SetActive(bool active);
 
 private:
