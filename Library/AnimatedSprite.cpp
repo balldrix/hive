@@ -18,15 +18,15 @@ AnimatedSprite::~AnimatedSprite()
 }
 
 void
-AnimatedSprite::Init(Graphics* graphics, TextureManager* textureManager, unsigned int frames, float frameDelay)
+AnimatedSprite::Init(Graphics* graphics, TextureManager* textureManager, unsigned int frames, float frameDelay, unsigned int frameWidth, unsigned int frameHeight)
 {
 	Sprite::Init(graphics, textureManager);
 
 	m_numOfFrames = frames;
 	m_frameDelay = frameDelay;
 
-	m_spriteData.width = m_tileSize.x;
-	m_spriteData.height = m_tileSize.y;
+	m_spriteData.width = frameWidth;
+	m_spriteData.height = frameHeight;
 	SetRect();
 }
 

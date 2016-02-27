@@ -29,7 +29,7 @@ Player::Init(Graphics* graphics, TextureManager* playerTexture, TextureManager* 
 	m_pGraphics = graphics;
 	m_pPlayerTexture = playerTexture;
 
-	m_tileSize = { 128, 128 };
+	m_tileSize = { 32, 32 };
 
 	AnimatedSprite::Init(m_pGraphics, m_pPlayerTexture, NUM_PLAYER_ANIM_FRAMES, PLAYER_ANIM_FRAME_DELAY);
 

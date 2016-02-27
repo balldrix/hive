@@ -9,7 +9,7 @@ public:
 	AnimatedSprite();
 	virtual ~AnimatedSprite();
 
-	virtual void	Init(Graphics* graphics, TextureManager* textureManager, unsigned int frames, float frameDelay);
+	virtual void	Init(Graphics* graphics, TextureManager* textureManager, unsigned int frames, float frameDelay, unsigned int frameWidth, unsigned int frameHeight);
 	virtual void	Update(float deltaTime);
 	virtual	void	Reset();
 

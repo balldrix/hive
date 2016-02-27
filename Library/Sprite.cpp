@@ -4,7 +4,6 @@
 Sprite::Sprite() : 
 m_pGraphics(NULL),
 m_pTextureManager(NULL),
-m_numCols(1),
 m_currentFrame(0),
 m_initialised(false),
 m_showHitBox(false),
@@ -15,8 +14,6 @@ m_facingDirection(RIGHT)
 	// initialise the spriteData struct
 	m_spriteData = { 0, 0, Vector2D(0.0f, 0.0f),
 		0.0f, 0.0f, RECT(), NULL, false, false };
-
-	m_tileSize = { 0, 0 };
 }
 
 Sprite::~Sprite()
@@ -46,8 +43,6 @@ Sprite::Init(Graphics* graphics, TextureManager* textureManager)
 	m_spriteData.flipHorizontal= false;
 	m_spriteData.flipVertical = false;
 	m_spriteData.texture = m_pTextureManager->GetTexture();
-
-	m_numCols = m_spriteData.width / m_tileSize.x;
 
 	m_initialised = true;
 }
@@ -155,9 +150,9 @@ Sprite::SetHeight(int h)
 void
 Sprite::SetRect()
 {
-	m_spriteData.rect.left = (m_currentFrame % m_numCols) * m_spriteData.width;
+	m_spriteData.rect.left = m_currentFrame * m_spriteData.width;
 	m_spriteData.rect.right = m_spriteData.rect.left + m_spriteData.width;
-	m_spriteData.rect.top = m_currentFrame / m_numCols * m_spriteData.height;
+	m_spriteData.rect.top = m_currentFrame * m_spriteData.height;
 	m_spriteData.rect.bottom = m_spriteData.rect.top + m_spriteData.height;
 }
 

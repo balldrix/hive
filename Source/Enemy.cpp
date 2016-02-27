@@ -24,10 +24,8 @@ Enemy::Init(Graphics* graphics, TextureManager* enemyTexture)
 {
 	m_pGraphics = graphics;
 	m_pEnemyTexture = enemyTexture;
-
-	m_tileSize = { 128, 128 };
 	
-	AnimatedSprite::Init(m_pGraphics, m_pEnemyTexture, NUM_ENEMY_ANIM_FRAMES, ENEMY_ANIM_FRAME_DELAY);
+	AnimatedSprite::Init(m_pGraphics, m_pEnemyTexture, ENEMY_ANIM_NUM_FRAMES, ENEMY_ANIM_FRAME_DELAY, ENEMY_ANIM_FRAME_WIDTH, ENEMY_ANIM_FRAME_HEIGHT);
 	
 	m_aiTimer = AI_THINKING_TIME;
 	
