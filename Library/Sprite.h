@@ -16,7 +16,7 @@ class Sprite
 public:
 	Sprite();
 	virtual ~Sprite();
-	virtual void				Init(Graphics* graphics, TextureManager* textureManager);
+	virtual void				Init(Graphics* graphics, TextureManager* textureManager, unsigned int frameWidth, unsigned int frameHeight);
 	virtual void				Update(float deltaTime);
 	virtual void				Render();
 	virtual void				Render(Vector2D position);
@@ -56,6 +56,8 @@ protected:
 
 	unsigned int				m_numCols;
 	unsigned int				m_currentFrame;
+	unsigned int				m_frameWidth;
+	unsigned int				m_frameHeight;
 
 	AABB						m_collisionBox;
 

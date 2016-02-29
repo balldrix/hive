@@ -1,7 +1,7 @@
 #include "Player.h"
 #include "Resources.h"
 
-Player::Player() : 
+Player::Player() :
 AnimatedSprite(),
 Transform(),
 m_pGraphics(NULL),
