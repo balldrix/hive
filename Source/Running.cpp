@@ -356,20 +356,27 @@ Running::SpawnEnemy()
 	// loop through enemy array
 	for(int index = 0; index < MAX_ENEMY; index++)
 	{
+		m_enemySpawnPosition = SetSpawnLocation();
+		m_enemy[index].SetPosition(m_enemySpawnPosition);
+		m_enemy[index].SetAABB(m_enemySpawnPosition, Vector2D(m_enemySpawnPosition.x + TILE_SIZE, m_enemySpawnPosition.y + TILE_SIZE));
 		// loop through remaining array
-		for(int j = index; j < MAX_ENEMY; j++)
+		for(int j = 0; j < MAX_ENEMY; j++)
 		{
-			{	// loop while there is a collision
-				while(m_enemy[index].Collision(m_enemy[j].GetAABB()))
-				{
-					m_enemySpawnPosition = SetSpawnLocation();
-					m_enemy[j].SetPosition(m_enemySpawnPosition);
-					m_enemy[j].SetAABB(m_enemySpawnPosition, Vector2D(m_enemySpawnPosition.x + TILE_SIZE, m_enemySpawnPosition.y + TILE_SIZE));
-				}
+			m_enemySpawnPosition = SetSpawnLocation();
+			m_enemy[j].SetPosition(m_enemySpawnPosition);
+			m_enemy[j].SetAABB(m_enemySpawnPosition, Vector2D(m_enemySpawnPosition.x + TILE_SIZE, m_enemySpawnPosition.y + TILE_SIZE));
+
+			// loop while there is a collision
+			if(m_enemy[index].Collision(m_enemy[j].GetAABB()))
+			{
+				index = 0;
+			}
+			else
+			{
+				// set spawned enemy to active
+				m_enemy[index].SetActive(true);
 			}
 		}
-		// set spawned enemy to active
-		m_enemy[index].SetActive(true);
 	}
 }
 
