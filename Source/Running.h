@@ -29,19 +29,6 @@
 const int				START_X_POSITION			= GAME_WIDTH / 2;
 const int				START_Y_POSITION			= GAME_HEIGHT / 2;
 
-// enemy spawn area
-const unsigned int		ENEMY_SPAWN__AREA1_MIN_X	= 0;
-const unsigned int		ENEMY_SPAWN__AREA1_MIN_Y	= 0;
-
-const unsigned int		ENEMY_SPAWN__AREA1_MAX_X	= 288;
-const unsigned int		ENEMY_SPAWN__AREA1_MAX_Y	= 88;
-
-const unsigned int		ENEMY_SPAWN__AREA2_MIN_X	= 960;
-const unsigned int		ENEMY_SPAWN__AREA2_MIN_Y	= 480;
-
-const unsigned int		ENEMY_SPAWN__AREA2_MAX_X	= GAME_WIDTH;
-const unsigned int		ENEMY_SPAWN__AREA2_MAX_Y	= GAME_HEIGHT;
-
 // delay between spawning enemy
 const float				ENEMY_SPAWN_DELAY = 0.2f;
 
