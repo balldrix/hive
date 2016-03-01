@@ -4,10 +4,7 @@
 Sprite::Sprite() : 
 m_pGraphics(NULL),
 m_pTextureManager(NULL),
-m_numCols(1),
 m_currentFrame(0),
-m_frameWidth(0),
-m_frameHeight(0),
 m_initialised(false),
 m_showHitBox(false),
 m_colourFilter(colourNS::WHITE),
@@ -24,7 +21,7 @@ Sprite::~Sprite()
 }
 
 void
-Sprite::Init(Graphics* graphics, TextureManager* textureManager, unsigned int frameWidth, unsigned int frameHeight)
+Sprite::Init(Graphics* graphics, TextureManager* textureManager)
 {
 	m_pGraphics = graphics;
 	m_pTextureManager = textureManager;
@@ -46,8 +43,6 @@ Sprite::Init(Graphics* graphics, TextureManager* textureManager, unsigned int fr
 	m_spriteData.flipHorizontal= false;
 	m_spriteData.flipVertical = false;
 	m_spriteData.texture = m_pTextureManager->GetTexture();
-
-	m_numCols = m_spriteData.width / m_frameWidth;
 
 	m_initialised = true;
 }
@@ -155,10 +150,10 @@ Sprite::SetHeight(int h)
 void
 Sprite::SetRect()
 {
-	m_spriteData.rect.left = (m_currentFrame % m_numCols) * m_frameWidth;
-	m_spriteData.rect.right = m_spriteData.rect.left + m_frameWidth;
-	m_spriteData.rect.top = m_currentFrame / m_numCols * m_frameHeight;
-	m_spriteData.rect.bottom = m_spriteData.rect.top + m_frameHeight;
+	m_spriteData.rect.left = m_currentFrame * m_spriteData.width;
+	m_spriteData.rect.right = m_spriteData.rect.left + m_spriteData.width;
+	m_spriteData.rect.top = m_currentFrame * m_spriteData.height;
+	m_spriteData.rect.bottom = m_spriteData.rect.top + m_spriteData.height;
 }
 
 void
