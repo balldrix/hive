@@ -9,11 +9,8 @@ Running::Running(GameStateManager* gm) :
 	m_pInput(NULL),
 	m_initialised(false),
 	m_isPaused(false),
-	m_canSpawnEnemy(false),
 	m_showHitBoxes(false),
-	m_enemySpawnDelay(0.0f),
 	m_keyDownDelay(0.0f),
-	m_enemySpawnPosition(0.0f, 0.0f),
 	m_score(0),
 	m_level(0),
 	GameState("RUNNING")
@@ -353,46 +350,7 @@ Running::ResetAll()
 void
 Running::SpawnEnemy()
 {
-	// loop through enemy array
-	for(int index = 0; index < MAX_ENEMY; index++)
-	{
-		// loop through remaining array
-		for(int j = index; j < MAX_ENEMY; j++)
-		{
-			{	// loop while there is a collision
-				while(m_enemy[index].Collision(m_enemy[j].GetAABB()))
-				{
-					m_enemySpawnPosition = SetSpawnLocation();
-					m_enemy[j].SetPosition(m_enemySpawnPosition);
-					m_enemy[j].SetAABB(m_enemySpawnPosition, Vector2D(m_enemySpawnPosition.x + m_enemy[j].GetWidth(), m_enemySpawnPosition.y + m_enemy[j].GetHeight()));
-				}
-			}
-		}
-		// set spawned enemy to active
-		m_enemy[index].SetActive(true);
-	}
-}
 
-Vector2D
-Running::SetSpawnLocation()
-{
-	// create x and y position vars
-	unsigned int xPos = 0;
-	unsigned int yPos = 0;
-
-	do
-	{
-		xPos = Randomiser::GetRandNum(ENEMY_SPAWN__AREA1_MIN_X, ENEMY_SPAWN__AREA2_MAX_X);
-	} while((xPos > ENEMY_SPAWN__AREA1_MAX_X) &&
-			(xPos < ENEMY_SPAWN__AREA2_MIN_X));
-
-	do
-	{
-		yPos = Randomiser::GetRandNum(ENEMY_SPAWN__AREA1_MIN_Y, ENEMY_SPAWN__AREA2_MAX_Y);
-	} while((yPos > ENEMY_SPAWN__AREA1_MAX_Y) &&
-			(yPos < ENEMY_SPAWN__AREA2_MIN_Y));
-
-	return Vector2D(xPos, yPos);
 }
 
 void
