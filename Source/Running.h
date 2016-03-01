@@ -64,9 +64,6 @@ public:
 	void				SpawnEnemy();
 	void				CheckCollisions();
 	void				AddScore(unsigned int score);
-	
-	// set random x and y spawn location
-	Vector2D			SetSpawnLocation();
 
 	// toggle the rendering of object hit boxes
 	void				SetRenderHitBoxes();
@@ -90,13 +87,9 @@ private:
 
 	bool				m_initialised;
 	bool				m_isPaused;
-	bool				m_canSpawnEnemy;
 	bool				m_showHitBoxes;
 
-	float				m_enemySpawnDelay;
 	float				m_keyDownDelay;
-
-	Vector2D			m_enemySpawnPosition;
 
 	// current player score
 	unsigned int		m_score;
