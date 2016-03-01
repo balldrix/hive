@@ -23,7 +23,7 @@ Sprite::~Sprite()
 }
 
 void
-Sprite::Init(Graphics* graphics, TextureManager* textureManager)
+Sprite::Init(Graphics* graphics, TextureManager* textureManager, unsigned int frameWidth, unsigned int frameHeight)
 {
 	m_pGraphics = graphics;
 	m_pTextureManager = textureManager;
@@ -45,6 +45,9 @@ Sprite::Init(Graphics* graphics, TextureManager* textureManager)
 	m_spriteData.flipHorizontal= false;
 	m_spriteData.flipVertical = false;
 	m_spriteData.texture = m_pTextureManager->GetTexture();
+
+	m_frameWidth = frameWidth;
+	m_frameHeight = frameHeight;
 
 	m_initialised = true;
 }

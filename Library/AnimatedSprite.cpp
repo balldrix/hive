@@ -20,13 +20,11 @@ AnimatedSprite::~AnimatedSprite()
 void
 AnimatedSprite::Init(Graphics* graphics, TextureManager* textureManager, unsigned int frames, float frameDelay, unsigned int frameWidth, unsigned int frameHeight)
 {
-	Sprite::Init(graphics, textureManager);
+	Sprite::Init(graphics, textureManager, frameWidth, frameHeight);
 
 	m_numOfFrames = frames;
 	m_frameDelay = frameDelay;
 
-	m_spriteData.width = frameWidth;
-	m_spriteData.height = frameHeight;
 	SetRect();
 }
 
@@ -91,8 +89,8 @@ AnimatedSprite::SetAnimDone(bool done)
 void
 AnimatedSprite::SetRect()
 {
-	m_spriteData.rect.left = m_currentFrame * m_spriteData.width;
-	m_spriteData.rect.right = m_spriteData.rect.left + m_spriteData.width;
-	m_spriteData.rect.top = m_currentAnimation * m_spriteData.height;
-	m_spriteData.rect.bottom = m_spriteData.rect.top + m_spriteData.height;
+	m_spriteData.rect.left = m_currentFrame * m_frameWidth;
+	m_spriteData.rect.right = m_spriteData.rect.left + m_frameWidth;
+	m_spriteData.rect.top = m_currentAnimation * m_frameHeight;
+	m_spriteData.rect.bottom = m_spriteData.rect.top + m_frameHeight;
 }

@@ -16,7 +16,7 @@ class Sprite
 public:
 	Sprite();
 	virtual ~Sprite();
-	virtual void				Init(Graphics* graphics, TextureManager* textureManager);
+	virtual void				Init(Graphics* graphics, TextureManager* textureManager, unsigned int frameWidth, unsigned int frameHeight);
 	virtual void				Update(float deltaTime);
 	virtual void				Render();
 	virtual void				Render(Vector2D position);
