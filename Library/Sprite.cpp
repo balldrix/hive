@@ -4,6 +4,8 @@
 Sprite::Sprite() : 
 m_pGraphics(NULL),
 m_pTextureManager(NULL),
+m_frameWidth(0),
+m_frameHeight(0),
 m_currentFrame(0),
 m_initialised(false),
 m_showHitBox(false),
@@ -150,10 +152,10 @@ Sprite::SetHeight(int h)
 void
 Sprite::SetRect()
 {
-	m_spriteData.rect.left = m_currentFrame * m_spriteData.width;
-	m_spriteData.rect.right = m_spriteData.rect.left + m_spriteData.width;
-	m_spriteData.rect.top = m_currentFrame * m_spriteData.height;
-	m_spriteData.rect.bottom = m_spriteData.rect.top + m_spriteData.height;
+	m_spriteData.rect.left = (m_currentFrame % m_numCols) * m_frameWidth;
+	m_spriteData.rect.right = m_spriteData.rect.left + m_frameWidth;
+	m_spriteData.rect.top = m_currentFrame / m_numCols * m_frameHeight;
+	m_spriteData.rect.bottom = m_spriteData.rect.top + m_frameHeight;
 }
 
 void
