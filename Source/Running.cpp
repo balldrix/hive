@@ -350,7 +350,8 @@ Running::ResetAll()
 void
 Running::SpawnEnemy()
 {
-
+	m_enemy[0].SetPosition(900,200);
+	m_enemy[0].SetActive(true);
 }
 
 void
