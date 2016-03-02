@@ -54,9 +54,6 @@ protected:
 	
 	SpriteData					m_spriteData;
 
-	unsigned int				m_frameWidth;
-	unsigned int				m_frameHeight;
-
 	unsigned int				m_numCols;
 	unsigned int				m_currentFrame;
 

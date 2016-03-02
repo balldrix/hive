@@ -79,11 +79,10 @@ Enemy::Update(float deltaTime)
 		m_aiTimer = AI_THINKING_TIME;
 	}
 
-	if (m_position.x < m_tileSize.x || m_position.x + m_tileSize.x > GAME_WIDTH
-		|| m_position.y < m_tileSize.y || m_position.y + m_tileSize.y > GAME_HEIGHT)
+	if (m_position.x < m_spriteData.width || m_position.x + m_spriteData.width > GAME_WIDTH
+		|| m_position.y < m_spriteData.height || m_position.y + m_spriteData.height > GAME_HEIGHT)
 	{
 		SetRandomDirection();
-		//SetTargetVelocity(Vector2D(m_currentVelocity.x *-1, m_currentVelocity.y *-1));
 	}
 
 	m_aiTimer -= deltaTime;

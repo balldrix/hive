@@ -89,8 +89,8 @@ AnimatedSprite::SetAnimDone(bool done)
 void
 AnimatedSprite::SetRect()
 {
-	m_spriteData.rect.left = m_currentFrame * m_frameWidth;
-	m_spriteData.rect.right = m_spriteData.rect.left + m_frameWidth;
-	m_spriteData.rect.top = m_currentAnimation * m_frameHeight;
-	m_spriteData.rect.bottom = m_spriteData.rect.top + m_frameHeight;
+	m_spriteData.rect.left = m_currentFrame * m_spriteData.width;
+	m_spriteData.rect.right = m_spriteData.rect.left + m_spriteData.width;
+	m_spriteData.rect.top = m_currentAnimation * m_spriteData.height;
+	m_spriteData.rect.bottom = m_spriteData.rect.top + m_spriteData.height;
 }
