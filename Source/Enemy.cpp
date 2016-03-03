@@ -9,7 +9,7 @@ AABB(),
 m_pGraphics(NULL),
 m_pEnemyTexture(NULL),
 m_ID(""),
-m_enemyState(ENEMY_STATE_ROAM),
+m_enemyState(ENEMY_STATE_IDLE),
 m_aiTimer(0.0f),
 m_active(false)
 {
@@ -27,9 +27,9 @@ Enemy::Init(Graphics* graphics, TextureManager* enemyTexture)
 	
 	AnimatedSprite::Init(m_pGraphics, m_pEnemyTexture, ENEMY_ANIM_NUM_FRAMES, ENEMY_ANIM_FRAME_DELAY, ENEMY_ANIM_FRAME_WIDTH, ENEMY_ANIM_FRAME_HEIGHT);
 	
+	SetEnemyState(ENEMY_STATE_IDLE);
 	m_aiTimer = AI_THINKING_TIME;
-	
-	SetRandomDirection();
+	m_isLerper = true;
 }
 
 void 
@@ -69,11 +69,6 @@ Enemy::Update(float deltaTime)
 		}
 	}
 
-	
-//	m_pEnemySprite->Update(deltaTime);
-	
-//	FlipSprite(m_pEnemySprite, m_facingDirection);
-
 	if (m_aiTimer < 0)
 	{
 		m_aiTimer = AI_THINKING_TIME;
@@ -111,14 +106,25 @@ Enemy::Reset()
 	AABB::Reset();
 	m_active = false;
 	m_position = Vector2D(0.0f, 0.0f);
-	m_targetMovementSpeed = ENEMY_WALK_SPEED;
+	m_targetMovementSpeed = 0;
 	SetEnemyState(ENEMY_STATE_ROAM);
 }
 
 Enemy::ENEMY_STATE
 Enemy::Idle()
 {
-	return m_enemyState;
+	unsigned int randomRoll = Randomiser::GetRandNum(1,6);
+	if(randomRoll > 3)
+	{
+		SetTargetMovementSpeed(0);
+		SetTargetVelocity(0.0f,0.0f);
+	}
+	else
+	{
+		SetRandomDirection();
+		SetTargetMovementSpeed(ENEMY_ROAM_SPEED);
+	}
+	return ENEMY_STATE_IDLE;
 }
 
 Enemy::ENEMY_STATE

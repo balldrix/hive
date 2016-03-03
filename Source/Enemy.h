@@ -11,7 +11,7 @@ const unsigned int	ENEMY_ANIM_NUM_FRAMES	= 1;
 const float			ENEMY_ANIM_FRAME_DELAY	= 1.0f;
 const unsigned int	ENEMY_ANIM_FRAME_WIDTH	= 32;
 const unsigned int	ENEMY_ANIM_FRAME_HEIGHT = 32;
-const unsigned int	ENEMY_WALK_SPEED		= 64;
+const unsigned int	ENEMY_ROAM_SPEED		= 64;
 const unsigned int	ENEMY_RUN_SPEED			= 32;
 const float			AI_THINKING_TIME		= 30.0f;
 
@@ -21,9 +21,9 @@ public:
 
 	enum ENEMY_STATE
 	{
+		ENEMY_STATE_IDLE,
 		ENEMY_STATE_ROAM,
 		ENEMY_STATE_DEAD,
-		ENEMY_STATE_IDLE,
 		ENEMY_STATE_ATTACKING,
 		ENEMY_STATE_DEATH,
 		ENEMY_STATE_MAX_STATES
