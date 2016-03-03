@@ -36,7 +36,7 @@ public:
 	void				SetActive(bool active);
 
 	BULLET_STATE		GetBulletState()	const { return m_bulletState; }
-	bool				GetActive()			const { return m_active; }
+	bool				GetIsActive()		const { return m_active; }
 
 private:
 	Graphics*			m_pGraphics;

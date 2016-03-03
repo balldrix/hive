@@ -72,7 +72,7 @@ Player::Update(float deltaTime)
 	// Update Bullets
  	for (int index = 0; index < MAX_BULLETS_ON_SCREEN; index++)
 	{
-		if(m_bullet[index].GetActive())
+		if(m_bullet[index].GetIsActive())
 		{
 			m_bullet[index].Update(deltaTime);
 		}
@@ -156,7 +156,7 @@ Player::Shoot()
 		for (int index = 0; index < MAX_BULLETS_ON_SCREEN; index++)
 		{
 			
-			if (!m_bullet[index].GetActive())
+			if (!m_bullet[index].GetIsActive())
 			{
 				m_bullet[index].SetActive(true);
 				m_bullet[index].SetFacingDirection(m_facingDirection);
