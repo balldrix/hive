@@ -29,16 +29,6 @@ public:
 		ENEMY_STATE_MAX_STATES
 	};
 
-	//enum ANIMATION_STATE
-	//{
-	//	ANIM_ROAM,
-	//	ANIM_DEAD,
-	//	ANIM_IDLE,
-	//	ANIM_ATTACKING,
-	//	ANIM_DEATH,
-	//	ANIM_MAX_STATES
-	//};
-
 	Enemy();
 	virtual ~Enemy();
 
@@ -69,7 +59,6 @@ private:
 
 	const char*			m_ID;
 	ENEMY_STATE			m_enemyState;
-	//ANIMATION_STATE	m_animState;
 	float				m_aiTimer;
 	bool				m_active;
 };
