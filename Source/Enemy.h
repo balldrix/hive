@@ -13,7 +13,7 @@ const unsigned int	ENEMY_ANIM_FRAME_WIDTH	= 32;
 const unsigned int	ENEMY_ANIM_FRAME_HEIGHT = 32;
 const unsigned int	ENEMY_ROAM_SPEED		= 64;
 const unsigned int	ENEMY_RUN_SPEED			= 32;
-const float			AI_THINKING_TIME		= 30.0f;
+const float			AI_THINKING_TIME		= 4.0f;
 
 class Enemy : public Transform, public AnimatedSprite, public AABB
 {

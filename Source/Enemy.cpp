@@ -39,49 +39,48 @@ Enemy::Update(float deltaTime)
 	{
 		Transform::Update(deltaTime);
 
-		switch(m_enemyState)
+		if(m_aiTimer < 0)
 		{
-			case ENEMY_STATE_IDLE:
+			switch(m_enemyState)
 			{
-				SetEnemyState(Idle());
-				break;
+				case ENEMY_STATE_IDLE:
+				{
+					SetEnemyState(Idle());
+					break;
+				}
+				case ENEMY_STATE_ROAM:
+				{
+					SetEnemyState(Roam());
+					break;
+				}
+				case ENEMY_STATE_ATTACKING:
+				{
+					SetEnemyState(Attack());
+					break;
+				}
+				case ENEMY_STATE_DEATH:
+				{
+					SetEnemyState(Die());
+					break;
+				}
+				case ENEMY_STATE_DEAD:
+				{
+					SetEnemyState(Dead());
+					break;
+				}
 			}
-			case ENEMY_STATE_ROAM:
-			{
-				SetEnemyState(Roam());
-				break;
-			}
-			case ENEMY_STATE_ATTACKING:
-			{
-				SetEnemyState(Attack());
-				break;
-			}
-			case ENEMY_STATE_DEATH:
-			{
-				SetEnemyState(Die());
-				break;
-			}
-			case ENEMY_STATE_DEAD:
-			{
-				SetEnemyState(Dead());
-				break;
-			}
+			
+			m_aiTimer = AI_THINKING_TIME;
+		}
+
+		m_aiTimer -= deltaTime;
+		
+		if (m_position.x < m_spriteData.width || m_position.x + m_spriteData.width > GAME_WIDTH
+			|| m_position.y < m_spriteData.height || m_position.y + m_spriteData.height > GAME_HEIGHT)
+		{
+			SetRandomDirection();
 		}
 	}
-
-	if (m_aiTimer < 0)
-	{
-		m_aiTimer = AI_THINKING_TIME;
-	}
-
-	if (m_position.x < m_spriteData.width || m_position.x + m_spriteData.width > GAME_WIDTH
-		|| m_position.y < m_spriteData.height || m_position.y + m_spriteData.height > GAME_HEIGHT)
-	{
-		SetRandomDirection();
-	}
-
-	m_aiTimer -= deltaTime;
-	
 }
 
 void
@@ -107,14 +106,14 @@ Enemy::Reset()
 	m_active = false;
 	m_position = Vector2D(0.0f, 0.0f);
 	m_targetMovementSpeed = 0;
-	SetEnemyState(ENEMY_STATE_ROAM);
+	SetEnemyState(ENEMY_STATE_IDLE);
 }
 
 Enemy::ENEMY_STATE
 Enemy::Idle()
 {
 	unsigned int randomRoll = Randomiser::GetRandNum(1,6);
-	if(randomRoll > 3)
+	if(randomRoll > 2)
 	{
 		SetTargetMovementSpeed(0);
 		SetTargetVelocity(0.0f,0.0f);
