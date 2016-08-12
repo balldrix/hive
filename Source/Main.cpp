@@ -3,43 +3,28 @@
 	using the Kaon Engine
 
 	Christopher Ball
-	Copyright (c) 2015
+	Copyright (c) 2016
 */
-
 
 //CRT Debug for memory leaks
 #define _CRTDBG_MAP_ALLOC
 #define WIN32_LEAN_AND_MEAN
 
-#include <Windows.h>
-#include <stdlib.h>
-#include <crtdbg.h>
+#include "Window.h"
+#include "Graphics.h"
 #include "Hive.h"
 
-// Windows Handle
-HWND		hWindow;
-
-// is running flag
-bool		running;
-
-// struct to deal with windows message queue
-MSG msg;
-
-// game object
-Hive* game;
+// Global Variables
+Graphics* graphics = nullptr;
+Window* window	= nullptr;
+Game* game = nullptr;
 
 // Prototypes
 // main entry point
 int WINAPI	WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow);
 
-// create window function
-bool		CreateMainWindow(HWND &hWindow, HINSTANCE hInstance, int nCmdShow);
-
 // WinProc function to handle messages
 LRESULT		WINAPI WinProc(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam);
-
-// Initialise stuff
-bool		Init(HINSTANCE hInstance, int nCmdShow);
 
 // Entry point for program
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
@@ -49,137 +34,70 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	#endif
 
-		// create breakpoint at num location 
-		//_CrtSetBreakAlloc(249);
+		// initialise Window
+		window = new Window();
+		window->Init(hInstance, nCmdShow, WndProc);
 
-		if(!Init(hInstance, nCmdShow))
-		{
-			MessageBox(hWindow, "Failed to initalise", "Error!", MB_OK);
-			return 0;
-		}
+		// initialise graphics
+		graphics = new Graphics();
+		graphics->Init(window->GetHwnd());
 
-	// main game loop
-	while (running)
-	{
-		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+		// initialise game engine
+		game = new Game();
+		game->Init(graphics);
+
+		// start message processes where the magic happens
+		MSG msg = {0};
+
+		while(msg.message != WM_QUIT)
 		{
-			if (msg.message == WM_QUIT)
+			// peek at windows message queue 
+			if(PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
 			{
-				running = false;
+				TranslateMessage(&msg);
+				DispatchMessage(&msg);
 			}
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
+			else
+			{
+				// run game
+				game->Run();
+			}
 		}
-		else
-		{
-			game->Run(hWindow);
-		}
-	}
 
-	if (game != NULL)
+		// release game related objects and delete pointers
+		game->ReleaseAll(); 
+		ShutDown();
+
+		return (int)msg.wParam;
+}
+
+void ShutDown()
+{
+	if(game)
 	{
+		// delete game class and null pointer
 		delete game;
-		game = NULL;
-		
+		game = nullptr;
 	}
 
-	return msg.wParam;
+	if(graphics)
+	{
+		// delete graphics class and null pointer
+		delete graphics;
+		graphics = nullptr;
+	}
+
+	if(window)
+	{
+		// delete window class and null pointer
+		delete window;
+		window = nullptr;
+	}
 }
 
-// Initialise window and its params
-bool CreateMainWindow(HWND &hWindow, HINSTANCE hInstance, int nCmdShow)
+LRESULT CALLBACK
+WndProc(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-	// Windows Class
-	WNDCLASSEX	wClassex;
-
-	// Null all class parameters
-	ZeroMemory(&wClassex, sizeof(wClassex));
-
-	wClassex.cbSize = sizeof(wClassex);
-	wClassex.style = CS_CLASSDC;
-	wClassex.lpfnWndProc = WinProc;
-	wClassex.hInstance = hInstance;
-	wClassex.hCursor = LoadCursor(NULL, IDC_ARROW);
-	wClassex.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
-	wClassex.lpszClassName = CLASS_NAME;
-
-	// Register the window class
-	if (!RegisterClassEx(&wClassex))
-	{
-		MessageBox(hWindow, "Error Creating Window Class!", "Error!", MB_OK);
-		return false;
-	}
-
-	// Style flags
-	DWORD style;
-
-	if(FULLSCREEN)
-	{
-		style = WS_EX_TOPMOST | WS_VISIBLE | WS_POPUP;
-	}
-	else
-	{
-		style = WS_OVERLAPPED; // | WS_MINIMIZEBOX | WS_SYSMENU;
-	}
-
-	// create the window
-	hWindow = CreateWindow(
-		CLASS_NAME,
-		GAME_NAME,
-		style,
-		CW_USEDEFAULT,
-		CW_USEDEFAULT,
-		GAME_WIDTH,
-		GAME_HEIGHT,
-		NULL,
-		NULL,
-		hInstance,
-		NULL);
-
-	if(!hWindow)
-	{
-		MessageBox(hWindow, "Error Creating Window!", "Error!", MB_OK);
-		return false;
-	}
-
-	if (!FULLSCREEN)
-	{ 
-		RECT clientRect;
-		GetClientRect(hWindow, &clientRect);
-
-		MoveWindow(hWindow, 
-			0, 
-			0, 
-			GAME_WIDTH + (GAME_WIDTH - clientRect.right), 
-			GAME_HEIGHT + (GAME_HEIGHT - clientRect.bottom), 
-			TRUE);
-	}
-
-	ShowWindow(hWindow, nCmdShow);
-
-	return true;
-}
-
-LRESULT WINAPI WinProc(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam)
-{
-	return (game->MessageHandler(hWindow, msg, wParam, lParam));
-}
-
-bool Init(HINSTANCE hInstance, int nCmdShow)
-{
-	hWindow = NULL;
-	running = true;
-
-	game = NULL;
-	game = new Hive;
-
-	// create a window
-	if (!CreateMainWindow(hWindow, hInstance, nCmdShow))
-	{
-		return false;
-	}
-
-	game->Init(hWindow);
-		
-	return true;
+	// send message handler from game engine to WndProc callback function
+	return game->MessageHandler(hWindow, msg, wParam, lParam);
 }

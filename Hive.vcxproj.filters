@@ -26,6 +26,22 @@
     <ClCompile Include="Source\Enemy.cpp">
       <Filter>GameObjects\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Sprite.cpp" />
+    <ClCompile Include="Source\Surface.cpp" />
+    <ClCompile Include="Source\TextureManager.cpp" />
+    <ClCompile Include="Source\Timer.cpp" />
+    <ClCompile Include="Source\Transform.cpp" />
+    <ClCompile Include="Source\Vector2D.cpp" />
+    <ClCompile Include="Source\Window.cpp" />
+    <ClCompile Include="Source\AABB.cpp" />
+    <ClCompile Include="Source\AnimatedSprite.cpp" />
+    <ClCompile Include="Source\Font.cpp" />
+    <ClCompile Include="Source\Game.cpp" />
+    <ClCompile Include="Source\GameState.cpp" />
+    <ClCompile Include="Source\GameStateManager.cpp" />
+    <ClCompile Include="Source\Graphics.cpp" />
+    <ClCompile Include="Source\Input.cpp" />
+    <ClCompile Include="Source\Randomiser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">
@@ -85,5 +101,33 @@
     <ClInclude Include="Source\Enemy.h">
       <Filter>GameObjects\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Sprite.h" />
+    <ClInclude Include="Source\Surface.h" />
+    <ClInclude Include="Source\TextureManager.h" />
+    <ClInclude Include="Source\Timer.h" />
+    <ClInclude Include="Source\Transform.h" />
+    <ClInclude Include="Source\UnitVectors.h" />
+    <ClInclude Include="Source\Vector2D.h" />
+    <ClInclude Include="Source\Window.h" />
+    <ClInclude Include="Source\AABB.h" />
+    <ClInclude Include="Source\AnimatedSprite.h" />
+    <ClInclude Include="Source\Colours.h" />
+    <ClInclude Include="Source\Constants.h" />
+    <ClInclude Include="Source\Controls.h" />
+    <ClInclude Include="Source\Font.h" />
+    <ClInclude Include="Source\Game.h" />
+    <ClInclude Include="Source\GameState.h" />
+    <ClInclude Include="Source\GameStateManager.h" />
+    <ClInclude Include="Source\Graphics.h" />
+    <ClInclude Include="Source\ID3DLines.h" />
+    <ClInclude Include="Source\Input.h" />
+    <ClInclude Include="Source\LinkedList.h" />
+    <ClInclude Include="Source\ListNode.h" />
+    <ClInclude Include="Source\pch.h" />
+    <ClInclude Include="Source\Randomiser.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Source\LinkedList.inl" />
+    <None Include="Source\Listnode.inl" />
   </ItemGroup>
 </Project>

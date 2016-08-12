@@ -33,7 +33,7 @@ TextureManager::Init(Graphics* graphics, const char* fileName)
 				m_colourKey,
 				m_width, m_height);
 
-	if (m_result != D3D_OK)
+	if (m_result != S_OK)
 	{
 		if (m_pTexture != NULL)
 		{

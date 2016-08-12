@@ -86,10 +86,12 @@ Game::MessageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam)
 void
 Game::Init(HWND hWindow)
 {
+	// copy graphics pointer
+	m_pGraphics = graphics;
+
 	// set windows handle
 	m_hWindow = hWindow;
 
-	m_pGraphics = new Graphics();
 	m_pInput = new Input();
 
 	// initialise graphics object
