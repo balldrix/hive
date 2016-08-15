@@ -1,18 +1,17 @@
 /*
-	Hive v0.0.011
-	using the Kaon Engine
+	Hive Project v0.0.011
 
 	Christopher Ball
 	Copyright (c) 2016
 */
 
+#include "Window.h"
+#include "Graphics.h"
+#include "Game.h"
+
 //CRT Debug for memory leaks
 #define _CRTDBG_MAP_ALLOC
 #define WIN32_LEAN_AND_MEAN
-
-#include "Window.h"
-#include "Graphics.h"
-#include "Hive.h"
 
 // Global Variables
 Graphics* graphics = nullptr;
@@ -20,11 +19,12 @@ Window* window	= nullptr;
 Game* game = nullptr;
 
 // Prototypes
-// main entry point
-int WINAPI	WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow);
+
+// Prototype Functions
+void ShutDown();
 
 // WinProc function to handle messages
-LRESULT		WINAPI WinProc(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam);
+LRESULT WINAPI WndProc(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam);
 
 // Entry point for program
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
@@ -69,6 +69,30 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		ShutDown();
 
 		return (int)msg.wParam;
+}
+
+void ShutDown()
+{
+	if(game)
+	{
+		// delete game class and null pointer
+		delete game;
+		game = nullptr;
+	}
+
+	if(graphics)
+	{
+		// delete graphics class and null pointer
+		delete graphics;
+		graphics = nullptr;
+	}
+
+	if(window)
+	{
+		// delete window class and null pointer
+		delete window;
+		window = nullptr;
+	}
 }
 
 void ShutDown()

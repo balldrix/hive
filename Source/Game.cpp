@@ -1,7 +1,15 @@
 #include "Game.h"
+#include "Input.h"
+#include "GameStateManager.h"
+#include "FrontEnd.h"
+#include "ControlScreen.h"
+#include "Running.h"
+#include "GameOver.h"
+#include "GameState.h"
 #include "Constants.h"
 
 Game::Game() :
+	m_stateManager(NULL),
 	m_pGraphics(NULL),
 	m_pInput(NULL),
 	m_hWindow(0),
@@ -18,84 +26,18 @@ Game::Game() :
 
 Game::~Game()
 {
+	ReleaseAll();
 	DeleteAll();
 	ShowCursor(true);
 }
 
-LRESULT
-Game::MessageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam)
-{
-	if (m_initialised)
-	{
-		switch (msg)
-		{
-		case WM_DESTROY:
-			PostQuitMessage(0);
-			return 0;
-		case WM_KEYDOWN: case WM_SYSKEYDOWN:
-			m_pInput->KeyDown(wParam);
-			return 0;
-		case WM_KEYUP: case WM_SYSKEYUP:
-			m_pInput->KeyUp(wParam);
-			return 0;
-		case WM_CHAR:
-			m_pInput->KeyIn(wParam);
-			return 0;
-		case WM_MOUSEMOVE:
-			m_pInput->MouseIn(lParam);
-			return 0;
-		case WM_INPUT:
-			m_pInput->MouseRawIn(lParam);
-			return 0;
-		case WM_LBUTTONDOWN:
-			m_pInput->SetMouseLButton(true);
-			m_pInput->MouseIn(lParam);
-			return 0;
-		case WM_LBUTTONUP:
-			m_pInput->SetMouseLButton(false);
-			m_pInput->MouseIn(lParam);
-			return 0;
-		case WM_RBUTTONDOWN:
-			m_pInput->SetMouseRButton(true);
-			m_pInput->MouseIn(lParam);
-			return 0;
-		case WM_RBUTTONUP:
-			m_pInput->SetMouseRButton(false);
-			m_pInput->MouseIn(lParam);
-			return 0;
-		case WM_MBUTTONDOWN:
-			m_pInput->SetMouseMButton(true);
-			m_pInput->MouseIn(lParam);
-			return 0;
-		case WM_MBUTTONUP:
-			m_pInput->SetMouseMButton(false);
-			m_pInput->MouseIn(lParam);
-			return 0;
-		case WM_XBUTTONDOWN: case WM_XBUTTONUP:
-			m_pInput->SetMouseXButton(wParam);
-			m_pInput->MouseIn(lParam);
-			return 0;
-		case WM_DEVICECHANGE:
-			m_pInput->CheckControllers();
-			return 0;
-		}
-	}
-	return DefWindowProc(hWindow, msg, wParam, lParam);
-}
-
 void
-Game::Init(HWND hWindow)
+Game::Init(Graphics* graphics)
 {
 	// copy graphics pointer
 	m_pGraphics = graphics;
 
-	// set windows handle
-	m_hWindow = hWindow;
-
 	m_pInput = new Input();
-
-	// initialise graphics object
-	m_pGraphics->Init(m_hWindow, GAME_WIDTH, GAME_HEIGHT, FULLSCREEN);
 
 	// initialise input 
 	m_pInput->Init(m_hWindow, false);
@@ -106,6 +48,15 @@ Game::Init(HWND hWindow)
 	// set timer start
 	m_timeStart = m_pTimer.GetTicks();
 
+	// create state manager object and add game states needed for game
+	m_stateManager = new GameStateManager();
+	m_stateManager->CreateGlobalSystems(m_pGraphics->GetHwnd(), m_pGraphics, m_pInput);
+	m_stateManager->AddState(new FrontEnd(m_stateManager));
+	m_stateManager->AddState(new ControlScreen(m_stateManager));
+	m_stateManager->AddState(new Running(m_stateManager));
+	m_stateManager->AddState(new GameOver(m_stateManager));
+	m_stateManager->SwitchState("RUNNING");
+
 	m_initialised = true;
 
 	// seed the randoms with the current time
@@ -114,7 +65,7 @@ Game::Init(HWND hWindow)
 
 // run method called in winmain message loop
 void
-Game::Run(HWND hWindow)
+Game::Run()
 {
 	if (m_pGraphics != NULL)
 	{
@@ -122,9 +73,9 @@ Game::Run(HWND hWindow)
 
 		m_deltaTime = ((float)(m_timeEnd - m_timeStart) / (float)m_timeFreq);
 
-		if (m_deltaTime < MIN_FRAME_TIME)
+		if (m_deltaTime < GlobalConstants::MIN_FRAME_TIME)
 		{
-			m_sleepTime = (DWORD)((MIN_FRAME_TIME - m_deltaTime) * 1000);
+			m_sleepTime = (DWORD)((GlobalConstants::MIN_FRAME_TIME - m_deltaTime) * 1000);
 			timeBeginPeriod(1);
 			Sleep(m_sleepTime);
 			timeEndPeriod(1);
@@ -136,19 +87,17 @@ Game::Run(HWND hWindow)
 			m_fps = (m_fps * 0.99f) + (0.01f / m_deltaTime);
 		}
 
-		if (m_deltaTime > MAX_FRAME_TIME)
+		if (m_deltaTime > GlobalConstants::MAX_FRAME_TIME)
 		{
-			m_deltaTime = MAX_FRAME_TIME;
+			m_deltaTime = GlobalConstants::MAX_FRAME_TIME;
 		}
 
 		m_timeStart = m_timeEnd;
 
-		m_pInput->ReadControllers();
-
 		// if Alt+Enter toggle fullscreen/window
 		if (m_pInput->IsKeyDown(ALT_KEY) && m_pInput->WasKeyPressed(ENTER_KEY))
 		{
-			SetDisplayMode(graphicsNS::TOGGLE); // toggle fullscreen/window
+			SetDisplayMode(TOGGLE); // toggle fullscreen/window
 		}
 
 		if (m_pInput->IsKeyDown(ESC_KEY))
@@ -157,7 +106,6 @@ Game::Run(HWND hWindow)
 		}
 
 		Update(m_deltaTime);	
-		m_pInput->VibrateControllers(m_deltaTime);
 
 		RenderGame();
 		
@@ -169,8 +117,6 @@ Game::Run(HWND hWindow)
 void
 Game::DeleteAll()
 {	
-	ReleaseAll();
-
 	if (m_pInput != NULL)
 	{
 		delete m_pInput;
@@ -183,19 +129,31 @@ Game::DeleteAll()
 		m_pGraphics = NULL;
 	}
 
+	if (m_stateManager != NULL)
+	{
+		delete m_stateManager;
+		m_stateManager = NULL;
+	}
+
 	m_initialised = false;
+}
+
+void
+Game::Update(float deltaTime)
+{
+	m_stateManager->Update(deltaTime);
 }
 
 // render game objects
 void
-Game::RenderGame()
+Game::Render()
 {
-	m_result = m_pGraphics->Begin();
+	m_result = m_pGraphics->BeginScene();
 
 	if (m_result == S_OK)
 	{
-		Render();
-		m_pGraphics->End();
+		m_stateManager->Render();
+		m_pGraphics->EndScene();
 	}	
 	
 	HandleLostDevice();
@@ -210,6 +168,7 @@ Game::HandleLostDevice()
 	m_result = m_pGraphics->GetDeviceState();
 	if (m_result != D3D_OK)
 	{
+		// TODO insert error logging
 		if (m_result == D3DERR_DEVICELOST)
 		{
 			Sleep(100);
@@ -232,7 +191,7 @@ Game::HandleLostDevice()
 }
 
 void			
-Game::SetDisplayMode(graphicsNS::DISPLAY_MODE mode)
+Game::SetDisplayMode(DisplayMode mode)
 {
 	ReleaseAll();
 	m_pGraphics->ChangeDisplayMode(mode);
@@ -249,4 +208,63 @@ void
 Game::ResetAll()
 {
 
+}
+
+
+LRESULT
+Game::MessageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+	if (m_initialised)
+	{
+		switch (msg)
+		{
+			case WM_DESTROY:
+				PostQuitMessage(0);
+				return 0;
+			case WM_KEYDOWN: case WM_SYSKEYDOWN:
+				m_pInput->KeyDown(wParam);
+				return 0;
+			case WM_KEYUP: case WM_SYSKEYUP:
+				m_pInput->KeyUp(wParam);
+				return 0;
+			case WM_CHAR:
+				m_pInput->KeyIn(wParam);
+				return 0;
+			case WM_MOUSEMOVE:
+				m_pInput->MouseIn(lParam);
+				return 0;
+			case WM_INPUT:
+				m_pInput->MouseRawIn(lParam);
+				return 0;
+			case WM_LBUTTONDOWN:
+				m_pInput->SetMouseLButton(true);
+				m_pInput->MouseIn(lParam);
+				return 0;
+			case WM_LBUTTONUP:
+				m_pInput->SetMouseLButton(false);
+				m_pInput->MouseIn(lParam);
+				return 0;
+			case WM_RBUTTONDOWN:
+				m_pInput->SetMouseRButton(true);
+				m_pInput->MouseIn(lParam);
+				return 0;
+			case WM_RBUTTONUP:
+				m_pInput->SetMouseRButton(false);
+				m_pInput->MouseIn(lParam);
+				return 0;
+			case WM_MBUTTONDOWN:
+				m_pInput->SetMouseMButton(true);
+				m_pInput->MouseIn(lParam);
+				return 0;
+			case WM_MBUTTONUP:
+				m_pInput->SetMouseMButton(false);
+				m_pInput->MouseIn(lParam);
+				return 0;
+			case WM_XBUTTONDOWN: case WM_XBUTTONUP:
+				m_pInput->SetMouseXButton(wParam);
+				m_pInput->MouseIn(lParam);
+				return 0;
+		}
+	}
+	return DefWindowProc(hWindow, msg, wParam, lParam);
 }

@@ -1,4 +1,5 @@
 #include "Graphics.h"
+#include "pch.h"
 
 // Constructor
 Graphics::Graphics() : 
@@ -9,7 +10,7 @@ Graphics::Graphics() :
 	m_width			(0),
 	m_height		(0)
 {
-	m_backColour = colourNS::WHITE;
+	m_backColour = Colors::LightGray;
 }
 
 // Destructor
@@ -20,13 +21,16 @@ Graphics::~Graphics()
 
 // initialise directx9 and its parameters
 bool
-Graphics::Init(HWND hwnd, int width, int height, bool fullscreen)
+Graphics::Init(HWND hWindow)
 {
-	// handle to my window
-	m_hWindow		= hwnd;
-	m_width			= width;
-	m_height		= height;
-	m_fullscreen	= fullscreen;
+	// copy window handle
+	m_hWindow = hWindow;
+
+	// get screen dimensions from window handle
+	RECT rc;
+	GetClientRect(m_hWindow, &rc);
+	m_width = rc.right - rc.left;
+	m_height = rc.bottom - rc.top;
 
 	// create D3D9 context
 	m_pD3D = Direct3DCreate9(D3D_SDK_VERSION);
@@ -34,7 +38,7 @@ Graphics::Init(HWND hwnd, int width, int height, bool fullscreen)
 	// if context creation fails display error
 	if (m_pD3D == NULL)
 	{
-		MessageBox(m_hWindow, "Error Intitialising Direct3D!", "Error!", MB_OK);
+		MessageBox(m_hWindow, L"Error Intitialising Direct3D!", L"Error!", MB_OK);
 		return false;
 	}
 
@@ -51,7 +55,7 @@ Graphics::Init(HWND hwnd, int width, int height, bool fullscreen)
 		else
 		{
 			// else display error message
-			MessageBox(m_hWindow, "This Graphics device does not support the specified resolution and/or format!", "Error!", MB_OK);
+			MessageBox(m_hWindow, L"This Graphics device does not support the specified resolution and/or format!", L"Error!", MB_OK);
 			return false;
 		}
 	}
@@ -80,7 +84,7 @@ Graphics::Init(HWND hwnd, int width, int height, bool fullscreen)
 
 	if(m_result != D3D_OK)
 	{
-		MessageBox(m_hWindow, "Error Creating Direct3D Device!", "Error!", MB_OK);
+		MessageBox(m_hWindow, L"Error Creating Direct3D Device!", L"Error!", MB_OK);
 		return false;
 	}
 
@@ -88,8 +92,8 @@ Graphics::Init(HWND hwnd, int width, int height, bool fullscreen)
 
 	if(m_result != S_OK)
 	{
-		std::string s = "Error Creating Sprite!";// +fileName;
-		MessageBox(m_hWindow, s.c_str(), "Error!", MB_OK);
+		std::wstring s = L"Error Creating Sprite!";// +fileName;
+		MessageBox(m_hWindow, s.c_str(), L"Error!", MB_OK);
 		return false;
 	}
 
@@ -183,7 +187,7 @@ Graphics::PresentBackBuffer()
 
 	if (m_result != D3D_OK)
 	{
-		MessageBox(m_hWindow, "Error Presenting Backbuffer!", "Error!", MB_OK);
+		MessageBox(m_hWindow, L"Error Presenting Backbuffer!", L"Error!", MB_OK);
 		return;
 	}
 }
@@ -221,11 +225,11 @@ Graphics::Reset()
 }
 
 void
-Graphics::ChangeDisplayMode(graphicsNS::DISPLAY_MODE mode)
+Graphics::ChangeDisplayMode(DisplayMode mode)
 {
 	switch (mode)
 	{
-		case graphicsNS::FULLSCREEN:
+		case FULLSCREEN:
 		{
 			if (m_fullscreen)
 			{
@@ -234,7 +238,7 @@ Graphics::ChangeDisplayMode(graphicsNS::DISPLAY_MODE mode)
 			m_fullscreen = true;
 			break;
 		}
-		case graphicsNS::WINDOW:
+		case WINDOW:
 		{
 			if (m_fullscreen == false)
 			{
@@ -273,59 +277,6 @@ Graphics::ChangeDisplayMode(graphicsNS::DISPLAY_MODE mode)
 
 }
 
-HRESULT
-Graphics::LoadTexture(const char* filename, LPDIRECT3DTEXTURE9 &texture, D3DCOLOR transKey, UINT &width, UINT &height)
-{
-
-	// d3d image info struct
-	D3DXIMAGE_INFO imageInfo;
-
-	m_result = E_FAIL;
-
-	if(filename == NULL)
-	{
-		texture = NULL;
-		return D3DERR_INVALIDCALL;
-	}
-
-	// D3DXGetImageInfoFromFile
-	m_result = D3DXGetImageInfoFromFile(filename, &imageInfo);
-
-	width = imageInfo.Width;
-	height = imageInfo.Height;
-
-	m_result = D3DXCreateTextureFromFileEx(
-		m_pD3DDevice,
-		filename,
-		imageInfo.Width,
-		imageInfo.Height,
-		1, 0,
-		D3DFMT_UNKNOWN,
-		D3DPOOL_DEFAULT,
-		D3DX_DEFAULT,
-		D3DX_DEFAULT,
-		transKey,
-		&imageInfo,
-		NULL, &texture);
-
-	if(m_result != S_OK)
-	{
-		std::string s = "Error Loading Texture!";// +fileName;
-		MessageBox(m_hWindow, s.c_str(), "Error!", MB_OK);
-		return false;
-	}
-
-	if(m_result != D3D_OK)
-	{
-		std::string s = "Error Loading Image File!";// +fileName;
-		MessageBox(m_hWindow, s.c_str(), "Error!", MB_OK);
-		return false;
-	}
-
-	return m_result;
-}
-
-
 void
 Graphics::CreateVertexBuffer(CustomVertex vertex[], UINT size, LPDIRECT3DVERTEXBUFFER9 &vertexBuffer)
 {
@@ -353,13 +304,13 @@ Graphics::RenderQuad(LPDIRECT3DVERTEXBUFFER9 vertexBuffer)
 
 	if(m_result != D3D_OK)
 	{
-		MessageBox(m_hWindow, "Error Drawing Quad!", "Error!", MB_OK);
+		MessageBox(m_hWindow, L"Error Drawing Quad!", L"Error!", MB_OK);
 		return;
 	}
 }
 
 void
-Graphics::RenderSprite(const SpriteData &spriteData, D3DCOLOR colour)
+Graphics::RenderSprite(const SpriteData &spriteData, Color colour)
 {
 	if(spriteData.texture == NULL)
 	{
@@ -414,12 +365,12 @@ Graphics::RenderSprite(const SpriteData &spriteData, D3DCOLOR colour)
 								// Tell the sprite about the new transform matrix
 	m_pSprite->SetTransform(&matrix);
 
-	m_pSprite->Draw(spriteData.texture, &spriteData.rect, NULL, NULL, colour);
+	m_pSprite->Draw(spriteData.texture, &spriteData.rect, NULL, NULL, colour.BGRA());
 }
 
 // begin frame
 HRESULT
-Graphics::Begin()
+Graphics::BeginScene()
 {
 	m_result = E_FAIL;
 	if(m_pD3DDevice == NULL)
@@ -427,7 +378,7 @@ Graphics::Begin()
 		return m_result;
 	}
 
-	m_pD3DDevice->Clear(0, NULL, D3DCLEAR_TARGET, m_backColour, 1.0f, 0);
+	m_pD3DDevice->Clear(0, NULL, D3DCLEAR_TARGET, m_backColour.BGRA(), 1.0f, 0);
 
 	m_result = m_pD3DDevice->BeginScene();
 
@@ -442,7 +393,7 @@ Graphics::SpriteBegin()
 
 // end frame
 HRESULT
-Graphics::End()
+Graphics::EndScene()
 {
 	m_result = E_FAIL;
 
@@ -457,5 +408,5 @@ Graphics::End()
 void 
 Graphics::SpriteEnd()
 {
-	m_pSprite->End();
+	m_pSprite->EndScene();
 }

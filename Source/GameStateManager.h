@@ -1,10 +1,12 @@
 #ifndef _GAMESTATEMANAGER_H_
 #define _GAMESTATEMANAGER_H_
 
-#include "Graphics.h"
-#include "Input.h"
-#include "LinkedList.h"
-#include "GameState.h"
+#include "pch.h"
+
+// forward declarations
+class Graphics;
+class Input;
+class GameState;
 
 class GameStateManager
 {
@@ -31,7 +33,7 @@ public:
 
 private:
 	GameState*				m_currentState;
-	LinkedList<GameState*>	m_stateList;
+	std::vector<GameState*>	m_stateList;
 
 	HWND					m_hWindow;
 	Graphics*				m_pGraphics;

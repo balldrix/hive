@@ -84,7 +84,7 @@ Transform::SetPosition(unsigned int x, unsigned int y)
 }
 
 void				
-Transform::SetPosition(Vector2D position)
+Transform::SetPosition(Vector2 position)
 {
 	m_position = position;
 }
@@ -109,7 +109,7 @@ Transform::SetCurrentVelocity(float x, float y)
 }
 
 void
-Transform::SetCurrentVelocity(Vector2D velocity)
+Transform::SetCurrentVelocity(Vector2 velocity)
 {
 	m_currentVelocity = velocity;
 }
@@ -122,7 +122,7 @@ Transform::SetTargetVelocity(float x, float y)
 }
 
 void
-Transform::SetTargetVelocity(Vector2D velocity)
+Transform::SetTargetVelocity(Vector2 velocity)
 {
 	m_targetVelocity = velocity;
 }

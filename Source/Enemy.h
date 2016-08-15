@@ -42,7 +42,7 @@ public:
 	Enemy();
 	virtual ~Enemy();
 
-	void				Init(Graphics* graphics, TextureManager* enemyTexture);
+	void				Init(Graphics* graphics, Texture* enemyTexture);
 	void				Update(float deltaTime);
 	void				Render();
 	void				Reset();
@@ -65,7 +65,7 @@ public:
 
 private:
 	Graphics*			m_pGraphics;
-	TextureManager*		m_pEnemyTexture;
+	Texture*		m_pEnemyTexture;
 
 	const char*			m_ID;
 	ENEMY_STATE			m_enemyState;

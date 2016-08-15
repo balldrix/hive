@@ -11,14 +11,17 @@
 #ifndef _RUNNING_H_
 #define _RUNNING_H_
 
-#include <math.h>
-#include <time.h>
+#include "pch.h"
 #include "Timer.h"
 #include "GameStateManager.h"
+#include "GameState.h"
 #include "Constants.h"
 #include "Player.h"
 #include "Enemy.h"
 #include "Randomiser.h"
+
+// forward declarations
+
 
 
 //////////////////////////////////////////
@@ -26,8 +29,8 @@
 //////////////////////////////////////////
 
 // start positions
-const int				START_X_POSITION			= GAME_WIDTH / 2;
-const int				START_Y_POSITION			= GAME_HEIGHT / 2;
+const int				START_POSITION_X			= GlobalConstants::GAME_WIDTH / 2;
+const int				START_POSITION_Y			= GlobalConstants::GAME_HEIGHT / 2;
 
 // delay between spawning enemy
 const float				ENEMY_SPAWN_DELAY = 0.2f;
@@ -65,9 +68,9 @@ private:
 	Player				m_player;
 	Enemy				m_enemy[MAX_ENEMY];
 
-	TextureManager		m_enemyTexture;
-	TextureManager		m_bulletTexture;
-	TextureManager		m_playerTexture;
+	Texture		m_enemyTexture;
+	Texture		m_bulletTexture;
+	Texture		m_playerTexture;
 
 	void				LoadAssets();
 	void				DeleteAssets();

@@ -24,7 +24,7 @@ Player::~Player()
 }
 
 void
-Player::Init(Graphics* graphics, TextureManager* playerTexture, TextureManager* bulletTexture)
+Player::Init(Graphics* graphics, Texture* playerTexture, Texture* bulletTexture)
 {
 	m_pGraphics = graphics;
 	m_pPlayerTexture = playerTexture;
@@ -38,7 +38,7 @@ Player::Init(Graphics* graphics, TextureManager* playerTexture, TextureManager* 
 
 	m_currentMovementSpeed = PLAYER_WALK_SPEED;
 	
-	m_collisionBox.SetAABB(m_position, m_position + Vector2D(m_spriteData.width, m_spriteData.height));
+	m_collisionBox.SetAABB(m_position, m_position + Vector2(m_spriteData.width, m_spriteData.height));
 
 	m_meleeHitBox = m_collisionBox;
 		
@@ -166,14 +166,14 @@ Player::Shoot()
 				
 				if (m_facingDirection == RIGHT)
 				{
-					m_bullet[index].SetPosition(m_position + Vector2D(8.0f, 0.0f));
+					m_bullet[index].SetPosition(m_position + Vector2(8.0f, 0.0f));
 					m_bullet[index].SetCurrentVelocity(directionNS::RIGHT);
 					m_position.x -= PLAYER_KICKBACK;
 
 				}
 				else
 				{
-					m_bullet[index].SetPosition(m_position - Vector2D(8.0f, 0.0f));
+					m_bullet[index].SetPosition(m_position - Vector2(8.0f, 0.0f));
 					m_bullet[index].SetCurrentVelocity(directionNS::LEFT);
 					m_position.x += PLAYER_KICKBACK;
 				}

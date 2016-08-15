@@ -3,45 +3,40 @@
 
 #define WIN32_LEAN_AND_MEAN
 
-#include <Windows.h>
-#include <mmsystem.h>
-#include <stdio.h>
-#include <time.h>
+#include "pch.h"
 #include "Graphics.h"
-#include "Input.h"
 #include "Timer.h"
-#include "Sprite.h"
-#include "GameStateManager.h"
+
+// forward declarations
+class GameStateManager;
+class Input;
 
 class Game
 {
 public:
 	Game();
-	virtual	~Game();
+	~Game();
 	
-	// handle windows messages
-	LRESULT			MessageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam);
-
 	//Initialise the game variables
-	virtual void	Init(HWND hWindow);
+	void	Init(Graphics* graphics);
 
 	// run method called in winmain message loop
-	virtual void	Run(HWND hWindow);
+	void	Run();
 
-	virtual void	ReleaseAll();
-	virtual void	ResetAll();
+	void	ReleaseAll();
+	void	ResetAll();
 
 	// delete reserved memory
-	virtual void	DeleteAll();
+	void	DeleteAll();
 
 	// render game objects
-	virtual void	RenderGame();
+	void	RenderGame();
 
 	// handle lost device
-	virtual void	HandleLostDevice();
+	void	HandleLostDevice();
 
 	// set new display mode
-	void			SetDisplayMode(graphicsNS::DISPLAY_MODE mode);
+	void			SetDisplayMode(DisplayMode mode);
 
 	// return pointer to Graphics
 	Graphics*		GetGraphics()	{ return m_pGraphics; }
@@ -54,13 +49,16 @@ public:
 
 	// Pure virtual methods only the derived class can define
 	// update game 
-	virtual void	Update(float deltaTime) = 0;
+	void	Update(float deltaTime);
 	
 	// render graphics
-	virtual void	Render() = 0;
+	void	Render();
+
+	// handle windows messages
+	LRESULT			MessageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam);
 
 protected:
-
+	GameStateManager*	m_stateManager;
 	Graphics*		m_pGraphics;
 	Input*			m_pInput;
 	Timer			m_pTimer;

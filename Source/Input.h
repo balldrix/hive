@@ -5,17 +5,10 @@
 
 class Input;
 
-#include <Windows.h>
-#include <windowsx.h>
-#include <string>
-#include <Xinput.h>
+#include "pch.h"
 #include "Controls.h"
 
-const unsigned int		MAX_CONTROLLERS = 4;
-const DWORD				GAMEPAD_THUMBSTICK_DEADZONE = (DWORD)(0.20f * 0x7FFF); // 0x7FFF = 32767 (max value of thumbstick)
-const DWORD				GAMEPAD_TRIGGER_DEADZONE = 30;
-
-using namespace std;
+const float				KEY_DELAY		= 5.0f;
 
 #ifndef HID_USAGE_PAGE_GENERIC
 #define HID_USAGE_PAGE_GENERIC         ((USHORT) 0x01)
@@ -34,16 +27,6 @@ namespace inputNS
 	const UCHAR			TEXT_IN			= 8;
 	const UCHAR			KEYS_MOUSE_TEXT = KEYS_DOWN + KEYS_PRESSED + MOUSE + TEXT_IN;
 }
-
-struct ControllerState
-{
-	XINPUT_STATE		state;
-	XINPUT_VIBRATION	vibration;
-	float				vibrateTimeLeft;
-	float				vibrateTimeRight;
-	bool				connected;
-};
-
 
 class Input
 {
@@ -77,7 +60,7 @@ public:
 	bool				AnyKeyPressed() const;
 
 	// return string text
-	string				GetTextIn() const { return m_textIn; }
+	std::string				GetTextIn() const { return m_textIn; }
 
 	// return last character pressed
 	char				GetCharIn() const { return m_charIn; }
@@ -121,51 +104,6 @@ public:
 	// return raw mouse y movement
 	int					GetMouseRawY() const { return m_mouseRawY; }
 
-	// check for controllers
-	void				CheckControllers();
-
-	// read controller data
-	void				ReadControllers();
-
-	// return state of controller
-	const ControllerState*	GetControllerState(UINT n);
-
-	// return state of controller n's buttons
-	const WORD			GetGamepadButtons(UINT n);
-
-	// return state of controller n buttons
-	bool				GetGamepadDpadUp(UINT n);
-	bool				GetGamepadDpadDown(UINT n);
-	bool				GetGamepadDpadLeft(UINT n);
-	bool				GetGamepadDpadRight(UINT n);
-	bool				GetGamepadStart(UINT n);
-	bool				GetGamepadBack(UINT n);
-	bool				GetGamepadLeftThumb(UINT n);
-	bool				GetGamepadRightThumb(UINT n);
-	bool				GetGamepadLeftShoulder(UINT n);
-	bool				GetGamepadRightShoulder(UINT n);
-	bool				GetGamepadA(UINT n);
-	bool				GetGamepadB(UINT n);
-	bool				GetGamepadX(UINT n);
-	bool				GetGamepadY(UINT n);
-
-	// return state of gamepad triggers
-	BYTE				GetGamepadLeftTrigger(UINT n);
-	BYTE				GetGamepadRightTrigger(UINT n);
-
-	// return state of gamepad thumb sticks
-	SHORT				GetGamepadThumbLX(UINT n);
-	SHORT				GetGamepadThumbLY(UINT n);
-	SHORT				GetGamepadThumbRX(UINT n);
-	SHORT				GetGamepadThumbRY(UINT n);
-
-	// vibrate controllers
-	void				GamepadVibrateLeft(UINT n, WORD speed, float sec);
-	void				GamepadVibrateRight(UINT n, WORD speed, float sec);
-
-	void				VibrateControllers(float deltaTime);
-
-
 	// clear all input data
 	void				ClearAll() { Clear(inputNS::KEYS_MOUSE_TEXT); }
 	
@@ -176,7 +114,7 @@ private:
 	bool				m_keysDown[inputNS::KEYS_ARRAY_LEN];
 	bool				m_keysPressed[inputNS::KEYS_ARRAY_LEN];
 
-	string				m_textIn;
+	std::string			m_textIn;
 	char				m_charIn;
 	bool				m_newLine;
 
@@ -193,8 +131,6 @@ private:
 	bool				m_mouseMButton;
 	bool				m_mouseX1Button;
 	bool				m_mouseX2Button;
-
-	ControllerState		m_controllers[MAX_CONTROLLERS];
 };
 
 #endif  _INPUT_H_

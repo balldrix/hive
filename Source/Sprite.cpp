@@ -7,12 +7,12 @@ m_pTextureManager(NULL),
 m_currentFrame(0),
 m_initialised(false),
 m_showHitBox(false),
-m_colourFilter(colourNS::WHITE),
-m_transKey(colourNS::MAGENTA),
+m_colourFilter(Colors::White),
+m_transKey(Colors::Magenta),
 m_facingDirection(RIGHT)
 {
 	// initialise the spriteData struct
-	m_spriteData = { 0, 0, Vector2D(0.0f, 0.0f),
+	m_spriteData = { 0, 0, Vector2(0.0f, 0.0f),
 		0.0f, 0.0f, RECT(), NULL, false, false };
 }
 
@@ -21,7 +21,7 @@ Sprite::~Sprite()
 }
 
 void
-Sprite::Init(Graphics* graphics, TextureManager* textureManager, unsigned int frameWidth, unsigned int frameHeight)
+Sprite::Init(Graphics* graphics, Texture* textureManager, unsigned int frameWidth, unsigned int frameHeight)
 {
 	m_pGraphics = graphics;
 	m_pTextureManager = textureManager;
@@ -33,7 +33,7 @@ Sprite::Init(Graphics* graphics, TextureManager* textureManager, unsigned int fr
 
 	m_spriteData.width = frameWidth;
 	m_spriteData.height = frameHeight;
-	m_spriteData.position = Vector2D(0.0f,0.0f);
+	m_spriteData.position = Vector2(0.0f,0.0f);
 	m_spriteData.scale = 1.0f;
 	m_spriteData.angle = 0.0f;
 	m_spriteData.rect.left = 0;
@@ -61,7 +61,7 @@ Sprite::Render()
 }
 
 void
-Sprite::Render(Vector2D position)
+Sprite::Render(Vector2 position)
 {
 	m_spriteData.position = position;
 
@@ -73,7 +73,7 @@ Sprite::Render(Vector2D position)
 
 
 void
-Sprite::Render(Vector2D position, RECT rect)
+Sprite::Render(Vector2 position, RECT rect)
 {
 	m_spriteData.position = position;
 	SetRect(rect);

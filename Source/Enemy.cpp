@@ -20,7 +20,7 @@ Enemy::~Enemy()
 }
 
 void 
-Enemy::Init(Graphics* graphics, TextureManager* enemyTexture)
+Enemy::Init(Graphics* graphics, Texture* enemyTexture)
 {
 	m_pGraphics = graphics;
 	m_pEnemyTexture = enemyTexture;
@@ -110,7 +110,7 @@ Enemy::Reset()
 	AnimatedSprite::Reset();
 	AABB::Reset();
 	m_active = false;
-	m_position = Vector2D(0.0f, 0.0f);
+	m_position = Vector2(0.0f, 0.0f);
 	m_targetMovementSpeed = ENEMY_WALK_SPEED;
 	SetEnemyState(ENEMY_STATE_ROAM);
 }
@@ -137,7 +137,7 @@ Enemy::Attack()
 Enemy::ENEMY_STATE
 Enemy::Die()
 {
-	m_targetVelocity = Vector2D().Zero();
+	m_targetVelocity = Vector2().Zero();
 	//m_pEnemySprite->SetCurrentFrame(0);
 //	m_pEnemySprite->SetLoop(false);
 	return ENEMY_STATE_DEAD;

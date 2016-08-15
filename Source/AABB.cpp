@@ -18,7 +18,7 @@ AABB::Reset()
 }
 
 void
-AABB::SetAABB(const Vector2D &min, const Vector2D &max)
+AABB::SetAABB(const Vector2 &min, const Vector2 &max)
 {
 	m_min = min;
 	m_max = max;
@@ -35,13 +35,13 @@ AABB::OffSetAABB(float x, float y)
 }
 
 void
-AABB::SetMin(const Vector2D &min)
+AABB::SetMin(const Vector2 &min)
 {
 	m_min = min;
 }
 
 void 
-AABB::SetMax(const Vector2D &max)
+AABB::SetMax(const Vector2 &max)
 {
 	m_max = max;
 }

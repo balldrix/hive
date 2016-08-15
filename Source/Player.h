@@ -1,8 +1,8 @@
 #ifndef _PLAYER_H_
 #define _PLAYER_H_
 
+#include "pch.h"
 #include "Transform.h"
-#include "Vector2D.h"
 #include "AnimatedSprite.h"
 #include "Bullet.h"
 #include "UnitVectors.h"
@@ -39,7 +39,7 @@ public:
 	Player();
 	~Player();
 
-	void				Init(Graphics* graphics, TextureManager* playerTexture, TextureManager* bulletTexture);
+	void				Init(Graphics* graphics, Texture* playerTexture, Texture* bulletTexture);
 	void				Update(float deltaTime);
 	void				Render();
 						
@@ -64,7 +64,7 @@ public:
 
 private:
 	Graphics*			m_pGraphics;
-	TextureManager*		m_pPlayerTexture;
+	Texture*		m_pPlayerTexture;
 
 	AABB				m_collisionBox;
 	AABB				m_meleeHitBox;

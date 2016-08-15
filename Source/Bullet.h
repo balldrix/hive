@@ -1,7 +1,6 @@
 #ifndef _BULLET_H_
 #define _BULLET_H_
 
-#include "Vector2D.h"
 #include "TextureManager.h"
 #include "AnimatedSprite.h"
 #include "AABB.h"
@@ -27,7 +26,7 @@ public:
 	Bullet();
 	~Bullet();
 
-	void				Init(Graphics* graphics, TextureManager* texture);
+	void				Init(Graphics* graphics, Texture* texture);
 	void				Update(float deltaTime);
 	void				Render();
 	void				Reset();
@@ -40,7 +39,7 @@ public:
 
 private:
 	Graphics*			m_pGraphics;
-	TextureManager*		m_pBulletTexture;
+	Texture*		m_pBulletTexture;
 	BULLET_STATE		m_bulletState;
 	bool				m_active;
 };

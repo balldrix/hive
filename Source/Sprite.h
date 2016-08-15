@@ -16,11 +16,11 @@ class Sprite
 public:
 	Sprite();
 	virtual ~Sprite();
-	virtual void				Init(Graphics* graphics, TextureManager* textureManager, unsigned int frameWidth, unsigned int frameHeight);
+	virtual void				Init(Graphics* graphics, Texture* textureManager, unsigned int frameWidth, unsigned int frameHeight);
 	virtual void				Update(float deltaTime);
 	virtual void				Render();
-	virtual void				Render(Vector2D position);
-	virtual void				Render(Vector2D position, RECT rect);
+	virtual void				Render(Vector2 position);
+	virtual void				Render(Vector2 position, RECT rect);
 	virtual void				Reset();
 	
 	void						RenderHitBox(AABB box);
@@ -50,7 +50,7 @@ public:
 
 protected:
 	Graphics*					m_pGraphics;
-	TextureManager*				m_pTextureManager;
+	Texture*				m_pTextureManager;
 	
 	SpriteData					m_spriteData;
 
@@ -64,8 +64,8 @@ protected:
 	
 	HRESULT						m_result;
 
-	D3DCOLOR					m_colourFilter;
-	D3DCOLOR					m_transKey;
+	Color						m_colourFilter;
+	Color						m_transKey;
 
 	FACING_DIRECTION			m_facingDirection;
 

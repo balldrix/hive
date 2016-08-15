@@ -18,7 +18,7 @@ AnimatedSprite::~AnimatedSprite()
 }
 
 void
-AnimatedSprite::Init(Graphics* graphics, TextureManager* textureManager, unsigned int frames, float frameDelay, unsigned int frameWidth, unsigned int frameHeight)
+AnimatedSprite::Init(Graphics* graphics, Texture* textureManager, unsigned int frames, float frameDelay, unsigned int frameWidth, unsigned int frameHeight)
 {
 	Sprite::Init(graphics, textureManager, frameWidth, frameHeight);
 

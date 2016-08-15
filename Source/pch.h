@@ -12,6 +12,8 @@
 #include <mmsystem.h>
 
 #include <d3d11.h>
+#include <d3d9.h>
+#include <d3dx9.h>
 #include <d3dcompiler.h>
 
 #include <SimpleMath.h>

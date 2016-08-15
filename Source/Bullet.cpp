@@ -18,7 +18,7 @@ Bullet::~Bullet()
 }
 
 void
-Bullet::Init(Graphics* graphics, TextureManager* texture)
+Bullet::Init(Graphics* graphics, Texture* texture)
 {
 	m_pGraphics = graphics;
 	m_pBulletTexture = texture;
@@ -39,7 +39,7 @@ Bullet::Update(float deltaTime)
 		Transform::Update(deltaTime);
 
 		// set hit box position
-		m_collisionBox.SetAABB(m_position, m_position + Vector2D(m_spriteData.width, m_spriteData.height));
+		m_collisionBox.SetAABB(m_position, m_position + Vector2(m_spriteData.width, m_spriteData.height));
 	
 		if (m_position.x > GAME_WIDTH ||
 			m_position.x < 0)

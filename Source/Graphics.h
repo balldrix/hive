@@ -3,32 +3,22 @@
 
 #define WIN32_LEAN_AND_MEAN
 
-#include <d3d9.h>
-#include <d3dx9.h>
-#include <string>
-#include "Vector2D.h"
-#include "Colours.h"
+#include "pch.h"
 
-//#include <stdio.h>
-//#include <time.h>
-//#include "Constants.h"
 
-namespace graphicsNS
+enum DisplayMode
 {
-	enum DISPLAY_MODE
-	{
-		TOGGLE,
-		FULLSCREEN,
-		WINDOW
-	};
-}
+	TOGGLE,
+	FULLSCREEN,
+	WINDOW
+};
 
 // structure to store properties of a sprite
 struct SpriteData
 {
 	int					width;
 	int					height;
-	Vector2D			position;
+	Vector2				position;
 	float				scale;
 	float				angle;
 	RECT				rect;
@@ -59,7 +49,7 @@ public:
 	~Graphics();
 
 	// initialise directx9 device
-	bool				Init(HWND hwnd, int width, int height, bool fullscreen);
+	bool				Init(HWND hWindow);
 
 	//check if adapter is compatible with dimensions and refresh rate
 	bool				IsAdapterCompatable();
@@ -67,14 +57,14 @@ public:
 	// release all graphics pointers
 	void				ReleaseAll();
 
-	// present back buffer
-	void				PresentBackBuffer();
-
 	// get D3D device
 	LPDIRECT3DDEVICE9	GetD3DDevice()	{ return m_pD3DDevice; }
 
 	// get D3D context
 	LPDIRECT3D9			GetD3D()		{ return m_pD3D; }
+
+	// get sprite batch
+	LPD3DXSPRITE		GetSprite() const { return m_pSprite; }
 
 	// get handle to my window
 	HWND				GetHwnd()		{ return m_hWindow; }
@@ -89,31 +79,16 @@ public:
 	HRESULT				Reset();
 
 	// set to different display mode
-	void				ChangeDisplayMode(graphicsNS::DISPLAY_MODE mode);
-
-	// loads texture from file and writes to dx texture
-	HRESULT				LoadTexture(const char* filename, LPDIRECT3DTEXTURE9 &texture, D3DCOLOR transKey, UINT &width, UINT &height);
-
-	// create vertex buffer
-	void				CreateVertexBuffer(CustomVertex vertex[], UINT size, LPDIRECT3DVERTEXBUFFER9 &vertexBuffer);
-
-	// draw quad using vertex buffer
-	void				RenderQuad(LPDIRECT3DVERTEXBUFFER9 vertexBuffer);
-
-	// draw sprite
-	void				RenderSprite(const SpriteData &spriteData, D3DCOLOR colour = colourNS::WHITE);
+	void				ChangeDisplayMode(DisplayMode mode);
 
 	// begin scene
-	HRESULT				Begin();
-
-	// begin sprite drawing
-	void				SpriteBegin();
+	HRESULT				BeginScene();
+	
+	// present back buffer
+	void				PresentBackBuffer();
 
 	// end scene
-	HRESULT				End();
-
-	// end sprite drawing
-	void				SpriteEnd();
+	HRESULT				EndScene();
 
 private:
 
@@ -151,7 +126,7 @@ private:
 	HRESULT					m_result;
 
 	// colour for backbuffer
-	D3DCOLOR				m_backColour;
+	Color				m_backColour;
 
 };
 
