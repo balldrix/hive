@@ -28,7 +28,7 @@ struct SpriteData
 };
 
 // structure for drawing primitives using vertexes
-struct CustomVertex
+struct PCVertex
 {
 	float x;
 	float y;
@@ -36,6 +36,7 @@ struct CustomVertex
 	float rhw;
 	DWORD colour;
 };
+
 // set vertex definition 
 #define CUSTOMFVF (D3DFVF_XYZRHW | D3DFVF_DIFFUSE)
 
