@@ -9,7 +9,7 @@ AABB(),
 m_pGraphics(NULL),
 m_pEnemyTexture(NULL),
 m_ID(""),
-m_enemyState(ENEMY_STATE_ROAM),
+m_enemyState(ENEMY_STATE_IDLE),
 m_aiTimer(0.0f),
 m_active(false)
 {
@@ -27,9 +27,9 @@ Enemy::Init(Graphics* graphics, Texture* enemyTexture)
 	
 	AnimatedSprite::Init(m_pGraphics, m_pEnemyTexture, ENEMY_ANIM_NUM_FRAMES, ENEMY_ANIM_FRAME_DELAY, ENEMY_ANIM_FRAME_WIDTH, ENEMY_ANIM_FRAME_HEIGHT);
 	
+	SetEnemyState(ENEMY_STATE_IDLE);
 	m_aiTimer = AI_THINKING_TIME;
-	
-	SetRandomDirection();
+	m_isLerper = true;
 }
 
 void 
@@ -39,54 +39,48 @@ Enemy::Update(float deltaTime)
 	{
 		Transform::Update(deltaTime);
 
-		switch(m_enemyState)
+		if(m_aiTimer < 0)
 		{
-			case ENEMY_STATE_IDLE:
+			switch(m_enemyState)
 			{
-				SetEnemyState(Idle());
-				break;
+				case ENEMY_STATE_IDLE:
+				{
+					SetEnemyState(Idle());
+					break;
+				}
+				case ENEMY_STATE_ROAM:
+				{
+					SetEnemyState(Roam());
+					break;
+				}
+				case ENEMY_STATE_ATTACKING:
+				{
+					SetEnemyState(Attack());
+					break;
+				}
+				case ENEMY_STATE_DEATH:
+				{
+					SetEnemyState(Die());
+					break;
+				}
+				case ENEMY_STATE_DEAD:
+				{
+					SetEnemyState(Dead());
+					break;
+				}
 			}
-			case ENEMY_STATE_ROAM:
-			{
-				SetEnemyState(Roam());
-				break;
-			}
-			case ENEMY_STATE_ATTACKING:
-			{
-				SetEnemyState(Attack());
-				break;
-			}
-			case ENEMY_STATE_DEATH:
-			{
-				SetEnemyState(Die());
-				break;
-			}
-			case ENEMY_STATE_DEAD:
-			{
-				SetEnemyState(Dead());
-				break;
-			}
+			
+			m_aiTimer = AI_THINKING_TIME;
+		}
+
+		m_aiTimer -= deltaTime;
+		
+		if (m_position.x < m_spriteData.width || m_position.x + m_spriteData.width > GAME_WIDTH
+			|| m_position.y < m_spriteData.height || m_position.y + m_spriteData.height > GAME_HEIGHT)
+		{
+			SetRandomDirection();
 		}
 	}
-
-	
-//	m_pEnemySprite->Update(deltaTime);
-	
-//	FlipSprite(m_pEnemySprite, m_facingDirection);
-
-	if (m_aiTimer < 0)
-	{
-		m_aiTimer = AI_THINKING_TIME;
-	}
-
-	if (m_position.x < m_spriteData.width || m_position.x + m_spriteData.width > GAME_WIDTH
-		|| m_position.y < m_spriteData.height || m_position.y + m_spriteData.height > GAME_HEIGHT)
-	{
-		SetRandomDirection();
-	}
-
-	m_aiTimer -= deltaTime;
-	
 }
 
 void
@@ -110,15 +104,32 @@ Enemy::Reset()
 	AnimatedSprite::Reset();
 	AABB::Reset();
 	m_active = false;
+<<<<<<< HEAD
 	m_position = Vector2(0.0f, 0.0f);
 	m_targetMovementSpeed = ENEMY_WALK_SPEED;
 	SetEnemyState(ENEMY_STATE_ROAM);
+=======
+	m_position = Vector2D(0.0f, 0.0f);
+	m_targetMovementSpeed = 0;
+	SetEnemyState(ENEMY_STATE_IDLE);
+>>>>>>> origin/feature/Enemy_AI
 }
 
 Enemy::ENEMY_STATE
 Enemy::Idle()
 {
-	return m_enemyState;
+	unsigned int randomRoll = Randomiser::GetRandNum(1,6);
+	if(randomRoll > 2)
+	{
+		SetTargetMovementSpeed(0);
+		SetTargetVelocity(0.0f,0.0f);
+	}
+	else
+	{
+		SetRandomDirection();
+		SetTargetMovementSpeed(ENEMY_ROAM_SPEED);
+	}
+	return ENEMY_STATE_IDLE;
 }
 
 Enemy::ENEMY_STATE

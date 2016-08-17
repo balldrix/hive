@@ -11,9 +11,9 @@ const unsigned int	ENEMY_ANIM_NUM_FRAMES	= 1;
 const float			ENEMY_ANIM_FRAME_DELAY	= 1.0f;
 const unsigned int	ENEMY_ANIM_FRAME_WIDTH	= 32;
 const unsigned int	ENEMY_ANIM_FRAME_HEIGHT = 32;
-const unsigned int	ENEMY_WALK_SPEED		= 64;
+const unsigned int	ENEMY_ROAM_SPEED		= 64;
 const unsigned int	ENEMY_RUN_SPEED			= 32;
-const float			AI_THINKING_TIME		= 30.0f;
+const float			AI_THINKING_TIME		= 4.0f;
 
 class Enemy : public Transform, public AnimatedSprite, public AABB
 {
@@ -21,23 +21,13 @@ public:
 
 	enum ENEMY_STATE
 	{
+		ENEMY_STATE_IDLE,
 		ENEMY_STATE_ROAM,
 		ENEMY_STATE_DEAD,
-		ENEMY_STATE_IDLE,
 		ENEMY_STATE_ATTACKING,
 		ENEMY_STATE_DEATH,
 		ENEMY_STATE_MAX_STATES
 	};
-
-	//enum ANIMATION_STATE
-	//{
-	//	ANIM_ROAM,
-	//	ANIM_DEAD,
-	//	ANIM_IDLE,
-	//	ANIM_ATTACKING,
-	//	ANIM_DEATH,
-	//	ANIM_MAX_STATES
-	//};
 
 	Enemy();
 	virtual ~Enemy();
@@ -69,7 +59,6 @@ private:
 
 	const char*			m_ID;
 	ENEMY_STATE			m_enemyState;
-	//ANIMATION_STATE	m_animState;
 	float				m_aiTimer;
 	bool				m_active;
 };

@@ -329,7 +329,6 @@ Running::NewGame()
 {
 	m_score = 0;
 	m_level = 0;
-	//m_enemySpawnDelay = ENEMY_SPAWN_DELAY;
 	ResetAll();
 	SpawnEnemy();
 }
@@ -350,7 +349,9 @@ Running::ResetAll()
 void
 Running::SpawnEnemy()
 {
-
+	m_enemy[0].SetPosition(900,200);
+	m_enemy[0].SetRandomDirection();
+	m_enemy[0].SetActive(true);
 }
 
 void
