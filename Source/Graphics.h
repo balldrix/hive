@@ -13,20 +13,6 @@ enum DisplayMode
 	WINDOW
 };
 
-// structure to store properties of a sprite
-struct SpriteData
-{
-	int					width;
-	int					height;
-	Vector2				position;
-	float				scale;
-	float				angle;
-	RECT				rect;
-	LPDIRECT3DTEXTURE9	texture;
-	bool				flipHorizontal;
-	bool				flipVertical;
-};
-
 // structure for drawing primitives using vertexes
 struct PCVertex
 {

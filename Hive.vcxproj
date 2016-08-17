@@ -103,12 +103,12 @@
     <ClCompile Include="Source\GameState.cpp" />
     <ClCompile Include="Source\GameStateManager.cpp" />
     <ClCompile Include="Source\Graphics.cpp" />
+    <ClCompile Include="Source\HitBoxMesh.cpp" />
     <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Hive.cpp" />
     <ClCompile Include="Source\Mesh.cpp" />
     <ClCompile Include="Source\Player.cpp" />
-    <ClCompile Include="Source\Quad.cpp" />
     <ClCompile Include="Source\Randomiser.cpp" />
     <ClCompile Include="Source\Running.cpp" />
     <ClCompile Include="Source\Sprite.cpp" />
@@ -133,11 +133,11 @@
     <ClInclude Include="Source\GameState.h" />
     <ClInclude Include="Source\GameStateManager.h" />
     <ClInclude Include="Source\Graphics.h" />
+    <ClInclude Include="Source\HitBoxMesh.h" />
     <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\pch.h" />
     <ClInclude Include="Source\Player.h" />
-    <ClInclude Include="Source\Quad.h" />
     <ClInclude Include="Source\Randomiser.h" />
     <ClInclude Include="Source\Resources.h" />
     <ClInclude Include="Source\Running.h" />

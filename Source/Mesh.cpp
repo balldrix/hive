@@ -6,7 +6,7 @@ Mesh::Mesh() :
 	m_indexBuffer(nullptr),
 	m_vertexCount(0),
 	m_indexCount(0),
-	m_primitiveType(0)
+	m_primitiveType(D3DPT_POINTLIST)
 {}
 
 Mesh::~Mesh()

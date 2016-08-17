@@ -73,7 +73,7 @@
     <ClCompile Include="Source\Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Quad.cpp">
+    <ClCompile Include="Source\HitBoxMesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -176,7 +176,7 @@
     <ClInclude Include="Source\Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Quad.h">
+    <ClInclude Include="Source\HitBoxMesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

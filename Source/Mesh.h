@@ -27,6 +27,7 @@ protected:
 	int						m_vertexCount; // number of vertices
 	int						m_indexCount; // number of indices
 	D3DPRIMITIVETYPE		m_primitiveType; // primitive type enum
+	
 };
 
 #endif _MESH_H_

@@ -1,9 +1,24 @@
 #ifndef _SPRITE_H_
 #define _SPRITE_H_
 
-#include "TextureManager.h"
+#include "Graphics.h"
+#include "Texture.h"
 #include "AABB.h"
 #include <string>
+
+// structure to store properties of a sprite
+struct SpriteData
+{
+	int					width;
+	int					height;
+	Vector2				position;
+	float				scale;
+	float				angle;
+	RECT				rect;
+	LPDIRECT3DTEXTURE9	texture;
+	bool				flipHorizontal;
+	bool				flipVertical;
+};
 
 enum FACING_DIRECTION
 {
@@ -50,7 +65,7 @@ public:
 
 protected:
 	Graphics*					m_pGraphics;
-	Texture*				m_pTextureManager;
+	Texture*					m_pTextureManager;
 	
 	SpriteData					m_spriteData;
 
@@ -69,8 +84,6 @@ protected:
 
 	FACING_DIRECTION			m_facingDirection;
 
-	CustomVertex				m_vertex[5];
-	LPDIRECT3DVERTEXBUFFER9		m_vertexBuffer;
 };
 
 #endif _SPRITE_H_
