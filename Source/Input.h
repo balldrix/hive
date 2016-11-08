@@ -1,32 +1,15 @@
+// Input.h
+// Christopher Ball 2016
+// Manages keyboard and mouse input
+// technique learnt from Charles Kelly - Programming 2D Games
+
 #ifndef _INPUT_H_
 #define _INPUT_H_
 
-#define WIN32_MEAN_AND_LEAN
-
-class Input;
-
 #include "pch.h"
-#include "Controls.h"
 
-const float				KEY_DELAY		= 5.0f;
-
-#ifndef HID_USAGE_PAGE_GENERIC
-#define HID_USAGE_PAGE_GENERIC         ((USHORT) 0x01)
-#endif
-#ifndef HID_USAGE_GENERIC_MOUSE
-#define HID_USAGE_GENERIC_MOUSE        ((USHORT) 0x02)
-#endif
-
-namespace inputNS
-{
-	const int			KEYS_ARRAY_LEN	= 256;
-
-	const UCHAR			KEYS_DOWN		= 1;
-	const UCHAR			KEYS_PRESSED	= 2;
-	const UCHAR			MOUSE			= 4;
-	const UCHAR			TEXT_IN			= 8;
-	const UCHAR			KEYS_MOUSE_TEXT = KEYS_DOWN + KEYS_PRESSED + MOUSE + TEXT_IN;
-}
+const UINT MAX_KEY_ARRAY = 256;		// max number of keys available
+const float MAX_INPUT_DELAY = 0.2f;	// time delay between inputs
 
 class Input
 {
@@ -34,104 +17,27 @@ public:
 	Input();
 	~Input();
 
-	// initialise inputs
-	void				Init(HWND hWindow, bool capture);
+	void SetKeyDown(WPARAM wParam); // set key down 
+	void SetKeyUp(WPARAM wParam);	// set key up
+	void SetMouseIn(LPARAM lParam); // set mouse position
+	void SetMouseX(UINT x);			// set mouse x position
+	void SetMouseY(UINT y);			// set mouse y position
+									
+	void SetMouseClicked(bool button); // set Mouse Left Button status
 
-	/* **********************************************
-		KEYS INPUT
-	********************************************** */
-
-	// process KeyDown message
-	void				KeyDown(WPARAM wParam);
-
-	// proces KeyUp message
-	void				KeyUp(WPARAM wParam);
-
-	// process KeyIn message
-	void				KeyIn(WPARAM wParam);
-
-	// return true if virtual key is down
-	bool				IsKeyDown(UCHAR vk) const;
-
-	// return true if virtual key was pressed in most recent frame
-	bool				WasKeyPressed(UCHAR vk) const;
-
-	// return true if any key was pressed
-	bool				AnyKeyPressed() const;
-
-	// return string text
-	std::string				GetTextIn() const { return m_textIn; }
-
-	// return last character pressed
-	char				GetCharIn() const { return m_charIn; }
+	void ClearKeysPressed();		// clear keys pressed array
 	
-	// clear specific key pressed
-	void				ClearKeyPress(UCHAR vk);
+	bool IsKeyDown(UCHAR key) const;			// check if key pressed
+	UINT GetMouseX() const { return m_mouseX; } // return mouse X position
+	UINT GetMouseY() const { return m_mouseY; } // return mouse Y position
+	bool GetMouseClicked() const { return m_mouseClicked; } // return mouse clicked status
 
-	// clear textIn buffer
-	void				ClearTextIn() { m_textIn.clear(); }
-
-	/* **********************************************
-		MOUSE INPUT
-	********************************************** */
-	// process mouse data
-	void				MouseIn(LPARAM lParam);
-
-	// process raw mouse data
-	void				MouseRawIn(LPARAM lParam);
-
-	// set Mouse Left Button status
-	void				SetMouseClicked(bool button) { m_mouseLButton = button; }
-
-	// set Mouse Right Button status
-	void				SetMouseRButton(bool button) { m_mouseRButton = button; }
-
-	// set Mouse Middle Button status
-	void				SetMouseMButton(bool button) { m_mouseMButton = button; }
-
-	// set Mouse X Button status
-	void				SetMouseXButton(WPARAM wParam);
-
-	// return Mouse x position
-	int					GetMouseX()	const { return m_mouseX; }
-
-	// return mouse y position
-	int					GetMouseY() const { return m_mouseY; }
-
-	// return raw mouse x movement
-	int					GetMouseRawX() const { return m_mouseRawX; }
-
-	// return raw mouse y movement
-	int					GetMouseRawY() const { return m_mouseRawY; }
-
-	// clear all input data
-	void				ClearAll() { Clear(inputNS::KEYS_MOUSE_TEXT); }
 	
-	// clear input data
-	void				Clear(UCHAR data);
-
-private:	
-	bool				m_keysDown[inputNS::KEYS_ARRAY_LEN];
-	bool				m_keysPressed[inputNS::KEYS_ARRAY_LEN];
-
-	std::string			m_textIn;
-	char				m_charIn;
-	bool				m_newLine;
-
-	int					m_mouseX;
-	int					m_mouseY;
-	int					m_mouseRawX;
-	int					m_mouseRawY;
-
-	RAWINPUTDEVICE		m_rid[1];
-
-	bool				m_mouseCaptured;
-	bool				m_mouseLButton;
-	bool				m_mouseRButton;
-	bool				m_mouseMButton;
-	bool				m_mouseX1Button;
-	bool				m_mouseX2Button;
+private:
+	bool m_keyPressed[MAX_KEY_ARRAY]; // boolean array of keys 
+	UINT m_mouseX;					// mouse x position
+	UINT m_mouseY;					// mouse y position
+	bool m_mouseClicked;			// L mouse button
 };
 
-#endif  _INPUT_H_
-
+#endif _INPUT_H_

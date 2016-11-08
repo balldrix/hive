@@ -1,137 +1,131 @@
 #include "GameStateManager.h"
+#include "GameState.h"
+#include "Graphics.h"
+#include "Error.h"
 
 GameStateManager::GameStateManager() :
-m_currentState(NULL)
+m_currentState(nullptr),
+m_graphics(nullptr),
+m_input(nullptr),
+m_audio(nullptr)
 {
 }
 
 GameStateManager::~GameStateManager()
 {
-	if (m_currentState != NULL)
+	// if current game state is 
+	if (m_currentState != nullptr)
 	{
 		m_currentState->OnExit();
 	}
 
-	ListNode<GameState*>* node = m_stateList.GetFirst();
-
-	while (node != NULL)
+	if(!m_stateList.empty())
 	{
-		GameState* state = node->GetData();
-		delete state;
-		node = node->GetNext();
+		// delete all NPC from the list
+		for(unsigned int i = 0; i < m_stateList.size(); i++)
+		{
+			delete m_stateList[i];
+		}
+		// clear list
+		m_stateList.clear();
 	}
+
 }
 
 void
-GameStateManager::CreateGlobalSystems(HWND hWindow, Graphics* graphics, Input* input)
+GameStateManager::Init(Graphics* graphics, Input* input, AudioEngine* audio)
 {
-	m_hWindow = hWindow;
-	m_pGraphics = graphics;
-	m_pInput = input;
+	// copy pointers
+	m_graphics = graphics;
+	m_input = input;
+	m_audio = audio;
 }
 
 void
 GameStateManager::AddState(GameState* state)
 {
-	ListNode<GameState*>* node = m_stateList.GetFirst();
-
-	while (node != NULL)
-	{
-		GameState* currentState = node->GetData();
-		if (currentState->GetStateName() == state->GetStateName())
-		{
-			delete state;
-			return;
-		}
-		node = node->GetNext();
-	}
-
-	m_stateList.Insert(state);
+	// push state to vector list
+	m_stateList.push_back(state);
 }
 
 void
-GameStateManager::SwitchState(const char* stateName)
+GameStateManager::SwitchState(const wchar_t* stateName)
 {
-	if (m_currentState != NULL)
+	// if current state contains points to a state
+	if (m_currentState != nullptr)
 	{
-		m_currentState->OnExit();
-		m_currentState = NULL;
+		// call OnExit method and clear pointer
+		m_currentState->OnExit(); 
+		m_currentState = nullptr;
 	}
 
-	ListNode<GameState*>* node = m_stateList.GetFirst();
-
-	while (node != NULL)
+	// loop through state list
+	for(unsigned int i = 0; i < m_stateList.size(); i++)
 	{
-		GameState* state = node->GetData();
-
-		if (state->GetStateName() == stateName)
-		{
-			m_currentState = state;
-			m_currentState->OnEntry();
+		if (m_stateList[i]->GetStateName() == stateName)
+		{			
+			m_currentState = m_stateList[i]; // set current state pointer
+			m_currentState->OnEntry(); // call OnEntry method
 			return;
 		}
-		node = node->GetNext();
 	}
+
+	// if this method hasn't returned by now
+	// the state name is incorrect
+	std::string error = " Error finding game state in SwitchState method GameStateManager.cpp line 60; \n"; // error message
+	Error::FileLog(error);
+	MessageBox(m_graphics->GetHwnd(), L"Error loading GameState. See Logs/Error.txt", L"Error!", MB_OK); // display loading texture error message
+	PostQuitMessage(0); // quit game
 }
 
 GameState*		
 GameStateManager::GetCurrentState() const
 {
-	return m_currentState;
+	return m_currentState; // return current state
 }
 
-const char*
+const wchar_t*
 GameStateManager::GetCurrentStateName() const
 {
-	if (m_currentState != NULL)
+	if (m_currentState != nullptr)
 	{
-		return m_currentState->GetStateName();
+		return m_currentState->GetStateName(); // return current state name
 	}
-	return "";
+	return L""; // if no state name exists return ""
+}
+
+void
+GameStateManager::ProcessInput()
+{
+	if(m_currentState != nullptr)
+	{
+		m_currentState->ProcessInput(); // process input for current state
+	}
 }
 
 void	
 GameStateManager::Update(float deltaTime)
 {
-	if (m_currentState != NULL)
+	if (m_currentState != nullptr)
 	{
-		m_currentState->CheckInput(deltaTime);
-		m_currentState->Update(deltaTime);
+		m_currentState->Update(deltaTime); // update current state
 	}
 }
 
 void			
 GameStateManager::Render()
 {
-	if (m_currentState != NULL)
+	if (m_currentState != nullptr)
 	{
-		m_currentState->Render();
-	}
-}
-
-void			
-GameStateManager::OnLostDevice()
-{
-	if (m_currentState != NULL)
-	{
-		m_currentState->OnLostDevice();
-	}
-}
-
-void
-GameStateManager::ResetAll()
-{
-	if (m_currentState != NULL)
-	{
-		m_currentState->ResetAll();
+		m_currentState->Render(); // render current state
 	}
 }
 
 void 
 GameStateManager::ReleaseAll()
 {
-	if (m_currentState != NULL)
+	if (m_currentState != nullptr)
 	{
-		m_currentState->ReleaseAll();
+		m_currentState->ReleaseAll(); // release all resources for currents state
 	}
 }

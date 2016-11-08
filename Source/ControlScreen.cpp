@@ -5,11 +5,11 @@
 ControlScreen::ControlScreen(GameStateManager* gm) :
 m_pGM(gm),
 m_pGraphics(NULL),
-m_pInput(NULL),
+m_input(NULL),
 GameState("CONTROLSCREEN")
 {
 	m_pGraphics = m_pGM->GetGraphics();
-	m_pInput = m_pGM->GetInput();
+	m_input = m_pGM->GetInput();
 }
 
 ControlScreen::~ControlScreen()
@@ -55,11 +55,11 @@ ControlScreen::CheckInput(float deltaTime)
 	{
 		m_keyPressed = false;
 	}
-	else if (!(m_pInput->IsKeyDown(PLAYER_UP_KEY) ||
-		m_pInput->IsKeyDown(PLAYER_DOWN_KEY) ||
-		m_pInput->IsKeyDown(PLAYER_LEFT_KEY) ||
-		m_pInput->IsKeyDown(PLAYER_RIGHT_KEY) ||
-		m_pInput->IsKeyDown(ENTER_KEY)
+	else if (!(m_input->IsKeyDown(PLAYER_UP_KEY) ||
+		m_input->IsKeyDown(PLAYER_DOWN_KEY) ||
+		m_input->IsKeyDown(PLAYER_LEFT_KEY) ||
+		m_input->IsKeyDown(PLAYER_RIGHT_KEY) ||
+		m_input->IsKeyDown(ENTER_KEY)
 		))
 	{
 		m_keyPressed = false;

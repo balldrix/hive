@@ -16,8 +16,8 @@ void
 Window::Init(HINSTANCE hInstance, INT cmdShow, WNDPROC winProc)
 {
 	// set game dimentions
-	m_width = GlobalConstants::GAME_WIDTH;
-	m_height = GlobalConstants::GAME_HEIGHT;
+	m_width = GlobalConstants::WND_WIDTH;
+	m_height = GlobalConstants::WND_HEIGHT;
 
 	// setup window class to register window
 	WNDCLASS wc = { 0 };

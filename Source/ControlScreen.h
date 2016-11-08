@@ -21,7 +21,7 @@ private:
 
 	GameStateManager*	m_pGM;
 	Graphics*			m_pGraphics;
-	Input*				m_pInput;
+	Input*				m_input;
 
 	void		LoadAssets();
 	void		DeleteAssets();

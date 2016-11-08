@@ -1,120 +1,51 @@
+// Graphics.h
+// Christopher Ball 2016
+// This class manages DirectX and all the functions for 
+// drawing to the screen
+
 #ifndef _GRAPHICS_H_
 #define _GRAPHICS_H_
 
-#define WIN32_LEAN_AND_MEAN
-
 #include "pch.h"
 
-
-enum DisplayMode
-{
-	TOGGLE,
-	FULLSCREEN,
-	WINDOW
-};
-
-// structure for drawing primitives using vertexes
-struct PCVertex
-{
-	float x;
-	float y;
-	float z;
-	float rhw;
-	DWORD colour;
-};
-
-// set vertex definition 
-#define CUSTOMFVF (D3DFVF_XYZRHW | D3DFVF_DIFFUSE)
-
-// graphics class to manage directx9 wrapper
 class Graphics
 {
 public:
-	// Constructor
-	Graphics();
-	// Destructor
-	~Graphics();
-
-	// initialise directx9 device
-	bool				Init(HWND hWindow);
-
-	//check if adapter is compatible with dimensions and refresh rate
-	bool				IsAdapterCompatable();
-
-	// release all graphics pointers
-	void				ReleaseAll();
-
-	// get D3D device
-	LPDIRECT3DDEVICE9	GetD3DDevice()	{ return m_pD3DDevice; }
-
-	// get D3D context
-	LPDIRECT3D9			GetD3D()		{ return m_pD3D; }
-
-	// get sprite batch
-	LPD3DXSPRITE		GetSprite() const { return m_pSprite; }
-
-	// get handle to my window
-	HWND				GetHwnd()		{ return m_hWindow; }
-
-	// check if device is lost
-	HRESULT				GetDeviceState();
-
-	// return fullscreen
-	bool				GetFullscreen() { return m_fullscreen; }
+	Graphics();					
+	~Graphics();			
+	void						Init(HWND hWindow, HINSTANCE hInstance);	// initialises graphics device
+	void						ReleaseAll();								// release all ID3D11 pointers
+	void						BeginScene();								// prepare render target for rendering scene
 	
-	// reset graphics device
-	HRESULT				Reset();
+	void						PresentBackBuffer();						// present backbuffer to screen
 
-	// set to different display mode
-	void				ChangeDisplayMode(DisplayMode mode);
-
-	// begin scene
-	HRESULT				BeginScene();
+	ID3D11Device*				GetDevice() { return m_D3DDevice; }			// return graphics device pointer
+	ID3D11DeviceContext*		GetDeviceContext() { return m_D3DDeviceContext; }	// return graphics context pointer
 	
-	// present back buffer
-	void				PresentBackBuffer();
-
-	// end scene
-	HRESULT				EndScene();
+	SpriteBatch*				GetSpriteBatch() const { return m_spriteBatch; }	// return spritebatch pointer
+	
+	float GetWidth()	const { return m_gameWidth; }					// return game window width
+	float GetHeight()	const { return m_gameHeight; }					// return game window height
+	
+	HWND GetHwnd()		const { return m_hWnd; }						// return window handle
 
 private:
-
-	// initialise D3D presentation parameters
-	bool				SetD3DPresentParams();
-
-	// pointer to D3D device
-	LPDIRECT3DDEVICE9		m_pD3DDevice;
+	HWND						m_hWnd;					// handle to the window
+	HINSTANCE					m_hInstance;			// instance of our window
 	
-	// pointer to D3D context
-	LPDIRECT3D9				m_pD3D;
+	IDXGISwapChain*				m_swapchain;			// pointer to swapchain of frame buffers
+	ID3D11Device*				m_D3DDevice;			// pointer to D3D Device
+	ID3D11DeviceContext*		m_D3DDeviceContext;		// pointer to D3D Context
 
-	// pointer to D3D parameters
-	D3DPRESENT_PARAMETERS	m_pD3DPParams;
+	ID3D11RenderTargetView*		m_renderTargetView;		// pointer to render target view
+	ID3D11Texture2D*			m_backbuffer;			// pointer to 2d backbuffer
 
-	// pointer to DX sprite
-	LPD3DXSPRITE			m_pSprite;
+	SpriteBatch*				m_spriteBatch;			// spritebatch for drawing sprites to backbuffer
 
-	// pointer to screen modes
-	D3DDISPLAYMODE			m_pMode;
-
-	// window handle
-	HWND					m_hWindow;
-
-	// is game fullscreen
-	bool					m_fullscreen;
-
-	//	game width
-	int						m_width;
+	bool						m_fullScreen;			// fullscreen setting
 	
-	// game height
-	int						m_height;
-
-	// winapi result return code
-	HRESULT					m_result;
-
-	// colour for backbuffer
-	Color				m_backColour;
-
+	float						m_gameWidth;			// client window width
+	float						m_gameHeight;			// client window height
 };
 
 #endif _GRAPHICS_H_

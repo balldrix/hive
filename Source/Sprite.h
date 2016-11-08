@@ -1,89 +1,64 @@
+// Sprite.h
+// Christopher Ball 2016
+// sprite class contains texture, position, alpha
+// rotation and scale of the 2D sprite
+
 #ifndef _SPRITE_H_
 #define _SPRITE_H_
 
-#include "Graphics.h"
-#include "Texture.h"
-#include "AABB.h"
-#include <string>
+#include "pch.h"
 
-// structure to store properties of a sprite
-struct SpriteData
-{
-	int					width;
-	int					height;
-	Vector2				position;
-	float				scale;
-	float				angle;
-	RECT				rect;
-	LPDIRECT3DTEXTURE9	texture;
-	bool				flipHorizontal;
-	bool				flipVertical;
-};
-
-enum FACING_DIRECTION
-{
-	LEFT,
-	RIGHT
-};
+// forward declarations
+class Graphics;
+class Texture;
 
 class Sprite
 {
 public:
 	Sprite();
-	virtual ~Sprite();
-	virtual void				Init(Graphics* graphics, Texture* textureManager, unsigned int frameWidth, unsigned int frameHeight);
-	virtual void				Update(float deltaTime);
-	virtual void				Render();
-	virtual void				Render(Vector2 position);
-	virtual void				Render(Vector2 position, RECT rect);
-	virtual void				Reset();
+	~Sprite();
+	void				Init(Texture* texture); // initialise sprite
+	void				Render(Graphics* graphics); // render sprite
+	void				Render(Graphics* graphics, Vector2 position); // render sprite
+
+	// helper methods
+	// setters
+	void				SetPosition(const Vector2& position);
+	void				SetScale(const float& scale); 
+	void				SetRotation(const float& rotation); 
+	void				SetAlpha(const float& alpha);
+	void				SetColour(const Color& colour);
+	void				SetOrigin(const Vector2& origin);
+	void				SetRect(const RECT& rect);
+	void				SetActive(bool active);
+
+	// getters
+	const Vector2		GetPosition() const		{ return m_position; }
+	const float			GetScale() const		{ return m_scale; }
+	const float			GetRotation() const		{ return m_rotation; }
+	const float			GetAlpha() const		{ return m_alpha; }
+	const Color			GetColour() const		{ return m_colour; }
+	const Vector2		GetOrigin() const		{ return m_origin; }
+	const RECT			GetRect() const			{ return m_rect; }
+	const UINT			GetWidth() const		{ return m_width; }
+	const UINT			GetHeight() const		{ return m_height; }
+	const bool			GetActive() const		{ return m_active; }
+
+private:
+	Texture*			m_texture;	// texture pointer
+
+	Vector2				m_position; // sprite position
+	float				m_scale;	// scaler
+	float				m_rotation; // rotation angle in radians
+	float				m_alpha;	// alpha value 0.0f - 1.0f
+	Color				m_colour;	// colour tint
+	Vector2				m_origin;	// sprite origin i.e. middle
+	RECT				m_rect;		// source rect
+
+	UINT				m_width;	// sprite width
+	UINT				m_height;	// sprite height
 	
-	void						RenderHitBox(AABB box);
-
-	void						SetTransKey(int r, int g, int b);
-	void						SetRect();
-	void						SetRect(RECT rect);
-	void						SetRect(int left, int right, int top , int bottom);
-	void						SetVerticalFlip(bool vFlip);
-	void						SetHorizontalFlip(bool hFlip);
-
-	void						SetWidth(int w);
-	void						SetHeight(int h);
-
-	void						SetCurrentFrame(unsigned int frame);
-	void						SetShowHitBox(bool showHitBox);
-
-	void						SetFacingDirection(FACING_DIRECTION direction);
-	void						FlipSprite();
-
-	virtual	RECT				GetRect()					const { return m_spriteData.rect; }
-	AABB						GetAABB()					const { return m_collisionBox; }
-	bool						GetShowHitBox()				const { return m_showHitBox; }
-
-	unsigned int				GetWidth()					const {	return m_spriteData.width; }
-	unsigned int				GetHeight()					const { return m_spriteData.height; }
-
-protected:
-	Graphics*					m_pGraphics;
-	Texture*					m_pTextureManager;
-	
-	SpriteData					m_spriteData;
-
-	unsigned int				m_numCols;
-	unsigned int				m_currentFrame;
-
-	AABB						m_collisionBox;
-
-	bool						m_initialised;
-	bool						m_showHitBox;
-	
-	HRESULT						m_result;
-
-	Color						m_colourFilter;
-	Color						m_transKey;
-
-	FACING_DIRECTION			m_facingDirection;
-
+	bool				m_active;	// if active or not
 };
 
 #endif _SPRITE_H_

@@ -1,97 +1,50 @@
 #include "Texture.h"
 #include "Graphics.h"
+#include "Error.h"
 
 Texture::Texture() :
-m_pTexture(NULL),
-m_pGraphics(NULL),
-m_colourKey(Colors::Magenta),
-m_filename(NULL),
-m_height(0),
-m_width(0),
-m_initialised(false)
+	m_texture(nullptr),
+	m_resource(nullptr)
 {
-
 }
 
 Texture::~Texture()
 {
-	if (m_pTexture != NULL)
-	{
-		m_pTexture->Release();
-		m_pTexture = NULL;
-	}
 }
 
-bool
-Texture::Init(Graphics* graphics, const wchar_t* filename)
+void 
+Texture::LoadTexture(Graphics* graphics, std::string filename)
 {
-	m_pGraphics = graphics;
-	m_filename = filename;
+	// convert string to wstring LPCWSTR
+	std::wstring textureFile = std::wstring(filename.begin(), filename.end());
 
-	// d3d image info struct
-	D3DXIMAGE_INFO imageInfo;
-
-	m_result = D3DXGetImageInfoFromFile(filename, &imageInfo);
-
-	if(m_result != S_OK)
-	{
-		// TODO deal with error reporting
-	}
-
-	// get texture dimensions from imageInfo
-	m_width = imageInfo.Width;
-	m_height = imageInfo.Height;
+	// load texture from file
+	HRESULT result = CreateWICTextureFromFile(graphics->GetDevice(), nullptr, textureFile.c_str(), &m_resource, &m_texture, 0);
 	
-	m_result = D3DXCreateTextureFromFileEx(
-				m_pGraphics->GetD3DDevice(),
-				filename,
-				imageInfo.Width,
-				imageInfo.Height,
-				1, 0,
-				D3DFMT_UNKNOWN,
-				D3DPOOL_DEFAULT,
-				D3DX_DEFAULT,
-				D3DX_DEFAULT,
-				m_colourKey.BGRA(),
-				&imageInfo,
-				NULL, &m_pTexture);
-	
-	if(m_result != S_OK)
+	// if load result is not ok
+	if(result != S_OK)
 	{
-		// TODO deal with error reporting
-		if(m_pTexture != NULL)
-		{
-			m_pTexture->Release();
-			m_pTexture = NULL;
-		}
-		return false;
-	}
-	m_initialised = true;
-	return true;
-}
-
-void
-Texture::OnLostDevice()
-{
-	if (!m_initialised)
-	{
-		return;
-	}
-
-	if (m_pTexture != NULL)
-	{
-		m_pTexture->Release();
-		m_pTexture = NULL;
+		std::string error = " Error Loading texture file " + filename + " in Texture.cpp line 21; \n"; // error message
+		Error::FileLog(error);
+		MessageBox(graphics->GetHwnd(), L"Error loading Texture. See Logs/Error.txt", L"Error!", MB_OK); // display loading texture error message
+		PostQuitMessage(0); // quit game
 	}
 }
 
 void
-Texture::OnResetDevice()
+Texture::Release()
 {
-	if (!m_initialised)
+	// release texture resources
+
+	if(m_resource)
 	{
-		return;
+		m_resource->Release();
+		m_resource = nullptr;
 	}
 
-	Init(m_pGraphics, m_filename);
+	if(m_texture)
+	{
+		m_texture->Release();
+		m_texture = nullptr;
+	}
 }

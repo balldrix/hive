@@ -1,270 +1,172 @@
 #include "Game.h"
+
+#include "pch.h"
+#include "Graphics.h"
 #include "Input.h"
+
 #include "GameStateManager.h"
-#include "FrontEnd.h"
-#include "ControlScreen.h"
-#include "Running.h"
-#include "GameOver.h"
 #include "GameState.h"
-#include "Constants.h"
+
+#include "MenuGameState.h"
+#include "GameplayGameState.h"
 
 Game::Game() :
-	m_stateManager(NULL),
-	m_pGraphics(NULL),
-	m_pInput(NULL),
-	m_hWindow(0),
-	m_result(0),
-	m_timeStart(0),
-	m_timeEnd(0),
-	m_timeFreq(0),
-	m_deltaTime(0),
-	m_sleepTime(0),
-	m_initialised(false)
+m_graphics(nullptr),
+m_input(nullptr),
+m_gameStateManager(nullptr),
+m_timerFreq(0.0f),
+m_currentTime(0.0f),
+m_previousTime(0.0f),
+m_retryAudio(false)
 {
-
 }
 
 Game::~Game()
 {
-	ReleaseAll();
-	DeleteAll();
-	ShowCursor(true);
+	DeleteAll(); // delete all pointers
 }
 
 void
 Game::Init(Graphics* graphics)
 {
-	// copy graphics pointer
-	m_pGraphics = graphics;
+	// allow multi threading
+	CoInitializeEx(NULL, COINIT_MULTITHREADED);
 
-	m_pInput = new Input();
+	m_graphics = graphics; // copy pointer address to 
 
-	// initialise input 
-	m_pInput->Init(m_hWindow, false);
+	// create new input class
+	m_input = new Input();
 
-	// set timer frequency
-	m_timeFreq = m_pTimer.GetFrequency();
+	// set audio engine flags
+	AUDIO_ENGINE_FLAGS eflags = AudioEngine_UseMasteringLimiter;
+	#ifdef _DEBUG
+		eflags = eflags | AudioEngine_Debug;
+	#endif
 
-	// set timer start
-	m_timeStart = m_pTimer.GetTicks();
+	// initialise audio engine
+	m_audio.reset(new AudioEngine(eflags));
 
-	// create state manager object and add game states needed for game
-	m_stateManager = new GameStateManager();
-	m_stateManager->CreateGlobalSystems(m_pGraphics->GetHwnd(), m_pGraphics, m_pInput);
-	m_stateManager->AddState(new FrontEnd(m_stateManager));
-	m_stateManager->AddState(new ControlScreen(m_stateManager));
-	m_stateManager->AddState(new Running(m_stateManager));
-	m_stateManager->AddState(new GameOver(m_stateManager));
-	m_stateManager->SwitchState("RUNNING");
+	// create new game state manager
+	m_gameStateManager = new GameStateManager();
+	m_gameStateManager->Init(m_graphics,
+								m_input,
+								m_audio.get());
 
-	m_initialised = true;
+	// add game states to state list and switch to front end
+	m_gameStateManager->AddState(new MenuGameState(m_gameStateManager));
+	m_gameStateManager->AddState(new GameplayGameState(m_gameStateManager));
+	m_gameStateManager->SwitchState(L"MENU");
 
-	// seed the randoms with the current time
-	srand((int)time(NULL));
+	// get cpu frequency and current time in ticks
+	m_timerFreq = m_timer.GetFrequency();
+	m_currentTime = m_timer.GetTicks();
 }
 
-// run method called in winmain message loop
 void
 Game::Run()
 {
-	if (m_pGraphics != NULL)
+	m_previousTime = m_currentTime; // keep current time for next update
+	m_currentTime = m_timer.GetTicks(); // get cpu tick count
+	float deltaTime = (m_currentTime - m_previousTime) * m_timerFreq; // calculate time taken since last update
+
+	// if delta time becomes too large
+	// lock at 60fps
+	if(deltaTime > 0.016f)
 	{
-		m_timeEnd = m_pTimer.GetTicks();
-
-		m_deltaTime = ((float)(m_timeEnd - m_timeStart) / (float)m_timeFreq);
-
-		if (m_deltaTime < GlobalConstants::MIN_FRAME_TIME)
-		{
-			m_sleepTime = (DWORD)((GlobalConstants::MIN_FRAME_TIME - m_deltaTime) * 1000);
-			timeBeginPeriod(1);
-			Sleep(m_sleepTime);
-			timeEndPeriod(1);
-			return;
-		}
-
-		if (m_deltaTime > 0.0)
-		{
-			m_fps = (m_fps * 0.99f) + (0.01f / m_deltaTime);
-		}
-
-		if (m_deltaTime > GlobalConstants::MAX_FRAME_TIME)
-		{
-			m_deltaTime = GlobalConstants::MAX_FRAME_TIME;
-		}
-
-		m_timeStart = m_timeEnd;
-
-		// if Alt+Enter toggle fullscreen/window
-		if (m_pInput->IsKeyDown(ALT_KEY) && m_pInput->WasKeyPressed(ENTER_KEY))
-		{
-			SetDisplayMode(TOGGLE); // toggle fullscreen/window
-		}
-
-		if (m_pInput->IsKeyDown(ESC_KEY))
-		{
-			Exit();
-		}
-
-		Update(m_deltaTime);	
-
-		RenderGame();
-		
-		m_pInput->Clear(inputNS::KEYS_PRESSED);
+		deltaTime = 0.016f;
 	}
+
+	ProcessInput(); // read key and mouse input into game
+	Update(deltaTime); // update game
+	Render(); // render objects	
 }
 
-// delete reserved memory
-void
-Game::DeleteAll()
-{	
-	if (m_pInput != NULL)
-	{
-		delete m_pInput;
-		m_pInput = NULL;
-	}
-
-	if (m_pGraphics != NULL)
-	{
-		delete m_pGraphics;
-		m_pGraphics = NULL;
-	}
-
-	if (m_stateManager != NULL)
-	{
-		delete m_stateManager;
-		m_stateManager = NULL;
-	}
-
-	m_initialised = false;
+void 
+Game::ProcessInput()
+{
+	// process game state input
+	m_gameStateManager->ProcessInput();
 }
 
 void
 Game::Update(float deltaTime)
 {
-	m_stateManager->Update(deltaTime);
+	// update game state
+	m_gameStateManager->Update(deltaTime);
 }
 
-// render game objects
 void
 Game::Render()
 {
-	m_result = m_pGraphics->BeginScene();
+	// prepare graphics render target and clear backbuffer
+	m_graphics->BeginScene();
 
-	if (m_result == S_OK)
-	{
-		m_stateManager->Render();
-		m_pGraphics->EndScene();
-	}	
-	
-	HandleLostDevice();
-	
-	m_pGraphics->PresentBackBuffer();
-}
+	// render game state
+	m_gameStateManager->Render();
 
-// handle lost graphics device
-void
-Game::HandleLostDevice()
-{
-	m_result = m_pGraphics->GetDeviceState();
-	if (m_result != D3D_OK)
-	{
-		// TODO insert error logging
-		if (m_result == D3DERR_DEVICELOST)
-		{
-			Sleep(100);
-			return;
-		}
-		else if (m_result == D3DERR_DEVICENOTRESET)
-		{
-			ReleaseAll();
-			m_result = m_pGraphics->Reset();
-			if (m_result != D3D_OK)
-			{
-				return;
-			}
-		}
-		else
-		{
-			return;
-		}
-	}
-}
-
-void			
-Game::SetDisplayMode(DisplayMode mode)
-{
-	ReleaseAll();
-	m_pGraphics->ChangeDisplayMode(mode);
-	ResetAll();
+	// display backbuffer on screen
+	m_graphics->PresentBackBuffer();
 }
 
 void
 Game::ReleaseAll()
 {
-
+	m_graphics->ReleaseAll(); // release all graphics related pointers
+	m_gameStateManager->ReleaseAll(); // release all states
+	m_audio.reset(); // reset audio engine
 }
 
-void 
-Game::ResetAll()
+void
+Game::DeleteAll()
 {
-
+	// delete game state manager
+	if(m_gameStateManager)
+	{
+		delete m_gameStateManager;
+		m_gameStateManager = nullptr;
+	}
+	
+	// delete input object
+	if(m_input)
+	{
+		delete m_input;
+		m_input = nullptr;
+	}
+	
+	// clear graphics object pointer
+	if(m_graphics)
+	{
+		m_graphics = nullptr;
+	}
 }
 
-
-LRESULT
+LRESULT 
 Game::MessageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-	if (m_initialised)
+	// handle msg values in switch statement
+	switch(msg)
 	{
-		switch (msg)
-		{
-			case WM_DESTROY:
-				PostQuitMessage(0);
-				return 0;
-			case WM_KEYDOWN: case WM_SYSKEYDOWN:
-				m_pInput->KeyDown(wParam);
-				return 0;
-			case WM_KEYUP: case WM_SYSKEYUP:
-				m_pInput->KeyUp(wParam);
-				return 0;
-			case WM_CHAR:
-				m_pInput->KeyIn(wParam);
-				return 0;
-			case WM_MOUSEMOVE:
-				m_pInput->MouseIn(lParam);
-				return 0;
-			case WM_INPUT:
-				m_pInput->MouseRawIn(lParam);
-				return 0;
-			case WM_LBUTTONDOWN:
-				m_pInput->SetMouseClicked(true);
-				m_pInput->MouseIn(lParam);
-				return 0;
-			case WM_LBUTTONUP:
-				m_pInput->SetMouseClicked(false);
-				m_pInput->MouseIn(lParam);
-				return 0;
-			case WM_RBUTTONDOWN:
-				m_pInput->SetMouseRButton(true);
-				m_pInput->MouseIn(lParam);
-				return 0;
-			case WM_RBUTTONUP:
-				m_pInput->SetMouseRButton(false);
-				m_pInput->MouseIn(lParam);
-				return 0;
-			case WM_MBUTTONDOWN:
-				m_pInput->SetMouseMButton(true);
-				m_pInput->MouseIn(lParam);
-				return 0;
-			case WM_MBUTTONUP:
-				m_pInput->SetMouseMButton(false);
-				m_pInput->MouseIn(lParam);
-				return 0;
-			case WM_XBUTTONDOWN: case WM_XBUTTONUP:
-				m_pInput->SetMouseXButton(wParam);
-				m_pInput->MouseIn(lParam);
-				return 0;
-		}
+		case WM_DESTROY:
+		PostQuitMessage(0); // post quit window
+		return 0;
+		case WM_KEYDOWN: case WM_SYSKEYDOWN:
+		m_input->SetKeyDown(wParam); // set keyboard key down
+		return 0;
+		case WM_KEYUP: case WM_SYSKEYUP:
+		m_input->SetKeyUp(wParam); // set keyboard key up
+		return 0;
+		case WM_MOUSEMOVE:
+		m_input->SetMouseIn(lParam); // set mouse position
+		return 0;
+		case WM_LBUTTONDOWN:
+		m_input->SetMouseClicked(true);
+		m_input->SetMouseIn(lParam);
+		return 0;
+		case WM_LBUTTONUP:
+		m_input->SetMouseClicked(false);
+		m_input->SetMouseIn(lParam);
+		return 0;
 	}
+	// else return default
 	return DefWindowProc(hWindow, msg, wParam, lParam);
 }

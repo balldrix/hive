@@ -1,20 +1,20 @@
 #include "GameState.h"
 
 GameState::GameState() :
-m_inputTimer(0),
-m_keyPressed(false)
+m_inputTimer(0.0f),
+m_inputReady(false)
 {
 
 }
 
-GameState::GameState(const char* stateName) :
-m_inputTimer(0),
-m_keyPressed(false)
+GameState::GameState(const wchar_t* stateName) :
+m_inputTimer(0.0f),
+m_inputReady(false)
 {
 	m_stateName = stateName;
 }
 
-const char*
+const wchar_t*
 GameState::GetStateName() const
 {
 	return m_stateName;

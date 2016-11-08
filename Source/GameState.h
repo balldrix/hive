@@ -1,3 +1,8 @@
+// GameState.h
+// Christopher Ball 2016
+// game state abstract class for
+// all game states
+
 #ifndef _GAMESTATE_H_
 #define _GAMESTATE_H_
 
@@ -5,35 +10,24 @@ class GameState
 {
 public:
 	GameState();
-	GameState(const char* stateName);
+	GameState(const wchar_t* stateName);
 	virtual ~GameState(void) {};
 
-	//  load all assetts when entering state
-	virtual void	OnEntry(){};
+	virtual void	OnEntry() {};				//  load all assetts when entering state
+	virtual void	OnExit() {};				// delete all assetts when changing state
 
-	// delete all assetts when changing state
-	virtual void	OnExit(){};
+	virtual void	ProcessInput() {};			// process keyboard and mouse input
+	virtual void	Update(float deltaTime) {}; // update game state
+	virtual void	Render() {};				// render game state
 
-	virtual void	CheckInput(float deltaTime){};
-	virtual void	Update(float deltaTime){};
-	virtual void	Render(){};
-	virtual void	OnLostDevice(){};
-	virtual void	ResetAll() {};
-	virtual void	ReleaseAll() {};
+	virtual void	ReleaseAll() {};			// release all resources in state
 
-	// return name of current state
-	const char*		GetStateName() const;
+	const wchar_t*	GetStateName() const;		// return name of current state
 
 protected:
-
-	// name of game state
-	const char*		m_stateName;
-
-	// var used to create input delay
-	float			m_inputTimer;
-
-	// has a key been pressed already?
-	bool			m_keyPressed;
+	const wchar_t*	m_stateName; 				// name of game state
+	float			m_inputTimer; 				// var used to create input delay
+	bool			m_inputReady; 				// has a key been pressed already?
 };
 
 #endif _GAMESTATE_H_

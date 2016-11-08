@@ -96,25 +96,21 @@
     <ClCompile Include="Source\Bullet.cpp" />
     <ClCompile Include="Source\ControlScreen.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
-    <ClCompile Include="Source\Font.cpp" />
-    <ClCompile Include="Source\FrontEnd.cpp" />
+    <ClCompile Include="Source\Error.cpp" />
     <ClCompile Include="Source\Game.cpp" />
-    <ClCompile Include="Source\GameOver.cpp" />
+    <ClCompile Include="Source\GameplayGameState.cpp" />
     <ClCompile Include="Source\GameState.cpp" />
     <ClCompile Include="Source\GameStateManager.cpp" />
     <ClCompile Include="Source\Graphics.cpp" />
     <ClCompile Include="Source\HitBoxMesh.cpp" />
     <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\Main.cpp" />
-    <ClCompile Include="Source\Hive.cpp" />
     <ClCompile Include="Source\Mesh.cpp" />
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\Randomiser.cpp" />
-    <ClCompile Include="Source\Running.cpp" />
     <ClCompile Include="Source\Sprite.cpp" />
     <ClCompile Include="Source\Texture.cpp" />
     <ClCompile Include="Source\Timer.cpp" />
-    <ClCompile Include="Source\Transform.cpp" />
     <ClCompile Include="Source\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -126,25 +122,23 @@
     <ClInclude Include="Source\Controls.h" />
     <ClInclude Include="Source\ControlScreen.h" />
     <ClInclude Include="Source\Enemy.h" />
-    <ClInclude Include="Source\Font.h" />
-    <ClInclude Include="Source\FrontEnd.h" />
+    <ClInclude Include="Source\Error.h" />
     <ClInclude Include="Source\Game.h" />
-    <ClInclude Include="Source\GameOver.h" />
+    <ClInclude Include="Source\GameplayGameState.h" />
     <ClInclude Include="Source\GameState.h" />
     <ClInclude Include="Source\GameStateManager.h" />
     <ClInclude Include="Source\Graphics.h" />
     <ClInclude Include="Source\HitBoxMesh.h" />
     <ClInclude Include="Source\Input.h" />
+    <ClInclude Include="Source\MenuGameState.h" />
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\pch.h" />
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\Randomiser.h" />
     <ClInclude Include="Source\Resources.h" />
-    <ClInclude Include="Source\Running.h" />
     <ClInclude Include="Source\Sprite.h" />
     <ClInclude Include="Source\Texture.h" />
     <ClInclude Include="Source\Timer.h" />
-    <ClInclude Include="Source\Transform.h" />
     <ClInclude Include="Source\UnitVectors.h" />
     <ClInclude Include="Source\Window.h" />
   </ItemGroup>

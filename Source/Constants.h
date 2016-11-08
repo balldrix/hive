@@ -6,17 +6,12 @@
 // game constants
 namespace GlobalConstants
 {
-	const wchar_t		WINDOW_NAME[] = L"Hive";				// Title of window that shows in top bar
-	const wchar_t		WND_CLASS_NAME[] = L"MyWndClass";				// name of class for creating a window
-	const unsigned int		GAME_WIDTH		= 1280;
-	const unsigned int		GAME_HEIGHT		= 720;
-	const float				FRAME_RATE		= 200.0f;
-	const float				MIN_FRAME_RATE	= 10.0f;					// the minimum frame rate
-	const float				MIN_FRAME_TIME	= 1.0f / FRAME_RATE;		// minimum desired time for 1 frame
-	const float				MAX_FRAME_TIME	= 1.0f / MIN_FRAME_RATE;	// maximum time used in calculations
+	const wchar_t			WINDOW_NAME[]		= L"Hive";				// title of window that shows in top bar
+	const wchar_t			WND_CLASS_NAME[]	= L"MyWndClass";		// name of class for creating a window
+	const unsigned int		WND_WIDTH			= 960;					// window width
+	const unsigned int		WND_HEIGHT			=540;					// window height
+	const unsigned int		GAME_WIDTH			= 480;					// game width
+	const unsigned int		GAME_HEIGHT			= 270;					// game height
 }
-
-// maximum number of enemies on screen
-const unsigned int		MAX_ENEMY = 50;
 
 #endif _CONSTANTS_H_

@@ -1,77 +1,52 @@
+// Game.h
+// Christopher Ball 2016
+// The game class manages the main game loop
+// and interacting with game state manager to 
+// call update and render the correct state
+
 #ifndef _GAME_H_
 #define _GAME_H_
 
-#define WIN32_LEAN_AND_MEAN
-
 #include "pch.h"
-#include "Graphics.h"
 #include "Timer.h"
 
 // forward declarations
-class GameStateManager;
+class Graphics;
 class Input;
+class GameStateManager;
 
 class Game
 {
 public:
 	Game();
 	~Game();
+	void				Init(Graphics* graphics);	// initialises game class and passes pointer to the graphics class
+
+	void				Run(); // main game function
+
+	void				ProcessInput(); // read inputs
+	void				Update(float deltaTime); // update all objects in the scene
+	void				Render(); // Render scene
+
+	void				ReleaseAll(); // release all pointers
+	void				DeleteAll(); // delete all pointers
+
+	LRESULT				MessageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam); // deals with windows messages
+
+private:
+	Graphics*			m_graphics; // pointer to graphics class for access to the gpu device
+	SpriteBatch*		m_spriteBatch; // 2d sprites engine
+	Input*				m_input; // manages key and mouse inputs
+	std::unique_ptr<AudioEngine> m_audio; // audio engine from directx tk
+	GameStateManager*	m_gameStateManager; // manager to switch and call current game state for render/update calls
+		
 	
-	//Initialise the game variables
-	void	Init(Graphics* graphics);
+	Timer				m_timer; // helper object for time step
+	float				m_timerFreq; // timer frequency 
+	float				m_currentTime; // tick time
+	float				m_previousTime; // previous tick time
 
-	// run method called in winmain message loop
-	void	Run();
-
-	void	ReleaseAll();
-	void	ResetAll();
-
-	// delete reserved memory
-	void	DeleteAll();
-
-	// render game objects
-	void	RenderGame();
-
-	// handle lost device
-	void	HandleLostDevice();
-
-	// set new display mode
-	void			SetDisplayMode(DisplayMode mode);
-
-	// return pointer to Graphics
-	Graphics*		GetGraphics()	{ return m_pGraphics; }
-
-	// return pointer to Input
-	Input*			GetInput()		{ return m_pInput; }
-
-	// exit game
-	void			Exit()			{ PostMessage(m_hWindow, WM_DESTROY, 0, 0); }
-
-	// Pure virtual methods only the derived class can define
-	// update game 
-	void	Update(float deltaTime);
-	
-	// render graphics
-	void	Render();
-
-	// handle windows messages
-	LRESULT			MessageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam);
-
-protected:
-	GameStateManager*	m_stateManager;
-	Graphics*		m_pGraphics;
-	Input*			m_pInput;
-	Timer			m_pTimer;
-	HWND			m_hWindow;
-	HRESULT			m_result;
-	UINT64			m_timeStart;
-	UINT64			m_timeEnd;
-	UINT64			m_timeFreq;
-	float			m_deltaTime;
-	float			m_fps;
-	DWORD			m_sleepTime;
-	
-	bool			m_initialised;
+	bool				m_retryAudio; // sets if audio device is lost
 };
 
-#endif  _GAME_H_
+#endif _GAME_H_

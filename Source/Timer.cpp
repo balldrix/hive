@@ -2,34 +2,32 @@
 
 Timer::Timer()
 {
-
 }
 
 Timer::~Timer()
 {
-
 }
 
-UINT64	
+float	
 Timer::GetTicks()
 {
-	UINT64 ticks;
+	LARGE_INTEGER ticks;
 
-	if (!QueryPerformanceCounter((LARGE_INTEGER*)&ticks))
+	if (!QueryPerformanceCounter(&ticks)) // query cpu time
 	{
-		ticks = (UINT64)timeGetTime;
+		ticks.QuadPart = timeGetTime(); // if Query fails set to standard clock time
 	}
-	return ticks;
+	return (float)ticks.QuadPart; // return time
 }
 
-UINT64
+float
 Timer::GetFrequency()
 {
-	UINT64 frequency;
+	LARGE_INTEGER frequency;
 
-	if (!QueryPerformanceFrequency((LARGE_INTEGER*)&frequency))
+	if (!QueryPerformanceFrequency(&frequency)) // query cpu ticks per second
 	{
-		frequency = 1000;
+		frequency.QuadPart = 1000; // if query fails set to 1000 ticks
 	}
-	return frequency;
+	return 1 / (float)frequency.QuadPart; // return ticks as a fraction of a second
 }

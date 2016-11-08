@@ -2,52 +2,12 @@
 #include "Resources.h"
 
 Player::Player() : 
-AnimatedSprite(),
-Transform(),
-m_pGraphics(NULL),
-m_pPlayerTexture(NULL),
-m_collisionBox(AABB()),
-m_meleeHitBox(AABB()),
-m_playerState(IDLE),
-m_shootingTimer(0.0f),
-m_meleeTimer(0.0f),
-m_firedGun(false),
-m_isMelee(false),
-m_isStrafe(false),
-m_active(false)
+m_playerState(IDLE)
 {
 }
 
 Player::~Player()
 {
-
-}
-
-void
-Player::Init(Graphics* graphics, Texture* playerTexture, Texture* bulletTexture)
-{
-	m_pGraphics = graphics;
-	m_pPlayerTexture = playerTexture;
-
-	AnimatedSprite::Init(m_pGraphics, m_pPlayerTexture, PLAYER_ANIM_NUM_FRAMES, PLAYER_ANIM_FRAME_DELAY, PLAYER_ANIM_FRAME_WIDTH, PLAYER_ANIM_FRAME_HEIGHT);
-
-	for(int index = 0; index < MAX_BULLETS_ON_SCREEN; index++)
-	{
-		m_bullet[index].Init(m_pGraphics, bulletTexture);
-	}
-
-	m_currentMovementSpeed = PLAYER_WALK_SPEED;
-	
-	m_collisionBox.SetAABB(m_position, m_position + Vector2(m_spriteData.width, m_spriteData.height));
-
-	m_meleeHitBox = m_collisionBox;
-		
-	SetPosition(START_X, START_Y);
-
-	m_shootingTimer = SHOOTING_DELAY;
-	m_meleeTimer = MELEE_DELAY;
-	
-	m_isLerper = true;
 }
 
 void

@@ -1,7 +1,7 @@
 #ifndef _BULLET_H_
 #define _BULLET_H_
 
-#include "TextureManager.h"
+#include "Texture.h"
 #include "AnimatedSprite.h"
 #include "AABB.h"
 #include "Transform.h"
