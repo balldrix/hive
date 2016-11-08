@@ -237,11 +237,11 @@ Game::MessageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam)
 				m_pInput->MouseRawIn(lParam);
 				return 0;
 			case WM_LBUTTONDOWN:
-				m_pInput->SetMouseLButton(true);
+				m_pInput->SetMouseClicked(true);
 				m_pInput->MouseIn(lParam);
 				return 0;
 			case WM_LBUTTONUP:
-				m_pInput->SetMouseLButton(false);
+				m_pInput->SetMouseClicked(false);
 				m_pInput->MouseIn(lParam);
 				return 0;
 			case WM_RBUTTONDOWN:

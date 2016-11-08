@@ -81,7 +81,7 @@ public:
 	void				MouseRawIn(LPARAM lParam);
 
 	// set Mouse Left Button status
-	void				SetMouseLButton(bool button) { m_mouseLButton = button; }
+	void				SetMouseClicked(bool button) { m_mouseLButton = button; }
 
 	// set Mouse Right Button status
 	void				SetMouseRButton(bool button) { m_mouseRButton = button; }
