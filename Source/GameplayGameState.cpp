@@ -13,7 +13,6 @@ GameplayGameState::GameplayGameState(GameStateManager* gameStateManager) :
 m_gameStateManager(nullptr),
 m_graphics(nullptr),
 m_input(nullptr),
-m_audio(nullptr),
 m_running(false),
 GameState(L"GAMEPLAY")
 {
@@ -21,7 +20,6 @@ GameState(L"GAMEPLAY")
 	m_gameStateManager = gameStateManager;
 	m_graphics = m_gameStateManager->GetGraphics();
 	m_input = m_gameStateManager->GetInput();
-	m_audio = m_gameStateManager->GetAudio();
 }
 
 GameplayGameState::~GameplayGameState()

@@ -11,13 +11,13 @@
 #include "GameplayGameState.h"
 
 Game::Game() :
-m_graphics(nullptr),
-m_input(nullptr),
-m_gameStateManager(nullptr),
-m_timerFreq(0.0f),
-m_currentTime(0.0f),
-m_previousTime(0.0f),
-m_retryAudio(false)
+	m_graphics(nullptr),
+	m_input(nullptr),
+	m_gameStateManager(nullptr),
+	m_timerFreq(0.0f),
+	m_currentTime(0.0f),
+	m_previousTime(0.0f),
+	m_retryAudio(false)
 {
 }
 
@@ -37,22 +37,12 @@ Game::Init(Graphics* graphics)
 	// create new input class
 	m_input = new Input();
 
-	// set audio engine flags
-	AUDIO_ENGINE_FLAGS eflags = AudioEngine_UseMasteringLimiter;
-	#ifdef _DEBUG
-		eflags = eflags | AudioEngine_Debug;
-	#endif
-
-	// initialise audio engine
-	m_audio.reset(new AudioEngine(eflags));
-
 	// create new game state manager
 	m_gameStateManager = new GameStateManager();
 	m_gameStateManager->Init(m_graphics,
-								m_input,
-								m_audio.get());
+							 m_input);
 
-	// add game states to state list and switch to front end
+// add game states to state list and switch to front end
 	m_gameStateManager->AddState(new MenuGameState(m_gameStateManager));
 	m_gameStateManager->AddState(new GameplayGameState(m_gameStateManager));
 	m_gameStateManager->SwitchState(L"MENU");
@@ -81,7 +71,7 @@ Game::Run()
 	Render(); // render objects	
 }
 
-void 
+void
 Game::ProcessInput()
 {
 	// process game state input
@@ -125,14 +115,14 @@ Game::DeleteAll()
 		delete m_gameStateManager;
 		m_gameStateManager = nullptr;
 	}
-	
+
 	// delete input object
 	if(m_input)
 	{
 		delete m_input;
 		m_input = nullptr;
 	}
-	
+
 	// clear graphics object pointer
 	if(m_graphics)
 	{
@@ -140,32 +130,32 @@ Game::DeleteAll()
 	}
 }
 
-LRESULT 
+LRESULT
 Game::MessageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	// handle msg values in switch statement
 	switch(msg)
 	{
 		case WM_DESTROY:
-		PostQuitMessage(0); // post quit window
-		return 0;
+			PostQuitMessage(0); // post quit window
+			return 0;
 		case WM_KEYDOWN: case WM_SYSKEYDOWN:
-		m_input->SetKeyDown(wParam); // set keyboard key down
-		return 0;
+			m_input->SetKeyDown(wParam); // set keyboard key down
+			return 0;
 		case WM_KEYUP: case WM_SYSKEYUP:
-		m_input->SetKeyUp(wParam); // set keyboard key up
-		return 0;
+			m_input->SetKeyUp(wParam); // set keyboard key up
+			return 0;
 		case WM_MOUSEMOVE:
-		m_input->SetMouseIn(lParam); // set mouse position
-		return 0;
+			m_input->SetMouseIn(lParam); // set mouse position
+			return 0;
 		case WM_LBUTTONDOWN:
-		m_input->SetMouseClicked(true);
-		m_input->SetMouseIn(lParam);
-		return 0;
+			m_input->SetMouseClicked(true);
+			m_input->SetMouseIn(lParam);
+			return 0;
 		case WM_LBUTTONUP:
-		m_input->SetMouseClicked(false);
-		m_input->SetMouseIn(lParam);
-		return 0;
+			m_input->SetMouseClicked(false);
+			m_input->SetMouseIn(lParam);
+			return 0;
 	}
 	// else return default
 	return DefWindowProc(hWindow, msg, wParam, lParam);

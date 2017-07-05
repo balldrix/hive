@@ -4,6 +4,9 @@
 #include "pch.h"
 #include "GameObject.h"
 
+// forward declarations
+class AnimatedSprite;
+
 const unsigned int		PLAYER_ANIM_NUM_FRAMES		= 1;
 const float				PLAYER_ANIM_FRAME_DELAY		= 0.3f;
 const unsigned int		PLAYER_ANIM_FRAME_WIDTH		= 32;
@@ -45,6 +48,7 @@ public:
 
 private:
 	PLAYER_STATE		m_playerState;
+	AnimatedSprite*		m_sprite;
 };
 
 #endif _PLAYER_H_

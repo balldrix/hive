@@ -163,9 +163,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="Assets\Sprites\bullet.png">
       <Filter>Assets\Sprites</Filter>
     </Image>

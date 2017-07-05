@@ -1,8 +1,10 @@
 #include "Player.h"
 #include "Resources.h"
+#include "AnimatedSprite.h"
 
 Player::Player() : 
-m_playerState(IDLE)
+m_playerState(IDLE),
+m_sprite(nullptr)
 {
 }
 
@@ -13,8 +15,9 @@ Player::~Player()
 void
 Player::Update(float deltaTime)
 {
-	AnimatedSprite::Update(deltaTime);
-	AnimatedSprite::FlipSprite();
+	m_sprite->Flip();
+	m_sprite->Update(deltaTime);
+
 	Transform::Update(deltaTime);
 	
 	// set collision box for melee attack

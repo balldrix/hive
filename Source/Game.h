@@ -37,7 +37,6 @@ private:
 	Graphics*			m_graphics; // pointer to graphics class for access to the gpu device
 	SpriteBatch*		m_spriteBatch; // 2d sprites engine
 	Input*				m_input; // manages key and mouse inputs
-	std::unique_ptr<AudioEngine> m_audio; // audio engine from directx tk
 	GameStateManager*	m_gameStateManager; // manager to switch and call current game state for render/update calls
 		
 	
