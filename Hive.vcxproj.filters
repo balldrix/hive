@@ -173,4 +173,7 @@
       <Filter>Assets\Sprites</Filter>
     </Image>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
 </Project>
