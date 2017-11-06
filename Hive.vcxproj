@@ -15,7 +15,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>XenosSwarm</RootNamespace>
     <ProjectName>Hive</ProjectName>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -145,12 +145,6 @@
     <Image Include="Assets\Sprites\bullet.png" />
     <Image Include="Assets\Sprites\enemy.png" />
     <Image Include="Assets\Sprites\player.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DirectXTK\DirectXTK_Desktop_2017.vcxproj">
-      <Project>{e0b52ae7-e160-4d32-bf3f-910b785e5a8e}</Project>
-      <Private>false</Private>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
 </Project>
