@@ -6,14 +6,14 @@
 #ifndef _HITBOXMESH_H_
 #define _HITBOXMESH_H_
 
-#include "Mesh.h"
+#include "pch.h"
 
 // forward declarations
 class Graphics;
 class AABB;
 
 // inherit from Mesh Object
-class HitBoxMesh : public Mesh
+class HitBoxMesh
 {
 public:
 	HitBoxMesh();
@@ -21,7 +21,7 @@ public:
 	void Init();
 	void Update(Graphics* graphics, AABB hitbox); // update hitbox mesh position
 private:
-	float m_rhw; // right hand winding value
+	std::unique_ptr<GeometricPrimitive> m_mesh;
 	Color m_colour; // vertex colour
 };
 

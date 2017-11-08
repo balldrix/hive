@@ -6,8 +6,7 @@
 GameStateManager::GameStateManager() :
 m_currentState(nullptr),
 m_graphics(nullptr),
-m_input(nullptr),
-m_audio(nullptr)
+m_input(nullptr)
 {
 }
 
@@ -33,12 +32,11 @@ GameStateManager::~GameStateManager()
 }
 
 void
-GameStateManager::Init(Graphics* graphics, Input* input, AudioEngine* audio)
+GameStateManager::Init(Graphics* graphics, Input* input)
 {
 	// copy pointers
 	m_graphics = graphics;
 	m_input = input;
-	m_audio = audio;
 }
 
 void

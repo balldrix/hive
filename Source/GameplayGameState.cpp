@@ -134,7 +134,7 @@ GameplayGameState::Render()
 void
 GameplayGameState::ReleaseAll()
 {
-	m_audio->Reset();
+
 }
 
 void

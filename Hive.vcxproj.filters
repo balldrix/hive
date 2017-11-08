@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Source\ControlScreen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Bullet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -14,9 +11,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\AABB.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\AnimatedSprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Graphics.cpp">
@@ -49,9 +43,6 @@
     <ClCompile Include="Source\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Mesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\HitBoxMesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -62,6 +53,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -80,9 +74,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\ControlScreen.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Bullet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -93,9 +84,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\AABB.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\AnimatedSprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Colours.h">
@@ -146,19 +134,16 @@
     <ClInclude Include="Source\Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Mesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\HitBoxMesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameplayGameState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\MenuGameState.h">
+    <ClInclude Include="Source\Error.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Error.h">
+    <ClInclude Include="Source\GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

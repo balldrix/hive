@@ -39,7 +39,6 @@ private:
 	GameStateManager*	m_gameStateManager;			// game state manager pointer
 	Graphics*			m_graphics;					// graphics pointer
 	Input*				m_input;					// input class pointer		
-	AudioEngine*		m_audio;					// audio engine pointer
 
 	bool				m_running;					// is game running or not
 };

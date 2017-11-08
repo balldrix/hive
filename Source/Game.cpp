@@ -7,7 +7,6 @@
 #include "GameStateManager.h"
 #include "GameState.h"
 
-#include "MenuGameState.h"
 #include "GameplayGameState.h"
 
 Game::Game() :
@@ -43,9 +42,8 @@ Game::Init(Graphics* graphics)
 							 m_input);
 
 	// add game states to state list and switch to front end
-	m_gameStateManager->AddState(new MenuGameState(m_gameStateManager));
 	m_gameStateManager->AddState(new GameplayGameState(m_gameStateManager));
-	m_gameStateManager->SwitchState(L"MENU");
+	m_gameStateManager->SwitchState(L"GAMEPLAY");
 
 	// get cpu frequency and current time in ticks
 	m_timerFreq = m_timer.GetFrequency();
@@ -103,7 +101,6 @@ Game::ReleaseAll()
 {
 	m_graphics->ReleaseAll(); // release all graphics related pointers
 	m_gameStateManager->ReleaseAll(); // release all states
-	m_audio.reset(); // reset audio engine
 }
 
 void

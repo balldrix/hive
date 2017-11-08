@@ -11,6 +11,7 @@
 
 #include <d3d11.h>
 #include <d3dcompiler.h>
+#include <GeometricPrimitive.h>
 
 #include <vector>
 #include <fstream>

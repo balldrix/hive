@@ -6,6 +6,7 @@
 
 // forward declarations
 class AnimatedSprite;
+class Bullet;
 
 const unsigned int		PLAYER_ANIM_NUM_FRAMES		= 1;
 const float				PLAYER_ANIM_FRAME_DELAY		= 0.3f;
@@ -48,7 +49,8 @@ public:
 
 private:
 	PLAYER_STATE		m_playerState;
-	AnimatedSprite*		m_sprite;
+	SpriteBatch*		m_sprite;
+	Bullet*				m_bullet[MAX_BULLETS_ON_SCREEN];
 };
 
 #endif _PLAYER_H_

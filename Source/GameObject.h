@@ -1,5 +1,5 @@
 // GameObject.h
-// Christopher Ball 2016
+// Christopher Ball 2017
 // A base class for objects used in game
 
 #ifndef _GAMEOBJECT_H_
@@ -38,7 +38,7 @@ protected:
 	Sprite*			m_sprite;	// game object sprite
 	Vector2			m_position;	// object position
 	AABB			m_hitbox;	// axis aligned bounding box
-	bool			m_active;	// cursor active or not
+	bool			m_active;	// object active or not
 };
 
 #endif _GAMEOBJECT_H_

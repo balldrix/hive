@@ -1,10 +1,9 @@
 #ifndef _BULLET_H_
 #define _BULLET_H_
 
+#include "GameObject.h"
 #include "Texture.h"
-#include "AnimatedSprite.h"
 #include "AABB.h"
-#include "Transform.h"
 
 const float			BULLET_ANIM_FRAME_DELAY = 0.005f;
 const unsigned int	BULLET_ANIM_NUM_FRAMES = 3;
@@ -12,7 +11,7 @@ const unsigned int	BULLET_ANIM_FRAME_WIDTH = 32;
 const unsigned int	BULLET_ANIM_FRAME_HEIGHT = 32;
 const unsigned int	BULLET_SPEED = 800;
 
-class Bullet : public AnimatedSprite, public Transform, public AABB
+class Bullet : public GameObject
 {
 public:
 
@@ -39,7 +38,7 @@ public:
 
 private:
 	Graphics*			m_pGraphics;
-	Texture*		m_pBulletTexture;
+	Texture*			m_pBulletTexture;
 	BULLET_STATE		m_bulletState;
 	bool				m_active;
 };

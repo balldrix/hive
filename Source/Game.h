@@ -39,7 +39,6 @@ private:
 	Input*				m_input; // manages key and mouse inputs
 	GameStateManager*	m_gameStateManager; // manager to switch and call current game state for render/update calls
 		
-	
 	Timer				m_timer; // helper object for time step
 	float				m_timerFreq; // timer frequency 
 	float				m_currentTime; // tick time

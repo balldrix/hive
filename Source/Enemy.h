@@ -3,9 +3,10 @@
 
 #include "Constants.h"
 #include "Randomiser.h"
-#include "Transform.h"
-#include "AnimatedSprite.h"
-#include "AABB.h"
+#include "GameObject.h"
+
+class Graphics;
+class Texture;
 
 const unsigned int	ENEMY_ANIM_NUM_FRAMES	= 1;
 const float			ENEMY_ANIM_FRAME_DELAY	= 1.0f;
@@ -15,7 +16,7 @@ const unsigned int	ENEMY_ROAM_SPEED		= 64;
 const unsigned int	ENEMY_RUN_SPEED			= 32;
 const float			AI_THINKING_TIME		= 4.0f;
 
-class Enemy : public Transform, public AnimatedSprite, public AABB
+class Enemy : public GameObject
 {
 public:
 
@@ -54,8 +55,8 @@ public:
 	void				SetActive(bool active);
 
 private:
-	Graphics*			m_pGraphics;
-	Texture*		m_pEnemyTexture;
+	Graphics*			m_graphics;
+	Texture*			m_enemyTexture;
 
 	const char*			m_ID;
 	ENEMY_STATE			m_enemyState;
