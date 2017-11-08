@@ -1,5 +1,5 @@
 // MenuGameState.h
-// Christopher Ball 2016
+// Christopher Ball 2017
 // menu game state
 
 #ifndef _MENUGAMESTATE_H_

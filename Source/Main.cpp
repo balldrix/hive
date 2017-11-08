@@ -1,6 +1,6 @@
-// City & Guilds Assignment 4241-506
-// Computer Game Design and Development
-// Christopher Ball 2016
+// Main.cpp
+// Hive Project
+// Christopher Ball 2017
 
 #include "Window.h"
 #include "Graphics.h"

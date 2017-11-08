@@ -42,7 +42,7 @@ Game::Init(Graphics* graphics)
 	m_gameStateManager->Init(m_graphics,
 							 m_input);
 
-// add game states to state list and switch to front end
+	// add game states to state list and switch to front end
 	m_gameStateManager->AddState(new MenuGameState(m_gameStateManager));
 	m_gameStateManager->AddState(new GameplayGameState(m_gameStateManager));
 	m_gameStateManager->SwitchState(L"MENU");

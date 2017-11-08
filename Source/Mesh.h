@@ -1,5 +1,5 @@
 // Mesh.h
-// Christopher Ball 2016
+// Christopher Ball 2017
 // The mesh class is a base class to hold the vertex and index buffers
 // a child class will specify the vertices and indices specific to 
 // that mesh. Modified code from SumoDX by Mickey Macdonald @scruffyfurn

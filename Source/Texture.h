@@ -1,5 +1,5 @@
 // Texture.h
-// Christopher Ball 2016
+// Christopher Ball 2017
 // a class to load and store textures
 // for use in Sprites
 

@@ -1,5 +1,5 @@
 // Game.h
-// Christopher Ball 2016
+// Christopher Ball 2017
 // The game class manages the main game loop
 // and interacting with game state manager to 
 // call update and render the correct state

@@ -1,5 +1,5 @@
 // HitBoxMesh.h
-// Christopher Ball 2016
+// Christopher Ball 2017
 // child of Mesh class, holds data for quad
 // that make up the visable hitbox
 
