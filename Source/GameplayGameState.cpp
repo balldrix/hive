@@ -47,6 +47,7 @@ GameplayGameState::LoadAssets()
 	// seed random generator
 	srand((int)time(NULL));
 
+
 	
 
 	// set running to true

@@ -14,8 +14,8 @@ Game::Game() :
 	m_input(nullptr),
 	m_gameStateManager(nullptr),
 	m_timerFreq(0.0f),
+	m_gameTime(0.0f),
 	m_currentTime(0.0f),
-	m_previousTime(0.0f),
 	m_retryAudio(false)
 {
 }
@@ -53,20 +53,17 @@ Game::Init(Graphics* graphics)
 void
 Game::Run()
 {
-	m_previousTime = m_currentTime; // keep current time for next update
-	m_currentTime = m_timer.GetTicks(); // get cpu tick count
-	float deltaTime = (m_currentTime - m_previousTime) * m_timerFreq; // calculate time taken since last update
+	float newTime = m_timer.GetTicks(); // get cpu tick count
+	float deltaTime = (newTime - m_currentTime) * m_timerFreq; // calculate time taken since last update
 
-	// if delta time becomes too large
-	// lock at 60fps
-	if(deltaTime > 0.016f)
-	{
-		deltaTime = 0.016f;
-	}
+	m_currentTime = newTime; // keep current time for next update
 
-	ProcessInput(); // read key and mouse input into game
-	Update(deltaTime); // update game
-	Render(); // render objects	
+	ProcessInput();			// read key and mouse input into game
+	Update(deltaTime);		// update game
+
+	m_gameTime += deltaTime; // increment game time
+
+	Render();				// render objects	
 }
 
 void

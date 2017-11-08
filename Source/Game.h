@@ -41,8 +41,8 @@ private:
 		
 	Timer				m_timer; // helper object for time step
 	float				m_timerFreq; // timer frequency 
+	float				m_gameTime;	// game timer
 	float				m_currentTime; // tick time
-	float				m_previousTime; // previous tick time
 
 	bool				m_retryAudio; // sets if audio device is lost
 };
