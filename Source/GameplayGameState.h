@@ -13,8 +13,12 @@ class GameStateManager;
 class Graphics;
 class Input;
 class Texture;
+class Sprite;
+class Player;
 
 // constants
+const unsigned int PLAYER_START_X = 30;	// game start player position X
+const unsigned int PLAYER_START_Y = 70;	// game start player position y
 
 class GameplayGameState : public GameState
 {
@@ -39,6 +43,12 @@ private:
 	GameStateManager*	m_gameStateManager;			// game state manager pointer
 	Graphics*			m_graphics;					// graphics pointer
 	Input*				m_input;					// input class pointer		
+
+	Texture*			m_playerTexture;			// player sprite sheet
+
+	Sprite*				m_playerSprite;				// player sprite object
+
+	Player*				m_player;					// pointer to player class
 
 	bool				m_running;					// is game running or not
 };

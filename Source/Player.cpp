@@ -1,10 +1,10 @@
 #include "Player.h"
+#include "Sprite.h"
 #include "Resources.h"
 #include "Bullet.h"
 
 Player::Player() :
-	m_playerState(IDLE),
-	m_sprite(nullptr)
+	m_playerState(IDLE)
 {
 }
 
@@ -15,8 +15,10 @@ Player::~Player()
 void
 Player::Update(float deltaTime)
 {
+	m_sprite->SetPosition(m_position);
+
 	// Update Bullets
-	for (int index = 0; index < MAX_BULLETS_ON_SCREEN; index++)
+	/*for (int index = 0; index < MAX_BULLETS_ON_SCREEN; index++)
 	{
 		if (m_bullet[index]->GetActive())
 		{
@@ -27,7 +29,7 @@ Player::Update(float deltaTime)
 	///////////////////////////////////////////
 	// handle bullets delay
 	///////////////////////////////////////////
-/*
+
 	if (m_firedGun)
 	{
 		m_shootingTimer -= deltaTime;
@@ -56,24 +58,23 @@ Player::Update(float deltaTime)
 	///////////////////////////////////////////
 }
 
-void
-Player::Render()
+void Player::Render(Graphics* graphics)
 {
-	/*
-	m_sprite->Draw()
+	m_sprite->Render(graphics);
 
+	/*
 	for(int index = 0; index < MAX_BULLETS_ON_SCREEN; index++)
 	{
-		m_bullet[index].Render();
+	m_bullet[index].Render();
 	}
 
 	if(m_showHitBox)
 	{
-		RenderHitBox(m_pGraphics, m_collisionBox);
-		if(m_isMelee)
-		{
-			RenderHitBox(m_pGraphics, m_meleeHitBox);
-		}
+	RenderHitBox(m_pGraphics, m_collisionBox);
+	if(m_isMelee)
+	{
+	RenderHitBox(m_pGraphics, m_meleeHitBox);
+	}
 	}
 	*/
 }
@@ -146,7 +147,7 @@ Player::Reset()
 
 
 void
-Player::SetPlayerState(PLAYER_STATE state)
+Player::SetPlayerState(PlayerState state)
 {
 	m_playerState = state;
 }

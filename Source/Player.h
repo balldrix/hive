@@ -5,9 +5,9 @@
 #include "GameObject.h"
 
 // forward declarations
-class AnimatedSprite;
 class Bullet;
 
+// player constants
 const unsigned int		PLAYER_ANIM_NUM_FRAMES		= 1;
 const float				PLAYER_ANIM_FRAME_DELAY		= 0.3f;
 const unsigned int		PLAYER_ANIM_FRAME_WIDTH		= 32;
@@ -25,7 +25,8 @@ class Player : public GameObject
 {
 public:
 
-	enum PLAYER_STATE
+	// player states
+	enum PlayerState
 	{
 		IDLE = 0,
 		WALKING,
@@ -41,16 +42,15 @@ public:
 	~Player();
 
 	void				Update(float deltaTime);
-	void				Render();
+	void				Render(Graphics* graphics);
 	void				Reset();
 						
-	void				SetPlayerState(PLAYER_STATE state);
-	PLAYER_STATE		GetState()				const { return m_playerState; }
+	void				SetPlayerState(PlayerState state);
+	PlayerState			GetState()				const { return m_playerState; }
 
 private:
-	PLAYER_STATE		m_playerState;
-	SpriteBatch*		m_sprite;
-	Bullet*				m_bullet[MAX_BULLETS_ON_SCREEN];
+	PlayerState			m_playerState;						// player states for state machine
+	Bullet*				m_bullet[MAX_BULLETS_ON_SCREEN];	// player bullets
 };
 
 #endif _PLAYER_H_
