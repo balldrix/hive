@@ -3,17 +3,17 @@
 #include "Error.h"
 
 Graphics::Graphics() :
-m_hWnd(nullptr),
-m_hInstance(nullptr),			
-m_swapchain(nullptr),
-m_D3DDevice(nullptr),
-m_D3DDeviceContext(nullptr),
-m_renderTargetView(nullptr),
-m_backbuffer(nullptr),
-m_spriteBatch(nullptr),
-m_fullScreen(false),
-m_gameWidth(0.0f),
-m_gameHeight(0.0f)
+	m_hWnd(nullptr),
+	m_hInstance(nullptr),
+	m_swapchain(nullptr),
+	m_D3DDevice(nullptr),
+	m_D3DDeviceContext(nullptr),
+	m_renderTargetView(nullptr),
+	m_backbuffer(nullptr),
+	m_spriteBatch(nullptr),
+	m_fullScreen(false),
+	m_gameWidth(0.0f),
+	m_gameHeight(0.0f)
 {
 }
 
@@ -34,11 +34,8 @@ Graphics::Init(HWND hWnd, HINSTANCE hInstance)
 	m_hWnd = hWnd;
 	m_hInstance = hInstance;
 
-	// get screen dimensions from window handle
-	RECT rc;
-	GetClientRect(m_hWnd, &rc);
-	UINT width = rc.right - rc.left;
-	UINT height = rc.bottom - rc.top;
+	UINT width = GlobalConstants::GAME_WIDTH;
+	UINT height = GlobalConstants::GAME_HEIGHT;
 
 	// Initialise DirectX
 	DXGI_SWAP_CHAIN_DESC scd = { 0 };
@@ -54,32 +51,32 @@ Graphics::Init(HWND hWnd, HINSTANCE hInstance)
 	scd.SampleDesc.Quality = 0;
 	scd.Windowed = !m_fullScreen;
 	result = D3D11CreateDeviceAndSwapChain(NULL,
-								  D3D_DRIVER_TYPE_HARDWARE,
-								  NULL,
-								  NULL,
-								  NULL,
-								  NULL,
-								  D3D11_SDK_VERSION,
-								  &scd,
-								  &m_swapchain,
-								  &m_D3DDevice,
-								  NULL,
-								  &m_D3DDeviceContext);
+		D3D_DRIVER_TYPE_HARDWARE,
+		NULL,
+		NULL,
+		NULL,
+		NULL,
+		D3D11_SDK_VERSION,
+		&scd,
+		&m_swapchain,
+		&m_D3DDevice,
+		NULL,
+		&m_D3DDeviceContext);
 
 	// error checking
 	if(result != S_OK)
 	{
 		// log error in txt file
 		Error::FileLog("Error Creating D3D11 Device in Graphics.cpp Line 55; \n");
-		
+
 		MessageBox(m_hWnd, L"Graphics Init Error. See Logs/Error.txt", L"Error!", MB_OK); // message
-	
+
 		PostQuitMessage(0); // quit game
 	}
 
 	// Get backbuffer pointer from swapchain
 	result = m_swapchain->GetBuffer(0, __uuidof(m_backbuffer), (void**)&m_backbuffer);
-	
+
 	// error checking
 	if(result != S_OK)
 	{
