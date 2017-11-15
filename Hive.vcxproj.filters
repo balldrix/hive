@@ -66,11 +66,11 @@
     <Filter Include="Source Files">
       <UniqueIdentifier>{c4f03af4-9746-424f-8eaa-c6867db40142}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Assets">
+    <Filter Include="Game Data">
       <UniqueIdentifier>{5ddac016-1fb2-4443-be93-f4d736282e5c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Assets\Sprites">
-      <UniqueIdentifier>{b04372b8-798f-491f-9451-266cedb46d4c}</UniqueIdentifier>
+    <Filter Include="Game Data\Textures">
+      <UniqueIdentifier>{8097c6c1-0b85-445b-b3c3-2776deeed50d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -148,17 +148,11 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Assets\Sprites\bullet.png">
-      <Filter>Assets\Sprites</Filter>
-    </Image>
-    <Image Include="Assets\Sprites\enemy.png">
-      <Filter>Assets\Sprites</Filter>
-    </Image>
-    <Image Include="Assets\Sprites\player.png">
-      <Filter>Assets\Sprites</Filter>
-    </Image>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <Image Include="GameData\Textures\playerTest.png">
+      <Filter>Game Data\Textures</Filter>
+    </Image>
   </ItemGroup>
 </Project>
