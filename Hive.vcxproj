@@ -21,6 +21,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\AABB.cpp" />
+    <ClCompile Include="Source\AnimatedSprite.cpp" />
     <ClCompile Include="Source\Bullet.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\Error.cpp" />
@@ -54,6 +55,7 @@
     <ClInclude Include="Source\GameState.h" />
     <ClInclude Include="Source\GameStateManager.h" />
     <ClInclude Include="Source\Graphics.h" />
+    <ClInclude Include="Source\AnimatedSprite.h" />
     <ClInclude Include="Source\HitBoxMesh.h" />
     <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\pch.h" />

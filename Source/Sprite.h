@@ -44,7 +44,7 @@ public:
 	const UINT			GetHeight() const		{ return m_height; }
 	const bool			GetActive() const		{ return m_active; }
 
-private:
+protected:
 	Texture*			m_texture;	// texture pointer
 
 	Vector2				m_position; // sprite position
