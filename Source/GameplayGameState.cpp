@@ -3,10 +3,12 @@
 #include "Graphics.h"
 #include "Input.h"
 #include "Texture.h"
+#include "AnimatedSprite.h"
 #include "Sprite.h"
 #include "Player.h"
 #include "Controls.h"
 #include "Resources.h"
+#include "UnitVectors.h"
 
 GameplayGameState::GameplayGameState()
 {}
@@ -67,7 +69,6 @@ void GameplayGameState::LoadAssets()
 	// init game objects
 	m_player->Init(m_playerSprite, Vector2((float)PLAYER_START_X, (float)PLAYER_START_Y));
 
-
 	// set running to true
 	m_running = true;
 }
@@ -104,31 +105,160 @@ void GameplayGameState::ProcessInput()
 		PostQuitMessage(0);
 	}
 
+	///////////////////////////////////////////
+	// check if key is released
+	///////////////////////////////////////////
+
 	if(!m_input->IsKeyDown(PLAYER_UP_KEY))
 	{
 		// move player up
-		// m_player.SetTargetVelocityY(0.0f);
+		m_player->SetTargetVelocityY(0.0f);
 		m_inputReady = false;
 	}
 	else if(!m_input->IsKeyDown(PLAYER_DOWN_KEY))
 	{
 		// move player down
-		// m_player.SetTargetVelocityY(0.0f);
+		m_player->SetTargetVelocityY(0.0f);
 		m_inputReady = false;
 	}
 
 	if(!m_input->IsKeyDown(PLAYER_RIGHT_KEY))
 	{
 		// move player right
-		// m_player.SetTargetVelocityX(0.0f);
+		m_player->SetTargetVelocityX(0.0f);
 
 		m_inputReady = false;
 	}
 	else if(!m_input->IsKeyDown(PLAYER_LEFT_KEY))
 	{
 		// move player left
-		// m_player.SetTargetVelocityX(0.0f);
+		m_player->SetTargetVelocityX(0.0f);
 		m_inputReady = false;
+	}
+
+	///////////////////////////////////////////
+	// check if key is pressed down
+	///////////////////////////////////////////
+
+	if (m_input->IsKeyDown(PLAYER_UP_KEY))
+	{
+		if (m_input->IsKeyDown(PLAYER_RIGHT_KEY))
+		{
+			// move player up right
+			m_player->SetTargetVelocity(directionNS::UPRIGHT);
+
+			// if strafing don't change facing direction
+			//if (!m_player->GetIsStrafe())
+			//{
+			//	m_player.SetFacingDirection(FACING_DIRECTION::RIGHT);
+			//}
+		}
+		else if (m_input->IsKeyDown(PLAYER_LEFT_KEY))
+		{
+			// move player up left
+			m_player->SetTargetVelocity(directionNS::UPLEFT);
+
+			// if strafing don't change facing direction
+			//if (!m_player.GetIsStrafe())
+			//{
+			//	m_player.SetFacingDirection(FACING_DIRECTION::LEFT);
+			//}
+		}
+		else
+		{
+			// move player up
+			m_player->SetTargetVelocity(directionNS::UP);
+		}
+	}
+	else if (m_input->IsKeyDown(PLAYER_DOWN_KEY))
+	{
+		if (m_input->IsKeyDown(PLAYER_RIGHT_KEY))
+		{
+			// move player down right
+			m_player->SetTargetVelocity(directionNS::DOWNRIGHT);
+
+			// if strafing don't change facing direction
+			//if (!m_player.GetIsStrafe())
+			//{
+			//	m_player.SetFacingDirection(FACING_DIRECTION::RIGHT);
+			//}
+		}
+		else if (m_input->IsKeyDown(PLAYER_LEFT_KEY))
+		{
+			// move player down left
+			m_player->SetTargetVelocity(directionNS::DOWNLEFT);
+
+			// if strafing don't change facing direction
+			//if (!m_player.GetIsStrafe())
+			//{
+			//	m_player.SetFacingDirection(FACING_DIRECTION::LEFT);
+			//}
+		}
+		else
+		{
+			// move player down
+			m_player->SetTargetVelocity(directionNS::DOWN);
+		}
+	}
+	else if (m_input->IsKeyDown(PLAYER_RIGHT_KEY))
+	{
+		if (m_input->IsKeyDown(PLAYER_UP_KEY))
+		{
+			// move player up right
+			m_player->SetTargetVelocity(directionNS::UPRIGHT);
+		}
+		else if (m_input->IsKeyDown(PLAYER_DOWN_KEY))
+		{
+			// move player down right
+			m_player->SetTargetVelocity(directionNS::DOWNRIGHT);
+		}
+		else
+		{
+			// move player right
+			m_player->SetTargetVelocity(directionNS::RIGHT);
+		}
+
+		// if strafing don't change facing direction
+		//if (!m_player.GetIsStrafe())
+		//{
+		//	m_player.SetFacingDirection(FACING_DIRECTION::RIGHT);
+		//}
+	}
+	else if (m_input->IsKeyDown(PLAYER_LEFT_KEY))
+	{
+		if (m_input->IsKeyDown(PLAYER_UP_KEY))
+		{
+			// move player up left
+			m_player->SetTargetVelocity(directionNS::UPLEFT);
+		}
+		else if (m_input->IsKeyDown(PLAYER_DOWN_KEY))
+		{
+			// move player down left
+			m_player->SetTargetVelocity(directionNS::DOWNLEFT);
+		}
+		else
+		{
+			// move player left
+			m_player->SetTargetVelocity(directionNS::LEFT);
+		}
+
+		// if strafing don't change facing direction
+		//if (!m_player.GetIsStrafe())
+		//{
+		//	m_player.SetFacingDirection(FACING_DIRECTION::LEFT);
+		//}
+
+	}
+
+	// use shift to run
+	if (m_input->IsKeyDown(SHIFT_PRESSED))
+	{
+		m_player->SetTargetMovementSpeed(PLAYER_RUN_SPEED);
+		//m_keyPressed = true;
+	}
+	else
+	{
+		m_player->SetTargetMovementSpeed(PLAYER_WALK_SPEED);
 	}
 
 	// reset game when R is pressed

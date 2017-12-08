@@ -5,7 +5,7 @@
 #include "GameObject.h"
 
 // forward declarations
-class Bullet;
+class Sprite;
 
 // player constants
 const unsigned int		PLAYER_ANIM_NUM_FRAMES		= 1;
@@ -39,8 +39,9 @@ public:
 	};
 
 	Player();
-	~Player();
+	virtual ~Player();
 
+	void				Init(Sprite* sprite, Vector2 position);
 	void				Update(float deltaTime);
 	void				Render(Graphics* graphics);
 	void				Reset();
@@ -49,8 +50,8 @@ public:
 	PlayerState			GetState()				const { return m_playerState; }
 
 private:
+	Sprite*				m_sprite;						// player sprite sheet
 	PlayerState			m_playerState;						// player states for state machine
-	Bullet*				m_bullet[MAX_BULLETS_ON_SCREEN];	// player bullets
 };
 
 #endif _PLAYER_H_

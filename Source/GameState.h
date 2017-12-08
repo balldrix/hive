@@ -22,7 +22,7 @@ public:
 
 	virtual void	ReleaseAll() {};			// release all resources in state
 
-	const wchar_t*	GetStateName() const;		// return name of current state
+	virtual const wchar_t*	GetStateName() const;		// return name of current state
 
 protected:
 	const wchar_t*	m_stateName; 				// name of game state

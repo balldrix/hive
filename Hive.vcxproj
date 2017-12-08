@@ -22,7 +22,6 @@
   <ItemGroup>
     <ClCompile Include="Source\AABB.cpp" />
     <ClCompile Include="Source\AnimatedSprite.cpp" />
-    <ClCompile Include="Source\Bullet.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\Error.cpp" />
     <ClCompile Include="Source\Game.cpp" />
@@ -43,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\AABB.h" />
-    <ClInclude Include="Source\Bullet.h" />
     <ClInclude Include="Source\Colours.h" />
     <ClInclude Include="Source\Constants.h" />
     <ClInclude Include="Source\Controls.h" />

@@ -12,11 +12,17 @@
 class Graphics;
 class Texture;
 
+enum FACING_DIRECTION
+{
+	LEFT,
+	RIGHT
+};
+
 class Sprite
 {
 public:
 	Sprite();
-	~Sprite();
+	virtual ~Sprite();
 	void				Init(Texture* texture); // initialise sprite
 	void				Render(Graphics* graphics); // render sprite
 	void				Render(Graphics* graphics, Vector2 position); // render sprite
@@ -54,7 +60,8 @@ protected:
 	Color				m_colour;	// colour tint
 	Vector2				m_origin;	// sprite origin i.e. middle
 	RECT				m_rect;		// source rect
-
+	bool				m_flipHorizontal; // does sprite need flipping horizontally?
+	bool				m_flipVertical; // does sprite need flipping vertically?
 	UINT				m_width;	// sprite width
 	UINT				m_height;	// sprite height
 	

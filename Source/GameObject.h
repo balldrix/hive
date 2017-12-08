@@ -12,33 +12,66 @@
 class Sprite;
 class Graphics;
 
+const unsigned int LERP_SPEED = 500;
+
 class GameObject
 {
 public:
 	GameObject();
-	~GameObject();
+	virtual ~GameObject();
 	
-	void			Init(Sprite* sprite, Vector2 position = Vector2(0.0f, 0.0f)); // initialise object
+	virtual void	Update(float deltaTime);	// update object
+	virtual void 	Render(Graphics* graphics) = 0;	// render object
 
-	virtual void	Update(float deltaTime) = 0;	// update object
-	virtual void 	Render(Graphics* graphics) = 0;					// render object
+	float			Lerp(float target, float current, float deltaTime);
 
-	void			SetID(const wchar_t* string);		// set object ID
-	void			SetPosition(Vector2 position);	// set position
-	void			SetActive(bool active);			// set active or not
+	// Setters
+	virtual void	SetID(const wchar_t* string);	// set object ID
+	virtual	void	SetPositionX(unsigned int x);
+	virtual	void	SetPositionY(unsigned int y);
+	virtual	void	SetPosition(unsigned int x, unsigned int y);
+	virtual void	SetPosition(Vector2 position);	// set position
 
-	const wchar_t*	GetID() const		{ return m_ID; }		// return object ID
-	Sprite*			GetSprite() 		{ return m_sprite; }	// return sprite pointer
-	Vector2			GetPosition() const { return m_position; }	// return cursor position
-	AABB&			GetHitBox()			{ return m_hitbox; }	// return hitbox
-	bool			IsActive() const	{ return m_active;}		// return if active
+	virtual void	SetTargetMovementSpeed(unsigned int speed);
+	virtual void	SetCurrentMovementSpeed(unsigned int speed);
+	 
+	virtual void	SetCurrentVelocity(float x, float y);
+	virtual void	SetCurrentVelocity(Vector2 velocity);
+	 
+	virtual void	SetTargetVelocity(float x, float y);
+	virtual void	SetTargetVelocity(Vector2 velocity);
+	 
+	virtual void	SetTargetVelocityX(float x);
+	virtual void	SetTargetVelocityY(float y);
+	 
+	virtual void	SetActive(bool active);			// set active or not
+
+	// getters
+	virtual const wchar_t*	GetID() const		{ return m_ID; }		// return object ID
+	
+	virtual float			GetPositionX() const { return m_position.x; }
+				
+	virtual float			GetPositionY() const { return m_position.y; }
+
+	virtual Vector2			GetPosition() const { return m_position; }
+
+	virtual Vector2			GetCurrentVelocity() const { return m_currentVelocity; }
+	virtual Vector2			GetTargetVelocity() const { return m_targetVelocity; }
+	virtual float			GetTargetMovementSpeed() const { return m_targetMovementSpeed; }
+	virtual float			GetCurrentMovementSpeed()	const { return m_currentMovementSpeed; }
+
+	virtual bool			IsActive() const	{ return m_active;}		// return if active
 
 protected:
-	const wchar_t*	m_ID;		// object ID
-	Sprite*			m_sprite;	// game object sprite
-	Vector2			m_position;	// object position
-	AABB			m_hitbox;	// axis aligned bounding box
-	bool			m_active;	// object active or not
+	const wchar_t*	m_ID;					// object ID
+	
+	Vector2			m_position;				// object position
+	Vector2			m_currentVelocity;		// current object velocity
+	Vector2			m_targetVelocity;		// target velocity
+	float			m_currentMovementSpeed;	// current object speed
+	float			m_targetMovementSpeed;	// target movement speed
+
+	bool			m_active;				// object active or not
 };
 
 #endif _GAMEOBJECT_H_

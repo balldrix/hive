@@ -12,6 +12,8 @@ m_alpha(0.0f),
 m_colour(Colors::White.v),
 m_origin(0.0f, 0.0f),
 m_rect(),
+m_flipHorizontal(false),
+m_flipVertical(false),
 m_width(0),
 m_height(0),
 m_active(false)

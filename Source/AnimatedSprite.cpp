@@ -94,7 +94,7 @@ AnimatedSprite::SetRect()
 void
 AnimatedSprite::Reset()
 {
-	Sprite::Reset();
+	Reset();
 	m_animDone = false;
 	m_frameTime = 0;
 }

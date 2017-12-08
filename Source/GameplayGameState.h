@@ -25,7 +25,7 @@ class GameplayGameState : public GameState
 public:
 	GameplayGameState();
 	GameplayGameState(GameStateManager* gameStateManager);
-	~GameplayGameState();
+	virtual ~GameplayGameState();
 
 	void				OnEntry();					// calls the load assets method
 	void				OnExit();					// calls the delete assets method
