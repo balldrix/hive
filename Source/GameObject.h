@@ -32,8 +32,8 @@ public:
 	virtual	void	SetPosition(unsigned int x, unsigned int y);
 	virtual void	SetPosition(Vector2 position);	// set position
 
-	virtual void	SetTargetMovementSpeed(unsigned int speed);
-	virtual void	SetCurrentMovementSpeed(unsigned int speed);
+	virtual void	SetTargetMovementSpeed(float speed);
+	virtual void	SetCurrentMovementSpeed(float speed);
 	 
 	virtual void	SetCurrentVelocity(float x, float y);
 	virtual void	SetCurrentVelocity(Vector2 velocity);

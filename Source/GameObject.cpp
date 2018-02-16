@@ -25,11 +25,20 @@ GameObject::SetID(const wchar_t* string)
 void GameObject::Update(float deltaTime)
 {
 	float speed;
+	float velocityX;
+	float velocityY;
+
+	// interpolate object's speed
 	speed = Lerp(m_targetMovementSpeed, m_currentMovementSpeed, deltaTime);
 
-	SetCurrentMovementSpeed(speed);
+	// interpolate objects velocity		
+	velocityX = Lerp(m_targetVelocity.x, m_currentVelocity.x, deltaTime);
+	velocityY = Lerp(m_targetVelocity.y, m_currentVelocity.y, deltaTime);
 
-	m_position += (m_currentVelocity * speed) * deltaTime;
+	SetCurrentMovementSpeed(speed);
+	SetCurrentVelocity(velocityX, velocityY);
+
+	m_position += (m_currentVelocity * m_currentMovementSpeed) * deltaTime;
 }
 
 float GameObject::Lerp(float target, float current, float deltaTime)
@@ -52,18 +61,18 @@ float GameObject::Lerp(float target, float current, float deltaTime)
 
 void GameObject::SetPositionX(unsigned int x)
 {
-	m_position.x = x;
+	m_position.x = (float)x;
 }
 
 void GameObject::SetPositionY(unsigned int y)
 {
-	m_position.y = y;
+	m_position.y = (float)y;
 }
 
 void GameObject::SetPosition(unsigned int x, unsigned int y)
 {
-	m_position.x = x;
-	m_position.y = y;
+	m_position.x = (float)x;
+	m_position.y = (float)y;
 }
 
 void GameObject::SetPosition(Vector2 position)
@@ -71,12 +80,12 @@ void GameObject::SetPosition(Vector2 position)
 	m_position = position;
 }
 
-void GameObject::SetTargetMovementSpeed(unsigned int speed)
+void GameObject::SetTargetMovementSpeed(float speed)
 {
 	m_targetMovementSpeed = speed;
 }
 
-void GameObject::SetCurrentMovementSpeed(unsigned int speed)
+void GameObject::SetCurrentMovementSpeed(float speed)
 {
 	m_currentMovementSpeed = speed;
 }
