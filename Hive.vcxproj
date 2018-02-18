@@ -67,10 +67,10 @@
     <ClInclude Include="Source\Window.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <Image Include="GameData\Textures\playerTest.png" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="GameData\Textures\playerTest.png" />
+    <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F07D24C5-CADD-4262-80F1-7370DF167E8E}</ProjectGuid>
