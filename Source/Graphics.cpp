@@ -10,6 +10,7 @@ Graphics::Graphics() :
 	m_D3DDeviceContext(nullptr),
 	m_renderTargetView(nullptr),
 	m_backbuffer(nullptr),
+	m_samplerState(nullptr),
 	m_spriteBatch(nullptr),
 	m_fullScreen(false),
 	m_gameWidth(0.0f),
@@ -114,6 +115,29 @@ Graphics::Init(HWND hWnd, HINSTANCE hInstance)
 	vp.TopLeftY = 0;
 	m_D3DDeviceContext->RSSetViewports(1, &vp);
 
+	// create samplerstate description
+	D3D11_SAMPLER_DESC sd = {};
+	sd.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
+	sd.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
+	sd.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
+	sd.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
+	sd.MaxAnisotropy = (m_D3DDevice->GetFeatureLevel() > D3D_FEATURE_LEVEL_9_1) ? D3D11_MAX_MAXANISOTROPY : 2;
+	sd.MaxLOD = D3D11_FLOAT32_MAX;
+	sd.ComparisonFunc = D3D11_COMPARISON_NEVER;
+
+	result = m_D3DDevice->CreateSamplerState(&sd, &m_samplerState);
+
+	// error checking
+	if (result != S_OK)
+	{
+		// log error in txt file
+		Error::FileLog("Error Creating Sampler State in Graphics Line 128; \n");
+
+		MessageBox(m_hWnd, L"Graphics Init Error. See Logs/Error.txt", L"Error!", MB_OK); // message box
+
+		PostQuitMessage(0); // quit game
+	}
+
 	// initialse sprite batch engine
 	m_spriteBatch = new SpriteBatch(m_D3DDeviceContext);
 
@@ -124,6 +148,7 @@ Graphics::Init(HWND hWnd, HINSTANCE hInstance)
 
 void Graphics::ReleaseAll()
 {
+	if(m_samplerState) { m_samplerState->Release(); }
 	if(m_renderTargetView) { m_renderTargetView->Release(); }
 	if(m_D3DDeviceContext) { m_D3DDeviceContext->Release(); }
 	if(m_D3DDevice) { m_D3DDevice->Release(); }
@@ -146,7 +171,7 @@ Graphics::BeginScene()
 	m_D3DDeviceContext->OMSetDepthStencilState(0, 0);
 
 	// begin sprite scene
-	m_spriteBatch->Begin();
+	m_spriteBatch->Begin(SpriteSortMode_Deferred, nullptr, m_samplerState);
 }
 
 void

@@ -40,6 +40,8 @@ private:
 	ID3D11RenderTargetView*		m_renderTargetView;		// pointer to render target view
 	ID3D11Texture2D*			m_backbuffer;			// pointer to 2d backbuffer
 
+	ID3D11SamplerState*			m_samplerState;			// pointer to sampler state object
+
 	SpriteBatch*				m_spriteBatch;			// spritebatch for drawing sprites to backbuffer
 
 	bool						m_fullScreen;			// fullscreen setting
