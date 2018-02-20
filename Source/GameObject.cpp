@@ -8,6 +8,8 @@ GameObject::GameObject() :
 	m_targetVelocity(0.0f, 0.0f),
 	m_currentMovementSpeed(0.0f),
 	m_targetMovementSpeed(0.0f),
+	m_acceleration(0.0f),
+	m_deceleration(0.0f),
 	m_active(false)
 {
 }
@@ -16,8 +18,7 @@ GameObject::~GameObject()
 {
 }
 
-void
-GameObject::SetID(const wchar_t* string)
+void GameObject::SetID(const wchar_t* string)
 {
 	m_ID = string;
 }
@@ -44,16 +45,32 @@ void GameObject::Update(float deltaTime)
 float GameObject::Lerp(float target, float current, float deltaTime)
 {
 	float tempValue = target - current;
-	float lerpAmt = deltaTime * LERP_SPEED;
+	float accelLerpAmt = deltaTime * m_acceleration;
+	float decelLerpAmt = deltaTime * m_deceleration;
 
-	if (tempValue > lerpAmt)
+	if(abs(target) > abs(current))
 	{
-		return current + lerpAmt;
+		if(tempValue > accelLerpAmt)
+		{
+			return current + accelLerpAmt;
+		}
+
+		if(tempValue < -accelLerpAmt)
+		{
+			return current - accelLerpAmt;
+		}
 	}
-
-	if (tempValue < -lerpAmt)
+	else if(abs(target) < abs(current))
 	{
-		return current - lerpAmt;
+		if(tempValue > decelLerpAmt)
+		{
+			return current + decelLerpAmt;
+		}
+
+		if(tempValue < -decelLerpAmt)
+		{
+			return current - decelLerpAmt;
+		}
 	}
 
 	return target;
@@ -122,8 +139,12 @@ void GameObject::SetTargetVelocityY(float y)
 	m_targetVelocity.y = y;
 }
 
-void 
-GameObject::SetActive(bool active)
+void GameObject::SetAcceleration(float accel)
+{
+	m_acceleration = accel;
+}
+
+void GameObject::SetActive(bool active)
 {
 	m_active = active;
 }

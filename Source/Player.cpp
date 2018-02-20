@@ -15,6 +15,9 @@ void Player::Init(Sprite* sprite, Vector2 position)
 {
 	m_sprite = sprite;
 	m_position = position;
+	m_acceleration = PLAYER_ACCELERATION;
+	m_deceleration = PLAYER_DECELERATION;
+	m_currentMovementSpeed = PLAYER_WALK_SPEED;
 }
 
 void

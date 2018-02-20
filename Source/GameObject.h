@@ -12,8 +12,6 @@
 class Sprite;
 class Graphics;
 
-const unsigned int LERP_SPEED = 500;
-
 class GameObject
 {
 public:
@@ -43,6 +41,7 @@ public:
 	 
 	virtual void	SetTargetVelocityX(float x);
 	virtual void	SetTargetVelocityY(float y);
+	virtual	void	SetAcceleration(float accel);
 	 
 	virtual void	SetActive(bool active);			// set active or not
 
@@ -50,9 +49,7 @@ public:
 	virtual const wchar_t*	GetID() const		{ return m_ID; }		// return object ID
 	
 	virtual float			GetPositionX() const { return m_position.x; }
-				
 	virtual float			GetPositionY() const { return m_position.y; }
-
 	virtual Vector2			GetPosition() const { return m_position; }
 
 	virtual Vector2			GetCurrentVelocity() const { return m_currentVelocity; }
@@ -70,6 +67,8 @@ protected:
 	Vector2			m_targetVelocity;		// target velocity
 	float			m_currentMovementSpeed;	// current object speed
 	float			m_targetMovementSpeed;	// target movement speed
+	float			m_acceleration;			// acceleration speed
+	float			m_deceleration;			// decceleration speed
 
 	bool			m_active;				// object active or not
 };

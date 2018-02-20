@@ -9,10 +9,10 @@
 namespace directionNS
 {
 	// up
-	const Vector2 UP = Vector2(0.0f, -1.0f);
+	const Vector2 UP = Vector2(0.0f, -0.5f);
 	
 	// down
-	const Vector2 DOWN = Vector2(0.0f, 1.0f);
+	const Vector2 DOWN = Vector2(0.0f, 0.5f);
 	
 	// left
 	const Vector2 LEFT = Vector2(-1.0f, 0.0f);
@@ -21,16 +21,16 @@ namespace directionNS
 	const Vector2 RIGHT = Vector2(1.0f, 0.0f);
 	
 	// upleft
-	const Vector2 UPLEFT = Vector2(-0.707f, -0.707f);
+	const Vector2 UPLEFT = Vector2(-0.707f, -0.5f);
 	
 	// upright
-	const Vector2 UPRIGHT = Vector2(0.707f, -0.707f);
+	const Vector2 UPRIGHT = Vector2(0.707f, -0.5f);
 	
 	// downleft
-	const Vector2 DOWNLEFT = Vector2(-0.707f, 0.707f);
+	const Vector2 DOWNLEFT = Vector2(-0.707f, 0.5f);
 	
 	// downright
-	const Vector2 DOWNRIGHT = Vector2(0.707f, 0.707f);
+	const Vector2 DOWNRIGHT = Vector2(0.707f, 0.5f);
 }
 
 
