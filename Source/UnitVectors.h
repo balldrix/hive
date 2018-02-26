@@ -6,7 +6,7 @@
 // A list of unit vectors for 8 directions
 // up, down, left, right and diaganols.
 
-namespace directionNS
+namespace Direction
 {
 	// up
 	const Vector2 UP = Vector2(0.0f, -0.5f);

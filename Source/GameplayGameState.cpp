@@ -111,175 +111,48 @@ void GameplayGameState::ProcessInput()
 
 	if(!m_input->IsKeyDown(PLAYER_UP_KEY))
 	{
-		// move player up
-		m_player->SetTargetVelocityY(0.0f);
-		m_inputReady = false;
-	}
-	else if(!m_input->IsKeyDown(PLAYER_DOWN_KEY))
+		// stop Y movement
+		m_player->Stop(Controller::up);
+	} else if(!m_input->IsKeyDown(PLAYER_DOWN_KEY))
 	{
-		// move player down
-		m_player->SetTargetVelocityY(0.0f);
-		m_inputReady = false;
+		// stop Y movement
+		m_player->Stop(Controller::down);
 	}
 
-	if(!m_input->IsKeyDown(PLAYER_RIGHT_KEY))
+	if(!m_input->IsKeyDown(PLAYER_LEFT_KEY))
 	{
-		// move player right
-		m_player->SetTargetVelocityX(0.0f);
-
-		m_inputReady = false;
-	}
-	else if(!m_input->IsKeyDown(PLAYER_LEFT_KEY))
+		// stop X movement
+		m_player->Stop(Controller::left);
+	}else if(!m_input->IsKeyDown(PLAYER_RIGHT_KEY))
 	{
-		// move player left
-		m_player->SetTargetVelocityX(0.0f);
-		m_inputReady = false;
+		// stop X movement
+		m_player->Stop(Controller::right);
 	}
 
 	///////////////////////////////////////////
 	// check if key is pressed down
 	///////////////////////////////////////////
 
-	if (m_input->IsKeyDown(PLAYER_UP_KEY))
+	if(m_input->IsKeyDown(PLAYER_UP_KEY))
 	{
-		if (m_input->IsKeyDown(PLAYER_RIGHT_KEY))
-		{
-			// move player up right
-			m_player->SetTargetVelocity(directionNS::UPRIGHT);
-
-			// if strafing don't change facing direction
-			//if (!m_player->GetIsStrafe())
-			//{
-			//	m_player.SetFacingDirection(FACING_DIRECTION::RIGHT);
-			//}
-		}
-		else if (m_input->IsKeyDown(PLAYER_LEFT_KEY))
-		{
-			// move player up left
-			m_player->SetTargetVelocity(directionNS::UPLEFT);
-
-			// if strafing don't change facing direction
-			//if (!m_player.GetIsStrafe())
-			//{
-			//	m_player.SetFacingDirection(FACING_DIRECTION::LEFT);
-			//}
-		}
-		else
-		{
-			// move player up
-			m_player->SetTargetVelocity(directionNS::UP);
-		}
+		// move player up
+		m_player->Move(Controller::up);
 	}
-	else if (m_input->IsKeyDown(PLAYER_DOWN_KEY))
+	else if(m_input->IsKeyDown(PLAYER_DOWN_KEY))
 	{
-		if (m_input->IsKeyDown(PLAYER_RIGHT_KEY))
-		{
-			// move player down right
-			m_player->SetTargetVelocity(directionNS::DOWNRIGHT);
-
-			// if strafing don't change facing direction
-			//if (!m_player.GetIsStrafe())
-			//{
-			//	m_player.SetFacingDirection(FACING_DIRECTION::RIGHT);
-			//}
-		}
-		else if (m_input->IsKeyDown(PLAYER_LEFT_KEY))
-		{
-			// move player down left
-			m_player->SetTargetVelocity(directionNS::DOWNLEFT);
-
-			// if strafing don't change facing direction
-			//if (!m_player.GetIsStrafe())
-			//{
-			//	m_player.SetFacingDirection(FACING_DIRECTION::LEFT);
-			//}
-		}
-		else
-		{
-			// move player down
-			m_player->SetTargetVelocity(directionNS::DOWN);
-		}
-	}
-	else if (m_input->IsKeyDown(PLAYER_RIGHT_KEY))
-	{
-		if (m_input->IsKeyDown(PLAYER_UP_KEY))
-		{
-			// move player up right
-			m_player->SetTargetVelocity(directionNS::UPRIGHT);
-		}
-		else if (m_input->IsKeyDown(PLAYER_DOWN_KEY))
-		{
-			// move player down right
-			m_player->SetTargetVelocity(directionNS::DOWNRIGHT);
-		}
-		else
-		{
-			// move player right
-			m_player->SetTargetVelocity(directionNS::RIGHT);
-		}
-
-		// if strafing don't change facing direction
-		//if (!m_player.GetIsStrafe())
-		//{
-		//	m_player.SetFacingDirection(FACING_DIRECTION::RIGHT);
-		//}
-	}
-	else if (m_input->IsKeyDown(PLAYER_LEFT_KEY))
-	{
-		if (m_input->IsKeyDown(PLAYER_UP_KEY))
-		{
-			// move player up left
-			m_player->SetTargetVelocity(directionNS::UPLEFT);
-		}
-		else if (m_input->IsKeyDown(PLAYER_DOWN_KEY))
-		{
-			// move player down left
-			m_player->SetTargetVelocity(directionNS::DOWNLEFT);
-		}
-		else
-		{
-			// move player left
-			m_player->SetTargetVelocity(directionNS::LEFT);
-		}
-
-		// if strafing don't change facing direction
-		//if (!m_player.GetIsStrafe())
-		//{
-		//	m_player.SetFacingDirection(FACING_DIRECTION::LEFT);
-		//}
-
+		// move player down
+		m_player->Move(Controller::down);
 	}
 
-	// use shift to run
-	if (m_input->IsKeyDown(SHIFT_PRESSED))
+	if(m_input->IsKeyDown(PLAYER_LEFT_KEY))
 	{
-		m_player->SetTargetMovementSpeed(PLAYER_RUN_SPEED);
-		//m_keyPressed = true;
+		// move player left
+		m_player->Move(Controller::left);
 	}
-	else
+	else if(m_input->IsKeyDown(PLAYER_RIGHT_KEY))
 	{
-		m_player->SetTargetMovementSpeed(PLAYER_WALK_SPEED);
-	}
-
-	// reset game when R is pressed
-	if(m_input->IsKeyDown('R'))
-	{
-		// reset game
-		//NewGame();
-		m_inputReady = true;
-	}
-
-	if(!(m_input->IsKeyDown(PLAYER_UP_KEY) ||
-		m_input->IsKeyDown(PLAYER_DOWN_KEY) ||
-		m_input->IsKeyDown(PLAYER_LEFT_KEY) ||
-		m_input->IsKeyDown(PLAYER_RIGHT_KEY) ||
-		m_input->IsKeyDown(PLAYER_A_KEY) ||
-		m_input->IsKeyDown(PLAYER_B_KEY) ||
-		m_input->IsKeyDown(ENTER_KEY) ||
-		m_input->IsKeyDown(F4_KEY)
-		))
-	{
-		m_inputReady = false;
+		// move player right
+		m_player->Move(Controller::right);
 	}
 }
 

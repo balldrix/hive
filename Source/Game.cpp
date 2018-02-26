@@ -66,7 +66,7 @@ Game::Run()
 
 	Render();				// render objects	
 
-	m_input->ClearKeysDown(); // clear keys pressed
+	m_input->ClearKeysPressed(); // clear keys pressed
 }
 
 void

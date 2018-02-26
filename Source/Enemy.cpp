@@ -127,31 +127,31 @@ void Enemy::SetRandomDirection()
 	switch (direction)
 	{
 	case 0:
-		//SetTargetVelocity(directionNS::RIGHT);
+		//SetTargetVelocity(Direction::RIGHT);
 		break;
 	case 1:
-		//SetTargetVelocity(directionNS::DOWNRIGHT);
+		//SetTargetVelocity(Direction::DOWNRIGHT);
 		break;
 	case 2:
-		//SetTargetVelocity(directionNS::DOWN);
+		//SetTargetVelocity(Direction::DOWN);
 		break;
 	case 3:
-		//SetTargetVelocity(directionNS::DOWNLEFT);
+		//SetTargetVelocity(Direction::DOWNLEFT);
 		break;
 	case 4:
-		//SetTargetVelocity(directionNS::LEFT);
+		//SetTargetVelocity(Direction::LEFT);
 		break;
 	case 5:
-		//SetTargetVelocity(directionNS::UPLEFT);
+		//SetTargetVelocity(Direction::UPLEFT);
 		break;
 	case 6:
-		//SetTargetVelocity(directionNS::UP);
+		//SetTargetVelocity(Direction::UP);
 		break;
 	case 7:
-		//SetTargetVelocity(directionNS::UPRIGHT);
+		//SetTargetVelocity(Direction::UPRIGHT);
 		break;
 	default:
-		//SetTargetVelocity(directionNS::RIGHT);
+		//SetTargetVelocity(Direction::RIGHT);
 		break;
 	}
 }

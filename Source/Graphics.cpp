@@ -212,24 +212,6 @@ void Graphics::ChangeDisplayMode(DisplayMode mode)
 
 	Init(m_hWnd, m_hInstance);
 
-	if(m_fullScreen)
-	{
-		SetWindowLong(m_hWnd, GWL_STYLE, WS_EX_TOPMOST | WS_VISIBLE | WS_POPUP);
-	}
-	else            // windowed
-	{
-		SetWindowLong(m_hWnd, GWL_STYLE, WS_OVERLAPPEDWINDOW);
-		SetWindowPos(m_hWnd, HWND_TOP, 0, 0, GlobalConstants::GAME_WIDTH, GlobalConstants::GAME_HEIGHT,
-					 SWP_FRAMECHANGED | SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
-
-		// Adjust window size so client area is GAME_WIDTH x GAME_HEIGHT
-		RECT clientRect;
-		GetClientRect(m_hWnd, &clientRect);   // get size of client area of window
-		MoveWindow(m_hWnd,
-				   0,                                           // Left
-				   0,                                           // Top
-				   GlobalConstants::GAME_WIDTH + (GlobalConstants::GAME_WIDTH - clientRect.right),    // Right
-				   GlobalConstants::GAME_HEIGHT + (GlobalConstants::GAME_HEIGHT - clientRect.bottom), // Bottom
-				   TRUE);                                       // Repaint the window
-	}
+	// update window
+	UpdateWindow(m_hWnd);
 }
