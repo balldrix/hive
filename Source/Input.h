@@ -25,16 +25,20 @@ public:
 									
 	void SetMouseClicked(bool button); // set Mouse Left Button status
 
+	void ClearKeysDown();		// clear keys pressed array
 	void ClearKeysPressed();		// clear keys pressed array
+	void ClearAll();			// clear all input
 	
 	bool IsKeyDown(UCHAR key) const;			// check if key pressed
+	bool WasKeyPressed(UCHAR key) const;	// check if key was pressed
 	UINT GetMouseX() const { return m_mouseX; } // return mouse X position
 	UINT GetMouseY() const { return m_mouseY; } // return mouse Y position
 	bool GetMouseClicked() const { return m_mouseClicked; } // return mouse clicked status
 
 	
 private:
-	bool m_keyPressed[MAX_KEY_ARRAY]; // boolean array of keys 
+	bool m_keysPressed[MAX_KEY_ARRAY]; // boolean array of keys 
+	bool m_keysDown[MAX_KEY_ARRAY]; // boolean array of keys 
 	UINT m_mouseX;					// mouse x position
 	UINT m_mouseY;					// mouse y position
 	bool m_mouseClicked;			// L mouse button

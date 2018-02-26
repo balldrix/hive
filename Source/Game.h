@@ -8,10 +8,10 @@
 #define _GAME_H_
 
 #include "pch.h"
+#include "Graphics.h"
 #include "Timer.h"
 
 // forward declarations
-class Graphics;
 class Input;
 class GameStateManager;
 
@@ -27,6 +27,8 @@ public:
 	void				ProcessInput(); // read inputs
 	void				Update(float deltaTime); // update all objects in the scene
 	void				Render(); // Render scene
+
+	void				SetDisplayMode(DisplayMode mode);
 
 	void				ReleaseAll(); // release all pointers
 	void				DeleteAll(); // delete all pointers

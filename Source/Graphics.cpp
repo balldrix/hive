@@ -28,8 +28,7 @@ Graphics::~Graphics()
 	}
 }
 
-void
-Graphics::Init(HWND hWnd, HINSTANCE hInstance)
+void Graphics::Init(HWND hWnd, HINSTANCE hInstance)
 {
 	HRESULT result; // used for error checking
 	m_hWnd = hWnd;
@@ -51,18 +50,19 @@ Graphics::Init(HWND hWnd, HINSTANCE hInstance)
 	scd.SampleDesc.Count = 1;
 	scd.SampleDesc.Quality = 0;
 	scd.Windowed = !m_fullScreen;
+	scd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 	result = D3D11CreateDeviceAndSwapChain(NULL,
-		D3D_DRIVER_TYPE_HARDWARE,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-		D3D11_SDK_VERSION,
-		&scd,
-		&m_swapchain,
-		&m_D3DDevice,
-		NULL,
-		&m_D3DDeviceContext);
+										   D3D_DRIVER_TYPE_HARDWARE,
+										   NULL,
+										   NULL,
+										   NULL,
+										   NULL,
+										   D3D11_SDK_VERSION,
+										   &scd,
+										   &m_swapchain,
+										   &m_D3DDevice,
+										   NULL,
+										   &m_D3DDeviceContext);
 
 	// error checking
 	if(result != S_OK)
@@ -106,14 +106,13 @@ Graphics::Init(HWND hWnd, HINSTANCE hInstance)
 	m_backbuffer->Release();
 
 	// initialise viewport
-	D3D11_VIEWPORT vp;
-	vp.Width = (float)width;
-	vp.Height = (float)height;
-	vp.MinDepth = 0.0f;
-	vp.MaxDepth = 1.0f;
-	vp.TopLeftX = 0;
-	vp.TopLeftY = 0;
-	m_D3DDeviceContext->RSSetViewports(1, &vp);
+	m_viewport.Width = (float)width;
+	m_viewport.Height = (float)height;
+	m_viewport.MinDepth = 0.0f;
+	m_viewport.MaxDepth = 1.0f;
+	m_viewport.TopLeftX = 0;
+	m_viewport.TopLeftY = 0;
+	m_D3DDeviceContext->RSSetViewports(1, &m_viewport);
 
 	// create samplerstate description
 	D3D11_SAMPLER_DESC sd = {};
@@ -128,7 +127,7 @@ Graphics::Init(HWND hWnd, HINSTANCE hInstance)
 	result = m_D3DDevice->CreateSamplerState(&sd, &m_samplerState);
 
 	// error checking
-	if (result != S_OK)
+	if(result != S_OK)
 	{
 		// log error in txt file
 		Error::FileLog("Error Creating Sampler State in Graphics Line 128; \n");
@@ -148,6 +147,7 @@ Graphics::Init(HWND hWnd, HINSTANCE hInstance)
 
 void Graphics::ReleaseAll()
 {
+	if(m_swapchain) { m_swapchain->SetFullscreenState(FALSE, NULL); }    // switch to windowed mode
 	if(m_samplerState) { m_samplerState->Release(); }
 	if(m_renderTargetView) { m_renderTargetView->Release(); }
 	if(m_D3DDeviceContext) { m_D3DDeviceContext->Release(); }
@@ -155,8 +155,7 @@ void Graphics::ReleaseAll()
 	if(m_swapchain) { m_swapchain->Release(); }
 }
 
-void
-Graphics::BeginScene()
+void Graphics::BeginScene()
 {
 	// bind render target view and depth stencil view in graphics pipeline
 	m_D3DDeviceContext->OMSetRenderTargets(1, &m_renderTargetView, NULL);
@@ -170,16 +169,67 @@ Graphics::BeginScene()
 	// reset depth stencil state to normal state
 	m_D3DDeviceContext->OMSetDepthStencilState(0, 0);
 
+	// reset viewport
+	m_D3DDeviceContext->RSSetViewports(1, &m_viewport);
+
 	// begin sprite scene
 	m_spriteBatch->Begin(SpriteSortMode_Deferred, nullptr, m_samplerState);
 }
 
-void
-Graphics::PresentBackBuffer()
+void Graphics::PresentBackBuffer()
 {
 	// end sprite batch rendering
 	m_spriteBatch->End();
 
 	// present backbuffer
 	m_swapchain->Present(0, 0);
+}
+
+void Graphics::ChangeDisplayMode(DisplayMode mode)
+{
+	switch(mode)
+	{
+	case FULLSCREEN:
+		if(m_fullScreen)
+		{
+			return;
+		}
+
+		m_fullScreen = true;
+		break;
+	case WINDOW:
+		if(!m_fullScreen)
+		{
+			return;
+		}
+
+		m_fullScreen = false;
+		break;
+	default:
+		m_fullScreen = !m_fullScreen;
+		break;
+	}
+
+	Init(m_hWnd, m_hInstance);
+
+	if(m_fullScreen)
+	{
+		SetWindowLong(m_hWnd, GWL_STYLE, WS_EX_TOPMOST | WS_VISIBLE | WS_POPUP);
+	}
+	else            // windowed
+	{
+		SetWindowLong(m_hWnd, GWL_STYLE, WS_OVERLAPPEDWINDOW);
+		SetWindowPos(m_hWnd, HWND_TOP, 0, 0, GlobalConstants::GAME_WIDTH, GlobalConstants::GAME_HEIGHT,
+					 SWP_FRAMECHANGED | SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
+
+		// Adjust window size so client area is GAME_WIDTH x GAME_HEIGHT
+		RECT clientRect;
+		GetClientRect(m_hWnd, &clientRect);   // get size of client area of window
+		MoveWindow(m_hWnd,
+				   0,                                           // Left
+				   0,                                           // Top
+				   GlobalConstants::GAME_WIDTH + (GlobalConstants::GAME_WIDTH - clientRect.right),    // Right
+				   GlobalConstants::GAME_HEIGHT + (GlobalConstants::GAME_HEIGHT - clientRect.bottom), // Bottom
+				   TRUE);                                       // Repaint the window
+	}
 }

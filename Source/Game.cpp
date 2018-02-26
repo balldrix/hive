@@ -3,6 +3,7 @@
 #include "pch.h"
 #include "Graphics.h"
 #include "Input.h"
+#include "Controls.h"
 
 #include "GameStateManager.h"
 #include "GameState.h"
@@ -64,6 +65,8 @@ Game::Run()
 	m_gameTime += deltaTime; // increment game time
 
 	Render();				// render objects	
+
+	m_input->ClearKeysDown(); // clear keys pressed
 }
 
 void
@@ -71,6 +74,12 @@ Game::ProcessInput()
 {
 	// process game state input
 	m_gameStateManager->ProcessInput();
+
+	// if Alt+Enter toggle fullscreen/window
+	if(m_input->IsKeyDown(ALT_KEY) && m_input->WasKeyPressed(ENTER_KEY))
+	{
+		SetDisplayMode(DisplayMode::FULLSCREEN); // toggle fullscreen/window
+	}
 }
 
 void
@@ -91,6 +100,12 @@ Game::Render()
 
 	// display backbuffer on screen
 	m_graphics->PresentBackBuffer();
+}
+
+void Game::SetDisplayMode(DisplayMode mode)
+{
+	ReleaseAll();
+	m_graphics->ChangeDisplayMode(mode);
 }
 
 void
