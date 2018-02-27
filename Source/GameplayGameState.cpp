@@ -109,24 +109,13 @@ void GameplayGameState::ProcessInput()
 	// check if key is released
 	///////////////////////////////////////////
 
-	if(!m_input->IsKeyDown(PLAYER_UP_KEY))
+	if(!(m_input->IsKeyDown(PLAYER_UP_KEY) ||
+		 m_input->IsKeyDown(PLAYER_DOWN_KEY) ||
+		 m_input->IsKeyDown(PLAYER_LEFT_KEY) ||
+		 m_input->IsKeyDown(PLAYER_RIGHT_KEY)))
 	{
-		// stop Y movement
-		m_player->Stop(Controller::up);
-	} else if(!m_input->IsKeyDown(PLAYER_DOWN_KEY))
-	{
-		// stop Y movement
-		m_player->Stop(Controller::down);
-	}
-
-	if(!m_input->IsKeyDown(PLAYER_LEFT_KEY))
-	{
-		// stop X movement
-		m_player->Stop(Controller::left);
-	}else if(!m_input->IsKeyDown(PLAYER_RIGHT_KEY))
-	{
-		// stop X movement
-		m_player->Stop(Controller::right);
+		// reset velocity
+		m_player->SetTargetVelocity(Vector2::Zero);
 	}
 
 	///////////////////////////////////////////
@@ -135,24 +124,49 @@ void GameplayGameState::ProcessInput()
 
 	if(m_input->IsKeyDown(PLAYER_UP_KEY))
 	{
-		// move player up
-		m_player->Move(Controller::up);
+		if(m_input->IsKeyDown(PLAYER_LEFT_KEY))
+		{
+			// move player up left
+			m_player->SetTargetVelocity(UnitVectors::UpLeft);
+		}
+		else if(m_input->IsKeyDown(PLAYER_RIGHT_KEY))
+		{
+			// move player up right
+			m_player->SetTargetVelocity(UnitVectors::UpRight);
+		}
+		else
+		{
+			// move player up
+			m_player->SetTargetVelocity(UnitVectors::Up);
+		}
 	}
 	else if(m_input->IsKeyDown(PLAYER_DOWN_KEY))
 	{
-		// move player down
-		m_player->Move(Controller::down);
+		if(m_input->IsKeyDown(PLAYER_LEFT_KEY))
+		{
+			// move player down left
+			m_player->SetTargetVelocity(UnitVectors::DownLeft);
+		}
+		else if(m_input->IsKeyDown(PLAYER_RIGHT_KEY))
+		{
+			// move player down right
+			m_player->SetTargetVelocity(UnitVectors::DownRight);
+		}
+		else
+		{
+			// move player down
+			m_player->SetTargetVelocity(UnitVectors::Down);
+		}
 	}
-
-	if(m_input->IsKeyDown(PLAYER_LEFT_KEY))
+	else if(m_input->IsKeyDown(PLAYER_LEFT_KEY))
 	{
 		// move player left
-		m_player->Move(Controller::left);
+		m_player->SetTargetVelocity(UnitVectors::Left);
 	}
 	else if(m_input->IsKeyDown(PLAYER_RIGHT_KEY))
 	{
 		// move player right
-		m_player->Move(Controller::right);
+		m_player->SetTargetVelocity(UnitVectors::Right);
 	}
 }
 

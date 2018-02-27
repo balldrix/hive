@@ -23,23 +23,9 @@ const float				PLAYER_KICKBACK = 2.5f;
 const float				PLAYER_ACCELERATION = 1.0f;
 const float				PLAYER_DECELERATION = 3.0f;
 
-// player controls enum
-namespace Controller
-{
-
-	enum Buttons
-	{
-		up,
-		down,
-		left,
-		right
-	};
-}
-
 class Player : public GameObject
 {
 public:
-
 	// player states
 	enum PlayerState
 	{
@@ -61,15 +47,12 @@ public:
 	void				Render(Graphics* graphics);
 	void				Reset();
 
-	void				Move(Controller::Buttons button);
-	void				Stop(Controller::Buttons button);
-
 	void				SetPlayerState(PlayerState state);
 	PlayerState			GetState() const { return m_playerState; }
 
 private:
-	Sprite * m_sprite;		// player sprite sheet
-	PlayerState			m_playerState;	// player states for state machine
+	Sprite*				m_sprite;				// player sprite sheet
+	PlayerState			m_playerState;			// player states for state machine
 };
 
 #endif _PLAYER_H_

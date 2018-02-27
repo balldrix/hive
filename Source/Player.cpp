@@ -39,52 +39,6 @@ void Player::Reset()
 	SetActive(true);
 }
 
-void Player::Move(Controller::Buttons button)
-{
-	switch(button)
-	{
-	case Controller::up:
-		SetTargetVelocityY(Direction::UP.y);
-		break;
-	case Controller::down:
-		SetTargetVelocityY(Direction::DOWN.y);
-		break;
-	case Controller::left:
-		SetTargetVelocityX(Direction::LEFT.x);
-		break;
-	case Controller::right:
-		SetTargetVelocityX(Direction::RIGHT.x);
-		break;
-	default:
-		break;
-	}
-}
-
-void Player::Stop(Controller::Buttons button)
-{
-	switch(button)
-	{
-	case Controller::up:
-		// stop Y movement
-		SetTargetVelocityY(0.0f);
-		break;
-	case Controller::down:
-		// stop Y movement
-		SetTargetVelocityY(0.0f);
-		break;
-	case Controller::left:
-		// stop X movement
-		SetTargetVelocityX(0.0f);
-		break;
-	case Controller::right:
-		// stop X movement
-		SetTargetVelocityX(0.0f);
-		break;
-	default:
-		break;
-	}
-}
-
 void Player::SetPlayerState(PlayerState state)
 {
 	m_playerState = state;
