@@ -6,8 +6,7 @@ GameObject::GameObject() :
 	m_position(0.0f, 0.0f),
 	m_currentVelocity(0.0f, 0.0f),
 	m_targetVelocity(0.0f, 0.0f),
-	m_currentMovementSpeed(0.0f),
-	m_targetMovementSpeed(0.0f),
+	m_movementSpeed(0.0f),
 	m_acceleration(0.0f),
 	m_deceleration(0.0f),
 	m_active(false)
@@ -25,21 +24,16 @@ void GameObject::SetID(const wchar_t* string)
 
 void GameObject::Update(float deltaTime)
 {
-	float speed;
 	float velocityX;
 	float velocityY;
-
-	// interpolate object's speed
-	speed = Lerp(m_targetMovementSpeed, m_currentMovementSpeed, deltaTime);
 
 	// interpolate objects velocity		
 	velocityX = Lerp(m_targetVelocity.x, m_currentVelocity.x, deltaTime);
 	velocityY = Lerp(m_targetVelocity.y, m_currentVelocity.y, deltaTime);
 
-	SetCurrentMovementSpeed(speed);
 	SetCurrentVelocity(velocityX, velocityY);
 
-	m_position += (m_currentVelocity * m_currentMovementSpeed) * deltaTime;
+	m_position += (m_currentVelocity * m_movementSpeed) * deltaTime;
 }
 
 float GameObject::Lerp(float target, float current, float deltaTime)
@@ -97,14 +91,9 @@ void GameObject::SetPosition(Vector2 position)
 	m_position = position;
 }
 
-void GameObject::SetTargetMovementSpeed(float speed)
+void GameObject::SetMovementSpeed(float speed)
 {
-	m_targetMovementSpeed = speed;
-}
-
-void GameObject::SetCurrentMovementSpeed(float speed)
-{
-	m_currentMovementSpeed = speed;
+	m_movementSpeed = speed;
 }
 
 void GameObject::SetCurrentVelocity(float x, float y)

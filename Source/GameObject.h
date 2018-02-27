@@ -30,8 +30,7 @@ public:
 	virtual	void	SetPosition(unsigned int x, unsigned int y);
 	virtual void	SetPosition(Vector2 position);	// set position
 
-	virtual void	SetTargetMovementSpeed(float speed);
-	virtual void	SetCurrentMovementSpeed(float speed);
+	virtual void	SetMovementSpeed(float speed);
 	 
 	virtual void	SetCurrentVelocity(float x, float y);
 	virtual void	SetCurrentVelocity(Vector2 velocity);
@@ -54,8 +53,7 @@ public:
 
 	virtual Vector2			GetCurrentVelocity() const { return m_currentVelocity; }
 	virtual Vector2			GetTargetVelocity() const { return m_targetVelocity; }
-	virtual float			GetTargetMovementSpeed() const { return m_targetMovementSpeed; }
-	virtual float			GetCurrentMovementSpeed()	const { return m_currentMovementSpeed; }
+	virtual float			GetMovementSpeed()	const { return m_movementSpeed; }
 
 	virtual bool			IsActive() const	{ return m_active;}		// return if active
 
@@ -65,8 +63,7 @@ protected:
 	Vector2			m_position;				// object position
 	Vector2			m_currentVelocity;		// current object velocity
 	Vector2			m_targetVelocity;		// target velocity
-	float			m_currentMovementSpeed;	// current object speed
-	float			m_targetMovementSpeed;	// target movement speed
+	float			m_movementSpeed;		// current object speed
 	float			m_acceleration;			// acceleration speed
 	float			m_deceleration;			// decceleration speed
 
