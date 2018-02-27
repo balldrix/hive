@@ -34,6 +34,7 @@
     <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Player.cpp" />
+    <ClCompile Include="Source\PlayerIdleState.cpp" />
     <ClCompile Include="Source\Randomiser.cpp" />
     <ClCompile Include="Source\Sprite.cpp" />
     <ClCompile Include="Source\Texture.cpp" />
@@ -57,6 +58,7 @@
     <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\pch.h" />
     <ClInclude Include="Source\Player.h" />
+    <ClInclude Include="Source\PlayerIdleState.h" />
     <ClInclude Include="Source\Randomiser.h" />
     <ClInclude Include="Source\Resources.h" />
     <ClInclude Include="Source\Sprite.h" />

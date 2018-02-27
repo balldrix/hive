@@ -58,6 +58,7 @@
     <ClCompile Include="Source\AnimatedSprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\PlayerIdleState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -143,7 +144,12 @@
     <ClInclude Include="Source\AnimatedSprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\State.h" />
+    <ClInclude Include="Source\State.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerIdleState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Textures\playerTest.png">
