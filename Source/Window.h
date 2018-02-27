@@ -1,5 +1,5 @@
 // Window.h
-// Christopher Ball 2017
+// Christopher Ball 2018
 // This class encapsulates the window creation
 // and hides away the WndProc function
 

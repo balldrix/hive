@@ -1,5 +1,5 @@
 // AABB.h
-// Christopher Ball 2017
+// Christopher Ball 2018
 // axis aligned bounding box
 // for 2D collision detection
 

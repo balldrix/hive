@@ -1,6 +1,6 @@
 // Main.cpp
 // Hive Project
-// Christopher Ball 2017
+// Christopher Ball 2018
 
 #include "Window.h"
 #include "Graphics.h"

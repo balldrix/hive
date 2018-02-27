@@ -1,5 +1,5 @@
 // GameplayGameState.h
-// Christopher Ball 2017
+// Christopher Ball 2018
 // the game state for the main gameplay state
 
 #ifndef _GAMEPLAYGAMESTATE_H_

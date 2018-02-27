@@ -1,5 +1,5 @@
 // GameObject.h
-// Christopher Ball 2017
+// Christopher Ball 2018
 // A base class for objects used in game
 
 #ifndef _GAMEOBJECT_H_

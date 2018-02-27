@@ -1,5 +1,5 @@
 // Error.h
-// Christopher Ball 2017
+// Christopher Ball 2018
 // error namespace is called when there is an error
 // and saves the error into a log file
 

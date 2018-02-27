@@ -1,5 +1,5 @@
 // AnimatedSprite.h
-// Christopher Ball 2017
+// Christopher Ball 2018
 // child of sprite class for animations
 
 #ifndef _ANIMATED_SPRITE_H_

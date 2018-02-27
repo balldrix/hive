@@ -1,5 +1,5 @@
 // Input.h
-// Christopher Ball 2017
+// Christopher Ball 2018
 // Manages keyboard and mouse input
 // technique learnt from Charles Kelly - Programming 2D Games
 

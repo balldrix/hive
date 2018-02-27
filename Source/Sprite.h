@@ -1,5 +1,5 @@
 // Sprite.h
-// Christopher Ball 2017
+// Christopher Ball 2018
 // sprite class contains texture, position, alpha
 // rotation and scale of the 2D sprite
 
