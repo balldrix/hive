@@ -83,9 +83,6 @@
     <ClInclude Include="Source\AABB.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Colours.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Constants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -146,6 +143,7 @@
     <ClInclude Include="Source\AnimatedSprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\State.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Textures\playerTest.png">
