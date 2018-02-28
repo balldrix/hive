@@ -1,8 +1,6 @@
 #ifndef _CONSTANTS_H_
 #define _CONSTANTS_H_
 
-#include "Colours.h"
-
 // game constants
 namespace GlobalConstants
 {

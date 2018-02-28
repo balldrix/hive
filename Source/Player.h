@@ -3,42 +3,21 @@
 
 #include "pch.h"
 #include "GameObject.h"
+#include "State.h"
 
 // forward declarations
 class Sprite;
 
 // player constants TODO move into struct with data in txt file
-const unsigned int		PLAYER_ANIM_NUM_FRAMES = 1;
-const float				PLAYER_ANIM_FRAME_DELAY = 0.3f;
-const unsigned int		PLAYER_ANIM_FRAME_WIDTH = 32;
-const unsigned int		PLAYER_ANIM_FRAME_HEIGHT = 32;
-const float				START_X = 300;
-const float				START_Y = 300;
-const unsigned int		PLAYER_WALK_SPEED = 40;
-const unsigned int		PLAYER_RUN_SPEED = 40;
-const unsigned int		MAX_BULLETS_ON_SCREEN = 64;
-const float				SHOOTING_DELAY = 0.2f;
-const float				MELEE_DELAY = 0.6f;
-const float				PLAYER_KICKBACK = 2.5f;
-const float				PLAYER_ACCELERATION = 1.0f;
-const float				PLAYER_DECELERATION = 3.0f;
+const float				StartScreenPositionX = 30;
+const float				StartScreenPositionY = 70;
+const unsigned int		WalkSpeed = 40;
+const float				PlayerAcceleration = 1.0f;
+const float				PlayerDeceleration = 3.0f;
 
 class Player : public GameObject
 {
 public:
-	// player states
-	enum PlayerState
-	{
-		IDLE = 0,
-		WALKING,
-		RUNNING,
-		SHOOTING,
-		MELEE,
-		HIT_STUN,
-		BLOCK_STUN,
-		MAX_PLAYER_STATES
-	};
-
 	Player();
 	virtual ~Player();
 
@@ -47,12 +26,12 @@ public:
 	void				Render(Graphics* graphics);
 	void				Reset();
 
-	void				SetPlayerState(PlayerState state);
-	PlayerState			GetState() const { return m_playerState; }
+	void				SetPlayerState(State<Player>* state);
+	State<Player>*		GetState() const { return m_currentState; }
 
 private:
 	Sprite*				m_sprite;				// player sprite sheet
-	PlayerState			m_playerState;			// player states for state machine
+	State<Player>*		m_currentState;			// player states for state machine
 };
 
 #endif _PLAYER_H_

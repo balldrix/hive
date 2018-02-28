@@ -7,6 +7,9 @@
 
 #include "pch.h"
 #include "GameState.h"
+#include "Controls.h"
+
+using namespace PlayerInput;
 
 // forward declarations
 class GameStateManager;
@@ -15,10 +18,6 @@ class Input;
 class Texture;
 class Sprite;
 class Player;
-
-// constants
-const unsigned int PLAYER_START_X = 30;	// game start player position X
-const unsigned int PLAYER_START_Y = 70;	// game start player position y
 
 class GameplayGameState : public GameState
 {

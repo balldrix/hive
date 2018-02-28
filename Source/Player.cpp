@@ -1,10 +1,12 @@
 #include "Player.h"
 #include "AnimatedSprite.h"
 #include "Resources.h"
-#include "UnitVectors.h"
+
+#include "PlayerIdleState.h"
 
 Player::Player() :
-	m_playerState(IDLE)
+	m_sprite(nullptr),
+	m_currentState(PlayerIdleState::Instance())
 {
 }
 
@@ -16,9 +18,9 @@ void Player::Init(Sprite* sprite, Vector2 position)
 {
 	m_sprite = sprite;
 	m_position = position;
-	m_acceleration = PLAYER_ACCELERATION;
-	m_deceleration = PLAYER_DECELERATION;
-	m_movementSpeed = PLAYER_WALK_SPEED;
+	m_acceleration = PlayerAcceleration;
+	m_deceleration = PlayerDeceleration;
+	m_movementSpeed = WalkSpeed;
 }
 
 void Player::Update(float deltaTime)
@@ -34,12 +36,19 @@ void Player::Render(Graphics* graphics)
 
 void Player::Reset()
 {
-	SetPlayerState(IDLE);
+	// SetPlayerState(IDLE);
 	// SetPosition();
 	SetActive(true);
 }
 
-void Player::SetPlayerState(PlayerState state)
+void Player::SetPlayerState(State<Player>* state)
 {
-	m_playerState = state;
+	// call on exit for current state
+	m_currentState->OnExit(this);
+
+	// set new state
+	m_currentState = state;
+
+	// call on entry for new state
+	m_currentState->OnEnter(this);
 }

@@ -67,7 +67,7 @@ void GameplayGameState::LoadAssets()
 	m_playerSprite->Init(m_playerTexture);
 
 	// init game objects
-	m_player->Init(m_playerSprite, Vector2((float)PLAYER_START_X, (float)PLAYER_START_Y));
+	m_player->Init(m_playerSprite, Vector2(StartScreenPositionX, StartScreenPositionY));
 
 	// set running to true
 	m_running = true;

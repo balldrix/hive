@@ -41,4 +41,17 @@ const DWORD GAMEPAD_B				= 0x2000;
 const DWORD GAMEPAD_X				= 0x4000;
 const DWORD GAMEPAD_Y				= 0x8000;
 
+// player controls enum
+namespace PlayerInput
+{
+	enum Buttons
+	{
+		Up,
+		Down,
+		Left,
+		Right,
+		MaxButtons
+	};
+}
+
 #endif _CONTROLS_H_
