@@ -3,6 +3,7 @@
 #include "Resources.h"
 
 #include "PlayerIdleState.h"
+#include "PlayerWalkingState.h"
 
 Player::Player() :
 	m_sprite(nullptr),
@@ -27,6 +28,8 @@ void Player::Update(float deltaTime)
 {
 	GameObject::Update(deltaTime);
 	m_sprite->SetPosition(m_position);
+
+	m_currentState->Execute(this);
 }
 
 void Player::Render(Graphics* graphics)
@@ -36,8 +39,12 @@ void Player::Render(Graphics* graphics)
 
 void Player::Reset()
 {
-	// SetPlayerState(IDLE);
+	// set player state back to Idle
+	SetPlayerState(PlayerIdleState::Instance());
+
 	// SetPosition();
+	SetPosition(StartScreenPositionX, StartScreenPositionY);
+	
 	SetActive(true);
 }
 

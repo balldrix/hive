@@ -59,6 +59,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\PlayerIdleState.cpp" />
+    <ClCompile Include="Source\PlayerWalkingState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -148,6 +149,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\PlayerIdleState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerWalkingState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
