@@ -118,19 +118,6 @@ void GameplayGameState::ProcessInput()
 	}
 
 	///////////////////////////////////////////
-	// check if key is released
-	///////////////////////////////////////////
-
-	if(!(m_input->IsKeyDown(PLAYER_UP_KEY) ||
-		m_input->IsKeyDown(PLAYER_DOWN_KEY) ||
-		m_input->IsKeyDown(PLAYER_LEFT_KEY) ||
-		m_input->IsKeyDown(PLAYER_RIGHT_KEY)))
-	{
-		// set player input to none
-		m_controlSystem->SetInput(None);
-	}
-
-	///////////////////////////////////////////
 	// check if key is pressed down
 	///////////////////////////////////////////
 
@@ -168,7 +155,7 @@ void GameplayGameState::ProcessInput()
 		else
 		{
 			// send up input to control system
-			m_controlSystem->SetInput(Up);
+			m_controlSystem->SetInput(Down);
 
 		}
 	}
@@ -182,6 +169,14 @@ void GameplayGameState::ProcessInput()
 	{
 		// send right input to control system
 		m_controlSystem->SetInput(Right);
+	}
+	else if(!(m_input->IsKeyDown(PLAYER_UP_KEY) ||
+		m_input->IsKeyDown(PLAYER_DOWN_KEY) ||
+		m_input->IsKeyDown(PLAYER_LEFT_KEY) ||
+		m_input->IsKeyDown(PLAYER_RIGHT_KEY)))
+	{
+		// set player input to none
+		m_controlSystem->SetInput(None);
 	}
 }
 

@@ -31,7 +31,7 @@ public:
 
 	void				SetPlayerState(State<Player>* state);
 	State<Player>*		GetState() const { return m_currentState; }
-
+	ControlSystem*		GetControlSystem() const { return m_controlSystem; }
 private:
 	ControlSystem*		m_controlSystem;		// pointer to control system
 	Sprite*				m_sprite;				// player sprite sheet

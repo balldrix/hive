@@ -6,8 +6,8 @@
 #define _CONTROL_SYSTEM_H_
 
 const unsigned int MaxCombo = 5;
-const float ComboTimeLimit = 4.0f;
-const float InputTimeLimit = 0.2f;
+const float ComboTimeLimit = 2.0f;
+const float InputTimeLimit = 0.05f;
 
 enum Controls
 {
@@ -33,10 +33,10 @@ public:
 	void Init();
 	void Update(float deltaTime);
 	void SetInput(Controls input);
-
+	Controls GetLastPressed() const;
 
 private:
-	int m_playerInput[MaxCombo];
+	Controls m_playerInput[MaxCombo];
 	int m_inputIndex;
 
 	float m_inputTimer;

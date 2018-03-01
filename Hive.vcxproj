@@ -61,6 +61,7 @@
     <ClInclude Include="Source\pch.h" />
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\PlayerIdleState.h" />
+    <ClInclude Include="Source\PlayerOwnedStates.h" />
     <ClInclude Include="Source\PlayerWalkingState.h" />
     <ClInclude Include="Source\Randomiser.h" />
     <ClInclude Include="Source\Resources.h" />

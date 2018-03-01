@@ -64,7 +64,9 @@
     <ClCompile Include="Source\PlayerWalkingState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ControlSystem.cpp" />
+    <ClCompile Include="Source\ControlSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -157,6 +159,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\ControlSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerOwnedStates.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

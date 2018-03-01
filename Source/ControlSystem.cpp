@@ -28,6 +28,18 @@ void ControlSystem::SetInput(Controls input)
 	m_playerInput[m_inputIndex] = input;
 }
 
+Controls ControlSystem::GetLastPressed() const
+{
+	if(m_inputIndex == 0)
+	{
+		return m_playerInput[MaxCombo - 1];
+	}
+	else
+	{
+		return m_playerInput[m_inputIndex];
+	}
+}
+
 void ControlSystem::Update(float deltaTime)
 {
 	m_inputTimer += deltaTime;
@@ -46,6 +58,6 @@ void ControlSystem::Update(float deltaTime)
 
 	if(m_comboTimer > ComboTimeLimit)
 	{
-		m_inputIndex = 0;
+		Init();
 	}
 }
