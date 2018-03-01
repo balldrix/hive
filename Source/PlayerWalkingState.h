@@ -23,6 +23,7 @@ public:
 private:
 	PlayerWalkingState() {}
 	PlayerWalkingState(const PlayerWalkingState&);
+	PlayerWalkingState operator=(PlayerWalkingState const&);
 };
 
 #endif // !_PLAYER_WALKING_STATE_

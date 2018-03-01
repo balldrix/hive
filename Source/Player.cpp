@@ -6,6 +6,7 @@
 #include "PlayerWalkingState.h"
 
 Player::Player() :
+	m_controlSystem(nullptr),
 	m_sprite(nullptr),
 	m_currentState(PlayerIdleState::Instance())
 {
@@ -13,6 +14,7 @@ Player::Player() :
 
 Player::~Player()
 {
+	
 }
 
 void Player::Init(Sprite* sprite, Vector2 position)
@@ -22,6 +24,11 @@ void Player::Init(Sprite* sprite, Vector2 position)
 	m_acceleration = PlayerAcceleration;
 	m_deceleration = PlayerDeceleration;
 	m_movementSpeed = WalkSpeed;
+}
+
+void Player::AddControlSystem(ControlSystem* controlSystem)
+{
+	m_controlSystem = controlSystem;
 }
 
 void Player::Update(float deltaTime)
@@ -50,6 +57,8 @@ void Player::Reset()
 
 void Player::SetPlayerState(State<Player>* state)
 {
+	assert(m_currentState && state);
+
 	// call on exit for current state
 	m_currentState->OnExit(this);
 

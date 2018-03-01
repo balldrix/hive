@@ -23,6 +23,7 @@ public:
 private:
 	PlayerIdleState() {}
 	PlayerIdleState(const PlayerIdleState&);
+	PlayerIdleState operator=(PlayerIdleState const&);
 };
 
 #endif // !_PLAYER_IDLE_STATE_

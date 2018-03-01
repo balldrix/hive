@@ -3,7 +3,6 @@
 #include "pch.h"
 #include "Graphics.h"
 #include "Input.h"
-#include "Controls.h"
 
 #include "GameStateManager.h"
 #include "GameState.h"

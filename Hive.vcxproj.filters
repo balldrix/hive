@@ -58,8 +58,13 @@
     <ClCompile Include="Source\AnimatedSprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\PlayerIdleState.cpp" />
-    <ClCompile Include="Source\PlayerWalkingState.cpp" />
+    <ClCompile Include="Source\PlayerIdleState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerWalkingState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ControlSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -86,9 +91,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Constants.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Controls.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game.h">
@@ -152,6 +154,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\PlayerWalkingState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ControlSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

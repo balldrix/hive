@@ -7,9 +7,6 @@
 
 #include "pch.h"
 #include "GameState.h"
-#include "Controls.h"
-
-using namespace PlayerInput;
 
 // forward declarations
 class GameStateManager;
@@ -18,6 +15,7 @@ class Input;
 class Texture;
 class Sprite;
 class Player;
+class ControlSystem;
 
 class GameplayGameState : public GameState
 {
@@ -42,6 +40,7 @@ private:
 	GameStateManager*	m_gameStateManager;			// game state manager pointer
 	Graphics*			m_graphics;					// graphics pointer
 	Input*				m_input;					// input class pointer		
+	ControlSystem*		m_controlSystem;			// player input control system
 
 	Texture*			m_playerTexture;			// player sprite sheet
 

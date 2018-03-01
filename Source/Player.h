@@ -6,6 +6,7 @@
 #include "State.h"
 
 // forward declarations
+class ControlSystem;
 class Sprite;
 
 // player constants TODO move into struct with data in txt file
@@ -22,6 +23,8 @@ public:
 	virtual ~Player();
 
 	void				Init(Sprite* sprite, Vector2 position);
+	void				AddControlSystem(ControlSystem* controlSystem);
+
 	void				Update(float deltaTime);
 	void				Render(Graphics* graphics);
 	void				Reset();
@@ -30,6 +33,7 @@ public:
 	State<Player>*		GetState() const { return m_currentState; }
 
 private:
+	ControlSystem*		m_controlSystem;		// pointer to control system
 	Sprite*				m_sprite;				// player sprite sheet
 	State<Player>*		m_currentState;			// player states for state machine
 };
