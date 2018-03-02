@@ -24,47 +24,48 @@ void GameObject::SetID(const wchar_t* string)
 
 void GameObject::Update(float deltaTime)
 {
-	float velocityX;
-	float velocityY;
+	float t;
+	if(m_targetVelocity.x == 0.0f)
+	{
+		t = m_deceleration;
+	}
+	else
+	{
+		t = m_acceleration;
+	}
 
-	// interpolate objects velocity		
-	velocityX = Lerp(m_targetVelocity.x, m_currentVelocity.x, deltaTime);
-	velocityY = Lerp(m_targetVelocity.y, m_currentVelocity.y, deltaTime);
+	float x;
+	x = Lerp(m_targetVelocity.x, m_currentVelocity.x, t * deltaTime);
+	m_currentVelocity.x = x;
 
-	SetCurrentVelocity(velocityX, velocityY);
+	if(m_targetVelocity.y == 0.0f)
+	{
+		t = m_deceleration;
+	}
+	else
+	{
+		t = m_acceleration;
+	}
+
+	float y;
+	y = Lerp(m_targetVelocity.y, m_currentVelocity.y, t * deltaTime);
+	m_currentVelocity.y = y;
 
 	m_position += (m_currentVelocity * m_movementSpeed) * deltaTime;
 }
 
-float GameObject::Lerp(float target, float current, float deltaTime)
+float GameObject::Lerp(float target, float current, float amount)
 {
 	float tempValue = target - current;
-	float accelLerpAmt = deltaTime * m_acceleration;
-	float decelLerpAmt = deltaTime * m_deceleration;
 
-	if(abs(target) > abs(current))
+	if(tempValue > amount)
 	{
-		if(tempValue > accelLerpAmt)
-		{
-			return current + accelLerpAmt;
-		}
-
-		if(tempValue < -accelLerpAmt)
-		{
-			return current - accelLerpAmt;
-		}
+		return current + amount;
 	}
-	else if(abs(target) < abs(current))
-	{
-		if(tempValue > decelLerpAmt)
-		{
-			return current + decelLerpAmt;
-		}
 
-		if(tempValue < -decelLerpAmt)
-		{
-			return current - decelLerpAmt;
-		}
+	if(tempValue < -amount)
+	{
+		return current - amount;
 	}
 
 	return target;
