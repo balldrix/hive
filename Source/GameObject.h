@@ -21,6 +21,7 @@ public:
 	virtual void	Update(float deltaTime);	// update object
 	virtual void 	Render(Graphics* graphics) = 0;	// render object
 
+	float			GetLerpAmount(float num);
 	float			Lerp(float target, float current, float amount);
 
 	// Setters

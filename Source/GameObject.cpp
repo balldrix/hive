@@ -25,33 +25,29 @@ void GameObject::SetID(const wchar_t* string)
 void GameObject::Update(float deltaTime)
 {
 	float t;
-	if(m_targetVelocity.x == 0.0f)
-	{
-		t = m_deceleration;
-	}
-	else
-	{
-		t = m_acceleration;
-	}
-
-	float x;
+	float x; 
+	t = GetLerpAmount(m_targetVelocity.x);
 	x = Lerp(m_targetVelocity.x, m_currentVelocity.x, t * deltaTime);
 	m_currentVelocity.x = x;
 
-	if(m_targetVelocity.y == 0.0f)
-	{
-		t = m_deceleration;
-	}
-	else
-	{
-		t = m_acceleration;
-	}
-
 	float y;
+	t = GetLerpAmount(m_targetVelocity.y);
 	y = Lerp(m_targetVelocity.y, m_currentVelocity.y, t * deltaTime);
 	m_currentVelocity.y = y;
 
 	m_position += (m_currentVelocity * m_movementSpeed) * deltaTime;
+}
+
+float GameObject::GetLerpAmount(float num)
+{
+	if(num == 0.0f)
+	{
+		return m_deceleration;
+	}
+	else
+	{
+		return m_acceleration;
+	}
 }
 
 float GameObject::Lerp(float target, float current, float amount)
