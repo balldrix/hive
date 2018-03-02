@@ -35,6 +35,7 @@
     <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Player.cpp" />
+    <ClCompile Include="Source\PlayerGlobalState.cpp" />
     <ClCompile Include="Source\PlayerIdleState.cpp" />
     <ClCompile Include="Source\PlayerWalkingState.cpp" />
     <ClCompile Include="Source\Randomiser.cpp" />
@@ -60,6 +61,7 @@
     <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\pch.h" />
     <ClInclude Include="Source\Player.h" />
+    <ClInclude Include="Source\PlayerGlobalState.h" />
     <ClInclude Include="Source\PlayerIdleState.h" />
     <ClInclude Include="Source\PlayerOwnedStates.h" />
     <ClInclude Include="Source\PlayerWalkingState.h" />

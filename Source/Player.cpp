@@ -2,13 +2,13 @@
 #include "AnimatedSprite.h"
 #include "Resources.h"
 
-#include "PlayerIdleState.h"
-#include "PlayerWalkingState.h"
+#include "PlayerOwnedStates.h"
 
 Player::Player() :
 	m_controlSystem(nullptr),
 	m_sprite(nullptr),
-	m_currentState(PlayerIdleState::Instance())
+	m_currentState(PlayerIdleState::Instance()),
+	m_globalState(PlayerGlobalState::Instance())
 {
 }
 
@@ -36,6 +36,7 @@ void Player::Update(float deltaTime)
 	GameObject::Update(deltaTime);
 	m_sprite->SetPosition(m_position);
 
+	m_globalState->Execute(this);
 	m_currentState->Execute(this);
 }
 
@@ -59,6 +60,9 @@ void Player::SetPlayerState(State<Player>* state)
 {
 	assert(m_currentState && state);
 
+	// store previous state
+	m_previousState = m_currentState;
+
 	// call on exit for current state
 	m_currentState->OnExit(this);
 
@@ -67,4 +71,9 @@ void Player::SetPlayerState(State<Player>* state)
 
 	// call on entry for new state
 	m_currentState->OnEnter(this);
+}
+
+void Player::ReturnToPreviousState()
+{
+	SetPlayerState(m_previousState);
 }

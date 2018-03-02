@@ -30,13 +30,20 @@ public:
 	void				Reset();
 
 	void				SetPlayerState(State<Player>* state);
+	void				ReturnToPreviousState();
+
 	State<Player>*		GetState() const { return m_currentState; }
 	ControlSystem*		GetControlSystem() const { return m_controlSystem; }
 	Sprite*				GetSprite() const { return m_sprite; }
+
 private:
 	ControlSystem*		m_controlSystem;		// pointer to control system
+
 	Sprite*				m_sprite;				// player sprite sheet
+	
 	State<Player>*		m_currentState;			// player states for state machine
+	State<Player>*		m_previousState;		// record of previous state for state blips
+	State<Player>*		m_globalState;			// global state for common player methods
 };
 
 #endif _PLAYER_H_
