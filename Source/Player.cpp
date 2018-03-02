@@ -49,7 +49,7 @@ void Player::Reset()
 	// set player state back to Idle
 	SetPlayerState(PlayerIdleState::Instance());
 
-	// SetPosition();
+	// Set Position TODO set world position and screen position
 	SetPosition(StartScreenPositionX, StartScreenPositionY);
 	
 	SetActive(true);

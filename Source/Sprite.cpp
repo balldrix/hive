@@ -2,6 +2,7 @@
 
 #include "Graphics.h"
 #include "Texture.h"
+#include "Sprite.h"
 
 Sprite::Sprite() :
 m_texture(nullptr),
@@ -12,11 +13,9 @@ m_alpha(0.0f),
 m_colour(Colors::White.v),
 m_origin(0.0f, 0.0f),
 m_rect(),
-m_flipHorizontal(false),
-m_flipVertical(false),
+m_spriteEffects(SpriteEffects::SpriteEffects_None),
 m_width(0),
-m_height(0),
-m_active(false)
+m_height(0)
 {
 }
 
@@ -72,7 +71,7 @@ Sprite::Render(Graphics* graphics)
 						m_rotation,
 						m_origin,
 						m_scale,
-						SpriteEffects::SpriteEffects_None,
+						m_spriteEffects,
 						0.0f);
 }
 
@@ -90,7 +89,7 @@ Sprite::Render(Graphics* graphics, Vector2 position)
 									 m_rotation,
 									 m_origin,
 									 m_scale,
-									 SpriteEffects::SpriteEffects_None,
+									 m_spriteEffects,
 									 0.0f);
 }
 
@@ -136,8 +135,7 @@ Sprite::SetRect(const RECT& rect)
 	m_rect = rect;
 }
 
-void 
-Sprite::SetActive(bool active)
+void Sprite::SetFlipEffect(SpriteEffects effect)
 {
-	m_active = active;
+	m_spriteEffects = effect;
 }

@@ -10,8 +10,8 @@ class ControlSystem;
 class Sprite;
 
 // player constants TODO move into struct with data in txt file
-const float				StartScreenPositionX = 30;
-const float				StartScreenPositionY = 70;
+const unsigned int		StartScreenPositionX = 30;
+const unsigned int		StartScreenPositionY = 70;
 const unsigned int		WalkSpeed = 40;
 const float				PlayerAcceleration = 1.0f;
 const float				PlayerDeceleration = 3.0f;
@@ -32,6 +32,7 @@ public:
 	void				SetPlayerState(State<Player>* state);
 	State<Player>*		GetState() const { return m_currentState; }
 	ControlSystem*		GetControlSystem() const { return m_controlSystem; }
+	Sprite*				GetSprite() const { return m_sprite; }
 private:
 	ControlSystem*		m_controlSystem;		// pointer to control system
 	Sprite*				m_sprite;				// player sprite sheet

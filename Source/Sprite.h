@@ -12,12 +12,6 @@
 class Graphics;
 class Texture;
 
-enum FACING_DIRECTION
-{
-	LEFT,
-	RIGHT
-};
-
 class Sprite
 {
 public:
@@ -36,7 +30,7 @@ public:
 	void				SetColour(const Color& colour);
 	void				SetOrigin(const Vector2& origin);
 	void				SetRect(const RECT& rect);
-	void				SetActive(bool active);
+	void				SetFlipEffect(SpriteEffects effect);
 
 	// getters
 	const Vector2		GetPosition() const		{ return m_position; }
@@ -48,24 +42,20 @@ public:
 	const RECT			GetRect() const			{ return m_rect; }
 	const UINT			GetWidth() const		{ return m_width; }
 	const UINT			GetHeight() const		{ return m_height; }
-	const bool			GetActive() const		{ return m_active; }
 
 protected:
-	Texture*			m_texture;	// texture pointer
+	Texture*			m_texture;			// texture pointer
 
-	Vector2				m_position; // sprite position
-	float				m_scale;	// scaler
-	float				m_rotation; // rotation angle in radians
-	float				m_alpha;	// alpha value 0.0f - 1.0f
-	Color				m_colour;	// colour tint
-	Vector2				m_origin;	// sprite origin i.e. middle
-	RECT				m_rect;		// source rect
-	bool				m_flipHorizontal; // does sprite need flipping horizontally?
-	bool				m_flipVertical; // does sprite need flipping vertically?
-	UINT				m_width;	// sprite width
-	UINT				m_height;	// sprite height
-	
-	bool				m_active;	// if active or not
+	Vector2				m_position;			// sprite position
+	float				m_scale;			// scaler
+	float				m_rotation;			// rotation angle in radians
+	float				m_alpha;			// alpha value 0.0f - 1.0f
+	Color				m_colour;			// colour tint
+	Vector2				m_origin;			// sprite origin i.e. middle
+	RECT				m_rect;				// source rect
+	UINT				m_width;			// sprite width
+	UINT				m_height;			// sprite height
+	SpriteEffects		m_spriteEffects;	// sprite effects
 };
 
 #endif _SPRITE_H_
