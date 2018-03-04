@@ -10,8 +10,8 @@ class ControlSystem;
 class Sprite;
 
 // player constants TODO move into struct with data in txt file
-const unsigned int		StartScreenPositionX = 30;
-const unsigned int		StartScreenPositionY = 70;
+const unsigned int		StartScreenPositionX = 100;
+const unsigned int		StartScreenPositionY = 50;
 const unsigned int		WalkSpeed = 40;
 const float				PlayerAcceleration = 1.0f;
 const float				PlayerDeceleration = 3.0f;
@@ -29,6 +29,7 @@ public:
 	void				Render(Graphics* graphics);
 	void				Reset();
 
+	// TODO create state machine
 	void				SetPlayerState(State<Player>* state);
 	void				ReturnToPreviousState();
 

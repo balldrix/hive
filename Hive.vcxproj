@@ -46,6 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\AABB.h" />
+    <ClInclude Include="Source\Animation.h" />
+    <ClInclude Include="Source\Animator.h" />
     <ClInclude Include="Source\Constants.h" />
     <ClInclude Include="Source\ControlSystem.h" />
     <ClInclude Include="Source\Enemy.h" />
@@ -68,6 +70,7 @@
     <ClInclude Include="Source\Randomiser.h" />
     <ClInclude Include="Source\Resources.h" />
     <ClInclude Include="Source\Sprite.h" />
+    <ClInclude Include="Source\SpriteSheet.h" />
     <ClInclude Include="Source\State.h" />
     <ClInclude Include="Source\Texture.h" />
     <ClInclude Include="Source\Timer.h" />
