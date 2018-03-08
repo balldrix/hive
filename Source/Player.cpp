@@ -1,5 +1,5 @@
 #include "Player.h"
-#include "AnimatedSprite.h"
+#include "SpriteSheet.h"
 #include "Resources.h"
 
 #include "PlayerOwnedStates.h"
@@ -17,7 +17,7 @@ Player::~Player()
 	
 }
 
-void Player::Init(Sprite* sprite, Vector2 position)
+void Player::Init(SpriteSheet* sprite, Vector2 position)
 {
 	m_sprite = sprite;
 	m_position = position;
@@ -42,7 +42,7 @@ void Player::Update(float deltaTime)
 
 void Player::Render(Graphics* graphics)
 {
-	m_sprite->Render(graphics);
+	m_sprite->Render(graphics, 0);
 }
 
 void Player::Reset()

@@ -7,23 +7,19 @@
 
 #include "pch.h"
 #include "Animation.h"
-#include "SpriteSheet.h"
-
-class Sprite;
 
 class Animator
 {
 public:
 	Animator();
 	~Animator();
-	void Init(Sprite* spriteSheet,
-		SpriteSheet spriteSheetData,
-		const wchar_t*); // init animator
-	void LoadData(const wchar_t* fileName); // load data from txt file
-	void Update(float deltaTime);			// update animation frame
+	void Init(std::string fileName);	// init animator
+	void Update(float deltaTime);			// update animation sourceRect
+
+	void SetAnimation(unsigned int index);	// set current animation to play
 
 	Animation* GetAnimation() const { return m_currentAnimation; } // return current animation playing
-	void SetAnimation(unsigned int index);	// set current animation to play
+	int GetCurrentFrame() const { return m_currentFrame; } // return current sourceRect in animation
 
 	void Play() { m_paused = false; }		// play animation
 	void Pause() { m_paused = true; }		// pause animation
@@ -35,11 +31,8 @@ private:
 	Animation * m_currentAnimation;			// pointer to current animation to play
 	std::vector<Animation>	m_animationList; // list of animations to play
 
-	Sprite*	m_spriteSheet;					// sprite sheet
-	SpriteSheet m_spriteSheetData;			// sprite sheet data
-
 	bool m_paused;							// is animation paused
-	unsigned int m_currentFrame;			// current animation frame to draw
+	unsigned int m_currentFrame;			// current animation sourceRect to draw
 	bool m_animDone;						// has non looping anination finished
 	bool m_loop;							// does animation loop
 	float m_animationTimer;					// timer

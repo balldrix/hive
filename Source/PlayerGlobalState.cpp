@@ -2,7 +2,7 @@
 #include "Player.h"
 #include "UnitVectors.h"
 #include "ControlSystem.h"
-#include "Sprite.h"
+#include "SpriteSheet.h"
 
 PlayerGlobalState* PlayerGlobalState::Instance()
 {

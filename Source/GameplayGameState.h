@@ -13,7 +13,8 @@ class GameStateManager;
 class Graphics;
 class Input;
 class Texture;
-class Sprite;
+class SpriteSheet;
+class Animator;
 class Player;
 class ControlSystem;
 
@@ -44,7 +45,9 @@ private:
 
 	Texture*			m_playerTexture;			// player sprite sheet
 
-	Sprite*				m_playerSprite;				// player sprite object
+	SpriteSheet*		m_playerSprite;				// player sprite object
+	
+	Animator*			m_playerAnimator;			// class to run player animations
 
 	Player*				m_player;					// pointer to player class
 

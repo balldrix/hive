@@ -41,7 +41,7 @@ private:
 	HWND						m_hWnd;					// handle to the window
 	HINSTANCE					m_hInstance;			// instance of our window
 	
-	IDXGISwapChain*				m_swapchain;			// pointer to swapchain of frame buffers
+	IDXGISwapChain*				m_swapchain;			// pointer to swapchain of sourceRect buffers
 	ID3D11Device*				m_D3DDevice;			// pointer to D3D Device
 	ID3D11DeviceContext*		m_D3DDeviceContext;		// pointer to D3D Context
 

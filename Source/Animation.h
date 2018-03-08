@@ -1,17 +1,17 @@
 // Animation.h
 // Christopher Ball 2018
-// animation frame data
+// animation sourceRect data
 
 #ifndef _ANIMATION_H_
 #define _ANIMATION_H_
 
 struct Animation
 {
-	const wchar_t* m_name;
-	unsigned int m_spriteSheetIndex;
-	unsigned int m_frameCount;
-	unsigned int m_framesPerSecond;
-	bool m_loop;
+	std::string	name;
+	int spriteSheetIndex;
+	int frameCount;
+	int framesPerSecond;
+	bool loop;
 };
 
 #endif // !_ANIMATION_H_

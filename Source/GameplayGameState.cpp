@@ -4,7 +4,8 @@
 #include "Input.h"
 #include "Texture.h"
 #include "AnimatedSprite.h"
-#include "Sprite.h"
+#include "SpriteSheet.h"
+#include "Animator.h"
 #include "Player.h"
 #include "Resources.h"
 #include "UnitVectors.h"
@@ -20,6 +21,7 @@ GameplayGameState::GameplayGameState(GameStateManager* gameStateManager) :
 	m_controlSystem(nullptr),
 	m_playerTexture(nullptr),
 	m_playerSprite(nullptr),
+	m_playerAnimator(nullptr),
 	m_player(nullptr),
 	m_running(false),
 	GameState(L"GAMEPLAY")
@@ -56,7 +58,10 @@ void GameplayGameState::LoadAssets()
 	m_playerTexture = new Texture();
 
 	// create sprite memory 
-	m_playerSprite = new Sprite();
+	m_playerSprite = new SpriteSheet();
+
+	// create animator memory
+	m_playerAnimator = new Animator();
 
 	// create objects in memory
 	m_player = new Player();
@@ -65,10 +70,13 @@ void GameplayGameState::LoadAssets()
 	m_playerTexture->LoadTexture(m_graphics, PLAYER_RESOURCE);
 
 	// init sprites
-	m_playerSprite->Init(m_playerTexture);
+	m_playerSprite->Init(m_playerTexture, "GameData\\SpriteSheetData\\spritesheet.json");
+
+	// init animator
+	m_playerAnimator->Init("GameData\\Animation\\playerAnimation.json");
 
 	// init game objects
-	m_player->Init(m_playerSprite, Vector2(StartScreenPositionX, StartScreenPositionY));
+	m_player->Init(m_playerSprite, Vector2((float)StartScreenPositionX, (float)StartScreenPositionY));
 
 	// set running to true
 	m_running = true;
@@ -92,6 +100,13 @@ void GameplayGameState::DeleteAssets()
 	{
 		delete m_player;
 		m_player = nullptr;
+	}
+
+	// delete animators
+	if(m_playerAnimator)
+	{
+		delete m_playerAnimator;
+		m_playerAnimator = nullptr;
 	}
 
 	// delete sprites

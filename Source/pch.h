@@ -17,6 +17,7 @@
 #include <fstream>
 #include <string>
 #include <algorithm>
+#include <map>
 
 #include "SimpleMath.h"
 #include "SpriteBatch.h"
@@ -24,9 +25,13 @@
 #include "WICTextureLoader.h"
 #include "DDSTextureLoader.h"
 
+#include "json.hpp"
+
 #include "Time.h"
 
 using namespace DirectX;
 using namespace SimpleMath;
+
+using json = nlohmann::json;
 
 #endif _PCH_H
