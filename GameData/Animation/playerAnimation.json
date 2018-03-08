@@ -1,5 +1,6 @@
-[
-	{
+{
+	"animation": [
+		{
 			"name": "Idle",
 			"index": 0,
 			"frameCount": 4,
@@ -14,3 +15,4 @@
 			"loop": true
 		}
 	]
+}

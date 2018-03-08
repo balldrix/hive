@@ -23,15 +23,22 @@ void Animator::Init(std::string fileName)
 
 	// parse data from file
 	json data = json::parse(file);
+	json animation = data["animation"];
 
 	// iterate through data and save in animation list
-	for(json::iterator it = data.begin(); it != data.end(); ++it)
+	for(json::iterator it = animation.begin(); it != animation.end(); ++it)
 	{
-		// current iterator
-		json anim = it.value();
+		// json of current it in array
+		json j = it.value();
 
 		// data struct
-		Animation animation;
-		animation.spriteSheetIndex = anim["index"];
+		Animation animationType;
+		animationType.name = j["name"];
+		animationType.spriteSheetIndex = j["index"];
+		animationType.frameCount = j["frameCount"];
+		animationType.framesPerSecond = j["framesPerSecond"];
+		animationType.loop = j["loop"];
+
+		m_animationList.push_back(animationType);
 	}
 }

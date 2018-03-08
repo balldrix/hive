@@ -73,7 +73,7 @@ void GameplayGameState::LoadAssets()
 	m_playerSprite->Init(m_playerTexture, "GameData\\SpriteSheetData\\spritesheet.json");
 
 	// init animator
-	m_playerAnimator->Init("GameData\\Animation\\playerAnimation.json");
+	m_playerAnimator->Init("GameData\\Animation\\playeranimation.json");
 
 	// init game objects
 	m_player->Init(m_playerSprite, Vector2((float)StartScreenPositionX, (float)StartScreenPositionY));
