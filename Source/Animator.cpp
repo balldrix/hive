@@ -29,6 +29,12 @@ void Animator::Init(std::string fileName)
 
 void Animator::Update(float deltaTime)
 {
+	// if paused
+	if(m_paused)
+	{
+		return;
+	}
+
 	// update timer
 	m_animationTimer += deltaTime;
 
@@ -40,7 +46,7 @@ void Animator::Update(float deltaTime)
 	if(m_animationTimer > frameRate)
 	{
 		// reset timer
-		m_animationTimer = 0.0f;
+		m_animationTimer -= frameRate;
 
 		// if animation is not over
 		if(!m_animDone)
