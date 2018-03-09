@@ -5,7 +5,6 @@ Animator::Animator() :
 	m_paused(false),
 	m_currentFrame(0),
 	m_animDone(false),
-	m_loop(false),
 	m_animationTimer(0.0f)
 {
 	m_animationList.clear();
@@ -25,20 +24,59 @@ void Animator::Init(std::string fileName)
 	json data = json::parse(file);
 	json animation = data["animation"];
 
-	// iterate through data and save in animation list
-	for(json::iterator it = animation.begin(); it != animation.end(); ++it)
+	m_animationList = animation.get<std::vector<Animation>>();
+}
+
+void Animator::Update(float deltaTime)
+{
+	// update timer
+	m_animationTimer += deltaTime;
+
+	// calculate frame rate
+	float frameRate;
+	frameRate = 1 / (float)m_currentAnimation->framesPerSecond;
+
+	// if timer has gone over rate
+	if(m_animationTimer > frameRate)
 	{
-		// json of current it in array
-		json j = it.value();
+		// reset timer
+		m_animationTimer = 0.0f;
 
-		// data struct
-		Animation animationType;
-		animationType.name = j["name"];
-		animationType.spriteSheetIndex = j["index"];
-		animationType.frameCount = j["frameCount"];
-		animationType.framesPerSecond = j["framesPerSecond"];
-		animationType.loop = j["loop"];
-
-		m_animationList.push_back(animationType);
+		// if animation is not over
+		if(!m_animDone)
+		{
+			// if frame count is below max num of frames in animation
+			if(m_currentFrame < ((unsigned int)m_currentAnimation->frameCount - 1))
+			{
+				// increase frame count
+				m_currentFrame++;
+			}
+			else
+			{
+				// if animation should loop
+				if(m_currentAnimation->loop)
+				{
+					// reset frame count
+					m_currentFrame = 0;
+				}
+				else
+				{
+					m_currentFrame = m_currentAnimation->frameCount - 1;
+					m_animDone = true;
+				}
+			}
+		}
 	}
+}
+
+void Animator::SetAnimation(unsigned int index)
+{
+	m_currentAnimation = &m_animationList[index];
+}
+
+void Animator::Reset()
+{
+	m_animationTimer = 0.0f;
+	m_animDone = false;
+	m_currentFrame = 0;
 }

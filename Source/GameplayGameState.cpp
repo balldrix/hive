@@ -54,6 +54,10 @@ void GameplayGameState::LoadAssets()
 	// seed random generator
 	srand((int)time(NULL));
 
+	// init control system
+	m_controlSystem = new ControlSystem();
+	m_controlSystem->Init();
+
 	// create texture memory
 	m_playerTexture = new Texture();
 
@@ -76,15 +80,10 @@ void GameplayGameState::LoadAssets()
 	m_playerAnimator->Init("GameData\\Animation\\playeranimation.json");
 
 	// init game objects
-	m_player->Init(m_playerSprite, Vector2((float)StartScreenPositionX, (float)StartScreenPositionY));
+	m_player->Init(m_controlSystem, m_playerSprite, m_playerAnimator, Vector2((float)StartScreenPositionX, (float)StartScreenPositionY));
 
 	// set running to true
 	m_running = true;
-
-	// init control system
-	m_controlSystem = new ControlSystem();
-	m_controlSystem->Init();
-	m_player->AddControlSystem(m_controlSystem);
 }
 
 void GameplayGameState::DeleteAssets()

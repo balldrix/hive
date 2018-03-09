@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "SpriteSheet.h"
+#include "Animator.h"
 #include "Resources.h"
 
 #include "PlayerOwnedStates.h"
@@ -7,6 +8,7 @@
 Player::Player() :
 	m_controlSystem(nullptr),
 	m_sprite(nullptr),
+	m_animator(nullptr),
 	m_currentState(PlayerIdleState::Instance()),
 	m_globalState(PlayerGlobalState::Instance())
 {
@@ -17,8 +19,9 @@ Player::~Player()
 	
 }
 
-void Player::Init(SpriteSheet* sprite, Vector2 position)
+void Player::Init(ControlSystem* controlSystem, SpriteSheet* sprite, Vector2 position)
 {
+	m_controlSystem = controlSystem;
 	m_sprite = sprite;
 	m_position = position;
 	m_acceleration = PlayerAcceleration;
@@ -26,13 +29,21 @@ void Player::Init(SpriteSheet* sprite, Vector2 position)
 	m_movementSpeed = WalkSpeed;
 }
 
-void Player::AddControlSystem(ControlSystem* controlSystem)
+void Player::Init(ControlSystem* controlSystem, SpriteSheet* sprite, Animator* animator, Vector2 position)
 {
-	m_controlSystem = controlSystem;
+	Init(controlSystem, sprite, position);
+	m_animator = animator;
+	m_animator->SetAnimation(0);
 }
 
 void Player::Update(float deltaTime)
 {
+	// if player has an animator
+	if(m_animator)
+	{
+		m_animator->Update(deltaTime);
+	}
+
 	GameObject::Update(deltaTime);
 	m_sprite->SetPosition(m_position);
 
@@ -42,7 +53,14 @@ void Player::Update(float deltaTime)
 
 void Player::Render(Graphics* graphics)
 {
-	m_sprite->Render(graphics, 0);
+	if(m_animator)
+	{
+		m_sprite->Render(graphics, m_animator->GetCurrentFrame() + m_animator->GetAnimation()->spriteSheetIndex);
+	}
+	else
+	{
+		m_sprite->Render(graphics, 0);
+	}
 }
 
 void Player::Reset()

@@ -1,17 +1,31 @@
 // Animation.h
 // Christopher Ball 2018
-// animation sourceRect data
+// animation frame data
+
+#include "pch.h"
 
 #ifndef _ANIMATION_H_
 #define _ANIMATION_H_
 
-struct Animation
+namespace
 {
-	std::string	name;
-	int spriteSheetIndex;
-	int frameCount;
-	int framesPerSecond;
-	bool loop;
-};
+	struct Animation
+	{
+		std::string	name;
+		int spriteSheetIndex;
+		int frameCount;
+		int framesPerSecond;
+		bool loop;
+	};
+
+	void from_json(const json& j, Animation& a)
+	{
+		a.name = j.at("name").get<std::string>();
+		a.spriteSheetIndex = j.at("index").get<int>();
+		a.frameCount = j.at("frameCount").get<int>();
+		a.framesPerSecond = j.at("framesPerSecond").get<int>();
+		a.loop = j.at("loop").get<bool>();
+	}
+}
 
 #endif // !_ANIMATION_H_

@@ -28,13 +28,12 @@ public:
 	void Reset();							// reset animation
 
 private:
-	Animation * m_currentAnimation;			// pointer to current animation to play
+	Animation* m_currentAnimation;			// pointer to current animation to play
 	std::vector<Animation>	m_animationList; // list of animations to play
 
 	bool m_paused;							// is animation paused
 	unsigned int m_currentFrame;			// current animation sourceRect to draw
 	bool m_animDone;						// has non looping anination finished
-	bool m_loop;							// does animation loop
 	float m_animationTimer;					// timer
 };
 

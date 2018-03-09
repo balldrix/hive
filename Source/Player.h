@@ -8,6 +8,7 @@
 // forward declarations
 class ControlSystem;
 class SpriteSheet;
+class Animator;
 
 // player constants TODO move into struct with data in txt file
 const unsigned int		StartScreenPositionX = 100;
@@ -22,8 +23,8 @@ public:
 	Player();
 	virtual ~Player();
 
-	void				Init(SpriteSheet* sprite, Vector2 position);
-	void				AddControlSystem(ControlSystem* controlSystem);
+	void				Init(ControlSystem* controlSystem, SpriteSheet* sprite, Vector2 position);
+	void				Init(ControlSystem* controlSystem, SpriteSheet* sprite, Animator* animator, Vector2 position);
 
 	void				Update(float deltaTime);
 	void				Render(Graphics* graphics);
@@ -40,7 +41,8 @@ public:
 private:
 	ControlSystem*		m_controlSystem;		// pointer to control system
 
-	SpriteSheet*				m_sprite;				// player sprite sheet
+	SpriteSheet*		m_sprite;				// player sprite sheet
+	Animator*			m_animator;				// player animation controller
 	
 	State<Player>*		m_currentState;			// player states for state machine
 	State<Player>*		m_previousState;		// record of previous state for state blips
