@@ -87,7 +87,13 @@
     <Filter Include="Game Data">
       <UniqueIdentifier>{5ddac016-1fb2-4443-be93-f4d736282e5c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game Data\Textures">
+    <Filter Include="Game Data\Sprite Sheet Data">
+      <UniqueIdentifier>{89ef07ea-009e-4fc7-8958-e642f9b5a6da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Data\Animation Data">
+      <UniqueIdentifier>{6b386d83-ed86-4fb6-b2fc-ed523c376315}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Data\Sprites">
       <UniqueIdentifier>{8097c6c1-0b85-445b-b3c3-2776deeed50d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -187,11 +193,17 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="GameData\Textures\playerTest.png">
-      <Filter>Game Data\Textures</Filter>
+    <Image Include="GameData\Sprites\playerSpritesheet.png">
+      <Filter>Game Data\Sprites</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="GameData\SpriteSheetData\playerSpritesheetData.json">
+      <Filter>Game Data\Sprite Sheet Data</Filter>
+    </None>
+    <None Include="GameData\Animation\playerAnimationData.json">
+      <Filter>Game Data\Animation Data</Filter>
+    </None>
   </ItemGroup>
 </Project>

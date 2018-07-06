@@ -3,15 +3,15 @@
 		{
 			"name": "Idle",
 			"index": 0,
-			"frameCount": 8,
-			"framesPerSecond": 10,
+			"frameCount": 4,
+			"framesPerSecond": 8,
 			"loop": true
 		},
 		{
 			"name": "Walking",
-			"index": 8,
+			"index": 4,
 			"frameCount": 4,
-			"framesPerSecond": 10,
+			"framesPerSecond": 8,
 			"loop": true
 		}
 	]

@@ -79,9 +79,11 @@
     <ClInclude Include="Source\Window.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="GameData\Textures\playerTest.png" />
+    <Image Include="GameData\Sprites\playerSpritesheet.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="GameData\Animation\playerAnimationData.json" />
+    <None Include="GameData\SpriteSheetData\playerSpritesheetData.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
