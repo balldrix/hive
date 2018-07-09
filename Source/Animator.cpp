@@ -1,4 +1,5 @@
 #include "Animator.h"
+#include "Error.h"
 
 Animator::Animator() :
 	m_currentAnimation(nullptr),
@@ -75,9 +76,29 @@ void Animator::Update(float deltaTime)
 	}
 }
 
+// set current animation from list using index
 void Animator::SetAnimation(unsigned int index)
 {
 	m_currentAnimation = &m_animationList[index];
+}
+
+void Animator::SetAnimation(std::string name)
+{
+	Animation newAnimation;
+
+	// loop through animation list
+	for(unsigned int i = 0; i < m_animationList.size(); i++)
+	{
+		if(m_animationList[i].name == name)
+		{
+			m_currentAnimation = &m_animationList[i];
+			return;
+		}
+	}
+	
+	// unable to find animation with string so call error function
+	std::string error = " Error! No animation with name " + name + " found. Check animation data.";
+	Error::FileLog(error);
 }
 
 void Animator::Reset()
