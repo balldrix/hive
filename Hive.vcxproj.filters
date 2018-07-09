@@ -198,12 +198,12 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="GameData\SpriteSheetData\playerSpritesheetData.json">
       <Filter>Game Data\Sprite Sheet Data</Filter>
     </None>
     <None Include="GameData\Animation\playerAnimationData.json">
       <Filter>Game Data\Animation Data</Filter>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
