@@ -37,6 +37,7 @@ public:
 	State<Player>*		GetState() const { return m_currentState; }
 	ControlSystem*		GetControlSystem() const { return m_controlSystem; }
 	SpriteSheet*		GetSprite() const { return m_sprite; }
+	Animator*			GetAnimator() const { return m_animator; }
 
 private:
 	ControlSystem*		m_controlSystem;		// pointer to control system

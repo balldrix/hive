@@ -1,7 +1,7 @@
 #include "PlayerOwnedStates.h"
 #include "Player.h"
+#include "Animator.h"
 #include "ControlSystem.h"
-#include "Sprite.h"
 #include "UnitVectors.h"
 
 PlayerWalkingState* PlayerWalkingState::Instance()
@@ -12,7 +12,8 @@ PlayerWalkingState* PlayerWalkingState::Instance()
 
 void PlayerWalkingState::OnEnter(Player* player)
 {
-
+	// set walking animation
+	player->GetAnimator()->SetAnimation("Walking");
 }
 
 void PlayerWalkingState::Execute(Player* player)

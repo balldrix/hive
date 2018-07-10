@@ -1,5 +1,6 @@
 #include "PlayerOwnedStates.h"
 #include "Player.h"
+#include "Animator.h"
 #include "ControlSystem.h"
 #include "UnitVectors.h"
 
@@ -11,6 +12,8 @@ PlayerIdleState* PlayerIdleState::Instance()
 
 void PlayerIdleState::OnEnter(Player* player)
 {
+	// set idle animation
+	player->GetAnimator()->SetAnimation("Idle");
 }
 
 void PlayerIdleState::Execute(Player* player)
