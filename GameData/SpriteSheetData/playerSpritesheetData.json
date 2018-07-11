@@ -1,6 +1,6 @@
 { "frames": [
    {
-    "filename": "playerSpriteIdle 0.ase",
+    "filename": "playerSprite (sprite layer) 0.ase",
     "frame": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -9,7 +9,7 @@
     "duration": 100
    },
    {
-    "filename": "playerSpriteIdle 1.ase",
+    "filename": "playerSprite (sprite layer) 1.ase",
     "frame": { "x": 32, "y": 0, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -18,7 +18,7 @@
     "duration": 100
    },
    {
-    "filename": "playerSpriteIdle 2.ase",
+    "filename": "playerSprite (sprite layer) 2.ase",
     "frame": { "x": 64, "y": 0, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -27,7 +27,7 @@
     "duration": 100
    },
    {
-    "filename": "playerSpriteIdle 3.ase",
+    "filename": "playerSprite (sprite layer) 3.ase",
     "frame": { "x": 96, "y": 0, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -36,7 +36,7 @@
     "duration": 100
    },
    {
-    "filename": "playerSpriteIdle 4.ase",
+    "filename": "playerSprite (sprite layer) 4.ase",
     "frame": { "x": 0, "y": 32, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -45,7 +45,7 @@
     "duration": 100
    },
    {
-    "filename": "playerSpriteIdle 5.ase",
+    "filename": "playerSprite (sprite layer) 5.ase",
     "frame": { "x": 32, "y": 32, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -54,7 +54,7 @@
     "duration": 100
    },
    {
-    "filename": "playerSpriteIdle 6.ase",
+    "filename": "playerSprite (sprite layer) 6.ase",
     "frame": { "x": 64, "y": 32, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -63,7 +63,7 @@
     "duration": 100
    },
    {
-    "filename": "playerSpriteIdle 7.ase",
+    "filename": "playerSprite (sprite layer) 7.ase",
     "frame": { "x": 96, "y": 32, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -72,7 +72,7 @@
     "duration": 100
    },
    {
-    "filename": "playerSpriteIdle 8.ase",
+    "filename": "playerSprite (sprite layer) 8.ase",
     "frame": { "x": 0, "y": 64, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -81,7 +81,7 @@
     "duration": 100
    },
    {
-    "filename": "playerSpriteIdle 9.ase",
+    "filename": "playerSprite (sprite layer) 9.ase",
     "frame": { "x": 32, "y": 64, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -90,7 +90,7 @@
     "duration": 100
    },
    {
-    "filename": "playerSpriteIdle 10.ase",
+    "filename": "playerSprite (sprite layer) 10.ase",
     "frame": { "x": 64, "y": 64, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -99,7 +99,7 @@
     "duration": 100
    },
    {
-    "filename": "playerSpriteIdle 11.ase",
+    "filename": "playerSprite (sprite layer) 11.ase",
     "frame": { "x": 96, "y": 64, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -108,7 +108,7 @@
     "duration": 100
    },
    {
-    "filename": "playerSpriteIdle 12.ase",
+    "filename": "playerSprite (sprite layer) 12.ase",
     "frame": { "x": 0, "y": 96, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -117,7 +117,7 @@
     "duration": 100
    },
    {
-    "filename": "playerSpriteIdle 13.ase",
+    "filename": "playerSprite (sprite layer) 13.ase",
     "frame": { "x": 32, "y": 96, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -126,7 +126,7 @@
     "duration": 100
    },
    {
-    "filename": "playerSpriteIdle 14.ase",
+    "filename": "playerSprite (sprite layer) 14.ase",
     "frame": { "x": 64, "y": 96, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -135,7 +135,7 @@
     "duration": 100
    },
    {
-    "filename": "playerSpriteIdle 15.ase",
+    "filename": "playerSprite (sprite layer) 15.ase",
     "frame": { "x": 96, "y": 96, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -148,11 +148,15 @@
   "app": "http://www.aseprite.org/",
   "version": "1.2.2-x64",
   "image": "C:\\git_root\\Hive Project\\GameData\\Sprites\\playerSpritesheet.png",
-  "format": "I8",
+  "format": "RGBA8888",
   "size": { "w": 128, "h": 128 },
   "scale": "1",
+  "frameTags": [
+   { "name": "Idle", "from": 0, "to": 7, "direction": "forward" },
+   { "name": "Walking", "from": 8, "to": 15, "direction": "forward" }
+  ],
   "layers": [
-   { "name": "Layer", "opacity": 255, "blendMode": "normal" }
+   { "name": "sprite layer", "opacity": 255, "blendMode": "normal" }
   ]
  }
 }
