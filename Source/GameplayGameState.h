@@ -14,9 +14,11 @@ class Graphics;
 class Input;
 class Texture;
 class SpriteSheet;
+class Sprite;
 class Animator;
 class Player;
 class ControlSystem;
+class HitBox;
 
 class GameplayGameState : public GameState
 {
@@ -44,12 +46,15 @@ private:
 	ControlSystem*		m_controlSystem;			// player input control system
 
 	Texture*			m_playerTexture;			// player sprite sheet
+	Texture*			m_hitBoxTexture;			// basic hitbox texture
 
 	SpriteSheet*		m_playerSprite;				// player sprite object
+	Sprite*				m_hitBoxSprite;				// basic hitbox sprite
 	
 	Animator*			m_playerAnimator;			// class to run player animations
 
 	Player*				m_player;					// pointer to player class
+	HitBox*				m_hitBox;					// TODO replace with hitbox system
 
 	bool				m_running;					// is game running or not
 };

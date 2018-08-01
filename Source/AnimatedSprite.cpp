@@ -29,7 +29,7 @@ AnimatedSprite::Init(Graphics* graphics, Texture* texture,
 
 	m_frameWidth = frameWidth;
 	m_frameHeight = frameHeight;
-	SetRect();
+	SetSourceRect();
 }
 
 void
@@ -60,7 +60,7 @@ AnimatedSprite::Update(float deltaTime)
 				}
 			}
 		}
-		SetRect();
+		SetSourceRect();
 	}
 }
 
@@ -83,7 +83,7 @@ AnimatedSprite::SetAnimDone(bool done)
 }
 
 void
-AnimatedSprite::SetRect()
+AnimatedSprite::SetSourceRect()
 {
 	m_rect.left = m_currentFrame * m_width;
 	m_rect.right = m_rect.left + m_width;

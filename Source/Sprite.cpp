@@ -5,17 +5,17 @@
 #include "Sprite.h"
 
 Sprite::Sprite() :
-m_texture(nullptr),
-m_position(0.0f, 0.0f),
-m_scale(0.0f),
-m_rotation(0.0f),
-m_alpha(0.0f),
-m_colour(Colors::White.v),
-m_origin(0.0f, 0.0f),
-m_rect(),
-m_spriteEffects(SpriteEffects::SpriteEffects_None),
-m_width(0),
-m_height(0)
+	m_texture(nullptr),
+	m_position(0.0f, 0.0f),
+	m_scale(0.0f),
+	m_rotation(0.0f),
+	m_alpha(0.0f),
+	m_colour(Colors::White.v),
+	m_origin(0.0f, 0.0f),
+	m_rect(),
+	m_spriteEffects(SpriteEffects::SpriteEffects_None),
+	m_width(0),
+	m_height(0)
 {
 }
 
@@ -23,12 +23,12 @@ Sprite::~Sprite()
 {
 }
 
-void 
+void
 Sprite::Init(Texture* texture)
 {
 	// initialise texture
 	m_texture = texture;
-	
+
 	// copy D3D11 resource to a Texture2D struct
 	ID3D11Texture2D*	tex2D;
 	tex2D = (ID3D11Texture2D*)m_texture->GetResource();
@@ -58,60 +58,75 @@ Sprite::Init(Texture* texture)
 	m_alpha = 1.0f;
 }
 
-void 
+void
 Sprite::Render(Graphics* graphics)
 {
 	// set alpha colour key
 	m_colour.w = m_alpha;
 
-	graphics->GetSpriteBatch()->Draw(m_texture->GetTexture(), 
-						m_position,
-						&m_rect,
-						m_colour,
-						m_rotation,
-						m_origin,
-						m_scale,
-						m_spriteEffects,
-						0.0f);
+	graphics->GetSpriteBatch()->Draw(m_texture->GetTexture(),
+		m_position,
+		&m_rect,
+		m_colour,
+		m_rotation,
+		m_origin,
+		m_scale,
+		m_spriteEffects,
+		0.0f);
 }
 
-void 
-Sprite::Render(Graphics* graphics, Vector2 position)
+void
+Sprite::Render(Graphics* graphics, const Vector2& position)
 {
 	// set alpha colour key
 	m_colour.w = m_alpha;
 
 	// draw sprite
-	graphics->GetSpriteBatch()->Draw(m_texture->GetTexture(), 
-									 position,
-									 &m_rect,
-									 m_colour,
-									 m_rotation,
-									 m_origin,
-									 m_scale,
-									 m_spriteEffects,
-									 0.0f);
+	graphics->GetSpriteBatch()->Draw(m_texture->GetTexture(),
+		position,
+		&m_rect,
+		m_colour,
+		m_rotation,
+		m_origin,
+		m_scale,
+		m_spriteEffects,
+		0.0f);
 }
 
-void 
+void Sprite::Render(Graphics* graphics, const Vector2& position, const RECT& destination)
+{
+	// set alpha colour key
+	m_colour.w = m_alpha;
+
+	// draw sprite
+	graphics->GetSpriteBatch()->Draw(m_texture->GetTexture(),
+	destination,
+	&m_rect,
+	m_colour,
+	m_rotation,
+	m_origin,
+	m_spriteEffects);
+}
+
+void
 Sprite::SetPosition(const Vector2& position)
 {
 	m_position = position;
 }
 
-void 
+void
 Sprite::SetScale(const float& scale)
 {
 	m_scale = scale;
 }
 
-void 
+void
 Sprite::SetRotation(const float& rotation)
 {
 	m_rotation = rotation;
 }
 
-void 
+void
 Sprite::SetAlpha(const float& alpha)
 {
 	m_alpha = alpha;
@@ -129,8 +144,8 @@ Sprite::SetOrigin(const Vector2& origin)
 	m_origin = origin;
 }
 
-void 
-Sprite::SetRect(const RECT& rect)
+void
+Sprite::SetSourceRect(const RECT& rect)
 {
 	m_rect = rect;
 }

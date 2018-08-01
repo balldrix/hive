@@ -21,7 +21,7 @@ public:
 	void SetAnimation(unsigned int animation);
 	void SetLoop(bool loop);
 	void SetAnimDone(bool done);
-	void SetRect();
+	void SetSourceRect();
 	void Reset();
 
 protected:

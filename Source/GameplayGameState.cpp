@@ -5,11 +5,13 @@
 #include "Texture.h"
 #include "AnimatedSprite.h"
 #include "SpriteSheet.h"
+#include "Sprite.h"
 #include "Animator.h"
 #include "Player.h"
 #include "Resources.h"
 #include "UnitVectors.h"
 #include "ControlSystem.h"
+#include "HitBox.h"
 
 GameplayGameState::GameplayGameState()
 {}
@@ -20,9 +22,12 @@ GameplayGameState::GameplayGameState(GameStateManager* gameStateManager) :
 	m_input(nullptr),
 	m_controlSystem(nullptr),
 	m_playerTexture(nullptr),
+	m_hitBoxTexture(nullptr),
 	m_playerSprite(nullptr),
+	m_hitBoxSprite(nullptr),
 	m_playerAnimator(nullptr),
 	m_player(nullptr),
+	m_hitBox(nullptr),
 	m_running(false),
 	GameState(L"GAMEPLAY")
 {
@@ -60,27 +65,33 @@ void GameplayGameState::LoadAssets()
 
 	// create texture memory
 	m_playerTexture = new Texture();
+	m_hitBoxTexture = new Texture();
 
 	// create sprite memory 
 	m_playerSprite = new SpriteSheet();
+	m_hitBoxSprite = new Sprite();
 
 	// create animator memory
 	m_playerAnimator = new Animator();
 
 	// create objects in memory
 	m_player = new Player();
+	m_hitBox = new HitBox();
 
 	// load textures
 	m_playerTexture->LoadTexture(m_graphics, "GameData\\Sprites\\playerSpritesheet.png");
+	m_hitBoxTexture->LoadTexture(m_graphics, "GameData\\Sprites\\hitbox.png");
 
 	// init sprites
 	m_playerSprite->Init(m_playerTexture, "GameData\\SpriteSheetData\\playerSpritesheetData.json");
+	m_hitBoxSprite->Init(m_hitBoxTexture);
 
 	// init animator
 	m_playerAnimator->Init("GameData\\AnimationData\\playerAnimationData.json");
 
 	// init game objects
-	m_player->Init(m_controlSystem, m_playerSprite, m_playerAnimator, Vector2((float)StartScreenPositionX, (float)StartScreenPositionY));
+	m_player->Init(m_controlSystem, m_playerSprite, m_playerAnimator, Vector2((float)StartScreenPositionX, (float)StartScreenPositionY), m_hitBox);
+	m_hitBox->Init(m_hitBoxSprite, Colors::Blue.v);
 
 	// set running to true
 	m_running = true;

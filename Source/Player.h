@@ -9,6 +9,7 @@
 class ControlSystem;
 class SpriteSheet;
 class Animator;
+class HitBox;
 
 // player constants TODO move into struct with data in txt file
 const unsigned int		StartScreenPositionX = 100;
@@ -23,8 +24,8 @@ public:
 	Player();
 	virtual ~Player();
 
-	void				Init(ControlSystem* controlSystem, SpriteSheet* sprite, Vector2 position);
-	void				Init(ControlSystem* controlSystem, SpriteSheet* sprite, Animator* animator, Vector2 position);
+	void				Init(ControlSystem* controlSystem, SpriteSheet* sprite, const Vector2& position);
+	void				Init(ControlSystem* controlSystem, SpriteSheet* sprite, Animator* animator, const Vector2& position, HitBox* hitBox);
 
 	void				Update(float deltaTime);
 	void				Render(Graphics* graphics);
@@ -44,6 +45,8 @@ private:
 
 	SpriteSheet*		m_sprite;				// player sprite sheet
 	Animator*			m_animator;				// player animation controller
+
+	HitBox*				m_hitBox;				// hit box pointer
 	
 	State<Player>*		m_currentState;			// player states for state machine
 	State<Player>*		m_previousState;		// record of previous state for state blips

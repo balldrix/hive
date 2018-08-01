@@ -31,7 +31,7 @@
     <ClCompile Include="Source\GameState.cpp" />
     <ClCompile Include="Source\GameStateManager.cpp" />
     <ClCompile Include="Source\Graphics.cpp" />
-    <ClCompile Include="Source\HitBoxMesh.cpp" />
+    <ClCompile Include="Source\HitBox.cpp" />
     <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Player.cpp" />
@@ -60,7 +60,7 @@
     <ClInclude Include="Source\GameStateManager.h" />
     <ClInclude Include="Source\Graphics.h" />
     <ClInclude Include="Source\AnimatedSprite.h" />
-    <ClInclude Include="Source\HitBoxMesh.h" />
+    <ClInclude Include="Source\HitBox.h" />
     <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\pch.h" />
     <ClInclude Include="Source\Player.h" />
@@ -79,6 +79,7 @@
     <ClInclude Include="Source\Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="GameData\Sprites\hitbox.png" />
     <Image Include="GameData\Sprites\playerSpritesheet.png" />
   </ItemGroup>
   <ItemGroup>

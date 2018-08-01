@@ -19,7 +19,8 @@ public:
 	virtual ~Sprite();
 	void				Init(Texture* texture); // initialise sprite
 	void				Render(Graphics* graphics); // render sprite
-	void				Render(Graphics* graphics, Vector2 position); // render sprite
+	void				Render(Graphics* graphics, const Vector2& position); // render sprite
+	void				Render(Graphics* graphics, const Vector2& position, const RECT& destination); // render to new destination rect
 
 	// helper methods
 	// setters
@@ -29,7 +30,7 @@ public:
 	void				SetAlpha(const float& alpha);
 	void				SetColour(const Color& colour);
 	void				SetOrigin(const Vector2& origin);
-	void				SetRect(const RECT& rect);
+	void				SetSourceRect(const RECT& rect);
 	void				SetFlipEffect(SpriteEffects effect);
 
 	// getters
