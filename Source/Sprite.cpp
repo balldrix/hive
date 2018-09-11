@@ -99,53 +99,40 @@ void Sprite::Render(Graphics* graphics, const Vector2& position, const RECT& des
 	m_colour.w = m_alpha;
 
 	// draw sprite
-	graphics->GetSpriteBatch()->Draw(m_texture->GetTexture(),
-	destination,
-	&m_rect,
-	m_colour,
-	m_rotation,
-	m_origin,
-	m_spriteEffects);
+	graphics->GetSpriteBatch()->Draw(m_texture->GetTexture(), destination, m_colour);
 }
 
-void
-Sprite::SetPosition(const Vector2& position)
+void Sprite::SetPosition(const Vector2& position)
 {
 	m_position = position;
 }
 
-void
-Sprite::SetScale(const float& scale)
+void Sprite::SetScale(const float& scale)
 {
 	m_scale = scale;
 }
 
-void
-Sprite::SetRotation(const float& rotation)
+void Sprite::SetRotation(const float& rotation)
 {
 	m_rotation = rotation;
 }
 
-void
-Sprite::SetAlpha(const float& alpha)
+void Sprite::SetAlpha(const float& alpha)
 {
 	m_alpha = alpha;
 }
 
-void
-Sprite::SetColour(const Color& colour)
+void Sprite::SetColour(const Color& colour)
 {
 	m_colour = colour;
 }
 
-void
-Sprite::SetOrigin(const Vector2& origin)
+void Sprite::SetOrigin(const Vector2& origin)
 {
 	m_origin = origin;
 }
 
-void
-Sprite::SetSourceRect(const RECT& rect)
+void Sprite::SetSourceRect(const RECT& rect)
 {
 	m_rect = rect;
 }

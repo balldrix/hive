@@ -99,12 +99,13 @@ void GameplayGameState::LoadAssets()
 
 void GameplayGameState::DeleteAssets()
 {
-	// delete control system
-	if(m_controlSystem)
+	// delete hit box
+	if(m_hitBox)
 	{
-		delete m_controlSystem;
-		m_controlSystem = nullptr;
+		delete m_hitBox;
+		m_hitBox = nullptr;
 	}
+
 	// delete game objects
 	if(m_player)
 	{
@@ -120,6 +121,12 @@ void GameplayGameState::DeleteAssets()
 	}
 
 	// delete sprites
+	if(m_hitBoxSprite)
+	{
+		delete m_hitBoxSprite;
+		m_hitBoxSprite = nullptr;
+	}
+
 	if(m_playerSprite)
 	{
 		delete m_playerSprite;
@@ -131,6 +138,19 @@ void GameplayGameState::DeleteAssets()
 	{
 		delete m_playerTexture;
 		m_playerTexture = nullptr;
+	}
+	
+	if(m_hitBoxTexture)
+	{
+		delete m_hitBoxTexture;
+		m_hitBoxTexture = nullptr;
+	}
+
+	// delete control system
+	if(m_controlSystem)
+	{
+		delete m_controlSystem;
+		m_controlSystem = nullptr;
 	}
 }
 

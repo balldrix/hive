@@ -39,6 +39,7 @@ public:
 	ControlSystem*		GetControlSystem() const { return m_controlSystem; }
 	SpriteSheet*		GetSprite() const { return m_sprite; }
 	Animator*			GetAnimator() const { return m_animator; }
+	HitBox*				GetHitBox() const { return m_hitBox; }
 
 private:
 	ControlSystem*		m_controlSystem;		// pointer to control system

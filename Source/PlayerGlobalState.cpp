@@ -28,6 +28,7 @@ void PlayerGlobalState::Execute(Player* player)
 	case UpLeft:
 		player->SetTargetVelocity(UnitVectors::UpLeft);
 		player->GetSprite()->SetFlipEffect(SpriteEffects::SpriteEffects_FlipHorizontally);
+		player->GetHitBox()->SetFlipped()
 		break;
 	case Up:
 		player->SetTargetVelocity(UnitVectors::Up);

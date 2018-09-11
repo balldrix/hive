@@ -43,6 +43,7 @@ private:
 	GameStateManager*	m_gameStateManager;			// game state manager pointer
 	Graphics*			m_graphics;					// graphics pointer
 	Input*				m_input;					// input class pointer		
+	
 	ControlSystem*		m_controlSystem;			// player input control system
 
 	Texture*			m_playerTexture;			// player sprite sheet
