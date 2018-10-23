@@ -7,7 +7,8 @@
 HitBox::HitBox() :
 	m_sprite(nullptr),
 	m_position(Vector2::Zero),
-	m_colour(Colors::White)
+	m_colour(Colors::White),
+	m_flipped(false)
 {
 }
 
@@ -26,7 +27,7 @@ void HitBox::Init(Sprite* sprite, Color colour)
 	m_colour = colour; // store colour variable
 
 	// TODO replace this when hitbox manager is in place
-	m_boundingBox.SetAABB(Vector2(-2.0f, -2.0f), Vector2(6.0f, 16.0f));
+	m_boundingBox.SetAABB(Vector2(-3.0f, -2.0f), Vector2(3.0f, 12.0f));
 	m_sprite->SetOrigin(Vector2::Zero);
 }
 
@@ -41,6 +42,12 @@ void HitBox::Update(const Vector2& position)
 void HitBox::Render(Graphics* graphics)
 {
 	AABB box = m_boundingBox;
+
+	if(m_flipped)
+	{
+		box = this->FlipAABB();
+	}
+
 	box.OffSetAABB(m_position);
 
 	// set sprite rect
@@ -58,11 +65,16 @@ void HitBox::SetAABB(const AABB& boundingBox)
 	m_boundingBox = boundingBox;
 }
 
+void HitBox::SetFlipped(bool flipped)
+{
+	m_flipped = flipped;
+}
+
 AABB HitBox::FlipAABB()
 {
 	AABB newBox = m_boundingBox;
-	newBox.SetMin(newBox.GetMin().X * -1.0f, newBox.GetMin().y * -1.0f);
-	newBox.SetMax(newBox.GetMax().X * -1.0f, newBox.GetMax().y * -1.0f);
+	newBox.SetMin(Vector2(newBox.GetMax().x * -1.0f, newBox.GetMin().y));
+	newBox.SetMax(Vector2(newBox.GetMin().x * -1.0f, newBox.GetMax().y));
 
 	return newBox;
 }

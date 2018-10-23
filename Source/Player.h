@@ -41,6 +41,9 @@ public:
 	Animator*			GetAnimator() const { return m_animator; }
 	HitBox*				GetHitBox() const { return m_hitBox; }
 
+	// flip sprite and hitboxes
+	void				FlipHorizontally(bool flip);
+
 private:
 	ControlSystem*		m_controlSystem;		// pointer to control system
 

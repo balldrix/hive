@@ -18,7 +18,7 @@ Player::Player() :
 
 Player::~Player()
 {
-	
+
 }
 
 void Player::Init(ControlSystem* controlSystem, SpriteSheet* sprite, const Vector2& position)
@@ -35,7 +35,7 @@ void Player::Init(ControlSystem* controlSystem, SpriteSheet* sprite, const Vecto
 void Player::Init(ControlSystem* controlSystem, SpriteSheet* sprite, Animator* animator, const Vector2& position, HitBox* hitBox)
 {
 	Init(controlSystem, sprite, position);
-	
+
 	// init animator
 	m_animator = animator;
 	m_animator->SetAnimation(0);
@@ -48,7 +48,7 @@ void Player::Update(float deltaTime)
 {
 	// update object
 	GameObject::Update(deltaTime);
-	
+
 	// if player has an animator
 	if(m_animator)
 	{
@@ -68,7 +68,7 @@ void Player::Update(float deltaTime)
 }
 
 void Player::Render(Graphics* graphics)
-{	
+{
 	// render player sprite
 	if(m_animator)
 	{
@@ -90,7 +90,7 @@ void Player::Reset()
 
 	// Set Position TODO set world position and screen position
 	SetPosition(StartScreenPositionX, StartScreenPositionY);
-	
+
 	SetActive(true);
 }
 
@@ -115,3 +115,22 @@ void Player::ReturnToPreviousState()
 {
 	SetPlayerState(m_previousState);
 }
+
+void Player::FlipHorizontally(bool flip)
+{
+	// true if flip param is true
+	if(flip == true)
+	{
+		// flip sprite
+		m_sprite->SetFlipEffect(SpriteEffects::SpriteEffects_FlipHorizontally);
+
+	}
+	else
+	{
+		m_sprite->SetFlipEffect(SpriteEffects::SpriteEffects_None);	
+	}
+	
+	// flip hitboxes
+	m_hitBox->SetFlipped(flip);
+}
+

@@ -23,6 +23,8 @@ public:
 	void Update(const Vector2& position);		// update hitbox mesh position
 	void Render(Graphics* graphics);			// render hibox
 
+	AABB GetAABB() const { return m_boundingBox; }
+
 	void SetAABB(const AABB& boundingBox);
 	void SetFlipped(bool flipped);
 

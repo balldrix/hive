@@ -27,34 +27,33 @@ void PlayerGlobalState::Execute(Player* player)
 		break;
 	case UpLeft:
 		player->SetTargetVelocity(UnitVectors::UpLeft);
-		player->GetSprite()->SetFlipEffect(SpriteEffects::SpriteEffects_FlipHorizontally);
-		player->GetHitBox()->SetFlipped()
+		player->FlipHorizontally(true);
 		break;
 	case Up:
 		player->SetTargetVelocity(UnitVectors::Up);
 		break;
 	case UpRight:
 		player->SetTargetVelocity(UnitVectors::UpRight);
-		player->GetSprite()->SetFlipEffect(SpriteEffects::SpriteEffects_None);
+		player->FlipHorizontally(false);
 		break;
 	case Right:
 		player->SetTargetVelocity(UnitVectors::Right);
-		player->GetSprite()->SetFlipEffect(SpriteEffects::SpriteEffects_None);
+		player->FlipHorizontally(false);
 		break;
 	case DownRight:
 		player->SetTargetVelocity(UnitVectors::DownRight);
-		player->GetSprite()->SetFlipEffect(SpriteEffects::SpriteEffects_None);
+		player->FlipHorizontally(false);
 		break;
 	case Down:
 		player->SetTargetVelocity(UnitVectors::Down);
 		break;
 	case DownLeft:
 		player->SetTargetVelocity(UnitVectors::DownLeft);
-		player->GetSprite()->SetFlipEffect(SpriteEffects::SpriteEffects_FlipHorizontally);
+		player->FlipHorizontally(true);
 		break;
 	case Left:
 		player->SetTargetVelocity(UnitVectors::Left);
-		player->GetSprite()->SetFlipEffect(SpriteEffects::SpriteEffects_FlipHorizontally);
+		player->FlipHorizontally(true);
 		break;
 	default:
 		break;
