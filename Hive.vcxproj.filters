@@ -76,6 +76,9 @@
     <ClCompile Include="Source\HitBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HitBoxManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -95,6 +98,9 @@
     </Filter>
     <Filter Include="Game Data\Sprites">
       <UniqueIdentifier>{8097c6c1-0b85-445b-b3c3-2776deeed50d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Data\HitBoxData">
+      <UniqueIdentifier>{80dbea2e-ece0-43f8-85e6-28b22d959618}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -191,6 +197,12 @@
     <ClInclude Include="Source\HitBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HitBoxManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\HitBoxData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\playerSpritesheet.png">
@@ -204,9 +216,12 @@
     <None Include="GameData\SpriteSheetData\playerSpritesheetData.json">
       <Filter>Game Data\Sprite Sheet Data</Filter>
     </None>
-    <None Include="GameData\Animation\playerAnimationData.json">
+    <None Include="packages.config" />
+    <None Include="GameData\AnimationData\playerAnimationData.json">
       <Filter>Game Data\Animation Data</Filter>
     </None>
-    <None Include="packages.config" />
+    <None Include="GameData\HitBoxData\playerHitBoxData.json">
+      <Filter>Game Data\HitBoxData</Filter>
+    </None>
   </ItemGroup>
 </Project>

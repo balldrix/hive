@@ -13,6 +13,31 @@ class Graphics;
 class AABB;
 class Sprite;
 
+namespace
+{
+	struct HitBoxData
+	{
+		std::string	name;
+		AABB movementBox;
+		HurtBoxData hurtBox;
+		AABB hitBox;
+	};
+
+	struct HurtBoxData
+	{
+
+	};
+
+	void from_json(const json& j, HitBoxData& a)
+	{
+		a.name = j.at("name").get<std::string>();
+		a.spriteSheetIndex = j.at("index").get<int>();
+		a.frameCount = j.at("frameCount").get<int>();
+		a.framesPerSecond = j.at("framesPerSecond").get<int>();
+		a.loop = j.at("loop").get<bool>();
+	}
+}
+
 class HitBox
 {
 public:

@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="HitBoxManager.cpp" />
     <ClCompile Include="Source\AABB.cpp" />
     <ClCompile Include="Source\AnimatedSprite.cpp" />
     <ClCompile Include="Source\Animator.cpp" />
@@ -46,6 +47,7 @@
     <ClCompile Include="Source\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="HitBoxManager.h" />
     <ClInclude Include="Source\AABB.h" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\Animator.h" />
@@ -61,6 +63,7 @@
     <ClInclude Include="Source\Graphics.h" />
     <ClInclude Include="Source\AnimatedSprite.h" />
     <ClInclude Include="Source\HitBox.h" />
+    <ClInclude Include="Source\HitBoxData.h" />
     <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\pch.h" />
     <ClInclude Include="Source\Player.h" />
@@ -83,7 +86,8 @@
     <Image Include="GameData\Sprites\playerSpritesheet.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="GameData\Animation\playerAnimationData.json" />
+    <None Include="GameData\AnimationData\playerAnimationData.json" />
+    <None Include="GameData\HitBoxData\playerHitBoxData.json" />
     <None Include="GameData\SpriteSheetData\playerSpritesheetData.json" />
     <None Include="packages.config" />
   </ItemGroup>
