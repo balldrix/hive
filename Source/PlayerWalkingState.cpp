@@ -1,5 +1,6 @@
 #include "PlayerOwnedStates.h"
 #include "Player.h"
+#include "HitBoxManager.h"
 #include "Animator.h"
 #include "ControlSystem.h"
 #include "UnitVectors.h"
@@ -14,6 +15,7 @@ void PlayerWalkingState::OnEnter(Player* player)
 {
 	// set walking animation
 	player->GetAnimator()->SetAnimation("Walking");
+	player->GetHitBox()->SetCurrentHitBox("Walking");
 }
 
 void PlayerWalkingState::Execute(Player* player)

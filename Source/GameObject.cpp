@@ -1,5 +1,8 @@
 #include "GameObject.h"
-#include "Sprite.h"
+#include "SpriteSheet.h"
+#include "HitBoxManager.h"
+#include "Animator.h"
+#include "ControlSystem.h"
 
 GameObject::GameObject() :
 	m_ID(L"GameObject"),
@@ -9,11 +12,23 @@ GameObject::GameObject() :
 	m_movementSpeed(0.0f),
 	m_acceleration(0.0f),
 	m_deceleration(0.0f),
+	m_sprite(nullptr),
+	m_animator(nullptr),
+	m_hitBoxManager(nullptr),
+	m_controlSystem(nullptr),
 	m_active(false)
 {
 }
 
 GameObject::~GameObject()
+{
+}
+
+void GameObject::Init(const Vector2& position, HitBoxManager* hitBoxManager, SpriteSheet* sprite)
+{
+}
+
+void GameObject::Init(const Vector2& position, HitBoxManager* hitBoxManager, SpriteSheet* sprite, Animator* animator, ControlSystem* controlSystem)
 {
 }
 

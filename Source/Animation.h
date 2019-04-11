@@ -11,11 +11,13 @@ namespace
 {
 	struct Animation
 	{
-		std::string	name;
-		int spriteSheetIndex;
-		int frameCount;
-		int framesPerSecond;
-		bool loop;
+		std::string	name = {};
+		int spriteSheetIndex = {};
+		int frameCount = {};
+		int framesPerSecond = {};
+		bool loop = {};
+
+		Animation() = default;
 	};
 
 	void from_json(const json& j, Animation& a)

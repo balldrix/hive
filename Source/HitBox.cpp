@@ -5,7 +5,6 @@
 #include "AABB.h"
 
 HitBox::HitBox() :
-	m_sprite(nullptr),
 	m_position(Vector2::Zero),
 	m_colour(Colors::White),
 	m_flipped(false)
@@ -17,18 +16,20 @@ HitBox::~HitBox()
 }
 
 // initialise the hit box
-void HitBox::Init(Sprite* sprite, Color colour)
+void HitBox::Init(Sprite* sprite, AABB box, Color colour)
 {
 	// init sprite
-	m_sprite = sprite;
-	m_sprite->SetAlpha(0.3f);
-	m_sprite->SetColour(colour);
+	m_sprite = Sprite(*sprite);
+	m_sprite.SetColour(colour);
+	m_sprite.SetAlpha(0.25f);
 
 	m_colour = colour; // store colour variable
 
-	// TODO replace this when hitbox manager is in place
-	m_boundingBox.SetAABB(Vector2(-3.0f, -2.0f), Vector2(3.0f, 12.0f));
-	m_sprite->SetOrigin(Vector2::Zero);
+	// set bounding box
+	m_boundingBox = box;
+
+	// zero origin
+	m_sprite.SetOrigin(Vector2::Zero);
 }
 
 // update hitbox
@@ -57,7 +58,7 @@ void HitBox::Render(Graphics* graphics)
 	rect.right = (LONG)box.GetMax().x;
 	rect.bottom = (LONG)box.GetMax().y;
 
-	m_sprite->Render(graphics, m_position, rect);
+	m_sprite.Render(graphics, m_position, rect);
 }
 
 void HitBox::SetAABB(const AABB& boundingBox)
@@ -72,9 +73,14 @@ void HitBox::SetFlipped(bool flipped)
 
 AABB HitBox::FlipAABB()
 {
+	Vector2 newMin = m_boundingBox.GetMin();
+	Vector2 newMax = m_boundingBox.GetMax();
 	AABB newBox = m_boundingBox;
-	newBox.SetMin(Vector2(newBox.GetMax().x * -1.0f, newBox.GetMin().y));
-	newBox.SetMax(Vector2(newBox.GetMin().x * -1.0f, newBox.GetMax().y));
+
+	newMin.x = m_boundingBox.GetMax().x * -1;
+	newMax.x = m_boundingBox.GetMin().x * -1;
+
+	newBox.SetAABB(newMin, newMax);
 
 	return newBox;
 }

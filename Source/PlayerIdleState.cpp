@@ -1,6 +1,7 @@
 #include "PlayerOwnedStates.h"
 #include "Player.h"
 #include "Animator.h"
+#include "HitBoxManager.h"
 #include "ControlSystem.h"
 #include "UnitVectors.h"
 
@@ -14,6 +15,7 @@ void PlayerIdleState::OnEnter(Player* player)
 {
 	// set idle animation
 	player->GetAnimator()->SetAnimation("Idle");
+	player->GetHitBox()->SetCurrentHitBox("Idle");
 }
 
 void PlayerIdleState::Execute(Player* player)

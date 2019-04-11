@@ -1,17 +1,14 @@
 #include "Player.h"
 #include "SpriteSheet.h"
 #include "Animator.h"
-#include "HitBox.h"
+#include "HitBoxManager.h"
 #include "Resources.h"
 
 #include "PlayerOwnedStates.h"
 
 Player::Player() :
-	m_controlSystem(nullptr),
-	m_sprite(nullptr),
-	m_animator(nullptr),
-	m_hitBox(nullptr),
 	m_currentState(PlayerIdleState::Instance()),
+	m_previousState(nullptr),
 	m_globalState(PlayerGlobalState::Instance())
 {
 }
@@ -21,27 +18,17 @@ Player::~Player()
 
 }
 
-void Player::Init(ControlSystem* controlSystem, SpriteSheet* sprite, const Vector2& position)
+void Player::Init(ControlSystem* controlSystem, SpriteSheet* sprite, Animator* animator, const Vector2& position, HitBoxManager* hitBoxManager)
 {
-	// init player
 	m_controlSystem = controlSystem;
 	m_sprite = sprite;
 	m_position = position;
 	m_acceleration = PlayerAcceleration;
 	m_deceleration = PlayerDeceleration;
 	m_movementSpeed = WalkSpeed;
-}
-
-void Player::Init(ControlSystem* controlSystem, SpriteSheet* sprite, Animator* animator, const Vector2& position, HitBox* hitBox)
-{
-	Init(controlSystem, sprite, position);
-
-	// init animator
 	m_animator = animator;
 	m_animator->SetAnimation(0);
-
-	// init hitbox
-	m_hitBox = hitBox;
+	m_hitBoxManager = hitBoxManager;
 }
 
 void Player::Update(float deltaTime)
@@ -56,15 +43,15 @@ void Player::Update(float deltaTime)
 		m_animator->Update(deltaTime);
 	}
 
-	// update position of sprite
-	m_sprite->SetPosition(m_position);
-
 	// TODO update player state machine
 	m_globalState->Execute(this);
 	m_currentState->Execute(this);
 
+	// update position of sprite
+	m_sprite->SetPosition(m_position);
+
 	// update hitbox
-	m_hitBox->Update(m_position);
+	m_hitBoxManager->Update();
 }
 
 void Player::Render(Graphics* graphics)
@@ -80,7 +67,7 @@ void Player::Render(Graphics* graphics)
 	}
 
 	// render hitbox
-	m_hitBox->Render(graphics);
+	m_hitBoxManager->Render(graphics);
 }
 
 void Player::Reset()
@@ -88,8 +75,12 @@ void Player::Reset()
 	// set player state back to Idle
 	SetPlayerState(PlayerIdleState::Instance());
 
-	// Set Position TODO set world position and screen position
+	// Set Position 
+	// TODO set world position and screen position
 	SetPosition(StartScreenPositionX, StartScreenPositionY);
+
+	// reset hitboxes
+	m_hitBoxManager->SetCurrentHitBox(0);
 
 	SetActive(true);
 }
@@ -131,6 +122,6 @@ void Player::FlipHorizontally(bool flip)
 	}
 	
 	// flip hitboxes
-	m_hitBox->SetFlipped(flip);
+	m_hitBoxManager->SetFlipped(flip);
 }
 

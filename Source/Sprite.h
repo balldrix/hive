@@ -1,5 +1,5 @@
 // Sprite.h
-// Christopher Ball 2018
+// Christopher Ball 2019
 // sprite class contains texture, position, alpha
 // rotation and scale of the 2D sprite
 
@@ -17,10 +17,11 @@ class Sprite
 public:
 	Sprite();
 	virtual ~Sprite();
-	void				Init(Texture* texture); // initialise sprite
-	void				Render(Graphics* graphics); // render sprite
-	void				Render(Graphics* graphics, const Vector2& position); // render sprite
-	void				Render(Graphics* graphics, const Vector2& position, const RECT& destination); // render to new destination rect
+	void				Init(Texture* texture); 
+	void				Render(Graphics* graphics); 
+	void				Render(Graphics* graphics, float alpha);
+	void				Render(Graphics* graphics, const Vector2& position); 
+	void				Render(Graphics* graphics, const Vector2& position, const RECT& destination); 
 
 	// helper methods
 	// setters

@@ -23,8 +23,7 @@ Sprite::~Sprite()
 {
 }
 
-void
-Sprite::Init(Texture* texture)
+void Sprite::Init(Texture* texture)
 {
 	// initialise texture
 	m_texture = texture;
@@ -58,12 +57,8 @@ Sprite::Init(Texture* texture)
 	m_alpha = 1.0f;
 }
 
-void
-Sprite::Render(Graphics* graphics)
+void Sprite::Render(Graphics* graphics)
 {
-	// set alpha colour key
-	m_colour.w = m_alpha;
-
 	graphics->GetSpriteBatch()->Draw(m_texture->GetTexture(),
 		m_position,
 		&m_rect,
@@ -75,15 +70,21 @@ Sprite::Render(Graphics* graphics)
 		0.0f);
 }
 
+void Sprite::Render(Graphics* graphics, float alpha)
+{
+	SetAlpha(alpha);
+	
+	Render(graphics);
+}
+
 void
 Sprite::Render(Graphics* graphics, const Vector2& position)
 {
-	// set alpha colour key
-	m_colour.w = m_alpha;
+	SetPosition(position);
 
 	// draw sprite
 	graphics->GetSpriteBatch()->Draw(m_texture->GetTexture(),
-		position,
+		m_position,
 		&m_rect,
 		m_colour,
 		m_rotation,
@@ -98,13 +99,16 @@ void Sprite::Render(Graphics* graphics, const Vector2& position, const RECT& des
 	// set alpha colour key
 	m_colour.w = m_alpha;
 
+	SetPosition(position);
+
 	// draw sprite
 	graphics->GetSpriteBatch()->Draw(m_texture->GetTexture(), destination, m_colour);
 }
 
 void Sprite::SetPosition(const Vector2& position)
 {
-	m_position = position;
+	m_position.x = round(position.x);
+	m_position.y = round(position.y);
 }
 
 void Sprite::SetScale(const float& scale)
@@ -120,11 +124,13 @@ void Sprite::SetRotation(const float& rotation)
 void Sprite::SetAlpha(const float& alpha)
 {
 	m_alpha = alpha;
+	SetColour(m_colour);
 }
 
 void Sprite::SetColour(const Color& colour)
 {
 	m_colour = colour;
+	m_colour.w = m_alpha;
 }
 
 void Sprite::SetOrigin(const Vector2& origin)

@@ -7,11 +7,9 @@
 
 // forward declarations
 class ControlSystem;
-class SpriteSheet;
-class Animator;
-class HitBox;
 
-// player constants TODO move into struct with data in txt file
+// player constants 
+// TODO move into struct with data in txt file
 const unsigned int		StartScreenPositionX = 100;
 const unsigned int		StartScreenPositionY = 50;
 const unsigned int		WalkSpeed = 30;
@@ -24,8 +22,7 @@ public:
 	Player();
 	virtual ~Player();
 
-	void				Init(ControlSystem* controlSystem, SpriteSheet* sprite, const Vector2& position);
-	void				Init(ControlSystem* controlSystem, SpriteSheet* sprite, Animator* animator, const Vector2& position, HitBox* hitBox);
+	void				Init(ControlSystem* controlSystem, SpriteSheet* sprite, Animator* animator, const Vector2& position, HitBoxManager* hitBoxManager);
 
 	void				Update(float deltaTime);
 	void				Render(Graphics* graphics);
@@ -36,22 +33,11 @@ public:
 	void				ReturnToPreviousState();
 
 	State<Player>*		GetState() const { return m_currentState; }
-	ControlSystem*		GetControlSystem() const { return m_controlSystem; }
-	SpriteSheet*		GetSprite() const { return m_sprite; }
-	Animator*			GetAnimator() const { return m_animator; }
-	HitBox*				GetHitBox() const { return m_hitBox; }
 
 	// flip sprite and hitboxes
 	void				FlipHorizontally(bool flip);
 
 private:
-	ControlSystem*		m_controlSystem;		// pointer to control system
-
-	SpriteSheet*		m_sprite;				// player sprite sheet
-	Animator*			m_animator;				// player animation controller
-
-	HitBox*				m_hitBox;				// hit box pointer
-	
 	State<Player>*		m_currentState;			// player states for state machine
 	State<Player>*		m_previousState;		// record of previous state for state blips
 	State<Player>*		m_globalState;			// global state for common player methods

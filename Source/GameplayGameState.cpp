@@ -11,9 +11,22 @@
 #include "Resources.h"
 #include "UnitVectors.h"
 #include "ControlSystem.h"
-#include "HitBox.h"
+#include "HitBoxManager.h"
 
-GameplayGameState::GameplayGameState()
+GameplayGameState::GameplayGameState() :
+	m_gameStateManager(nullptr),
+	m_graphics(nullptr),
+	m_input(nullptr),
+	m_controlSystem(nullptr),
+	m_playerTexture(nullptr),
+	m_hitBoxTexture(nullptr),
+	m_playerSprite(nullptr),
+	m_hitBoxSprite(nullptr),
+	m_playerAnimator(nullptr),
+	m_player(nullptr),
+	m_playerHitBoxManager(nullptr),
+	m_running(false),
+	GameState(L"GAMEPLAY")
 {}
 
 GameplayGameState::GameplayGameState(GameStateManager* gameStateManager) :
@@ -27,7 +40,7 @@ GameplayGameState::GameplayGameState(GameStateManager* gameStateManager) :
 	m_hitBoxSprite(nullptr),
 	m_playerAnimator(nullptr),
 	m_player(nullptr),
-	m_hitBox(nullptr),
+	m_playerHitBoxManager(nullptr),
 	m_running(false),
 	GameState(L"GAMEPLAY")
 {
@@ -74,9 +87,11 @@ void GameplayGameState::LoadAssets()
 	// create animator memory
 	m_playerAnimator = new Animator();
 
+	// create hitbox managers
+	m_playerHitBoxManager = new HitBoxManager();
+	
 	// create objects in memory
 	m_player = new Player();
-	m_hitBox = new HitBox();
 
 	// load textures
 	m_playerTexture->LoadTexture(m_graphics, "GameData\\Sprites\\playerSpritesheet.png");
@@ -89,28 +104,30 @@ void GameplayGameState::LoadAssets()
 	// init animator
 	m_playerAnimator->Init("GameData\\AnimationData\\playerAnimationData.json");
 
+	// init hitbox managers
+	m_playerHitBoxManager->Init(m_hitBoxSprite, m_player, "GameData\\HitBoxData\\playerHitBoxData.json");
+	
 	// init game objects
-	m_player->Init(m_controlSystem, m_playerSprite, m_playerAnimator, Vector2((float)StartScreenPositionX, (float)StartScreenPositionY), m_hitBox);
-	m_hitBox->Init(m_hitBoxSprite, Colors::Blue.v);
+	m_player->Init(m_controlSystem, m_playerSprite, m_playerAnimator, Vector2((float)StartScreenPositionX, (float)StartScreenPositionY), m_playerHitBoxManager);
 
 	// set running to true
 	m_running = true;
 }
 
 void GameplayGameState::DeleteAssets()
-{
-	// delete hit box
-	if(m_hitBox)
-	{
-		delete m_hitBox;
-		m_hitBox = nullptr;
-	}
-
-	// delete game objects
+{	
+	// delete player
 	if(m_player)
 	{
 		delete m_player;
 		m_player = nullptr;
+	}
+
+	// delete hit box manager
+	if(m_playerHitBoxManager)
+	{
+		delete m_playerHitBoxManager;
+		m_playerHitBoxManager = nullptr;
 	}
 
 	// delete animators

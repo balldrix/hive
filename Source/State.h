@@ -1,5 +1,5 @@
 // State.h
-// Christopher Ball 2018.
+// Christopher Ball 2019
 // state template class for use in
 // finite state machines
 
@@ -20,7 +20,6 @@ public:
 
 	// on exit
 	virtual void OnExit(T*) = 0;
-
 };
 
 #endif // !_STATE_H_

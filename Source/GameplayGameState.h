@@ -1,5 +1,5 @@
 // GameplayGameState.h
-// Christopher Ball 2018
+// Christopher Ball 2019
 // the game state for the main gameplay state
 
 #ifndef _GAMEPLAYGAMESTATE_H_
@@ -18,7 +18,7 @@ class Sprite;
 class Animator;
 class Player;
 class ControlSystem;
-class HitBox;
+class HitBoxManager;
 
 class GameplayGameState : public GameState
 {
@@ -55,7 +55,7 @@ private:
 	Animator*			m_playerAnimator;			// class to run player animations
 
 	Player*				m_player;					// pointer to player class
-	HitBox*				m_hitBox;					// TODO replace with hitbox system
+	HitBoxManager*		m_playerHitBoxManager;			// replace with hitbox system
 
 	bool				m_running;					// is game running or not
 };

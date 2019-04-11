@@ -76,7 +76,7 @@
     <ClCompile Include="Source\HitBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HitBoxManager.cpp">
+    <ClCompile Include="Source\HitBoxManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -197,10 +197,10 @@
     <ClInclude Include="Source\HitBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HitBoxManager.h">
+    <ClInclude Include="Source\HitBoxData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\HitBoxData.h">
+    <ClInclude Include="Source\HitBoxManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
