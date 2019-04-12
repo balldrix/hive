@@ -7,12 +7,19 @@
 			"framesPerSecond": 8,
 			"loop": true
 		},
-		{
-			"name": "Walking",
-			"index": 7,
-			"frameCount": 8,
-			"framesPerSecond": 10,
-			"loop": true
-		}
+    {
+      "name": "Walking",
+      "index": 7,
+      "frameCount": 8,
+      "framesPerSecond": 10,
+      "loop": true
+    },
+    {
+      "name": "Jab",
+      "index": 15,
+      "frameCount": 4,
+      "framesPerSecond": 10,
+      "loop": false
+    }
 	]
 }

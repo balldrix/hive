@@ -1,5 +1,5 @@
 // PlayerOwnedStates.h
-// Christopher Ball 2018
+// Christopher Ball 2019
 // header file to keep player 
 // state headers together
 
@@ -9,5 +9,6 @@
 #include "PlayerGlobalState.h"
 #include "PlayerIdleState.h"
 #include "PlayerWalkingState.h"
+#include "PlayerJabState.h"
 
 #endif // !_PLAYER_OWNED_STATES_H_
