@@ -1,5 +1,5 @@
 // ControlSystem.h
-// Christopher Ball 2018
+// Christopher Ball 2019
 // Manages player input and combos
 
 #ifndef _CONTROL_SYSTEM_H_
@@ -20,6 +20,7 @@ enum Controls
 	Down,
 	DownLeft,
 	Left,
+	Jab,
 	MaxControls
 };
 

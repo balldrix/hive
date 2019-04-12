@@ -80,6 +80,7 @@ void Animator::Update(float deltaTime)
 void Animator::SetAnimation(unsigned int index)
 {
 	m_currentAnimation = &m_animationList[index];
+	m_animDone = false;
 }
 
 void Animator::SetAnimation(std::string name)
@@ -91,7 +92,7 @@ void Animator::SetAnimation(std::string name)
 	{
 		if(m_animationList[i].name == name)
 		{
-			m_currentAnimation = &m_animationList[i];
+			SetAnimation(i);
 			return;
 		}
 	}

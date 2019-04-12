@@ -3,7 +3,8 @@
 ControlSystem::ControlSystem() :
 	m_inputIndex(0),
 	m_inputTimer(0.0f),
-	m_comboTimer(0.0f)
+	m_comboTimer(0.0f),
+	m_playerInput()
 {
 }
 

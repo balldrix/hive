@@ -89,7 +89,7 @@ void GameplayGameState::LoadAssets()
 
 	// create hitbox managers
 	m_playerHitBoxManager = new HitBoxManager();
-	
+
 	// create objects in memory
 	m_player = new Player();
 
@@ -106,7 +106,7 @@ void GameplayGameState::LoadAssets()
 
 	// init hitbox managers
 	m_playerHitBoxManager->Init(m_hitBoxSprite, m_player, "GameData\\HitBoxData\\playerHitBoxData.json");
-	
+
 	// init game objects
 	m_player->Init(m_controlSystem, m_playerSprite, m_playerAnimator, Vector2((float)StartScreenPositionX, (float)StartScreenPositionY), m_playerHitBoxManager);
 
@@ -115,7 +115,7 @@ void GameplayGameState::LoadAssets()
 }
 
 void GameplayGameState::DeleteAssets()
-{	
+{
 	// delete player
 	if(m_player)
 	{
@@ -156,7 +156,7 @@ void GameplayGameState::DeleteAssets()
 		delete m_playerTexture;
 		m_playerTexture = nullptr;
 	}
-	
+
 	if(m_hitBoxTexture)
 	{
 		delete m_hitBoxTexture;
@@ -232,7 +232,13 @@ void GameplayGameState::ProcessInput()
 		// send right input to control system
 		m_controlSystem->SetInput(Right);
 	}
-	else if(!(m_input->IsKeyDown(PLAYER_UP_KEY) ||
+
+	if(m_input->IsKeyDown(PLAYER_A_KEY))
+	{
+		m_controlSystem->SetInput(Jab);
+	}
+
+	if(!(m_input->IsKeyDown(PLAYER_UP_KEY) ||
 		m_input->IsKeyDown(PLAYER_DOWN_KEY) ||
 		m_input->IsKeyDown(PLAYER_LEFT_KEY) ||
 		m_input->IsKeyDown(PLAYER_RIGHT_KEY)))
