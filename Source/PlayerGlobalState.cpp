@@ -3,6 +3,7 @@
 #include "UnitVectors.h"
 #include "ControlSystem.h"
 #include "SpriteSheet.h"
+#include "Animator.h"
 
 PlayerGlobalState* PlayerGlobalState::Instance()
 {
@@ -54,6 +55,12 @@ void PlayerGlobalState::Execute(Player* player)
 	case Left:
 		player->SetTargetVelocity(UnitVectors::Left);
 		player->FlipHorizontally(true);
+		break;
+	case Punch:
+		if(player->GetControlSystem()->CanAttack())
+		{
+			player->SetPlayerState(PlayerJabState::Instance());
+		}
 		break;
 	default:
 		break;

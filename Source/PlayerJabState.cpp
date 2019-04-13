@@ -14,13 +14,16 @@ PlayerJabState* PlayerJabState::Instance()
 void PlayerJabState::OnEnter(Player* player)
 {
 	// set jab animation
+	player->GetAnimator()->Reset();
 	player->GetAnimator()->SetAnimation("Jab");
 	player->GetHitBox()->SetCurrentHitBox("Jab");
+	player->GetControlSystem()->CanAttack(false);
 }
 
 void PlayerJabState::Execute(Player* player)
 {
 	// stop movement
+	player->SetTargetVelocity(Vector2::Zero);
 	player->SetCurrentVelocity(Vector2::Zero);
 
 	// true if the jab animation is done

@@ -3,6 +3,7 @@
 #include "GameObject.h"
 #include "SpriteSheet.h"
 #include "Animator.h"
+#include "Animation.h"
 
 
 HitBoxManager::HitBoxManager() :
@@ -90,9 +91,12 @@ bool HitBoxManager::IsHitBoxActive()
 	int startup = m_currentHitBoxData->startupFrames - 1;
 	int active = m_currentHitBoxData->activeFrames + startup;
 
-	if(currentFrame > startup && currentFrame < startup)
+	if(m_owner->GetAnimator()->GetAnimation()->name == "Jab")
 	{
-		return true;
+		if(currentFrame >= startup && currentFrame <= active)
+		{
+			return true;
+		}
 	}
 
 	return false;

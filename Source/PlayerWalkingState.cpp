@@ -28,4 +28,5 @@ void PlayerWalkingState::Execute(Player* player)
 
 void PlayerWalkingState::OnExit(Player* player)
 {
+	player->GetAnimator()->Reset();
 }

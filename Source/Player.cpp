@@ -67,7 +67,7 @@ void Player::Render(Graphics* graphics)
 	}
 
 	// render hitbox
-	m_hitBoxManager->Render(graphics);
+	//m_hitBoxManager->Render(graphics);
 }
 
 void Player::Reset()

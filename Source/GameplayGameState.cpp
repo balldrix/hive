@@ -25,6 +25,8 @@ GameplayGameState::GameplayGameState() :
 	m_playerAnimator(nullptr),
 	m_player(nullptr),
 	m_playerHitBoxManager(nullptr),
+	m_canAttack(true),
+	m_attackCoolDown(0.0f),
 	m_running(false),
 	GameState(L"GAMEPLAY")
 {}
@@ -233,18 +235,24 @@ void GameplayGameState::ProcessInput()
 		m_controlSystem->SetInput(Right);
 	}
 
-	if(m_input->IsKeyDown(PLAYER_A_KEY))
+	if(m_input->IsKeyDown(PLAYER_A_KEY) && m_controlSystem->CanAttack())
 	{
-		m_controlSystem->SetInput(Jab);
+		m_controlSystem->SetInput(Punch);
 	}
 
 	if(!(m_input->IsKeyDown(PLAYER_UP_KEY) ||
 		m_input->IsKeyDown(PLAYER_DOWN_KEY) ||
 		m_input->IsKeyDown(PLAYER_LEFT_KEY) ||
-		m_input->IsKeyDown(PLAYER_RIGHT_KEY)))
+		m_input->IsKeyDown(PLAYER_RIGHT_KEY) ||
+		m_input->IsKeyDown(PLAYER_A_KEY)))
 	{
 		// set player input to none
 		m_controlSystem->SetInput(None);
+	}
+
+	if(!m_input->IsKeyDown(PLAYER_A_KEY))
+	{
+		m_controlSystem->CanAttack(true);
 	}
 }
 

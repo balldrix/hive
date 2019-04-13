@@ -9,16 +9,16 @@
 		},
     {
       "name": "Walking",
-      "index": 7,
+      "index": 8,
       "frameCount": 8,
-      "framesPerSecond": 10,
+      "framesPerSecond": 8,
       "loop": true
     },
     {
       "name": "Jab",
-      "index": 15,
-      "frameCount": 4,
-      "framesPerSecond": 10,
+      "index": 17,
+      "frameCount": 1,
+      "framesPerSecond": 8,
       "loop": false
     }
 	]

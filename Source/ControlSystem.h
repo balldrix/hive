@@ -5,9 +5,8 @@
 #ifndef _CONTROL_SYSTEM_H_
 #define _CONTROL_SYSTEM_H_
 
-const unsigned int MaxCombo = 5;
-const float ComboTimeLimit = 2.0f;
-const float InputTimeLimit = 0.05f;
+const unsigned int MaxCombo = 99;
+const float InputTimeLimit = 0.008f;
 
 enum Controls
 {
@@ -20,7 +19,7 @@ enum Controls
 	Down,
 	DownLeft,
 	Left,
-	Jab,
+	Punch,
 	MaxControls
 };
 
@@ -34,7 +33,9 @@ public:
 	void Init();
 	void Update(float deltaTime);
 	void SetInput(Controls input);
-	Controls GetLastPressed() const;
+	void CanAttack(bool canAttack);
+	Controls GetLastPressed();
+	bool CanAttack() const { return m_canAttack; }
 
 private:
 	Controls m_playerInput[MaxCombo];
@@ -42,6 +43,8 @@ private:
 
 	float m_inputTimer;
 	float m_comboTimer;
+
+	bool m_canAttack;
 };
 
 #endif _CONTROLS_H_

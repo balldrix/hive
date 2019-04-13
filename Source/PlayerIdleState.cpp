@@ -28,4 +28,5 @@ void PlayerIdleState::Execute(Player* player)
 
 void PlayerIdleState::OnExit(Player* player)
 {
+	player->GetAnimator()->Reset();
 }

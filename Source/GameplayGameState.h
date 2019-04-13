@@ -20,6 +20,8 @@ class Player;
 class ControlSystem;
 class HitBoxManager;
 
+const float AttackCoolDown = 0.2f;
+
 class GameplayGameState : public GameState
 {
 public:
@@ -55,7 +57,10 @@ private:
 	Animator*			m_playerAnimator;			// class to run player animations
 
 	Player*				m_player;					// pointer to player class
-	HitBoxManager*		m_playerHitBoxManager;			// replace with hitbox system
+	HitBoxManager*		m_playerHitBoxManager;		// replace with hitbox system
+
+	float				m_attackCoolDown;			// stops attack from sticking
+	bool				m_canAttack;				// flag for attack cooldown
 
 	bool				m_running;					// is game running or not
 };
