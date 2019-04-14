@@ -20,7 +20,8 @@ void PlayerWalkingState::OnEnter(Player* player)
 
 void PlayerWalkingState::Execute(Player* player)
 {
-	if(player->GetCurrentVelocity() == Vector2::Zero)
+	if(player->GetCurrentVelocity() == Vector2::Zero &&
+		player->GetTargetVelocity() == Vector2::Zero)
 	{
 		player->SetPlayerState(PlayerIdleState::Instance());
 	}

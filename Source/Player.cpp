@@ -3,6 +3,7 @@
 #include "Animator.h"
 #include "HitBoxManager.h"
 #include "Resources.h"
+#include "ControlSystem.h"
 
 #include "PlayerOwnedStates.h"
 
@@ -105,6 +106,46 @@ void Player::SetPlayerState(State<Player>* state)
 void Player::ReturnToPreviousState()
 {
 	SetPlayerState(m_previousState);
+}
+
+void Player::Move(const Vector2& direction)
+{
+	// true if switching direction
+	if(direction.x < 0 && m_currentVelocity.x > 0 || 
+		direction.x > 0 && m_currentVelocity.x < 0)
+	{
+		// slow down before switching
+		SetTargetVelocityX(0.0f);
+		return;
+	}
+
+	SetTargetVelocity(direction);
+
+	// true if moving to the left
+	if(m_currentVelocity.x < 0)
+	{
+		FlipHorizontally(true);
+	}
+	
+	// true if moving to the right
+	if(m_currentVelocity.x > 0)
+	{
+		FlipHorizontally(false);
+	}
+}
+
+void Player::Stop()
+{
+	SetTargetVelocity(Vector2::Zero);
+	SetCurrentVelocity(Vector2::Zero);
+}
+
+void Player::Punch()
+{
+	if(m_controlSystem->CanAttack())
+	{
+		SetPlayerState(PlayerJabState::Instance());
+	}
 }
 
 void Player::FlipHorizontally(bool flip)

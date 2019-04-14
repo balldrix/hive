@@ -26,7 +26,6 @@ GameplayGameState::GameplayGameState() :
 	m_player(nullptr),
 	m_playerHitBoxManager(nullptr),
 	m_canAttack(true),
-	m_attackCoolDown(0.0f),
 	m_running(false),
 	GameState(L"GAMEPLAY")
 {}
@@ -43,6 +42,7 @@ GameplayGameState::GameplayGameState(GameStateManager* gameStateManager) :
 	m_playerAnimator(nullptr),
 	m_player(nullptr),
 	m_playerHitBoxManager(nullptr),
+	m_canAttack(true),
 	m_running(false),
 	GameState(L"GAMEPLAY")
 {
@@ -185,14 +185,17 @@ void GameplayGameState::ProcessInput()
 	// check if key is pressed down
 	///////////////////////////////////////////
 
-	if(m_input->IsKeyDown(PLAYER_UP_KEY))
+	if(m_input->IsKeyDown(PLAYER_UP_KEY) &&
+		!m_input->IsKeyDown(PLAYER_DOWN_KEY))
 	{
-		if(m_input->IsKeyDown(PLAYER_LEFT_KEY))
+		if(m_input->IsKeyDown(PLAYER_LEFT_KEY) &&
+			!m_input->IsKeyDown(PLAYER_RIGHT_KEY))
 		{
 			// send up left input to control system
 			m_controlSystem->SetInput(UpLeft);
 		}
-		else if(m_input->IsKeyDown(PLAYER_RIGHT_KEY))
+		else if(m_input->IsKeyDown(PLAYER_RIGHT_KEY) &&
+			!m_input->IsKeyDown(PLAYER_LEFT_KEY))
 		{
 			// send up right input to control system
 			m_controlSystem->SetInput(UpRight);
@@ -203,15 +206,18 @@ void GameplayGameState::ProcessInput()
 			m_controlSystem->SetInput(Up);
 		}
 	}
-	else if(m_input->IsKeyDown(PLAYER_DOWN_KEY))
+	else if(m_input->IsKeyDown(PLAYER_DOWN_KEY) &&
+		!m_input->IsKeyDown(PLAYER_UP_KEY))
 	{
-		if(m_input->IsKeyDown(PLAYER_LEFT_KEY))
+		if(m_input->IsKeyDown(PLAYER_LEFT_KEY) &&
+			!m_input->IsKeyDown(PLAYER_RIGHT_KEY))
 		{
 			// send down left input to control system
 			m_controlSystem->SetInput(DownLeft);
 
 		}
-		else if(m_input->IsKeyDown(PLAYER_RIGHT_KEY))
+		else if(m_input->IsKeyDown(PLAYER_RIGHT_KEY) &&
+			!m_input->IsKeyDown(PLAYER_LEFT_KEY))
 		{
 			// send down right input to control system
 			m_controlSystem->SetInput(DownRight);
@@ -223,21 +229,24 @@ void GameplayGameState::ProcessInput()
 
 		}
 	}
-	else if(m_input->IsKeyDown(PLAYER_LEFT_KEY))
-	{
-		// send left input to control system
-		m_controlSystem->SetInput(Left);
-
-	}
-	else if(m_input->IsKeyDown(PLAYER_RIGHT_KEY))
+	else if(m_input->IsKeyDown(PLAYER_RIGHT_KEY) &&
+		!m_input->IsKeyDown(PLAYER_LEFT_KEY))
 	{
 		// send right input to control system
 		m_controlSystem->SetInput(Right);
+
+	}
+	else if(m_input->IsKeyDown(PLAYER_LEFT_KEY) && 
+		!m_input->IsKeyDown(PLAYER_RIGHT_KEY))
+	{
+		// send left input to control system
+		m_controlSystem->SetInput(Left);
 	}
 
 	if(m_input->IsKeyDown(PLAYER_A_KEY) && m_controlSystem->CanAttack())
 	{
 		m_controlSystem->SetInput(Punch);
+		return;
 	}
 
 	if(!(m_input->IsKeyDown(PLAYER_UP_KEY) ||

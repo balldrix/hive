@@ -53,6 +53,14 @@ void GameObject::Update(float deltaTime)
 	m_position += (m_currentVelocity * m_movementSpeed) * deltaTime;
 }
 
+void GameObject::Move(const Vector2 &direction)
+{
+}
+
+void GameObject::Stop()
+{
+}
+
 float GameObject::GetLerpAmount(float num)
 {
 	if(num == 0.0f)

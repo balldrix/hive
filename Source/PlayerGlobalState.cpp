@@ -24,43 +24,40 @@ void PlayerGlobalState::Execute(Player* player)
 	switch(lastPressed)
 	{
 	case None:
-		player->SetTargetVelocity(Vector2::Zero);
+		player->Move(Vector2::Zero);
 		break;
 	case UpLeft:
-		player->SetTargetVelocity(UnitVectors::UpLeft);
-		player->FlipHorizontally(true);
+		player->Move(UnitVectors::UpLeft);
+		//player->FlipHorizontally(true);
 		break;
 	case Up:
-		player->SetTargetVelocity(UnitVectors::Up);
+		player->Move(UnitVectors::Up);
 		break;
 	case UpRight:
-		player->SetTargetVelocity(UnitVectors::UpRight);
-		player->FlipHorizontally(false);
+		player->Move(UnitVectors::UpRight);
+		//player->FlipHorizontally(false);
 		break;
 	case Right:
-		player->SetTargetVelocity(UnitVectors::Right);
-		player->FlipHorizontally(false);
+		player->Move(UnitVectors::Right);
+		//player->FlipHorizontally(false);
 		break;
 	case DownRight:
-		player->SetTargetVelocity(UnitVectors::DownRight);
-		player->FlipHorizontally(false);
+		player->Move(UnitVectors::DownRight);
+		//player->FlipHorizontally(false);
 		break;
 	case Down:
-		player->SetTargetVelocity(UnitVectors::Down);
+		player->Move(UnitVectors::Down);
 		break;
 	case DownLeft:
-		player->SetTargetVelocity(UnitVectors::DownLeft);
-		player->FlipHorizontally(true);
+		player->Move(UnitVectors::DownLeft);
+		//player->FlipHorizontally(true);
 		break;
 	case Left:
-		player->SetTargetVelocity(UnitVectors::Left);
-		player->FlipHorizontally(true);
+		player->Move(UnitVectors::Left);
+		//player->FlipHorizontally(true);
 		break;
 	case Punch:
-		if(player->GetControlSystem()->CanAttack())
-		{
-			player->SetPlayerState(PlayerJabState::Instance());
-		}
+		player->Punch();
 		break;
 	default:
 		break;

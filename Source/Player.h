@@ -34,6 +34,12 @@ public:
 
 	State<Player>*		GetState() const { return m_currentState; }
 
+	// movement
+	void				Move(const Vector2 &direction);
+	void				Stop();
+
+	void				Punch();
+
 	// flip sprite and hitboxes
 	void				FlipHorizontally(bool flip);
 
