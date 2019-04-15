@@ -15,7 +15,7 @@ void PlayerIdleState::OnEnter(Player* player)
 {
 	// set idle animation
 	player->GetAnimator()->SetAnimation("Idle");
-	player->GetHitBox()->SetCurrentHitBox("Idle");
+	player->GetHitBoxManager()->SetCurrentHitBox("Idle");
 }
 
 void PlayerIdleState::Execute(Player* player)

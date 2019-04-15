@@ -20,6 +20,8 @@ public:
 
 	// on exit
 	virtual void OnExit(T*) = 0;
+
+	std::string m_name;
 };
 
 #endif // !_STATE_H_

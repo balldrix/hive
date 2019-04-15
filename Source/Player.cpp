@@ -34,25 +34,12 @@ void Player::Init(ControlSystem* controlSystem, SpriteSheet* sprite, Animator* a
 
 void Player::Update(float deltaTime)
 {
-	// update object
-	GameObject::Update(deltaTime);
-
-	// if player has an animator
-	if(m_animator)
-	{
-		// update animator
-		m_animator->Update(deltaTime);
-	}
-
 	// TODO update player state machine
 	m_globalState->Execute(this);
 	m_currentState->Execute(this);
 
-	// update position of sprite
-	m_sprite->SetPosition(m_position);
-
-	// update hitbox
-	m_hitBoxManager->Update();
+	// update object
+	GameObject::Update(deltaTime);
 }
 
 void Player::Render(Graphics* graphics)
@@ -68,7 +55,7 @@ void Player::Render(Graphics* graphics)
 	}
 
 	// render hitbox
-	//m_hitBoxManager->Render(graphics);
+	m_hitBoxManager->Render(graphics);
 }
 
 void Player::Reset()
@@ -146,23 +133,5 @@ void Player::Punch()
 	{
 		SetPlayerState(PlayerJabState::Instance());
 	}
-}
-
-void Player::FlipHorizontally(bool flip)
-{
-	// true if flip param is true
-	if(flip == true)
-	{
-		// flip sprite
-		m_sprite->SetFlipEffect(SpriteEffects::SpriteEffects_FlipHorizontally);
-
-	}
-	else
-	{
-		m_sprite->SetFlipEffect(SpriteEffects::SpriteEffects_None);	
-	}
-	
-	// flip hitboxes
-	m_hitBoxManager->SetFlipped(flip);
 }
 

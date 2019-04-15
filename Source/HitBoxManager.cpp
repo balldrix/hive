@@ -85,6 +85,14 @@ void HitBoxManager::SetCurrentHitBox(int index)
 	SetAllHitBoxes();
 }
 
+void HitBoxManager::Kill()
+{
+	AABB empty;
+	m_movementBox.SetAABB(empty);
+	m_hitBox.SetAABB(empty);
+	m_hurtBox.SetAABB(empty);
+}
+
 bool HitBoxManager::IsHitBoxActive()
 {
 	int currentFrame = m_owner->GetAnimator()->GetCurrentFrame();

@@ -28,6 +28,10 @@ void GameObject::Init(const Vector2& position, HitBoxManager* hitBoxManager, Spr
 {
 }
 
+void GameObject::Init(const Vector2& position, HitBoxManager* hitBoxManager, SpriteSheet* sprite, Animator* animator)
+{
+}
+
 void GameObject::Init(const Vector2& position, HitBoxManager* hitBoxManager, SpriteSheet* sprite, Animator* animator, ControlSystem* controlSystem)
 {
 }
@@ -51,6 +55,19 @@ void GameObject::Update(float deltaTime)
 	m_currentVelocity.y = y;
 
 	m_position += (m_currentVelocity * m_movementSpeed) * deltaTime;
+
+	// if object has an animator
+	if(m_animator)
+	{
+		// update animator
+		m_animator->Update(deltaTime);
+	}
+
+	// update position of sprite
+	m_sprite->SetPosition(m_position);
+
+	// update hitbox
+	m_hitBoxManager->Update();
 }
 
 void GameObject::Move(const Vector2 &direction)
@@ -88,6 +105,24 @@ float GameObject::Lerp(float target, float current, float amount)
 	}
 
 	return target;
+}
+
+void GameObject::FlipHorizontally(bool flip)
+{
+	// true if flip param is true
+	if(flip == true)
+	{
+		// flip sprite
+		m_sprite->SetFlipEffect(SpriteEffects::SpriteEffects_FlipHorizontally);
+
+	}
+	else
+	{
+		m_sprite->SetFlipEffect(SpriteEffects::SpriteEffects_None);
+	}
+
+	// flip hitboxes
+	m_hitBoxManager->SetFlipped(flip);
 }
 
 void GameObject::SetPositionX(unsigned int x)

@@ -16,7 +16,7 @@ void PlayerJabState::OnEnter(Player* player)
 	// set jab animation
 	player->GetAnimator()->Reset();
 	player->GetAnimator()->SetAnimation("Jab");
-	player->GetHitBox()->SetCurrentHitBox("Jab");
+	player->GetHitBoxManager()->SetCurrentHitBox("Jab");
 	player->GetControlSystem()->CanAttack(false);
 }
 

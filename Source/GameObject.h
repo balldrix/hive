@@ -21,6 +21,7 @@ public:
 	virtual ~GameObject();
 	
 	virtual void	Init(const Vector2& position, HitBoxManager* hitBoxManager, SpriteSheet* sprite);
+	virtual void	Init(const Vector2& position, HitBoxManager* hitBoxManager, SpriteSheet* sprite, Animator* animator);
 	virtual void	Init(const Vector2& position, HitBoxManager* hitBoxManager, SpriteSheet* sprite, Animator* animator, ControlSystem* controlSystem);
 
 	virtual void	Update(float deltaTime);	// update object
@@ -32,45 +33,47 @@ public:
 	float			GetLerpAmount(float num);
 	float			Lerp(float target, float current, float amount);
 
-	// getters
-	ControlSystem* GetControlSystem() const { return m_controlSystem; }
-	SpriteSheet* GetSprite() const { return m_sprite; }
-	Animator* GetAnimator() const { return m_animator; }
-	HitBoxManager* GetHitBox() const { return m_hitBoxManager; }
+	// flip sprite and hitboxes
+	void			FlipHorizontally(bool flip);
 
 	// Setters
-	void	SetID(const wchar_t* string);	// set object ID
-	void	SetPositionX(unsigned int x);
-	void	SetPositionY(unsigned int y);
-	void	SetPosition(unsigned int x, unsigned int y);
-	void	SetPosition(Vector2 position);	// set position
+	void			SetID(const wchar_t* string);	// set object ID
+	void			SetPositionX(unsigned int x);
+	void			SetPositionY(unsigned int y);
+	void			SetPosition(unsigned int x, unsigned int y);
+	void			SetPosition(Vector2 position);	// set position
 
-	void	SetMovementSpeed(float speed);
+	void			SetMovementSpeed(float speed);
 	
-	void	SetCurrentVelocity(float x, float y);
-	void	SetCurrentVelocity(Vector2 velocity);
+	void			SetCurrentVelocity(float x, float y);
+	void			SetCurrentVelocity(Vector2 velocity);
 	
-	void	SetTargetVelocity(float x, float y);
-	void	SetTargetVelocity(Vector2 velocity);
+	void			SetTargetVelocity(float x, float y);
+	void			SetTargetVelocity(Vector2 velocity);
 	
-	void	SetTargetVelocityX(float x);
-	void	SetTargetVelocityY(float y);
-	void	SetAcceleration(float accel);
+	void			SetTargetVelocityX(float x);
+	void			SetTargetVelocityY(float y);
+	void			SetAcceleration(float accel);
 	
-	void	SetActive(bool active);			// set active or not
+	void			SetActive(bool active);			// set active or not
 
 	// getters
 	const wchar_t*	GetID() const		{ return m_ID; }		// return object ID
 	
-	float	GetPositionX() const { return m_position.x; }
-	float	GetPositionY() const { return m_position.y; }
-	Vector2	GetPosition() const { return m_position; }
+	float			GetPositionX() const { return m_position.x; }
+	float			GetPositionY() const { return m_position.y; }
+	Vector2			GetPosition() const { return m_position; }
 	
-	Vector2	GetCurrentVelocity() const { return m_currentVelocity; }
-	Vector2	GetTargetVelocity() const { return m_targetVelocity; }
-	float	GetMovementSpeed()	const { return m_movementSpeed; }
+	Vector2			GetCurrentVelocity() const { return m_currentVelocity; }
+	Vector2			GetTargetVelocity() const { return m_targetVelocity; }
+	float			GetMovementSpeed()	const { return m_movementSpeed; }
 
-	bool	IsActive() const	{ return m_active;}		// return if active
+	ControlSystem*	GetControlSystem() const { return m_controlSystem; }
+	SpriteSheet*	GetSprite() const { return m_sprite; }
+	Animator*		GetAnimator() const { return m_animator; }
+	HitBoxManager*	GetHitBoxManager() const { return m_hitBoxManager; }
+
+	bool			IsActive() const	{ return m_active;}		// return if active
 
 protected:
 	const wchar_t*	m_ID;					// object ID

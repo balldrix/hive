@@ -23,7 +23,10 @@
     <ClCompile Include="Source\AnimatedSprite.cpp" />
     <ClCompile Include="Source\Animator.cpp" />
     <ClCompile Include="Source\ControlSystem.cpp" />
-    <ClCompile Include="Source\Enemy.cpp" />
+    <ClCompile Include="Source\DummyEnemy.cpp" />
+    <ClCompile Include="Source\DummyEnemyDeadState.cpp" />
+    <ClCompile Include="Source\DummyEnemyHurtState.cpp" />
+    <ClCompile Include="Source\DummyEnemyIdleState.cpp" />
     <ClCompile Include="Source\Error.cpp" />
     <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />
@@ -53,7 +56,11 @@
     <ClInclude Include="Source\Animator.h" />
     <ClInclude Include="Source\Constants.h" />
     <ClInclude Include="Source\ControlSystem.h" />
-    <ClInclude Include="Source\Enemy.h" />
+    <ClInclude Include="Source\DummyEnemy.h" />
+    <ClInclude Include="Source\DummyEnemyDeadState.h" />
+    <ClInclude Include="Source\DummyEnemyHurtState.h" />
+    <ClInclude Include="Source\DummyEnemyIdleState.h" />
+    <ClInclude Include="Source\DummyEnemyOwnedStates.h" />
     <ClInclude Include="Source\Error.h" />
     <ClInclude Include="Source\Game.h" />
     <ClInclude Include="Source\GameObject.h" />

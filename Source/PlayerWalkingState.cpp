@@ -13,9 +13,8 @@ PlayerWalkingState* PlayerWalkingState::Instance()
 
 void PlayerWalkingState::OnEnter(Player* player)
 {
-	// set walking animation
 	player->GetAnimator()->SetAnimation("Walking");
-	player->GetHitBox()->SetCurrentHitBox("Walking");
+	player->GetHitBoxManager()->SetCurrentHitBox("Walking");
 }
 
 void PlayerWalkingState::Execute(Player* player)

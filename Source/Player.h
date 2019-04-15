@@ -20,7 +20,7 @@ class Player : public GameObject
 {
 public:
 	Player();
-	virtual ~Player();
+	virtual				~Player();
 
 	void				Init(ControlSystem* controlSystem, SpriteSheet* sprite, Animator* animator, const Vector2& position, HitBoxManager* hitBoxManager);
 
@@ -39,9 +39,6 @@ public:
 	void				Stop();
 
 	void				Punch();
-
-	// flip sprite and hitboxes
-	void				FlipHorizontally(bool flip);
 
 private:
 	State<Player>*		m_currentState;			// player states for state machine

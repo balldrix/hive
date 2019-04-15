@@ -65,6 +65,8 @@ public:
 	HitBox GetHurtBox() const { return m_hurtBox; }
 	HitBox GetHitBox() const { return m_hitBox; }
 
+	void Kill();
+
 	bool IsHitBoxActive();
 
 private:
