@@ -79,16 +79,16 @@
     <ClCompile Include="Source\PlayerJabState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\DummyEnemy.cpp">
+    <ClCompile Include="Source\Dummy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\DummyEnemyIdleState.cpp">
+    <ClCompile Include="Source\DummyDeadState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\DummyEnemyHurtState.cpp">
+    <ClCompile Include="Source\DummyHurtState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\DummyEnemyDeadState.cpp">
+    <ClCompile Include="Source\DummyIdleState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -215,39 +215,51 @@
     <ClInclude Include="Source\PlayerJabState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\DummyEnemy.h">
+    <ClInclude Include="Source\Dummy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\DummyEnemyOwnedStates.h">
+    <ClInclude Include="Source\DummyDeadState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\DummyEnemyIdleState.h">
+    <ClInclude Include="Source\DummyHurtState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\DummyEnemyHurtState.h">
+    <ClInclude Include="Source\DummyIdleState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\DummyEnemyDeadState.h">
+    <ClInclude Include="Source\DummyOwnedStates.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="GameData\Sprites\playerSpritesheet.png">
-      <Filter>Game Data\Sprites</Filter>
-    </Image>
     <Image Include="GameData\Sprites\hitbox.png">
       <Filter>Game Data\Sprites</Filter>
     </Image>
+    <Image Include="GameData\Sprites\dummySpritesheet.png">
+      <Filter>Game Data\Sprites</Filter>
+    </Image>
+    <Image Include="GameData\Sprites\playerSpriteSheet.png">
+      <Filter>Game Data\Sprites</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="GameData\SpriteSheetData\playerSpritesheetData.json">
-      <Filter>Game Data\Sprite Sheet Data</Filter>
-    </None>
     <None Include="packages.config" />
     <None Include="GameData\AnimationData\playerAnimationData.json">
       <Filter>Game Data\Animation Data</Filter>
     </None>
     <None Include="GameData\HitBoxData\playerHitBoxData.json">
+      <Filter>Game Data\HitBoxData</Filter>
+    </None>
+    <None Include="GameData\SpriteSheetData\playerSpriteSheetData.json">
+      <Filter>Game Data\Sprite Sheet Data</Filter>
+    </None>
+    <None Include="GameData\SpriteSheetData\dummySpriteSheetData.json">
+      <Filter>Game Data\Sprite Sheet Data</Filter>
+    </None>
+    <None Include="GameData\AnimationData\dummyAnimationData.json">
+      <Filter>Game Data\Animation Data</Filter>
+    </None>
+    <None Include="GameData\HitBoxData\dummyHitBoxData.json">
       <Filter>Game Data\HitBoxData</Filter>
     </None>
   </ItemGroup>

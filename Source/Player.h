@@ -10,8 +10,8 @@ class ControlSystem;
 
 // player constants 
 // TODO move into struct with data in txt file
-const unsigned int		StartScreenPositionX = 100;
-const unsigned int		StartScreenPositionY = 50;
+const unsigned int		PlayerStartScreenPositionX = 100;
+const unsigned int		PlayerStartScreenPositionY = 50;
 const unsigned int		WalkSpeed = 30;
 const float				PlayerAcceleration = 1.0f;
 const float				PlayerDeceleration = 4.0f;
@@ -22,7 +22,7 @@ public:
 	Player();
 	virtual				~Player();
 
-	void				Init(ControlSystem* controlSystem, SpriteSheet* sprite, Animator* animator, const Vector2& position, HitBoxManager* hitBoxManager);
+	void				Init(const Vector2& position, SpriteSheet* sprite, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem);
 
 	void				Update(float deltaTime);
 	void				Render(Graphics* graphics);

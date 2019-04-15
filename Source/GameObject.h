@@ -10,6 +10,7 @@
 // forward definitions
 class Graphics;
 class HitBoxManager;
+class Sprite;
 class SpriteSheet;
 class Animator;
 class ControlSystem;
@@ -20,9 +21,9 @@ public:
 	GameObject();
 	virtual ~GameObject();
 	
-	virtual void	Init(const Vector2& position, HitBoxManager* hitBoxManager, SpriteSheet* sprite);
-	virtual void	Init(const Vector2& position, HitBoxManager* hitBoxManager, SpriteSheet* sprite, Animator* animator);
-	virtual void	Init(const Vector2& position, HitBoxManager* hitBoxManager, SpriteSheet* sprite, Animator* animator, ControlSystem* controlSystem);
+	virtual void	Init(const Vector2& position, Sprite* sprite);
+	virtual void	Init(const Vector2& position, SpriteSheet* sprite, Animator* animator, HitBoxManager* hitBoxManager);
+	virtual void	Init(const Vector2& position, SpriteSheet* sprite, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem);
 
 	virtual void	Update(float deltaTime);	// update object
 	virtual void 	Render(Graphics* graphics) = 0;	// render object

@@ -19,7 +19,7 @@ Player::~Player()
 
 }
 
-void Player::Init(ControlSystem* controlSystem, SpriteSheet* sprite, Animator* animator, const Vector2& position, HitBoxManager* hitBoxManager)
+void Player::Init(const Vector2& position, SpriteSheet* sprite, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem)
 {
 	m_controlSystem = controlSystem;
 	m_sprite = sprite;
@@ -65,7 +65,7 @@ void Player::Reset()
 
 	// Set Position 
 	// TODO set world position and screen position
-	SetPosition(StartScreenPositionX, StartScreenPositionY);
+	SetPosition(PlayerStartScreenPositionX, PlayerStartScreenPositionY);
 
 	// reset hitboxes
 	m_hitBoxManager->SetCurrentHitBox(0);

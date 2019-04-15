@@ -1,0 +1,25 @@
+{
+	"animation": [
+		{
+			"name": "Idle",
+			"index": 0,
+			"frameCount": 8,
+			"framesPerSecond": 8,
+			"loop": true
+		},
+    {
+      "name": "Walking",
+      "index": 8,
+      "frameCount": 8,
+      "framesPerSecond": 8,
+      "loop": true
+    },
+    {
+      "name": "Jab",
+      "index": 17,
+      "frameCount": 1,
+      "framesPerSecond": 8,
+      "loop": false
+    }
+	]
+}

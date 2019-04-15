@@ -1,23 +1,23 @@
-#include "DummyEnemy.h"
+#include "Dummy.h"
 #include "SpriteSheet.h"
 #include "Animator.h"
 #include "HitBoxManager.h"
 #include "Resources.h"
 #include "ControlSystem.h"
 
-#include "DummyEnemyOwnedStates.h"
+#include "DummyOwnedStates.h"
 
-DummyEnemy::DummyEnemy() :
+Dummy::Dummy() :
 	m_currentState(nullptr),
 	m_previousState(nullptr),
 	m_globalState(nullptr)
 {}
 
-DummyEnemy::~DummyEnemy()
+Dummy::~Dummy()
 {
 }
 
-void DummyEnemy::Init(const Vector2& position, HitBoxManager* hitBoxManager, SpriteSheet* sprite, Animator* animator)
+void Dummy::Init(const Vector2& position, SpriteSheet* sprite, Animator* animator, HitBoxManager* hitBoxManager)
 {
 	m_sprite = sprite;
 	m_position = position;
@@ -27,7 +27,7 @@ void DummyEnemy::Init(const Vector2& position, HitBoxManager* hitBoxManager, Spr
 }
 
 void 
-DummyEnemy::Update(float deltaTime)
+Dummy::Update(float deltaTime)
 {
 	// TODO update player state machine
 	m_globalState->Execute(this);
@@ -38,7 +38,7 @@ DummyEnemy::Update(float deltaTime)
 }
 
 void
-DummyEnemy::Render(Graphics* graphics)
+Dummy::Render(Graphics* graphics)
 {
 	// render enemy sprite
 	if(m_animator)
@@ -55,14 +55,14 @@ DummyEnemy::Render(Graphics* graphics)
 }
 
 void
-DummyEnemy::Reset()
+Dummy::Reset()
 {
 	// set enemy state back to Idle
-	SetEnemyState(DummyEnemyIdleState::Instance());
+	SetEnemyState(DummyIdleState::Instance());
 
 	// Set Position 
 	// TODO set world position and screen position
-	SetPosition(StartScreenPositionX, StartScreenPositionY);
+	SetPosition(DummyStartScreenPositionX, DummyStartScreenPositionY);
 
 	// reset hitboxes
 	m_hitBoxManager->SetCurrentHitBox(0);
@@ -70,7 +70,7 @@ DummyEnemy::Reset()
 	SetActive(true);
 }
 
-void DummyEnemy::SetEnemyState(State<DummyEnemy>* state)
+void Dummy::SetEnemyState(State<Dummy>* state)
 {
 	assert(m_currentState && state);
 
@@ -87,7 +87,7 @@ void DummyEnemy::SetEnemyState(State<DummyEnemy>* state)
 	m_currentState->OnEnter(this);
 }
 
-void DummyEnemy::ReturnToPreviousState()
+void Dummy::ReturnToPreviousState()
 {
-	SetPlayerState(m_previousState);
+	SetEnemyState(m_previousState);
 }

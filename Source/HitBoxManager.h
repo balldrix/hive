@@ -20,8 +20,8 @@ namespace
 		AABB movementBox; // hit box to block movement in scene
 		AABB hitBox; // hit box (red) is what will do damage to other character
 		AABB hurtBox; // hit box that set character's vulnerable area
-		int startupFrames;
-		int activeFrames;
+		int startupFrames = 0;
+		int activeFrames = 0;
 	};
 
 	void from_json(const json& j, HitBoxData& a)
@@ -65,7 +65,7 @@ public:
 	HitBox GetHurtBox() const { return m_hurtBox; }
 	HitBox GetHitBox() const { return m_hitBox; }
 
-	void Kill();
+	void KillAll();
 
 	bool IsHitBoxActive();
 

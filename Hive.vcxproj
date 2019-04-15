@@ -23,10 +23,10 @@
     <ClCompile Include="Source\AnimatedSprite.cpp" />
     <ClCompile Include="Source\Animator.cpp" />
     <ClCompile Include="Source\ControlSystem.cpp" />
-    <ClCompile Include="Source\DummyEnemy.cpp" />
-    <ClCompile Include="Source\DummyEnemyDeadState.cpp" />
-    <ClCompile Include="Source\DummyEnemyHurtState.cpp" />
-    <ClCompile Include="Source\DummyEnemyIdleState.cpp" />
+    <ClCompile Include="Source\Dummy.cpp" />
+    <ClCompile Include="Source\DummyDeadState.cpp" />
+    <ClCompile Include="Source\DummyHurtState.cpp" />
+    <ClCompile Include="Source\DummyIdleState.cpp" />
     <ClCompile Include="Source\Error.cpp" />
     <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />
@@ -56,11 +56,11 @@
     <ClInclude Include="Source\Animator.h" />
     <ClInclude Include="Source\Constants.h" />
     <ClInclude Include="Source\ControlSystem.h" />
-    <ClInclude Include="Source\DummyEnemy.h" />
-    <ClInclude Include="Source\DummyEnemyDeadState.h" />
-    <ClInclude Include="Source\DummyEnemyHurtState.h" />
-    <ClInclude Include="Source\DummyEnemyIdleState.h" />
-    <ClInclude Include="Source\DummyEnemyOwnedStates.h" />
+    <ClInclude Include="Source\Dummy.h" />
+    <ClInclude Include="Source\DummyDeadState.h" />
+    <ClInclude Include="Source\DummyHurtState.h" />
+    <ClInclude Include="Source\DummyIdleState.h" />
+    <ClInclude Include="Source\DummyOwnedStates.h" />
     <ClInclude Include="Source\Error.h" />
     <ClInclude Include="Source\Game.h" />
     <ClInclude Include="Source\GameObject.h" />
@@ -91,13 +91,17 @@
     <ClInclude Include="Source\Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="GameData\Sprites\dummySpritesheet.png" />
     <Image Include="GameData\Sprites\hitbox.png" />
-    <Image Include="GameData\Sprites\playerSpritesheet.png" />
+    <Image Include="GameData\Sprites\playerSpriteSheet.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="GameData\AnimationData\dummyAnimationData.json" />
     <None Include="GameData\AnimationData\playerAnimationData.json" />
+    <None Include="GameData\HitBoxData\dummyHitBoxData.json" />
     <None Include="GameData\HitBoxData\playerHitBoxData.json" />
-    <None Include="GameData\SpriteSheetData\playerSpritesheetData.json" />
+    <None Include="GameData\SpriteSheetData\dummySpriteSheetData.json" />
+    <None Include="GameData\SpriteSheetData\playerSpriteSheetData.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

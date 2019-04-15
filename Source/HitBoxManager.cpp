@@ -66,9 +66,9 @@ void HitBoxManager::SetFlipped(bool flip)
 
 void HitBoxManager::SetCurrentHitBox(std::string name)
 {
-	unsigned int index = 0;
+	int index = 0;
 
-	for(int i = 0; i < m_hitBoxDataList.size(); i++)
+	for(unsigned int i = 0; i < m_hitBoxDataList.size(); i++)
 	{
 		if(name == m_hitBoxDataList[i].name)
 		{
@@ -85,7 +85,7 @@ void HitBoxManager::SetCurrentHitBox(int index)
 	SetAllHitBoxes();
 }
 
-void HitBoxManager::Kill()
+void HitBoxManager::KillAll()
 {
 	AABB empty;
 	m_movementBox.SetAABB(empty);
