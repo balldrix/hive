@@ -7,14 +7,14 @@
 
 PlayerWalkingState* PlayerWalkingState::Instance()
 {
-	static PlayerWalkingState instance;
+	static PlayerWalkingState instance("Walking");
 	return &instance;
 }
 
 void PlayerWalkingState::OnEnter(Player* player)
 {
-	player->GetAnimator()->SetAnimation("Walking");
-	player->GetHitBoxManager()->SetCurrentHitBox("Walking");
+	player->GetAnimator()->SetAnimation(m_name);
+	player->GetHitBoxManager()->SetCurrentHitBox(m_name);
 }
 
 void PlayerWalkingState::Execute(Player* player)
@@ -22,11 +22,16 @@ void PlayerWalkingState::Execute(Player* player)
 	if(player->GetCurrentVelocity() == Vector2::Zero &&
 		player->GetTargetVelocity() == Vector2::Zero)
 	{
-		player->SetPlayerState(PlayerIdleState::Instance());
+		player->GetStateMachine()->ChangeState(PlayerIdleState::Instance());
 	}
 }
 
 void PlayerWalkingState::OnExit(Player* player)
 {
 	player->GetAnimator()->Reset();
+}
+
+PlayerWalkingState::PlayerWalkingState(std::string name)
+{
+	m_name = name;
 }

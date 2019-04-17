@@ -5,9 +5,10 @@
 #include "Randomiser.h"
 #include "GameObject.h"
 #include "State.h"
+#include "StateMachine.h"
 
-const unsigned int		DummyStartScreenPositionX = 100;
-const unsigned int		DummyStartScreenPositionY = 50;
+const unsigned int		DummyStartScreenPositionX = 120;
+const unsigned int		DummyStartScreenPositionY = 80;
 
 class Dummy : public GameObject
 {
@@ -22,16 +23,14 @@ public:
 	void				Render(Graphics* graphics);
 	void				Reset();
 	
-	bool				GetIsActive() const { return m_active; }
+	StateMachine<Dummy>* GetStateMachine() const { return m_stateMachine; }
 
-	void				SetEnemyState(State<Dummy>* state);
-	void				ReturnToPreviousState();
-	State<Dummy>*	GetState() const { return m_currentState; }
+	void				ApplyDamage(int amount);
 
 private:
-	State<Dummy>*	m_currentState;			// player states for state machine
-	State<Dummy>*	m_previousState;		// record of previous state for state blips
-	State<Dummy>*	m_globalState;			// global state for common player methods
+	StateMachine<Dummy>* m_stateMachine;
+
+	int m_health;
 };
 
 #endif _ENEMY_H_

@@ -34,6 +34,7 @@ public:
 	void				OnExit();					// calls the delete assets method
 	void				ProcessInput();				// processes input from player
 	void				Update(float deltaTime);	// update state
+	void				ProcessCollisions();		// check for collisions
 	void				Render();					// render state
 	void				ReleaseAll();				// release all texture memory
 

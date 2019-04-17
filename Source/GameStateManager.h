@@ -1,3 +1,7 @@
+// "GameStateManager.h"
+// Christopher Ball 2019
+// manages game states
+
 #ifndef _GAMESTATEMANAGER_H_
 #define _GAMESTATEMANAGER_H_
 
@@ -23,6 +27,7 @@ public:
 
 	void							ProcessInput();								// process input for game state
 	void							Update(float deltaTime);					// update game state
+	void							ProcessCollisions();						// collision checking
 	void							Render();									// render game state
 
 	void							ReleaseAll();								// release all game state resources

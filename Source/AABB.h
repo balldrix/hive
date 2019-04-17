@@ -27,6 +27,7 @@ public:
 	const Vector2&		GetMax() const { return m_max; } // get max vector
 
 	bool				Collision(const AABB &other) const; // return true if collision occurs with other
+	bool				Collision(const Vector2 &other) const; // return true if collision occurs with other
 	virtual void		Reset(); // reset min and max to zero
 
 	AABB&				operator=(const AABB &other); // = operator overload

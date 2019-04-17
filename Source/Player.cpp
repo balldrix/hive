@@ -4,19 +4,20 @@
 #include "HitBoxManager.h"
 #include "Resources.h"
 #include "ControlSystem.h"
-
+#include "StateMachine.h"
 #include "PlayerOwnedStates.h"
 
-Player::Player() :
-	m_currentState(PlayerIdleState::Instance()),
-	m_previousState(nullptr),
-	m_globalState(PlayerGlobalState::Instance())
+Player::Player() : m_stateMachine(nullptr)
 {
 }
 
 Player::~Player()
 {
-
+	if(m_stateMachine)
+	{
+		delete m_stateMachine;
+		m_stateMachine = nullptr;
+	}
 }
 
 void Player::Init(const Vector2& position, SpriteSheet* sprite, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem)
@@ -30,13 +31,15 @@ void Player::Init(const Vector2& position, SpriteSheet* sprite, Animator* animat
 	m_animator = animator;
 	m_animator->SetAnimation(0);
 	m_hitBoxManager = hitBoxManager;
+
+	m_stateMachine = new StateMachine<Player>(this);
+	m_stateMachine->Init(PlayerIdleState::Instance(), nullptr, PlayerGlobalState::Instance());
 }
 
 void Player::Update(float deltaTime)
 {
-	// TODO update player state machine
-	m_globalState->Execute(this);
-	m_currentState->Execute(this);
+	// update player state machine
+	m_stateMachine->Update();
 
 	// update object
 	GameObject::Update(deltaTime);
@@ -55,13 +58,13 @@ void Player::Render(Graphics* graphics)
 	}
 
 	// render hitbox
-	m_hitBoxManager->Render(graphics);
+	//m_hitBoxManager->Render(graphics);
 }
 
 void Player::Reset()
 {
 	// set player state back to Idle
-	SetPlayerState(PlayerIdleState::Instance());
+	m_stateMachine->ChangeState((PlayerIdleState::Instance()));
 
 	// Set Position 
 	// TODO set world position and screen position
@@ -71,28 +74,6 @@ void Player::Reset()
 	m_hitBoxManager->SetCurrentHitBox(0);
 
 	SetActive(true);
-}
-
-void Player::SetPlayerState(State<Player>* state)
-{
-	assert(m_currentState && state);
-
-	// store previous state
-	m_previousState = m_currentState;
-
-	// call on exit for current state
-	m_currentState->OnExit(this);
-
-	// set new state
-	m_currentState = state;
-
-	// call on entry for new state
-	m_currentState->OnEnter(this);
-}
-
-void Player::ReturnToPreviousState()
-{
-	SetPlayerState(m_previousState);
 }
 
 void Player::Move(const Vector2& direction)
@@ -131,7 +112,7 @@ void Player::Punch()
 {
 	if(m_controlSystem->CanAttack())
 	{
-		SetPlayerState(PlayerJabState::Instance());
+		m_stateMachine->ChangeState((PlayerJabState::Instance()));
 	}
 }
 

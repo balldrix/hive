@@ -206,9 +206,6 @@
     <ClInclude Include="Source\HitBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\HitBoxData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\HitBoxManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -228,6 +225,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\DummyOwnedStates.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateMachine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\HitBoxData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SpriteFrameData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

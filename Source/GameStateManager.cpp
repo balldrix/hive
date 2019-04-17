@@ -4,16 +4,16 @@
 #include "Error.h"
 
 GameStateManager::GameStateManager() :
-m_currentState(nullptr),
-m_graphics(nullptr),
-m_input(nullptr)
+	m_currentState(nullptr),
+	m_graphics(nullptr),
+	m_input(nullptr)
 {
 }
 
 GameStateManager::~GameStateManager()
 {
 	// if current game state is 
-	if (m_currentState != nullptr)
+	if(m_currentState != nullptr)
 	{
 		m_currentState->OnExit();
 	}
@@ -31,37 +31,34 @@ GameStateManager::~GameStateManager()
 
 }
 
-void
-GameStateManager::Init(Graphics* graphics, Input* input)
+void GameStateManager::Init(Graphics* graphics, Input* input)
 {
 	// copy pointers
 	m_graphics = graphics;
 	m_input = input;
 }
 
-void
-GameStateManager::AddState(GameState* state)
+void GameStateManager::AddState(GameState* state)
 {
 	// push state to vector list
 	m_stateList.push_back(state);
 }
 
-void
-GameStateManager::SwitchState(const wchar_t* stateName)
+void GameStateManager::SwitchState(const wchar_t* stateName)
 {
 	// if current state contains points to a state
-	if (m_currentState != nullptr)
+	if(m_currentState != nullptr)
 	{
 		// call OnExit method and clear pointer
-		m_currentState->OnExit(); 
+		m_currentState->OnExit();
 		m_currentState = nullptr;
 	}
 
 	// loop through state list
 	for(unsigned int i = 0; i < m_stateList.size(); i++)
 	{
-		if (m_stateList[i]->GetStateName() == stateName)
-		{			
+		if(m_stateList[i]->GetStateName() == stateName)
+		{
 			m_currentState = m_stateList[i]; // set current state pointer
 			m_currentState->OnEntry(); // call OnEntry method
 			return;
@@ -76,24 +73,21 @@ GameStateManager::SwitchState(const wchar_t* stateName)
 	PostQuitMessage(0); // quit game
 }
 
-GameState*		
-GameStateManager::GetCurrentState() const
+GameState* GameStateManager::GetCurrentState() const
 {
 	return m_currentState; // return current state
 }
 
-const wchar_t*
-GameStateManager::GetCurrentStateName() const
+const wchar_t* GameStateManager::GetCurrentStateName() const
 {
-	if (m_currentState != nullptr)
+	if(m_currentState != nullptr)
 	{
 		return m_currentState->GetStateName(); // return current state name
 	}
 	return L""; // if no state name exists return ""
 }
 
-void
-GameStateManager::ProcessInput()
+void GameStateManager::ProcessInput()
 {
 	if(m_currentState != nullptr)
 	{
@@ -101,28 +95,33 @@ GameStateManager::ProcessInput()
 	}
 }
 
-void	
-GameStateManager::Update(float deltaTime)
+void GameStateManager::Update(float deltaTime)
 {
-	if (m_currentState != nullptr)
+	if(m_currentState != nullptr)
 	{
 		m_currentState->Update(deltaTime); // update current state
 	}
 }
 
-void			
-GameStateManager::Render()
+void GameStateManager::ProcessCollisions()
 {
-	if (m_currentState != nullptr)
+	if(m_currentState != nullptr)
+	{
+		m_currentState->ProcessCollisions();
+	}
+}
+
+void GameStateManager::Render()
+{
+	if(m_currentState != nullptr)
 	{
 		m_currentState->Render(); // render current state
 	}
 }
 
-void 
-GameStateManager::ReleaseAll()
+void GameStateManager::ReleaseAll()
 {
-	if (m_currentState != nullptr)
+	if(m_currentState != nullptr)
 	{
 		m_currentState->ReleaseAll(); // release all resources for currents state
 	}

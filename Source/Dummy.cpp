@@ -7,14 +7,18 @@
 
 #include "DummyOwnedStates.h"
 
-Dummy::Dummy() :
-	m_currentState(nullptr),
-	m_previousState(nullptr),
-	m_globalState(nullptr)
+Dummy::Dummy() : 
+	m_stateMachine(nullptr),
+	m_health(0)
 {}
 
 Dummy::~Dummy()
 {
+	if(m_stateMachine)
+	{
+		delete m_stateMachine;
+		m_stateMachine = nullptr;
+	}
 }
 
 void Dummy::Init(const Vector2& position, SpriteSheet* sprite, Animator* animator, HitBoxManager* hitBoxManager)
@@ -24,14 +28,19 @@ void Dummy::Init(const Vector2& position, SpriteSheet* sprite, Animator* animato
 	m_animator = animator;
 	m_animator->SetAnimation(0);
 	m_hitBoxManager = hitBoxManager;
+	m_hitBoxManager->SetCurrentHitBox(0);
+
+	m_stateMachine = new StateMachine<Dummy>(this);
+	m_stateMachine->Init(DummyIdleState::Instance(), nullptr, nullptr);
+
+	m_health = 3;
 }
 
 void 
 Dummy::Update(float deltaTime)
 {
-	// TODO update player state machine
-	m_globalState->Execute(this);
-	m_currentState->Execute(this);
+	// update state machine
+	m_stateMachine->Update();
 
 	// update object
 	GameObject::Update(deltaTime);
@@ -51,14 +60,14 @@ Dummy::Render(Graphics* graphics)
 	}
 
 	// render hitbox
-	m_hitBoxManager->Render(graphics);
+	//m_hitBoxManager->Render(graphics);
 }
 
 void
 Dummy::Reset()
 {
 	// set enemy state back to Idle
-	SetEnemyState(DummyIdleState::Instance());
+	m_stateMachine->ChangeState(DummyIdleState::Instance());
 
 	// Set Position 
 	// TODO set world position and screen position
@@ -70,24 +79,16 @@ Dummy::Reset()
 	SetActive(true);
 }
 
-void Dummy::SetEnemyState(State<Dummy>* state)
+void Dummy::ApplyDamage(int amount)
 {
-	assert(m_currentState && state);
+	m_health -= amount;
 
-	// store previous state
-	m_previousState = m_currentState;
-
-	// call on exit for current state
-	m_currentState->OnExit(this);
-
-	// set new state
-	m_currentState = state;
-
-	// call on entry for new state
-	m_currentState->OnEnter(this);
-}
-
-void Dummy::ReturnToPreviousState()
-{
-	SetEnemyState(m_previousState);
+	if(m_health < 1)
+	{
+		m_stateMachine->ChangeState(DummyDeadState::Instance());
+	}
+	else
+	{
+		m_stateMachine->ChangeState(DummyHurtState::Instance());
+	}
 }

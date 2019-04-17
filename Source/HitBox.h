@@ -30,6 +30,9 @@ public:
 
 	AABB FlipAABB();
 
+	bool OnCollision(const HitBox &collider) const; // checks other hibox for collision
+	bool OnCollision(const Vector2 &position) const; // checks vector position for collision
+
 private:
 	AABB m_boundingBox;		// aabb bouding box
 	Sprite m_sprite;		// hitbox 

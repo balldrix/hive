@@ -5,24 +5,29 @@
 #include "ControlSystem.h"
 #include "UnitVectors.h"
 
+PlayerIdleState::PlayerIdleState(std::string name)
+{
+	m_name = name;
+}
+
 PlayerIdleState* PlayerIdleState::Instance()
 {
-	static PlayerIdleState instance;
+	static PlayerIdleState instance("Idle");
 	return &instance;
 }
 
 void PlayerIdleState::OnEnter(Player* player)
 {
 	// set idle animation
-	player->GetAnimator()->SetAnimation("Idle");
-	player->GetHitBoxManager()->SetCurrentHitBox("Idle");
+	player->GetAnimator()->SetAnimation(m_name);
+	player->GetHitBoxManager()->SetCurrentHitBox(m_name);
 }
 
 void PlayerIdleState::Execute(Player* player)
 {
 	if(player->GetCurrentVelocity() != Vector2::Zero)
 	{
-		player->SetPlayerState(PlayerWalkingState::Instance());
+		player->GetStateMachine()->ChangeState((PlayerWalkingState::Instance()));
 	}
 }
 

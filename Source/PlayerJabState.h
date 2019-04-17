@@ -22,6 +22,7 @@ public:
 
 private:
 	PlayerJabState() {}
+	PlayerJabState(std::string name);
 	PlayerJabState(const PlayerJabState&);
 	PlayerJabState operator=(PlayerJabState const&);
 };

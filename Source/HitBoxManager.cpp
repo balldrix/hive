@@ -26,7 +26,7 @@ void HitBoxManager::Init(Sprite* sprite, GameObject* owner, std::string fileName
 	m_owner = owner;
 
 	LoadData(fileName);
-	SetCurrentHitBox("Idle");
+	SetCurrentHitBox(0);
 
 	// initialise hitboxes
 	m_movementBox.Init(sprite, m_currentHitBoxData->movementBox, Colors::Blue.v);

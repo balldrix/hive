@@ -3,21 +3,21 @@
 		{
 			"name": "Idle",
 			"index": 0,
-			"frameCount": 8,
+			"frameCount": 1,
 			"framesPerSecond": 8,
 			"loop": true
 		},
     {
-      "name": "Walking",
-      "index": 8,
-      "frameCount": 8,
+      "name": "Hurt",
+      "index": 1,
+      "frameCount": 1,
       "framesPerSecond": 8,
-      "loop": true
+      "loop": false
     },
     {
-      "name": "Jab",
-      "index": 17,
-      "frameCount": 1,
+      "name": "Dead",
+      "index": 0,
+      "frameCount": 5,
       "framesPerSecond": 8,
       "loop": false
     }

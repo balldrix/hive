@@ -21,6 +21,7 @@ public:
 
 private:
 	DummyHurtState() {}
+	DummyHurtState(std::string name);
 	DummyHurtState(const DummyHurtState&);
 	DummyHurtState operator=(DummyHurtState const&);
 };

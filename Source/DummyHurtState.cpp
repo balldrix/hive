@@ -6,27 +6,32 @@
 
 DummyHurtState* DummyHurtState::Instance()
 {
-	static DummyHurtState instance;
+	static DummyHurtState instance("Hurt");
 	return &instance;
 }
 
 void DummyHurtState::OnEnter(Dummy* enemy)
 {
-	enemy->GetAnimator()->SetAnimation("Hurt");
-	enemy->GetHitBoxManager()->SetCurrentHitBox("Hurt");
+	enemy->GetAnimator()->SetAnimation(m_name);
+	enemy->GetHitBoxManager()->KillAll();
 }
 
 void DummyHurtState::Execute(Dummy* enemy)
 {
 	if(enemy->GetAnimator()->IsDone())
 	{
-		enemy->SetEnemyState(DummyIdleState::Instance());
+		enemy->GetStateMachine()->ChangeState(DummyIdleState::Instance());
 	}
 }
 
 void DummyHurtState::OnExit(Dummy* enemy)
 {
 	enemy->GetAnimator()->Reset();
+}
+
+DummyHurtState::DummyHurtState(std::string name)
+{
+	m_name = name;
 }
 
 

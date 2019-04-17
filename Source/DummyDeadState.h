@@ -21,6 +21,7 @@ public:
 
 private:
 	DummyDeadState() {}
+	DummyDeadState(std::string name);
 	DummyDeadState(const DummyDeadState&);
 	DummyDeadState operator=(DummyDeadState const&);
 };

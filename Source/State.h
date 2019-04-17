@@ -6,9 +6,14 @@
 #ifndef _STATE_H_
 #define	_STATE_H_
 
+#include "pch.h"
+
 template <typename T>
 class State
 {
+protected:
+	std::string m_name;
+
 public:
 	virtual ~State() {}
 
@@ -20,6 +25,9 @@ public:
 
 	// on exit
 	virtual void OnExit(T*) = 0;
+
+	// return state name
+	std::string GetName() const { return m_name; }
 };
 
 #endif // !_STATE_H_

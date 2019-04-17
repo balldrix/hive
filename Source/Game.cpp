@@ -11,6 +11,7 @@
 
 Game::Game() :
 	m_graphics(nullptr),
+	m_spriteBatch(nullptr),
 	m_input(nullptr),
 	m_gameStateManager(nullptr),
 	m_timerFreq(0.0f),
@@ -60,7 +61,7 @@ Game::Run()
 
 	ProcessInput();			// read key and mouse input into game
 	Update(deltaTime);		// update game
-
+	ProcessCollisions();	// check for collisions
 	m_gameTime += deltaTime; // increment game time
 
 	Render();				// render objects	
@@ -86,6 +87,15 @@ Game::Update(float deltaTime)
 {
 	// update game state
 	m_gameStateManager->Update(deltaTime);
+}
+
+void Game::AI()
+{
+}
+
+void Game::ProcessCollisions()
+{
+	m_gameStateManager->ProcessCollisions();
 }
 
 void

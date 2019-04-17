@@ -4,10 +4,11 @@
 #include "Animator.h"
 #include "ControlSystem.h"
 #include "UnitVectors.h"
+#include "PlayerJabState.h"
 
 PlayerJabState* PlayerJabState::Instance()
 {
-	static PlayerJabState instance;
+	static PlayerJabState instance("Jab");
 	return &instance;
 }
 
@@ -15,8 +16,8 @@ void PlayerJabState::OnEnter(Player* player)
 {
 	// set jab animation
 	player->GetAnimator()->Reset();
-	player->GetAnimator()->SetAnimation("Jab");
-	player->GetHitBoxManager()->SetCurrentHitBox("Jab");
+	player->GetAnimator()->SetAnimation(m_name);
+	player->GetHitBoxManager()->SetCurrentHitBox(m_name);
 	player->GetControlSystem()->CanAttack(false);
 }
 
@@ -29,10 +30,15 @@ void PlayerJabState::Execute(Player* player)
 	// true if the jab animation is done
 	if(player->GetAnimator()->IsDone())
 	{
-		player->SetPlayerState(PlayerIdleState::Instance());
+		player->GetStateMachine()->ChangeState(PlayerIdleState::Instance());
 	}
 }
 
 void PlayerJabState::OnExit(Player* player)
 {
+}
+
+PlayerJabState::PlayerJabState(std::string name)
+{
+	m_name = name;
 }

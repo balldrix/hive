@@ -26,7 +26,7 @@ void SpriteSheet::Init(Texture* texture, std::string fileName)
 	// get frames data
 	json frames = data["frames"];
 
-	m_frames = frames.get<std::vector<SpriteFrame>>();
+	m_frames = frames.get<std::vector<SpriteFrameData>>();
 }
 
 void SpriteSheet::Render(Graphics* graphics, int frameNum)

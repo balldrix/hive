@@ -83,8 +83,10 @@
     <ClInclude Include="Source\Randomiser.h" />
     <ClInclude Include="Source\Resources.h" />
     <ClInclude Include="Source\Sprite.h" />
+    <ClInclude Include="Source\SpriteFrameData.h" />
     <ClInclude Include="Source\SpriteSheet.h" />
     <ClInclude Include="Source\State.h" />
+    <ClInclude Include="Source\StateMachine.h" />
     <ClInclude Include="Source\Texture.h" />
     <ClInclude Include="Source\Timer.h" />
     <ClInclude Include="Source\UnitVectors.h" />

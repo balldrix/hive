@@ -22,6 +22,7 @@ public:
 
 private:
 	PlayerWalkingState() {}
+	PlayerWalkingState(std::string name);
 	PlayerWalkingState(const PlayerWalkingState&);
 	PlayerWalkingState operator=(PlayerWalkingState const&);
 };

@@ -84,3 +84,38 @@ AABB HitBox::FlipAABB()
 
 	return newBox;
 }
+
+// return true if collision with other hitbox
+bool HitBox::OnCollision(const HitBox &collider) const
+{
+	AABB box = m_boundingBox;
+	AABB otherBox = collider.GetAABB();
+
+	box.OffSetAABB(m_position);
+	otherBox.OffSetAABB(collider.m_position);
+
+	if(box.Collision(otherBox))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+// return true if collision with position
+bool HitBox::OnCollision(const Vector2 &position) const
+{
+	AABB box = m_boundingBox;
+	box.OffSetAABB(m_position);
+
+	if(box.Collision(position))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}

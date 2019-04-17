@@ -22,6 +22,7 @@ public:
 
 private:
 	DummyIdleState() {}
+	DummyIdleState(std::string name);
 	DummyIdleState(const DummyIdleState&);
 	DummyIdleState operator=(DummyIdleState const&);
 };

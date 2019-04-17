@@ -21,7 +21,8 @@ public:
 	virtual void OnExit(Player* player);
 
 private:
-	PlayerIdleState() {}
+	PlayerIdleState();
+	PlayerIdleState(std::string name);
 	PlayerIdleState(const PlayerIdleState&);
 	PlayerIdleState operator=(PlayerIdleState const&);
 };

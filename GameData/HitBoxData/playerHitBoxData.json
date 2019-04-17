@@ -5,9 +5,9 @@
       "startup": 0,
       "active": 0,
       "movementBox": {
-        "minX": -4.0,
-        "minY": 4.0,
-        "maxX": 4.0,
+        "minX": -2.0,
+        "minY": 5.0,
+        "maxX": 3.0,
         "maxY": 8.0
       },
       "hurtBox": {
@@ -28,9 +28,9 @@
       "startup": 0,
       "active": 0,
       "movementBox": {
-        "minX": -4.0,
-        "minY": 4.0,
-        "maxX": 4.0,
+        "minX": -2.0,
+        "minY": 5.0,
+        "maxX": 3.0,
         "maxY": 8.0
       },
       "hurtBox": {
@@ -51,9 +51,9 @@
       "startup": 0,
       "active": 1,
       "movementBox": {
-        "minX": -4.0,
-        "minY": 4.0,
-        "maxX": 4.0,
+        "minX": -2.0,
+        "minY": 5.0,
+        "maxX": 3.0,
         "maxY": 8.0
       },
       "hurtBox": {

@@ -127,7 +127,7 @@ void GameplayGameState::LoadAssets()
 
 	// init hitbox managers
 	m_playerHitBoxManager->Init(m_hitBoxSprite, m_player, "GameData\\HitBoxData\\playerHitBoxData.json");
-	m_dummyHitBoxManager->Init(m_hitBoxSprite, m_player, "GameData\\HitBoxData\\dummyHitBoxData.json");
+	m_dummyHitBoxManager->Init(m_hitBoxSprite, m_dummy, "GameData\\HitBoxData\\dummyHitBoxData.json");
 
 	// init game objects
 	m_player->Init(Vector2((float)PlayerStartScreenPositionX, (float)PlayerStartScreenPositionY), m_playerSprite, m_playerAnimator, m_playerHitBoxManager,  m_controlSystem);
@@ -327,6 +327,18 @@ void GameplayGameState::Update(float deltaTime)
 	m_dummy->Update(deltaTime);
 }
 
+void GameplayGameState::ProcessCollisions()
+{
+	if(m_player->GetHitBoxManager()->IsHitBoxActive())
+	{
+		if(m_player->GetHitBoxManager()->GetHitBox().OnCollision(
+			m_dummy->GetHitBoxManager()->GetHurtBox()))
+		{
+			m_dummy->ApplyDamage(1);
+		}
+	}
+}
+
 void GameplayGameState::Render()
 {
 	//////////////////////////////////////
@@ -334,8 +346,8 @@ void GameplayGameState::Render()
 
 	//////////////////////////////////////
 	// render game objects
-	m_player->Render(m_graphics);
 	m_dummy->Render(m_graphics);
+	m_player->Render(m_graphics);
 }
 
 void GameplayGameState::ReleaseAll()

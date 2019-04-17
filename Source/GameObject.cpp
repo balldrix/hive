@@ -192,3 +192,7 @@ void GameObject::SetActive(bool active)
 {
 	m_active = active;
 }
+
+void GameObject::ApplyDamage(int amount)
+{
+}

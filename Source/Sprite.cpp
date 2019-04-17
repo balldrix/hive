@@ -107,6 +107,8 @@ void Sprite::Render(Graphics* graphics, const Vector2& position, const RECT& des
 
 void Sprite::SetPosition(const Vector2& position)
 {
+	// round position as object position will be floating points
+	// and pixel positions are ints
 	m_position.x = round(position.x);
 	m_position.y = round(position.y);
 }
