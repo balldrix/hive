@@ -20,7 +20,11 @@
         "w": 32,
         "h": 32
       },
-      "duration": 100
+      "duration": 100,
+      "origin": {
+        "x": 16,
+        "y": 24
+      }
     },
     {
       "name": "idle frame 2",
@@ -42,7 +46,11 @@
         "w": 32,
         "h": 32
       },
-      "duration": 100
+      "duration": 100,
+      "origin": {
+        "x": 16,
+        "y": 24
+      }
     },
     {
       "name": "idle frame 3",
@@ -64,7 +72,11 @@
         "w": 32,
         "h": 32
       },
-      "duration": 100
+      "duration": 100,
+      "origin": {
+        "x": 16,
+        "y": 24
+      }
     },
     {
       "name": "idle frame 4",
@@ -86,7 +98,11 @@
         "w": 32,
         "h": 32
       },
-      "duration": 100
+      "duration": 100,
+      "origin": {
+        "x": 16,
+        "y": 24
+      }
     },
     {
       "name": "idle frame 5",
@@ -108,39 +124,11 @@
         "w": 32,
         "h": 32
       },
-      "duration": 100
+      "duration": 100,
+      "origin": {
+        "x": 16,
+        "y": 24
+      }
     }
-  ],
-	"meta": {
-		"app": "http://www.aseprite.org/",
-		"version": "1.2.2-x64",
-		"image": "C:\\git_root\\Hive Project\\GameData\\Sprites\\playerSpritesheet.png",
-		"format": "RGBA8888",
-		"size": {
-			"w": 128,
-			"h": 128
-		},
-		"scale": "1",
-		"frameTags": [
-			{
-				"name": "Idle",
-				"from": 0,
-				"to": 7,
-				"direction": "forward"
-			},
-			{
-				"name": "Walking",
-				"from": 8,
-				"to": 15,
-				"direction": "forward"
-			}
-		],
-		"layers": [
-			{
-				"name": "sprite layer",
-				"opacity": 255,
-				"blendMode": "normal"
-			}
-		]
-	}
+  ]
 }

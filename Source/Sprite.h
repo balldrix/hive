@@ -33,6 +33,7 @@ public:
 	void				SetOrigin(const Vector2& origin);
 	void				SetSourceRect(const RECT& rect);
 	void				SetFlipEffect(SpriteEffects effect);
+	void				SetDepth(const float &depth);
 
 	// getters
 	const Vector2		GetPosition() const		{ return m_position; }
@@ -44,6 +45,7 @@ public:
 	const RECT			GetRect() const			{ return m_rect; }
 	const UINT			GetWidth() const		{ return m_width; }
 	const UINT			GetHeight() const		{ return m_height; }
+	const float			GetDepth() const		{ return m_depth;}
 
 protected:
 	Texture*			m_texture;			// texture pointer
@@ -58,6 +60,7 @@ protected:
 	UINT				m_width;			// sprite width
 	UINT				m_height;			// sprite height
 	SpriteEffects		m_spriteEffects;	// sprite effects
+	float				m_depth;			// sprite depth for layering
 };
 
 #endif _SPRITE_H_

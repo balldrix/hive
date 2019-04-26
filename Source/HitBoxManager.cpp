@@ -79,7 +79,7 @@ void HitBoxManager::SetCurrentHitBox(std::string name)
 	SetCurrentHitBox(index);
 }
 
-void HitBoxManager::SetCurrentHitBox(int index)
+void HitBoxManager::SetCurrentHitBox(const int &index)
 {
 	m_currentHitBoxData = &m_hitBoxDataList[index];
 	SetAllHitBoxes();

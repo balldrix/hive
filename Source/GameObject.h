@@ -86,6 +86,8 @@ protected:
 	SpriteSheet*	m_sprite;				// object sprite sheet
 	Animator*		m_animator;				// animation controller
 
+	Sprite*			m_shadow;				// object shadow
+
 	HitBoxManager*	m_hitBoxManager;		// hit box manager
 	ControlSystem*	m_controlSystem;		// pointer to control system	
 

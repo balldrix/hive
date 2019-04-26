@@ -25,7 +25,7 @@ public:
 
 	void SetFlipped(bool flip); // flip the hitbox data
 	void SetCurrentHitBox(std::string name);
-	void SetCurrentHitBox(int index);
+	void SetCurrentHitBox(const int &index);
 
 	HitBox GetMovementBox() const { return m_movementBox; }
 	HitBox GetHurtBox() const { return m_hurtBox; }

@@ -173,7 +173,7 @@ void Graphics::BeginScene()
 	m_D3DDeviceContext->RSSetViewports(1, &m_viewport);
 
 	// begin sprite scene
-	m_spriteBatch->Begin(SpriteSortMode_Deferred, nullptr, m_samplerState);
+	m_spriteBatch->Begin(SpriteSortMode_FrontToBack, nullptr, m_samplerState);
 }
 
 void Graphics::PresentBackBuffer()

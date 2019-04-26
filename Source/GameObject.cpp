@@ -14,6 +14,7 @@ GameObject::GameObject() :
 	m_deceleration(0.0f),
 	m_sprite(nullptr),
 	m_animator(nullptr),
+	m_shadow(nullptr),
 	m_hitBoxManager(nullptr),
 	m_controlSystem(nullptr),
 	m_active(false)
@@ -64,10 +65,22 @@ void GameObject::Update(float deltaTime)
 	}
 
 	// update position of sprite
-	m_sprite->SetPosition(m_position);
+	if(m_sprite)
+	{
+		m_sprite->SetPosition(m_position);
+	}
+
+	// update shadow position
+	if(m_shadow)
+	{
+		m_shadow->SetPosition(m_position);
+	}
 
 	// update hitbox
-	m_hitBoxManager->Update();
+	if(m_hitBoxManager)
+	{
+		m_hitBoxManager->Update();
+	}
 }
 
 void GameObject::Move(const Vector2 &direction)

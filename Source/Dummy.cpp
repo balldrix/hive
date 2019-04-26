@@ -1,4 +1,5 @@
 #include "Dummy.h"
+#include "Graphics.h"
 #include "SpriteSheet.h"
 #include "Animator.h"
 #include "HitBoxManager.h"
@@ -49,18 +50,33 @@ Dummy::Update(float deltaTime)
 void
 Dummy::Render(Graphics* graphics)
 {
-	// render enemy sprite
-	if(m_animator)
+	// render shadow first
+	if(m_shadow)
 	{
-		m_sprite->Render(graphics, m_animator->GetCurrentFrame() + m_animator->GetAnimation()->spriteSheetIndex);
+		m_shadow->SetDepth(m_position.y / graphics->GetHeight());
+		m_shadow->Render(graphics);
 	}
-	else
+
+	if(m_sprite)
 	{
-		m_sprite->Render(graphics, 0);
+		m_sprite->SetDepth(m_position.y / graphics->GetHeight());
+
+		// render enemy sprite
+		if(m_animator)
+		{
+			m_sprite->Render(graphics, m_animator->GetCurrentFrame() + m_animator->GetAnimation()->spriteSheetIndex);
+		}
+		else
+		{
+			m_sprite->Render(graphics, 0);
+		}
 	}
 
 	// render hitbox
-	//m_hitBoxManager->Render(graphics);
+	if(m_hitBoxManager)
+	{
+		//m_hitBoxManager->Render(graphics);
+	}
 }
 
 void

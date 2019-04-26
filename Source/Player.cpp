@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Graphics.h"
 #include "SpriteSheet.h"
 #include "Animator.h"
 #include "HitBoxManager.h"
@@ -47,18 +48,34 @@ void Player::Update(float deltaTime)
 
 void Player::Render(Graphics* graphics)
 {
-	// render player sprite
-	if(m_animator)
+	// render shadow first
+	if(m_shadow)
 	{
-		m_sprite->Render(graphics, m_animator->GetCurrentFrame() + m_animator->GetAnimation()->spriteSheetIndex);
+		m_shadow->SetDepth(m_position.y / graphics->GetHeight());
+		m_shadow->Render(graphics);
 	}
-	else
+
+	if(m_sprite)
 	{
-		m_sprite->Render(graphics, 0);
+		// set layer depth
+		m_sprite->SetDepth(m_position.y / graphics->GetHeight());
+
+		// render player sprite
+		if(m_animator)
+		{
+			m_sprite->Render(graphics, m_animator->GetCurrentFrame() + m_animator->GetAnimation()->spriteSheetIndex);
+		}
+		else
+		{
+			m_sprite->Render(graphics, 0);
+		}
 	}
 
 	// render hitbox
-	//m_hitBoxManager->Render(graphics);
+	if(m_hitBoxManager)
+	{
+		//m_hitBoxManager->Render(graphics);
+	}
 }
 
 void Player::Reset()

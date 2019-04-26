@@ -34,9 +34,9 @@ namespace
 		s.size.x = size["w"];
 		s.size.y = size["h"];
 
-		// calculate origin
-		s.origin.x = s.size.x * 0.5f;
-		s.origin.y = s.size.y * 0.5f;
+		json origin = j["origin"];
+		s.origin.x = origin["x"];
+		s.origin.y = origin["y"];
 	}
 }
 

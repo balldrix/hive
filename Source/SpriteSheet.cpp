@@ -32,13 +32,13 @@ void SpriteSheet::Init(Texture* texture, std::string fileName)
 void SpriteSheet::Render(Graphics* graphics, int frameNum)
 {
 	graphics->GetSpriteBatch()->Draw(m_texture->GetTexture(), m_position, &m_frames[frameNum].sourceRect, m_colour,
-									 m_rotation, m_frames[frameNum].origin, m_scale, m_spriteEffects);
+									 m_rotation, m_frames[frameNum].origin, m_scale, m_spriteEffects, m_depth);
 									 
 }
 
 void SpriteSheet::Render(Graphics* graphics, Vector2 position, int frameNum)
 {
 	graphics->GetSpriteBatch()->Draw(m_texture->GetTexture(), position, &m_frames[frameNum].sourceRect, m_colour,
-									 m_rotation, m_frames[frameNum].origin, m_scale, m_spriteEffects);
+									 m_rotation, m_frames[frameNum].origin, m_scale, m_spriteEffects, m_depth);
 
 }

@@ -15,7 +15,8 @@ Sprite::Sprite() :
 	m_rect(),
 	m_spriteEffects(SpriteEffects::SpriteEffects_None),
 	m_width(0),
-	m_height(0)
+	m_height(0),
+	m_depth(0.0f)
 {
 }
 
@@ -29,7 +30,7 @@ void Sprite::Init(Texture* texture)
 	m_texture = texture;
 
 	// copy D3D11 resource to a Texture2D struct
-	ID3D11Texture2D*	tex2D;
+	ID3D11Texture2D* tex2D;
 	tex2D = (ID3D11Texture2D*)m_texture->GetResource();
 
 	// create a texture 2D description
@@ -67,13 +68,13 @@ void Sprite::Render(Graphics* graphics)
 		m_origin,
 		m_scale,
 		m_spriteEffects,
-		0.0f);
+		m_depth);
 }
 
 void Sprite::Render(Graphics* graphics, float alpha)
 {
 	SetAlpha(alpha);
-	
+
 	Render(graphics);
 }
 
@@ -91,7 +92,7 @@ Sprite::Render(Graphics* graphics, const Vector2& position)
 		m_origin,
 		m_scale,
 		m_spriteEffects,
-		0.0f);
+		m_depth);
 }
 
 void Sprite::Render(Graphics* graphics, const Vector2& position, const RECT& destination)
@@ -148,4 +149,9 @@ void Sprite::SetSourceRect(const RECT& rect)
 void Sprite::SetFlipEffect(SpriteEffects effect)
 {
 	m_spriteEffects = effect;
+}
+
+void Sprite::SetDepth(const float& depth)
+{
+	m_depth = depth;
 }
