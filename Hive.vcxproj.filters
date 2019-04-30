@@ -247,6 +247,9 @@
     <Image Include="GameData\Sprites\playerSpriteSheet.png">
       <Filter>Game Data\Sprites</Filter>
     </Image>
+    <Image Include="GameData\Sprites\shadow.png">
+      <Filter>Game Data\Sprites</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

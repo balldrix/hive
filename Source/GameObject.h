@@ -22,8 +22,11 @@ public:
 	virtual ~GameObject();
 	
 	virtual void	Init(const Vector2& position, Sprite* sprite);
+	virtual void	Init(const Vector2& position, Sprite* sprite, Sprite* shadow);
 	virtual void	Init(const Vector2& position, SpriteSheet* sprite, Animator* animator, HitBoxManager* hitBoxManager);
+	virtual void	Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager);
 	virtual void	Init(const Vector2& position, SpriteSheet* sprite, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem);
+	virtual void	Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem);
 
 	virtual void	Update(float deltaTime);	// update object
 	virtual void 	Render(Graphics* graphics) = 0;	// render object

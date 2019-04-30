@@ -29,11 +29,23 @@ void GameObject::Init(const Vector2& position, Sprite* sprite)
 {
 }
 
+void GameObject::Init(const Vector2& position, Sprite* sprite, Sprite* shadow)
+{
+}
+
 void GameObject::Init(const Vector2& position, SpriteSheet* sprite, Animator* animator, HitBoxManager* hitBoxManager)
 {
 }
 
+void GameObject::Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager)
+{
+}
+
 void GameObject::Init(const Vector2& position, SpriteSheet* sprite, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem)
+{
+}
+
+void GameObject::Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem)
 {
 }
 

@@ -1,5 +1,6 @@
 #include "Dummy.h"
 #include "Graphics.h"
+#include "Sprite.h"
 #include "SpriteSheet.h"
 #include "Animator.h"
 #include "HitBoxManager.h"
@@ -22,9 +23,10 @@ Dummy::~Dummy()
 	}
 }
 
-void Dummy::Init(const Vector2& position, SpriteSheet* sprite, Animator* animator, HitBoxManager* hitBoxManager)
+void Dummy::Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager)
 {
 	m_sprite = sprite;
+	m_shadow = shadow;
 	m_position = position;
 	m_animator = animator;
 	m_animator->SetAnimation(0);

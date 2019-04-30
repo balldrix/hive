@@ -23,7 +23,7 @@ public:
 	Player();
 	virtual					~Player();
 							
-	void					Init(const Vector2& position, SpriteSheet* sprite, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem);
+	void					Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem);
 							
 	void					Update(float deltaTime);
 	void					Render(Graphics* graphics);

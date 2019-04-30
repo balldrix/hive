@@ -17,7 +17,7 @@ public:
 	Dummy();
 	virtual				~Dummy();
 
-	void				Init(const Vector2& position, SpriteSheet* sprite, Animator* animator, HitBoxManager* hitBoxManager);
+	void				Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager);
 	
 	void				Update(float deltaTime);
 	void				Render(Graphics* graphics);

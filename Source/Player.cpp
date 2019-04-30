@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Graphics.h"
+#include "Sprite.h"
 #include "SpriteSheet.h"
 #include "Animator.h"
 #include "HitBoxManager.h"
@@ -21,10 +22,11 @@ Player::~Player()
 	}
 }
 
-void Player::Init(const Vector2& position, SpriteSheet* sprite, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem)
+void Player::Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem)
 {
 	m_controlSystem = controlSystem;
 	m_sprite = sprite;
+	m_shadow = shadow;
 	m_position = position;
 	m_acceleration = PlayerAcceleration;
 	m_deceleration = PlayerDeceleration;

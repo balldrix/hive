@@ -96,6 +96,7 @@
     <Image Include="GameData\Sprites\dummySpritesheet.png" />
     <Image Include="GameData\Sprites\hitbox.png" />
     <Image Include="GameData\Sprites\playerSpriteSheet.png" />
+    <Image Include="GameData\Sprites\shadow.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GameData\AnimationData\dummyAnimationData.json" />
