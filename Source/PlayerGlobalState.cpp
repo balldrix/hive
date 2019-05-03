@@ -56,8 +56,8 @@ void PlayerGlobalState::Execute(Player* player)
 		player->Move(UnitVectors::Left);
 		//player->FlipHorizontally(true);
 		break;
-	case Punch:
-		player->Punch();
+	case Attack:
+		player->Attack();
 		break;
 	default:
 		break;

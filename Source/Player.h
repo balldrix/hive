@@ -35,7 +35,7 @@ public:
 	void					Move(const Vector2 &direction);
 	void					Stop();
 
-	void					Punch();
+	void					Attack();
 
 private:
 	StateMachine<Player>*	m_stateMachine;

@@ -58,6 +58,7 @@ void HitBox::Render(Graphics* graphics)
 	rect.right = (LONG)box.GetMax().x;
 	rect.bottom = (LONG)box.GetMax().y;
 
+	m_sprite.SetDepth(1.0f);
 	m_sprite.Render(graphics, m_position, rect);
 }
 

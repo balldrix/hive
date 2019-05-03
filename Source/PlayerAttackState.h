@@ -1,6 +1,6 @@
-// PlayerJabState.h
+// PlayerAttackState.h
 // Christopher Ball 2019
-// Player jab punch state
+// Player normal attack state
 
 #ifndef _PLAYER_JAB_STATE_
 #define _PLAYER_JAB_STATE_
@@ -10,21 +10,21 @@
 // forward declaration
 class Player;
 
-class PlayerJabState : public State<Player>
+class PlayerAttackState : public State<Player>
 {
 public:
 	// static instance call
-	static PlayerJabState* Instance();
+	static PlayerAttackState* Instance();
 
 	virtual void OnEnter(Player* player);
 	virtual void Execute(Player* player);
 	virtual void OnExit(Player* player);
 
 private:
-	PlayerJabState() {}
-	PlayerJabState(std::string name);
-	PlayerJabState(const PlayerJabState&);
-	PlayerJabState operator=(PlayerJabState const&);
+	PlayerAttackState() {}
+	PlayerAttackState(std::string name);
+	PlayerAttackState(const PlayerAttackState&);
+	PlayerAttackState operator=(PlayerAttackState const&);
 };
 
 #endif // _PLAYER_JAB_STATE_

@@ -53,166 +53,10 @@
       }
     },
     {
-      "name": "idle frame 3",
-      "frame": {
-        "x": 64,
-        "y": 0,
-        "w": 32,
-        "h": 32
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 32,
-        "h": 32
-      },
-      "sourceSize": {
-        "w": 32,
-        "h": 32
-      },
-      "duration": 100,
-      "origin": {
-        "x": 16,
-        "y": 24
-      }
-    },
-    {
-      "name": "idle frame 4",
-      "frame": {
-        "x": 96,
-        "y": 0,
-        "w": 32,
-        "h": 32
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 32,
-        "h": 32
-      },
-      "sourceSize": {
-        "w": 32,
-        "h": 32
-      },
-      "duration": 100,
-      "origin": {
-        "x": 16,
-        "y": 24
-      }
-    },
-    {
-      "name": "idle frame 5",
-      "frame": {
-        "x": 0,
-        "y": 32,
-        "w": 32,
-        "h": 32
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 32,
-        "h": 32
-      },
-      "sourceSize": {
-        "w": 32,
-        "h": 32
-      },
-      "duration": 100,
-      "origin": {
-        "x": 16,
-        "y": 24
-      }
-    },
-    {
-      "name": "idle frame 6",
-      "frame": {
-        "x": 32,
-        "y": 32,
-        "w": 32,
-        "h": 32
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 32,
-        "h": 32
-      },
-      "sourceSize": {
-        "w": 32,
-        "h": 32
-      },
-      "duration": 100,
-      "origin": {
-        "x": 16,
-        "y": 24
-      }
-    },
-    {
-      "name": "idle frame 7",
-      "frame": {
-        "x": 64,
-        "y": 32,
-        "w": 32,
-        "h": 32
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 32,
-        "h": 32
-      },
-      "sourceSize": {
-        "w": 32,
-        "h": 32
-      },
-      "duration": 100,
-      "origin": {
-        "x": 16,
-        "y": 24
-      }
-    },
-    {
-      "name": "idle frame 8",
-      "frame": {
-        "x": 96,
-        "y": 32,
-        "w": 32,
-        "h": 32
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 32,
-        "h": 32
-      },
-      "sourceSize": {
-        "w": 32,
-        "h": 32
-      },
-      "duration": 100,
-      "origin": {
-        "x": 16,
-        "y": 24
-      }
-    },
-    {
       "name": "walking frame 1",
       "frame": {
-        "x": 0,
-        "y": 64,
+        "x": 64,
+        "y": 0,
         "w": 32,
         "h": 32
       },
@@ -237,8 +81,8 @@
     {
       "name": "walking frame 2",
       "frame": {
-        "x": 32,
-        "y": 64,
+        "x": 0,
+        "y": 0,
         "w": 32,
         "h": 32
       },
@@ -261,36 +105,10 @@
       }
     },
     {
-      "name": "walking frame 3",
-      "frame": {
-        "x": 64,
-        "y": 64,
-        "w": 32,
-        "h": 32
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 32,
-        "h": 32
-      },
-      "sourceSize": {
-        "w": 32,
-        "h": 32
-      },
-      "duration": 100,
-      "origin": {
-        "x": 16,
-        "y": 24
-      }
-    },
-    {
-      "name": "walking frame 4",
+      "name": "attack 1 frame 1",
       "frame": {
         "x": 96,
-        "y": 64,
+        "y": 0,
         "w": 32,
         "h": 32
       },
@@ -313,10 +131,10 @@
       }
     },
     {
-      "name": "walking frame 5",
+      "name": "attack 2 frame 1",
       "frame": {
         "x": 0,
-        "y": 96,
+        "y": 32,
         "w": 32,
         "h": 32
       },
@@ -339,114 +157,10 @@
       }
     },
     {
-      "name": "walking frame 6",
-      "frame": {
-        "x": 32,
-        "y": 96,
-        "w": 32,
-        "h": 32
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 32,
-        "h": 32
-      },
-      "sourceSize": {
-        "w": 32,
-        "h": 32
-      },
-      "duration": 100,
-      "origin": {
-        "x": 16,
-        "y": 24
-      }
-    },
-    {
-      "name": "walking frame 7",
-      "frame": {
-        "x": 64,
-        "y": 96,
-        "w": 32,
-        "h": 32
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 32,
-        "h": 32
-      },
-      "sourceSize": {
-        "w": 32,
-        "h": 32
-      },
-      "duration": 100,
-      "origin": {
-        "x": 16,
-        "y": 24
-      }
-    },
-    {
-      "name": "walking frame 8",
-      "frame": {
-        "x": 96,
-        "y": 96,
-        "w": 32,
-        "h": 32
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 32,
-        "h": 32
-      },
-      "sourceSize": {
-        "w": 32,
-        "h": 32
-      },
-      "duration": 100,
-      "origin": {
-        "x": 16,
-        "y": 24
-      }
-    },
-    {
-      "name": "jab frame 1",
-      "frame": {
-        "x": 0,
-        "y": 128,
-        "w": 32,
-        "h": 32
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 32,
-        "h": 32
-      },
-      "sourceSize": {
-        "w": 32,
-        "h": 32
-      },
-      "duration": 100,
-      "origin": {
-        "x": 16,
-        "y": 24
-      }
-    },
-    {
-      "name": "jab frame 2",
+      "name": "attack 3 frame 1",
       "frame": {
         "x": 32,
-        "y": 128,
+        "y": 32,
         "w": 32,
         "h": 32
       },
@@ -469,10 +183,10 @@
       }
     },
     {
-      "name": "jab frame 3",
+      "name": "attack 3 frame 2",
       "frame": {
-        "x": 64,
-        "y": 128,
+        "x": 32,
+        "y": 32,
         "w": 32,
         "h": 32
       },
@@ -495,10 +209,10 @@
       }
     },
     {
-      "name": "jab frame 4",
+      "name": "attack 3 frame 3",
       "frame": {
-        "x": 96,
-        "y": 128,
+        "x": 32,
+        "y": 32,
         "w": 32,
         "h": 32
       },

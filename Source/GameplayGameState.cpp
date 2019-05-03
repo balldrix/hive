@@ -329,7 +329,7 @@ void GameplayGameState::ProcessInput()
 
 	if(m_input->IsKeyDown(PLAYER_A_KEY) && m_controlSystem->CanAttack())
 	{
-		m_controlSystem->SetInput(Punch);
+		m_controlSystem->SetInput(Attack);
 		return;
 	}
 

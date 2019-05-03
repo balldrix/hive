@@ -76,7 +76,7 @@ void Player::Render(Graphics* graphics)
 	// render hitbox
 	if(m_hitBoxManager)
 	{
-		//m_hitBoxManager->Render(graphics);
+		m_hitBoxManager->Render(graphics);
 	}
 }
 
@@ -127,11 +127,11 @@ void Player::Stop()
 	SetCurrentVelocity(Vector2::Zero);
 }
 
-void Player::Punch()
+void Player::Attack()
 {
 	if(m_controlSystem->CanAttack())
 	{
-		m_stateMachine->ChangeState((PlayerJabState::Instance()));
+		m_stateMachine->ChangeState((PlayerAttackState::Instance()));
 	}
 }
 

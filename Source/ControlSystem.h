@@ -19,7 +19,7 @@ enum Controls
 	Down,
 	DownLeft,
 	Left,
-	Punch,
+	Attack,
 	MaxControls
 };
 

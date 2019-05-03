@@ -47,7 +47,7 @@
       }
     },
     {
-      "name": "Jab",
+      "name": "Attack 1",
       "startup": 0,
       "active": 1,
       "movementBox": {

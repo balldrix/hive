@@ -79,7 +79,7 @@ void HitBoxManager::SetCurrentHitBox(std::string name)
 	SetCurrentHitBox(index);
 }
 
-void HitBoxManager::SetCurrentHitBox(const int &index)
+void HitBoxManager::SetCurrentHitBox(const int& index)
 {
 	m_currentHitBoxData = &m_hitBoxDataList[index];
 	SetAllHitBoxes();
@@ -99,12 +99,9 @@ bool HitBoxManager::IsHitBoxActive()
 	int startup = m_currentHitBoxData->startupFrames - 1;
 	int active = m_currentHitBoxData->activeFrames + startup;
 
-	if(m_owner->GetAnimator()->GetAnimation()->name == "Jab")
+	if(currentFrame >= startup && currentFrame <= active)
 	{
-		if(currentFrame >= startup && currentFrame <= active)
-		{
-			return true;
-		}
+		return true;
 	}
 
 	return false;

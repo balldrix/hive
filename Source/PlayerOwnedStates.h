@@ -9,6 +9,6 @@
 #include "PlayerGlobalState.h"
 #include "PlayerIdleState.h"
 #include "PlayerWalkingState.h"
-#include "PlayerJabState.h"
+#include "PlayerAttackState.h"
 
 #endif // !_PLAYER_OWNED_STATES_H_

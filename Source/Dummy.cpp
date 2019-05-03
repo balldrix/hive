@@ -77,7 +77,7 @@ Dummy::Render(Graphics* graphics)
 	// render hitbox
 	if(m_hitBoxManager)
 	{
-		//m_hitBoxManager->Render(graphics);
+		m_hitBoxManager->Render(graphics);
 	}
 }
 
