@@ -13,6 +13,7 @@ PlayerWalkingState* PlayerWalkingState::Instance()
 
 void PlayerWalkingState::OnEnter(Player* player)
 {
+	player->GetAnimator()->Reset();
 	player->GetAnimator()->SetAnimation(m_name);
 	player->GetHitBoxManager()->SetCurrentHitBox(m_name);
 }

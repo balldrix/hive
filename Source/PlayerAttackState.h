@@ -15,6 +15,7 @@ class PlayerAttackState : public State<Player>
 public:
 	// static instance call
 	static PlayerAttackState* Instance();
+	void SetName(std::string name);
 
 	virtual void OnEnter(Player* player);
 	virtual void Execute(Player* player);

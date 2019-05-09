@@ -17,22 +17,22 @@
     {
       "name": "Attack 1",
       "index": 4,
-      "frameCount": 1,
+      "frameCount": 2,
       "framesPerSecond": 8,
       "loop": false
     },
     {
       "name": "Attack 2",
-      "index": 5,
-      "frameCount": 1,
-      "framesPerSecond": 4,
+      "index": 6,
+      "frameCount": 2,
+      "framesPerSecond": 8,
       "loop": false
     },
     {
       "name": "Attack 3",
-      "index": 6,
-      "frameCount": 3,
-      "framesPerSecond": 4,
+      "index": 8,
+      "frameCount": 7,
+      "framesPerSecond": 8,
       "loop": false
     }
 	]

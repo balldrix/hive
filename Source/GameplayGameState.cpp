@@ -93,7 +93,6 @@ void GameplayGameState::LoadAssets()
 
 	// init control system
 	m_controlSystem = new ControlSystem();
-	m_controlSystem->Init();
 
 	// create texture memory
 	m_playerTexture = new Texture();
@@ -327,7 +326,8 @@ void GameplayGameState::ProcessInput()
 		m_controlSystem->SetInput(Left);
 	}
 
-	if(m_input->IsKeyDown(PLAYER_A_KEY) && m_controlSystem->CanAttack())
+	if(m_input->IsKeyDown(PLAYER_A_KEY) &&
+		m_controlSystem->CanAttack())
 	{
 		m_controlSystem->SetInput(Attack);
 		return;

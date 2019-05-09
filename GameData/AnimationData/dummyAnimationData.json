@@ -11,13 +11,13 @@
       "name": "Hurt",
       "index": 1,
       "frameCount": 1,
-      "framesPerSecond": 4,
+      "framesPerSecond": 8,
       "loop": false
     },
     {
       "name": "Dead",
       "index": 0,
-      "frameCount": 5,
+      "frameCount": 7,
       "framesPerSecond": 8,
       "loop": false
     }

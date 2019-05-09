@@ -95,10 +95,10 @@ void Player::Reset()
 	SetActive(true);
 }
 
-void Player::Move(const Vector2& direction)
+void Player::Move(const Vector2 & direction)
 {
 	// true if switching direction
-	if(direction.x < 0 && m_currentVelocity.x > 0 || 
+	if(direction.x < 0 && m_currentVelocity.x > 0 ||
 		direction.x > 0 && m_currentVelocity.x < 0)
 	{
 		// slow down before switching
@@ -113,7 +113,7 @@ void Player::Move(const Vector2& direction)
 	{
 		FlipHorizontally(true);
 	}
-	
+
 	// true if moving to the right
 	if(m_currentVelocity.x > 0)
 	{
@@ -129,9 +129,35 @@ void Player::Stop()
 
 void Player::Attack()
 {
-	if(m_controlSystem->CanAttack())
+	if(m_controlSystem->CanAttack() &&
+		(m_animator->GetAnimation()->name == "Idle" ||
+			m_animator->GetAnimation()->name == "Walking"))
 	{
+		switch(m_controlSystem->GetComboCounter())
+			{
+			case 0:
+			case 1:
+				PlayerAttackState::Instance()->SetName("Attack 1");
+				break;
+			case 2:
+				PlayerAttackState::Instance()->SetName("Attack 2");
+				break;
+			case 3:
+				PlayerAttackState::Instance()->SetName("Attack 3");
+				break;
+			default:
+				PlayerAttackState::Instance()->SetName("Attack 1");
+				break;
+		}
+
 		m_stateMachine->ChangeState((PlayerAttackState::Instance()));
+	
+		m_controlSystem->ResetTimers();
+
+		if(m_controlSystem->CanCombo())
+		{
+			m_controlSystem->IncrementComboCount();
+		}
 	}
 }
 

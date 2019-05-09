@@ -36,7 +36,7 @@ void Dummy::Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, A
 	m_stateMachine = new StateMachine<Dummy>(this);
 	m_stateMachine->Init(DummyIdleState::Instance(), nullptr, nullptr);
 
-	m_health = 3;
+	m_health = 4;
 }
 
 void 

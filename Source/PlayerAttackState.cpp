@@ -8,16 +8,21 @@
 
 PlayerAttackState* PlayerAttackState::Instance()
 {
-	static PlayerAttackState instance("Attack");
+	static PlayerAttackState instance;
 	return &instance;
+}
+
+void PlayerAttackState::SetName(std::string name)
+{
+	m_name = name;
 }
 
 void PlayerAttackState::OnEnter(Player* player)
 {
 	// set jab animation
 	player->GetAnimator()->Reset();
-	player->GetAnimator()->SetAnimation("Attack 1");
-	player->GetHitBoxManager()->SetCurrentHitBox("Attack 1");
+	player->GetAnimator()->SetAnimation(m_name);
+	player->GetHitBoxManager()->SetCurrentHitBox(m_name);
 	player->GetControlSystem()->CanAttack(false);
 }
 

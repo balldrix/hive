@@ -19,6 +19,7 @@ PlayerIdleState* PlayerIdleState::Instance()
 void PlayerIdleState::OnEnter(Player* player)
 {
 	// set idle animation
+	player->GetAnimator()->Reset();
 	player->GetAnimator()->SetAnimation(m_name);
 	player->GetHitBoxManager()->SetCurrentHitBox(m_name);
 }
