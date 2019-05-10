@@ -12,7 +12,7 @@ PlayerAttackState* PlayerAttackState::Instance()
 	return &instance;
 }
 
-void PlayerAttackState::SetName(std::string name)
+void PlayerAttackState::SetAttack(std::string name)
 {
 	m_name = name;
 }
@@ -35,7 +35,10 @@ void PlayerAttackState::Execute(Player* player)
 	// true if the jab animation is done
 	if(player->GetAnimator()->IsDone())
 	{
+		// change back to idle state and reset control timers
 		player->GetStateMachine()->ChangeState(PlayerIdleState::Instance());
+		player->GetControlSystem()->ResetTimers();
+		player->GetControlSystem()->IncrementComboCount();
 	}
 }
 

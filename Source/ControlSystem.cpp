@@ -32,7 +32,12 @@ Controls ControlSystem::GetLastPressed()
 
 void ControlSystem::IncrementComboCount()
 {
-	m_comboCounter = (m_comboCounter + 1) % MaxCombo;
+	m_comboCounter++;
+
+	if(m_comboCounter > MaxCombo - 1)
+	{
+		m_comboCounter = 0;
+	}
 }
 
 void ControlSystem::ResetTimers()

@@ -31,7 +31,7 @@
     {
       "name": "Attack 3",
       "index": 8,
-      "frameCount": 7,
+      "frameCount": 5,
       "framesPerSecond": 8,
       "loop": false
     }

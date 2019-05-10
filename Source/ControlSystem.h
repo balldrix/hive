@@ -6,8 +6,8 @@
 #define _CONTROL_SYSTEM_H_
 
 const unsigned int MaxCombo = 4;
-const float ComboTimeLimit = 2.0f;
-const float InputTimeLimit = 0.5f;
+const float ComboTimeLimit = 1.5f; // time given to allow combos again
+const float InputTimeLimit = 0.15f; // time given to link combos
 
 enum Controls
 {

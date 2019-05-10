@@ -35,6 +35,7 @@ public:
 	void					Move(const Vector2 &direction);
 	void					Stop();
 
+	// attacks
 	void					Attack();
 
 private:

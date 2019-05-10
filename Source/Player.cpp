@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Graphics.h"
 #include "Sprite.h"
+#include "ControlSystem.h"
 #include "SpriteSheet.h"
 #include "Animator.h"
 #include "HitBoxManager.h"
@@ -46,6 +47,11 @@ void Player::Update(float deltaTime)
 
 	// update object
 	GameObject::Update(deltaTime);
+
+	if(m_stateMachine->GetCurrentState() != PlayerAttackState::Instance())
+	{
+		m_controlSystem->Update(deltaTime);
+	}
 }
 
 void Player::Render(Graphics* graphics)
@@ -74,10 +80,10 @@ void Player::Render(Graphics* graphics)
 	}
 
 	// render hitbox
-	if(m_hitBoxManager)
-	{
-		m_hitBoxManager->Render(graphics);
-	}
+	//if(m_hitBoxManager)
+	//{
+	//	m_hitBoxManager->Render(graphics);
+	//}
 }
 
 void Player::Reset()
@@ -121,43 +127,37 @@ void Player::Move(const Vector2 & direction)
 	}
 }
 
+// stop velocity
 void Player::Stop()
 {
 	SetTargetVelocity(Vector2::Zero);
 	SetCurrentVelocity(Vector2::Zero);
 }
 
+// normal attack behaviour
 void Player::Attack()
 {
-	if(m_controlSystem->CanAttack() &&
-		(m_animator->GetAnimation()->name == "Idle" ||
-			m_animator->GetAnimation()->name == "Walking"))
+	if(m_animator->GetAnimation()->name == "Idle" || m_animator->GetAnimation()->name == "Walking")
 	{
+		// use combo counter to get the correct attack 
 		switch(m_controlSystem->GetComboCounter())
 			{
 			case 0:
 			case 1:
-				PlayerAttackState::Instance()->SetName("Attack 1");
+				PlayerAttackState::Instance()->SetAttack("Attack 1");
 				break;
 			case 2:
-				PlayerAttackState::Instance()->SetName("Attack 2");
+				PlayerAttackState::Instance()->SetAttack("Attack 2");
 				break;
 			case 3:
-				PlayerAttackState::Instance()->SetName("Attack 3");
+				PlayerAttackState::Instance()->SetAttack("Attack 3");
 				break;
 			default:
-				PlayerAttackState::Instance()->SetName("Attack 1");
+				PlayerAttackState::Instance()->SetAttack("Attack 1");
 				break;
 		}
 
 		m_stateMachine->ChangeState((PlayerAttackState::Instance()));
-	
-		m_controlSystem->ResetTimers();
-
-		if(m_controlSystem->CanCombo())
-		{
-			m_controlSystem->IncrementComboCount();
-		}
 	}
 }
 

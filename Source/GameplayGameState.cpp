@@ -351,9 +351,6 @@ void GameplayGameState::ProcessInput()
 
 void GameplayGameState::Update(float deltaTime)
 {
-	// update control system
-	m_controlSystem->Update(deltaTime);
-
 	// update player
 	m_player->Update(deltaTime);
 	m_dummy->Update(deltaTime);
