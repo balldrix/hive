@@ -6,12 +6,12 @@
 #include "HitBoxManager.h"
 #include "Resources.h"
 #include "ControlSystem.h"
+#include "pch.h"
 
 #include "DummyOwnedStates.h"
 
 Dummy::Dummy() : 
-	m_stateMachine(nullptr),
-	m_health(0)
+	m_stateMachine(nullptr)
 {}
 
 Dummy::~Dummy()
@@ -28,6 +28,8 @@ void Dummy::Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, A
 	m_sprite = sprite;
 	m_shadow = shadow;
 	m_position = position;
+	m_acceleration = 1.0f;
+	m_deceleration = 1.25f;
 	m_animator = animator;
 	m_animator->SetAnimation(0);
 	m_hitBoxManager = hitBoxManager;
@@ -55,13 +57,13 @@ Dummy::Render(Graphics* graphics)
 	// render shadow first
 	if(m_shadow)
 	{
-		m_shadow->SetDepth(m_position.y / graphics->GetHeight());
+		m_shadow->SetDepth(m_groundPosition.y / graphics->GetHeight());
 		m_shadow->Render(graphics);
 	}
 
 	if(m_sprite)
 	{
-		m_sprite->SetDepth(m_position.y / graphics->GetHeight());
+		m_sprite->SetDepth(m_groundPosition.y / graphics->GetHeight());
 
 		// render enemy sprite
 		if(m_animator)
@@ -97,16 +99,34 @@ Dummy::Reset()
 	SetActive(true);
 }
 
-void Dummy::ApplyDamage(int amount)
+void Dummy::ApplyDamage(GameObject* source, const int& amount)
 {
 	m_health -= amount;
 
-	if(m_health < 1)
+	// true if health has gone or damage is high
+	if(m_health < 1 || amount > 15)
 	{
-		m_stateMachine->ChangeState(DummyDeadState::Instance());
+		// set knockback state
+		m_stateMachine->ChangeState(DummyKnockbackState::Instance());
+
+		// calculate direction to knockback
+		Vector2 direction = Vector2(this->GetPosition().x - source->GetPosition().x, 0.0f) - Vector2(0.0f, 10.0f);
+		direction.Normalize();
+
+		// knockback dummy with 80.0f force
+		Knockback(direction, 90.0f);
+
+		// bounce once
+		SetKnockbackCount(1);
 	}
 	else
 	{
 		m_stateMachine->ChangeState(DummyHurtState::Instance());
 	}
+}
+
+void Dummy::Knockback(const Vector2& direction, const float& force)
+{
+	SetVelocity(direction);
+	SetMovementSpeed(force);
 }

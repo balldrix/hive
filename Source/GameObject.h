@@ -7,6 +7,9 @@
 
 #include "pch.h"
 
+// constants
+const float Gravity = 0.001f;
+
 // forward definitions
 class Graphics;
 class HitBoxManager;
@@ -20,7 +23,7 @@ class GameObject
 public:
 	GameObject();
 	virtual ~GameObject();
-	
+
 	virtual void	Init(const Vector2& position, Sprite* sprite);
 	virtual void	Init(const Vector2& position, Sprite* sprite, Sprite* shadow);
 	virtual void	Init(const Vector2& position, SpriteSheet* sprite, Animator* animator, HitBoxManager* hitBoxManager);
@@ -31,7 +34,7 @@ public:
 	virtual void	Update(float deltaTime);	// update object
 	virtual void 	Render(Graphics* graphics) = 0;	// render object
 
-	virtual void	Move(const Vector2 &direction);
+	virtual void	Move(const Vector2& direction);
 	virtual void	Stop();
 
 	float			GetLerpAmount(float num);
@@ -41,23 +44,28 @@ public:
 	void			FlipHorizontally(bool flip);
 
 	// Setters
-	void			SetID(const wchar_t* string);	// set object ID
+	void			SetID(const wchar_t* string);			// set object ID
 	void			SetPositionX(unsigned int x);
 	void			SetPositionY(unsigned int y);
 	void			SetPosition(unsigned int x, unsigned int y);
-	void			SetPosition(Vector2 position);	// set position
+	void			SetPosition(const Vector2& position);			// set position
 	void			SetMovementSpeed(float speed);
+	void			SetVelocity(float x, float y);
+	void			SetVelocity(const Vector2& velocity);
 	void			SetCurrentVelocity(float x, float y);
-	void			SetCurrentVelocity(Vector2 velocity);
+	void			SetCurrentVelocity(const Vector2& velocity);
 	void			SetTargetVelocity(float x, float y);
-	void			SetTargetVelocity(Vector2 velocity);
+	void			SetTargetVelocity(const Vector2& velocity);
 	void			SetTargetVelocityX(float x);
 	void			SetTargetVelocityY(float y);
 	void			SetAcceleration(float accel);
-	void			SetActive(bool active);			// set active or not
+	void			SetHealth(int health);
+	void			SetKnockbackCount(int count);
+	void			SetGrounded(bool grounded);
+	void			SetActive(bool active);					// set active or not
 
 	// getters
-	const wchar_t*	GetID() const		{ return m_ID; }					// return object ID
+	const wchar_t*	GetID() const { return m_ID; }					// return object ID
 	float			GetPositionX() const { return m_position.x; }
 	float			GetPositionY() const { return m_position.y; }
 	Vector2			GetPosition() const { return m_position; }
@@ -71,20 +79,25 @@ public:
 	Animator*		GetAnimator() const { return m_animator; }
 	HitBoxManager*	GetHitBoxManager() const { return m_hitBoxManager; }
 
-	// apply damage
-	virtual void	ApplyDamage(int amount);
+	int				GetKnockbackCount() const { return m_knockbackCount; }
 
-	bool			IsActive() const	{ return m_active;}		// return if active
+	virtual void	ApplyDamage(GameObject* source, const int& amount); // apply damage
+	virtual void	Knockback(const Vector2& direction, const float& force); // knock back with force
+
+	bool			IsGrounded() const { return m_grounded; }
+	bool			IsActive() const { return m_active; }		// return if active
 
 protected:
-	const wchar_t*	m_ID;					// object ID
+	const wchar_t* m_ID;					// object ID
 
 	Vector2			m_position;				// object position
+	Vector2			m_groundPosition;		// y position of grounded feet
 	Vector2			m_currentVelocity;		// current object velocity
 	Vector2			m_targetVelocity;		// target velocity
 	float			m_movementSpeed;		// current object speed
 	float			m_acceleration;			// acceleration speed
 	float			m_deceleration;			// decceleration speed
+
 
 	SpriteSheet*	m_sprite;				// object sprite sheet
 	Animator*		m_animator;				// animation controller
@@ -94,6 +107,10 @@ protected:
 	HitBoxManager*	m_hitBoxManager;		// hit box manager
 	ControlSystem*	m_controlSystem;		// pointer to control system	
 
+	int				m_health;				// object health
+	int				m_knockbackCount;		// number of knockbacks
+
+	bool			m_grounded;				// true when object is grounded
 	bool			m_active;				// object active or not
 };
 

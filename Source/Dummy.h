@@ -25,12 +25,11 @@ public:
 	
 	StateMachine<Dummy>* GetStateMachine() const { return m_stateMachine; }
 
-	void				ApplyDamage(int amount);
+	void				ApplyDamage(GameObject* source, const int& amount);
+	void				Knockback(const Vector2& direction, const float& force);
 
 private:
 	StateMachine<Dummy>* m_stateMachine;
-
-	int m_health;
 };
 
 #endif _ENEMY_H_

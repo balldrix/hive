@@ -59,14 +59,14 @@ void Player::Render(Graphics* graphics)
 	// render shadow first
 	if(m_shadow)
 	{
-		m_shadow->SetDepth(m_position.y / graphics->GetHeight());
+		m_shadow->SetDepth(m_groundPosition.y / graphics->GetHeight());
 		m_shadow->Render(graphics);
 	}
 
 	if(m_sprite)
 	{
 		// set layer depth
-		m_sprite->SetDepth(m_position.y / graphics->GetHeight());
+		m_sprite->SetDepth(m_groundPosition.y / graphics->GetHeight());
 
 		// render player sprite
 		if(m_animator)

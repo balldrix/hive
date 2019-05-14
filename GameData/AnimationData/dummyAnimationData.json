@@ -1,12 +1,12 @@
 {
-	"animation": [
-		{
-			"name": "Idle",
-			"index": 0,
-			"frameCount": 1,
-			"framesPerSecond": 8,
-			"loop": true
-		},
+  "animation": [
+    {
+      "name": "Idle",
+      "index": 0,
+      "frameCount": 1,
+      "framesPerSecond": 8,
+      "loop": true
+    },
     {
       "name": "Hurt",
       "index": 1,
@@ -15,11 +15,18 @@
       "loop": false
     },
     {
+      "name": "Knockback",
+      "index": 3,
+      "frameCount": 1,
+      "framesPerSecond": 8,
+      "loop": false
+    },
+    {
       "name": "Dead",
-      "index": 0,
-      "frameCount": 7,
+      "index": 3,
+      "frameCount": 2,
       "framesPerSecond": 8,
       "loop": false
     }
-	]
+  ]
 }

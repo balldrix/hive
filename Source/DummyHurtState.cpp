@@ -12,6 +12,7 @@ DummyHurtState* DummyHurtState::Instance()
 
 void DummyHurtState::OnEnter(Dummy* enemy)
 {
+	enemy->GetAnimator()->Reset();
 	enemy->GetAnimator()->SetAnimation(m_name);
 	enemy->GetHitBoxManager()->KillAll();
 }
@@ -26,7 +27,6 @@ void DummyHurtState::Execute(Dummy* enemy)
 
 void DummyHurtState::OnExit(Dummy* enemy)
 {
-	enemy->GetAnimator()->Reset();
 }
 
 DummyHurtState::DummyHurtState(std::string name)

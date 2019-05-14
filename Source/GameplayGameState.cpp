@@ -363,7 +363,7 @@ void GameplayGameState::ProcessCollisions()
 		if(m_player->GetHitBoxManager()->GetHitBox().OnCollision(
 			m_dummy->GetHitBoxManager()->GetHurtBox()))
 		{
-			m_dummy->ApplyDamage(1);
+			m_dummy->ApplyDamage(m_player, 1);
 		}
 	}
 }

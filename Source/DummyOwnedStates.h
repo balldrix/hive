@@ -9,5 +9,6 @@
 #include "DummyIdleState.h"
 #include "DummyHurtState.h"
 #include "DummyDeadState.h"
+#include "DummyKnockbackState.h"
 
 #endif // !_DUMMY_OWNED_STATES_H_

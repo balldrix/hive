@@ -27,6 +27,7 @@
     <ClCompile Include="Source\DummyDeadState.cpp" />
     <ClCompile Include="Source\DummyHurtState.cpp" />
     <ClCompile Include="Source\DummyIdleState.cpp" />
+    <ClCompile Include="Source\DummyKnockbackState.cpp" />
     <ClCompile Include="Source\Error.cpp" />
     <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />
@@ -60,6 +61,7 @@
     <ClInclude Include="Source\DummyDeadState.h" />
     <ClInclude Include="Source\DummyHurtState.h" />
     <ClInclude Include="Source\DummyIdleState.h" />
+    <ClInclude Include="Source\DummyKnockbackState.h" />
     <ClInclude Include="Source\DummyOwnedStates.h" />
     <ClInclude Include="Source\Error.h" />
     <ClInclude Include="Source\Game.h" />

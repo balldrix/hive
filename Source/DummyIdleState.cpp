@@ -11,6 +11,7 @@ DummyIdleState* DummyIdleState::Instance()
 
 void DummyIdleState::OnEnter(Dummy* enemy)
 {
+	enemy->GetAnimator()->Reset();
 	enemy->GetAnimator()->SetAnimation(m_name);
 	enemy->GetHitBoxManager()->SetCurrentHitBox(m_name);
 }
@@ -22,7 +23,6 @@ void DummyIdleState::Execute(Dummy* enemy)
 
 void DummyIdleState::OnExit(Dummy* enemy)
 {
-	enemy->GetAnimator()->Reset();
 }
 
 DummyIdleState::DummyIdleState(std::string name)
