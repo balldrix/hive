@@ -1,8 +1,4 @@
-Christopher Ball 2016
-Kaon Engine v1.1
-
-
-Must install dx9 runtime in order to run
+Christopher Ball 2019
 
 ******************************
 ******************************
