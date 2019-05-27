@@ -7,8 +7,8 @@
 #include "State.h"
 #include "StateMachine.h"
 
-const unsigned int		DummyStartScreenPositionX = 120;
-const unsigned int		DummyStartScreenPositionY = 80;
+const unsigned int		DummyStartScreenPositionX = 40;
+const unsigned int		DummyStartScreenPositionY = 60;
 
 class Dummy : public GameObject
 {
