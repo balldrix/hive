@@ -259,7 +259,7 @@ void GameplayGameState::DeleteAssets()
 void GameplayGameState::ProcessInput()
 {
 	// quit when escape key is pressed
-	if(m_input->IsKeyDown(VK_ESCAPE))
+	if(m_input->IsKeyDown(ESC_KEY))
 	{
 		PostQuitMessage(0);
 	}
