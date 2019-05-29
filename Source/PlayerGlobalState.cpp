@@ -28,33 +28,27 @@ void PlayerGlobalState::Execute(Player* player)
 		break;
 	case UpLeft:
 		player->Move(UnitVectors::UpLeft);
-		//player->FlipHorizontally(true);
 		break;
 	case Up:
 		player->Move(UnitVectors::Up);
 		break;
 	case UpRight:
 		player->Move(UnitVectors::UpRight);
-		//player->FlipHorizontally(false);
 		break;
 	case Right:
 		player->Move(UnitVectors::Right);
-		//player->FlipHorizontally(false);
 		break;
 	case DownRight:
 		player->Move(UnitVectors::DownRight);
-		//player->FlipHorizontally(false);
 		break;
 	case Down:
 		player->Move(UnitVectors::Down);
 		break;
 	case DownLeft:
 		player->Move(UnitVectors::DownLeft);
-		//player->FlipHorizontally(true);
 		break;
 	case Left:
 		player->Move(UnitVectors::Left);
-		//player->FlipHorizontally(true);
 		break;
 	case Attack:
 		player->Attack();

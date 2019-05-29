@@ -23,11 +23,13 @@ GameplayGameState::GameplayGameState() :
 	m_dummyTexture(nullptr),
 	m_hitBoxTexture(nullptr),
 	m_shadowTexture(nullptr),
+	m_backgroundTexture(nullptr),
 	m_playerSprite(nullptr),
 	m_playerShadowSprite(nullptr),
 	m_dummySprite(nullptr),
 	m_dummyShadowSprite(nullptr),
 	m_hitBoxSprite(nullptr),
+	m_backgroundSprite(nullptr),
 	m_playerAnimator(nullptr),
 	m_dummyAnimator(nullptr),
 	m_player(nullptr),
@@ -48,11 +50,13 @@ GameplayGameState::GameplayGameState(GameStateManager* gameStateManager) :
 	m_dummyTexture(nullptr),
 	m_hitBoxTexture(nullptr),
 	m_shadowTexture(nullptr),
+	m_backgroundTexture(nullptr),
 	m_playerSprite(nullptr),
 	m_playerShadowSprite(nullptr),
 	m_dummySprite(nullptr),
 	m_dummyShadowSprite(nullptr),
 	m_hitBoxSprite(nullptr),
+	m_backgroundSprite(nullptr),
 	m_playerAnimator(nullptr),
 	m_dummyAnimator(nullptr),
 	m_player(nullptr),
@@ -99,6 +103,7 @@ void GameplayGameState::LoadAssets()
 	m_dummyTexture = new Texture();
 	m_hitBoxTexture = new Texture();
 	m_shadowTexture = new Texture();
+	m_backgroundTexture = new Texture();
 
 	// create sprite memory 
 	m_playerSprite = new SpriteSheet();
@@ -108,6 +113,7 @@ void GameplayGameState::LoadAssets()
 	m_dummyShadowSprite = new Sprite();
 	
 	m_hitBoxSprite = new Sprite();
+	m_backgroundSprite = new Sprite();
 
 	// create animator memory
 	m_playerAnimator = new Animator();
@@ -126,13 +132,18 @@ void GameplayGameState::LoadAssets()
 	m_dummyTexture->LoadTexture(m_graphics, "GameData\\Sprites\\dummySpritesheet.png");
 	m_hitBoxTexture->LoadTexture(m_graphics, "GameData\\Sprites\\hitbox.png");
 	m_shadowTexture->LoadTexture(m_graphics, "GameData\\Sprites\\shadow.png");
+	m_backgroundTexture->LoadTexture(m_graphics, "GameData\\Sprites\\backgroundTest.png");
 
 	// init sprites
 	m_playerSprite->Init(m_playerTexture, "GameData\\SpriteSheetData\\playerSpritesheetData.json");
 	m_playerShadowSprite->Init(m_shadowTexture);
+	m_playerShadowSprite->SetAlpha(0.7f);
 	m_dummySprite->Init(m_dummyTexture, "GameData\\SpriteSheetData\\dummySpritesheetData.json");
 	m_dummyShadowSprite->Init(m_shadowTexture);
+	m_dummyShadowSprite->SetAlpha(0.7f);
 	m_hitBoxSprite->Init(m_hitBoxTexture);
+	m_backgroundSprite->Init(m_backgroundTexture);
+	m_backgroundSprite->SetOrigin(Vector2::Zero);
 
 	// init animator
 	m_playerAnimator->Init("GameData\\AnimationData\\playerAnimationData.json");
@@ -193,6 +204,12 @@ void GameplayGameState::DeleteAssets()
 	}
 
 	// delete sprites
+	if(m_backgroundSprite)
+	{
+		delete m_backgroundSprite;
+		m_backgroundSprite = nullptr;
+	}
+
 	if(m_hitBoxSprite)
 	{
 		delete m_hitBoxSprite;
@@ -224,6 +241,12 @@ void GameplayGameState::DeleteAssets()
 	}
 
 	// delete textures
+	if(m_backgroundTexture)
+	{
+		delete m_backgroundTexture;
+		m_backgroundTexture = nullptr;
+	}
+
 	if(m_shadowTexture)
 	{
 		delete m_shadowTexture;
@@ -373,6 +396,7 @@ void GameplayGameState::Render()
 {
 	//////////////////////////////////////
 	// render background first
+	m_backgroundSprite->Render(m_graphics);
 
 	//////////////////////////////////////
 	// render game objects
@@ -383,6 +407,7 @@ void GameplayGameState::Render()
 void GameplayGameState::ReleaseAll()
 {
 	// release all texture resources
+	if(m_backgroundTexture) { m_backgroundTexture->Release(); }
 	if(m_shadowTexture) { m_shadowTexture->Release(); }
 	if(m_hitBoxTexture) { m_hitBoxTexture->Release(); }
 	if(m_dummyTexture) { m_dummyTexture->Release(); }

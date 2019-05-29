@@ -29,12 +29,13 @@ public:
 	void SetFlipped(bool flipped);
 
 	AABB FlipAABB();
+	AABB FlipAABB(const AABB& box);
 
-	bool OnCollision(const HitBox &collider) const; // checks other hibox for collision
-	bool OnCollision(const Vector2 &position) const; // checks vector position for collision
+	bool OnCollision(const HitBox &collider); // checks other hibox for collision
+	bool OnCollision(const Vector2 &position); // checks vector position for collision
 
 private:
-	AABB m_boundingBox;		// aabb bouding box
+	AABB m_boundingBox;		// aabb bounding box
 	Sprite m_sprite;		// hitbox 
 	Vector2 m_position;		// hit box position
 	Color m_colour;			// vertex colour

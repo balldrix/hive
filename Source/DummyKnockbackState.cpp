@@ -19,6 +19,18 @@ void DummyKnockbackState::OnEnter(Dummy* enemy)
 
 void DummyKnockbackState::Execute(Dummy* enemy)
 {
+	// true if moving to the left
+	if(enemy->GetCurrentVelocity().x < 0)
+	{
+		enemy->FlipHorizontally(true);
+	}
+
+	// true if moving to the right
+	if(enemy->GetCurrentVelocity().x > 0)
+	{
+		enemy->FlipHorizontally(false);
+	}
+
 	if(enemy->IsGrounded())
 	{
 		enemy->GetStateMachine()->ChangeState(DummyDeadState::Instance());

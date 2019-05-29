@@ -46,7 +46,7 @@ void HitBox::Render(Graphics* graphics)
 
 	if(m_flipped)
 	{
-		box = this->FlipAABB();
+		box = FlipAABB();
 	}
 
 	box.OffSetAABB(m_position);
@@ -86,11 +86,36 @@ AABB HitBox::FlipAABB()
 	return newBox;
 }
 
+AABB HitBox::FlipAABB(const AABB& box)
+{
+	Vector2 newMin = box.GetMin();
+	Vector2 newMax = box.GetMax();
+	AABB newBox = box;
+
+	newMin.x = m_boundingBox.GetMax().x * -1;
+	newMax.x = m_boundingBox.GetMin().x * -1;
+
+	newBox.SetAABB(newMin, newMax);
+
+	return newBox;
+}
+
 // return true if collision with other hitbox
-bool HitBox::OnCollision(const HitBox &collider) const
+bool HitBox::OnCollision(const HitBox &collider)
 {
 	AABB box = m_boundingBox;
+	
+	if(m_flipped)
+	{
+		box = FlipAABB();
+	}
+
 	AABB otherBox = collider.GetAABB();
+
+	if(collider.m_flipped)
+	{
+		otherBox = FlipAABB(otherBox);
+	}
 
 	box.OffSetAABB(m_position);
 	otherBox.OffSetAABB(collider.m_position);
@@ -106,9 +131,15 @@ bool HitBox::OnCollision(const HitBox &collider) const
 }
 
 // return true if collision with position
-bool HitBox::OnCollision(const Vector2 &position) const
+bool HitBox::OnCollision(const Vector2 &position)
 {
 	AABB box = m_boundingBox;
+
+	if(m_flipped)
+	{
+		box = FlipAABB();
+	}
+
 	box.OffSetAABB(m_position);
 
 	if(box.Collision(position))

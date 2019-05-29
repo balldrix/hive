@@ -54,12 +54,14 @@ private:
 	Texture*			m_dummyTexture;				// dummy enemy texture
 	Texture*			m_hitBoxTexture;			// basic hitbox texture
 	Texture*			m_shadowTexture;			// shadow texture
+	Texture*			m_backgroundTexture;		// background texture
 
 	SpriteSheet*		m_playerSprite;				// player sprite object
 	Sprite*				m_playerShadowSprite;		// player shadow
 	SpriteSheet*		m_dummySprite;				// dummy sprite sheet
 	Sprite*				m_dummyShadowSprite;		// dummy shadow
 	Sprite*				m_hitBoxSprite;				// basic hitbox sprite
+	Sprite*				m_backgroundSprite;			// background sprite
 	
 	Animator*			m_playerAnimator;			// class to run player animations
 	Animator*			m_dummyAnimator;			// dummy animator class
