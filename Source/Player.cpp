@@ -158,6 +158,7 @@ void Player::Attack()
 		}
 
 		m_stateMachine->ChangeState((PlayerAttackState::Instance()));
+		m_controlSystem->SetInput(Controls::None);
 	}
 }
 

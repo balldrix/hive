@@ -330,6 +330,7 @@ void GameplayGameState::ProcessInput()
 		m_controlSystem->CanAttack())
 	{
 		m_controlSystem->SetInput(Attack);
+		m_controlSystem->CanAttack(false);
 		return;
 	}
 
