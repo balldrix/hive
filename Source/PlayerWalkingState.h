@@ -1,5 +1,5 @@
 // PlayerWalkingState.h
-// Christopher Ball 2018
+// Christopher Ball 2019
 // Player walking state
 
 #ifndef _PLAYER_WALKING_STATE_

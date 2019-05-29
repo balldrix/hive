@@ -1,5 +1,5 @@
 // Animator.h
-// Christopher Ball 2018
+// Christopher Ball 2019
 // Class for animating sprites
 
 #ifndef _ANIMATOR_H_

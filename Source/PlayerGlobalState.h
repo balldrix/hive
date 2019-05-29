@@ -1,5 +1,5 @@
 // PlayerGlobalState.h
-// Christopher Ball 2018
+// Christopher Ball 2019
 // global state for common player methods
 
 #ifndef _PLAYER_GLOBAL_STATE_

@@ -1,5 +1,5 @@
 // Graphics.h
-// Christopher Ball 2018
+// Christopher Ball 2019
 // This class manages DirectX and all the functions for 
 // drawing to the screen
 

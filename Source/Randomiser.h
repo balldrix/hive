@@ -1,5 +1,5 @@
 // Randomiser.h
-// Christopher Ball 2018
+// Christopher Ball 2019
 // Utility class with template to randomise numbers
 
 #ifndef _RANDOMISER_H_

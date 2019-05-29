@@ -1,5 +1,5 @@
 // Animation.h
-// Christopher Ball 2018
+// Christopher Ball 2019
 // animation frame data
 
 #include "pch.h"

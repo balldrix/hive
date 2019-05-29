@@ -1,5 +1,5 @@
 // GameState.h
-// Christopher Ball 2018
+// Christopher Ball 2019
 // game state abstract class for
 // all game states
 

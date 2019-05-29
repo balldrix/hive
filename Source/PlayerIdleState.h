@@ -1,5 +1,5 @@
 // PlayerIdleState.h
-// Christopher Ball 2018
+// Christopher Ball 2019
 // Player state when Idle
 
 #ifndef _PLAYER_IDLE_STATE_

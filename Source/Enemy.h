@@ -1,5 +1,9 @@
-#ifndef _DUMMY_H_
-#define _DUMMY_H_
+// Enemy.h
+// Christopher Ball 2019
+// Enemy class 
+
+#ifndef _ENEMY_H_
+#define _ENEMY_H_
 
 #include "Constants.h"
 #include "Randomiser.h"
@@ -7,29 +11,29 @@
 #include "State.h"
 #include "StateMachine.h"
 
-const unsigned int		DummyStartScreenPositionX = 65;
-const unsigned int		DummyStartScreenPositionY = 70;
+const unsigned int		EnemyStartScreenPositionX = 40;
+const unsigned int		EnemyStartScreenPositionY = 70;
 
-class Dummy : public GameObject
+class Enemy : public GameObject
 {
 public:
 
-	Dummy();
-	virtual				~Dummy();
+	Enemy();
+	virtual				~Enemy();
 
 	void				Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager);
-	
+
 	void				Update(float deltaTime);
 	void				Render(Graphics* graphics);
 	void				Reset();
-	
-	StateMachine<Dummy>* GetStateMachine() const { return m_stateMachine; }
+
+	StateMachine<Enemy>* GetStateMachine() const { return m_stateMachine; }
 
 	void				ApplyDamage(GameObject* source, const int& amount);
 	void				Knockback(const Vector2& direction, const float& force);
 
 private:
-	StateMachine<Dummy>* m_stateMachine;
+	StateMachine<Enemy>* m_stateMachine;
 };
 
-#endif _DUMMY_H_
+#endif _ENEMY_H_

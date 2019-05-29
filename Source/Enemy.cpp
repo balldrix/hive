@@ -1,4 +1,4 @@
-#include "Dummy.h"
+#include "Enemy.h"
 #include "Graphics.h"
 #include "Sprite.h"
 #include "SpriteSheet.h"
@@ -8,13 +8,13 @@
 #include "ControlSystem.h"
 #include "pch.h"
 
-#include "DummyOwnedStates.h"
+#include "EnemyOwnedStates.h"
 
-Dummy::Dummy() : 
+Enemy::Enemy() :
 	m_stateMachine(nullptr)
 {}
 
-Dummy::~Dummy()
+Enemy::~Enemy()
 {
 	if(m_stateMachine)
 	{
@@ -23,7 +23,7 @@ Dummy::~Dummy()
 	}
 }
 
-void Dummy::Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager)
+void Enemy::Init(const Vector2 &position, SpriteSheet *sprite, Sprite *shadow, Animator *animator, HitBoxManager *hitBoxManager)
 {
 	m_sprite = sprite;
 	m_shadow = shadow;
@@ -35,14 +35,14 @@ void Dummy::Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, A
 	m_hitBoxManager = hitBoxManager;
 	m_hitBoxManager->SetCurrentHitBox(0);
 
-	m_stateMachine = new StateMachine<Dummy>(this);
-	m_stateMachine->Init(DummyIdleState::Instance(), nullptr, nullptr);
+	m_stateMachine = new StateMachine<Enemy>(this);
+	m_stateMachine->Init(EnemyIdleState::Instance(), nullptr, nullptr);
 
 	m_health = 4;
 }
 
-void 
-Dummy::Update(float deltaTime)
+void
+Enemy::Update(float deltaTime)
 {
 	// update state machine
 	m_stateMachine->Update();
@@ -52,7 +52,7 @@ Dummy::Update(float deltaTime)
 }
 
 void
-Dummy::Render(Graphics* graphics)
+Enemy::Render(Graphics *graphics)
 {
 	// render shadow first
 	if(m_shadow)
@@ -84,14 +84,14 @@ Dummy::Render(Graphics* graphics)
 }
 
 void
-Dummy::Reset()
+Enemy::Reset()
 {
 	// set enemy state back to Idle
-	m_stateMachine->ChangeState(DummyIdleState::Instance());
+	m_stateMachine->ChangeState(EnemyIdleState::Instance());
 
 	// Set Position 
 	// TODO set world position and screen position
-	SetPosition(DummyStartScreenPositionX, DummyStartScreenPositionY);
+	SetPosition(EnemyStartScreenPositionX, EnemyStartScreenPositionY);
 
 	// reset hitboxes
 	m_hitBoxManager->SetCurrentHitBox(0);
@@ -99,7 +99,7 @@ Dummy::Reset()
 	SetActive(true);
 }
 
-void Dummy::ApplyDamage(GameObject* source, const int& amount)
+void Enemy::ApplyDamage(GameObject* source, const int &amount)
 {
 	m_health -= amount;
 
@@ -107,25 +107,25 @@ void Dummy::ApplyDamage(GameObject* source, const int& amount)
 	if(m_health < 1 || amount > 15)
 	{
 		// set knockback state
-		m_stateMachine->ChangeState(DummyKnockbackState::Instance());
+		m_stateMachine->ChangeState(EnemyKnockbackState::Instance());
 
 		// calculate direction to knockback
-		Vector2 direction = Vector2(this->GetPosition().x - source->GetPosition().x, 0.0f) - Vector2(0.0f, 8.0f);
+		Vector2 direction = Vector2(this->GetPosition().x - source->GetPosition().x, 0.0f) - Vector2(0.0f, 10.0f);
 		direction.Normalize();
 
-		// knockback dummy with 80.0f force
-		Knockback(direction, 100.0f);
+		// knockback Enemy with 80.0f force
+		Knockback(direction, 90.0f);
 
-		// bounce once
+		// bounce 
 		SetKnockbackCount(1);
 	}
 	else
 	{
-		m_stateMachine->ChangeState(DummyHurtState::Instance());
+		m_stateMachine->ChangeState(EnemyHurtState::Instance());
 	}
 }
 
-void Dummy::Knockback(const Vector2& direction, const float& force)
+void Enemy::Knockback(const Vector2& direction, const float &force)
 {
 	SetVelocity(direction);
 	SetMovementSpeed(force);

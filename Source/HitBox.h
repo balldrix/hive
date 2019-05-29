@@ -1,5 +1,5 @@
 // HitBox.h
-// Christopher Ball 2018
+// Christopher Ball 2019
 // hitbox data and texture
 
 #ifndef _HITBOX_H_
