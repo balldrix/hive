@@ -382,6 +382,7 @@ void GameplayGameState::Update(float deltaTime)
 
 void GameplayGameState::ProcessCollisions()
 {
+	// check player hitbox vs enemy hurtboxes
 	if(m_player->GetHitBoxManager()->IsHitBoxActive())
 	{
 		if(m_player->GetHitBoxManager()->GetHitBox().OnCollision(
@@ -389,6 +390,14 @@ void GameplayGameState::ProcessCollisions()
 		{
 			m_dummy->ApplyDamage(m_player, 1);
 		}
+	}
+
+	// check player position against world objects
+	if(m_player->GetPositionY() < 61.0f)
+	{
+		m_player->SetPosition(Vector2(m_player->GetPositionX(), 61.0f));
+		m_player->SetCurrentVelocity(Vector2(m_player->GetCurrentVelocity().x, 0.0f));
+		m_player->SetTargetVelocity(Vector2(m_player->GetTargetVelocity().x, 0.0f));
 	}
 }
 
