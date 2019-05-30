@@ -8,7 +8,7 @@
 #include "Sprite.h"
 #include "Animator.h"
 #include "Player.h"
-#include "Dummy.h"
+#include "Enemy.h"
 #include "Resources.h"
 #include "UnitVectors.h"
 #include "ControlSystem.h"
@@ -20,22 +20,22 @@ GameplayGameState::GameplayGameState() :
 	m_input(nullptr),
 	m_controlSystem(nullptr),
 	m_playerTexture(nullptr),
-	m_dummyTexture(nullptr),
+	m_enemyTexture(nullptr),
 	m_hitBoxTexture(nullptr),
 	m_shadowTexture(nullptr),
 	m_backgroundTexture(nullptr),
 	m_playerSprite(nullptr),
 	m_playerShadowSprite(nullptr),
-	m_dummySprite(nullptr),
-	m_dummyShadowSprite(nullptr),
+	m_enemySprite(nullptr),
+	m_enemyShadowSprite(nullptr),
 	m_hitBoxSprite(nullptr),
 	m_backgroundSprite(nullptr),
 	m_playerAnimator(nullptr),
-	m_dummyAnimator(nullptr),
+	m_enemyAnimator(nullptr),
 	m_player(nullptr),
-	m_dummy(nullptr),
+	m_enemy(nullptr),
 	m_playerHitBoxManager(nullptr),
-	m_dummyHitBoxManager(nullptr),
+	m_enemyHitBoxManager(nullptr),
 	m_canAttack(true),
 	m_running(false),
 	GameState(L"GAMEPLAY")
@@ -47,22 +47,22 @@ GameplayGameState::GameplayGameState(GameStateManager* gameStateManager) :
 	m_input(nullptr),
 	m_controlSystem(nullptr),
 	m_playerTexture(nullptr),
-	m_dummyTexture(nullptr),
+	m_enemyTexture(nullptr),
 	m_hitBoxTexture(nullptr),
 	m_shadowTexture(nullptr),
 	m_backgroundTexture(nullptr),
 	m_playerSprite(nullptr),
 	m_playerShadowSprite(nullptr),
-	m_dummySprite(nullptr),
-	m_dummyShadowSprite(nullptr),
+	m_enemySprite(nullptr),
+	m_enemyShadowSprite(nullptr),
 	m_hitBoxSprite(nullptr),
 	m_backgroundSprite(nullptr),
 	m_playerAnimator(nullptr),
-	m_dummyAnimator(nullptr),
+	m_enemyAnimator(nullptr),
 	m_player(nullptr),
-	m_dummy(nullptr),
+	m_enemy(nullptr),
 	m_playerHitBoxManager(nullptr),
-	m_dummyHitBoxManager(nullptr),
+	m_enemyHitBoxManager(nullptr),
 	m_canAttack(true),
 	m_running(false),
 	GameState(L"GAMEPLAY")
@@ -100,7 +100,7 @@ void GameplayGameState::LoadAssets()
 
 	// create texture memory
 	m_playerTexture = new Texture();
-	m_dummyTexture = new Texture();
+	m_enemyTexture = new Texture();
 	m_hitBoxTexture = new Texture();
 	m_shadowTexture = new Texture();
 	m_backgroundTexture = new Texture();
@@ -109,27 +109,27 @@ void GameplayGameState::LoadAssets()
 	m_playerSprite = new SpriteSheet();
 	m_playerShadowSprite = new Sprite();
 
-	m_dummySprite = new SpriteSheet();
-	m_dummyShadowSprite = new Sprite();
+	m_enemySprite = new SpriteSheet();
+	m_enemyShadowSprite = new Sprite();
 	
 	m_hitBoxSprite = new Sprite();
 	m_backgroundSprite = new Sprite();
 
 	// create animator memory
 	m_playerAnimator = new Animator();
-	m_dummyAnimator = new Animator();
+	m_enemyAnimator = new Animator();
 
 	// create hitbox managers
 	m_playerHitBoxManager = new HitBoxManager();
-	m_dummyHitBoxManager = new HitBoxManager();
+	m_enemyHitBoxManager = new HitBoxManager();
 
 	// create objects in memory
 	m_player = new Player();
-	m_dummy = new Dummy();
+	m_enemy = new Enemy();
 
 	// load textures
 	m_playerTexture->LoadTexture(m_graphics, "GameData\\Sprites\\playerSpriteSheet.png");
-	m_dummyTexture->LoadTexture(m_graphics, "GameData\\Sprites\\dummySpritesheet.png");
+	m_enemyTexture->LoadTexture(m_graphics, "GameData\\Sprites\\dummySpritesheet.png");
 	m_hitBoxTexture->LoadTexture(m_graphics, "GameData\\Sprites\\hitbox.png");
 	m_shadowTexture->LoadTexture(m_graphics, "GameData\\Sprites\\shadow.png");
 	m_backgroundTexture->LoadTexture(m_graphics, "GameData\\Sprites\\backgroundTest.png");
@@ -138,24 +138,26 @@ void GameplayGameState::LoadAssets()
 	m_playerSprite->Init(m_playerTexture, "GameData\\SpriteSheetData\\playerSpritesheetData.json");
 	m_playerShadowSprite->Init(m_shadowTexture);
 	m_playerShadowSprite->SetAlpha(0.7f);
-	m_dummySprite->Init(m_dummyTexture, "GameData\\SpriteSheetData\\dummySpritesheetData.json");
-	m_dummyShadowSprite->Init(m_shadowTexture);
-	m_dummyShadowSprite->SetAlpha(0.7f);
+	m_enemySprite->Init(m_enemyTexture, "GameData\\SpriteSheetData\\dummySpritesheetData.json");
+	m_enemyShadowSprite->Init(m_shadowTexture);
+	m_enemyShadowSprite->SetAlpha(0.7f);
 	m_hitBoxSprite->Init(m_hitBoxTexture);
 	m_backgroundSprite->Init(m_backgroundTexture);
 	m_backgroundSprite->SetOrigin(Vector2::Zero);
 
 	// init animator
 	m_playerAnimator->Init("GameData\\AnimationData\\playerAnimationData.json");
-	m_dummyAnimator->Init("GameData\\AnimationData\\dummyAnimationData.json");
+	m_enemyAnimator->Init("GameData\\AnimationData\\dummyAnimationData.json");
 
 	// init hitbox managers
 	m_playerHitBoxManager->Init(m_hitBoxSprite, m_player, "GameData\\HitBoxData\\playerHitBoxData.json");
-	m_dummyHitBoxManager->Init(m_hitBoxSprite, m_dummy, "GameData\\HitBoxData\\dummyHitBoxData.json");
+	m_enemyHitBoxManager->Init(m_hitBoxSprite, m_enemy, "GameData\\HitBoxData\\dummyHitBoxData.json");
 
 	// init game objects
 	m_player->Init(Vector2((float)PlayerStartScreenPositionX, (float)PlayerStartScreenPositionY), m_playerSprite, m_playerShadowSprite, m_playerAnimator, m_playerHitBoxManager,  m_controlSystem);
-	m_dummy->Init(Vector2((float)DummyStartScreenPositionX, (float)DummyStartScreenPositionY), m_dummySprite, m_dummyShadowSprite, m_dummyAnimator, m_dummyHitBoxManager);
+	m_enemy->Init(Vector2((float)EnemyStartScreenPositionX, (float)EnemyStartScreenPositionY), m_enemySprite, m_enemyShadowSprite, m_enemyAnimator, m_enemyHitBoxManager);
+
+	m_enemy->SetPlayerTarget(m_player);
 
 	// set running to true
 	m_running = true;
@@ -163,11 +165,11 @@ void GameplayGameState::LoadAssets()
 
 void GameplayGameState::DeleteAssets()
 {
-	// delete dummy
-	if(m_dummy)
+	// delete enemy
+	if(m_enemy)
 	{
-		delete m_dummy;
-		m_dummy = nullptr;
+		delete m_enemy;
+		m_enemy = nullptr;
 	}
 
 	// delete player
@@ -178,10 +180,10 @@ void GameplayGameState::DeleteAssets()
 	}
 
 	// delete hit box managers
-	if(m_dummyHitBoxManager)
+	if(m_enemyHitBoxManager)
 	{
-		delete m_dummyHitBoxManager;
-		m_dummyHitBoxManager = nullptr;
+		delete m_enemyHitBoxManager;
+		m_enemyHitBoxManager = nullptr;
 	}
 
 	if(m_playerHitBoxManager)
@@ -191,10 +193,10 @@ void GameplayGameState::DeleteAssets()
 	}
 
 	// delete animators
-	if(m_dummyAnimator)
+	if(m_enemyAnimator)
 	{
-		delete m_dummyAnimator;
-		m_dummyAnimator = nullptr;
+		delete m_enemyAnimator;
+		m_enemyAnimator = nullptr;
 	}
 
 	if(m_playerAnimator)
@@ -216,16 +218,16 @@ void GameplayGameState::DeleteAssets()
 		m_hitBoxSprite = nullptr;
 	}
 
-	if(m_dummyShadowSprite)
+	if(m_enemyShadowSprite)
 	{
-		delete m_dummyShadowSprite;
-		m_dummyShadowSprite = nullptr;
+		delete m_enemyShadowSprite;
+		m_enemyShadowSprite = nullptr;
 	}
 
-	if(m_dummySprite)
+	if(m_enemySprite)
 	{
-		delete m_dummySprite;
-		m_dummySprite = nullptr;
+		delete m_enemySprite;
+		m_enemySprite = nullptr;
 	}
 
 	if(m_playerShadowSprite)
@@ -259,10 +261,10 @@ void GameplayGameState::DeleteAssets()
 		m_hitBoxTexture = nullptr;
 	}
 
-	if(m_dummyTexture)
+	if(m_enemyTexture)
 	{
-		delete m_dummyTexture;
-		m_dummyTexture = nullptr;
+		delete m_enemyTexture;
+		m_enemyTexture = nullptr;
 	}
 
 	if(m_playerTexture)
@@ -377,7 +379,7 @@ void GameplayGameState::Update(float deltaTime)
 {
 	// update player
 	m_player->Update(deltaTime);
-	m_dummy->Update(deltaTime);
+	m_enemy->Update(deltaTime);
 }
 
 void GameplayGameState::ProcessCollisions()
@@ -386,9 +388,9 @@ void GameplayGameState::ProcessCollisions()
 	if(m_player->GetHitBoxManager()->IsHitBoxActive())
 	{
 		if(m_player->GetHitBoxManager()->GetHitBox().OnCollision(
-			m_dummy->GetHitBoxManager()->GetHurtBox()))
+			m_enemy->GetHitBoxManager()->GetHurtBox()))
 		{
-			m_dummy->ApplyDamage(m_player, 1);
+			m_enemy->ApplyDamage(m_player, 1);
 		}
 	}
 
@@ -409,7 +411,7 @@ void GameplayGameState::Render()
 
 	//////////////////////////////////////
 	// render game objects
-	m_dummy->Render(m_graphics);
+	m_enemy->Render(m_graphics);
 	m_player->Render(m_graphics);
 }
 
@@ -419,7 +421,7 @@ void GameplayGameState::ReleaseAll()
 	if(m_backgroundTexture) { m_backgroundTexture->Release(); }
 	if(m_shadowTexture) { m_shadowTexture->Release(); }
 	if(m_hitBoxTexture) { m_hitBoxTexture->Release(); }
-	if(m_dummyTexture) { m_dummyTexture->Release(); }
+	if(m_enemyTexture) { m_enemyTexture->Release(); }
 	if(m_playerTexture) { m_playerTexture->Release(); }
 }
 

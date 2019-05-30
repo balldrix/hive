@@ -31,7 +31,7 @@ void Player::Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, 
 	m_position = position;
 	m_acceleration = PlayerAcceleration;
 	m_deceleration = PlayerDeceleration;
-	m_movementSpeed = WalkSpeed;
+	m_movementSpeed = PlayerWalkSpeed;
 	m_animator = animator;
 	m_animator->SetAnimation(0);
 	m_hitBoxManager = hitBoxManager;

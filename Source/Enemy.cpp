@@ -11,7 +11,9 @@
 #include "EnemyOwnedStates.h"
 
 Enemy::Enemy() :
-	m_stateMachine(nullptr)
+	m_playerTarget(nullptr),
+	m_stateMachine(nullptr),
+	m_thinkingTimer(0.0f)
 {}
 
 Enemy::~Enemy()
@@ -34,9 +36,12 @@ void Enemy::Init(const Vector2 &position, SpriteSheet *sprite, Sprite *shadow, A
 	m_animator->SetAnimation(0);
 	m_hitBoxManager = hitBoxManager;
 	m_hitBoxManager->SetCurrentHitBox(0);
+	m_movementSpeed = EnemyWalkSpeed;
+	m_acceleration = EnemyAcceleration;
+	m_deceleration = EnemyDeceleration;
 
 	m_stateMachine = new StateMachine<Enemy>(this);
-	m_stateMachine->Init(EnemyIdleState::Instance(), nullptr, nullptr);
+	m_stateMachine->Init(EnemyIdleState::Instance(), nullptr, EnemyGlobalState::Instance());
 
 	m_health = 4;
 }
@@ -49,6 +54,8 @@ Enemy::Update(float deltaTime)
 
 	// update object
 	GameObject::Update(deltaTime);
+
+	m_thinkingTimer += deltaTime;
 }
 
 void
@@ -97,6 +104,11 @@ Enemy::Reset()
 	m_hitBoxManager->SetCurrentHitBox(0);
 
 	SetActive(true);
+}
+
+void Enemy::SetPlayerTarget(Player* player)
+{
+	m_playerTarget = player;
 }
 
 void Enemy::ApplyDamage(GameObject* source, const int &amount)

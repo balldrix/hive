@@ -17,7 +17,7 @@ class SpriteSheet;
 class Sprite;
 class Animator;
 class Player;
-class Dummy;
+class Enemy;
 class ControlSystem;
 class HitBoxManager;
 
@@ -51,26 +51,26 @@ private:
 	ControlSystem*		m_controlSystem;			// player input control system
 
 	Texture*			m_playerTexture;			// player sprite sheet
-	Texture*			m_dummyTexture;				// dummy enemy texture
+	Texture*			m_enemyTexture;				// enemy enemy texture
 	Texture*			m_hitBoxTexture;			// basic hitbox texture
 	Texture*			m_shadowTexture;			// shadow texture
 	Texture*			m_backgroundTexture;		// background texture
 
 	SpriteSheet*		m_playerSprite;				// player sprite object
 	Sprite*				m_playerShadowSprite;		// player shadow
-	SpriteSheet*		m_dummySprite;				// dummy sprite sheet
-	Sprite*				m_dummyShadowSprite;		// dummy shadow
+	SpriteSheet*		m_enemySprite;				// enemy sprite sheet
+	Sprite*				m_enemyShadowSprite;		// enemy shadow
 	Sprite*				m_hitBoxSprite;				// basic hitbox sprite
 	Sprite*				m_backgroundSprite;			// background sprite
 	
 	Animator*			m_playerAnimator;			// class to run player animations
-	Animator*			m_dummyAnimator;			// dummy animator class
+	Animator*			m_enemyAnimator;			// enemy animator class
 
 	HitBoxManager*		m_playerHitBoxManager;		// player hitboxes
-	HitBoxManager*		m_dummyHitBoxManager;		// dummy hitboxes
+	HitBoxManager*		m_enemyHitBoxManager;		// enemy hitboxes
 
 	Player*				m_player;					// pointer to player class
-	Dummy*				m_dummy;					// pointer to dummy class
+	Enemy*				m_enemy;					// pointer to enemy class
 
 	bool				m_canAttack;				// flag for attack cooldown
 	bool				m_running;					// is game running or not

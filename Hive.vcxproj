@@ -30,9 +30,12 @@
     <ClCompile Include="Source\DummyKnockbackState.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\EnemyDeadState.cpp" />
+    <ClCompile Include="Source\EnemyGlobalState.cpp" />
     <ClCompile Include="Source\EnemyHurtState.cpp" />
     <ClCompile Include="Source\EnemyIdleState.cpp" />
     <ClCompile Include="Source\EnemyKnockbackState.cpp" />
+    <ClCompile Include="Source\EnemyRunningState.cpp" />
+    <ClCompile Include="Source\EnemyWalkingState.cpp" />
     <ClCompile Include="Source\Error.cpp" />
     <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />

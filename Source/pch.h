@@ -18,6 +18,7 @@
 #include <string>
 #include <algorithm>
 #include <map>
+#include <random>
 
 #include "SimpleMath.h"
 #include "SpriteBatch.h"

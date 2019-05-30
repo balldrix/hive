@@ -5,6 +5,8 @@
 #ifndef _RANDOMISER_H_
 #define _RANDOMISER_H_
 
+#include "pch.h"
+
 class Randomiser
 {
 public:
@@ -12,18 +14,10 @@ public:
 	Randomiser(int seed); // constructor that passes a user defined seed
 	~Randomiser();
 
-	// template function to get a random number between min and max values
-	template<typename T>
-	static T GetRandNum(T min, T max);
+	// get random number
+	static double GetRandNum(double min, double max);
+	static int GetRandNum(int min, int max);
 };
-
-template<typename T>
-T
-Randomiser::GetRandNum(T min, T max)
-{
-	T range = max - min + 1; // get range between min and max
-	return (rand() % range) + min; // return random number within range
-}
 
 #endif _RANDOMISER_H_
 
