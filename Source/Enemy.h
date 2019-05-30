@@ -15,7 +15,7 @@ const unsigned int			EnemyStartScreenPositionY = 70;
 const unsigned int			EnemyWalkSpeed = 25;
 const unsigned int			EnemyRunningSpeed = 40;
 const float					EnemyAcceleration = 0.8f;
-const float					EnemyDeceleration = 4.5f;
+const float					EnemyDeceleration = 3.5f;
 const float					ThinkingTime = 3.5f;
 
 class Player;
@@ -33,14 +33,15 @@ public:
 	void					Reset();
 
 	void					SetPlayerTarget(Player* player);
+	void					SetTimer(const float& time);
 
 	Player*					GetPlayerTarget() const { return m_playerTarget; }
 	StateMachine<Enemy>*	GetStateMachine() const { return m_stateMachine; }
+	float					GetTimer() const { return m_thinkingTimer; }
 
 	void					ApplyDamage(GameObject* source, const int& amount);
 	void					Knockback(const Vector2& direction, const float& force);
 
-	float					GetTimer() const { return m_thinkingTimer; }
 
 private:
 	Player*					m_playerTarget;

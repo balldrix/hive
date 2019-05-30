@@ -12,6 +12,7 @@ class Dummy;
 class DummyDeadState : public State<Dummy>
 {
 public:
+
 	// static instance call
 	static DummyDeadState* Instance();
 
@@ -23,7 +24,8 @@ private:
 	DummyDeadState() {}
 	DummyDeadState(std::string name);
 	DummyDeadState(const DummyDeadState&);
-	DummyDeadState operator=(DummyDeadState const&);
+	~DummyDeadState() {}
+	DummyDeadState& operator=(const DummyDeadState&);
 };
 
 #endif // !_DUMMYENEMY_DEAD_STATE_

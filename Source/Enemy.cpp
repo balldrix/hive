@@ -7,6 +7,7 @@
 #include "Resources.h"
 #include "ControlSystem.h"
 #include "pch.h"
+#include "UnitVectors.h"
 
 #include "EnemyOwnedStates.h"
 
@@ -104,11 +105,17 @@ Enemy::Reset()
 	m_hitBoxManager->SetCurrentHitBox(0);
 
 	SetActive(true);
+	m_health = 4;
 }
 
 void Enemy::SetPlayerTarget(Player* player)
 {
 	m_playerTarget = player;
+}
+
+void Enemy::SetTimer(const float& time)
+{
+	m_thinkingTimer = time;
 }
 
 void Enemy::ApplyDamage(GameObject* source, const int &amount)
@@ -121,12 +128,20 @@ void Enemy::ApplyDamage(GameObject* source, const int &amount)
 		// set knockback state
 		m_stateMachine->ChangeState(EnemyKnockbackState::Instance());
 
+		Vector2 direction = Vector2::Zero;
+		
 		// calculate direction to knockback
-		Vector2 direction = Vector2(this->GetPosition().x - source->GetPosition().x, 0.0f) - Vector2(0.0f, 10.0f);
-		direction.Normalize();
+		if(this->GetPositionX() < source->GetPositionX())
+		{
+			direction = UnitVectors::UpLeft;
+		}
+		else
+		{
+			direction = UnitVectors::UpRight;
+		}
 
 		// knockback Enemy with 80.0f force
-		Knockback(direction, 90.0f);
+		Knockback(direction, 100.0f);
 
 		// bounce 
 		SetKnockbackCount(1);

@@ -69,6 +69,7 @@ public:
 	float			GetPositionX() const { return m_position.x; }
 	float			GetPositionY() const { return m_position.y; }
 	Vector2			GetPosition() const { return m_position; }
+	Vector2			GetGroundPosition() const { return m_groundPosition; }
 	Vector2			GetCurrentVelocity() const { return m_currentVelocity; }
 	Vector2			GetTargetVelocity() const { return m_targetVelocity; }
 	float			GetMovementSpeed()	const { return m_movementSpeed; }

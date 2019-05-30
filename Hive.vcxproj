@@ -29,6 +29,7 @@
     <ClCompile Include="Source\DummyIdleState.cpp" />
     <ClCompile Include="Source\DummyKnockbackState.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
+    <ClCompile Include="Source\EnemyAttackState.cpp" />
     <ClCompile Include="Source\EnemyDeadState.cpp" />
     <ClCompile Include="Source\EnemyGlobalState.cpp" />
     <ClCompile Include="Source\EnemyHurtState.cpp" />

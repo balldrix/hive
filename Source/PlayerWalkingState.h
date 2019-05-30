@@ -22,9 +22,10 @@ public:
 
 private:
 	PlayerWalkingState() {}
+	~PlayerWalkingState() {}
 	PlayerWalkingState(std::string name);
 	PlayerWalkingState(const PlayerWalkingState&);
-	PlayerWalkingState operator=(PlayerWalkingState const&);
+	PlayerWalkingState& operator=(const PlayerWalkingState&);
 };
 
 #endif // !_PLAYER_WALKING_STATE_

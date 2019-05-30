@@ -28,8 +28,16 @@ void EnemyDeadState::Execute(Enemy* enemy)
 	else
 	{
 		// calculate direction to knockback
-		Vector2 direction = Vector2(enemy->GetCurrentVelocity().x, -0.9f);
-		direction.Normalize();
+		Vector2 direction = Vector2::Zero;
+		
+		if(enemy->GetCurrentVelocity().x > 0)
+		{
+			direction = UnitVectors::UpRight;
+		}
+		else
+		{
+			direction = UnitVectors::UpLeft;
+		}
 
 		// knockback dummy with  50.0f force
 		enemy->Knockback(direction, 50.0f);

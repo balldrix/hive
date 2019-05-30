@@ -2,8 +2,8 @@
 // Christopher Ball 2019
 // Player normal attack state
 
-#ifndef _PLAYER_JAB_STATE_
-#define _PLAYER_JAB_STATE_
+#ifndef _PLAYER_ATTACK_STATE_
+#define _PLAYER_ATTACK_STATE_
 
 #include "State.h"
 
@@ -23,9 +23,10 @@ public:
 
 private:
 	PlayerAttackState() {}
+	~PlayerAttackState() {}
 	PlayerAttackState(std::string name);
 	PlayerAttackState(const PlayerAttackState&);
-	PlayerAttackState operator=(PlayerAttackState const&);
+	PlayerAttackState& operator=(const PlayerAttackState&);
 };
 
-#endif // _PLAYER_JAB_STATE_
+#endif // _PLAYER_ATTACK_STATE_

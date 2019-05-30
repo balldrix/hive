@@ -289,6 +289,11 @@ void GameplayGameState::ProcessInput()
 		PostQuitMessage(0);
 	}
 
+	if(m_input->IsKeyDown('R'))
+	{
+		ResetGame();
+	}
+
 	///////////////////////////////////////////
 	// check if key is pressed down
 	///////////////////////////////////////////
@@ -395,11 +400,33 @@ void GameplayGameState::ProcessCollisions()
 	}
 
 	// check player position against world objects
-	if(m_player->GetPositionY() < 61.0f)
+	if(m_player->GetGroundPosition().y < 61.0f)
 	{
 		m_player->SetPosition(Vector2(m_player->GetPositionX(), 61.0f));
 		m_player->SetCurrentVelocity(Vector2(m_player->GetCurrentVelocity().x, 0.0f));
 		m_player->SetTargetVelocity(Vector2(m_player->GetTargetVelocity().x, 0.0f));
+	}
+
+	if(m_player->GetGroundPosition().y > m_graphics->GetHeight() - 1)
+	{
+		m_player->SetPosition(Vector2(m_player->GetPositionX(), m_graphics->GetHeight() - 1));
+		m_player->SetCurrentVelocity(Vector2(m_player->GetCurrentVelocity().x, 0.0f));
+		m_player->SetTargetVelocity(Vector2(m_player->GetTargetVelocity().x, 0.0f));
+	}
+
+	// check enemy position against world objects
+	if(m_enemy->GetGroundPosition().y < 61.0f)
+	{
+		m_enemy->SetPosition(Vector2(m_enemy->GetPositionX(), 61.0f));
+		m_enemy->SetCurrentVelocity(Vector2(m_enemy->GetCurrentVelocity().x, 0.0f));
+		m_enemy->SetTargetVelocity(Vector2(m_enemy->GetTargetVelocity().x, 0.0f));
+	}
+
+	if(m_enemy->GetGroundPosition().y > m_graphics->GetHeight() - 1)
+	{
+		m_enemy->SetPosition(Vector2(m_enemy->GetPositionX(), m_graphics->GetHeight() - 1));
+		m_enemy->SetCurrentVelocity(Vector2(m_enemy->GetCurrentVelocity().x, 0.0f));
+		m_enemy->SetTargetVelocity(Vector2(m_enemy->GetTargetVelocity().x, 0.0f));
 	}
 }
 
@@ -427,4 +454,6 @@ void GameplayGameState::ReleaseAll()
 
 void GameplayGameState::ResetGame()
 {
+	m_player->Reset();
+	m_enemy->Reset();
 }

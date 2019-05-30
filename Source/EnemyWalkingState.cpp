@@ -18,25 +18,20 @@ void EnemyWalkingState::OnEnter(Enemy* enemy)
 	enemy->GetHitBoxManager()->SetCurrentHitBox(m_name);
 	
 	enemy->SetMovementSpeed(EnemyWalkSpeed);
+
+	Vector2 direction = Vector2::Zero;
+	Vector2 targetPosition = enemy->GetPlayerTarget()->GetPosition();
+	Vector2 position = enemy->GetPosition();
+
+	direction = targetPosition - position;
+	direction.Normalize();
+
+	enemy->SetVelocity(direction);
 }
 
 void EnemyWalkingState::Execute(Enemy* enemy)
 {
-	Vector2 direction = Vector2::Zero;
-	float targetXPosition = enemy->GetPlayerTarget()->GetPositionX();
-	float xPosition = enemy->GetPositionX();
 
-	if(targetXPosition < xPosition)
-	{
-		direction = UnitVectors::Left;
-	}
-
-	if(targetXPosition > xPosition)
-	{
-		direction = UnitVectors::Right;
-	}
-
-	enemy->SetTargetVelocity(direction);
 }
 
 void EnemyWalkingState::OnExit(Enemy* enemy)

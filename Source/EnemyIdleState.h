@@ -21,10 +21,11 @@ public:
 	virtual void OnExit(Enemy* enemy);
 
 private:
-	EnemyIdleState();
+	EnemyIdleState() {}
+	~EnemyIdleState() {}
 	EnemyIdleState(std::string name);
 	EnemyIdleState(const EnemyIdleState&);
-	EnemyIdleState operator=(EnemyIdleState const&);
+	EnemyIdleState& operator=(const EnemyIdleState&);
 };
 
 #endif // !_ENEMY_IDLE_STATE_

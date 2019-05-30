@@ -22,9 +22,10 @@ public:
 
 private:
 	DummyIdleState() {}
+	~DummyIdleState() {}
 	DummyIdleState(std::string name);
 	DummyIdleState(const DummyIdleState&);
-	DummyIdleState operator=(DummyIdleState const&);
+	DummyIdleState& operator=(const DummyIdleState&);
 };
 
 #endif // !_DUMMY_IDLE_STATE_

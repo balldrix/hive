@@ -18,10 +18,7 @@ void EnemyRunningState::OnEnter(Enemy* enemy)
 	enemy->GetHitBoxManager()->SetCurrentHitBox(m_name);
 
 	enemy->SetMovementSpeed(EnemyRunningSpeed);
-}
 
-void EnemyRunningState::Execute(Enemy* enemy)
-{
 	Vector2 direction = Vector2::Zero;
 	float targetXPosition = enemy->GetPlayerTarget()->GetPositionX();
 	float xPosition = enemy->GetPositionX();
@@ -37,6 +34,10 @@ void EnemyRunningState::Execute(Enemy* enemy)
 	}
 
 	enemy->SetTargetVelocity(direction);
+}
+
+void EnemyRunningState::Execute(Enemy* enemy)
+{
 }
 
 void EnemyRunningState::OnExit(Enemy* enemy)

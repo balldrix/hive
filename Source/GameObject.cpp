@@ -254,6 +254,11 @@ void GameObject::SetAcceleration(float accel)
 	m_acceleration = accel;
 }
 
+void GameObject::SetHealth(int health)
+{
+	m_health = health;
+}
+
 void GameObject::SetGrounded(bool grounded)
 {
 	m_grounded = grounded;

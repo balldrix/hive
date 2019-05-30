@@ -15,16 +15,18 @@ class EnemyAttackState : public State<Enemy>
 public:
 	// static instance call
 	static EnemyAttackState* Instance();
+	void SetAttack(std::string);
 
 	virtual void OnEnter(Enemy* enemy);
 	virtual void Execute(Enemy* enemy);
 	virtual void OnExit(Enemy* enemy);
 
 private:
-	EnemyAttackState();
+	EnemyAttackState() {}
+	~EnemyAttackState() {}
 	EnemyAttackState(std::string name);
 	EnemyAttackState(const EnemyAttackState&);
-	EnemyAttackState operator=(EnemyAttackState const&);
+	EnemyAttackState& operator=(const EnemyAttackState&);
 };
 
 #endif // !_ENEMY_ATTACK_STATE_

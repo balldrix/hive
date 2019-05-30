@@ -21,7 +21,8 @@ public:
 
 private:
 	EnemyGlobalState() {}
+	~EnemyGlobalState() {}
 	EnemyGlobalState(const EnemyGlobalState&);
-	EnemyGlobalState operator=(EnemyGlobalState const&);
+	EnemyGlobalState& operator=(const EnemyGlobalState&);
 };
 #endif // !_ENEMY_GLOBAL_STATE_

@@ -21,10 +21,11 @@ public:
 	virtual void OnExit(Enemy* enemy);
 
 private:
-	EnemyKnockbackState();
+	EnemyKnockbackState() {}
+	~EnemyKnockbackState() {}
 	EnemyKnockbackState(std::string name);
 	EnemyKnockbackState(const EnemyKnockbackState&);
-	EnemyKnockbackState operator=(EnemyKnockbackState const&);
+	EnemyKnockbackState& operator=(const EnemyKnockbackState&);
 };
 
 #endif // !_ENEMY_KNOCKBACK_STATE_

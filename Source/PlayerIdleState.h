@@ -13,6 +13,7 @@ class Player;
 class PlayerIdleState : public State<Player>
 {
 public:
+
 	// static instance call
 	static PlayerIdleState* Instance();
 
@@ -21,10 +22,11 @@ public:
 	virtual void OnExit(Player* player);
 
 private:
-	PlayerIdleState();
+	PlayerIdleState() {}
+	~PlayerIdleState() {}
 	PlayerIdleState(std::string name);
 	PlayerIdleState(const PlayerIdleState&);
-	PlayerIdleState operator=(PlayerIdleState const&);
+	PlayerIdleState& operator=(const PlayerIdleState&);
 };
 
 #endif // !_PLAYER_IDLE_STATE_

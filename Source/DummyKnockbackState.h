@@ -21,9 +21,10 @@ public:
 
 private:
 	DummyKnockbackState() {}
+	~DummyKnockbackState() {}
 	DummyKnockbackState(std::string name);
 	DummyKnockbackState(const DummyKnockbackState&);
-	DummyKnockbackState operator=(DummyKnockbackState const&);
+	DummyKnockbackState& operator=(const DummyKnockbackState&);
 };
 
 #endif // !_DUMMY_KNOCKBACK_STATE_
