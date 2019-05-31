@@ -8,6 +8,7 @@
 #include "ControlSystem.h"
 #include "pch.h"
 #include "UnitVectors.h"
+#include "Randomiser.h"
 
 #include "EnemyOwnedStates.h"
 
@@ -113,9 +114,9 @@ void Enemy::SetPlayerTarget(Player* player)
 	m_playerTarget = player;
 }
 
-void Enemy::SetTimer(const float& time)
+void Enemy::ResetTimer()
 {
-	m_thinkingTimer = time;
+	m_thinkingTimer = 0.0f;
 }
 
 void Enemy::ApplyDamage(GameObject* source, const int &amount)
@@ -140,8 +141,8 @@ void Enemy::ApplyDamage(GameObject* source, const int &amount)
 			direction = UnitVectors::UpRight;
 		}
 
-		// knockback Enemy with 80.0f force
-		Knockback(direction, 100.0f);
+		// knockback Enemy with force
+		Knockback(direction, 80.0f);
 
 		// bounce 
 		SetKnockbackCount(1);
@@ -156,4 +157,26 @@ void Enemy::Knockback(const Vector2& direction, const float &force)
 {
 	SetVelocity(direction);
 	SetMovementSpeed(force);
+}
+
+void Enemy::Attack()
+{
+	int randomNum = Randomiser::GetRandNum(0, 3);
+	switch(randomNum)
+	{
+	case 0:
+		EnemyAttackState::Instance()->SetAttack("Attack 1");
+		break;
+	case 1:
+		EnemyAttackState::Instance()->SetAttack("Attack 2");
+		break;
+	case 2:
+		EnemyAttackState::Instance()->SetAttack("Attack 3");
+		break;
+	default:
+		EnemyAttackState::Instance()->SetAttack("Attack 1");
+		break;
+	}
+
+	m_stateMachine->ChangeState((EnemyAttackState::Instance()));
 }

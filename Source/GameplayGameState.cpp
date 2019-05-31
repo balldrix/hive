@@ -389,13 +389,26 @@ void GameplayGameState::Update(float deltaTime)
 
 void GameplayGameState::ProcessCollisions()
 {
-	// check player hitbox vs enemy hurtboxes
-	if(m_player->GetHitBoxManager()->IsHitBoxActive())
+	// true if player hitbox is active and 
+	if(m_player->GetHitBoxManager()->IsHitBoxActive() &&
+		m_enemy->GetGroundPosition().y - m_player->GetGroundPosition().y < 8.0f)
 	{
+		// check player hitbox vs enemy hurtboxes
 		if(m_player->GetHitBoxManager()->GetHitBox().OnCollision(
 			m_enemy->GetHitBoxManager()->GetHurtBox()))
 		{
 			m_enemy->ApplyDamage(m_player, 1);
+		}
+	}
+
+	if(m_enemy->GetHitBoxManager()->IsHitBoxActive() &&
+		m_player->GetGroundPosition().y - m_enemy->GetGroundPosition().y < 8.0f)
+	{
+		// check player hitbox vs enemy hurtboxes
+		if(m_enemy->GetHitBoxManager()->GetHitBox().OnCollision(
+			m_player->GetHitBoxManager()->GetHurtBox()))
+		{
+			m_player->ApplyDamage(m_enemy, 1);
 		}
 	}
 

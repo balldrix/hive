@@ -25,15 +25,16 @@ void EnemyGlobalState::Execute(Enemy* enemy)
 		if(enemy->GetTimer() > ThinkingTime * Randomiser::GetRandNum(0.8, 2.0))
 		{
 			enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
+			enemy->ResetTimer();
 		}
 
-		if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() < 16)
+		if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() < FightingRange)
 		{
 			enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
 		}
 	}
 
-	// true if the enemy is not knocked back
+	// true if the enemy is not knocked back or dead
 	if(enemy->GetStateMachine()->GetCurrentState() != EnemyKnockbackState::Instance() &&
 		enemy->GetStateMachine()->GetCurrentState() != EnemyDeadState::Instance())
 	{

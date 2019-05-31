@@ -113,7 +113,7 @@ void Dummy::ApplyDamage(GameObject* source, const int& amount)
 		Vector2 direction = Vector2(this->GetPosition().x - source->GetPosition().x, 0.0f) - Vector2(0.0f, 8.0f);
 		direction.Normalize();
 
-		// knockback dummy with 80.0f force
+		// knockback dummy with force
 		Knockback(direction, 100.0f);
 
 		// bounce once

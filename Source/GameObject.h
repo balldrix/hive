@@ -8,7 +8,7 @@
 #include "pch.h"
 
 // constants
-const float Gravity = 0.001f;
+const float Gravity = 0.00065f;
 
 // forward definitions
 class Graphics;
