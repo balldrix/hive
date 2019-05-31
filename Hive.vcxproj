@@ -115,16 +115,20 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\dummySpritesheet.png" />
+    <Image Include="GameData\Sprites\enemySpriteSheet.png" />
     <Image Include="GameData\Sprites\hitbox.png" />
     <Image Include="GameData\Sprites\playerSpriteSheet.png" />
     <Image Include="GameData\Sprites\shadow.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GameData\AnimationData\dummyAnimationData.json" />
+    <None Include="GameData\AnimationData\enemyAnimationData.json" />
     <None Include="GameData\AnimationData\playerAnimationData.json" />
     <None Include="GameData\HitBoxData\dummyHitBoxData.json" />
+    <None Include="GameData\HitBoxData\enemyHitBoxData.json" />
     <None Include="GameData\HitBoxData\playerHitBoxData.json" />
     <None Include="GameData\SpriteSheetData\dummySpriteSheetData.json" />
+    <None Include="GameData\SpriteSheetData\enemySpriteSheetData.json" />
     <None Include="GameData\SpriteSheetData\playerSpriteSheetData.json" />
     <None Include="packages.config" />
   </ItemGroup>

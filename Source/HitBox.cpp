@@ -49,6 +49,9 @@ void HitBox::Render(Graphics* graphics)
 		box = FlipAABB();
 	}
 
+	//m_position.x = round(m_position.x);
+	//m_position.y = round(m_position.y);
+
 	box.OffSetAABB(m_position);
 
 	// set sprite rect
@@ -90,10 +93,10 @@ AABB HitBox::FlipAABB(const AABB& box)
 {
 	Vector2 newMin = box.GetMin();
 	Vector2 newMax = box.GetMax();
-	AABB newBox = box;
+	AABB newBox;
 
-	newMin.x = m_boundingBox.GetMax().x * -1;
-	newMax.x = m_boundingBox.GetMin().x * -1;
+	newMin.x = box.GetMax().x * -1;
+	newMax.x = box.GetMin().x * -1;
 
 	newBox.SetAABB(newMin, newMax);
 

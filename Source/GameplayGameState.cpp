@@ -129,7 +129,7 @@ void GameplayGameState::LoadAssets()
 
 	// load textures
 	m_playerTexture->LoadTexture(m_graphics, "GameData\\Sprites\\playerSpriteSheet.png");
-	m_enemyTexture->LoadTexture(m_graphics, "GameData\\Sprites\\dummySpritesheet.png");
+	m_enemyTexture->LoadTexture(m_graphics, "GameData\\Sprites\\enemySpritesheet.png");
 	m_hitBoxTexture->LoadTexture(m_graphics, "GameData\\Sprites\\hitbox.png");
 	m_shadowTexture->LoadTexture(m_graphics, "GameData\\Sprites\\shadow.png");
 	m_backgroundTexture->LoadTexture(m_graphics, "GameData\\Sprites\\backgroundTest.png");
@@ -138,7 +138,7 @@ void GameplayGameState::LoadAssets()
 	m_playerSprite->Init(m_playerTexture, "GameData\\SpriteSheetData\\playerSpritesheetData.json");
 	m_playerShadowSprite->Init(m_shadowTexture);
 	m_playerShadowSprite->SetAlpha(0.7f);
-	m_enemySprite->Init(m_enemyTexture, "GameData\\SpriteSheetData\\dummySpritesheetData.json");
+	m_enemySprite->Init(m_enemyTexture, "GameData\\SpriteSheetData\\enemySpritesheetData.json");
 	m_enemyShadowSprite->Init(m_shadowTexture);
 	m_enemyShadowSprite->SetAlpha(0.7f);
 	m_hitBoxSprite->Init(m_hitBoxTexture);
@@ -147,11 +147,11 @@ void GameplayGameState::LoadAssets()
 
 	// init animator
 	m_playerAnimator->Init("GameData\\AnimationData\\playerAnimationData.json");
-	m_enemyAnimator->Init("GameData\\AnimationData\\dummyAnimationData.json");
+	m_enemyAnimator->Init("GameData\\AnimationData\\enemyAnimationData.json");
 
 	// init hitbox managers
 	m_playerHitBoxManager->Init(m_hitBoxSprite, m_player, "GameData\\HitBoxData\\playerHitBoxData.json");
-	m_enemyHitBoxManager->Init(m_hitBoxSprite, m_enemy, "GameData\\HitBoxData\\dummyHitBoxData.json");
+	m_enemyHitBoxManager->Init(m_hitBoxSprite, m_enemy, "GameData\\HitBoxData\\enemyHitBoxData.json");
 
 	// init game objects
 	m_player->Init(Vector2((float)PlayerStartScreenPositionX, (float)PlayerStartScreenPositionY), m_playerSprite, m_playerShadowSprite, m_playerAnimator, m_playerHitBoxManager,  m_controlSystem);

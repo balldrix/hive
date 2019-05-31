@@ -61,10 +61,10 @@ Game::Run()
 
 	ProcessInput();			// read key and mouse input into game
 	Update(deltaTime);		// update game
-	ProcessCollisions();	// check for collisions
-	m_gameTime += deltaTime; // increment game time
-
 	Render();				// render objects	
+	ProcessCollisions();	// check for collisions
+
+	m_gameTime += deltaTime; // increment game time
 
 	m_input->ClearKeysPressed(); // clear keys pressed
 }

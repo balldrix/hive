@@ -10,8 +10,8 @@
 #include "State.h"
 #include "StateMachine.h"
 
-const unsigned int			EnemyStartScreenPositionX = 80;
-const unsigned int			EnemyStartScreenPositionY = 70;
+const unsigned int			EnemyStartScreenPositionX = 75;
+const unsigned int			EnemyStartScreenPositionY = 65;
 const unsigned int			EnemyWalkSpeed = 25;
 const unsigned int			EnemyRunningSpeed = 40;
 const float					EnemyAcceleration = 0.8f;

@@ -22,13 +22,13 @@ void EnemyKnockbackState::Execute(Enemy* enemy)
 	// true if moving to the left
 	if(enemy->GetCurrentVelocity().x < 0)
 	{
-		enemy->FlipHorizontally(true);
+		enemy->FlipHorizontally(false);
 	}
 
 	// true if moving to the right
 	if(enemy->GetCurrentVelocity().x > 0)
 	{
-		enemy->FlipHorizontally(false);
+		enemy->FlipHorizontally(true);
 	}
 
 	if(enemy->IsGrounded())

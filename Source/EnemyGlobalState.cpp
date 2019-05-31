@@ -33,6 +33,22 @@ void EnemyGlobalState::Execute(Enemy* enemy)
 		}
 	}
 
+	// true if the enemy is not knocked back
+	if(enemy->GetStateMachine()->GetCurrentState() != EnemyKnockbackState::Instance() &&
+		enemy->GetStateMachine()->GetCurrentState() != EnemyDeadState::Instance())
+	{
+		// true if moving to the left
+		if(enemy->GetCurrentVelocity().x < 0)
+		{
+			enemy->FlipHorizontally(true);
+		}
+
+		// true if moving to the right
+		if(enemy->GetCurrentVelocity().x > 0)
+		{
+			enemy->FlipHorizontally(false);
+		}
+	}
 }
 
 void EnemyGlobalState::OnExit(Enemy* enemy)
