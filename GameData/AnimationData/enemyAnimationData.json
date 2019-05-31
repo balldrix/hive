@@ -55,6 +55,13 @@
       "frameCount": 2,
       "framesPerSecond": 8,
       "loop": false
+    },
+    {
+      "name": "Running",
+      "index": 11,
+      "frameCount": 2,
+      "framesPerSecond": 8,
+      "loop": true
     }
   ]
 }

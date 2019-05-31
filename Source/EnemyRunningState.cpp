@@ -7,7 +7,7 @@
 
 EnemyRunningState* EnemyRunningState::Instance()
 {
-	static EnemyRunningState instance("Walking");
+	static EnemyRunningState instance("Running");
 	return &instance;
 }
 
