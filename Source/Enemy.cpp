@@ -27,13 +27,11 @@ Enemy::~Enemy()
 	}
 }
 
-void Enemy::Init(const Vector2 &position, SpriteSheet *sprite, Sprite *shadow, Animator *animator, HitBoxManager *hitBoxManager)
+void Enemy::Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager)
 {
 	m_sprite = sprite;
 	m_shadow = shadow;
 	m_position = position;
-	m_acceleration = 1.0f;
-	m_deceleration = 1.25f;
 	m_animator = animator;
 	m_animator->SetAnimation(0);
 	m_hitBoxManager = hitBoxManager;
@@ -61,7 +59,7 @@ Enemy::Update(float deltaTime)
 }
 
 void
-Enemy::Render(Graphics *graphics)
+Enemy::Render(Graphics* graphics)
 {
 	// render shadow first
 	if(m_shadow)
@@ -119,7 +117,7 @@ void Enemy::ResetTimer()
 	m_thinkingTimer = 0.0f;
 }
 
-void Enemy::ApplyDamage(GameObject* source, const int &amount)
+void Enemy::ApplyDamage(GameObject* source, const int& amount)
 {
 	m_health -= amount;
 
@@ -130,7 +128,7 @@ void Enemy::ApplyDamage(GameObject* source, const int &amount)
 		m_stateMachine->ChangeState(EnemyKnockbackState::Instance());
 
 		Vector2 direction = Vector2::Zero;
-		
+
 		// calculate direction to knockback
 		if(this->GetPositionX() < source->GetPositionX())
 		{
@@ -153,7 +151,7 @@ void Enemy::ApplyDamage(GameObject* source, const int &amount)
 	}
 }
 
-void Enemy::Knockback(const Vector2& direction, const float &force)
+void Enemy::Knockback(const Vector2& direction, const float& force)
 {
 	SetVelocity(direction);
 	SetMovementSpeed(force);

@@ -9,6 +9,7 @@
 #include "ControlSystem.h"
 #include "StateMachine.h"
 #include "PlayerOwnedStates.h"
+#include "UnitVectors.h"
 
 Player::Player() : m_stateMachine(nullptr)
 {
@@ -101,7 +102,7 @@ void Player::Reset()
 	SetActive(true);
 }
 
-void Player::Move(const Vector2 & direction)
+void Player::Move(const Vector2& direction)
 {
 	// true if switching direction
 	if(direction.x < 0 && m_currentVelocity.x > 0 ||
@@ -113,18 +114,6 @@ void Player::Move(const Vector2 & direction)
 	}
 
 	SetTargetVelocity(direction);
-
-	// true if moving to the left
-	if(m_currentVelocity.x < 0)
-	{
-		FlipHorizontally(true);
-	}
-
-	// true if moving to the right
-	if(m_currentVelocity.x > 0)
-	{
-		FlipHorizontally(false);
-	}
 }
 
 // stop velocity
@@ -141,24 +130,64 @@ void Player::Attack()
 	{
 		// use combo counter to get the correct attack 
 		switch(m_controlSystem->GetComboCounter())
-			{
-			case 0:
-			case 1:
-				PlayerAttackState::Instance()->SetAttack("Attack 1");
-				break;
-			case 2:
-				PlayerAttackState::Instance()->SetAttack("Attack 2");
-				break;
-			case 3:
-				PlayerAttackState::Instance()->SetAttack("Attack 3");
-				break;
-			default:
-				PlayerAttackState::Instance()->SetAttack("Attack 1");
-				break;
+		{
+		case 0:
+		case 1:
+			PlayerAttackState::Instance()->SetAttack("Attack 1");
+			break;
+		case 2:
+			PlayerAttackState::Instance()->SetAttack("Attack 2");
+			break;
+		case 3:
+			PlayerAttackState::Instance()->SetAttack("Attack 3");
+			break;
+		default:
+			PlayerAttackState::Instance()->SetAttack("Attack 1");
+			break;
 		}
 
 		m_stateMachine->ChangeState((PlayerAttackState::Instance()));
 		m_controlSystem->SetInput(Controls::None);
 	}
+}
+
+void Player::ApplyDamage(GameObject* source, const int& amount)
+{
+	m_health -= amount;
+
+	// true if health has gone or damage is high
+	if(m_health < 1 || amount > 15)
+	{
+		// set knockback state
+		m_stateMachine->ChangeState(PlayerKnockbackState::Instance());
+
+		Vector2 direction = Vector2::Zero;
+
+		// calculate direction to knockback
+		if(this->GetPositionX() < source->GetPositionX())
+		{
+			direction = UnitVectors::UpLeft;
+		}
+		else
+		{
+			direction = UnitVectors::UpRight;
+		}
+
+		// knockback with force
+		Knockback(direction, 80.0f);
+
+		// bounce 
+		SetKnockbackCount(1);
+	}
+	else
+	{
+		m_stateMachine->ChangeState(PlayerHurtState::Instance());
+	}
+}
+
+void Player::Knockback(const Vector2& direction, const float& force)
+{
+	SetVelocity(direction);
+	SetMovementSpeed(force);
 }
 

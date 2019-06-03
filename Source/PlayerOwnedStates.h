@@ -10,5 +10,8 @@
 #include "PlayerIdleState.h"
 #include "PlayerWalkingState.h"
 #include "PlayerAttackState.h"
+#include "PlayerKnockbackState.h"
+#include "PlayerHurtState.h"
+#include "PlayerDeadState.h"
 
 #endif // !_PLAYER_OWNED_STATES_H_

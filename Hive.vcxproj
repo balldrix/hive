@@ -49,9 +49,12 @@
     <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Player.cpp" />
+    <ClCompile Include="Source\PlayerDeadState.cpp" />
     <ClCompile Include="Source\PlayerGlobalState.cpp" />
+    <ClCompile Include="Source\PlayerHurtState.cpp" />
     <ClCompile Include="Source\PlayerIdleState.cpp" />
     <ClCompile Include="Source\PlayerAttackState.cpp" />
+    <ClCompile Include="Source\PlayerKnockbackState.cpp" />
     <ClCompile Include="Source\PlayerWalkingState.cpp" />
     <ClCompile Include="Source\Randomiser.cpp" />
     <ClCompile Include="Source\Sprite.cpp" />
@@ -96,9 +99,12 @@
     <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\pch.h" />
     <ClInclude Include="Source\Player.h" />
+    <ClInclude Include="Source\PlayerDeadState.h" />
     <ClInclude Include="Source\PlayerGlobalState.h" />
+    <ClInclude Include="Source\PlayerHurtState.h" />
     <ClInclude Include="Source\PlayerIdleState.h" />
     <ClInclude Include="Source\PlayerAttackState.h" />
+    <ClInclude Include="Source\PlayerKnockbackState.h" />
     <ClInclude Include="Source\PlayerOwnedStates.h" />
     <ClInclude Include="Source\PlayerWalkingState.h" />
     <ClInclude Include="Source\Randomiser.h" />

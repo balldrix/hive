@@ -51,7 +51,8 @@ void EnemyIdleState::Execute(Enemy* enemy)
 		if((enemy->GetPositionX() - enemy->GetPlayerTarget()->GetPositionX()) < AttackRange &&
 			(enemy->GetPositionY() - enemy->GetPlayerTarget()->GetPositionY()) < 8.0f)
 		{
-			Attack();
+			enemy->Attack();
+			enemy->Stop();
 		}
 
 		// reset timer

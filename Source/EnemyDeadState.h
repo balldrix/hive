@@ -1,6 +1,6 @@
 // EnemyDeadState.h
 // Christopher Ball 2019
-// manages state when enemy is idle
+// manages state when enemy is dead
 
 #ifndef _ENEMY_DEAD_STATE_
 #define	_ENEMY_DEAD_STATE_
