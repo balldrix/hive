@@ -17,48 +17,48 @@
     {
       "name": "Attack 1",
       "index": 4,
-      "frameCount": 1,
+      "frameCount": 2,
       "framesPerSecond": 8,
       "loop": false
     },
     {
       "name": "Attack 2",
-      "index": 5,
-      "frameCount": 1,
+      "index": 6,
+      "frameCount": 2,
       "framesPerSecond": 8,
       "loop": false
     },
     {
       "name": "Attack 3",
-      "index": 6,
-      "frameCount": 1,
+      "index": 8,
+      "frameCount": 2,
       "framesPerSecond": 8,
       "loop": false
     },
     {
       "name": "Hurt",
-      "index": 7,
+      "index": 10,
       "frameCount": 1,
       "framesPerSecond": 8,
       "loop": false
     },
     {
       "name": "Knockback",
-      "index": 9,
+      "index": 12,
       "frameCount": 1,
       "framesPerSecond": 8,
       "loop": false
     },
     {
       "name": "Dead",
-      "index": 9,
+      "index": 12,
       "frameCount": 2,
       "framesPerSecond": 8,
       "loop": false
     },
     {
       "name": "Running",
-      "index": 11,
+      "index": 14,
       "frameCount": 2,
       "framesPerSecond": 8,
       "loop": true

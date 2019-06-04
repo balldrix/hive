@@ -28,7 +28,7 @@ void EnemyIdleState::Execute(Enemy* enemy)
 	if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() < AttackRange &&
 		(enemy->GetPositionY() - enemy->GetPlayerTarget()->GetPositionY()) < 5.0f)
 	{
-		if(enemy->GetTimer() > Randomiser::GetRandNum(0.05, 0.9) * ThinkingTime)
+		if(enemy->GetTimer() > Randomiser::GetRandNum(0.02, 1.8) * ThinkingTime)
 		{
 			enemy->Attack();
 			enemy->Stop();
