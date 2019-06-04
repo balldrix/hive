@@ -31,12 +31,10 @@ void EnemyWalkingState::OnEnter(Enemy* enemy)
 
 void EnemyWalkingState::Execute(Enemy* enemy)
 {
-	// true if enemy is withing attack range
-	if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() < AttackRange &&
-		(enemy->GetPositionY() - enemy->GetPlayerTarget()->GetPositionY()) < 8.0f)
+	if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() < AttackRange)
 	{
-		enemy->Attack();
-		enemy->Stop();
+		// change to idle state
+		enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
 	}
 }
 

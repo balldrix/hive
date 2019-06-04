@@ -39,6 +39,8 @@ void Player::Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, 
 
 	m_stateMachine = new StateMachine<Player>(this);
 	m_stateMachine->Init(PlayerIdleState::Instance(), nullptr, PlayerGlobalState::Instance());
+
+	m_health = 5;
 }
 
 void Player::Update(float deltaTime)
@@ -98,6 +100,8 @@ void Player::Reset()
 
 	// reset hitboxes
 	m_hitBoxManager->SetCurrentHitBox(0);
+
+	m_health = 5;
 
 	SetActive(true);
 }

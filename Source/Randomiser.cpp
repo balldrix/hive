@@ -1,6 +1,6 @@
 #include "Randomiser.h"
 #include "Time.h"
-#include "stdlib.h"
+#include "pch.h"
 
 Randomiser::Randomiser()
 {
@@ -19,14 +19,16 @@ Randomiser::Randomiser(int seed)
 
 double Randomiser::GetRandNum(double min, double max)
 {
-	static std::default_random_engine engine;
-	static std::uniform_real_distribution<> distribution(min, max);
-	return distribution(engine);
+	std::random_device rd;   // non-deterministic generator  
+	std::mt19937 gen(rd());  // to seed mersenne twister.  
+	std::uniform_real_distribution<> dist(min, max); // distribute results between 1 and 6 inclusive.  
+	return dist(rd);
 }
 
 int Randomiser::GetRandNum(int min, int max)
 {
-    static std::default_random_engine engine;
-    static std::uniform_int_distribution<> distribution(min, max);
-    return distribution(engine);
+	std::random_device rd;   // non-deterministic generator  
+	std::mt19937 gen(rd());  // to seed mersenne twister.  
+	std::uniform_int_distribution<> dist(min, max); // distribute results between 1 and 6 inclusive.  
+    return dist(rd);
 }

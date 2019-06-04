@@ -18,7 +18,7 @@ const float					EnemyAcceleration = 0.8f;
 const float					EnemyDeceleration = 3.5f;
 const float					ThinkingTime = 3.5f;
 const float					FightingRange = 20.0f;
-const float					AttackRange = 6.0f;
+const float					AttackRange = 9.0f;
 
 class Player;
 
