@@ -78,6 +78,7 @@
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\EnemyAttackState.h" />
     <ClInclude Include="Source\EnemyDeadState.h" />
+    <ClInclude Include="Source\EnemyFightingState.h" />
     <ClInclude Include="Source\EnemyGlobalState.h" />
     <ClInclude Include="Source\EnemyHurtState.h" />
     <ClInclude Include="Source\EnemyIdleState.h" />

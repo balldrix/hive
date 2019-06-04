@@ -15,7 +15,8 @@
 Enemy::Enemy() :
 	m_playerTarget(nullptr),
 	m_stateMachine(nullptr),
-	m_thinkingTimer(0.0f)
+	m_thinkingTimer(0.0f),
+	m_isHostile(false)
 {}
 
 Enemy::~Enemy()
@@ -110,6 +111,11 @@ Enemy::Reset()
 void Enemy::SetPlayerTarget(Player* player)
 {
 	m_playerTarget = player;
+}
+
+void Enemy::SetHostile(bool isHostile)
+{
+	m_isHostile = isHostile;
 }
 
 void Enemy::ResetTimer()

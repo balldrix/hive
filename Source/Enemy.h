@@ -35,11 +35,13 @@ public:
 	void					Reset();
 
 	void					SetPlayerTarget(Player* player);
+	void					SetHostile(bool isHostile);
 	void					ResetTimer();
 
 	Player*					GetPlayerTarget() const { return m_playerTarget; }
 	StateMachine<Enemy>*	GetStateMachine() const { return m_stateMachine; }
 	float					GetTimer() const { return m_thinkingTimer; }
+	bool					IsHostile() const { return m_isHostile; }
 
 	void					ApplyDamage(GameObject* source, const int& amount);
 	void					Knockback(const Vector2& direction, const float& force);
@@ -50,6 +52,7 @@ private:
 	Player*					m_playerTarget;
 	StateMachine<Enemy>*	m_stateMachine;
 	float					m_thinkingTimer;
+	bool					m_isHostile;
 };
 
 #endif _ENEMY_H_

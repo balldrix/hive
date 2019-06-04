@@ -80,6 +80,7 @@ public:
 	Animator*		GetAnimator() const { return m_animator; }
 	HitBoxManager*	GetHitBoxManager() const { return m_hitBoxManager; }
 
+	int				GetHealth() const { return m_health; }
 	int				GetKnockbackCount() const { return m_knockbackCount; }
 
 	virtual void	ApplyDamage(GameObject* source, const int& amount); // apply damage

@@ -29,7 +29,6 @@ void EnemyAttackState::OnEnter(Enemy* enemy)
 
 void EnemyAttackState::Execute(Enemy* enemy)
 {
-
 	// true if the attack animation is done
 	if(enemy->GetAnimator()->IsDone())
 	{

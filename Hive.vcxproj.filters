@@ -317,6 +317,9 @@
     <ClInclude Include="Source\PlayerDeadState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\EnemyFightingState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\hitbox.png">

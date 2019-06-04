@@ -24,7 +24,7 @@ void EnemyIdleState::OnEnter(Enemy* enemy)
 void EnemyIdleState::Execute(Enemy* enemy)
 {
 	// true if timer is greater than thinking time with random adjustment
-	if(enemy->GetTimer() > ThinkingTime * Randomiser::GetRandNum(0.4, 1.2))
+	if(enemy->GetTimer() > ThinkingTime * Randomiser::GetRandNum(0.4, 1.0))
 	{
 		// true if enemy is outside fighting range
 		if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() > FightingRange)
@@ -41,18 +41,10 @@ void EnemyIdleState::Execute(Enemy* enemy)
 			}
 
 		}
-		else
+		else if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() > AttackRange)
 		{
 			// change to walking state
 			enemy->GetStateMachine()->ChangeState(EnemyWalkingState::Instance());
-		}
-
-		// true if enemy is withing attack range
-		if((enemy->GetPositionX() - enemy->GetPlayerTarget()->GetPositionX()) < AttackRange &&
-			(enemy->GetPositionY() - enemy->GetPlayerTarget()->GetPositionY()) < 8.0f)
-		{
-			enemy->Attack();
-			enemy->Stop();
 		}
 
 		// reset timer
