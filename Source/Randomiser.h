@@ -10,13 +10,16 @@
 class Randomiser
 {
 public:
-	Randomiser();
-	Randomiser(int seed); // constructor that passes a user defined seed
 	~Randomiser();
 
+	static Randomiser* Instance();
 	// get random number
-	static double GetRandNum(double min, double max);
-	static int GetRandNum(int min, int max);
+	double GetRandNum(double min, double max);
+	int GetRandNum(int min, int max);
+
+	std::mt19937 m_generator;
+private:
+	Randomiser();
 };
 
 #endif _RANDOMISER_H_

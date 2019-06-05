@@ -184,7 +184,7 @@ void Enemy::Knockback(const Vector2& direction, const float& force)
 
 void Enemy::Attack()
 {
-	int randomNum = Randomiser::GetRandNum(0, 2);
+	int randomNum = Randomiser::Instance()->GetRandNum(0, 2);
 	switch(randomNum)
 	{
 	case 0:

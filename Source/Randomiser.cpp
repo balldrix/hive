@@ -4,7 +4,7 @@
 
 Randomiser::Randomiser()
 {
-	srand((int)time(NULL));
+	m_generator = std::mt19937((int)time(NULL));
 }
 
 Randomiser::~Randomiser()
@@ -12,23 +12,22 @@ Randomiser::~Randomiser()
 
 }
 
-Randomiser::Randomiser(int seed)
+Randomiser* Randomiser::Instance()
 {
-	srand(seed);
+	static Randomiser instance;
+	return &instance;
 }
 
 double Randomiser::GetRandNum(double min, double max)
 {
 	//std::random_device rd;   // non-deterministic generator  
-	std::mt19937 rd((int)time(NULL));
 	std::uniform_real_distribution<> dist(min, max); // distribute results between 1 and 6 inclusive.  
-	return dist(rd);
+	return dist(m_generator);
 }
 
 int Randomiser::GetRandNum(int min, int max)
 {
 	//std::random_device rd;   // non-deterministic generator    
-	std::mt19937 rd((int)time(NULL));
 	std::uniform_int_distribution<> dist(min, max); // distribute results between 1 and 6 inclusive.  
-    return dist(rd);
+    return dist(m_generator);
 }

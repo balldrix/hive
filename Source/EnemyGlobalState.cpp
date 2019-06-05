@@ -28,7 +28,7 @@ void EnemyGlobalState::Execute(Enemy* enemy)
 		enemy->GetStateMachine()->GetCurrentState() == EnemyRunningState::Instance()) &&
 		(enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() > FightingRange)
 	{
-		if(enemy->GetTimer() > ThinkingTime * Randomiser::GetRandNum(0.8, 2.0))
+		if(enemy->GetTimer() > ThinkingTime * Randomiser::Instance()->GetRandNum(0.8, 2.0))
 		{
 			enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
 		}

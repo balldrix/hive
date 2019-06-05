@@ -28,7 +28,7 @@ void EnemyIdleState::Execute(Enemy* enemy)
 	if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() < AttackRange &&
 		(enemy->GetPositionY() - enemy->GetPlayerTarget()->GetPositionY()) < 5.0f)
 	{
-		double randnum = Randomiser::GetRandNum(0.002, 0.8);
+		double randnum = Randomiser::Instance()->GetRandNum(0.002, 0.8);
 		double time = randnum * ThinkingTime;
 		float timer = enemy->GetTimer();
 		if(timer > time)
@@ -43,7 +43,7 @@ void EnemyIdleState::Execute(Enemy* enemy)
 	}
 
 	// true if timer is greater than thinking time with random adjustment
-	if(enemy->GetTimer() > ThinkingTime * Randomiser::GetRandNum(0.4, 1.0) && 
+	if(enemy->GetTimer() > ThinkingTime * Randomiser::Instance()->GetRandNum(0.4, 1.0) && 
 		enemy->GetHealth() > 0 &&
 		(enemy->GetPlayerTarget()->GetStateMachine()->GetCurrentState() != PlayerKnockbackState::Instance() &&
 		enemy->GetPlayerTarget()->GetStateMachine()->GetCurrentState() != PlayerDeadState::Instance()))
@@ -52,7 +52,7 @@ void EnemyIdleState::Execute(Enemy* enemy)
 		if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() > FightingRange)
 		{
 			// radomise next action
-			int randNum = Randomiser::GetRandNum(0, 1);
+			int randNum = Randomiser::Instance()->GetRandNum(0, 1);
 			if(randNum > 0)
 			{
 				enemy->GetStateMachine()->ChangeState(EnemyRunningState::Instance());
