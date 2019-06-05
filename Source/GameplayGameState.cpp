@@ -156,7 +156,7 @@ void GameplayGameState::LoadAssets()
 	for(int i = 0; i < 10; i++)
 	{
 		Enemy* enemy = new Enemy();
-		enemy->Init(Vector2((float)EnemyStartScreenPositionX, (float)EnemyStartScreenPositionY), m_enemySprite, m_enemyShadowSprite, m_enemyAnimator, m_enemyHitBoxManager);
+		enemy->Init(Vector2((float)EnemyStartScreenPositionX + i, (float)EnemyStartScreenPositionY), m_enemySprite, m_enemyShadowSprite, m_enemyAnimator, m_enemyHitBoxManager);
 		enemy->SetPlayerTarget(m_player);
 		enemy->GetHitBoxManager()->SetOwner(enemy);
 
@@ -190,12 +190,6 @@ void GameplayGameState::DeleteAssets()
 	{
 		delete m_enemyHitBoxManager;
 		m_enemyHitBoxManager = nullptr;
-	}
-
-	if(m_playerHitBoxManager)
-	{
-		delete m_playerHitBoxManager;
-		m_playerHitBoxManager = nullptr;
 	}
 
 	// delete animators

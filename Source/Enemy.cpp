@@ -21,6 +21,24 @@ Enemy::Enemy() :
 
 Enemy::~Enemy()
 {
+	if(m_sprite)
+	{
+		delete m_sprite;
+		m_sprite = nullptr;
+	}
+
+	if(m_shadow)
+	{
+		delete m_shadow;
+		m_shadow = nullptr;
+	}
+
+	if(m_animator)
+	{
+		delete m_animator;
+		m_animator = nullptr;
+	}
+
 	if(m_stateMachine)
 	{
 		delete m_stateMachine;
@@ -30,10 +48,10 @@ Enemy::~Enemy()
 
 void Enemy::Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager)
 {
-	m_sprite = sprite;
-	m_shadow = shadow;
+	m_sprite = new SpriteSheet(*sprite);
+	m_shadow = new Sprite(*shadow);
 	m_position = position;
-	m_animator = animator;
+	m_animator = new Animator(*animator);
 	m_animator->SetAnimation(0);
 	m_hitBoxManager = new HitBoxManager(*hitBoxManager);
 	m_hitBoxManager->SetCurrentHitBox(0);

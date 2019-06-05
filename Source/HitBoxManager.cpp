@@ -17,7 +17,7 @@ HitBoxManager::HitBoxManager() :
 
 HitBoxManager::~HitBoxManager()
 {
-	m_hitBoxDataList.clear();
+	//m_hitBoxDataList.clear();
 }
 
 void HitBoxManager::Init(Sprite* sprite, std::string fileName)
