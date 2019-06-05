@@ -153,10 +153,12 @@ void GameplayGameState::LoadAssets()
 	// init game objects
 	m_player->Init(Vector2((float)PlayerStartScreenPositionX, (float)PlayerStartScreenPositionY), m_playerSprite, m_playerShadowSprite, m_playerAnimator, m_playerHitBoxManager,  m_controlSystem);	
 	
-	for(int i = 0; i < 10; i++)
+	int offsets[10] = { -15, -11, -7, -3, 0, 3, 7, 11, 15, 19};
+
+	for(int i = 0; i < 5; i++)
 	{
 		Enemy* enemy = new Enemy();
-		enemy->Init(Vector2((float)EnemyStartScreenPositionX + i, (float)EnemyStartScreenPositionY), m_enemySprite, m_enemyShadowSprite, m_enemyAnimator, m_enemyHitBoxManager);
+		enemy->Init(Vector2((float)EnemyStartScreenPositionX + offsets[i], (float)EnemyStartScreenPositionY - offsets[i]), m_enemySprite, m_enemyShadowSprite, m_enemyAnimator, m_enemyHitBoxManager);
 		enemy->SetPlayerTarget(m_player);
 		enemy->GetHitBoxManager()->SetOwner(enemy);
 
@@ -414,6 +416,7 @@ void GameplayGameState::ProcessCollisions()
 				enemy->GetHitBoxManager()->GetHurtBox()))
 			{
 				enemy->ApplyDamage(m_player, 1);
+				break;
 			}
 		}
 
@@ -425,6 +428,7 @@ void GameplayGameState::ProcessCollisions()
 				m_player->GetHitBoxManager()->GetHurtBox()))
 			{
 				m_player->ApplyDamage(enemy, 1);
+				break;
 			}
 		}
 	}
