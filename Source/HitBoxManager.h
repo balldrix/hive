@@ -19,10 +19,12 @@ public:
 	HitBoxManager();
 	~HitBoxManager();
 
+	void Init(Sprite* sprite, std::string fileName);
 	void Init(Sprite* sprite, GameObject* owner, std::string fileName);
 	void Update();
 	void Render(Graphics* graphics);
 
+	void SetOwner(GameObject* owner);
 	void SetFlipped(bool flip); // flip the hitbox data
 	void SetCurrentHitBox(std::string name);
 	void SetCurrentHitBox(const int &index);
@@ -37,7 +39,7 @@ public:
 
 private:
 	GameObject* m_owner;	// owner of the hitbox manager
-	Sprite*					m_sprite; // debug sprite
+	Sprite*	m_sprite; // debug sprite
 	HitBoxData* m_currentHitBoxData; // current hit box in use
 	std::vector<HitBoxData> m_hitBoxDataList; // list of all hitboxes in this manager
 	HitBox m_movementBox;	// hit box to block movement in scene

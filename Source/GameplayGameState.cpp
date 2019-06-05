@@ -33,7 +33,6 @@ GameplayGameState::GameplayGameState() :
 	m_playerAnimator(nullptr),
 	m_enemyAnimator(nullptr),
 	m_player(nullptr),
-	m_enemy(nullptr),
 	m_playerHitBoxManager(nullptr),
 	m_enemyHitBoxManager(nullptr),
 	m_canAttack(true),
@@ -60,7 +59,6 @@ GameplayGameState::GameplayGameState(GameStateManager* gameStateManager) :
 	m_playerAnimator(nullptr),
 	m_enemyAnimator(nullptr),
 	m_player(nullptr),
-	m_enemy(nullptr),
 	m_playerHitBoxManager(nullptr),
 	m_enemyHitBoxManager(nullptr),
 	m_canAttack(true),
@@ -125,7 +123,6 @@ void GameplayGameState::LoadAssets()
 
 	// create objects in memory
 	m_player = new Player();
-	m_enemy = new Enemy();
 
 	// load textures
 	m_playerTexture->LoadTexture(m_graphics, "GameData\\Sprites\\playerSpriteSheet.png");
@@ -151,13 +148,20 @@ void GameplayGameState::LoadAssets()
 
 	// init hitbox managers
 	m_playerHitBoxManager->Init(m_hitBoxSprite, m_player, "GameData\\HitBoxData\\playerHitBoxData.json");
-	m_enemyHitBoxManager->Init(m_hitBoxSprite, m_enemy, "GameData\\HitBoxData\\enemyHitBoxData.json");
+	m_enemyHitBoxManager->Init(m_hitBoxSprite, "GameData\\HitBoxData\\enemyHitBoxData.json");
 
 	// init game objects
-	m_player->Init(Vector2((float)PlayerStartScreenPositionX, (float)PlayerStartScreenPositionY), m_playerSprite, m_playerShadowSprite, m_playerAnimator, m_playerHitBoxManager,  m_controlSystem);
-	m_enemy->Init(Vector2((float)EnemyStartScreenPositionX, (float)EnemyStartScreenPositionY), m_enemySprite, m_enemyShadowSprite, m_enemyAnimator, m_enemyHitBoxManager);
+	m_player->Init(Vector2((float)PlayerStartScreenPositionX, (float)PlayerStartScreenPositionY), m_playerSprite, m_playerShadowSprite, m_playerAnimator, m_playerHitBoxManager,  m_controlSystem);	
+	
+	for(int i = 0; i < 10; i++)
+	{
+		Enemy* enemy = new Enemy();
+		enemy->Init(Vector2((float)EnemyStartScreenPositionX, (float)EnemyStartScreenPositionY), m_enemySprite, m_enemyShadowSprite, m_enemyAnimator, m_enemyHitBoxManager);
+		enemy->SetPlayerTarget(m_player);
+		enemy->GetHitBoxManager()->SetOwner(enemy);
 
-	m_enemy->SetPlayerTarget(m_player);
+		m_enemyList.push_back(enemy);
+	}
 
 	// set running to true
 	m_running = true;
@@ -165,12 +169,14 @@ void GameplayGameState::LoadAssets()
 
 void GameplayGameState::DeleteAssets()
 {
-	// delete enemy
-	if(m_enemy)
+	// delete enemies
+	for(int i = 0; i < m_enemyList.size(); i++)
 	{
-		delete m_enemy;
-		m_enemy = nullptr;
+		delete m_enemyList[i];
+		m_enemyList[i] = nullptr;
 	}
+
+	m_enemyList.clear();
 
 	// delete player
 	if(m_player)
@@ -384,31 +390,48 @@ void GameplayGameState::Update(float deltaTime)
 {
 	// update player
 	m_player->Update(deltaTime);
-	m_enemy->Update(deltaTime);
+	
+	// update enemies
+	for(int i = 0; i < m_enemyList.size(); i++)
+	{
+		Enemy* enemy = m_enemyList[i];
+		enemy->Update(deltaTime);
+	}
+
+	// check if player is dead
+	if(m_player->GetDeathTimer() > PlayerDeathTime)
+	{
+		ResetGame();
+	}
 }
 
 void GameplayGameState::ProcessCollisions()
 {
-	// true if player hitbox is active and 
-	if(m_player->GetHitBoxManager()->IsHitBoxActive() &&
-		m_enemy->GetGroundPosition().y - m_player->GetGroundPosition().y < 8.0f)
+	for(int i = 0; i < m_enemyList.size(); i++)
 	{
-		// check player hitbox vs enemy hurtboxes
-		if(m_player->GetHitBoxManager()->GetHitBox().OnCollision(
-			m_enemy->GetHitBoxManager()->GetHurtBox()))
-		{
-			m_enemy->ApplyDamage(m_player, 1);
-		}
-	}
+		Enemy* enemy = m_enemyList[i];
 
-	if(m_enemy->GetHitBoxManager()->IsHitBoxActive() &&
-		m_player->GetGroundPosition().y - m_enemy->GetGroundPosition().y < 8.0f)
-	{
-		// check player hitbox vs enemy hurtboxes
-		if(m_enemy->GetHitBoxManager()->GetHitBox().OnCollision(
-			m_player->GetHitBoxManager()->GetHurtBox()))
+		// true if player hitbox is active and 
+		if(m_player->GetHitBoxManager()->IsHitBoxActive() &&
+			enemy->GetGroundPosition().y - m_player->GetGroundPosition().y < 8.0f)
 		{
-			m_player->ApplyDamage(m_enemy, 1);
+			// check player hitbox vs enemy hurtboxes
+			if(m_player->GetHitBoxManager()->GetHitBox().OnCollision(
+				enemy->GetHitBoxManager()->GetHurtBox()))
+			{
+				enemy->ApplyDamage(m_player, 1);
+			}
+		}
+
+		if(enemy->GetHitBoxManager()->IsHitBoxActive() &&
+			m_player->GetGroundPosition().y - enemy->GetGroundPosition().y < 8.0f)
+		{
+			// check player hitbox vs enemy hurtboxes
+			if(enemy->GetHitBoxManager()->GetHitBox().OnCollision(
+				m_player->GetHitBoxManager()->GetHurtBox()))
+			{
+				m_player->ApplyDamage(enemy, 1);
+			}
 		}
 	}
 
@@ -427,19 +450,24 @@ void GameplayGameState::ProcessCollisions()
 		m_player->SetTargetVelocity(Vector2(m_player->GetTargetVelocity().x, 0.0f));
 	}
 
-	// check enemy position against world objects
-	if(m_enemy->GetGroundPosition().y < 61.0f)
+	for(int i = 0; i < m_enemyList.size(); i++)
 	{
-		m_enemy->SetPosition(Vector2(m_enemy->GetPositionX(), 61.0f));
-		m_enemy->SetCurrentVelocity(Vector2(m_enemy->GetCurrentVelocity().x, 0.0f));
-		m_enemy->SetTargetVelocity(Vector2(m_enemy->GetTargetVelocity().x, 0.0f));
-	}
+		Enemy* enemy = m_enemyList[i];
 
-	if(m_enemy->GetGroundPosition().y > m_graphics->GetHeight() - 1)
-	{
-		m_enemy->SetPosition(Vector2(m_enemy->GetPositionX(), m_graphics->GetHeight() - 1));
-		m_enemy->SetCurrentVelocity(Vector2(m_enemy->GetCurrentVelocity().x, 0.0f));
-		m_enemy->SetTargetVelocity(Vector2(m_enemy->GetTargetVelocity().x, 0.0f));
+		// check enemy position against world objects
+		if(enemy->GetGroundPosition().y < 61.0f)
+		{
+			enemy->SetPosition(Vector2(enemy->GetPositionX(), 61.0f));
+			enemy->SetCurrentVelocity(Vector2(enemy->GetCurrentVelocity().x, 0.0f));
+			enemy->SetTargetVelocity(Vector2(enemy->GetTargetVelocity().x, 0.0f));
+		}
+
+		if(enemy->GetGroundPosition().y > m_graphics->GetHeight() - 1)
+		{
+			enemy->SetPosition(Vector2(enemy->GetPositionX(), m_graphics->GetHeight() - 1));
+			enemy->SetCurrentVelocity(Vector2(enemy->GetCurrentVelocity().x, 0.0f));
+			enemy->SetTargetVelocity(Vector2(enemy->GetTargetVelocity().x, 0.0f));
+		}
 	}
 }
 
@@ -451,8 +479,12 @@ void GameplayGameState::Render()
 
 	//////////////////////////////////////
 	// render game objects
-	m_enemy->Render(m_graphics);
 	m_player->Render(m_graphics);
+
+	for(int i = 0; i < m_enemyList.size(); i++)
+	{
+		m_enemyList[i]->Render(m_graphics);
+	}
 }
 
 void GameplayGameState::ReleaseAll()
@@ -468,5 +500,9 @@ void GameplayGameState::ReleaseAll()
 void GameplayGameState::ResetGame()
 {
 	m_player->Reset();
-	m_enemy->Reset();
+	
+	for(int i = 0; i < m_enemyList.size(); i++)
+	{
+		m_enemyList[i]->Reset();
+	}
 }

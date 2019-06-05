@@ -6,13 +6,13 @@
 #define _GAMEOBJECT_H_
 
 #include "pch.h"
+#include "HitBoxManager.h"
 
 // constants
 const float Gravity = 0.00065f;
 
 // forward definitions
 class Graphics;
-class HitBoxManager;
 class Sprite;
 class SpriteSheet;
 class Animator;
@@ -44,7 +44,7 @@ public:
 	void			FlipHorizontally(bool flip);
 
 	// Setters
-	void			SetID(const wchar_t* string);			// set object ID
+	void			SetID(std::string id);			// set object ID
 	void			SetPositionX(unsigned int x);
 	void			SetPositionY(unsigned int y);
 	void			SetPosition(unsigned int x, unsigned int y);
@@ -65,7 +65,7 @@ public:
 	void			SetActive(bool active);					// set active or not
 
 	// getters
-	const wchar_t*	GetID() const { return m_ID; }					// return object ID
+	std::string		GetID() const { return m_ID; }					// return object ID
 	float			GetPositionX() const { return m_position.x; }
 	float			GetPositionY() const { return m_position.y; }
 	Vector2			GetPosition() const { return m_position; }
@@ -82,6 +82,7 @@ public:
 
 	int				GetHealth() const { return m_health; }
 	int				GetKnockbackCount() const { return m_knockbackCount; }
+	float			GetDeathTimer() const { return m_deathTimer; }
 
 	virtual void	ApplyDamage(GameObject* source, const int& amount); // apply damage
 	virtual void	Knockback(const Vector2& direction, const float& force); // knock back with force
@@ -90,8 +91,8 @@ public:
 	bool			IsActive() const { return m_active; }		// return if active
 
 protected:
-	const wchar_t* m_ID;					// object ID
 
+	std::string		m_ID;					// object ID
 	Vector2			m_position;				// object position
 	Vector2			m_groundPosition;		// y position of grounded feet
 	Vector2			m_currentVelocity;		// current object velocity
@@ -99,7 +100,6 @@ protected:
 	float			m_movementSpeed;		// current object speed
 	float			m_acceleration;			// acceleration speed
 	float			m_deceleration;			// decceleration speed
-
 
 	SpriteSheet*	m_sprite;				// object sprite sheet
 	Animator*		m_animator;				// animation controller
@@ -111,6 +111,8 @@ protected:
 
 	int				m_health;				// object health
 	int				m_knockbackCount;		// number of knockbacks
+
+	float			m_deathTimer;			// timer running while object is dead
 
 	bool			m_grounded;				// true when object is grounded
 	bool			m_active;				// object active or not

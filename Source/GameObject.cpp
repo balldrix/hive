@@ -5,7 +5,7 @@
 #include "ControlSystem.h"
 
 GameObject::GameObject() :
-	m_ID(L"GameObject"),
+	m_ID("GameObject"),
 	m_position(0.0f, 0.0f),
 	m_groundPosition(0.0f, 0.0f),
 	m_currentVelocity(0.0f, 0.0f),
@@ -20,6 +20,7 @@ GameObject::GameObject() :
 	m_controlSystem(nullptr),
 	m_health(0),
 	m_knockbackCount(0),
+	m_deathTimer(0.0f),
 	m_grounded(true),
 	m_active(false)
 {
@@ -27,6 +28,11 @@ GameObject::GameObject() :
 
 GameObject::~GameObject()
 {
+	if(m_hitBoxManager)
+	{
+		delete m_hitBoxManager;
+		m_hitBoxManager = nullptr;
+	}
 }
 
 void GameObject::Init(const Vector2& position, Sprite* sprite)
@@ -53,9 +59,9 @@ void GameObject::Init(const Vector2& position, SpriteSheet* sprite, Sprite* shad
 {
 }
 
-void GameObject::SetID(const wchar_t* string)
+void GameObject::SetID(std::string id)
 {
-	m_ID = string;
+	m_ID = id;
 }
 
 void GameObject::Update(float deltaTime)

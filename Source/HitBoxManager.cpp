@@ -20,6 +20,11 @@ HitBoxManager::~HitBoxManager()
 	m_hitBoxDataList.clear();
 }
 
+void HitBoxManager::Init(Sprite* sprite, std::string fileName)
+{
+	Init(sprite, nullptr, fileName);
+}
+
 void HitBoxManager::Init(Sprite* sprite, GameObject* owner, std::string fileName)
 {
 	m_sprite = sprite;
@@ -54,6 +59,11 @@ void HitBoxManager::Render(Graphics* graphics)
 	{
 		m_hitBox.Render(graphics);
 	}
+}
+
+void HitBoxManager::SetOwner(GameObject* owner)
+{
+	m_owner = owner;
 }
 
 // flip boxes

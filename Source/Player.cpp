@@ -55,6 +55,11 @@ void Player::Update(float deltaTime)
 	{
 		m_controlSystem->Update(deltaTime);
 	}
+
+	if(m_stateMachine->GetCurrentState() == PlayerDeadState::Instance())
+	{
+		m_deathTimer += deltaTime;
+	}
 }
 
 void Player::Render(Graphics* graphics)
@@ -102,6 +107,7 @@ void Player::Reset()
 	m_hitBoxManager->SetCurrentHitBox(0);
 
 	m_health = 5;
+	m_deathTimer = 0.0f;
 
 	SetActive(true);
 }

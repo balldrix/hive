@@ -35,7 +35,7 @@ void Enemy::Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, A
 	m_position = position;
 	m_animator = animator;
 	m_animator->SetAnimation(0);
-	m_hitBoxManager = hitBoxManager;
+	m_hitBoxManager = new HitBoxManager(*hitBoxManager);
 	m_hitBoxManager->SetCurrentHitBox(0);
 	m_movementSpeed = EnemyWalkSpeed;
 	m_acceleration = EnemyAcceleration;
@@ -106,6 +106,7 @@ Enemy::Reset()
 
 	SetActive(true);
 	m_health = 4;
+	m_thinkingTimer = 0.0f;
 }
 
 void Enemy::SetPlayerTarget(Player* player)
@@ -165,7 +166,7 @@ void Enemy::Knockback(const Vector2& direction, const float& force)
 
 void Enemy::Attack()
 {
-	int randomNum = Randomiser::GetRandNum(0, 3);
+	int randomNum = Randomiser::GetRandNum(0, 2);
 	switch(randomNum)
 	{
 	case 0:

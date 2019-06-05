@@ -21,8 +21,6 @@ class Enemy;
 class ControlSystem;
 class HitBoxManager;
 
-const float AttackCoolDown = 0.2f;
-
 class GameplayGameState : public GameState
 {
 public:
@@ -70,7 +68,7 @@ private:
 	HitBoxManager*		m_enemyHitBoxManager;		// enemy hitboxes
 
 	Player*				m_player;					// pointer to player class
-	Enemy*				m_enemy;					// pointer to enemy class
+	std::vector<Enemy*>	m_enemyList;				// list of enemies
 
 	bool				m_canAttack;				// flag for attack cooldown
 	bool				m_running;					// is game running or not
