@@ -260,6 +260,11 @@ void GameObject::SetAcceleration(float accel)
 	m_acceleration = accel;
 }
 
+void GameObject::SetDeceleration(float decel)
+{
+	m_deceleration = decel;
+}
+
 void GameObject::SetHealth(int health)
 {
 	m_health = health;

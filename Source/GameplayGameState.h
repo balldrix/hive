@@ -20,6 +20,7 @@ class Player;
 class Enemy;
 class ControlSystem;
 class HitBoxManager;
+class NPCManager;
 
 class GameplayGameState : public GameState
 {
@@ -46,7 +47,7 @@ private:
 	Graphics*			m_graphics;					// graphics pointer
 	Input*				m_input;					// input class pointer		
 	
-	ControlSystem*		m_controlSystem;			// player input control system
+	ControlSystem*		m_controlSystem;			// player input control 
 
 	Texture*			m_playerTexture;			// player sprite sheet
 	Texture*			m_enemyTexture;				// enemy enemy texture
@@ -67,8 +68,9 @@ private:
 	HitBoxManager*		m_playerHitBoxManager;		// player hitboxes
 	HitBoxManager*		m_enemyHitBoxManager;		// enemy hitboxes
 
+	NPCManager*			m_NPCManager;				// enemy manager
+
 	Player*				m_player;					// pointer to player class
-	std::vector<Enemy*>	m_enemyList;				// list of enemies
 
 	bool				m_canAttack;				// flag for attack cooldown
 	bool				m_running;					// is game running or not

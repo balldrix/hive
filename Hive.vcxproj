@@ -48,6 +48,7 @@
     <ClCompile Include="Source\HitBoxManager.cpp" />
     <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\NPCManager.cpp" />
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\PlayerDeadState.cpp" />
     <ClCompile Include="Source\PlayerGlobalState.cpp" />
@@ -77,6 +78,7 @@
     <ClInclude Include="Source\DummyOwnedStates.h" />
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\EnemyAttackState.h" />
+    <ClInclude Include="Source\EnemyData.h" />
     <ClInclude Include="Source\EnemyDeadState.h" />
     <ClInclude Include="Source\EnemyFightingState.h" />
     <ClInclude Include="Source\EnemyGlobalState.h" />
@@ -98,6 +100,7 @@
     <ClInclude Include="Source\HitBoxData.h" />
     <ClInclude Include="Source\HitBoxManager.h" />
     <ClInclude Include="Source\Input.h" />
+    <ClInclude Include="Source\NPCManager.h" />
     <ClInclude Include="Source\pch.h" />
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\PlayerDeadState.h" />

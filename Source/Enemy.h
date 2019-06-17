@@ -9,16 +9,7 @@
 #include "GameObject.h"
 #include "State.h"
 #include "StateMachine.h"
-
-const unsigned int			EnemyStartScreenPositionX = 75;
-const unsigned int			EnemyStartScreenPositionY = 65;
-const unsigned int			EnemyWalkSpeed = 25;
-const unsigned int			EnemyRunningSpeed = 40;
-const float					EnemyAcceleration = 0.8f;
-const float					EnemyDeceleration = 3.5f;
-const float					ThinkingTime = 3.5f;
-const float					FightingRange = 20.0f;
-const float					AttackRange = 9.0f;
+#include "EnemyData.h"
 
 class Player;
 
@@ -34,6 +25,7 @@ public:
 	void					Render(Graphics* graphics);
 	void					Reset();
 
+	void					SetData(const EnemyData& data);
 	void					SetPlayerTarget(Player* player);
 	void					SetHostile(bool isHostile);
 	void					ResetTimer();
@@ -42,6 +34,7 @@ public:
 	StateMachine<Enemy>*	GetStateMachine() const { return m_stateMachine; }
 	float					GetTimer() const { return m_thinkingTimer; }
 	bool					IsHostile() const { return m_isHostile; }
+	EnemyData				GetData() const { return m_enemyData; }
 
 	void					ApplyDamage(GameObject* source, const int& amount);
 	void					Knockback(const Vector2& direction, const float& force);
@@ -49,6 +42,7 @@ public:
 	void					Attack();
 
 private:
+	EnemyData				m_enemyData;
 	Player*					m_playerTarget;
 	StateMachine<Enemy>*	m_stateMachine;
 	float					m_thinkingTimer;

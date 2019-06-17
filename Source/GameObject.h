@@ -18,6 +18,17 @@ class SpriteSheet;
 class Animator;
 class ControlSystem;
 
+struct ObjectData
+{
+	std::string				m_ID;
+	unsigned int			m_startingHealth;
+	Vector2					m_startingPosition;
+	float					m_walkSpeed;
+	float					m_runningSpeed;
+	float					m_acceleration;
+	float					m_deceleration;
+};
+
 class GameObject
 {
 public:
@@ -50,6 +61,8 @@ public:
 	void			SetPosition(unsigned int x, unsigned int y);
 	void			SetPosition(const Vector2& position);			// set position
 	void			SetMovementSpeed(float speed);
+	void			SetAcceleration(float accel);
+	void			SetDeceleration(float decel);
 	void			SetVelocity(float x, float y);
 	void			SetVelocity(const Vector2& velocity);
 	void			SetCurrentVelocity(float x, float y);
@@ -58,7 +71,6 @@ public:
 	void			SetTargetVelocity(const Vector2& velocity);
 	void			SetTargetVelocityX(float x);
 	void			SetTargetVelocityY(float y);
-	void			SetAcceleration(float accel);
 	void			SetHealth(int health);
 	void			SetKnockbackCount(int count);
 	void			SetGrounded(bool grounded);
@@ -89,10 +101,11 @@ public:
 
 	bool			IsGrounded() const { return m_grounded; }
 	bool			IsActive() const { return m_active; }		// return if active
+	
+	virtual void	Reset() = 0;	// must override reset method
 
 protected:
-
-	std::string		m_ID;					// object ID
+ 	std::string		m_ID;					// object ID
 	Vector2			m_position;				// object position
 	Vector2			m_groundPosition;		// y position of grounded feet
 	Vector2			m_currentVelocity;		// current object velocity

@@ -13,6 +13,7 @@
 #include "UnitVectors.h"
 #include "ControlSystem.h"
 #include "HitBoxManager.h"
+#include "NPCManager.h"
 
 GameplayGameState::GameplayGameState() :
 	m_gameStateManager(nullptr),
@@ -35,6 +36,7 @@ GameplayGameState::GameplayGameState() :
 	m_player(nullptr),
 	m_playerHitBoxManager(nullptr),
 	m_enemyHitBoxManager(nullptr),
+	m_NPCManager(nullptr),
 	m_canAttack(true),
 	m_running(false),
 	GameState(L"GAMEPLAY")
@@ -61,6 +63,7 @@ GameplayGameState::GameplayGameState(GameStateManager* gameStateManager) :
 	m_player(nullptr),
 	m_playerHitBoxManager(nullptr),
 	m_enemyHitBoxManager(nullptr),
+	m_NPCManager(nullptr),
 	m_canAttack(true),
 	m_running(false),
 	GameState(L"GAMEPLAY")
@@ -109,7 +112,7 @@ void GameplayGameState::LoadAssets()
 
 	m_enemySprite = new SpriteSheet();
 	m_enemyShadowSprite = new Sprite();
-	
+
 	m_hitBoxSprite = new Sprite();
 	m_backgroundSprite = new Sprite();
 
@@ -120,6 +123,9 @@ void GameplayGameState::LoadAssets()
 	// create hitbox managers
 	m_playerHitBoxManager = new HitBoxManager();
 	m_enemyHitBoxManager = new HitBoxManager();
+
+	// create enemy manager
+	m_NPCManager = new NPCManager();
 
 	// create objects in memory
 	m_player = new Player();
@@ -151,18 +157,16 @@ void GameplayGameState::LoadAssets()
 	m_enemyHitBoxManager->Init(m_hitBoxSprite, "GameData\\HitBoxData\\enemyHitBoxData.json");
 
 	// init game objects
-	m_player->Init(Vector2((float)PlayerStartScreenPositionX, (float)PlayerStartScreenPositionY), m_playerSprite, m_playerShadowSprite, m_playerAnimator, m_playerHitBoxManager,  m_controlSystem);	
-	
-	int offsets[10] = { -15, -11, -7, -3, 0, 3, 7, 11, 15, 19};
+	m_player->Init(Vector2((float)PlayerStartScreenPositionX, (float)PlayerStartScreenPositionY), m_playerSprite, m_playerShadowSprite, m_playerAnimator, m_playerHitBoxManager, m_controlSystem);
 
-	for(int i = 0; i < 5; i++)
+	m_NPCManager->Init();
+	std::vector<Enemy*> enemyList = m_NPCManager->GetEnemyList();
+
+	for(size_t i = 0; i < enemyList.size(); i++)
 	{
-		Enemy* enemy = new Enemy();
-		enemy->Init(Vector2((float)EnemyStartScreenPositionX + offsets[i], (float)EnemyStartScreenPositionY - offsets[i]), m_enemySprite, m_enemyShadowSprite, m_enemyAnimator, m_enemyHitBoxManager);
-		enemy->SetPlayerTarget(m_player);
-		enemy->GetHitBoxManager()->SetOwner(enemy);
-
-		m_enemyList.push_back(enemy);
+		enemyList[i]->Init(enemyList[i]->GetData().m_objectData.m_startingPosition, m_enemySprite, m_enemyShadowSprite, m_enemyAnimator, m_enemyHitBoxManager);
+		enemyList[i]->SetPlayerTarget(m_player);
+		enemyList[i]->GetHitBoxManager()->SetOwner(enemyList[i]);
 	}
 
 	// set running to true
@@ -171,20 +175,17 @@ void GameplayGameState::LoadAssets()
 
 void GameplayGameState::DeleteAssets()
 {
-	// delete enemies
-	for(int i = 0; i < m_enemyList.size(); i++)
-	{
-		delete m_enemyList[i];
-		m_enemyList[i] = nullptr;
-	}
-
-	m_enemyList.clear();
-
 	// delete player
 	if(m_player)
 	{
 		delete m_player;
 		m_player = nullptr;
+	}
+
+	if(m_NPCManager)
+	{
+		delete m_NPCManager;
+		m_NPCManager = nullptr;
 	}
 
 	// delete hit box managers
@@ -388,11 +389,7 @@ void GameplayGameState::Update(float deltaTime)
 	m_player->Update(deltaTime);
 	
 	// update enemies
-	for(int i = 0; i < m_enemyList.size(); i++)
-	{
-		Enemy* enemy = m_enemyList[i];
-		enemy->Update(deltaTime);
-	}
+	m_NPCManager->Update(deltaTime);
 
 	// check if player is dead
 	if(m_player->GetDeathTimer() > PlayerDeathTime)
@@ -403,9 +400,11 @@ void GameplayGameState::Update(float deltaTime)
 
 void GameplayGameState::ProcessCollisions()
 {
-	for(int i = 0; i < m_enemyList.size(); i++)
+	std::vector<Enemy*> enemyList = m_NPCManager->GetEnemyList();
+
+	for(size_t i = 0; i < enemyList.size(); i++)
 	{
-		Enemy* enemy = m_enemyList[i];
+		Enemy* enemy = enemyList[i];
 
 		// true if player hitbox is active and 
 		if(m_player->GetHitBoxManager()->IsHitBoxActive() &&
@@ -448,9 +447,9 @@ void GameplayGameState::ProcessCollisions()
 		m_player->SetTargetVelocity(Vector2(m_player->GetTargetVelocity().x, 0.0f));
 	}
 
-	for(int i = 0; i < m_enemyList.size(); i++)
+	for(size_t i = 0; i < enemyList.size(); i++)
 	{
-		Enemy* enemy = m_enemyList[i];
+		Enemy* enemy = enemyList[i];
 
 		// check enemy position against world objects
 		if(enemy->GetGroundPosition().y < 61.0f)
@@ -478,11 +477,7 @@ void GameplayGameState::Render()
 	//////////////////////////////////////
 	// render game objects
 	m_player->Render(m_graphics);
-
-	for(int i = 0; i < m_enemyList.size(); i++)
-	{
-		m_enemyList[i]->Render(m_graphics);
-	}
+	m_NPCManager->Render(m_graphics);
 }
 
 void GameplayGameState::ReleaseAll()
@@ -498,9 +493,5 @@ void GameplayGameState::ReleaseAll()
 void GameplayGameState::ResetGame()
 {
 	m_player->Reset();
-	
-	for(int i = 0; i < m_enemyList.size(); i++)
-	{
-		m_enemyList[i]->Reset();
-	}
+	m_NPCManager->Reset();
 }

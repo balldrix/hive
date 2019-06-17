@@ -48,16 +48,18 @@ Enemy::~Enemy()
 
 void Enemy::Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager)
 {
+	m_position = position;
 	m_sprite = new SpriteSheet(*sprite);
 	m_shadow = new Sprite(*shadow);
-	m_position = position;
 	m_animator = new Animator(*animator);
 	m_animator->SetAnimation(0);
 	m_hitBoxManager = new HitBoxManager(*hitBoxManager);
 	m_hitBoxManager->SetCurrentHitBox(0);
-	m_movementSpeed = EnemyWalkSpeed;
-	m_acceleration = EnemyAcceleration;
-	m_deceleration = EnemyDeceleration;
+	
+	ObjectData data = m_enemyData.m_objectData;
+	m_movementSpeed = data.m_walkSpeed;
+	m_acceleration = data.m_acceleration;
+	m_deceleration = data.m_deceleration;
 
 	m_stateMachine = new StateMachine<Enemy>(this);
 	m_stateMachine->Init(EnemyIdleState::Instance(), nullptr, EnemyGlobalState::Instance());
@@ -117,7 +119,9 @@ Enemy::Reset()
 
 	// Set Position 
 	// TODO set world position and screen position
-	SetPosition(EnemyStartScreenPositionX, EnemyStartScreenPositionY);
+	m_position = m_enemyData.m_objectData.m_startingPosition;
+	m_grounded = true;
+	m_movementSpeed = m_enemyData.m_objectData.m_walkSpeed;
 
 	// reset hitboxes
 	m_hitBoxManager->SetCurrentHitBox(0);
@@ -125,6 +129,11 @@ Enemy::Reset()
 	SetActive(true);
 	m_health = 4;
 	m_thinkingTimer = 0.0f;
+}
+
+void Enemy::SetData(const EnemyData& data)
+{
+	m_enemyData = data;
 }
 
 void Enemy::SetPlayerTarget(Player* player)

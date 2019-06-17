@@ -17,6 +17,7 @@ void EnemyIdleState::OnEnter(Enemy* enemy)
 	enemy->GetAnimator()->Reset();
 	enemy->GetAnimator()->SetAnimation(m_name);
 	enemy->GetHitBoxManager()->SetCurrentHitBox(m_name);
+	enemy->ResetTimer();
 
 	// stop movement
 	enemy->SetTargetVelocity(Vector2::Zero);
@@ -25,11 +26,11 @@ void EnemyIdleState::OnEnter(Enemy* enemy)
 void EnemyIdleState::Execute(Enemy* enemy)
 {
 	// true if enemy is withing attack range
-	if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() < AttackRange &&
+	if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() < enemy->GetData().m_attackRange &&
 		(enemy->GetPositionY() - enemy->GetPlayerTarget()->GetPositionY()) < 5.0f)
 	{
 		double randnum = Randomiser::Instance()->GetRandNum(0.02, 1.8);
-		double time = randnum * ThinkingTime;
+		double time = randnum * enemy->GetData().m_thinkingTime;
 		float timer = enemy->GetTimer();
 		if(timer > time)
 		{
@@ -43,13 +44,13 @@ void EnemyIdleState::Execute(Enemy* enemy)
 	}
 
 	// true if timer is greater than thinking time with random adjustment
-	if(enemy->GetTimer() > ThinkingTime * Randomiser::Instance()->GetRandNum(0.4, 1.0) && 
+	if(enemy->GetTimer() > enemy->GetData().m_thinkingTime * Randomiser::Instance()->GetRandNum(0.4, 1.0) &&
 		enemy->GetHealth() > 0 &&
 		(enemy->GetPlayerTarget()->GetStateMachine()->GetCurrentState() != PlayerKnockbackState::Instance() &&
 		enemy->GetPlayerTarget()->GetStateMachine()->GetCurrentState() != PlayerDeadState::Instance()))
 	{
 		// true if enemy is outside fighting range
-		if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() > FightingRange)
+		if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() > enemy->GetData().m_fightingRange)
 		{
 			// radomise next action
 			int randNum = Randomiser::Instance()->GetRandNum(0, 1);
@@ -63,7 +64,7 @@ void EnemyIdleState::Execute(Enemy* enemy)
 			}
 
 		}
-		else if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() > AttackRange &&
+		else if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() > enemy->GetData().m_attackRange &&
 			(enemy->GetPositionY() - enemy->GetPlayerTarget()->GetPositionY()) < 5.0f)
 		{
 			// change to walking state
