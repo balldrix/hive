@@ -12,13 +12,14 @@
 class GameStateManager;
 class Graphics;
 class Input;
+class Camera;
+class ControlSystem;
 class Texture;
 class SpriteSheet;
 class Sprite;
 class Animator;
 class Player;
 class Enemy;
-class ControlSystem;
 class HitBoxManager;
 class NPCManager;
 
@@ -27,18 +28,19 @@ class GameplayGameState : public GameState
 public:
 	GameplayGameState();
 	GameplayGameState(GameStateManager* gameStateManager);
-	virtual ~GameplayGameState();
+	virtual				~GameplayGameState();
 
 	void				OnEntry();					// calls the load assets method
 	void				OnExit();					// calls the delete assets method
+	
 	void				ProcessInput();				// processes input from player
 	void				Update(float deltaTime);	// update state
 	void				ProcessCollisions();		// check for collisions
 	void				Render();					// render state
-	void				ReleaseAll();				// release all texture memory
 
+	void				ReleaseAll();				// release all texture memory
 	void				ResetGame();				// reset game and play again
-																
+
 private:			
 	void				LoadAssets();				// load game state assets
 	void				DeleteAssets();				// delete game state assets
@@ -47,6 +49,7 @@ private:
 	Graphics*			m_graphics;					// graphics pointer
 	Input*				m_input;					// input class pointer		
 	
+	Camera*				m_camera;					// camera controller
 	ControlSystem*		m_controlSystem;			// player input control 
 
 	Texture*			m_playerTexture;			// player sprite sheet
@@ -74,6 +77,10 @@ private:
 
 	bool				m_canAttack;				// flag for attack cooldown
 	bool				m_running;					// is game running or not
+
+	// world
+	unsigned int		m_worldWidth;
+	unsigned int		m_worldHeight;
 };
 
 #endif _GAMEPLAYGAMESTATE_H_

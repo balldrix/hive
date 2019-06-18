@@ -81,11 +81,9 @@ void Sprite::Render(Graphics* graphics, float alpha)
 void
 Sprite::Render(Graphics* graphics, const Vector2& position)
 {
-	SetPosition(position);
-
 	// draw sprite
 	graphics->GetSpriteBatch()->Draw(m_texture->GetTexture(),
-		m_position,
+		position,
 		&m_rect,
 		m_colour,
 		m_rotation,

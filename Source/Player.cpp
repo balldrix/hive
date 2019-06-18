@@ -10,6 +10,7 @@
 #include "StateMachine.h"
 #include "PlayerOwnedStates.h"
 #include "UnitVectors.h"
+#include "Camera.h"
 
 Player::Player() : m_stateMachine(nullptr)
 {
@@ -101,7 +102,7 @@ void Player::Reset()
 
 	// Set Position 
 	// TODO set world position and screen position
-	SetPosition(PlayerStartScreenPositionX, PlayerStartScreenPositionY);
+	SetPosition(PlayerStartPositionX, PlayerStartPositionY);
 
 	// reset hitboxes
 	m_hitBoxManager->SetCurrentHitBox(0);

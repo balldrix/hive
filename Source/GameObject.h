@@ -17,6 +17,7 @@ class Sprite;
 class SpriteSheet;
 class Animator;
 class ControlSystem;
+class Camera;
 
 struct ObjectData
 {
@@ -55,6 +56,7 @@ public:
 	void			FlipHorizontally(bool flip);
 
 	// Setters
+	void			SetCamera(Camera* cam);
 	void			SetID(std::string id);			// set object ID
 	void			SetPositionX(unsigned int x);
 	void			SetPositionY(unsigned int y);
@@ -106,6 +108,7 @@ public:
 
 protected:
  	std::string		m_ID;					// object ID
+	Camera*			m_camera;				// pointer to camera
 	Vector2			m_position;				// object position
 	Vector2			m_groundPosition;		// y position of grounded feet
 	Vector2			m_currentVelocity;		// current object velocity

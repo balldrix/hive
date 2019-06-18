@@ -133,6 +133,9 @@
     <ClCompile Include="Source\NPCManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -329,6 +332,9 @@
     <ClInclude Include="Source\NPCManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\hitbox.png">
@@ -344,6 +350,9 @@
       <Filter>Game Data\Sprites</Filter>
     </Image>
     <Image Include="GameData\Sprites\enemySpriteSheet.png">
+      <Filter>Game Data\Sprites</Filter>
+    </Image>
+    <Image Include="GameData\Sprites\backgroundTest.png">
       <Filter>Game Data\Sprites</Filter>
     </Image>
   </ItemGroup>

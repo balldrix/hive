@@ -3,9 +3,11 @@
 #include "HitBoxManager.h"
 #include "Animator.h"
 #include "ControlSystem.h"
+#include "Camera.h"
 
 GameObject::GameObject() :
 	m_ID("GameObject"),
+	m_camera(nullptr),
 	m_position(0.0f, 0.0f),
 	m_groundPosition(0.0f, 0.0f),
 	m_currentVelocity(0.0f, 0.0f),
@@ -59,6 +61,11 @@ void GameObject::Init(const Vector2& position, SpriteSheet* sprite, Sprite* shad
 {
 }
 
+void GameObject::SetCamera(Camera* cam)
+{
+	m_camera = cam;
+}
+
 void GameObject::SetID(std::string id)
 {
 	m_ID = id;
@@ -108,16 +115,22 @@ void GameObject::Update(float deltaTime)
 		m_animator->Update(deltaTime);
 	}
 
+	Vector2 screenPosition = m_position;
+	screenPosition.x -= m_camera->GetPosition().x;
+		//= Vector2(m_position.x - m_camera->GetPosition().x, m_position.y);
+	Vector2 screenGroundPosition = m_groundPosition;
+	screenGroundPosition.x -= m_camera->GetPosition().x;
+
 	// update position of sprite
 	if(m_sprite)
 	{
-		m_sprite->SetPosition(m_position);
+		m_sprite->SetPosition(screenPosition);
 	}
 
 	// update shadow position
 	if(m_shadow)
 	{
-		m_shadow->SetPosition(m_groundPosition);
+		m_shadow->SetPosition(screenGroundPosition);
 	}
 
 	// update hitbox

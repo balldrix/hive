@@ -2,6 +2,8 @@
 #include "GameStateManager.h"
 #include "Graphics.h"
 #include "Input.h"
+#include "Camera.h"
+#include "ControlSystem.h"
 #include "Texture.h"
 #include "AnimatedSprite.h"
 #include "SpriteSheet.h"
@@ -11,7 +13,6 @@
 #include "Enemy.h"
 #include "Resources.h"
 #include "UnitVectors.h"
-#include "ControlSystem.h"
 #include "HitBoxManager.h"
 #include "NPCManager.h"
 
@@ -19,6 +20,7 @@ GameplayGameState::GameplayGameState() :
 	m_gameStateManager(nullptr),
 	m_graphics(nullptr),
 	m_input(nullptr),
+	m_camera(nullptr),
 	m_controlSystem(nullptr),
 	m_playerTexture(nullptr),
 	m_enemyTexture(nullptr),
@@ -39,6 +41,8 @@ GameplayGameState::GameplayGameState() :
 	m_NPCManager(nullptr),
 	m_canAttack(true),
 	m_running(false),
+	m_worldWidth(0),
+	m_worldHeight(0),
 	GameState(L"GAMEPLAY")
 {}
 
@@ -46,6 +50,7 @@ GameplayGameState::GameplayGameState(GameStateManager* gameStateManager) :
 	m_gameStateManager(nullptr),
 	m_graphics(nullptr),
 	m_input(nullptr),
+	m_camera(nullptr),
 	m_controlSystem(nullptr),
 	m_playerTexture(nullptr),
 	m_enemyTexture(nullptr),
@@ -66,6 +71,8 @@ GameplayGameState::GameplayGameState(GameStateManager* gameStateManager) :
 	m_NPCManager(nullptr),
 	m_canAttack(true),
 	m_running(false),
+	m_worldWidth(0),
+	m_worldHeight(0),
 	GameState(L"GAMEPLAY")
 {
 	// get essential pointers from gamestate manager
@@ -93,8 +100,12 @@ void GameplayGameState::OnExit()
 
 void GameplayGameState::LoadAssets()
 {
-	// seed random generator
-	srand((int)time(NULL));
+	m_worldWidth = 1200;
+	m_worldHeight = 80;
+
+	// init camera
+	m_camera = new Camera();
+	m_camera->Init(GlobalConstants::GAME_WIDTH, GlobalConstants::GAME_HEIGHT, m_worldWidth);
 
 	// init control system
 	m_controlSystem = new ControlSystem();
@@ -157,7 +168,9 @@ void GameplayGameState::LoadAssets()
 	m_enemyHitBoxManager->Init(m_hitBoxSprite, "GameData\\HitBoxData\\enemyHitBoxData.json");
 
 	// init game objects
-	m_player->Init(Vector2((float)PlayerStartScreenPositionX, (float)PlayerStartScreenPositionY), m_playerSprite, m_playerShadowSprite, m_playerAnimator, m_playerHitBoxManager, m_controlSystem);
+	m_player->Init(Vector2((float)PlayerStartPositionX, (float)PlayerStartPositionY), m_playerSprite, m_playerShadowSprite, m_playerAnimator, m_playerHitBoxManager, m_controlSystem);
+	m_player->SetCamera(m_camera);
+	m_camera->SetTarget(m_player);
 
 	m_NPCManager->Init();
 	std::vector<Enemy*> enemyList = m_NPCManager->GetEnemyList();
@@ -167,6 +180,7 @@ void GameplayGameState::LoadAssets()
 		enemyList[i]->Init(enemyList[i]->GetData().m_objectData.m_startingPosition, m_enemySprite, m_enemyShadowSprite, m_enemyAnimator, m_enemyHitBoxManager);
 		enemyList[i]->SetPlayerTarget(m_player);
 		enemyList[i]->GetHitBoxManager()->SetOwner(enemyList[i]);
+		enemyList[i]->SetCamera(m_camera);
 	}
 
 	// set running to true
@@ -282,6 +296,12 @@ void GameplayGameState::DeleteAssets()
 		delete m_controlSystem;
 		m_controlSystem = nullptr;
 	}
+
+	if(m_camera)
+	{
+		delete m_camera;
+		m_camera = nullptr;
+	}
 }
 
 void GameplayGameState::ProcessInput()
@@ -392,10 +412,13 @@ void GameplayGameState::Update(float deltaTime)
 	m_NPCManager->Update(deltaTime);
 
 	// check if player is dead
+	// TODO refactor to get player dead bool
 	if(m_player->GetDeathTimer() > PlayerDeathTime)
 	{
 		ResetGame();
 	}
+	
+	m_camera->Update(deltaTime);
 }
 
 void GameplayGameState::ProcessCollisions()
@@ -433,11 +456,25 @@ void GameplayGameState::ProcessCollisions()
 	}
 
 	// check player position against world objects
+	if(m_player->GetGroundPosition().x < 1.0f)
+	{
+		m_player->SetPosition(Vector2(1.0f, m_player->GetPositionY()));
+		m_player->SetCurrentVelocity(Vector2(0.0f, m_player->GetCurrentVelocity().y));
+		m_player->SetTargetVelocity(Vector2(0.0f, m_player->GetTargetVelocity().y));
+	}
+
 	if(m_player->GetGroundPosition().y < 61.0f)
 	{
 		m_player->SetPosition(Vector2(m_player->GetPositionX(), 61.0f));
 		m_player->SetCurrentVelocity(Vector2(m_player->GetCurrentVelocity().x, 0.0f));
 		m_player->SetTargetVelocity(Vector2(m_player->GetTargetVelocity().x, 0.0f));
+	}
+
+	if(m_player->GetGroundPosition().x > m_worldWidth - 1)
+	{
+		m_player->SetPosition(Vector2((float)m_worldWidth - 1, m_player->GetPositionY()));
+		m_player->SetCurrentVelocity(Vector2(0.0f, m_player->GetCurrentVelocity().y));
+		m_player->SetTargetVelocity(Vector2(0.0f, m_player->GetTargetVelocity().y));
 	}
 
 	if(m_player->GetGroundPosition().y > m_graphics->GetHeight() - 1)
@@ -452,11 +489,25 @@ void GameplayGameState::ProcessCollisions()
 		Enemy* enemy = enemyList[i];
 
 		// check enemy position against world objects
+		if(enemy->GetGroundPosition().x < 1.0f)
+		{
+			enemy->SetPosition(Vector2(1.0f, enemy->GetPositionY()));
+			enemy->SetCurrentVelocity(Vector2(0.0f, enemy->GetCurrentVelocity().y));
+			enemy->SetTargetVelocity(Vector2(0.0f, enemy->GetTargetVelocity().y));
+		}
+
 		if(enemy->GetGroundPosition().y < 61.0f)
 		{
 			enemy->SetPosition(Vector2(enemy->GetPositionX(), 61.0f));
 			enemy->SetCurrentVelocity(Vector2(enemy->GetCurrentVelocity().x, 0.0f));
 			enemy->SetTargetVelocity(Vector2(enemy->GetTargetVelocity().x, 0.0f));
+		}
+
+		if(enemy->GetGroundPosition().x > m_worldWidth - 1)
+		{
+			enemy->SetPosition(Vector2((float)m_worldWidth - 1, enemy->GetPositionY()));
+			enemy->SetCurrentVelocity(Vector2(0.0f, enemy->GetCurrentVelocity().y));
+			enemy->SetTargetVelocity(Vector2(0.0f, enemy->GetTargetVelocity().y));
 		}
 
 		if(enemy->GetGroundPosition().y > m_graphics->GetHeight() - 1)
@@ -472,7 +523,12 @@ void GameplayGameState::Render()
 {
 	//////////////////////////////////////
 	// render background first
-	m_backgroundSprite->Render(m_graphics);
+
+	// TODO refactor background it's own class
+	Vector2 screenPosition = m_backgroundSprite->GetPosition();
+	screenPosition.x -= m_camera->GetPosition().x;
+
+	m_backgroundSprite->Render(m_graphics, screenPosition);
 
 	//////////////////////////////////////
 	// render game objects
@@ -494,4 +550,5 @@ void GameplayGameState::ResetGame()
 {
 	m_player->Reset();
 	m_NPCManager->Reset();
+	m_backgroundSprite->SetPosition(Vector2::Zero);
 }

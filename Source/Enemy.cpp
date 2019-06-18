@@ -64,7 +64,8 @@ void Enemy::Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, A
 	m_stateMachine = new StateMachine<Enemy>(this);
 	m_stateMachine->Init(EnemyIdleState::Instance(), nullptr, EnemyGlobalState::Instance());
 
-	m_health = 4;
+	m_ID = m_enemyData.m_objectData.m_ID;
+	m_health = m_enemyData.m_objectData.m_startingHealth;
 }
 
 void
@@ -127,7 +128,7 @@ Enemy::Reset()
 	m_hitBoxManager->SetCurrentHitBox(0);
 
 	SetActive(true);
-	m_health = 4;
+	m_health = m_enemyData.m_objectData.m_startingHealth;
 	m_thinkingTimer = 0.0f;
 }
 
