@@ -19,7 +19,7 @@ const UCHAR ENTER_KEY = VK_RETURN;
 const UCHAR F4_KEY = VK_F4;
 const UCHAR F5_KEY = VK_F5;
 
-// TODO rename consts 
+// rename consts 
 const UCHAR PLAYER_UP_KEY = VK_UP;
 const UCHAR PLAYER_DOWN_KEY = VK_DOWN;
 const UCHAR PLAYER_LEFT_KEY = VK_LEFT;

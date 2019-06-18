@@ -11,6 +11,7 @@ class ControlSystem;
 
 // player constants 
 // TODO move into struct with data in txt file
+const unsigned int			StartingHealth = 30;
 const unsigned int			PlayerStartPositionX = 60;
 const unsigned int			PlayerStartPositionY = 63;
 const unsigned int			PlayerWalkSpeed = 30;

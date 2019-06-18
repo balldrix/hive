@@ -119,7 +119,6 @@ Enemy::Reset()
 	m_stateMachine->ChangeState(EnemyIdleState::Instance());
 
 	// Set Position 
-	// TODO set world position and screen position
 	m_position = m_enemyData.m_objectData.m_startingPosition;
 	m_grounded = true;
 	m_movementSpeed = m_enemyData.m_objectData.m_walkSpeed;

@@ -90,7 +90,6 @@ Dummy::Reset()
 	m_stateMachine->ChangeState(DummyIdleState::Instance());
 
 	// Set Position 
-	// TODO set world position and screen position
 	SetPosition(DummyStartScreenPositionX, DummyStartScreenPositionY);
 
 	// reset hitboxes

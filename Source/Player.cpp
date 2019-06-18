@@ -101,13 +101,12 @@ void Player::Reset()
 	m_stateMachine->ChangeState((PlayerIdleState::Instance()));
 
 	// Set Position 
-	// TODO set world position and screen position
 	SetPosition(PlayerStartPositionX, PlayerStartPositionY);
 
 	// reset hitboxes
 	m_hitBoxManager->SetCurrentHitBox(0);
 
-	m_health = 5;
+	m_health = StartingHealth;
 	m_deathTimer = 0.0f;
 
 	SetActive(true);
