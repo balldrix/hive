@@ -102,6 +102,7 @@ public:
 	virtual void	Knockback(const Vector2& direction, const float& force); // knock back with force
 
 	bool			IsGrounded() const { return m_grounded; }
+	bool			IsDead() const { return m_dead; }
 	bool			IsActive() const { return m_active; }		// return if active
 	
 	virtual void	Reset() = 0;	// must override reset method
@@ -131,6 +132,7 @@ protected:
 	float			m_deathTimer;			// timer running while object is dead
 
 	bool			m_grounded;				// true when object is grounded
+	bool			m_dead;					// true when object is dead/destroyed
 	bool			m_active;				// object active or not
 };
 

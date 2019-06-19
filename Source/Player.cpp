@@ -61,6 +61,11 @@ void Player::Update(float deltaTime)
 	{
 		m_deathTimer += deltaTime;
 	}
+
+	if(m_deathTimer > PlayerDeathTime)
+	{
+		m_dead = true;
+	}
 }
 
 void Player::Render(Graphics* graphics)
@@ -97,19 +102,13 @@ void Player::Render(Graphics* graphics)
 
 void Player::Reset()
 {
-	// set player state back to Idle
 	m_stateMachine->ChangeState((PlayerIdleState::Instance()));
-
-	// Set Position 
 	SetPosition(PlayerStartPositionX, PlayerStartPositionY);
-
-	// reset hitboxes
 	m_hitBoxManager->SetCurrentHitBox(0);
-
 	m_health = StartingHealth;
 	m_deathTimer = 0.0f;
-
-	SetActive(true);
+	m_dead = false;
+	m_active = true;
 }
 
 void Player::Move(const Vector2& direction)

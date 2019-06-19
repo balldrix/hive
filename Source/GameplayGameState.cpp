@@ -413,7 +413,7 @@ void GameplayGameState::Update(float deltaTime)
 
 	// check if player is dead
 	// TODO refactor to get player dead bool
-	if(m_player->GetDeathTimer() > PlayerDeathTime)
+	if(m_player->IsDead())
 	{
 		ResetGame();
 	}

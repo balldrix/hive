@@ -24,6 +24,7 @@ GameObject::GameObject() :
 	m_knockbackCount(0),
 	m_deathTimer(0.0f),
 	m_grounded(true),
+	m_dead(false),
 	m_active(false)
 {
 }
