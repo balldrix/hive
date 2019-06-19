@@ -28,6 +28,8 @@ public:
 	void			SetWidth(unsigned int width);
 	void			SetHeight(unsigned int height);
 
+	void			Reset();
+
 private:
 	GameObject*		m_trackingTarget;
 	Vector2			m_position;

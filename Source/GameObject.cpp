@@ -118,7 +118,7 @@ void GameObject::Update(float deltaTime)
 
 	Vector2 screenPosition = m_position;
 	screenPosition.x -= m_camera->GetPosition().x;
-		//= Vector2(m_position.x - m_camera->GetPosition().x, m_position.y);
+
 	Vector2 screenGroundPosition = m_groundPosition;
 	screenGroundPosition.x -= m_camera->GetPosition().x;
 

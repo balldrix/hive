@@ -26,13 +26,13 @@ void Camera::Init(unsigned int width, unsigned int height, unsigned int worldWid
 
 void Camera::Update(float deltaTime)
 {
-	Vector2 position = m_trackingTarget->GetPosition();
-	position.y = 0.0f;
-
-	if(position.x > m_width / 2 && 
-		position.x < m_maxWidth)
+	float x = m_trackingTarget->GetPositionX();
+	if(x > m_width / 2 && x < m_maxWidth)
 	{
-		SetPosition(Vector2(m_trackingTarget->GetPositionX(), 0.0f));
+		Vector2 position = m_position;
+		position += (m_trackingTarget->GetCurrentVelocity() * m_trackingTarget->GetMovementSpeed()) * deltaTime;
+		position.y = 0.0f;
+		SetPosition(position);
 	}
 }
 
@@ -43,7 +43,7 @@ void Camera::SetTarget(GameObject* target)
 
 void Camera::SetPosition(const Vector2& position)
 {
-	m_position = position - m_origin;
+	m_position = position;
 }
 
 void Camera::SetWidth(unsigned int width)
@@ -54,4 +54,9 @@ void Camera::SetWidth(unsigned int width)
 void Camera::SetHeight(unsigned int height)
 {
 	m_height = height;
+}
+
+void Camera::Reset()
+{
+	m_position = Vector2::Zero;
 }

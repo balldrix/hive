@@ -10,11 +10,12 @@
 #include "Sprite.h"
 #include "Animator.h"
 #include "Player.h"
-#include "Enemy.h"
+#include "Background.h"
 #include "Resources.h"
 #include "UnitVectors.h"
 #include "HitBoxManager.h"
 #include "NPCManager.h"
+#include "Enemy.h"
 
 GameplayGameState::GameplayGameState() :
 	m_gameStateManager(nullptr),
@@ -35,10 +36,11 @@ GameplayGameState::GameplayGameState() :
 	m_backgroundSprite(nullptr),
 	m_playerAnimator(nullptr),
 	m_enemyAnimator(nullptr),
-	m_player(nullptr),
 	m_playerHitBoxManager(nullptr),
 	m_enemyHitBoxManager(nullptr),
 	m_NPCManager(nullptr),
+	m_player(nullptr),
+	m_background(nullptr),
 	m_canAttack(true),
 	m_running(false),
 	m_worldWidth(0),
@@ -46,34 +48,7 @@ GameplayGameState::GameplayGameState() :
 	GameState(L"GAMEPLAY")
 {}
 
-GameplayGameState::GameplayGameState(GameStateManager* gameStateManager) :
-	m_gameStateManager(nullptr),
-	m_graphics(nullptr),
-	m_input(nullptr),
-	m_camera(nullptr),
-	m_controlSystem(nullptr),
-	m_playerTexture(nullptr),
-	m_enemyTexture(nullptr),
-	m_hitBoxTexture(nullptr),
-	m_shadowTexture(nullptr),
-	m_backgroundTexture(nullptr),
-	m_playerSprite(nullptr),
-	m_playerShadowSprite(nullptr),
-	m_enemySprite(nullptr),
-	m_enemyShadowSprite(nullptr),
-	m_hitBoxSprite(nullptr),
-	m_backgroundSprite(nullptr),
-	m_playerAnimator(nullptr),
-	m_enemyAnimator(nullptr),
-	m_player(nullptr),
-	m_playerHitBoxManager(nullptr),
-	m_enemyHitBoxManager(nullptr),
-	m_NPCManager(nullptr),
-	m_canAttack(true),
-	m_running(false),
-	m_worldWidth(0),
-	m_worldHeight(0),
-	GameState(L"GAMEPLAY")
+GameplayGameState::GameplayGameState(GameStateManager* gameStateManager) : GameplayGameState()
 {
 	// get essential pointers from gamestate manager
 	m_gameStateManager = gameStateManager;
@@ -140,6 +115,7 @@ void GameplayGameState::LoadAssets()
 
 	// create objects in memory
 	m_player = new Player();
+	m_background = new Background();
 
 	// load textures
 	m_playerTexture->LoadTexture(m_graphics, "GameData\\Sprites\\playerSpriteSheet.png");
@@ -182,6 +158,9 @@ void GameplayGameState::LoadAssets()
 		enemyList[i]->GetHitBoxManager()->SetOwner(enemyList[i]);
 		enemyList[i]->SetCamera(m_camera);
 	}
+
+	m_background->Init(m_backgroundSprite);
+	m_background->SetCamera(m_camera);
 
 	// set running to true
 	m_running = true;
@@ -405,11 +384,10 @@ void GameplayGameState::ProcessInput()
 
 void GameplayGameState::Update(float deltaTime)
 {
-	// update player
 	m_player->Update(deltaTime);
-	
-	// update enemies
+	m_camera->Update(deltaTime);
 	m_NPCManager->Update(deltaTime);
+	m_background->Update(deltaTime);
 
 	// check if player is dead
 	// TODO refactor to get player dead bool
@@ -418,7 +396,6 @@ void GameplayGameState::Update(float deltaTime)
 		ResetGame();
 	}
 	
-	m_camera->Update(deltaTime);
 }
 
 void GameplayGameState::ProcessCollisions()
@@ -525,10 +502,7 @@ void GameplayGameState::Render()
 	// render background first
 
 	// TODO refactor background it's own class
-	Vector2 screenPosition = m_backgroundSprite->GetPosition();
-	screenPosition.x -= m_camera->GetPosition().x;
-
-	m_backgroundSprite->Render(m_graphics, screenPosition);
+	m_background->Render(m_graphics);
 
 	//////////////////////////////////////
 	// render game objects
@@ -551,4 +525,5 @@ void GameplayGameState::ResetGame()
 	m_player->Reset();
 	m_NPCManager->Reset();
 	m_backgroundSprite->SetPosition(Vector2::Zero);
+	m_camera->Reset();
 }

@@ -19,7 +19,7 @@ class SpriteSheet;
 class Sprite;
 class Animator;
 class Player;
-class Enemy;
+class Background;
 class HitBoxManager;
 class NPCManager;
 
@@ -74,6 +74,7 @@ private:
 	NPCManager*			m_NPCManager;				// enemy manager
 
 	Player*				m_player;					// pointer to player class
+	Background*			m_background;				// pointer to background object
 
 	bool				m_canAttack;				// flag for attack cooldown
 	bool				m_running;					// is game running or not

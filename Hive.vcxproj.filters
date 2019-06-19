@@ -76,22 +76,7 @@
     <ClCompile Include="Source\HitBoxManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Dummy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\DummyDeadState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\DummyHurtState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\DummyIdleState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\PlayerAttackState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\DummyKnockbackState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Enemy.cpp">
@@ -136,6 +121,7 @@
     <ClCompile Include="Source\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Background.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -254,21 +240,6 @@
     <ClInclude Include="Source\HitBoxManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Dummy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DummyDeadState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DummyHurtState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DummyIdleState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DummyOwnedStates.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\StateMachine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -279,9 +250,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\PlayerAttackState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DummyKnockbackState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Enemy.h">
@@ -335,12 +303,12 @@
     <ClInclude Include="Source\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Background.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\hitbox.png">
-      <Filter>Game Data\Sprites</Filter>
-    </Image>
-    <Image Include="GameData\Sprites\dummySpritesheet.png">
       <Filter>Game Data\Sprites</Filter>
     </Image>
     <Image Include="GameData\Sprites\playerSpriteSheet.png">
@@ -365,9 +333,6 @@
       <Filter>Game Data\HitBoxData</Filter>
     </None>
     <None Include="GameData\SpriteSheetData\playerSpriteSheetData.json">
-      <Filter>Game Data\Sprite Sheet Data</Filter>
-    </None>
-    <None Include="GameData\SpriteSheetData\dummySpriteSheetData.json">
       <Filter>Game Data\Sprite Sheet Data</Filter>
     </None>
     <None Include="GameData\AnimationData\dummyAnimationData.json">

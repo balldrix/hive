@@ -22,13 +22,9 @@
     <ClCompile Include="Source\AABB.cpp" />
     <ClCompile Include="Source\AnimatedSprite.cpp" />
     <ClCompile Include="Source\Animator.cpp" />
+    <ClCompile Include="Source\Background.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\ControlSystem.cpp" />
-    <ClCompile Include="Source\Dummy.cpp" />
-    <ClCompile Include="Source\DummyDeadState.cpp" />
-    <ClCompile Include="Source\DummyHurtState.cpp" />
-    <ClCompile Include="Source\DummyIdleState.cpp" />
-    <ClCompile Include="Source\DummyKnockbackState.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\EnemyAttackState.cpp" />
     <ClCompile Include="Source\EnemyDeadState.cpp" />
@@ -69,15 +65,10 @@
     <ClInclude Include="Source\AABB.h" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\Animator.h" />
+    <ClInclude Include="Source\Background.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Constants.h" />
     <ClInclude Include="Source\ControlSystem.h" />
-    <ClInclude Include="Source\Dummy.h" />
-    <ClInclude Include="Source\DummyDeadState.h" />
-    <ClInclude Include="Source\DummyHurtState.h" />
-    <ClInclude Include="Source\DummyIdleState.h" />
-    <ClInclude Include="Source\DummyKnockbackState.h" />
-    <ClInclude Include="Source\DummyOwnedStates.h" />
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\EnemyAttackState.h" />
     <ClInclude Include="Source\EnemyData.h" />
@@ -127,7 +118,6 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\backgroundTest.png" />
-    <Image Include="GameData\Sprites\dummySpritesheet.png" />
     <Image Include="GameData\Sprites\enemySpriteSheet.png" />
     <Image Include="GameData\Sprites\hitbox.png" />
     <Image Include="GameData\Sprites\playerSpriteSheet.png" />
@@ -140,7 +130,6 @@
     <None Include="GameData\HitBoxData\dummyHitBoxData.json" />
     <None Include="GameData\HitBoxData\enemyHitBoxData.json" />
     <None Include="GameData\HitBoxData\playerHitBoxData.json" />
-    <None Include="GameData\SpriteSheetData\dummySpriteSheetData.json" />
     <None Include="GameData\SpriteSheetData\enemySpriteSheetData.json" />
     <None Include="GameData\SpriteSheetData\playerSpriteSheetData.json" />
     <None Include="packages.config" />
