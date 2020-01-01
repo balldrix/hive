@@ -27,6 +27,7 @@
     <ClCompile Include="Source\ControlSystem.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\EnemyAttackState.cpp" />
+    <ClCompile Include="Source\EnemyDataContainer.cpp" />
     <ClCompile Include="Source\EnemyDeadState.cpp" />
     <ClCompile Include="Source\EnemyGlobalState.cpp" />
     <ClCompile Include="Source\EnemyHurtState.cpp" />
@@ -72,6 +73,7 @@
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\EnemyAttackState.h" />
     <ClInclude Include="Source\EnemyData.h" />
+    <ClInclude Include="Source\EnemyDataContainer.h" />
     <ClInclude Include="Source\EnemyDeadState.h" />
     <ClInclude Include="Source\EnemyFightingState.h" />
     <ClInclude Include="Source\EnemyGlobalState.h" />

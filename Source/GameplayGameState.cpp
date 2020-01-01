@@ -153,7 +153,7 @@ void GameplayGameState::LoadAssets()
 
 	for(size_t i = 0; i < enemyList.size(); i++)
 	{
-		enemyList[i]->Init(enemyList[i]->GetData().m_objectData.m_startingPosition, m_enemySprite, m_enemyShadowSprite, m_enemyAnimator, m_enemyHitBoxManager);
+		enemyList[i]->Init(enemyList[i]->GetData().objectData.m_startingPosition, m_enemySprite, m_enemyShadowSprite, m_enemyAnimator, m_enemyHitBoxManager);
 		enemyList[i]->SetPlayerTarget(m_player);
 		enemyList[i]->GetHitBoxManager()->SetOwner(enemyList[i]);
 		enemyList[i]->SetCamera(m_camera);

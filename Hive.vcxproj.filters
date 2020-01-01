@@ -122,6 +122,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Background.cpp" />
+    <ClCompile Include="Source\EnemyDataContainer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -307,6 +308,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Background.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyDataContainer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -6,7 +6,7 @@
 #define _NPC_MANAGER_H_
 
 #include "pch.h"
-#include "EnemyData.h"
+#include "EnemyDataContainer.h"
 
 class Graphics;
 class Enemy;
@@ -30,8 +30,8 @@ public:
 	std::vector<Enemy*> GetEnemyList() const { return m_enemyList; }
 
 private:
-	std::vector<Enemy*>			m_enemyList;
-	std::vector<EnemyData>		m_typeDataList;
+	std::vector<Enemy*>		m_enemyList;
+	EnemyDataContainer*		m_enemyDataContainer;
 };
 
 #endif // !_NPC_MANAGER_H_

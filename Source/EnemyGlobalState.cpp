@@ -26,9 +26,9 @@ void EnemyGlobalState::Execute(Enemy* enemy)
 
 	if((enemy->GetStateMachine()->GetCurrentState() == EnemyWalkingState::Instance() ||
 		enemy->GetStateMachine()->GetCurrentState() == EnemyRunningState::Instance()) &&
-		(enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() > enemy->GetData().m_fightingRange)
+		(enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() > enemy->GetData().fightingRange)
 	{
-		if(enemy->GetTimer() > enemy->GetData().m_thinkingTime * Randomiser::Instance()->GetRandNum(0.8, 2.0))
+		if(enemy->GetTimer() > enemy->GetData().thinkingTime * Randomiser::Instance()->GetRandNum(0.8, 2.0))
 		{
 			enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
 		}
@@ -36,7 +36,7 @@ void EnemyGlobalState::Execute(Enemy* enemy)
 		enemy->ResetTimer();
 	}
 
-	if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() < enemy->GetData().m_fightingRange)
+	if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() < enemy->GetData().fightingRange)
 	{
 		if(enemy->IsHostile() == false)
 		{
