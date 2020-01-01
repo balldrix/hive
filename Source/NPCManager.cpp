@@ -37,51 +37,55 @@ bool NPCManager::InitTypes(std::string fileName)
 	if(file) // if file is open
 	{
 		EnemyData data;
-		std::string result;
+		std::string line;
 
 		// loop until end of file
-		while(!file.eof())
+		while(std::getline(file, line))
 		{
-			// ready data
-			result = "";
+			if(line[0] != '#')
+			{
+				std::string result;
+				std::istringstream iss(line);
 
-			// Type
-			file >> result;
+				// Type
+				iss >> result;
+				// TODO: CB add type as string and use to get data later
 
-			// start health
-			file >> result;
-			data.m_objectData.m_startingHealth = std::stoi(result);
+				// start health
+				iss >> result;
+				data.m_objectData.m_startingHealth = std::stoi(result);
 
-			// walk speed
-			file >> result;
-			data.m_objectData.m_walkSpeed = std::stof(result);
+				// walk speed
+				iss >> result;
+				data.m_objectData.m_walkSpeed = std::stof(result);
 
-			// running speed
-			file >> result;
-			data.m_objectData.m_runningSpeed = std::stof(result);
+				// running speed
+				iss >> result;
+				data.m_objectData.m_runningSpeed = std::stof(result);
 
-			// acceleration
-			file >> result;
-			data.m_objectData.m_acceleration = std::stof(result);
+				// acceleration
+				iss >> result;
+				data.m_objectData.m_acceleration = std::stof(result);
 
-			// deceleration
-			file >> result;
-			data.m_objectData.m_deceleration = std::stof(result);
+				// deceleration
+				iss >> result;
+				data.m_objectData.m_deceleration = std::stof(result);
 
-			// thinking time
-			file >> result;
-			data.m_thinkingTime = std::stof(result);
+				// thinking time
+				iss >> result;
+				data.m_thinkingTime = std::stof(result);
 
-			// fighting range
-			file >> result;
-			data.m_fightingRange = std::stof(result);
+				// fighting range
+				iss >> result;
+				data.m_fightingRange = std::stof(result);
 
-			// attack range
-			file >> result;
-			data.m_attackRange = std::stof(result);
+				// attack range
+				iss >> result;
+				data.m_attackRange = std::stof(result);
 
-			// add npc to list
-			m_typeDataList.push_back(data);
+				// add npc to list
+				m_typeDataList.push_back(data);
+			}
 		}
 	}
 	else
