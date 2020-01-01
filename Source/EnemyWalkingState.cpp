@@ -17,7 +17,7 @@ void EnemyWalkingState::OnEnter(Enemy* enemy)
 	enemy->GetAnimator()->SetAnimation(m_name);
 	enemy->GetHitBoxManager()->SetCurrentHitBox(m_name);
 	
-	enemy->SetMovementSpeed(EnemyWalkSpeed);
+	enemy->SetMovementSpeed(enemy->GetData().m_objectData.m_walkSpeed);
 
 	Vector2 direction = Vector2::Zero;
 	Vector2 targetPosition = enemy->GetPlayerTarget()->GetPosition();
@@ -31,7 +31,7 @@ void EnemyWalkingState::OnEnter(Enemy* enemy)
 
 void EnemyWalkingState::Execute(Enemy* enemy)
 {
-	if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() < AttackRange)
+	if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() < enemy->GetData().m_attackRange)
 	{
 		// change to idle state
 		enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());

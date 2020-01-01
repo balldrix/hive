@@ -134,6 +134,10 @@
     <None Include="GameData\SpriteSheetData\playerSpriteSheetData.json" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="GameData\EnemyData\positionData.txt" />
+    <Text Include="GameData\EnemyData\typeData.txt" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F07D24C5-CADD-4262-80F1-7370DF167E8E}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>

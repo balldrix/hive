@@ -145,6 +145,9 @@
     <Filter Include="Game Data\HitBoxData">
       <UniqueIdentifier>{80dbea2e-ece0-43f8-85e6-28b22d959618}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game Data\EnemyData">
+      <UniqueIdentifier>{a72ab50e-8d47-4728-be1c-515db02549d6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Player.h">
@@ -350,5 +353,13 @@
     <None Include="GameData\AnimationData\enemyAnimationData.json">
       <Filter>Game Data\Animation Data</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="GameData\EnemyData\positionData.txt">
+      <Filter>Game Data\EnemyData</Filter>
+    </Text>
+    <Text Include="GameData\EnemyData\typeData.txt">
+      <Filter>Game Data\EnemyData</Filter>
+    </Text>
   </ItemGroup>
 </Project>
