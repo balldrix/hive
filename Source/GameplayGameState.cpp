@@ -144,7 +144,8 @@ void GameplayGameState::LoadAssets()
 	m_enemyHitBoxManager->Init(m_hitBoxSprite, "GameData\\HitBoxData\\enemyHitBoxData.json");
 
 	// init game objects
-	m_player->Init(Vector2((float)PlayerStartPositionX, (float)PlayerStartPositionY), m_playerSprite, m_playerShadowSprite, m_playerAnimator, m_playerHitBoxManager, m_controlSystem);
+	m_player->LoadData("GameData\\PlayerData\\playerData.txt");
+	m_player->Init(m_playerSprite, m_playerShadowSprite, m_playerAnimator, m_playerHitBoxManager, m_controlSystem);
 	m_player->SetCamera(m_camera);
 	m_camera->SetTarget(m_player);
 
@@ -153,7 +154,7 @@ void GameplayGameState::LoadAssets()
 
 	for(size_t i = 0; i < enemyList.size(); i++)
 	{
-		enemyList[i]->Init(enemyList[i]->GetData().objectData.m_startingPosition, m_enemySprite, m_enemyShadowSprite, m_enemyAnimator, m_enemyHitBoxManager);
+		enemyList[i]->Init(enemyList[i]->GetData().objectData.startingPosition, m_enemySprite, m_enemyShadowSprite, m_enemyAnimator, m_enemyHitBoxManager);
 		enemyList[i]->SetPlayerTarget(m_player);
 		enemyList[i]->GetHitBoxManager()->SetOwner(enemyList[i]);
 		enemyList[i]->SetCamera(m_camera);

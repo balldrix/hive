@@ -5,19 +5,10 @@
 #include "GameObject.h"
 #include "State.h"
 #include "StateMachine.h"
+#include "PlayerData.h"
 
 // forward declarations
 class ControlSystem;
-
-// player constants 
-// TODO move into struct with data in txt file
-const unsigned int			StartingHealth = 30;
-const unsigned int			PlayerStartPositionX = 60;
-const unsigned int			PlayerStartPositionY = 63;
-const unsigned int			PlayerWalkSpeed = 30;
-const float					PlayerAcceleration = 1.0f;
-const float					PlayerDeceleration = 4.0f;
-const float					PlayerDeathTime = 5.0f;
 
 class Player : public GameObject
 {
@@ -25,13 +16,16 @@ public:
 	Player();
 	virtual					~Player();
 							
-	void					Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem);
+	void					Init(SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem);
 							
+	bool					LoadData(std::string filename);
 	void					Update(float deltaTime);
 	void					Render(Graphics* graphics);
 	void					Reset();
 
 	StateMachine<Player>*	GetStateMachine() const { return m_stateMachine; }
+
+	float					GetWalkSpeed() const { return m_playerData.objectData.walkSpeed; }
 
 	// movement
 	void					Move(const Vector2 &direction);
@@ -43,6 +37,7 @@ public:
 	void					Knockback(const Vector2& direction, const float& force);
 
 private:
+	PlayerData				m_playerData;
 	StateMachine<Player>*	m_stateMachine;
 };
 

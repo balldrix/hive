@@ -54,23 +54,23 @@ bool NPCManager::InitTypes(std::string fileName)
 
 				// start health
 				iss >> result;
-				data.objectData.m_startingHealth = std::stoi(result);
+				data.objectData.startingHealth = std::stoi(result);
 
 				// walk speed
 				iss >> result;
-				data.objectData.m_walkSpeed = std::stof(result);
+				data.objectData.walkSpeed = std::stof(result);
 
 				// running speed
 				iss >> result;
-				data.objectData.m_runningSpeed = std::stof(result);
+				data.objectData.runningSpeed = std::stof(result);
 
 				// acceleration
 				iss >> result;
-				data.objectData.m_acceleration = std::stof(result);
+				data.objectData.acceleration = std::stof(result);
 
 				// deceleration
 				iss >> result;
-				data.objectData.m_deceleration = std::stof(result);
+				data.objectData.deceleration = std::stof(result);
 
 				// thinking time
 				iss >> result;
@@ -114,7 +114,7 @@ bool NPCManager::InitNPCs(std::string fileName)
 
 			// ID
 			file >> result;
-			data.objectData.m_ID = result;
+			data.objectData.id = result;
 			
 			// Type
 			file >> result;
@@ -122,11 +122,11 @@ bool NPCManager::InitNPCs(std::string fileName)
 			
 			// start position X
 			file >> result;
-			data.objectData.m_startingPosition.x = std::stof(result);
+			data.objectData.startingPosition.x = std::stof(result);
 			
 			// start position Y
 			file >> result;
-			data.objectData.m_startingPosition.y = std::stof(result);
+			data.objectData.startingPosition.y = std::stof(result);
 
 			Enemy* enemy = new Enemy();
 			enemy->SetData(data);
@@ -169,7 +169,7 @@ void NPCManager::Reset()
 
 void NPCManager::DeleteAll()
 {
-	for(int i = m_enemyList.size() - 1; i >= 0; i--)
+	for(size_t i = m_enemyList.size() - 1; i-- > 0;)
 	{
 		if(m_enemyList[i] != nullptr)
 		{

@@ -121,8 +121,15 @@
     <ClCompile Include="Source\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Background.cpp" />
-    <ClCompile Include="Source\EnemyDataContainer.cpp" />
+    <ClCompile Include="Source\Background.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EnemyDataContainer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerData.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -148,6 +155,9 @@
     </Filter>
     <Filter Include="Game Data\EnemyData">
       <UniqueIdentifier>{a72ab50e-8d47-4728-be1c-515db02549d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Data\PlayerData">
+      <UniqueIdentifier>{2b07a1ff-a7a2-4a23-9c5b-6e0b9996f61d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -332,7 +342,6 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="GameData\AnimationData\playerAnimationData.json">
       <Filter>Game Data\Animation Data</Filter>
     </None>
@@ -357,6 +366,7 @@
     <None Include="GameData\AnimationData\enemyAnimationData.json">
       <Filter>Game Data\Animation Data</Filter>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="GameData\EnemyData\positionData.txt">
@@ -364,6 +374,9 @@
     </Text>
     <Text Include="GameData\EnemyData\typeData.txt">
       <Filter>Game Data\EnemyData</Filter>
+    </Text>
+    <Text Include="GameData\PlayerData\playerData.txt">
+      <Filter>Game Data\PlayerData</Filter>
     </Text>
   </ItemGroup>
 </Project>

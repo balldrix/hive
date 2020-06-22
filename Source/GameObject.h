@@ -21,13 +21,13 @@ class Camera;
 
 struct ObjectData
 {
-	std::string				m_ID;
-	unsigned int			m_startingHealth;
-	Vector2					m_startingPosition;
-	float					m_walkSpeed;
-	float					m_runningSpeed;
-	float					m_acceleration;
-	float					m_deceleration;
+	std::string				id;
+	unsigned int			startingHealth;
+	Vector2					startingPosition;
+	float					walkSpeed;
+	float					runningSpeed;
+	float					acceleration;
+	float					deceleration;
 };
 
 class GameObject

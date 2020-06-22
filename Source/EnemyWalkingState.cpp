@@ -17,7 +17,7 @@ void EnemyWalkingState::OnEnter(Enemy* enemy)
 	enemy->GetAnimator()->SetAnimation(m_name);
 	enemy->GetHitBoxManager()->SetCurrentHitBox(m_name);
 	
-	enemy->SetMovementSpeed(enemy->GetData().objectData.m_walkSpeed);
+	enemy->SetMovementSpeed(enemy->GetData().objectData.walkSpeed);
 
 	Vector2 direction = Vector2::Zero;
 	Vector2 targetPosition = enemy->GetPlayerTarget()->GetPosition();
