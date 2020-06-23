@@ -47,7 +47,7 @@
       }
     },
     {
-      "name": "Attack 1",
+      "name": "Attack1",
       "startup": 0,
       "active": 1,
       "movementBox": {
@@ -70,7 +70,7 @@
       }
     },
     {
-      "name": "Attack 2",
+      "name": "Attack2",
       "startup": 0,
       "active": 1,
       "movementBox": {
@@ -93,7 +93,7 @@
       }
     },
     {
-      "name": "Attack 3",
+      "name": "Attack3",
       "startup": 1,
       "active": 1,
       "movementBox": {

@@ -15,10 +15,12 @@ class Player : public GameObject
 public:
 	Player();
 	virtual					~Player();
-							
+
 	void					Init(SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem);
-							
-	bool					LoadData(std::string filename);
+
+	void					LoadData(std::string playerDataFile, std::string attackDataFile);
+	bool					LoadPlayerData(std::string filename);
+	bool					LoadDamageData(std::string filename);
 	void					Update(float deltaTime);
 	void					Render(Graphics* graphics);
 	void					Reset();
@@ -26,9 +28,10 @@ public:
 	StateMachine<Player>*	GetStateMachine() const { return m_stateMachine; }
 
 	float					GetWalkSpeed() const { return m_playerData.objectData.walkSpeed; }
+	int						GetDamage() const;
 
 	// movement
-	void					Move(const Vector2 &direction);
+	void					Move(const Vector2& direction);
 	void					Stop();
 
 	// attacks
@@ -37,8 +40,9 @@ public:
 	void					Knockback(const Vector2& direction, const float& force);
 
 private:
-	PlayerData				m_playerData;
-	StateMachine<Player>*	m_stateMachine;
+	std::map<std::string, int>	m_damageData;
+	PlayerData					m_playerData;
+	StateMachine<Player>* m_stateMachine;
 };
 
 #endif _PLAYER_H_

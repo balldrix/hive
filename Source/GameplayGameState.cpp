@@ -144,7 +144,7 @@ void GameplayGameState::LoadAssets()
 	m_enemyHitBoxManager->Init(m_hitBoxSprite, "GameData\\HitBoxData\\enemyHitBoxData.json");
 
 	// init game objects
-	m_player->LoadData("GameData\\PlayerData\\playerData.txt");
+	m_player->LoadData("GameData\\PlayerData\\playerData.txt", "GameData\\PlayerData\\playerDamage.txt");
 	m_player->Init(m_playerSprite, m_playerShadowSprite, m_playerAnimator, m_playerHitBoxManager, m_controlSystem);
 	m_player->SetCamera(m_camera);
 	m_camera->SetTarget(m_player);
@@ -415,8 +415,7 @@ void GameplayGameState::ProcessCollisions()
 			if(m_player->GetHitBoxManager()->GetHitBox().OnCollision(
 				enemy->GetHitBoxManager()->GetHurtBox()))
 			{
-				enemy->ApplyDamage(m_player, 1);
-				break;
+				enemy->ApplyDamage(m_player, m_player->GetDamage());
 			}
 		}
 
@@ -428,7 +427,6 @@ void GameplayGameState::ProcessCollisions()
 				m_player->GetHitBoxManager()->GetHurtBox()))
 			{
 				m_player->ApplyDamage(enemy, 1);
-				break;
 			}
 		}
 	}

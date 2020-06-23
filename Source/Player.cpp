@@ -11,8 +11,10 @@
 #include "PlayerOwnedStates.h"
 #include "UnitVectors.h"
 #include "Camera.h"
+#include "Error.h"
 
-Player::Player() : m_stateMachine(nullptr)
+Player::Player() : 
+	m_stateMachine(nullptr)
 {
 }
 
@@ -45,7 +47,24 @@ void Player::Init(SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBo
 	m_health = 5;
 }
 
-bool Player::LoadData(std::string filename)
+void Player::LoadData(std::string playerDataFile, std::string damageDataFile)
+{
+	if(!LoadPlayerData(playerDataFile))
+	{
+		// unable to load player data file
+		std::string error = " Error! No player data file " + playerDataFile + " found.";
+		Error::FileLog(error);
+	}
+
+	if(!LoadDamageData(damageDataFile))
+	{
+		// unable to load player data file
+		std::string error = " Error! No player damage data file " + damageDataFile + " found.";
+		Error::FileLog(error);
+	}
+}
+
+bool Player::LoadPlayerData(std::string filename)
 {
 	std::ifstream file;
 	file.open(filename);
@@ -85,6 +104,38 @@ bool Player::LoadData(std::string filename)
 
 				file >> result;
 				m_playerData.deathTime = std::stof(result);
+			}
+		}
+	}
+	else
+	{
+		return false;
+	}
+
+	file.close();
+	return true;
+}
+
+bool Player::LoadDamageData(std::string filename)
+{
+	std::ifstream file;
+	file.open(filename);
+
+	if(file)
+	{
+		std::string line;
+		m_damageData.clear();
+
+		while(std::getline(file, line))
+		{
+			if(line[0] != '#')
+			{
+				std::string attackName = "";
+				std::string value = "";
+
+				file >> attackName;
+				file >> value;
+				m_damageData[attackName] = std::stoi(value);
 			}
 		}
 	}
@@ -164,6 +215,11 @@ void Player::Reset()
 	m_active = true;
 }
 
+int Player::GetDamage() const
+{
+	return m_damageData.at(m_stateMachine->GetCurrentState()->GetName());
+}
+
 void Player::Move(const Vector2& direction)
 {
 	// true if switching direction
@@ -195,16 +251,16 @@ void Player::Attack()
 		{
 		case 0:
 		case 1:
-			PlayerAttackState::Instance()->SetAttack("Attack 1");
+			PlayerAttackState::Instance()->SetAttack("Attack1");
 			break;
 		case 2:
-			PlayerAttackState::Instance()->SetAttack("Attack 2");
+			PlayerAttackState::Instance()->SetAttack("Attack2");
 			break;
 		case 3:
-			PlayerAttackState::Instance()->SetAttack("Attack 3");
+			PlayerAttackState::Instance()->SetAttack("Attack3");
 			break;
 		default:
-			PlayerAttackState::Instance()->SetAttack("Attack 1");
+			PlayerAttackState::Instance()->SetAttack("Attack1");
 			break;
 		}
 

@@ -378,5 +378,8 @@
     <Text Include="GameData\PlayerData\playerData.txt">
       <Filter>Game Data\PlayerData</Filter>
     </Text>
+    <Text Include="GameData\PlayerData\playerDamage.txt">
+      <Filter>Game Data\PlayerData</Filter>
+    </Text>
   </ItemGroup>
 </Project>

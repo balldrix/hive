@@ -140,6 +140,7 @@
   <ItemGroup>
     <Text Include="GameData\EnemyData\positionData.txt" />
     <Text Include="GameData\EnemyData\typeData.txt" />
+    <Text Include="GameData\PlayerData\playerDamage.txt" />
     <Text Include="GameData\PlayerData\playerData.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
