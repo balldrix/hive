@@ -20,7 +20,6 @@ public:
 
 	void					LoadData(std::string playerDataFile, std::string attackDataFile);
 	bool					LoadPlayerData(std::string filename);
-	bool					LoadDamageData(std::string filename);
 	void					Update(float deltaTime);
 	void					Render(Graphics* graphics);
 	void					Reset();
@@ -40,7 +39,6 @@ public:
 	void					Knockback(const Vector2& direction, const float& force);
 
 private:
-	std::map<std::string, int>	m_damageData;
 	PlayerData					m_playerData;
 	StateMachine<Player>* m_stateMachine;
 };

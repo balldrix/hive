@@ -159,6 +159,9 @@
     <Filter Include="Game Data\PlayerData">
       <UniqueIdentifier>{2b07a1ff-a7a2-4a23-9c5b-6e0b9996f61d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game Data\EnemyData\Mook">
+      <UniqueIdentifier>{290b972c-24c4-422d-a85c-0b0d7988758c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Player.h">
@@ -380,6 +383,9 @@
     </Text>
     <Text Include="GameData\PlayerData\playerDamage.txt">
       <Filter>Game Data\PlayerData</Filter>
+    </Text>
+    <Text Include="GameData\EnemyData\Mook\mookDamage.txt">
+      <Filter>Game Data\EnemyData\Mook</Filter>
     </Text>
   </ItemGroup>
 </Project>

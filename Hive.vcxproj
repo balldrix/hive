@@ -138,6 +138,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="GameData\EnemyData\Mook\mookDamage.txt" />
     <Text Include="GameData\EnemyData\positionData.txt" />
     <Text Include="GameData\EnemyData\typeData.txt" />
     <Text Include="GameData\PlayerData\playerDamage.txt" />

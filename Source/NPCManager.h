@@ -19,7 +19,7 @@ public:
 
 	void	Init();
 	bool	InitTypes(std::string fileName);
-	bool	InitNPCs(std::string fileName);
+	bool	InitNPCs(std::string enemyDataFile);
 
 	void	Render(Graphics* graphics);
 	void	Update(float deltaTime);

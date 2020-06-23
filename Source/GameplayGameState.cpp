@@ -16,6 +16,8 @@
 #include "HitBoxManager.h"
 #include "NPCManager.h"
 #include "Enemy.h"
+#include "pch.h"
+#include "Error.h"
 
 GameplayGameState::GameplayGameState() :
 	m_gameStateManager(nullptr),
@@ -150,11 +152,22 @@ void GameplayGameState::LoadAssets()
 	m_camera->SetTarget(m_player);
 
 	m_NPCManager->Init();
+
 	std::vector<Enemy*> enemyList = m_NPCManager->GetEnemyList();
 
 	for(size_t i = 0; i < enemyList.size(); i++)
 	{
 		enemyList[i]->Init(enemyList[i]->GetData().objectData.startingPosition, m_enemySprite, m_enemyShadowSprite, m_enemyAnimator, m_enemyHitBoxManager);
+
+		std::string type = enemyList[i]->GetData().type;
+		std::string enemyDataFile = "GameData\\EnemyData\\" + type + "\\" + type + "Damage.txt";
+		
+		if(!enemyList[i]->LoadDamageData(enemyDataFile))
+		{
+			std::string error = "Error! Enemy damage data " + enemyDataFile + " not found.";
+			Error::FileLog(error);
+		}
+		
 		enemyList[i]->SetPlayerTarget(m_player);
 		enemyList[i]->GetHitBoxManager()->SetOwner(enemyList[i]);
 		enemyList[i]->SetCamera(m_camera);
@@ -426,7 +439,7 @@ void GameplayGameState::ProcessCollisions()
 			if(enemy->GetHitBoxManager()->GetHitBox().OnCollision(
 				m_player->GetHitBoxManager()->GetHurtBox()))
 			{
-				m_player->ApplyDamage(enemy, 1);
+				m_player->ApplyDamage(enemy, enemy->GetDamage());
 			}
 		}
 	}

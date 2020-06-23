@@ -116,38 +116,6 @@ bool Player::LoadPlayerData(std::string filename)
 	return true;
 }
 
-bool Player::LoadDamageData(std::string filename)
-{
-	std::ifstream file;
-	file.open(filename);
-
-	if(file)
-	{
-		std::string line;
-		m_damageData.clear();
-
-		while(std::getline(file, line))
-		{
-			if(line[0] != '#')
-			{
-				std::string attackName = "";
-				std::string value = "";
-
-				file >> attackName;
-				file >> value;
-				m_damageData[attackName] = std::stoi(value);
-			}
-		}
-	}
-	else
-	{
-		return false;
-	}
-
-	file.close();
-	return true;
-}
-
 void Player::Update(float deltaTime)
 {
 	// update player state machine

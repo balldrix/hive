@@ -179,6 +179,38 @@ float GameObject::Lerp(float target, float current, float amount)
 	return target;
 }
 
+bool GameObject::LoadDamageData(std::string filename)
+{
+	std::ifstream file;
+	file.open(filename);
+
+	if(file)
+	{
+		std::string line;
+		m_damageData.clear();
+
+		while(std::getline(file, line))
+		{
+			if(line[0] != '#')
+			{
+				std::string attackName = "";
+				std::string value = "";
+
+				file >> attackName;
+				file >> value;
+				m_damageData[attackName] = std::stoi(value);
+			}
+		}
+	}
+	else
+	{
+		return false;
+	}
+
+	file.close();
+	return true;
+}
+
 void GameObject::FlipHorizontally(bool flip)
 {
 	// true if flip param is true
@@ -305,4 +337,9 @@ void GameObject::ApplyDamage(GameObject* source, const int& amount)
 
 void GameObject::Knockback(const Vector2& direction, const float& force)
 {
+}
+
+int GameObject::GetDamage() const
+{
+	return 0;
 }

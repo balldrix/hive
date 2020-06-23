@@ -197,18 +197,23 @@ void Enemy::Attack()
 	switch(randomNum)
 	{
 	case 0:
-		EnemyAttackState::Instance()->SetAttack("Attack 1");
+		EnemyAttackState::Instance()->SetAttack("Attack1");
 		break;
 	case 1:
-		EnemyAttackState::Instance()->SetAttack("Attack 2");
+		EnemyAttackState::Instance()->SetAttack("Attack2");
 		break;
 	case 2:
-		EnemyAttackState::Instance()->SetAttack("Attack 3");
+		EnemyAttackState::Instance()->SetAttack("Attack3");
 		break;
 	default:
-		EnemyAttackState::Instance()->SetAttack("Attack 1");
+		EnemyAttackState::Instance()->SetAttack("Attack1");
 		break;
 	}
 
 	m_stateMachine->ChangeState((EnemyAttackState::Instance()));
+}
+
+int Enemy::GetDamage() const
+{
+	return m_damageData.at(m_stateMachine->GetCurrentState()->GetName());
 }

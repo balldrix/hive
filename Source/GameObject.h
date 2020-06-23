@@ -8,6 +8,9 @@
 #include "pch.h"
 #include "HitBoxManager.h"
 
+using std::string;
+using std::map;
+
 // constants
 const float Gravity = 0.00065f;
 
@@ -51,6 +54,7 @@ public:
 
 	float			GetLerpAmount(float num);
 	float			Lerp(float target, float current, float amount);
+	bool			LoadDamageData(std::string damageDataFile);
 
 	// flip sprite and hitboxes
 	void			FlipHorizontally(bool flip);
@@ -87,6 +91,7 @@ public:
 	Vector2			GetCurrentVelocity() const { return m_currentVelocity; }
 	Vector2			GetTargetVelocity() const { return m_targetVelocity; }
 	float			GetMovementSpeed()	const { return m_movementSpeed; }
+	virtual int		GetDamage() const;
 
 	// pointers for important objects
 	ControlSystem*	GetControlSystem() const { return m_controlSystem; }
@@ -108,32 +113,33 @@ public:
 	virtual void	Reset() = 0;	// must override reset method
 
 protected:
- 	std::string		m_ID;					// object ID
-	Camera*			m_camera;				// pointer to camera
-	Vector2			m_position;				// object position
-	Vector2			m_groundPosition;		// y position of grounded feet
-	Vector2			m_currentVelocity;		// current object velocity
-	Vector2			m_targetVelocity;		// target velocity
-	float			m_movementSpeed;		// current object speed
-	float			m_acceleration;			// acceleration speed
-	float			m_deceleration;			// decceleration speed
+ 	std::string			m_ID;					// object ID
+	Camera*				m_camera;				// pointer to camera
+	Vector2				m_position;				// object position
+	Vector2				m_groundPosition;		// y position of grounded feet
+	Vector2				m_currentVelocity;		// current object velocity
+	Vector2				m_targetVelocity;		// target velocity
+	float				m_movementSpeed;		// current object speed
+	float				m_acceleration;			// acceleration speed
+	float				m_deceleration;			// decceleration speed
 
-	SpriteSheet*	m_sprite;				// object sprite sheet
-	Animator*		m_animator;				// animation controller
+	SpriteSheet*		m_sprite;				// object sprite sheet
+	Animator*			m_animator;				// animation controller
 
-	Sprite*			m_shadow;				// object shadow
+	Sprite*				m_shadow;				// object shadow
 
-	HitBoxManager*	m_hitBoxManager;		// hit box manager
-	ControlSystem*	m_controlSystem;		// pointer to control system	
+	HitBoxManager*		m_hitBoxManager;		// hit box manager
+	ControlSystem*		m_controlSystem;		// pointer to control system	
 
-	int				m_health;				// object health
-	int				m_knockbackCount;		// number of knockbacks
+	int					m_health;				// object health
+	int					m_knockbackCount;		// number of knockbacks
 
-	float			m_deathTimer;			// timer running while object is dead
+	float				m_deathTimer;			// timer running while object is dead
 
-	bool			m_grounded;				// true when object is grounded
-	bool			m_dead;					// true when object is dead/destroyed
-	bool			m_active;				// object active or not
+	bool				m_grounded;				// true when object is grounded
+	bool				m_dead;					// true when object is dead/destroyed
+	bool				m_active;				// object active or not
+	map<string, int>	m_damageData;	// damage data map
 };
 
 #endif _GAMEOBJECT_H_
