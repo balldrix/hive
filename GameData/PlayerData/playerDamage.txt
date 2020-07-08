@@ -1,0 +1,5 @@
+# attack_name damage_value
+
+Attack1 5
+Attack2 7
+Attack3 10

@@ -16,6 +16,8 @@
 #include "HitBoxManager.h"
 #include "NPCManager.h"
 #include "Enemy.h"
+#include "pch.h"
+#include "Error.h"
 
 GameplayGameState::GameplayGameState() :
 	m_gameStateManager(nullptr),
@@ -144,16 +146,28 @@ void GameplayGameState::LoadAssets()
 	m_enemyHitBoxManager->Init(m_hitBoxSprite, "GameData\\HitBoxData\\enemyHitBoxData.json");
 
 	// init game objects
-	m_player->Init(Vector2((float)PlayerStartPositionX, (float)PlayerStartPositionY), m_playerSprite, m_playerShadowSprite, m_playerAnimator, m_playerHitBoxManager, m_controlSystem);
+	m_player->LoadData("GameData\\PlayerData\\playerData.txt", "GameData\\PlayerData\\playerDamage.txt");
+	m_player->Init(m_playerSprite, m_playerShadowSprite, m_playerAnimator, m_playerHitBoxManager, m_controlSystem);
 	m_player->SetCamera(m_camera);
 	m_camera->SetTarget(m_player);
 
 	m_NPCManager->Init();
+
 	std::vector<Enemy*> enemyList = m_NPCManager->GetEnemyList();
 
 	for(size_t i = 0; i < enemyList.size(); i++)
 	{
-		enemyList[i]->Init(enemyList[i]->GetData().m_objectData.m_startingPosition, m_enemySprite, m_enemyShadowSprite, m_enemyAnimator, m_enemyHitBoxManager);
+		enemyList[i]->Init(enemyList[i]->GetData().objectData.startingPosition, m_enemySprite, m_enemyShadowSprite, m_enemyAnimator, m_enemyHitBoxManager);
+
+		std::string type = enemyList[i]->GetData().type;
+		std::string enemyDataFile = "GameData\\EnemyData\\" + type + "\\" + type + "Damage.txt";
+		
+		if(!enemyList[i]->LoadDamageData(enemyDataFile))
+		{
+			std::string error = "Error! Enemy damage data " + enemyDataFile + " not found.";
+			Error::FileLog(error);
+		}
+		
 		enemyList[i]->SetPlayerTarget(m_player);
 		enemyList[i]->GetHitBoxManager()->SetOwner(enemyList[i]);
 		enemyList[i]->SetCamera(m_camera);
@@ -414,8 +428,7 @@ void GameplayGameState::ProcessCollisions()
 			if(m_player->GetHitBoxManager()->GetHitBox().OnCollision(
 				enemy->GetHitBoxManager()->GetHurtBox()))
 			{
-				enemy->ApplyDamage(m_player, 1);
-				break;
+				enemy->ApplyDamage(m_player, m_player->GetDamage());
 			}
 		}
 
@@ -426,8 +439,7 @@ void GameplayGameState::ProcessCollisions()
 			if(enemy->GetHitBoxManager()->GetHitBox().OnCollision(
 				m_player->GetHitBoxManager()->GetHurtBox()))
 			{
-				m_player->ApplyDamage(enemy, 1);
-				break;
+				m_player->ApplyDamage(enemy, enemy->GetDamage());
 			}
 		}
 	}

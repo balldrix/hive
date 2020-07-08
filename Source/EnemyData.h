@@ -8,18 +8,13 @@
 #include "pch.h"
 #include "GameObject.h"
 
-enum EnemyType
-{
-	Mook
-};
-
 struct EnemyData
 {
-	EnemyType				m_type;
-	ObjectData				m_objectData;
-	float					m_thinkingTime;
-	float					m_fightingRange;
-	float					m_attackRange;
+	std::string				type;
+	ObjectData				objectData;
+	float					thinkingTime;
+	float					fightingRange;
+	float					attackRange;
 };
 
 #endif // !_ENEMYDATA_H_

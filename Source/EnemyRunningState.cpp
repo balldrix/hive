@@ -17,7 +17,7 @@ void EnemyRunningState::OnEnter(Enemy* enemy)
 	enemy->GetAnimator()->SetAnimation(m_name);
 	enemy->GetHitBoxManager()->SetCurrentHitBox(m_name);
 
-	enemy->SetMovementSpeed(EnemyRunningSpeed);
+	enemy->SetMovementSpeed(enemy->GetData().objectData.runningSpeed);
 
 	Vector2 direction = Vector2::Zero;
 	float targetXPosition = enemy->GetPlayerTarget()->GetPositionX();

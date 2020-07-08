@@ -35,6 +35,7 @@ public:
 	float					GetTimer() const { return m_thinkingTimer; }
 	bool					IsHostile() const { return m_isHostile; }
 	EnemyData				GetData() const { return m_enemyData; }
+	int						GetDamage() const;
 
 	void					ApplyDamage(GameObject* source, const int& amount);
 	void					Knockback(const Vector2& direction, const float& force);

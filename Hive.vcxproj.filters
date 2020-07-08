@@ -121,7 +121,15 @@
     <ClCompile Include="Source\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Background.cpp" />
+    <ClCompile Include="Source\Background.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EnemyDataContainer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerData.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -144,6 +152,15 @@
     </Filter>
     <Filter Include="Game Data\HitBoxData">
       <UniqueIdentifier>{80dbea2e-ece0-43f8-85e6-28b22d959618}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Data\EnemyData">
+      <UniqueIdentifier>{a72ab50e-8d47-4728-be1c-515db02549d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Data\PlayerData">
+      <UniqueIdentifier>{2b07a1ff-a7a2-4a23-9c5b-6e0b9996f61d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Data\EnemyData\Mook">
+      <UniqueIdentifier>{290b972c-24c4-422d-a85c-0b0d7988758c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -306,6 +323,9 @@
     <ClInclude Include="Source\Background.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\EnemyDataContainer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\hitbox.png">
@@ -325,7 +345,6 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="GameData\AnimationData\playerAnimationData.json">
       <Filter>Game Data\Animation Data</Filter>
     </None>
@@ -350,5 +369,23 @@
     <None Include="GameData\AnimationData\enemyAnimationData.json">
       <Filter>Game Data\Animation Data</Filter>
     </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="GameData\EnemyData\positionData.txt">
+      <Filter>Game Data\EnemyData</Filter>
+    </Text>
+    <Text Include="GameData\EnemyData\typeData.txt">
+      <Filter>Game Data\EnemyData</Filter>
+    </Text>
+    <Text Include="GameData\PlayerData\playerData.txt">
+      <Filter>Game Data\PlayerData</Filter>
+    </Text>
+    <Text Include="GameData\PlayerData\playerDamage.txt">
+      <Filter>Game Data\PlayerData</Filter>
+    </Text>
+    <Text Include="GameData\EnemyData\Mook\mookDamage.txt">
+      <Filter>Game Data\EnemyData\Mook</Filter>
+    </Text>
   </ItemGroup>
 </Project>

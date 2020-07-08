@@ -4,6 +4,7 @@
 
 NPCManager::NPCManager()
 {
+	m_enemyDataContainer = new EnemyDataContainer();
 }
 
 NPCManager::~NPCManager()
@@ -37,51 +38,55 @@ bool NPCManager::InitTypes(std::string fileName)
 	if(file) // if file is open
 	{
 		EnemyData data;
-		std::string result;
+		std::string line;
 
 		// loop until end of file
-		while(!file.eof())
+		while(std::getline(file, line))
 		{
-			// ready data
-			result = "";
+			if(line[0] != '#')
+			{
+				std::string result;
+				std::istringstream iss(line);
 
-			// Type
-			file >> result;
+				// Type
+				iss >> result;
+				data.type = result;
 
-			// start health
-			file >> result;
-			data.m_objectData.m_startingHealth = std::stoi(result);
+				// start health
+				iss >> result;
+				data.objectData.startingHealth = std::stoi(result);
 
-			// walk speed
-			file >> result;
-			data.m_objectData.m_walkSpeed = std::stof(result);
+				// walk speed
+				iss >> result;
+				data.objectData.walkSpeed = std::stof(result);
 
-			// running speed
-			file >> result;
-			data.m_objectData.m_runningSpeed = std::stof(result);
+				// running speed
+				iss >> result;
+				data.objectData.runningSpeed = std::stof(result);
 
-			// acceleration
-			file >> result;
-			data.m_objectData.m_acceleration = std::stof(result);
+				// acceleration
+				iss >> result;
+				data.objectData.acceleration = std::stof(result);
 
-			// deceleration
-			file >> result;
-			data.m_objectData.m_deceleration = std::stof(result);
+				// deceleration
+				iss >> result;
+				data.objectData.deceleration = std::stof(result);
 
-			// thinking time
-			file >> result;
-			data.m_thinkingTime = std::stof(result);
+				// thinking time
+				iss >> result;
+				data.thinkingTime = std::stof(result);
 
-			// fighting range
-			file >> result;
-			data.m_fightingRange = std::stof(result);
+				// fighting range
+				iss >> result;
+				data.fightingRange = std::stof(result);
 
-			// attack range
-			file >> result;
-			data.m_attackRange = std::stof(result);
+				// attack range
+				iss >> result;
+				data.attackRange = std::stof(result);
 
-			// add npc to list
-			m_typeDataList.push_back(data);
+				// add enemy type data to list
+				m_enemyDataContainer->Add(data);
+			}
 		}
 	}
 	else
@@ -109,39 +114,19 @@ bool NPCManager::InitNPCs(std::string fileName)
 
 			// ID
 			file >> result;
-			data.m_objectData.m_ID = result;
+			data.objectData.id = result;
 			
 			// Type
 			file >> result;
-
-			EnemyType type = EnemyType::Mook;
-			if(result == "Mook")
-			{
-				type = EnemyType::Mook;
-			}
-
-			data.m_type = type;
-
-			// type data
-			switch(type)
-			{
-			case Mook:
-				data.m_objectData = m_typeDataList[Mook].m_objectData;
-				data.m_thinkingTime = m_typeDataList[Mook].m_thinkingTime;
-				data.m_fightingRange = m_typeDataList[Mook].m_fightingRange;
-				data.m_attackRange = m_typeDataList[Mook].m_attackRange;
-				break;
-			default:
-				break;
-			}
+			data = m_enemyDataContainer->GetData(result);
 			
 			// start position X
 			file >> result;
-			data.m_objectData.m_startingPosition.x = std::stof(result);
+			data.objectData.startingPosition.x = std::stof(result);
 			
 			// start position Y
 			file >> result;
-			data.m_objectData.m_startingPosition.y = std::stof(result);
+			data.objectData.startingPosition.y = std::stof(result);
 
 			Enemy* enemy = new Enemy();
 			enemy->SetData(data);
@@ -184,7 +169,7 @@ void NPCManager::Reset()
 
 void NPCManager::DeleteAll()
 {
-	for(int i = m_enemyList.size() - 1; i >= 0; i--)
+	for(size_t i = m_enemyList.size() - 1; i-- > 0;)
 	{
 		if(m_enemyList[i] != nullptr)
 		{
@@ -194,4 +179,9 @@ void NPCManager::DeleteAll()
 	}
 
 	m_enemyList.clear();
+	if(m_enemyDataContainer)
+	{
+		delete m_enemyDataContainer;
+		m_enemyDataContainer = nullptr;
+	}
 }

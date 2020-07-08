@@ -27,7 +27,7 @@ public:
 	void SetOwner(GameObject* owner);
 	void SetFlipped(bool flip); // flip the hitbox data
 	void SetCurrentHitBox(std::string name);
-	void SetCurrentHitBox(const int &index);
+	void SetCurrentHitBox(const int& index);
 
 	HitBox GetMovementBox() const { return m_movementBox; }
 	HitBox GetHurtBox() const { return m_hurtBox; }
@@ -39,17 +39,17 @@ public:
 
 private:
 	GameObject* m_owner;	// owner of the hitbox manager
-	Sprite*	m_sprite; // debug sprite
+	Sprite* m_sprite; // debug sprite
 	HitBoxData* m_currentHitBoxData; // current hit box in use
 	std::vector<HitBoxData> m_hitBoxDataList; // list of all hitboxes in this manager
 	HitBox m_movementBox;	// hit box to block movement in scene
 	HitBox m_hurtBox;		// hurt box that set character's vulnerable area
 	HitBox m_hitBox;		// hit box (red) is what will do damage to other character
 
-	
+
 	// load json data
 	void LoadData(std::string fileName);
-	
+
 	// set hitboxes
 	void SetAllHitBoxes();
 	void SetMovementBox();
