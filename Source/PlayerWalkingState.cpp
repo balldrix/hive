@@ -16,7 +16,7 @@ void PlayerWalkingState::OnEnter(Player* player)
 	player->GetAnimator()->Reset();
 	player->GetAnimator()->SetAnimation(m_name);
 	player->GetHitBoxManager()->SetCurrentHitBox(m_name);
-	player->SetMovementSpeed(PlayerWalkSpeed);
+	player->SetMovementSpeed(player->GetWalkSpeed());
 }
 
 void PlayerWalkingState::Execute(Player* player)

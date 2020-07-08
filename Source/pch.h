@@ -15,6 +15,7 @@
 
 #include <vector>
 #include <fstream>
+#include <sstream>
 #include <string>
 #include <algorithm>
 #include <map>
