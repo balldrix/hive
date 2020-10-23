@@ -38,27 +38,27 @@
     {
       "name": "Hurt",
       "index": 10,
-      "frameCount": 1,
+      "frameCount": 4,
       "framesPerSecond": 8,
       "loop": false
     },
     {
       "name": "Knockback",
-      "index": 12,
+      "index": 15,
       "frameCount": 1,
       "framesPerSecond": 8,
       "loop": false
     },
     {
       "name": "Dead",
-      "index": 12,
+      "index": 15,
       "frameCount": 2,
       "framesPerSecond": 8,
       "loop": false
     },
     {
       "name": "Running",
-      "index": 14,
+      "index": 17,
       "frameCount": 2,
       "framesPerSecond": 8,
       "loop": true

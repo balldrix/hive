@@ -185,7 +185,11 @@ void Player::Reset()
 
 int Player::GetDamage() const
 {
-	return m_damageData.at(m_stateMachine->GetCurrentState()->GetName());
+	std::string stateName = m_stateMachine->GetCurrentState()->GetName();
+	if(m_damageData.count(stateName) == 0)
+		return 0;
+
+	return m_damageData.at(stateName);
 }
 
 void Player::Move(const Vector2& direction)
