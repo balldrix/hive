@@ -46,7 +46,6 @@ private:
 	HitBox m_hurtBox;		// hurt box that set character's vulnerable area
 	HitBox m_hitBox;		// hit box (red) is what will do damage to other character
 
-
 	// load json data
 	void LoadData(std::string fileName);
 
