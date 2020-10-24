@@ -82,6 +82,8 @@ private:
 	// world
 	unsigned int		m_worldWidth;
 	unsigned int		m_worldHeight;
+
+	std::unique_ptr<SpriteFont>			m_spriteFont;
 };
 
 #endif _GAMEPLAYGAMESTATE_H_

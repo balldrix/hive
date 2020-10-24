@@ -141,9 +141,6 @@
     <Filter Include="Game Data">
       <UniqueIdentifier>{5ddac016-1fb2-4443-be93-f4d736282e5c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game Data\Sprite Sheet Data">
-      <UniqueIdentifier>{89ef07ea-009e-4fc7-8958-e642f9b5a6da}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game Data\Animation Data">
       <UniqueIdentifier>{6b386d83-ed86-4fb6-b2fc-ed523c376315}</UniqueIdentifier>
     </Filter>
@@ -161,6 +158,12 @@
     </Filter>
     <Filter Include="Game Data\EnemyData\Mook">
       <UniqueIdentifier>{290b972c-24c4-422d-a85c-0b0d7988758c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Data\SpriteFonts">
+      <UniqueIdentifier>{eb141ed7-2d36-4b54-b9e2-b887d723a4a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Data\SpriteSheetData">
+      <UniqueIdentifier>{89ef07ea-009e-4fc7-8958-e642f9b5a6da}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -352,7 +355,7 @@
       <Filter>Game Data\HitBoxData</Filter>
     </None>
     <None Include="GameData\SpriteSheetData\playerSpriteSheetData.json">
-      <Filter>Game Data\Sprite Sheet Data</Filter>
+      <Filter>Game Data\SpriteSheetData</Filter>
     </None>
     <None Include="GameData\AnimationData\dummyAnimationData.json">
       <Filter>Game Data\Animation Data</Filter>
@@ -364,12 +367,15 @@
       <Filter>Game Data\HitBoxData</Filter>
     </None>
     <None Include="GameData\SpriteSheetData\enemySpriteSheetData.json">
-      <Filter>Game Data\Sprite Sheet Data</Filter>
+      <Filter>Game Data\SpriteSheetData</Filter>
     </None>
     <None Include="GameData\AnimationData\enemyAnimationData.json">
       <Filter>Game Data\Animation Data</Filter>
     </None>
     <None Include="packages.config" />
+    <None Include="GameData\SpriteFonts\goodbye_despair.spritefont">
+      <Filter>Game Data\SpriteFonts</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="GameData\EnemyData\positionData.txt">

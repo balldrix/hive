@@ -133,6 +133,7 @@
     <None Include="GameData\HitBoxData\dummyHitBoxData.json" />
     <None Include="GameData\HitBoxData\enemyHitBoxData.json" />
     <None Include="GameData\HitBoxData\playerHitBoxData.json" />
+    <None Include="GameData\SpriteFonts\goodbye_despair.spritefont" />
     <None Include="GameData\SpriteSheetData\enemySpriteSheetData.json" />
     <None Include="GameData\SpriteSheetData\playerSpriteSheetData.json" />
     <None Include="packages.config" />
