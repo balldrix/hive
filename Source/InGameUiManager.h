@@ -8,6 +8,8 @@
 #include "pch.h"
 
 class Graphics;
+class Texture;
+class Sprite;
 
 class InGameUiManager
 {
@@ -19,10 +21,9 @@ public:
 	void Render(Graphics* graphics);
 
 private:
-	std::unique_ptr<SpriteFont> m_despairFont8;
+	Texture* m_playerPortraitTexture;
+	Sprite* m_playerPortraitSprite;
 	std::unique_ptr<SpriteFont> m_despairFont12;
-	std::unique_ptr<SpriteFont> m_silkscreenFont8;
-
 };
 
 #endif _INGAME_UI_MANAGER_H_

@@ -168,6 +168,9 @@
     <Filter Include="Game Data\SpriteSheetData">
       <UniqueIdentifier>{89ef07ea-009e-4fc7-8958-e642f9b5a6da}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game Data\Sprites\UI">
+      <UniqueIdentifier>{af3db2c9-7294-4876-b89b-6a7cb785f05e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Player.h">
@@ -351,6 +354,9 @@
     </Image>
     <Image Include="GameData\Sprites\backgroundTest.png">
       <Filter>Game Data\Sprites</Filter>
+    </Image>
+    <Image Include="GameData\Sprites\UI\player1_hud_portrait.png">
+      <Filter>Game Data\Sprites\UI</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

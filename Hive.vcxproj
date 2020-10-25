@@ -127,6 +127,7 @@
     <Image Include="GameData\Sprites\hitbox.png" />
     <Image Include="GameData\Sprites\playerSpriteSheet.png" />
     <Image Include="GameData\Sprites\shadow.png" />
+    <Image Include="GameData\Sprites\UI\player1_hud_portrait.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GameData\AnimationData\dummyAnimationData.json" />
