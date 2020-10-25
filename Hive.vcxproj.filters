@@ -130,6 +130,9 @@
     <ClCompile Include="Source\PlayerData.h">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\InGameUiManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -329,6 +332,9 @@
     <ClInclude Include="Source\EnemyDataContainer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\InGameUiManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\hitbox.png">
@@ -373,7 +379,7 @@
       <Filter>Game Data\Animation Data</Filter>
     </None>
     <None Include="packages.config" />
-    <None Include="GameData\SpriteFonts\goodbye_despair.spritefont">
+    <None Include="GameData\SpriteFonts\goodbye_despair_12pt.spritefont">
       <Filter>Game Data\SpriteFonts</Filter>
     </None>
   </ItemGroup>

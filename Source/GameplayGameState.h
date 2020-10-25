@@ -8,7 +8,6 @@
 #include "pch.h"
 #include "GameState.h"
 
-// forward declarations
 class GameStateManager;
 class Graphics;
 class Input;
@@ -22,6 +21,7 @@ class Player;
 class Background;
 class HitBoxManager;
 class NPCManager;
+class InGameUiManager;
 
 class GameplayGameState : public GameState
 {
@@ -30,60 +30,60 @@ public:
 	GameplayGameState(GameStateManager* gameStateManager);
 	virtual				~GameplayGameState();
 
-	void				OnEntry();					// calls the load assets method
-	void				OnExit();					// calls the delete assets method
+	void				OnEntry();					
+	void				OnExit();					
 	
-	void				ProcessInput();				// processes input from player
-	void				Update(float deltaTime);	// update state
-	void				ProcessCollisions();		// check for collisions
-	void				Render();					// render state
+	void				ProcessInput();				
+	void				Update(float deltaTime);	
+	void				ProcessCollisions();		
+	void				Render();					
 
-	void				ReleaseAll();				// release all texture memory
-	void				ResetGame();				// reset game and play again
+	void				ReleaseAll();				
+	void				ResetGame();				
 
 private:			
-	void				LoadAssets();				// load game state assets
-	void				DeleteAssets();				// delete game state assets
+	void				LoadAssets();				
+	void				DeleteAssets();				
 
-	GameStateManager*	m_gameStateManager;			// game state manager pointer
-	Graphics*			m_graphics;					// graphics pointer
-	Input*				m_input;					// input class pointer		
+	GameStateManager*	m_gameStateManager;			
+	Graphics*			m_graphics;					
+	Input*				m_input;					
 	
-	Camera*				m_camera;					// camera controller
-	ControlSystem*		m_controlSystem;			// player input control 
+	Camera*				m_camera;					
+	ControlSystem*		m_controlSystem;			
 
-	Texture*			m_playerTexture;			// player sprite sheet
-	Texture*			m_enemyTexture;				// enemy enemy texture
-	Texture*			m_hitBoxTexture;			// basic hitbox texture
-	Texture*			m_shadowTexture;			// shadow texture
-	Texture*			m_backgroundTexture;		// background texture
+	Texture*			m_playerTexture;			
+	Texture*			m_enemyTexture;				
+	Texture*			m_hitBoxTexture;			
+	Texture*			m_shadowTexture;			
+	Texture*			m_backgroundTexture;		
 
-	SpriteSheet*		m_playerSprite;				// player sprite object
-	Sprite*				m_playerShadowSprite;		// player shadow
-	SpriteSheet*		m_enemySprite;				// enemy sprite sheet
-	Sprite*				m_enemyShadowSprite;		// enemy shadow
-	Sprite*				m_hitBoxSprite;				// basic hitbox sprite
-	Sprite*				m_backgroundSprite;			// background sprite
+	SpriteSheet*		m_playerSprite;				
+	Sprite*				m_playerShadowSprite;		
+	SpriteSheet*		m_enemySprite;				
+	Sprite*				m_enemyShadowSprite;		
+	Sprite*				m_hitBoxSprite;				
+	Sprite*				m_backgroundSprite;			
 	
-	Animator*			m_playerAnimator;			// class to run player animations
-	Animator*			m_enemyAnimator;			// enemy animator class
+	Animator*			m_playerAnimator;			
+	Animator*			m_enemyAnimator;			
 
-	HitBoxManager*		m_playerHitBoxManager;		// player hitboxes
-	HitBoxManager*		m_enemyHitBoxManager;		// enemy hitboxes
+	HitBoxManager*		m_playerHitBoxManager;		
+	HitBoxManager*		m_enemyHitBoxManager;		
 
-	NPCManager*			m_NPCManager;				// enemy manager
+	NPCManager*			m_NPCManager;				
 
-	Player*				m_player;					// pointer to player class
-	Background*			m_background;				// pointer to background object
+	Player*				m_player;					
+	Background*			m_background;				
+	
+	InGameUiManager*	m_UiManager;
 
-	bool				m_canAttack;				// flag for attack cooldown
-	bool				m_running;					// is game running or not
+	bool				m_canAttack;				
+	bool				m_running;					
 
 	// world
 	unsigned int		m_worldWidth;
 	unsigned int		m_worldHeight;
-
-	std::unique_ptr<SpriteFont>			m_spriteFont;
 };
 
 #endif _GAMEPLAYGAMESTATE_H_

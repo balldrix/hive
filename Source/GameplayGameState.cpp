@@ -11,6 +11,7 @@
 #include "Animator.h"
 #include "Player.h"
 #include "Background.h"
+#include "InGameUiManager.h"
 #include "Resources.h"
 #include "UnitVectors.h"
 #include "HitBoxManager.h"
@@ -43,12 +44,12 @@ GameplayGameState::GameplayGameState() :
 	m_NPCManager(nullptr),
 	m_player(nullptr),
 	m_background(nullptr),
+	m_UiManager(nullptr),
 	m_canAttack(true),
 	m_running(false),
 	m_worldWidth(0),
 	m_worldHeight(0),
-	GameState(L"GAMEPLAY"),
-	m_spriteFont(nullptr)
+	GameState(L"GAMEPLAY")
 {}
 
 GameplayGameState::GameplayGameState(GameStateManager* gameStateManager) : GameplayGameState()
@@ -119,6 +120,7 @@ void GameplayGameState::LoadAssets()
 	// create objects in memory
 	m_player = new Player();
 	m_background = new Background();
+	m_UiManager = new InGameUiManager();
 
 	// load textures
 	m_playerTexture->LoadTexture(m_graphics, "GameData\\Sprites\\playerSpriteSheet.png");
@@ -176,16 +178,26 @@ void GameplayGameState::LoadAssets()
 
 	m_background->Init(m_backgroundSprite);
 	m_background->SetCamera(m_camera);
-
-	m_spriteFont = std::make_unique<SpriteBatch>(m_graphics->GetDevice(), L"GameData//Fonts//goodbye_despair.spritefont");
-
+	m_UiManager->Init(m_graphics);
+	
 	// set running to true
 	m_running = true;
 }
 
 void GameplayGameState::DeleteAssets()
 {
-	// delete player
+	if(m_UiManager)
+	{
+		delete m_UiManager;
+		m_UiManager = nullptr;
+	}
+
+	if(m_background)
+	{
+		delete m_background;
+		m_background = nullptr;
+	}
+
 	if(m_player)
 	{
 		delete m_player;
@@ -406,8 +418,6 @@ void GameplayGameState::Update(float deltaTime)
 	m_NPCManager->Update(deltaTime);
 	m_background->Update(deltaTime);
 
-	// check if player is dead
-	// TODO refactor to get player dead bool
 	if(m_player->IsDead())
 	{
 		ResetGame();
@@ -523,8 +533,7 @@ void GameplayGameState::Render()
 	// render game objects
 	m_player->Render(m_graphics);
 	m_NPCManager->Render(m_graphics);
-	
-	m_spriteFont->DrawString(m_graphics->GetSpriteBatch(), "PLAYER 1", Vector2(10, 10), Colors::White, 0, Vector2::Zero, Vector2::Zero, SpriteEffects::SpriteEffects_None, 99);
+	m_UiManager->Render(m_graphics);
 }
 
 void GameplayGameState::ReleaseAll()
