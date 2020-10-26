@@ -22,7 +22,11 @@ public:
 
 private:
 	Texture* m_playerPortraitTexture;
+	Texture* m_playerHealthBarBackgroundTexture;
+
 	Sprite* m_playerPortraitSprite;
+	Sprite* m_playerHealthBarBackgroundSprite;
+
 	std::unique_ptr<SpriteFont> m_despairFont12;
 };
 
