@@ -7,12 +7,19 @@ InGameUiManager::InGameUiManager() :
 	m_playerPortraitTexture(nullptr),
 	m_playerHealthBarBackgroundTexture(nullptr),
 	m_playerPortraitSprite(nullptr),
-	m_playerHealthBarBackgroundSprite(nullptr)
+	m_playerHealthBarBackgroundSprite(nullptr),
+	m_despairFont12(nullptr)
 {
 }
 
 InGameUiManager::~InGameUiManager()
 {
+	if(m_despairFont12 != nullptr)
+	{
+		delete m_despairFont12;
+		m_despairFont12 = nullptr;
+	}
+
 	if(m_playerHealthBarBackgroundSprite != nullptr)
 	{
 		delete m_playerHealthBarBackgroundSprite;
@@ -55,7 +62,7 @@ void InGameUiManager::Init(Graphics* graphics)
 	m_playerHealthBarBackgroundSprite->SetOrigin(Vector2::Zero);
 	m_playerHealthBarBackgroundSprite->SetPosition(Vector2(11, 8));
 	
-	m_despairFont12 = std::make_unique<SpriteFont>(graphics->GetDevice(), L"GameData//SpriteFonts//goodbye_despair_12pt.spritefont");
+	m_despairFont12 = new SpriteFont(graphics->GetDevice(), L"GameData//SpriteFonts//goodbye_despair_12pt.spritefont");
 }
 
 void InGameUiManager::Render(Graphics* graphics)

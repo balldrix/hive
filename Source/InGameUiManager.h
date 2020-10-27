@@ -27,7 +27,7 @@ private:
 	Sprite* m_playerPortraitSprite;
 	Sprite* m_playerHealthBarBackgroundSprite;
 
-	std::unique_ptr<SpriteFont> m_despairFont12;
+	SpriteFont* m_despairFont12;
 };
 
 #endif _INGAME_UI_MANAGER_H_
