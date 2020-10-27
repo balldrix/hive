@@ -24,11 +24,12 @@ private:
 	Texture* m_playerPortraitTexture;
 	Texture* m_playerHealthBarBackgroundTexture;
 	Texture* m_playerHealthBarFillTexture;
+	Texture* m_playerHealthBarFrameTexture;
 
 	Sprite* m_playerPortraitSprite;
-
 	Sprite* m_playerHealthBarBackgroundSprite;
 	Sprite* m_playerHealthBarFillSprite;
+	Sprite* m_playerHealthBarFrameSprite;
 
 	SpriteFont* m_despairFont12;
 };

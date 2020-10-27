@@ -7,9 +7,11 @@ InGameUiManager::InGameUiManager() :
 	m_playerPortraitTexture(nullptr),
 	m_playerHealthBarBackgroundTexture(nullptr),
 	m_playerHealthBarFillTexture(nullptr),
+	m_playerHealthBarFrameTexture(nullptr),
 	m_playerPortraitSprite(nullptr),
 	m_playerHealthBarBackgroundSprite(nullptr),
 	m_playerHealthBarFillSprite(nullptr),
+	m_playerHealthBarFrameSprite(nullptr),
 	m_despairFont12(nullptr)
 {
 }
@@ -20,6 +22,12 @@ InGameUiManager::~InGameUiManager()
 	{
 		delete m_despairFont12;
 		m_despairFont12 = nullptr;
+	}
+
+	if(m_playerHealthBarFrameSprite)
+	{
+		delete m_playerHealthBarFrameSprite;
+		m_playerHealthBarFrameSprite = nullptr;
 	}
 
 	if(m_playerHealthBarFillSprite != nullptr)
@@ -38,6 +46,12 @@ InGameUiManager::~InGameUiManager()
 	{
 		delete m_playerPortraitSprite;
 		m_playerPortraitSprite = nullptr;
+	}
+
+	if(m_playerHealthBarFrameTexture != nullptr)
+	{
+		delete m_playerHealthBarFrameTexture;
+		m_playerHealthBarFrameTexture = nullptr;
 	}
 
 	if(m_playerHealthBarFillTexture != nullptr)
@@ -65,10 +79,13 @@ void InGameUiManager::Init(Graphics* graphics)
 	m_playerPortraitTexture->LoadTexture(graphics, "GameData//Sprites//UI//player1_hud_portrait.png");
 
 	m_playerHealthBarBackgroundTexture = new Texture();
-	m_playerHealthBarBackgroundTexture->LoadTexture(graphics, "GameData//Sprites//UI/player1_hud_healthbar_background.png");
+	m_playerHealthBarBackgroundTexture->LoadTexture(graphics, "GameData//Sprites//UI//player1_hud_healthbar_background.png");
 
 	m_playerHealthBarFillTexture = new Texture();
-	m_playerHealthBarFillTexture->LoadTexture(graphics, "GameData//Sprites//UI/player1_hud_healthbar_fill.png");
+	m_playerHealthBarFillTexture->LoadTexture(graphics, "GameData//Sprites//UI//player1_hud_healthbar_fill.png");
+
+	m_playerHealthBarFrameTexture = new Texture();
+	m_playerHealthBarFrameTexture->LoadTexture(graphics, "GameData//Sprites//UI//player1_hud_healthbar_frame.png");
 
 	m_playerPortraitSprite = new Sprite();
 	m_playerPortraitSprite->Init(m_playerPortraitTexture);
@@ -77,12 +94,17 @@ void InGameUiManager::Init(Graphics* graphics)
 	m_playerHealthBarBackgroundSprite = new Sprite();
 	m_playerHealthBarBackgroundSprite->Init(m_playerHealthBarBackgroundTexture);
 	m_playerHealthBarBackgroundSprite->SetOrigin(Vector2::Zero);
-	m_playerHealthBarBackgroundSprite->SetPosition(Vector2(11, 8));
+	m_playerHealthBarBackgroundSprite->SetPosition(Vector2(10, 8));
 	
 	m_playerHealthBarFillSprite = new Sprite();
 	m_playerHealthBarFillSprite->Init(m_playerHealthBarFillTexture);
 	m_playerHealthBarFillSprite->SetOrigin(Vector2::Zero);
-	m_playerHealthBarFillSprite->SetPosition(Vector2(11, 8));
+	m_playerHealthBarFillSprite->SetPosition(Vector2(10, 8));
+
+	m_playerHealthBarFrameSprite = new Sprite();
+	m_playerHealthBarFrameSprite->Init(m_playerHealthBarFrameTexture);
+	m_playerHealthBarFrameSprite->SetOrigin(Vector2::Zero);
+	m_playerHealthBarFrameSprite->SetPosition(Vector2(10, 8));
 
 	m_despairFont12 = new SpriteFont(graphics->GetDevice(), L"GameData//SpriteFonts//goodbye_despair_12pt.spritefont");
 }
@@ -91,6 +113,7 @@ void InGameUiManager::Render(Graphics* graphics)
 {
 	m_playerHealthBarBackgroundSprite->Render(graphics);
 	m_playerHealthBarFillSprite->Render(graphics);
+	m_playerHealthBarFrameSprite->Render(graphics);
 
 	m_playerPortraitSprite->Render(graphics);
 
