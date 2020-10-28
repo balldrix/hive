@@ -1,3 +1,4 @@
+#include "Constants.h"
 #include "InGameUiManager.h"
 #include "BarController.h"
 #include "Graphics.h"
@@ -43,7 +44,9 @@ void InGameUiManager::Init(Graphics* graphics)
 {
 	m_playerHealthBar = new BarController();
 	m_playerHealthBar->Init(graphics);
-	m_playerHealthBar->SetPosition(Vector2(10, 8));
+
+	m_playerHealthBar->SetPosition(Vector2(InGameHudConstants::HealthBarPositionX, 
+		InGameHudConstants::HealthBarPositionY));
 
 	m_playerPortraitTexture = new Texture();
 	m_playerPortraitTexture->LoadTexture(graphics, "GameData//Sprites//UI//player1_hud_portrait.png");

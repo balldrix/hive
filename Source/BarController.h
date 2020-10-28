@@ -22,7 +22,6 @@ public:
 	void SetPosition(Vector2 position);
 
 private:
-
 	Texture* m_backgroundTexture;
 	Texture* m_fillTexture;
 	Texture* m_frameTexture;
