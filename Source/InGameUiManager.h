@@ -1,12 +1,12 @@
 // InGameUiManager.h
-// Christopher Ball 2019
-// managed hud UI
+// Christopher Ball 2019-2020
 
 #ifndef _INGAME_UI_MANAGER_H_
 #define _INGAME_UI_MANAGER_H_
 
 #include "pch.h"
 
+class BarController;
 class Graphics;
 class Texture;
 class Sprite;
@@ -21,15 +21,10 @@ public:
 	void Render(Graphics* graphics);
 
 private:
-	Texture* m_playerPortraitTexture;
-	Texture* m_playerHealthBarBackgroundTexture;
-	Texture* m_playerHealthBarFillTexture;
-	Texture* m_playerHealthBarFrameTexture;
+	BarController* m_playerHealthBar;
 
+	Texture* m_playerPortraitTexture;
 	Sprite* m_playerPortraitSprite;
-	Sprite* m_playerHealthBarBackgroundSprite;
-	Sprite* m_playerHealthBarFillSprite;
-	Sprite* m_playerHealthBarFrameSprite;
 
 	SpriteFont* m_despairFont12;
 };

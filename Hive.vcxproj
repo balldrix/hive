@@ -23,6 +23,7 @@
     <ClCompile Include="Source\AnimatedSprite.cpp" />
     <ClCompile Include="Source\Animator.cpp" />
     <ClCompile Include="Source\Background.cpp" />
+    <ClCompile Include="Source\BarController.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\ControlSystem.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
@@ -93,6 +94,7 @@
     <ClInclude Include="Source\GameStateManager.h" />
     <ClInclude Include="Source\Graphics.h" />
     <ClInclude Include="Source\AnimatedSprite.h" />
+    <ClInclude Include="Source\BarController.h" />
     <ClInclude Include="Source\HitBox.h" />
     <ClInclude Include="Source\HitBoxData.h" />
     <ClInclude Include="Source\HitBoxManager.h" />
