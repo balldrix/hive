@@ -25,6 +25,7 @@
     <ClCompile Include="Source\Background.cpp" />
     <ClCompile Include="Source\BarController.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
+    <ClCompile Include="Source\CharacterPortrait.cpp" />
     <ClCompile Include="Source\ControlSystem.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\EnemyAttackState.cpp" />
@@ -71,6 +72,7 @@
     <ClInclude Include="Source\Animator.h" />
     <ClInclude Include="Source\Background.h" />
     <ClInclude Include="Source\Camera.h" />
+    <ClInclude Include="Source\CharacterPortrait.h" />
     <ClInclude Include="Source\Constants.h" />
     <ClInclude Include="Source\ControlSystem.h" />
     <ClInclude Include="Source\Enemy.h" />

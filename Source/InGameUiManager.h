@@ -7,6 +7,7 @@
 #include "pch.h"
 
 class BarController;
+class CharacterPortrait;
 class Graphics;
 class Texture;
 class Sprite;
@@ -22,10 +23,7 @@ public:
 
 private:
 	BarController* m_playerHealthBar;
-
-	Texture* m_playerPortraitTexture;
-	Sprite* m_playerPortraitSprite;
-
+	CharacterPortrait* m_playerPortrait;
 	SpriteFont* m_despairFont12;
 };
 

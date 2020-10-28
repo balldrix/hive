@@ -8,7 +8,6 @@
 
 #include "pch.h"
 
-// forward declarations
 class Graphics;
 
 class Texture
