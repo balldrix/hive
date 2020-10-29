@@ -59,3 +59,13 @@ void InGameUiManager::Render(Graphics* graphics)
 		Vector2::Zero
 	);
 }
+
+void InGameUiManager::SetCurrentPlayerHealth(const int& health)
+{
+	m_playerHealthBar->SetCurrentValue(health);
+}
+
+void InGameUiManager::SetMaxPlayerHealth(const int& health)
+{
+	m_playerHealthBar->SetMaxValue(health);
+}

@@ -20,6 +20,9 @@ public:
 
 	void Init(Graphics* graphics);
 	void Render(Graphics* graphics);
+	
+	void SetCurrentPlayerHealth(const int& health);
+	void SetMaxPlayerHealth(const int& health);
 
 private:
 	BarController* m_playerHealthBar;

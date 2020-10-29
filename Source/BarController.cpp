@@ -5,6 +5,8 @@
 #include "pch.h"
 
 BarController::BarController() :
+	m_currentValue(0),
+	m_maxValue(0),
 	m_backgroundTexture(nullptr),
 	m_fillTexture(nullptr),
 	m_frameTexture(nullptr),
@@ -46,6 +48,14 @@ void BarController::Init(Graphics* graphics)
 void BarController::Render(Graphics* graphics)
 {
 	m_backgroundSprite->Render(graphics);
+	
+	RECT rect;
+	rect.left = 0;
+	rect.top = 0;
+	rect.bottom = m_fillSprite->GetHeight();
+	rect.right = (m_fillSprite->GetWidth() / m_maxValue) * m_currentValue;
+
+	m_fillSprite->SetSourceRect(rect);
 	m_fillSprite->Render(graphics);
 	m_frameSprite->Render(graphics);
 }
@@ -89,7 +99,17 @@ void BarController::DeleteAll()
 	}
 }
 
-void BarController::SetPosition(Vector2 position)
+void BarController::SetCurrentValue(const int& value)
+{
+	m_currentValue = value;
+}
+
+void BarController::SetMaxValue(const int& value)
+{
+	m_maxValue = value;
+}
+
+void BarController::SetPosition(const Vector2& position)
 {
 	m_backgroundSprite->SetPosition(position);
 	m_fillSprite->SetPosition(position);

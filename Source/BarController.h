@@ -19,9 +19,15 @@ public:
 	void Init(Graphics* graphics);
 	void Render(Graphics* graphics);
 	void DeleteAll();
-	void SetPosition(Vector2 position);
+
+	void SetCurrentValue(const int& value);
+	void SetMaxValue(const int& value);
+	void SetPosition(const Vector2& position);
 
 private:
+	int		m_currentValue;
+	int		m_maxValue;
+
 	Texture* m_backgroundTexture;
 	Texture* m_fillTexture;
 	Texture* m_frameTexture;

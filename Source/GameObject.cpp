@@ -331,6 +331,11 @@ void GameObject::SetKnockbackCount(int count)
 	m_knockbackCount = count;
 }
 
+int GameObject::GetMaxHealth() const
+{
+	return 0;
+}
+
 void GameObject::ApplyDamage(GameObject* source, const int& amount)
 {
 }

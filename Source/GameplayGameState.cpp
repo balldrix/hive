@@ -417,12 +417,13 @@ void GameplayGameState::Update(float deltaTime)
 	m_camera->Update(deltaTime);
 	m_NPCManager->Update(deltaTime);
 	m_background->Update(deltaTime);
+	m_UiManager->SetCurrentPlayerHealth(m_player->GetHealth());
+	m_UiManager->SetMaxPlayerHealth(m_player->GetMaxHealth());
 
 	if(m_player->IsDead())
 	{
 		ResetGame();
 	}
-	
 }
 
 void GameplayGameState::ProcessCollisions()

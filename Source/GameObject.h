@@ -100,6 +100,7 @@ public:
 	HitBoxManager*	GetHitBoxManager() const { return m_hitBoxManager; }
 
 	int				GetHealth() const { return m_health; }
+	virtual int		GetMaxHealth() const;
 	int				GetKnockbackCount() const { return m_knockbackCount; }
 	float			GetDeathTimer() const { return m_deathTimer; }
 
@@ -139,7 +140,7 @@ protected:
 	bool				m_grounded;				// true when object is grounded
 	bool				m_dead;					// true when object is dead/destroyed
 	bool				m_active;				// object active or not
-	map<string, int>	m_damageData;	// damage data map
+	map<string, int>	m_damageData;			// damage data map
 };
 
 #endif _GAMEOBJECT_H_

@@ -26,6 +26,7 @@ public:
 
 	StateMachine<Player>*	GetStateMachine() const { return m_stateMachine; }
 
+	virtual int				GetMaxHealth() const { return m_playerData.objectData.startingHealth; }
 	float					GetWalkSpeed() const { return m_playerData.objectData.walkSpeed; }
 	int						GetDamage() const;
 
@@ -39,8 +40,8 @@ public:
 	void					Knockback(const Vector2& direction, const float& force);
 
 private:
-	PlayerData					m_playerData;
-	StateMachine<Player>* m_stateMachine;
+	PlayerData				m_playerData;
+	StateMachine<Player>*	m_stateMachine;
 };
 
 #endif _PLAYER_H_
