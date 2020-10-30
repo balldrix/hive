@@ -44,7 +44,7 @@ void Player::Init(SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBo
 	m_stateMachine = new StateMachine<Player>(this);
 	m_stateMachine->Init(PlayerIdleState::Instance(), nullptr, PlayerGlobalState::Instance());
 
-	m_health = 5;
+	m_health = m_playerData.objectData.startingHealth;
 }
 
 void Player::LoadData(std::string playerDataFile, std::string damageDataFile)

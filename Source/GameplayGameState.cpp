@@ -179,6 +179,9 @@ void GameplayGameState::LoadAssets()
 	m_background->Init(m_backgroundSprite);
 	m_background->SetCamera(m_camera);
 	m_UiManager->Init(m_graphics);
+
+	m_UiManager->SetMaxPlayerHealth(m_player->GetMaxHealth());
+	m_UiManager->SetCurrentPlayerHealth(m_player->GetHealth());
 	
 	// set running to true
 	m_running = true;
@@ -417,8 +420,8 @@ void GameplayGameState::Update(float deltaTime)
 	m_camera->Update(deltaTime);
 	m_NPCManager->Update(deltaTime);
 	m_background->Update(deltaTime);
-	m_UiManager->SetCurrentPlayerHealth(m_player->GetHealth());
 	m_UiManager->SetMaxPlayerHealth(m_player->GetMaxHealth());
+	m_UiManager->SetCurrentPlayerHealth(m_player->GetHealth());
 
 	if(m_player->IsDead())
 	{

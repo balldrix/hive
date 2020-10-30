@@ -14,7 +14,7 @@ namespace GlobalConstants
 
 namespace InGameHudConstants
 {
-	const unsigned int HealthBarPositionX = 10;
+	const unsigned int HealthBarPositionX = 11;
 	const unsigned int HealthBarPositionY = 8;
 }
 
