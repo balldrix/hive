@@ -44,7 +44,7 @@ GameplayGameState::GameplayGameState() :
 	m_NPCManager(nullptr),
 	m_player(nullptr),
 	m_background(nullptr),
-	m_UiManager(nullptr),
+	m_uiManager(nullptr),
 	m_canAttack(true),
 	m_running(false),
 	m_worldWidth(0),
@@ -120,7 +120,7 @@ void GameplayGameState::LoadAssets()
 	// create objects in memory
 	m_player = new Player();
 	m_background = new Background();
-	m_UiManager = new InGameUiManager();
+	m_uiManager = new InGameUiManager();
 
 	// load textures
 	m_playerTexture->LoadTexture(m_graphics, "GameData\\Sprites\\playerSpriteSheet.png");
@@ -160,7 +160,7 @@ void GameplayGameState::LoadAssets()
 
 	for(size_t i = 0; i < enemyList.size(); i++)
 	{
-		enemyList[i]->Init(enemyList[i]->GetData().objectData.startingPosition, m_enemySprite, m_enemyShadowSprite, m_enemyAnimator, m_enemyHitBoxManager);
+		enemyList[i]->Init(enemyList[i]->GetData().objectData.startingPosition, m_enemySprite, m_enemyShadowSprite, m_enemyAnimator, m_enemyHitBoxManager, m_uiManager);
 
 		std::string type = enemyList[i]->GetData().type;
 		std::string enemyDataFile = "GameData\\EnemyData\\" + type + "\\" + type + "Damage.txt";
@@ -178,10 +178,10 @@ void GameplayGameState::LoadAssets()
 
 	m_background->Init(m_backgroundSprite);
 	m_background->SetCamera(m_camera);
-	m_UiManager->Init(m_graphics);
+	m_uiManager->Init(m_graphics);
 
-	m_UiManager->SetMaxPlayerHealth(m_player->GetMaxHealth());
-	m_UiManager->SetCurrentPlayerHealth(m_player->GetHealth());
+	m_uiManager->SetMaxPlayerHealth(m_player->GetMaxHealth());
+	m_uiManager->SetCurrentPlayerHealth(m_player->GetHealth());
 	
 	// set running to true
 	m_running = true;
@@ -189,10 +189,10 @@ void GameplayGameState::LoadAssets()
 
 void GameplayGameState::DeleteAssets()
 {
-	if(m_UiManager)
+	if(m_uiManager)
 	{
-		delete m_UiManager;
-		m_UiManager = nullptr;
+		delete m_uiManager;
+		m_uiManager = nullptr;
 	}
 
 	if(m_background)
@@ -420,8 +420,8 @@ void GameplayGameState::Update(float deltaTime)
 	m_camera->Update(deltaTime);
 	m_NPCManager->Update(deltaTime);
 	m_background->Update(deltaTime);
-	m_UiManager->SetMaxPlayerHealth(m_player->GetMaxHealth());
-	m_UiManager->SetCurrentPlayerHealth(m_player->GetHealth());
+	m_uiManager->SetMaxPlayerHealth(m_player->GetMaxHealth());
+	m_uiManager->SetCurrentPlayerHealth(m_player->GetHealth());
 
 	if(m_player->IsDead())
 	{
@@ -537,7 +537,7 @@ void GameplayGameState::Render()
 	// render game objects
 	m_player->Render(m_graphics);
 	m_NPCManager->Render(m_graphics);
-	m_UiManager->Render(m_graphics);
+	m_uiManager->Render(m_graphics);
 }
 
 void GameplayGameState::ReleaseAll()
@@ -556,4 +556,5 @@ void GameplayGameState::ResetGame()
 	m_NPCManager->Reset();
 	m_backgroundSprite->SetPosition(Vector2::Zero);
 	m_camera->Reset();
+	m_uiManager->SetKillCount(0);
 }

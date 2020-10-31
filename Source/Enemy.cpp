@@ -9,6 +9,7 @@
 #include "pch.h"
 #include "UnitVectors.h"
 #include "Randomiser.h"
+#include "InGameUiManager.h"
 
 #include "EnemyOwnedStates.h"
 
@@ -46,7 +47,7 @@ Enemy::~Enemy()
 	}
 }
 
-void Enemy::Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager)
+void Enemy::Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, InGameUiManager* inGameUiManager)
 {
 	m_position = position;
 	m_sprite = new SpriteSheet(*sprite);
@@ -66,6 +67,8 @@ void Enemy::Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, A
 
 	m_ID = m_enemyData.objectData.id;
 	m_health = m_enemyData.objectData.startingHealth;
+
+	m_uiManager = inGameUiManager;
 }
 
 void
@@ -149,6 +152,11 @@ void Enemy::SetHostile(bool isHostile)
 void Enemy::ResetTimer()
 {
 	m_thinkingTimer = 0.0f;
+}
+
+void Enemy::AddEnemyKill()
+{
+	m_uiManager->AddEnemyKill();
 }
 
 void Enemy::ApplyDamage(GameObject* source, const int& amount)

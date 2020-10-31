@@ -24,10 +24,14 @@ public:
 	void SetCurrentPlayerHealth(const int& health);
 	void SetMaxPlayerHealth(const int& health);
 
+	void AddEnemyKill();
+	void SetKillCount(const int& kills);
+
 private:
 	BarController* m_playerHealthBar;
 	CharacterPortrait* m_playerPortrait;
 	SpriteFont* m_despairFont12;
+	int m_killCount;
 };
 
 #endif _INGAME_UI_MANAGER_H_

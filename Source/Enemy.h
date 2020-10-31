@@ -12,6 +12,7 @@
 #include "EnemyData.h"
 
 class Player;
+class InGameUiManager;
 
 class Enemy : public GameObject
 {
@@ -19,7 +20,7 @@ public:
 	Enemy();
 	virtual					~Enemy();
 
-	void					Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager);
+	void					Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, InGameUiManager* inGameUiManager);
 
 	void					Update(float deltaTime);
 	void					Render(Graphics* graphics);
@@ -30,6 +31,7 @@ public:
 	void					SetHostile(bool isHostile);
 	void					ResetTimer();
 
+	void					AddEnemyKill();
 	Player*					GetPlayerTarget() const { return m_playerTarget; }
 	StateMachine<Enemy>*	GetStateMachine() const { return m_stateMachine; }
 	float					GetTimer() const { return m_thinkingTimer; }
@@ -45,6 +47,7 @@ public:
 private:
 	EnemyData				m_enemyData;
 	Player*					m_playerTarget;
+	InGameUiManager*		m_uiManager;
 	StateMachine<Enemy>*	m_stateMachine;
 	float					m_thinkingTimer;
 	bool					m_isHostile;

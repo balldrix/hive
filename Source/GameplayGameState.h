@@ -76,7 +76,7 @@ private:
 	Player*				m_player;					
 	Background*			m_background;				
 	
-	InGameUiManager*	m_UiManager;
+	InGameUiManager*	m_uiManager;
 
 	bool				m_canAttack;				
 	bool				m_running;					
