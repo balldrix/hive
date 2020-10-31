@@ -164,7 +164,7 @@ void Enemy::ApplyDamage(GameObject* source, const int& amount)
 	m_health -= amount;
 
 	// true if health has gone or damage is high
-	if(m_health < 1 || amount > 15)
+	if(m_health < 1)
 	{
 		// set knockback state
 		m_stateMachine->ChangeState(EnemyKnockbackState::Instance());
