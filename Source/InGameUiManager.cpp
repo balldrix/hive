@@ -9,6 +9,7 @@
 InGameUiManager::InGameUiManager() :
 	m_playerHealthBar(nullptr),
 	m_playerPortrait(nullptr),
+	m_enemyPortrait(nullptr),
 	m_despairFont12(nullptr),
 	m_killCount(0)
 {
@@ -53,6 +54,11 @@ void InGameUiManager::Render(Graphics* graphics)
 	m_playerPortrait->Render(graphics);
 	m_playerHealthBar->Render(graphics);
 
+	if(m_enemyPortrait != nullptr)
+	{
+		m_enemyPortrait->Render(graphics);
+	}
+
 	m_despairFont12->DrawString(graphics->GetSpriteBatch(),
 		std::to_string(m_killCount).c_str(),
 		Vector2(95, 2),
@@ -74,9 +80,21 @@ void InGameUiManager::SetMaxPlayerHealth(const int& health)
 void InGameUiManager::AddEnemyKill()
 {
 	m_killCount++;
+	m_enemyPortrait = nullptr;
 }
 
 void InGameUiManager::SetKillCount(const int& killCount)
 {
 	m_killCount = killCount;
+}
+
+void InGameUiManager::DisplayEnemyPortrait(Sprite* sprite)
+{
+	m_enemyPortrait = sprite;
+}
+
+void InGameUiManager::ReleaseAll()
+{
+	m_playerHealthBar->ReleaseAll();
+	m_playerPortrait->ReleaseAll();
 }

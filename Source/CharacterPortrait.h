@@ -16,6 +16,7 @@ public:
 	void Init(Graphics* graphics, std::string texturePath);
 	void Render(Graphics* graphics);
 	void DeleteAll();
+	void ReleaseAll();
 
 private:
 	Texture* m_playerPortraitTexture;

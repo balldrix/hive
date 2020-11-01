@@ -16,6 +16,7 @@ void EnemyHurtState::OnEnter(Enemy* enemy)
 	enemy->GetAnimator()->SetAnimation(m_name);
 	enemy->GetHitBoxManager()->KillAll();
 	enemy->ResetTimer();
+	enemy->DisplayEnemyPortrait();;
 }
 
 void EnemyHurtState::Execute(Enemy* enemy)

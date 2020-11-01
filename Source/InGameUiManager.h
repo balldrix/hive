@@ -26,10 +26,13 @@ public:
 
 	void AddEnemyKill();
 	void SetKillCount(const int& kills);
+	void DisplayEnemyPortrait(Sprite* sprite);
+	void ReleaseAll();
 
 private:
 	BarController* m_playerHealthBar;
 	CharacterPortrait* m_playerPortrait;
+	Sprite* m_enemyPortrait;
 	SpriteFont* m_despairFont12;
 	int m_killCount;
 };

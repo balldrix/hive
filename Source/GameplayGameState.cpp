@@ -28,12 +28,14 @@ GameplayGameState::GameplayGameState() :
 	m_controlSystem(nullptr),
 	m_playerTexture(nullptr),
 	m_enemyTexture(nullptr),
+	m_mookPortraitTexture(nullptr),
 	m_hitBoxTexture(nullptr),
 	m_shadowTexture(nullptr),
 	m_backgroundTexture(nullptr),
 	m_playerSprite(nullptr),
 	m_playerShadowSprite(nullptr),
 	m_enemySprite(nullptr),
+	m_mookPortraitSprite(nullptr),
 	m_enemyShadowSprite(nullptr),
 	m_hitBoxSprite(nullptr),
 	m_backgroundSprite(nullptr),
@@ -92,6 +94,7 @@ void GameplayGameState::LoadAssets()
 	// create texture memory
 	m_playerTexture = new Texture();
 	m_enemyTexture = new Texture();
+	m_mookPortraitTexture = new Texture();
 	m_hitBoxTexture = new Texture();
 	m_shadowTexture = new Texture();
 	m_backgroundTexture = new Texture();
@@ -101,6 +104,7 @@ void GameplayGameState::LoadAssets()
 	m_playerShadowSprite = new Sprite();
 
 	m_enemySprite = new SpriteSheet();
+	m_mookPortraitSprite = new Sprite();
 	m_enemyShadowSprite = new Sprite();
 
 	m_hitBoxSprite = new Sprite();
@@ -125,6 +129,7 @@ void GameplayGameState::LoadAssets()
 	// load textures
 	m_playerTexture->LoadTexture(m_graphics, "GameData\\Sprites\\playerSpriteSheet.png");
 	m_enemyTexture->LoadTexture(m_graphics, "GameData\\Sprites\\enemySpritesheet.png");
+	m_mookPortraitTexture->LoadTexture(m_graphics, "GameData\\Sprites\\UI\mook_hud_portrait.png");
 	m_hitBoxTexture->LoadTexture(m_graphics, "GameData\\Sprites\\hitbox.png");
 	m_shadowTexture->LoadTexture(m_graphics, "GameData\\Sprites\\shadow.png");
 	m_backgroundTexture->LoadTexture(m_graphics, "GameData\\Sprites\\backgroundTest.png");
@@ -134,6 +139,7 @@ void GameplayGameState::LoadAssets()
 	m_playerShadowSprite->Init(m_shadowTexture);
 	m_playerShadowSprite->SetAlpha(0.7f);
 	m_enemySprite->Init(m_enemyTexture, "GameData\\SpriteSheetData\\enemySpritesheetData.json");
+	m_mookPortraitSprite->Init(m_mookPortraitTexture);
 	m_enemyShadowSprite->Init(m_shadowTexture);
 	m_enemyShadowSprite->SetAlpha(0.7f);
 	m_hitBoxSprite->Init(m_hitBoxTexture);
@@ -160,7 +166,7 @@ void GameplayGameState::LoadAssets()
 
 	for(size_t i = 0; i < enemyList.size(); i++)
 	{
-		enemyList[i]->Init(enemyList[i]->GetData().objectData.startingPosition, m_enemySprite, m_enemyShadowSprite, m_enemyAnimator, m_enemyHitBoxManager, m_uiManager);
+		enemyList[i]->Init(enemyList[i]->GetData().objectData.startingPosition, m_enemySprite, m_enemyShadowSprite, m_enemyAnimator, m_enemyHitBoxManager, m_uiManager, m_mookPortraitSprite);
 
 		std::string type = enemyList[i]->GetData().type;
 		std::string enemyDataFile = "GameData\\EnemyData\\" + type + "\\" + type + "Damage.txt";
@@ -252,6 +258,12 @@ void GameplayGameState::DeleteAssets()
 		m_enemyShadowSprite = nullptr;
 	}
 
+	if(m_mookPortraitSprite)
+	{
+		delete m_mookPortraitSprite;
+		m_mookPortraitSprite = nullptr;
+	}
+
 	if(m_enemySprite)
 	{
 		delete m_enemySprite;
@@ -287,6 +299,12 @@ void GameplayGameState::DeleteAssets()
 	{
 		delete m_hitBoxTexture;
 		m_hitBoxTexture = nullptr;
+	}
+
+	if(m_mookPortraitTexture)
+	{
+		delete m_mookPortraitTexture;
+		m_mookPortraitTexture = nullptr;
 	}
 
 	if(m_enemyTexture)
@@ -543,9 +561,11 @@ void GameplayGameState::Render()
 void GameplayGameState::ReleaseAll()
 {
 	// release all texture resources
+	if(m_uiManager) { m_uiManager->ReleaseAll(); }
 	if(m_backgroundTexture) { m_backgroundTexture->Release(); }
 	if(m_shadowTexture) { m_shadowTexture->Release(); }
 	if(m_hitBoxTexture) { m_hitBoxTexture->Release(); }
+	if(m_mookPortraitTexture) { m_mookPortraitTexture->Release(); }
 	if(m_enemyTexture) { m_enemyTexture->Release(); }
 	if(m_playerTexture) { m_playerTexture->Release(); }
 }

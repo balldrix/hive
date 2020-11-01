@@ -3,6 +3,7 @@
 #include "Animator.h"
 #include "HitBoxManager.h"
 #include "UnitVectors.h"
+#include "InGameUiManager.h"
 
 EnemyDeadState* EnemyDeadState::Instance()
 {
@@ -15,7 +16,7 @@ void EnemyDeadState::OnEnter(Enemy* enemy)
 	enemy->GetAnimator()->Reset();
 	enemy->GetAnimator()->SetAnimation(m_name);
 	enemy->GetHitBoxManager()->KillAll();
-	enemy->AddEnemyKill();
+	enemy->GetUiManager()->AddEnemyKill();
 }
 
 void EnemyDeadState::Execute(Enemy* enemy)

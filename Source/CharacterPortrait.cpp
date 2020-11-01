@@ -44,3 +44,8 @@ void CharacterPortrait::DeleteAll()
 		m_playerPortraitTexture = nullptr;
 	}
 }
+
+void CharacterPortrait::ReleaseAll()
+{
+	m_playerPortraitTexture->Release();
+}

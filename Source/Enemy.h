@@ -20,7 +20,13 @@ public:
 	Enemy();
 	virtual					~Enemy();
 
-	void					Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, InGameUiManager* inGameUiManager);
+	void					Init(const Vector2& position, 
+									SpriteSheet* sprite, 
+									Sprite* shadow, 
+									Animator* animator, 
+									HitBoxManager* hitBoxManager, 
+									InGameUiManager* inGameUiManager, 
+									Sprite* portraitSprite);
 
 	void					Update(float deltaTime);
 	void					Render(Graphics* graphics);
@@ -31,23 +37,26 @@ public:
 	void					SetHostile(bool isHostile);
 	void					ResetTimer();
 
-	void					AddEnemyKill();
 	Player*					GetPlayerTarget() const { return m_playerTarget; }
 	StateMachine<Enemy>*	GetStateMachine() const { return m_stateMachine; }
 	float					GetTimer() const { return m_thinkingTimer; }
 	bool					IsHostile() const { return m_isHostile; }
 	EnemyData				GetData() const { return m_enemyData; }
 	int						GetDamage() const;
+	InGameUiManager*		GetUiManager() const { return m_uiManager; }
 
 	void					ApplyDamage(GameObject* source, const int& amount);
 	void					Knockback(const Vector2& direction, const float& force);
 	
 	void					Attack();
 
+	void					DisplayEnemyPortrait();
+
 private:
 	EnemyData				m_enemyData;
 	Player*					m_playerTarget;
 	InGameUiManager*		m_uiManager;
+	Sprite*					m_portraitSprite;
 	StateMachine<Enemy>*	m_stateMachine;
 	float					m_thinkingTimer;
 	bool					m_isHostile;

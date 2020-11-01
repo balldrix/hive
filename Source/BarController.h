@@ -24,6 +24,8 @@ public:
 	void SetMaxValue(const int& value);
 	void SetPosition(const Vector2& position);
 
+	void ReleaseAll();
+
 private:
 	int		m_currentValue;
 	int		m_maxValue;

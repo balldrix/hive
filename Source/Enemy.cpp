@@ -17,7 +17,9 @@ Enemy::Enemy() :
 	m_playerTarget(nullptr),
 	m_stateMachine(nullptr),
 	m_thinkingTimer(0.0f),
-	m_isHostile(false)
+	m_isHostile(false),
+	m_uiManager(nullptr),
+	m_portraitSprite(nullptr)
 {}
 
 Enemy::~Enemy()
@@ -47,7 +49,7 @@ Enemy::~Enemy()
 	}
 }
 
-void Enemy::Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, InGameUiManager* inGameUiManager)
+void Enemy::Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, InGameUiManager* inGameUiManager, Sprite* portraitSprite)
 {
 	m_position = position;
 	m_sprite = new SpriteSheet(*sprite);
@@ -69,6 +71,7 @@ void Enemy::Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, A
 	m_health = m_enemyData.objectData.startingHealth;
 
 	m_uiManager = inGameUiManager;
+	m_portraitSprite = portraitSprite;
 }
 
 void
@@ -154,11 +157,6 @@ void Enemy::ResetTimer()
 	m_thinkingTimer = 0.0f;
 }
 
-void Enemy::AddEnemyKill()
-{
-	m_uiManager->AddEnemyKill();
-}
-
 void Enemy::ApplyDamage(GameObject* source, const int& amount)
 {
 	m_health -= amount;
@@ -219,6 +217,11 @@ void Enemy::Attack()
 	}
 
 	m_stateMachine->ChangeState((EnemyAttackState::Instance()));
+}
+
+void Enemy::DisplayEnemyPortrait()
+{
+	m_uiManager->DisplayEnemyPortrait(m_portraitSprite);
 }
 
 int Enemy::GetDamage() const

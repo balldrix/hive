@@ -53,7 +53,8 @@ private:
 	ControlSystem*		m_controlSystem;			
 
 	Texture*			m_playerTexture;			
-	Texture*			m_enemyTexture;				
+	Texture*			m_enemyTexture;
+	Texture*			m_mookPortraitTexture;
 	Texture*			m_hitBoxTexture;			
 	Texture*			m_shadowTexture;			
 	Texture*			m_backgroundTexture;		
@@ -61,6 +62,7 @@ private:
 	SpriteSheet*		m_playerSprite;				
 	Sprite*				m_playerShadowSprite;		
 	SpriteSheet*		m_enemySprite;				
+	Sprite*				m_mookPortraitSprite;
 	Sprite*				m_enemyShadowSprite;		
 	Sprite*				m_hitBoxSprite;				
 	Sprite*				m_backgroundSprite;			

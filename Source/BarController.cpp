@@ -115,3 +115,10 @@ void BarController::SetPosition(const Vector2& position)
 	m_fillSprite->SetPosition(position);
 	m_frameSprite->SetPosition(position);
 }
+
+void BarController::ReleaseAll()
+{
+	m_backgroundTexture->Release();
+	m_fillTexture->Release();
+	m_frameTexture->Release();
+}

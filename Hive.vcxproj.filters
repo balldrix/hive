@@ -379,6 +379,9 @@
     <Image Include="GameData\Sprites\UI\player1_hud_healthbar_frame.png">
       <Filter>Game Data\Sprites\UI</Filter>
     </Image>
+    <Image Include="GameData\Sprites\UI\mook_hud_portrait.png">
+      <Filter>Game Data\Sprites\UI</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameData\AnimationData\playerAnimationData.json">
