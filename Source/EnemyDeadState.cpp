@@ -16,7 +16,9 @@ void EnemyDeadState::OnEnter(Enemy* enemy)
 	enemy->GetAnimator()->Reset();
 	enemy->GetAnimator()->SetAnimation(m_name);
 	enemy->GetHitBoxManager()->KillAll();
-	enemy->GetUiManager()->AddEnemyKill();
+	
+	if(enemy->GetKnockbackCount() < 1 && enemy->IsGrounded())
+		enemy->AddEnemyKill();
 }
 
 void EnemyDeadState::Execute(Enemy* enemy)
