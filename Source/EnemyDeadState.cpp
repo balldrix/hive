@@ -17,14 +17,19 @@ void EnemyDeadState::OnEnter(Enemy* enemy)
 	enemy->GetAnimator()->SetAnimation(m_name);
 	enemy->GetHitBoxManager()->KillAll();
 	
-	if(enemy->GetKnockbackCount() < 1 && enemy->IsGrounded())
-		enemy->AddEnemyKill();
+	if(EnemyIsDead(enemy))
+		enemy->Kill();
+}
+
+bool EnemyDeadState::EnemyIsDead(Enemy* enemy)
+{
+	return enemy->GetKnockbackCount() < 1 && enemy->IsGrounded();
 }
 
 void EnemyDeadState::Execute(Enemy* enemy)
 {
 	// true if the knock back count is up
-	if(enemy->GetKnockbackCount() < 1 && enemy->IsGrounded())
+	if(enemy->IsDead())
 	{
 		// stop all movement
 		enemy->SetTargetVelocity(Vector2::Zero);

@@ -25,14 +25,16 @@ public:
 	void SetMaxPlayerHealth(const int& health);
 
 	void AddEnemyKill();
+	void DisablePortrait(std::string id, Sprite* sprite);
 	void SetKillCount(const int& kills);
-	void DisplayEnemyPortrait(Sprite* sprite);
+	void DisplayEnemyPortrait(std::string id, Sprite* sprite);
 	void ReleaseAll();
 
 private:
 	BarController* m_playerHealthBar;
 	CharacterPortrait* m_playerPortrait;
 	Sprite* m_enemyPortrait;
+	std::string m_enemyId;
 	SpriteFont* m_despairFont12;
 	int m_killCount;
 };

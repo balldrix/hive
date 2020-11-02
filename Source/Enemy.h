@@ -49,6 +49,7 @@ public:
 	void					Knockback(const Vector2& direction, const float& force);
 	
 	void					Attack();
+	void					Kill();
 
 	void					DisplayEnemyPortrait();
 

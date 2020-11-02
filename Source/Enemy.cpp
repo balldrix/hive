@@ -67,7 +67,7 @@ void Enemy::Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, A
 	m_stateMachine = new StateMachine<Enemy>(this);
 	m_stateMachine->Init(EnemyIdleState::Instance(), nullptr, EnemyGlobalState::Instance());
 
-	m_ID = m_enemyData.objectData.id;
+	m_id = m_enemyData.objectData.id;
 	m_health = m_enemyData.objectData.startingHealth;
 
 	m_uiManager = inGameUiManager;
@@ -219,9 +219,16 @@ void Enemy::Attack()
 	m_stateMachine->ChangeState((EnemyAttackState::Instance()));
 }
 
+void Enemy::Kill()
+{
+	GetUiManager()->AddEnemyKill();
+	GetUiManager()->DisablePortrait(m_id, m_portraitSprite);
+	m_dead = true;
+}
+
 void Enemy::DisplayEnemyPortrait()
 {
-	m_uiManager->DisplayEnemyPortrait(m_portraitSprite);
+	m_uiManager->DisplayEnemyPortrait(m_id, m_portraitSprite);
 }
 
 int Enemy::GetDamage() const

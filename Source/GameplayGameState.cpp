@@ -129,7 +129,7 @@ void GameplayGameState::LoadAssets()
 	// load textures
 	m_playerTexture->LoadTexture(m_graphics, "GameData\\Sprites\\playerSpriteSheet.png");
 	m_enemyTexture->LoadTexture(m_graphics, "GameData\\Sprites\\enemySpritesheet.png");
-	m_mookPortraitTexture->LoadTexture(m_graphics, "GameData\\Sprites\\UI\mook_hud_portrait.png");
+	m_mookPortraitTexture->LoadTexture(m_graphics, "GameData\\Sprites\\UI\\mook_hud_portrait.png");
 	m_hitBoxTexture->LoadTexture(m_graphics, "GameData\\Sprites\\hitbox.png");
 	m_shadowTexture->LoadTexture(m_graphics, "GameData\\Sprites\\shadow.png");
 	m_backgroundTexture->LoadTexture(m_graphics, "GameData\\Sprites\\backgroundTest.png");
@@ -140,6 +140,9 @@ void GameplayGameState::LoadAssets()
 	m_playerShadowSprite->SetAlpha(0.7f);
 	m_enemySprite->Init(m_enemyTexture, "GameData\\SpriteSheetData\\enemySpritesheetData.json");
 	m_mookPortraitSprite->Init(m_mookPortraitTexture);
+	m_mookPortraitSprite->SetOrigin(Vector2::Zero);
+	m_mookPortraitSprite->SetPosition(Vector2(InGameHudConstants::EnemyPortraitPositionX,
+		InGameHudConstants::EnemyPortraitPositionY));
 	m_enemyShadowSprite->Init(m_shadowTexture);
 	m_enemyShadowSprite->SetAlpha(0.7f);
 	m_hitBoxSprite->Init(m_hitBoxTexture);

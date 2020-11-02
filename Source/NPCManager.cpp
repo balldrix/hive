@@ -114,12 +114,14 @@ bool NPCManager::InitNPCs(std::string fileName)
 
 			// ID
 			file >> result;
-			data.objectData.id = result;
+			std::string id = result;
 			
 			// Type
 			file >> result;
 			data = m_enemyDataContainer->GetData(result);
 			
+			data.objectData.id = id;
+
 			// start position X
 			file >> result;
 			data.objectData.startingPosition.x = std::stof(result);

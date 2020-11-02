@@ -6,7 +6,7 @@
 #include "Camera.h"
 
 GameObject::GameObject() :
-	m_ID("GameObject"),
+	m_id("GameObject"),
 	m_camera(nullptr),
 	m_position(0.0f, 0.0f),
 	m_groundPosition(0.0f, 0.0f),
@@ -69,7 +69,7 @@ void GameObject::SetCamera(Camera* cam)
 
 void GameObject::SetID(std::string id)
 {
-	m_ID = id;
+	m_id = id;
 }
 
 void GameObject::Update(float deltaTime)

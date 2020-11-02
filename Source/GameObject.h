@@ -83,7 +83,7 @@ public:
 	void			SetActive(bool active);					// set active or not
 
 	// getters
-	std::string		GetID() const { return m_ID; }					// return object ID
+	std::string		GetID() const { return m_id; }					// return object ID
 	float			GetPositionX() const { return m_position.x; }
 	float			GetPositionY() const { return m_position.y; }
 	Vector2			GetPosition() const { return m_position; }
@@ -114,7 +114,7 @@ public:
 	virtual void	Reset() = 0;	// must override reset method
 
 protected:
- 	std::string			m_ID;					// object ID
+ 	std::string			m_id;					// object ID
 	Camera*				m_camera;				// pointer to camera
 	Vector2				m_position;				// object position
 	Vector2				m_groundPosition;		// y position of grounded feet
