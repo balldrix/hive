@@ -10,7 +10,8 @@
 #include "UnitVectors.h"
 #include "Randomiser.h"
 #include "InGameUiManager.h"
-
+#include "BarController.h"
+#include "Player.h"
 #include "EnemyOwnedStates.h"
 
 Enemy::Enemy() :
@@ -19,37 +20,17 @@ Enemy::Enemy() :
 	m_thinkingTimer(0.0f),
 	m_isHostile(false),
 	m_uiManager(nullptr),
-	m_portraitSprite(nullptr)
+	m_portraitSprite(nullptr),
+	m_healthBar(nullptr)
 {}
 
 Enemy::~Enemy()
 {
-	if(m_sprite)
-	{
-		delete m_sprite;
-		m_sprite = nullptr;
-	}
-
-	if(m_shadow)
-	{
-		delete m_shadow;
-		m_shadow = nullptr;
-	}
-
-	if(m_animator)
-	{
-		delete m_animator;
-		m_animator = nullptr;
-	}
-
-	if(m_stateMachine)
-	{
-		delete m_stateMachine;
-		m_stateMachine = nullptr;
-	}
+	ReleaseAll();
+	DeleteAll();
 }
 
-void Enemy::Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, InGameUiManager* inGameUiManager, Sprite* portraitSprite)
+void Enemy::Init(Graphics* graphics, const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, InGameUiManager* inGameUiManager, Sprite* portraitSprite)
 {
 	m_position = position;
 	m_sprite = new SpriteSheet(*sprite);
@@ -72,6 +53,16 @@ void Enemy::Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, A
 
 	m_uiManager = inGameUiManager;
 	m_portraitSprite = portraitSprite;
+
+	m_healthBar = new BarController();
+	m_healthBar->Init(graphics);
+	m_healthBar->SetMaxValue(m_health);
+	m_healthBar->SetCurrentValue(m_health);
+	m_healthBar->SetPosition(Vector2(InGameHudConstants::HealthBarPositionX, InGameHudConstants::EnemyHealthBarPositionY));
+
+	float percentage = (float)m_health / (float)m_playerTarget->GetMaxHealth();
+	unsigned int width = (float)m_healthBar->GetWidth() * percentage;
+	m_healthBar->SetWidth(width);
 }
 
 void
@@ -229,6 +220,44 @@ void Enemy::Kill()
 void Enemy::DisplayEnemyPortrait()
 {
 	m_uiManager->DisplayEnemyPortrait(m_id, m_portraitSprite);
+}
+
+void Enemy::ReleaseAll()
+{
+	m_healthBar->ReleaseAll();
+}
+
+void Enemy::DeleteAll()
+{
+	if(m_healthBar)
+	{
+		delete m_healthBar;
+		m_healthBar = nullptr;
+	}
+
+	if(m_sprite)
+	{
+		delete m_sprite;
+		m_sprite = nullptr;
+	}
+
+	if(m_shadow)
+	{
+		delete m_shadow;
+		m_shadow = nullptr;
+	}
+
+	if(m_animator)
+	{
+		delete m_animator;
+		m_animator = nullptr;
+	}
+
+	if(m_stateMachine)
+	{
+		delete m_stateMachine;
+		m_stateMachine = nullptr;
+	}
 }
 
 int Enemy::GetDamage() const

@@ -11,7 +11,9 @@
 #include "StateMachine.h"
 #include "EnemyData.h"
 
+class Graphics;
 class Player;
+class BarController;
 class InGameUiManager;
 
 class Enemy : public GameObject
@@ -20,7 +22,8 @@ public:
 	Enemy();
 	virtual					~Enemy();
 
-	void					Init(const Vector2& position, 
+	void					Init(Graphics* graphics,
+									const Vector2& position, 
 									SpriteSheet* sprite, 
 									Sprite* shadow, 
 									Animator* animator, 
@@ -52,12 +55,15 @@ public:
 	void					Kill();
 
 	void					DisplayEnemyPortrait();
+	void					ReleaseAll();
+	void					DeleteAll();
 
 private:
 	EnemyData				m_enemyData;
 	Player*					m_playerTarget;
 	InGameUiManager*		m_uiManager;
 	Sprite*					m_portraitSprite;
+	BarController*			m_healthBar;
 	StateMachine<Enemy>*	m_stateMachine;
 	float					m_thinkingTimer;
 	bool					m_isHostile;

@@ -12,7 +12,8 @@ BarController::BarController() :
 	m_frameTexture(nullptr),
 	m_backgroundSprite(nullptr),
 	m_fillSprite(nullptr),
-	m_frameSprite(nullptr)
+	m_frameSprite(nullptr),
+	m_width(0U)
 {
 }
 
@@ -43,19 +44,22 @@ void BarController::Init(Graphics* graphics)
 	m_frameSprite = new Sprite();
 	m_frameSprite->Init(m_frameTexture);
 	m_frameSprite->SetOrigin(Vector2::Zero);
+
+	m_width = m_frameSprite->GetWidth();
 }
 
 void BarController::Render(Graphics* graphics)
 {
-	m_backgroundSprite->Render(graphics);
-	
 	RECT rect;
-	rect.left = 0;
+	unsigned int leftPos = m_fillSprite->GetWidth() - m_width;
+	rect.left = leftPos;
 	rect.top = 0;
 	rect.bottom = m_fillSprite->GetHeight();
-	rect.right = (m_fillSprite->GetWidth() / m_maxValue) * m_currentValue;
+	rect.right = leftPos + ((m_width / m_maxValue) * m_currentValue);
 
 	m_fillSprite->SetSourceRect(rect);
+
+	m_backgroundSprite->Render(graphics);
 	m_fillSprite->Render(graphics);
 	m_frameSprite->Render(graphics);
 }
@@ -114,6 +118,20 @@ void BarController::SetPosition(const Vector2& position)
 	m_backgroundSprite->SetPosition(position);
 	m_fillSprite->SetPosition(position);
 	m_frameSprite->SetPosition(position);
+}
+
+void BarController::SetWidth(const unsigned int& width)
+{
+	m_width = width;
+
+	RECT rect;
+	rect.left = m_backgroundSprite->GetWidth() - width;
+	rect.top = 0;
+	rect.bottom = m_fillSprite->GetHeight();
+	rect.right = m_backgroundSprite->GetWidth();
+
+	m_backgroundSprite->SetSourceRect(rect);
+	m_frameSprite->SetSourceRect(rect);
 }
 
 void BarController::ReleaseAll()

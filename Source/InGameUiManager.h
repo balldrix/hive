@@ -24,6 +24,8 @@ public:
 	void SetCurrentPlayerHealth(const int& health);
 	void SetMaxPlayerHealth(const int& health);
 
+	BarController* GetPlayerHealthBar() const { return m_playerHealthBar; }
+
 	void AddEnemyKill();
 	void DisablePortrait(std::string id, Sprite* sprite);
 	void SetKillCount(const int& kills);

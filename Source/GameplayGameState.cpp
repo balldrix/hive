@@ -169,7 +169,9 @@ void GameplayGameState::LoadAssets()
 
 	for(size_t i = 0; i < enemyList.size(); i++)
 	{
-		enemyList[i]->Init(enemyList[i]->GetData().objectData.startingPosition, m_enemySprite, m_enemyShadowSprite, m_enemyAnimator, m_enemyHitBoxManager, m_uiManager, m_mookPortraitSprite);
+		enemyList[i]->SetPlayerTarget(m_player);
+
+		enemyList[i]->Init(m_graphics, enemyList[i]->GetData().objectData.startingPosition, m_enemySprite, m_enemyShadowSprite, m_enemyAnimator, m_enemyHitBoxManager, m_uiManager, m_mookPortraitSprite);
 
 		std::string type = enemyList[i]->GetData().type;
 		std::string enemyDataFile = "GameData\\EnemyData\\" + type + "\\" + type + "Damage.txt";
@@ -180,7 +182,6 @@ void GameplayGameState::LoadAssets()
 			Error::FileLog(error);
 		}
 		
-		enemyList[i]->SetPlayerTarget(m_player);
 		enemyList[i]->GetHitBoxManager()->SetOwner(enemyList[i]);
 		enemyList[i]->SetCamera(m_camera);
 	}

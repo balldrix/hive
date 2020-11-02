@@ -23,6 +23,9 @@ public:
 	void SetCurrentValue(const int& value);
 	void SetMaxValue(const int& value);
 	void SetPosition(const Vector2& position);
+	void SetWidth(const unsigned int& width);
+
+	unsigned int GetWidth() const { return m_width; }
 
 	void ReleaseAll();
 
@@ -37,6 +40,8 @@ private:
 	Sprite* m_backgroundSprite;
 	Sprite* m_fillSprite;
 	Sprite* m_frameSprite;
+
+	unsigned int    m_width;
 };
 
 #endif // !_BARCONTROLLER_H_
