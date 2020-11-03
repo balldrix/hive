@@ -1,2 +1,2 @@
-# type HP walk_speed running_speed acceleration deceleration thinking_time fight_range attack_range
-Mook 25 25 40 0.8 3.5 3.5 20.0 9.0
+# type HP starting_lives walk_speed running_speed acceleration deceleration thinking_time fight_range attack_range
+Mook 25 1 25 40 0.8 3.5 3.5 20.0 9.0

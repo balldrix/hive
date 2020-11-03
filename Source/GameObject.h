@@ -26,6 +26,7 @@ struct ObjectData
 {
 	std::string				id;
 	unsigned int			startingHealth;
+	unsigned int			startingLives;
 	Vector2					startingPosition;
 	float					walkSpeed;
 	float					runningSpeed;

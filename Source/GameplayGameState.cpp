@@ -576,6 +576,9 @@ void GameplayGameState::ReleaseAll()
 
 void GameplayGameState::ResetGame()
 {
+	if(m_player->GetLives() < 0)
+		return;
+
 	m_player->Reset();
 	m_NPCManager->Reset();
 	m_backgroundSprite->SetPosition(Vector2::Zero);

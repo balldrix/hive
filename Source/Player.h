@@ -29,6 +29,7 @@ public:
 	virtual int				GetMaxHealth() const { return m_playerData.objectData.startingHealth; }
 	float					GetWalkSpeed() const { return m_playerData.objectData.walkSpeed; }
 	int						GetDamage() const;
+	int						GetLives() const { return m_lives; }
 
 	// movement
 	void					Move(const Vector2& direction);
@@ -42,6 +43,7 @@ public:
 private:
 	PlayerData				m_playerData;
 	StateMachine<Player>*	m_stateMachine;
+	int m_lives;
 };
 
 #endif _PLAYER_H_

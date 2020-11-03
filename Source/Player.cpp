@@ -14,7 +14,8 @@
 #include "Error.h"
 
 Player::Player() : 
-	m_stateMachine(nullptr)
+	m_stateMachine(nullptr),
+	m_lives(0)
 {
 }
 
@@ -45,6 +46,7 @@ void Player::Init(SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBo
 	m_stateMachine->Init(PlayerIdleState::Instance(), nullptr, PlayerGlobalState::Instance());
 
 	m_health = m_playerData.objectData.startingHealth;
+	m_lives = m_playerData.objectData.startingLives;
 }
 
 void Player::LoadData(std::string playerDataFile, std::string damageDataFile)
@@ -84,6 +86,9 @@ bool Player::LoadPlayerData(std::string filename)
 
 				file >> result;
 				data.startingHealth = std::stoi(result);
+
+				file >> result;
+				data.startingLives = std::stoi(result);
 
 				file >> result;
 				data.startingPosition.x = std::stof(result);
@@ -181,6 +186,7 @@ void Player::Reset()
 	m_deathTimer = 0.0f;
 	m_dead = false;
 	m_active = true;
+	m_lives--;
 }
 
 int Player::GetDamage() const

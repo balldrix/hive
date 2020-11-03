@@ -56,6 +56,9 @@ bool NPCManager::InitTypes(std::string fileName)
 				iss >> result;
 				data.objectData.startingHealth = std::stoi(result);
 
+				iss >> result;
+				data.objectData.startingLives = std::stoi(result);
+
 				// walk speed
 				iss >> result;
 				data.objectData.walkSpeed = std::stof(result);
