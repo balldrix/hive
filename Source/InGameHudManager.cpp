@@ -1,4 +1,4 @@
-#include "InGameUiManager.h"
+#include "InGameHudManager.h"
 #include "BarController.h"
 #include "Constants.h"
 #include "Graphics.h"
@@ -6,17 +6,18 @@
 #include "Texture.h"
 #include "Sprite.h"
 
-InGameUiManager::InGameUiManager() :
+InGameHudManager::InGameHudManager() :
 	m_playerHealthBar(nullptr),
 	m_playerPortrait(nullptr),
 	m_enemyPortrait(nullptr),
 	m_despairFont12(nullptr),
 	m_enemyId(std::string()),
+	m_enemyHealthBar(nullptr),
 	m_killCount(0)
 {
 }
 
-InGameUiManager::~InGameUiManager()
+InGameHudManager::~InGameHudManager()
 {
 	if(m_despairFont12 != nullptr)
 	{
@@ -37,7 +38,7 @@ InGameUiManager::~InGameUiManager()
 	}
 }
 
-void InGameUiManager::Init(Graphics* graphics)
+void InGameHudManager::Init(Graphics* graphics)
 {
 	m_playerHealthBar = new BarController();
 	m_playerHealthBar->Init(graphics);
@@ -50,15 +51,16 @@ void InGameUiManager::Init(Graphics* graphics)
 	m_despairFont12 = new SpriteFont(graphics->GetDevice(), L"GameData//SpriteFonts//goodbye_despair_12pt.spritefont");
 }
 
-void InGameUiManager::Render(Graphics* graphics)
+void InGameHudManager::Render(Graphics* graphics)
 {
 	m_playerPortrait->Render(graphics);
 	m_playerHealthBar->Render(graphics);
 
 	if(m_enemyPortrait != nullptr)
-	{
 		m_enemyPortrait->Render(graphics);
-	}
+
+	if(m_enemyHealthBar != nullptr)
+		m_enemyHealthBar->Render(graphics);
 
 	m_despairFont12->DrawString(graphics->GetSpriteBatch(),
 		std::to_string(m_killCount).c_str(),
@@ -68,42 +70,44 @@ void InGameUiManager::Render(Graphics* graphics)
 	);
 }
 
-void InGameUiManager::SetCurrentPlayerHealth(const int& health)
+void InGameHudManager::SetCurrentPlayerHealth(const int& health)
 {
 	m_playerHealthBar->SetCurrentValue(health);
 }
 
-void InGameUiManager::SetMaxPlayerHealth(const int& health)
+void InGameHudManager::SetMaxPlayerHealth(const int& health)
 {
 	m_playerHealthBar->SetMaxValue(health);
 }
 
-void InGameUiManager::AddEnemyKill()
+void InGameHudManager::AddEnemyKill()
 {
 	m_killCount++;
 }
 
-void InGameUiManager::DisablePortrait(std::string id, Sprite* sprite)
+void InGameHudManager::HideEnemyHud(std::string id)
 {
 	if(m_enemyId != id)
 		return;
 
 	m_enemyPortrait = nullptr;
+	m_enemyHealthBar = nullptr;
 	m_enemyId = std::string();
 }
 
-void InGameUiManager::SetKillCount(const int& killCount)
+void InGameHudManager::SetKillCount(const int& killCount)
 {
 	m_killCount = killCount;
 }
 
-void InGameUiManager::DisplayEnemyPortrait(std::string id, Sprite* sprite)
+void InGameHudManager::ShowEnemyHud(std::string id, Sprite* portrait, BarController* healthBar)
 {
 	m_enemyId = id;
-	m_enemyPortrait = sprite;
+	m_enemyPortrait = portrait;
+	m_enemyHealthBar = healthBar;
 }
 
-void InGameUiManager::ReleaseAll()
+void InGameHudManager::ReleaseAll()
 {
 	m_playerHealthBar->ReleaseAll();
 	m_playerPortrait->ReleaseAll();

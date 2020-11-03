@@ -14,7 +14,7 @@
 class Graphics;
 class Player;
 class BarController;
-class InGameUiManager;
+class InGameHudManager;
 
 class Enemy : public GameObject
 {
@@ -28,7 +28,7 @@ public:
 									Sprite* shadow, 
 									Animator* animator, 
 									HitBoxManager* hitBoxManager, 
-									InGameUiManager* inGameUiManager, 
+									InGameHudManager* inGameUiManager, 
 									Sprite* portraitSprite);
 
 	void					Update(float deltaTime);
@@ -46,7 +46,7 @@ public:
 	bool					IsHostile() const { return m_isHostile; }
 	EnemyData				GetData() const { return m_enemyData; }
 	int						GetDamage() const;
-	InGameUiManager*		GetUiManager() const { return m_uiManager; }
+	InGameHudManager*		GetUiManager() const { return m_uiManager; }
 
 	void					ApplyDamage(GameObject* source, const int& amount);
 	void					Knockback(const Vector2& direction, const float& force);
@@ -54,14 +54,14 @@ public:
 	void					Attack();
 	void					Kill();
 
-	void					DisplayEnemyPortrait();
+	void					ShowEnemyHud();
 	void					ReleaseAll();
 	void					DeleteAll();
 
 private:
 	EnemyData				m_enemyData;
 	Player*					m_playerTarget;
-	InGameUiManager*		m_uiManager;
+	InGameHudManager*		m_uiManager;
 	Sprite*					m_portraitSprite;
 	BarController*			m_healthBar;
 	StateMachine<Enemy>*	m_stateMachine;

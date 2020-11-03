@@ -21,7 +21,7 @@ class Player;
 class Background;
 class HitBoxManager;
 class NPCManager;
-class InGameUiManager;
+class InGameHudManager;
 
 class GameplayGameState : public GameState
 {
@@ -78,7 +78,7 @@ private:
 	Player*				m_player;					
 	Background*			m_background;				
 	
-	InGameUiManager*	m_uiManager;
+	InGameHudManager*	m_uiManager;
 
 	bool				m_canAttack;				
 	bool				m_running;					

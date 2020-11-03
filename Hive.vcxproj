@@ -46,7 +46,7 @@
     <ClCompile Include="Source\Graphics.cpp" />
     <ClCompile Include="Source\HitBox.cpp" />
     <ClCompile Include="Source\HitBoxManager.cpp" />
-    <ClCompile Include="Source\InGameUiManager.cpp" />
+    <ClCompile Include="Source\InGameHudManager.cpp" />
     <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\NPCManager.cpp" />
@@ -100,7 +100,7 @@
     <ClInclude Include="Source\HitBox.h" />
     <ClInclude Include="Source\HitBoxData.h" />
     <ClInclude Include="Source\HitBoxManager.h" />
-    <ClInclude Include="Source\InGameUiManager.h" />
+    <ClInclude Include="Source\InGameHudManager.h" />
     <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\NPCManager.h" />
     <ClInclude Include="Source\pch.h" />

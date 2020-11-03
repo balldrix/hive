@@ -130,13 +130,13 @@
     <ClCompile Include="Source\PlayerData.h">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\InGameUiManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\BarController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\CharacterPortrait.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\InGameHudManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -341,13 +341,13 @@
     <ClInclude Include="Source\EnemyDataContainer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\InGameUiManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\BarController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\CharacterPortrait.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\InGameHudManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

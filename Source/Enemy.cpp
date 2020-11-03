@@ -9,7 +9,7 @@
 #include "pch.h"
 #include "UnitVectors.h"
 #include "Randomiser.h"
-#include "InGameUiManager.h"
+#include "InGameHudManager.h"
 #include "BarController.h"
 #include "Player.h"
 #include "EnemyOwnedStates.h"
@@ -30,7 +30,7 @@ Enemy::~Enemy()
 	DeleteAll();
 }
 
-void Enemy::Init(Graphics* graphics, const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, InGameUiManager* inGameUiManager, Sprite* portraitSprite)
+void Enemy::Init(Graphics* graphics, const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, InGameHudManager* inGameUiManager, Sprite* portraitSprite)
 {
 	m_position = position;
 	m_sprite = new SpriteSheet(*sprite);
@@ -213,13 +213,14 @@ void Enemy::Attack()
 void Enemy::Kill()
 {
 	GetUiManager()->AddEnemyKill();
-	GetUiManager()->DisablePortrait(m_id, m_portraitSprite);
+	GetUiManager()->HideEnemyHud(m_id);
 	m_dead = true;
 }
 
-void Enemy::DisplayEnemyPortrait()
+void Enemy::ShowEnemyHud()
 {
-	m_uiManager->DisplayEnemyPortrait(m_id, m_portraitSprite);
+	m_healthBar->SetCurrentValue(m_health);
+	m_uiManager->ShowEnemyHud(m_id, m_portraitSprite, m_healthBar);
 }
 
 void Enemy::ReleaseAll()
@@ -262,5 +263,9 @@ void Enemy::DeleteAll()
 
 int Enemy::GetDamage() const
 {
-	return m_damageData.at(m_stateMachine->GetCurrentState()->GetName());
+	std::string stateName = m_stateMachine->GetCurrentState()->GetName();
+	if(m_damageData.count(stateName) == 0)
+		return 0;
+
+	return m_damageData.at(stateName);
 }

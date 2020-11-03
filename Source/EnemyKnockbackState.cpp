@@ -2,6 +2,7 @@
 #include "Enemy.h"
 #include "HitBoxManager.h"
 #include "Animator.h"
+#include "InGameHudManager.h"
 
 EnemyKnockbackState* EnemyKnockbackState::Instance()
 {
@@ -15,6 +16,7 @@ void EnemyKnockbackState::OnEnter(Enemy* enemy)
 	enemy->SetGrounded(false);
 	enemy->GetHitBoxManager()->KillAll();
 	enemy->GetAnimator()->SetAnimation(m_name);
+	enemy->ShowEnemyHud();
 }
 
 void EnemyKnockbackState::Execute(Enemy* enemy)

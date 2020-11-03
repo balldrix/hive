@@ -1,8 +1,8 @@
-// InGameUiManager.h
+// InGameHudManager.h
 // Christopher Ball 2019-2020
 
-#ifndef _INGAME_UI_MANAGER_H_
-#define _INGAME_UI_MANAGER_H_
+#ifndef _INGAME_HUD_MANAGER_H_
+#define _INGAME_HUD_MANAGER_H_
 
 #include "pch.h"
 
@@ -12,11 +12,11 @@ class Graphics;
 class Texture;
 class Sprite;
 
-class InGameUiManager
+class InGameHudManager
 {
 public:
-	InGameUiManager();
-	~InGameUiManager();
+	InGameHudManager();
+	~InGameHudManager();
 
 	void Init(Graphics* graphics);
 	void Render(Graphics* graphics);
@@ -27,13 +27,14 @@ public:
 	BarController* GetPlayerHealthBar() const { return m_playerHealthBar; }
 
 	void AddEnemyKill();
-	void DisablePortrait(std::string id, Sprite* sprite);
+	void HideEnemyHud(std::string id);
 	void SetKillCount(const int& kills);
-	void DisplayEnemyPortrait(std::string id, Sprite* sprite);
+	void ShowEnemyHud(std::string id, Sprite* sprite, BarController* healthBar);
 	void ReleaseAll();
 
 private:
 	BarController* m_playerHealthBar;
+	BarController* m_enemyHealthBar;
 	CharacterPortrait* m_playerPortrait;
 	Sprite* m_enemyPortrait;
 	std::string m_enemyId;
@@ -41,4 +42,4 @@ private:
 	int m_killCount;
 };
 
-#endif _INGAME_UI_MANAGER_H_
+#endif _INGAME_HUD_MANAGER_H_

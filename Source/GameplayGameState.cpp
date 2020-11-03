@@ -11,7 +11,7 @@
 #include "Animator.h"
 #include "Player.h"
 #include "Background.h"
-#include "InGameUiManager.h"
+#include "InGameHudManager.h"
 #include "Resources.h"
 #include "UnitVectors.h"
 #include "HitBoxManager.h"
@@ -124,7 +124,7 @@ void GameplayGameState::LoadAssets()
 	// create objects in memory
 	m_player = new Player();
 	m_background = new Background();
-	m_uiManager = new InGameUiManager();
+	m_uiManager = new InGameHudManager();
 
 	// load textures
 	m_playerTexture->LoadTexture(m_graphics, "GameData\\Sprites\\playerSpriteSheet.png");

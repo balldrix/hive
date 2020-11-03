@@ -3,7 +3,7 @@
 #include "Animator.h"
 #include "HitBoxManager.h"
 #include "UnitVectors.h"
-#include "InGameUiManager.h"
+#include "InGameHudManager.h"
 
 EnemyDeadState* EnemyDeadState::Instance()
 {
