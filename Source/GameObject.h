@@ -11,9 +11,6 @@
 using std::string;
 using std::map;
 
-// constants
-const float Gravity = 0.00065f;
-
 // forward definitions
 class Graphics;
 class Sprite;
@@ -48,7 +45,6 @@ public:
 	virtual void	Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem);
 
 	virtual void	Update(float deltaTime);	// update object
-	bool IsAlmostGrounded();
 	virtual void 	Render(Graphics* graphics) = 0;	// render object
 
 	virtual void	Move(const Vector2& direction);

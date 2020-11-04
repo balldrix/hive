@@ -51,6 +51,9 @@ void EnemyDeadState::Execute(Enemy* enemy)
 
 		// reset anim
 		enemy->GetStateMachine()->ChangeState(EnemyKnockbackState::Instance());
+		
+		if(enemy->GetKnockbackCount() < 1)
+			enemy->SetDead();
 	}
 }
 

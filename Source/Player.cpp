@@ -291,7 +291,7 @@ void Player::ApplyDamage(GameObject* source, const int& amount)
 		Knockback(direction, 80.0f);
 
 		// bounce 
-		SetKnockbackCount(1);
+		SetKnockbackCount(2);
 	}
 	else
 	{

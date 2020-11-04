@@ -133,6 +133,11 @@ void Enemy::SetData(const EnemyData& data)
 	m_enemyData = data;
 }
 
+void Enemy::SetDead()
+{
+	m_dead = true;
+}
+
 void Enemy::SetPlayerTarget(Player* player)
 {
 	m_playerTarget = player;
@@ -171,10 +176,10 @@ void Enemy::ApplyDamage(GameObject* source, const int& amount)
 		}
 
 		// knockback Enemy with force
-		Knockback(direction, 80.0f);
+		Knockback(direction, 100.0f);
 
 		// bounce 
-		SetKnockbackCount(1);
+		SetKnockbackCount(2);
 	}
 	else
 	{
@@ -214,7 +219,6 @@ void Enemy::Kill()
 {
 	GetUiManager()->AddEnemyKill();
 	GetUiManager()->HideEnemyHud(m_id);
-	m_dead = true;
 }
 
 void Enemy::ShowEnemyHud()

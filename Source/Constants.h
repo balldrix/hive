@@ -9,7 +9,8 @@ namespace GlobalConstants
 	const unsigned int		WND_HEIGHT			= 640;					// window height
 	const unsigned int		GAME_WIDTH			= 120;					// game width
 	const unsigned int		GAME_HEIGHT			= 80;					// game height
-	const float				BACK_COLOUR[4] = { 0.3f, 0.3f, 0.3f, 0.0f };// colour of window backPath
+	const float				BACK_COLOUR[4]		= { 0.3f, 0.3f, 0.3f, 0.0f };// colour of window backPath// constants
+	const float Gravity							= 2.0f;
 }
 
 namespace InGameHudConstants

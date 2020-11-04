@@ -36,6 +36,7 @@ public:
 	void					Reset();
 
 	void					SetData(const EnemyData& data);
+	void					SetDead();
 	void					SetPlayerTarget(Player* player);
 	void					SetHostile(bool isHostile);
 	void					ResetTimer();

@@ -40,7 +40,7 @@ void PlayerDeadState::Execute(Player* player)
 		}
 
 		// knockback with  50.0f force
-		player->Knockback(direction, 50.0f);
+		player->Knockback(direction, 30.0f);
 
 		// reduce knock back amount
 		player->SetKnockbackCount(player->GetKnockbackCount() - 1);

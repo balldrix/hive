@@ -4,6 +4,7 @@
 #include "Animator.h"
 #include "ControlSystem.h"
 #include "Camera.h"
+#include "Constants.h"
 
 GameObject::GameObject() :
 	m_id("GameObject"),
@@ -74,6 +75,27 @@ void GameObject::SetID(std::string id)
 
 void GameObject::Update(float deltaTime)
 {
+	// true if object is grounded
+	if(m_grounded)
+	{
+		// ground y position
+		m_groundPosition.y = m_position.y;
+	}
+	else
+	{
+		// apply gravity
+		SetVelocity(m_currentVelocity.x, m_currentVelocity.y += 0.002f);
+
+		// true if the y position is close enough to the ground 
+		if(std::abs(m_position.y - m_groundPosition.y) < 2.0f && m_currentVelocity.y > 0.0f)
+		{
+			m_grounded = true;
+			m_position.y = m_groundPosition.y;
+			m_currentVelocity.y = 0.0f;
+			m_targetVelocity.y = 0.0f;
+		}
+	}
+
 	float t;
 	float x;
 	t = GetLerpAmount(m_targetVelocity.x);
@@ -89,25 +111,6 @@ void GameObject::Update(float deltaTime)
 	
 	// update ground x position
 	m_groundPosition.x = m_position.x;
-
-	// true if object is grounded
-	if(m_grounded)
-	{
-		// ground y position
-		m_groundPosition.y = m_position.y;
-	}
-	else
-	{
-		// apply gravity
-		SetVelocity(m_currentVelocity.x, m_currentVelocity.y += Gravity);
-
-		// true if the y position is close enough to the ground 
-		if(IsAlmostGrounded())
-		{
-			m_grounded = true;
-			m_position.y = m_groundPosition.y;
-		}
-	}
 
 	// if object has an animator
 	if(m_animator)
@@ -139,12 +142,6 @@ void GameObject::Update(float deltaTime)
 	{
 		m_hitBoxManager->Update();
 	}
-}
-
-bool GameObject::IsAlmostGrounded()
-{
-	return std::abs(m_position.y) - std::abs(m_groundPosition.y) < 0.00002f &&
-		m_currentVelocity.y > 0.0f;
 }
 
 void GameObject::Move(const Vector2 &direction)
