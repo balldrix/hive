@@ -16,7 +16,7 @@ protected:
 
 public:
 	virtual ~State() {}
-
+	
 	// on enter
 	virtual void OnEnter(T*) = 0;
 

@@ -382,6 +382,12 @@
     <Image Include="GameData\Sprites\UI\mook_hud_portrait.png">
       <Filter>Game Data\Sprites\UI</Filter>
     </Image>
+    <Image Include="GameData\Sprites\UI\lives_x0.png" />
+    <Image Include="GameData\Sprites\UI\lives_x1.png" />
+    <Image Include="GameData\Sprites\UI\lives_x2.png" />
+    <Image Include="GameData\Sprites\UI\lives_x3.png" />
+    <Image Include="GameData\Sprites\UI\lives_x4.png" />
+    <Image Include="GameData\Sprites\UI\lives_x5.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GameData\AnimationData\playerAnimationData.json">
@@ -412,6 +418,7 @@
     <None Include="GameData\SpriteFonts\goodbye_despair_12pt.spritefont">
       <Filter>Game Data\SpriteFonts</Filter>
     </None>
+    <None Include="GameData\SpriteFonts\silkscreen_8pt.spritefont" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="GameData\EnemyData\positionData.txt">

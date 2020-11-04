@@ -12,8 +12,9 @@
 #include "UnitVectors.h"
 #include "Camera.h"
 #include "Error.h"
+#include "Constants.h"
 
-Player::Player() : 
+Player::Player() :
 	m_stateMachine(nullptr),
 	m_lives(0)
 {
@@ -123,6 +124,9 @@ bool Player::LoadPlayerData(std::string filename)
 
 void Player::Update(float deltaTime)
 {
+	if(m_dead == true)
+		return;
+
 	// update player state machine
 	m_stateMachine->Update();
 
@@ -130,19 +134,33 @@ void Player::Update(float deltaTime)
 	GameObject::Update(deltaTime);
 
 	if(m_stateMachine->GetCurrentState() != PlayerAttackState::Instance())
-	{
 		m_controlSystem->Update(deltaTime);
-	}
 
 	if(m_stateMachine->GetCurrentState() == PlayerDeadState::Instance())
-	{
 		m_deathTimer += deltaTime;
-	}
 
 	if(m_deathTimer > m_playerData.deathTime)
-	{
-		m_dead = true;
-	}
+		Kill();
+}
+
+void Player::Kill()
+{
+	m_lives--;
+	m_dead = true;
+}
+
+void Player::Respawn()
+{
+	m_grounded = false;
+	m_position = m_camera->GetPosition() + Vector2(GlobalConstants::GAME_WIDTH * 0.5f, 70);
+	m_groundPosition = m_position;
+	m_position.y = -20;
+	m_stateMachine->ChangeState((PlayerIdleState::Instance()));
+	m_hitBoxManager->SetCurrentHitBox(0);
+	m_health = m_playerData.objectData.startingHealth;
+	m_deathTimer = 0.0f;
+	m_dead = false;
+	m_active = true;
 }
 
 void Player::Render(Graphics* graphics)
@@ -186,7 +204,7 @@ void Player::Reset()
 	m_deathTimer = 0.0f;
 	m_dead = false;
 	m_active = true;
-	m_lives--;
+	m_lives = m_playerData.objectData.startingLives;
 }
 
 int Player::GetDamage() const

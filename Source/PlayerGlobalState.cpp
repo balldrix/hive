@@ -61,17 +61,12 @@ void PlayerGlobalState::Execute(Player* player)
 		default:
 			break;
 		}
-		// true if moving to the left
-		if(player->GetCurrentVelocity().x < 0)
-		{
-			player->FlipHorizontally(true);
-		}
 
-		// true if moving to the right
+		if(player->GetCurrentVelocity().x < 0)
+			player->FlipHorizontally(true);
+
 		if(player->GetCurrentVelocity().x > 0)
-		{
 			player->FlipHorizontally(false);
-		}
 	}
 }
 

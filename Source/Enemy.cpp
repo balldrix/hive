@@ -19,7 +19,7 @@ Enemy::Enemy() :
 	m_stateMachine(nullptr),
 	m_thinkingTimer(0.0f),
 	m_isHostile(false),
-	m_uiManager(nullptr),
+	m_hudManager(nullptr),
 	m_portraitSprite(nullptr),
 	m_healthBar(nullptr)
 {}
@@ -51,7 +51,7 @@ void Enemy::Init(Graphics* graphics, const Vector2& position, SpriteSheet* sprit
 	m_id = m_enemyData.objectData.id;
 	m_health = m_enemyData.objectData.startingHealth;
 
-	m_uiManager = inGameUiManager;
+	m_hudManager = inGameUiManager;
 	m_portraitSprite = portraitSprite;
 
 	m_healthBar = new BarController();
@@ -220,7 +220,7 @@ void Enemy::Kill()
 void Enemy::ShowEnemyHud()
 {
 	m_healthBar->SetCurrentValue(m_health);
-	m_uiManager->ShowEnemyHud(m_id, m_portraitSprite, m_healthBar);
+	m_hudManager->ShowEnemyHud(m_id, m_portraitSprite, m_healthBar);
 }
 
 void Enemy::ReleaseAll()

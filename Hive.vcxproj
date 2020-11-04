@@ -131,6 +131,12 @@
     <Image Include="GameData\Sprites\hitbox.png" />
     <Image Include="GameData\Sprites\playerSpriteSheet.png" />
     <Image Include="GameData\Sprites\shadow.png" />
+    <Image Include="GameData\Sprites\UI\lives_x0.png" />
+    <Image Include="GameData\Sprites\UI\lives_x1.png" />
+    <Image Include="GameData\Sprites\UI\lives_x2.png" />
+    <Image Include="GameData\Sprites\UI\lives_x3.png" />
+    <Image Include="GameData\Sprites\UI\lives_x4.png" />
+    <Image Include="GameData\Sprites\UI\lives_x5.png" />
     <Image Include="GameData\Sprites\UI\mook_hud_portrait.png" />
     <Image Include="GameData\Sprites\UI\player1_hud_healthbar_background.png" />
     <Image Include="GameData\Sprites\UI\player1_hud_healthbar_fill.png" />
@@ -145,6 +151,7 @@
     <None Include="GameData\HitBoxData\enemyHitBoxData.json" />
     <None Include="GameData\HitBoxData\playerHitBoxData.json" />
     <None Include="GameData\SpriteFonts\goodbye_despair_12pt.spritefont" />
+    <None Include="GameData\SpriteFonts\silkscreen_8pt.spritefont" />
     <None Include="GameData\SpriteSheetData\enemySpriteSheetData.json" />
     <None Include="GameData\SpriteSheetData\playerSpriteSheetData.json" />
     <None Include="packages.config" />

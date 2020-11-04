@@ -102,7 +102,7 @@ void GameObject::Update(float deltaTime)
 		SetVelocity(m_currentVelocity.x, m_currentVelocity.y += Gravity);
 
 		// true if the y position is close enough to the ground 
-		if(m_position.y - m_groundPosition.y < 0.00002f && m_currentVelocity.y > 0.0f)
+		if(IsAlmostGrounded())
 		{
 			m_grounded = true;
 			m_position.y = m_groundPosition.y;
@@ -139,6 +139,12 @@ void GameObject::Update(float deltaTime)
 	{
 		m_hitBoxManager->Update();
 	}
+}
+
+bool GameObject::IsAlmostGrounded()
+{
+	return std::abs(m_position.y) - std::abs(m_groundPosition.y) < 0.00002f &&
+		m_currentVelocity.y > 0.0f;
 }
 
 void GameObject::Move(const Vector2 &direction)

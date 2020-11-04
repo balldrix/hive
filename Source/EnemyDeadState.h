@@ -17,7 +17,6 @@ public:
 	static EnemyDeadState* Instance();
 
 	virtual void OnEnter(Enemy* enemy);
-	bool EnemyIsDead(Enemy* enemy);
 	virtual void Execute(Enemy* enemy);
 	virtual void OnExit(Enemy* enemy);
 

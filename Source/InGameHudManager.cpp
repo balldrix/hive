@@ -6,49 +6,57 @@
 #include "Texture.h"
 #include "Sprite.h"
 
+const int MaxLives = 5;
+
 InGameHudManager::InGameHudManager() :
+	m_livesLeftTextures(),
+	m_livesLeftSprites(),
 	m_playerHealthBar(nullptr),
 	m_playerPortrait(nullptr),
 	m_enemyPortrait(nullptr),
 	m_despairFont12(nullptr),
 	m_enemyId(std::string()),
 	m_enemyHealthBar(nullptr),
-	m_killCount(0)
+	m_killCount(0),
+	m_playerLivesLeft(0)
 {
 }
 
 InGameHudManager::~InGameHudManager()
 {
-	if(m_despairFont12 != nullptr)
-	{
-		delete m_despairFont12;
-		m_despairFont12 = nullptr;
-	}
-
-	if(m_playerPortrait != nullptr)
-	{
-		delete m_playerPortrait;
-		m_playerPortrait = nullptr;
-	}
-
-	if(m_playerHealthBar != nullptr)
-	{
-		delete m_playerHealthBar;
-		m_playerHealthBar = nullptr;
-	}
+	DeleteAll();
 }
 
 void InGameHudManager::Init(Graphics* graphics)
 {
 	m_playerHealthBar = new BarController();
 	m_playerHealthBar->Init(graphics);
-	m_playerHealthBar->SetPosition(Vector2(InGameHudConstants::HealthBarPositionX, 
+	m_playerHealthBar->SetPosition(Vector2(InGameHudConstants::HealthBarPositionX,
 		InGameHudConstants::HealthBarPositionY));
 
 	m_playerPortrait = new CharacterPortrait();
 	m_playerPortrait->Init(graphics, "GameData//Sprites//UI//player1_hud_portrait.png");
 
 	m_despairFont12 = new SpriteFont(graphics->GetDevice(), L"GameData//SpriteFonts//goodbye_despair_12pt.spritefont");
+
+	m_playerLivesLeft = MaxLives;
+
+	for(size_t i = 0; i <= MaxLives; i++)
+	{
+		Texture* texture = new Texture();
+		std::string filePath = "GameData//Sprites//UI//lives_x" + std::to_string(i) + ".png";
+		texture->LoadTexture(graphics, filePath);
+		m_livesLeftTextures.push_back(texture);
+	}
+
+	for(size_t i = 0; i <= MaxLives; i++)
+	{
+		Sprite* sprite = new Sprite();
+		sprite->Init(m_livesLeftTextures[i]);
+		sprite->SetOrigin(Vector2::Zero);
+		sprite->SetPosition(Vector2(74, 6));
+		m_livesLeftSprites.push_back(sprite);
+	}
 }
 
 void InGameHudManager::Render(Graphics* graphics)
@@ -64,10 +72,11 @@ void InGameHudManager::Render(Graphics* graphics)
 
 	m_despairFont12->DrawString(graphics->GetSpriteBatch(),
 		std::to_string(m_killCount).c_str(),
-		Vector2(95, 2),
+		Vector2(105, 0),
 		Colors::YellowGreen, 0,
-		Vector2::Zero
-	);
+		Vector2::Zero);
+
+	m_livesLeftSprites[m_playerLivesLeft]->Render(graphics);
 }
 
 void InGameHudManager::SetCurrentPlayerHealth(const int& health)
@@ -85,6 +94,11 @@ void InGameHudManager::AddEnemyKill()
 	m_killCount++;
 }
 
+void InGameHudManager::UpdatePlayerLives(const int& lives)
+{
+	m_playerLivesLeft = lives;
+}
+
 void InGameHudManager::HideEnemyHud(std::string id)
 {
 	if(m_enemyId != id)
@@ -93,11 +107,6 @@ void InGameHudManager::HideEnemyHud(std::string id)
 	m_enemyPortrait = nullptr;
 	m_enemyHealthBar = nullptr;
 	m_enemyId = std::string();
-}
-
-void InGameHudManager::SetKillCount(const int& killCount)
-{
-	m_killCount = killCount;
 }
 
 void InGameHudManager::ShowEnemyHud(std::string id, Sprite* portrait, BarController* healthBar)
@@ -111,4 +120,57 @@ void InGameHudManager::ReleaseAll()
 {
 	m_playerHealthBar->ReleaseAll();
 	m_playerPortrait->ReleaseAll();
+
+	for(size_t i = 0; i < m_livesLeftTextures.size(); i++)
+	{
+		m_livesLeftTextures[i]->Release();
+	}
+}
+
+void InGameHudManager::Reset()
+{
+	HideEnemyHud(m_enemyId);
+	m_killCount = 0;
+	m_playerLivesLeft = MaxLives;
+}
+
+void InGameHudManager::DeleteAll()
+{
+	for(size_t i = m_livesLeftSprites.size(); i--;)
+	{
+		if(m_livesLeftSprites[i] != nullptr)
+		{
+			delete m_livesLeftSprites[i];
+			m_livesLeftSprites[i] = nullptr;
+		}
+	}
+
+	for(size_t i = m_livesLeftTextures.size(); i--;)
+	{
+		if(m_livesLeftTextures[i] != nullptr)
+		{
+			delete m_livesLeftTextures[i];
+			m_livesLeftTextures[i] = nullptr;
+		}
+	}
+
+	m_livesLeftTextures.clear();
+
+	if(m_despairFont12 != nullptr)
+	{
+		delete m_despairFont12;
+		m_despairFont12 = nullptr;
+	}
+
+	if(m_playerPortrait != nullptr)
+	{
+		delete m_playerPortrait;
+		m_playerPortrait = nullptr;
+	}
+
+	if(m_playerHealthBar != nullptr)
+	{
+		delete m_playerHealthBar;
+		m_playerHealthBar = nullptr;
+	}
 }

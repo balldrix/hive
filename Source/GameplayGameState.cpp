@@ -46,7 +46,7 @@ GameplayGameState::GameplayGameState() :
 	m_NPCManager(nullptr),
 	m_player(nullptr),
 	m_background(nullptr),
-	m_uiManager(nullptr),
+	m_hudManager(nullptr),
 	m_canAttack(true),
 	m_running(false),
 	m_worldWidth(0),
@@ -124,7 +124,7 @@ void GameplayGameState::LoadAssets()
 	// create objects in memory
 	m_player = new Player();
 	m_background = new Background();
-	m_uiManager = new InGameHudManager();
+	m_hudManager = new InGameHudManager();
 
 	// load textures
 	m_playerTexture->LoadTexture(m_graphics, "GameData\\Sprites\\playerSpriteSheet.png");
@@ -171,7 +171,7 @@ void GameplayGameState::LoadAssets()
 	{
 		enemyList[i]->SetPlayerTarget(m_player);
 
-		enemyList[i]->Init(m_graphics, enemyList[i]->GetData().objectData.startingPosition, m_enemySprite, m_enemyShadowSprite, m_enemyAnimator, m_enemyHitBoxManager, m_uiManager, m_mookPortraitSprite);
+		enemyList[i]->Init(m_graphics, enemyList[i]->GetData().objectData.startingPosition, m_enemySprite, m_enemyShadowSprite, m_enemyAnimator, m_enemyHitBoxManager, m_hudManager, m_mookPortraitSprite);
 
 		std::string type = enemyList[i]->GetData().type;
 		std::string enemyDataFile = "GameData\\EnemyData\\" + type + "\\" + type + "Damage.txt";
@@ -188,10 +188,10 @@ void GameplayGameState::LoadAssets()
 
 	m_background->Init(m_backgroundSprite);
 	m_background->SetCamera(m_camera);
-	m_uiManager->Init(m_graphics);
+	m_hudManager->Init(m_graphics);
 
-	m_uiManager->SetMaxPlayerHealth(m_player->GetMaxHealth());
-	m_uiManager->SetCurrentPlayerHealth(m_player->GetHealth());
+	m_hudManager->SetMaxPlayerHealth(m_player->GetMaxHealth());
+	m_hudManager->SetCurrentPlayerHealth(m_player->GetHealth());
 	
 	// set running to true
 	m_running = true;
@@ -199,10 +199,10 @@ void GameplayGameState::LoadAssets()
 
 void GameplayGameState::DeleteAssets()
 {
-	if(m_uiManager)
+	if(m_hudManager != nullptr)
 	{
-		delete m_uiManager;
-		m_uiManager = nullptr;
+		delete m_hudManager;
+		m_hudManager = nullptr;
 	}
 
 	if(m_background)
@@ -442,13 +442,12 @@ void GameplayGameState::Update(float deltaTime)
 	m_camera->Update(deltaTime);
 	m_NPCManager->Update(deltaTime);
 	m_background->Update(deltaTime);
-	m_uiManager->SetMaxPlayerHealth(m_player->GetMaxHealth());
-	m_uiManager->SetCurrentPlayerHealth(m_player->GetHealth());
+	m_hudManager->SetMaxPlayerHealth(m_player->GetMaxHealth());
+	m_hudManager->SetCurrentPlayerHealth(m_player->GetHealth());
+	m_hudManager->UpdatePlayerLives(m_player->GetLives());
 
-	if(m_player->IsDead())
-	{
-		ResetGame();
-	}
+	if(m_player->IsDead() && m_player->GetLives() > 0)
+		m_player->Respawn();
 }
 
 void GameplayGameState::ProcessCollisions()
@@ -468,6 +467,7 @@ void GameplayGameState::ProcessCollisions()
 				enemy->GetHitBoxManager()->GetHurtBox()))
 			{
 				enemy->ApplyDamage(m_player, m_player->GetDamage());
+				enemy->ShowEnemyHud();
 			}
 		}
 
@@ -479,6 +479,7 @@ void GameplayGameState::ProcessCollisions()
 				m_player->GetHitBoxManager()->GetHurtBox()))
 			{
 				m_player->ApplyDamage(enemy, enemy->GetDamage());
+				enemy->ShowEnemyHud();
 			}
 		}
 	}
@@ -549,23 +550,16 @@ void GameplayGameState::ProcessCollisions()
 
 void GameplayGameState::Render()
 {
-	//////////////////////////////////////
-	// render background first
-
-	// TODO refactor background it's own class
 	m_background->Render(m_graphics);
-
-	//////////////////////////////////////
-	// render game objects
 	m_player->Render(m_graphics);
 	m_NPCManager->Render(m_graphics);
-	m_uiManager->Render(m_graphics);
+	m_hudManager->Render(m_graphics);
 }
 
 void GameplayGameState::ReleaseAll()
 {
 	// release all texture resources
-	if(m_uiManager) { m_uiManager->ReleaseAll(); }
+	if(m_hudManager) { m_hudManager->ReleaseAll(); }
 	if(m_backgroundTexture) { m_backgroundTexture->Release(); }
 	if(m_shadowTexture) { m_shadowTexture->Release(); }
 	if(m_hitBoxTexture) { m_hitBoxTexture->Release(); }
@@ -576,12 +570,10 @@ void GameplayGameState::ReleaseAll()
 
 void GameplayGameState::ResetGame()
 {
-	if(m_player->GetLives() < 0)
-		return;
-
+	m_input->ClearAll();
 	m_player->Reset();
 	m_NPCManager->Reset();
 	m_backgroundSprite->SetPosition(Vector2::Zero);
 	m_camera->Reset();
-	m_uiManager->SetKillCount(0);
+	m_hudManager->Reset();
 }

@@ -27,12 +27,16 @@ public:
 	BarController* GetPlayerHealthBar() const { return m_playerHealthBar; }
 
 	void AddEnemyKill();
+	void UpdatePlayerLives(const int& lives);
 	void HideEnemyHud(std::string id);
-	void SetKillCount(const int& kills);
 	void ShowEnemyHud(std::string id, Sprite* sprite, BarController* healthBar);
 	void ReleaseAll();
+	void Reset();
+	void DeleteAll();
 
 private:
+	std::vector<Texture*> m_livesLeftTextures;
+	std::vector<Sprite*> m_livesLeftSprites;
 	BarController* m_playerHealthBar;
 	BarController* m_enemyHealthBar;
 	CharacterPortrait* m_playerPortrait;
@@ -40,6 +44,7 @@ private:
 	std::string m_enemyId;
 	SpriteFont* m_despairFont12;
 	int m_killCount;
+	int m_playerLivesLeft;
 };
 
 #endif _INGAME_HUD_MANAGER_H_

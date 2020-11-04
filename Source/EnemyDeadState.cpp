@@ -17,13 +17,8 @@ void EnemyDeadState::OnEnter(Enemy* enemy)
 	enemy->GetAnimator()->SetAnimation(m_name);
 	enemy->GetHitBoxManager()->KillAll();
 	
-	if(EnemyIsDead(enemy))
+	if(enemy->GetHealth() < 1)
 		enemy->Kill();
-}
-
-bool EnemyDeadState::EnemyIsDead(Enemy* enemy)
-{
-	return enemy->GetKnockbackCount() < 1 && enemy->IsGrounded();
 }
 
 void EnemyDeadState::Execute(Enemy* enemy)

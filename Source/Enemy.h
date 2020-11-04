@@ -46,7 +46,7 @@ public:
 	bool					IsHostile() const { return m_isHostile; }
 	EnemyData				GetData() const { return m_enemyData; }
 	int						GetDamage() const;
-	InGameHudManager*		GetUiManager() const { return m_uiManager; }
+	InGameHudManager*		GetUiManager() const { return m_hudManager; }
 
 	void					ApplyDamage(GameObject* source, const int& amount);
 	void					Knockback(const Vector2& direction, const float& force);
@@ -61,7 +61,7 @@ public:
 private:
 	EnemyData				m_enemyData;
 	Player*					m_playerTarget;
-	InGameHudManager*		m_uiManager;
+	InGameHudManager*		m_hudManager;
 	Sprite*					m_portraitSprite;
 	BarController*			m_healthBar;
 	StateMachine<Enemy>*	m_stateMachine;
