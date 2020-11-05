@@ -219,6 +219,7 @@ void Enemy::Kill()
 {
 	GetUiManager()->AddEnemyKill();
 	GetUiManager()->HideEnemyHud(m_id);
+	m_dead = true;
 }
 
 void Enemy::ShowEnemyHud()

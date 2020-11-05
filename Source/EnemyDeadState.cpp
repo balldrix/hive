@@ -16,9 +16,6 @@ void EnemyDeadState::OnEnter(Enemy* enemy)
 	enemy->GetAnimator()->Reset();
 	enemy->GetAnimator()->SetAnimation(m_name);
 	enemy->GetHitBoxManager()->KillAll();
-	
-	if(enemy->GetHealth() < 1)
-		enemy->Kill();
 }
 
 void EnemyDeadState::Execute(Enemy* enemy)
@@ -53,7 +50,7 @@ void EnemyDeadState::Execute(Enemy* enemy)
 		enemy->GetStateMachine()->ChangeState(EnemyKnockbackState::Instance());
 		
 		if(enemy->GetKnockbackCount() < 1)
-			enemy->SetDead();
+			enemy->Kill();
 	}
 }
 
