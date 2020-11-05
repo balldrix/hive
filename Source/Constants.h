@@ -11,6 +11,9 @@ namespace GlobalConstants
 	const unsigned int		GAME_HEIGHT			= 80;					// game height
 	const float				BACK_COLOUR[4]		= { 0.3f, 0.3f, 0.3f, 0.0f };// colour of window backPath// constants
 	const float Gravity							= 2.0f;
+	const float RespawnGroundPositionY			= 70.0f;
+	const float RespawnAirPositionY				= -20.0f;
+	const float FallingSpeed						= 5.0f;
 }
 
 namespace InGameHudConstants

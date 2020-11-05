@@ -151,16 +151,17 @@ void Player::Kill()
 
 void Player::Respawn()
 {
-	m_grounded = false;
-	m_position = m_camera->GetPosition() + Vector2(GlobalConstants::GAME_WIDTH * 0.5f, 70);
-	m_groundPosition = m_position;
-	m_position.y = -20;
 	m_stateMachine->ChangeState((PlayerIdleState::Instance()));
+	m_position = m_camera->GetPosition() + Vector2(GlobalConstants::GAME_WIDTH * 0.5f, GlobalConstants::RespawnGroundPositionY);
 	m_hitBoxManager->SetCurrentHitBox(0);
-	m_health = m_playerData.objectData.startingHealth;
+	m_groundPosition = m_position;
+	m_position.y = GlobalConstants::RespawnAirPositionY;
 	m_deathTimer = 0.0f;
 	m_dead = false;
 	m_active = true;
+	m_grounded = false;
+	m_health = m_playerData.objectData.startingHealth;
+	SetVelocity(m_currentVelocity.x, m_currentVelocity.y + GlobalConstants::FallingSpeed);
 }
 
 void Player::Render(Graphics* graphics)
