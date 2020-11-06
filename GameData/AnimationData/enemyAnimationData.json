@@ -62,6 +62,13 @@
       "frameCount": 2,
       "framesPerSecond": 8,
       "loop": true
+    },
+    {
+      "name": "Dancing",
+      "index": 19,
+      "frameCount": 2,
+      "framesPerSecond": 8,
+      "loop": true
     }
   ]
 }
