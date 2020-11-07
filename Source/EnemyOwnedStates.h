@@ -1,5 +1,5 @@
 // EnemyOwnedStates.h
-// Christopher Ball 2019
+// Christopher Ball 2019-2020
 // list of states owned by the enemy class
 
 #ifndef _ENEMYOWNEDSTATES_H_
@@ -13,5 +13,6 @@
 #include "EnemyHurtState.h"
 #include "EnemyKnockbackState.h"
 #include "EnemyDeadState.h"
+#include "EnemyVictoryState.h"
 
 #endif _ENEMYOWNEDSTATES_H_

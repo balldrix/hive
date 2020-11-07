@@ -74,6 +74,9 @@ void EnemyIdleState::Execute(Enemy* enemy)
 		// reset timer
 		enemy->ResetTimer();
 	}
+
+	if(enemy->GetPlayerTarget()->GetKnockbackCount() < 1 && enemy->GetPlayerTarget()->GetHealth() < 1)
+		enemy->GetStateMachine()->ChangeState(EnemyVictoryState::Instance());
 }
 
 void EnemyIdleState::OnExit(Enemy* enemy)

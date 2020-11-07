@@ -139,6 +139,7 @@
     <ClCompile Include="Source\InGameHudManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\EnemyVictoryState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -350,6 +351,7 @@
     <ClInclude Include="Source\InGameHudManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\EnemyVictoryState.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\hitbox.png">

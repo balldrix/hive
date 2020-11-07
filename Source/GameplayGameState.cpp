@@ -184,6 +184,7 @@ void GameplayGameState::LoadAssets()
 		
 		enemyList[i]->GetHitBoxManager()->SetOwner(enemyList[i]);
 		enemyList[i]->SetCamera(m_camera);
+		enemyList[i]->SetActive(false);
 	}
 
 	m_background->Init(m_backgroundSprite);

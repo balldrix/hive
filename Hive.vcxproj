@@ -36,6 +36,7 @@
     <ClCompile Include="Source\EnemyIdleState.cpp" />
     <ClCompile Include="Source\EnemyKnockbackState.cpp" />
     <ClCompile Include="Source\EnemyRunningState.cpp" />
+    <ClCompile Include="Source\EnemyVictoryState.cpp" />
     <ClCompile Include="Source\EnemyWalkingState.cpp" />
     <ClCompile Include="Source\Error.cpp" />
     <ClCompile Include="Source\Game.cpp" />
@@ -87,6 +88,7 @@
     <ClInclude Include="Source\EnemyKnockbackState.h" />
     <ClInclude Include="Source\EnemyOwnedStates.h" />
     <ClInclude Include="Source\EnemyRunningState.h" />
+    <ClInclude Include="Source\EnemyVictoryState.h" />
     <ClInclude Include="Source\EnemyWalkingState.h" />
     <ClInclude Include="Source\Error.h" />
     <ClInclude Include="Source\Game.h" />
