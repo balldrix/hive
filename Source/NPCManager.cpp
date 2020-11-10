@@ -23,7 +23,7 @@ void NPCManager::Init()
 		PostQuitMessage(0); // quit game
 	}
 
-	result = InitNPCs("GameData\\EnemyData\\positionData.txt");
+	result = InitNPCs("GameData\\EnemyData\\encounterData.txt");
 	if(result == false)
 	{
 		Error::FileLog(" Error initialising enemy list. EnemyManager.cpp line 24");
@@ -132,6 +132,9 @@ bool NPCManager::InitNPCs(std::string fileName)
 			// start position Y
 			file >> result;
 			data.objectData.startingPosition.y = std::stof(result);
+
+			file >> result;
+			data.encounterIndex = std::stoi(result);
 
 			Enemy* enemy = new Enemy();
 			enemy->SetData(data);

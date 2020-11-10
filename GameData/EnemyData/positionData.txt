@@ -1,3 +1,0 @@
-Enemy01 Mook 75 65;
-Enemy02 Mook 80 60;
-Enemy03 Mook 10 80;

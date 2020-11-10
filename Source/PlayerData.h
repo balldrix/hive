@@ -10,7 +10,7 @@
 struct PlayerData
 {
 	ObjectData objectData;
-	float deathTime;
+	float deathTime = 0.0f;
 };
 
 #endif // !_PLAYERDATA_H_

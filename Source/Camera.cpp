@@ -26,6 +26,9 @@ void Camera::Init(unsigned int width, unsigned int height, unsigned int worldWid
 
 void Camera::Update(float deltaTime)
 {
+	if(m_trackingTarget == nullptr)
+		return;
+
 	float x = m_trackingTarget->GetPositionX();
 	if(x > m_width / 2 && x < m_maxWidth)
 	{

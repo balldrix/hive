@@ -54,6 +54,8 @@ GameplayGameState::GameplayGameState() :
 	m_running(false),
 	m_worldWidth(0),
 	m_worldHeight(0),
+	m_encounterIndex(0),
+	m_deltaTime(0.0f),
 	GameState(L"GAMEPLAY")
 {}
 
@@ -198,7 +200,7 @@ void GameplayGameState::LoadAssets()
 	m_hudManager->SetCurrentPlayerHealth(m_player->GetHealth());
 	
 	m_sceneStateMachine = new StateMachine<GameplayGameState>(this);
-	m_sceneStateMachine->Init(StartingSceneState::Instance(), nullptr, GlobalSceneState::Instance());
+	m_sceneStateMachine->Init(TravellingSceneState::Instance(), nullptr, GlobalSceneState::Instance());
 
 	// set running to true
 	m_running = true;
@@ -456,6 +458,14 @@ void GameplayGameState::Update(float deltaTime)
 	m_sceneStateMachine->Update();
 }
 
+void GameplayGameState::CheckForEncounter()
+{
+	if(m_player->GetPositionX() < m_encounterPositions[m_encounterIndex])
+		return;
+
+	m_sceneStateMachine->ChangeState(EncounterSceneState::Instance());
+}
+
 void GameplayGameState::Tick(float deltaTime)
 {
 	m_player->Update(deltaTime);
@@ -588,17 +598,15 @@ void GameplayGameState::ReleaseAll()
 	if(m_playerTexture) { m_playerTexture->Release(); }
 }
 
-void GameplayGameState::Begin()
+void GameplayGameState::ResetGame()
 {
 	m_input->ClearAll();
 	m_player->Reset();
 	m_NPCManager->Reset();
 	m_backgroundSprite->SetPosition(Vector2::Zero);
 	m_camera->Reset();
+	m_camera->SetTarget(m_player);
 	m_hudManager->Reset();
-}
-
-void GameplayGameState::ResetGame()
-{
-	m_sceneStateMachine->ChangeState(StartingSceneState::Instance());
+	m_encounterIndex = 0;
+	m_sceneStateMachine->ChangeState(TravellingSceneState::Instance());
 }

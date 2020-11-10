@@ -31,7 +31,7 @@ public:
 	GameplayGameState(GameStateManager* gameStateManager);
 	virtual				~GameplayGameState();
 
-	void				Begin();
+	void				CheckForEncounter();
 	void				Tick(float deltaTime);
 	float				GetDeltaTime() const { return m_deltaTime; }
 
@@ -44,7 +44,10 @@ public:
 	void				Render();					
 
 	void				ReleaseAll();
-	void				ResetGame();				
+	void				ResetGame();			
+
+	Camera*				GetCamera() const { return m_camera; }
+	Player*				GetPlayer() const { return m_player; }
 
 private:			
 	void				LoadAssets();				
@@ -89,9 +92,13 @@ private:
 	bool				m_canAttack;				
 	bool				m_running;					
 
-	// world
 	unsigned int		m_worldWidth;
 	unsigned int		m_worldHeight;
+	int					m_encounterIndex;
+	int					m_encounterPositions[1] =
+	{
+		180
+	};
 
 	float				m_deltaTime;
 };

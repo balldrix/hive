@@ -62,25 +62,27 @@ void Enemy::Init(Graphics* graphics, const Vector2& position, SpriteSheet* sprit
 	m_healthBar->SetPosition(Vector2(InGameHudConstants::HealthBarPositionX, InGameHudConstants::EnemyHealthBarPositionY));
 
 	float percentage = (float)m_health / (float)m_playerTarget->GetMaxHealth();
-	unsigned int width = (float)m_healthBar->GetWidth() * percentage;
+	unsigned int width = (unsigned int)(m_healthBar->GetWidth() * percentage);
 	m_healthBar->SetWidth(width);
 }
 
 void
 Enemy::Update(float deltaTime)
 {
-	// update state machine
+	if(m_active == false)
+		return;
+
 	m_stateMachine->Update();
-
-	// update object
 	GameObject::Update(deltaTime);
-
 	m_thinkingTimer += deltaTime;
 }
 
 void
 Enemy::Render(Graphics* graphics)
 {
+	if(m_active == false)
+		return;
+
 	// render shadow first
 	if(m_shadow)
 	{
@@ -113,20 +115,14 @@ Enemy::Render(Graphics* graphics)
 void
 Enemy::Reset()
 {
-	// set enemy state back to Idle
 	m_stateMachine->ChangeState(EnemyIdleState::Instance());
-
-	// Set Position 
 	m_position = m_enemyData.objectData.startingPosition;
 	m_grounded = true;
 	m_movementSpeed = m_enemyData.objectData.walkSpeed;
-
-	// reset hitboxes
 	m_hitBoxManager->SetCurrentHitBox(0);
-
-	SetActive(true);
 	m_health = m_enemyData.objectData.startingHealth;
 	m_thinkingTimer = 0.0f;
+	m_active = false;
 }
 
 void Enemy::SetData(const EnemyData& data)

@@ -19,8 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\EncounterSceneState.cpp" />
     <ClCompile Include="Source\GlobalSceneState.cpp" />
-    <ClCompile Include="Source\BeginSceneState.cpp" />
+    <ClCompile Include="Source\TravellingSceneState.cpp" />
     <ClCompile Include="Source\AABB.cpp" />
     <ClCompile Include="Source\AnimatedSprite.cpp" />
     <ClCompile Include="Source\Animator.cpp" />
@@ -70,9 +71,10 @@
     <ClCompile Include="Source\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\EncounterSceneState.h" />
     <ClInclude Include="Source\GameplayOwnedSceneStates.h" />
     <ClInclude Include="Source\GlobalSceneState.h" />
-    <ClInclude Include="Source\BeginSceneState.h" />
+    <ClInclude Include="Source\TravellingSceneState.h" />
     <ClInclude Include="Source\AABB.h" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\Animator.h" />
@@ -165,7 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="GameData\EnemyData\Mook\mookDamage.txt" />
-    <Text Include="GameData\EnemyData\positionData.txt" />
+    <Text Include="GameData\EnemyData\encounterData.txt" />
     <Text Include="GameData\EnemyData\typeData.txt" />
     <Text Include="GameData\PlayerData\playerDamage.txt" />
     <Text Include="GameData\PlayerData\playerData.txt" />

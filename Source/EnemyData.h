@@ -15,6 +15,7 @@ struct EnemyData
 	float					thinkingTime;
 	float					fightingRange;
 	float					attackRange;
+	int						encounterIndex;
 };
 
 #endif // !_ENEMYDATA_H_

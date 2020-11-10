@@ -140,8 +140,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\EnemyVictoryState.cpp" />
-    <ClCompile Include="Source\BeginSceneState.cpp" />
     <ClCompile Include="Source\GlobalSceneState.cpp" />
+    <ClCompile Include="Source\TravellingSceneState.cpp" />
+    <ClCompile Include="Source\EncounterSceneState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -354,9 +355,10 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\EnemyVictoryState.h" />
-    <ClInclude Include="Source\BeginSceneState.h" />
     <ClInclude Include="Source\GlobalSceneState.h" />
     <ClInclude Include="Source\GameplayOwnedSceneStates.h" />
+    <ClInclude Include="Source\TravellingSceneState.h" />
+    <ClInclude Include="Source\EncounterSceneState.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\hitbox.png">
@@ -428,9 +430,6 @@
     <None Include="GameData\SpriteFonts\silkscreen_8pt.spritefont" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="GameData\EnemyData\positionData.txt">
-      <Filter>Game Data\EnemyData</Filter>
-    </Text>
     <Text Include="GameData\EnemyData\typeData.txt">
       <Filter>Game Data\EnemyData</Filter>
     </Text>
@@ -442,6 +441,9 @@
     </Text>
     <Text Include="GameData\EnemyData\Mook\mookDamage.txt">
       <Filter>Game Data\EnemyData\Mook</Filter>
+    </Text>
+    <Text Include="GameData\EnemyData\encounterData.txt">
+      <Filter>Game Data\EnemyData</Filter>
     </Text>
   </ItemGroup>
 </Project>

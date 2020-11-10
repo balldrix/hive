@@ -1,4 +1,5 @@
 #pragma once
 
 #include "GlobalSceneState.h"
-#include "BeginSceneState.h"
+#include "TravellingSceneState.h"
+#include "EncounterSceneState.h"
