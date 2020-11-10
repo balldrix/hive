@@ -140,6 +140,8 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\EnemyVictoryState.cpp" />
+    <ClCompile Include="Source\BeginSceneState.cpp" />
+    <ClCompile Include="Source\GlobalSceneState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -352,6 +354,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\EnemyVictoryState.h" />
+    <ClInclude Include="Source\BeginSceneState.h" />
+    <ClInclude Include="Source\GlobalSceneState.h" />
+    <ClInclude Include="Source\GameplayOwnedSceneStates.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\hitbox.png">

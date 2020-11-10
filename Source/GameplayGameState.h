@@ -22,6 +22,7 @@ class Background;
 class HitBoxManager;
 class NPCManager;
 class InGameHudManager;
+template<class T> class StateMachine;
 
 class GameplayGameState : public GameState
 {
@@ -29,6 +30,10 @@ public:
 	GameplayGameState();
 	GameplayGameState(GameStateManager* gameStateManager);
 	virtual				~GameplayGameState();
+
+	void				Begin();
+	void				Tick(float deltaTime);
+	float				GetDeltaTime() const { return m_deltaTime; }
 
 	void				OnEntry();					
 	void				OnExit();					
@@ -38,7 +43,7 @@ public:
 	void				ProcessCollisions();		
 	void				Render();					
 
-	void				ReleaseAll();				
+	void				ReleaseAll();
 	void				ResetGame();				
 
 private:			
@@ -79,6 +84,7 @@ private:
 	Background*			m_background;				
 	
 	InGameHudManager*	m_hudManager;
+	StateMachine<GameplayGameState>*		m_sceneStateMachine;
 
 	bool				m_canAttack;				
 	bool				m_running;					
@@ -86,6 +92,8 @@ private:
 	// world
 	unsigned int		m_worldWidth;
 	unsigned int		m_worldHeight;
+
+	float				m_deltaTime;
 };
 
 #endif _GAMEPLAYGAMESTATE_H_

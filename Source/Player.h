@@ -4,11 +4,11 @@
 #include "pch.h"
 #include "GameObject.h"
 #include "State.h"
-#include "StateMachine.h"
 #include "PlayerData.h"
 
 // forward declarations
 class ControlSystem;
+template<class T> class StateMachine;
 
 class Player : public GameObject
 {

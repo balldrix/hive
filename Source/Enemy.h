@@ -7,14 +7,13 @@
 
 #include "Constants.h"
 #include "GameObject.h"
-#include "State.h"
-#include "StateMachine.h"
 #include "EnemyData.h"
 
 class Graphics;
 class Player;
 class BarController;
 class InGameHudManager;
+template<class T> class StateMachine;
 
 class Enemy : public GameObject
 {

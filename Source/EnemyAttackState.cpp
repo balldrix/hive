@@ -4,6 +4,7 @@
 #include "Animator.h"
 #include "ControlSystem.h"
 #include "UnitVectors.h"
+#include "StateMachine.h"
 
 EnemyAttackState* EnemyAttackState::Instance()
 {

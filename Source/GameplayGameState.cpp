@@ -19,6 +19,8 @@
 #include "Enemy.h"
 #include "pch.h"
 #include "Error.h"
+#include "StateMachine.h"
+#include "GameplayOwnedSceneStates.h"
 
 GameplayGameState::GameplayGameState() :
 	m_gameStateManager(nullptr),
@@ -47,6 +49,7 @@ GameplayGameState::GameplayGameState() :
 	m_player(nullptr),
 	m_background(nullptr),
 	m_hudManager(nullptr),
+	m_sceneStateMachine(nullptr),
 	m_canAttack(true),
 	m_running(false),
 	m_worldWidth(0),
@@ -194,12 +197,21 @@ void GameplayGameState::LoadAssets()
 	m_hudManager->SetMaxPlayerHealth(m_player->GetMaxHealth());
 	m_hudManager->SetCurrentPlayerHealth(m_player->GetHealth());
 	
+	m_sceneStateMachine = new StateMachine<GameplayGameState>(this);
+	m_sceneStateMachine->Init(StartingSceneState::Instance(), nullptr, GlobalSceneState::Instance());
+
 	// set running to true
 	m_running = true;
 }
 
 void GameplayGameState::DeleteAssets()
 {
+	if(m_sceneStateMachine != nullptr)
+	{
+		delete m_sceneStateMachine;
+		m_sceneStateMachine = nullptr;
+	}
+
 	if(m_hudManager != nullptr)
 	{
 		delete m_hudManager;
@@ -439,6 +451,13 @@ void GameplayGameState::ProcessInput()
 
 void GameplayGameState::Update(float deltaTime)
 {
+	m_deltaTime = deltaTime;
+
+	m_sceneStateMachine->Update();
+}
+
+void GameplayGameState::Tick(float deltaTime)
+{
 	m_player->Update(deltaTime);
 	m_camera->Update(deltaTime);
 	m_NPCManager->Update(deltaTime);
@@ -569,7 +588,7 @@ void GameplayGameState::ReleaseAll()
 	if(m_playerTexture) { m_playerTexture->Release(); }
 }
 
-void GameplayGameState::ResetGame()
+void GameplayGameState::Begin()
 {
 	m_input->ClearAll();
 	m_player->Reset();
@@ -577,4 +596,9 @@ void GameplayGameState::ResetGame()
 	m_backgroundSprite->SetPosition(Vector2::Zero);
 	m_camera->Reset();
 	m_hudManager->Reset();
+}
+
+void GameplayGameState::ResetGame()
+{
+	m_sceneStateMachine->ChangeState(StartingSceneState::Instance());
 }

@@ -1,4 +1,5 @@
 #include "EnemyOwnedStates.h"
+#include "StateMachine.h"
 #include "PlayerOwnedStates.h"
 #include "Enemy.h"
 #include "Player.h"

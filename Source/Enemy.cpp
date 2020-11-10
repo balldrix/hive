@@ -13,6 +13,7 @@
 #include "BarController.h"
 #include "Player.h"
 #include "EnemyOwnedStates.h"
+#include "StateMachine.h"
 
 Enemy::Enemy() :
 	m_playerTarget(nullptr),

@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\GlobalSceneState.cpp" />
+    <ClCompile Include="Source\BeginSceneState.cpp" />
     <ClCompile Include="Source\AABB.cpp" />
     <ClCompile Include="Source\AnimatedSprite.cpp" />
     <ClCompile Include="Source\Animator.cpp" />
@@ -68,6 +70,9 @@
     <ClCompile Include="Source\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\GameplayOwnedSceneStates.h" />
+    <ClInclude Include="Source\GlobalSceneState.h" />
+    <ClInclude Include="Source\BeginSceneState.h" />
     <ClInclude Include="Source\AABB.h" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\Animator.h" />
