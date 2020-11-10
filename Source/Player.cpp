@@ -200,6 +200,9 @@ void Player::Reset()
 {
 	m_stateMachine->ChangeState((PlayerIdleState::Instance()));
 	SetPosition(m_playerData.objectData.startingPosition);
+	m_groundPosition = m_position;
+	m_position.y = GlobalConstants::RespawnAirPositionY;
+	m_grounded = false;
 	m_hitBoxManager->SetCurrentHitBox(0);
 	m_health = m_playerData.objectData.startingHealth;
 	m_deathTimer = 0.0f;
