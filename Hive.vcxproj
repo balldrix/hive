@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\EncounterHandler.cpp" />
     <ClCompile Include="Source\EncounterSceneState.cpp" />
     <ClCompile Include="Source\GlobalSceneState.cpp" />
     <ClCompile Include="Source\TravellingSceneState.cpp" />
@@ -71,6 +72,7 @@
     <ClCompile Include="Source\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\EncounterHandler.h" />
     <ClInclude Include="Source\EncounterSceneState.h" />
     <ClInclude Include="Source\GameplayOwnedSceneStates.h" />
     <ClInclude Include="Source\GlobalSceneState.h" />
@@ -166,8 +168,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="GameData\EncounterData\encounterPositions.txt" />
     <Text Include="GameData\EnemyData\Mook\mookDamage.txt" />
-    <Text Include="GameData\EnemyData\encounterData.txt" />
+    <Text Include="GameData\EnemyData\enemyData.txt" />
     <Text Include="GameData\EnemyData\typeData.txt" />
     <Text Include="GameData\PlayerData\playerDamage.txt" />
     <Text Include="GameData\PlayerData\playerData.txt" />

@@ -23,7 +23,7 @@ void NPCManager::Init()
 		PostQuitMessage(0); // quit game
 	}
 
-	result = InitNPCs("GameData\\EnemyData\\encounterData.txt");
+	result = InitNPCs("GameData\\EnemyData\\enemyData.txt");
 	if(result == false)
 	{
 		Error::FileLog(" Error initialising enemy list. EnemyManager.cpp line 24");
@@ -119,6 +119,12 @@ bool NPCManager::InitNPCs(std::string fileName)
 			file >> result;
 			std::string id = result;
 			
+			if(id[0] == '#')
+			{
+				std::getline(file, id);
+				continue;
+			}
+
 			// Type
 			file >> result;
 			data = m_enemyDataContainer->GetData(result);

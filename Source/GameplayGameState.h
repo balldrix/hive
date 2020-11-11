@@ -1,5 +1,5 @@
 // GameplayGameState.h
-// Christopher Ball 2019
+// Christopher Ball 2019-2020
 // the game state for the main gameplay state
 
 #ifndef _GAMEPLAYGAMESTATE_H_
@@ -23,6 +23,7 @@ class HitBoxManager;
 class NPCManager;
 class InGameHudManager;
 template<class T> class StateMachine;
+class EncounterHandler;
 
 class GameplayGameState : public GameState
 {
@@ -87,18 +88,14 @@ private:
 	Background*			m_background;				
 	
 	InGameHudManager*	m_hudManager;
-	StateMachine<GameplayGameState>*		m_sceneStateMachine;
+	StateMachine<GameplayGameState>* m_sceneStateMachine;
+	EncounterHandler*    m_encounterHandler;
 
 	bool				m_canAttack;				
 	bool				m_running;					
 
 	unsigned int		m_worldWidth;
 	unsigned int		m_worldHeight;
-	int					m_encounterIndex;
-	int					m_encounterPositions[1] =
-	{
-		180
-	};
 
 	float				m_deltaTime;
 };

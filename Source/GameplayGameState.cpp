@@ -21,6 +21,7 @@
 #include "Error.h"
 #include "StateMachine.h"
 #include "GameplayOwnedSceneStates.h"
+#include "EncounterHandler.h"
 
 GameplayGameState::GameplayGameState() :
 	m_gameStateManager(nullptr),
@@ -50,11 +51,11 @@ GameplayGameState::GameplayGameState() :
 	m_background(nullptr),
 	m_hudManager(nullptr),
 	m_sceneStateMachine(nullptr),
+	m_encounterHandler(nullptr),
 	m_canAttack(true),
 	m_running(false),
 	m_worldWidth(0),
 	m_worldHeight(0),
-	m_encounterIndex(0),
 	m_deltaTime(0.0f),
 	GameState(L"GAMEPLAY")
 {}
@@ -130,6 +131,8 @@ void GameplayGameState::LoadAssets()
 	m_player = new Player();
 	m_background = new Background();
 	m_hudManager = new InGameHudManager();
+	m_sceneStateMachine = new StateMachine<GameplayGameState>(this);
+	m_encounterHandler = new EncounterHandler();
 
 	// load textures
 	m_playerTexture->LoadTexture(m_graphics, "GameData\\Sprites\\playerSpriteSheet.png");
@@ -199,8 +202,8 @@ void GameplayGameState::LoadAssets()
 	m_hudManager->SetMaxPlayerHealth(m_player->GetMaxHealth());
 	m_hudManager->SetCurrentPlayerHealth(m_player->GetHealth());
 	
-	m_sceneStateMachine = new StateMachine<GameplayGameState>(this);
 	m_sceneStateMachine->Init(TravellingSceneState::Instance(), nullptr, GlobalSceneState::Instance());
+	m_encounterHandler->Init("GameData\\EncounterData\\encounterPositions.txt");
 
 	// set running to true
 	m_running = true;
@@ -208,6 +211,12 @@ void GameplayGameState::LoadAssets()
 
 void GameplayGameState::DeleteAssets()
 {
+	if(m_encounterHandler != nullptr)
+	{
+		delete m_encounterHandler;
+		m_encounterHandler = nullptr;
+	}
+
 	if(m_sceneStateMachine != nullptr)
 	{
 		delete m_sceneStateMachine;
@@ -460,7 +469,7 @@ void GameplayGameState::Update(float deltaTime)
 
 void GameplayGameState::CheckForEncounter()
 {
-	if(m_player->GetPositionX() < m_encounterPositions[m_encounterIndex])
+	if(m_player->GetPositionX() < m_encounterHandler->GetEncounterPosition())
 		return;
 
 	m_sceneStateMachine->ChangeState(EncounterSceneState::Instance());
@@ -607,6 +616,6 @@ void GameplayGameState::ResetGame()
 	m_camera->Reset();
 	m_camera->SetTarget(m_player);
 	m_hudManager->Reset();
-	m_encounterIndex = 0;
+	m_encounterHandler->SetEncounterIndex(0);
 	m_sceneStateMachine->ChangeState(TravellingSceneState::Instance());
 }

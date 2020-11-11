@@ -143,6 +143,7 @@
     <ClCompile Include="Source\GlobalSceneState.cpp" />
     <ClCompile Include="Source\TravellingSceneState.cpp" />
     <ClCompile Include="Source\EncounterSceneState.cpp" />
+    <ClCompile Include="Source\EncounterHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -359,6 +360,7 @@
     <ClInclude Include="Source\GameplayOwnedSceneStates.h" />
     <ClInclude Include="Source\TravellingSceneState.h" />
     <ClInclude Include="Source\EncounterSceneState.h" />
+    <ClInclude Include="Source\EncounterHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\hitbox.png">
@@ -442,8 +444,9 @@
     <Text Include="GameData\EnemyData\Mook\mookDamage.txt">
       <Filter>Game Data\EnemyData\Mook</Filter>
     </Text>
-    <Text Include="GameData\EnemyData\encounterData.txt">
+    <Text Include="GameData\EnemyData\enemyData.txt">
       <Filter>Game Data\EnemyData</Filter>
     </Text>
+    <Text Include="GameData\EncounterData\encounterPositions.txt" />
   </ItemGroup>
 </Project>
