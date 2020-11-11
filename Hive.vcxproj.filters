@@ -152,36 +152,6 @@
     <Filter Include="Source Files">
       <UniqueIdentifier>{c4f03af4-9746-424f-8eaa-c6867db40142}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game Data">
-      <UniqueIdentifier>{5ddac016-1fb2-4443-be93-f4d736282e5c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game Data\Animation Data">
-      <UniqueIdentifier>{6b386d83-ed86-4fb6-b2fc-ed523c376315}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game Data\Sprites">
-      <UniqueIdentifier>{8097c6c1-0b85-445b-b3c3-2776deeed50d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game Data\HitBoxData">
-      <UniqueIdentifier>{80dbea2e-ece0-43f8-85e6-28b22d959618}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game Data\EnemyData">
-      <UniqueIdentifier>{a72ab50e-8d47-4728-be1c-515db02549d6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game Data\PlayerData">
-      <UniqueIdentifier>{2b07a1ff-a7a2-4a23-9c5b-6e0b9996f61d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game Data\EnemyData\Mook">
-      <UniqueIdentifier>{290b972c-24c4-422d-a85c-0b0d7988758c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game Data\SpriteFonts">
-      <UniqueIdentifier>{eb141ed7-2d36-4b54-b9e2-b887d723a4a2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game Data\SpriteSheetData">
-      <UniqueIdentifier>{89ef07ea-009e-4fc7-8958-e642f9b5a6da}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game Data\Sprites\UI">
-      <UniqueIdentifier>{af3db2c9-7294-4876-b89b-6a7cb785f05e}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Player.h">
@@ -363,90 +333,44 @@
     <ClInclude Include="Source\EncounterHandler.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="GameData\Sprites\hitbox.png">
-      <Filter>Game Data\Sprites</Filter>
-    </Image>
-    <Image Include="GameData\Sprites\playerSpriteSheet.png">
-      <Filter>Game Data\Sprites</Filter>
-    </Image>
-    <Image Include="GameData\Sprites\shadow.png">
-      <Filter>Game Data\Sprites</Filter>
-    </Image>
-    <Image Include="GameData\Sprites\enemySpriteSheet.png">
-      <Filter>Game Data\Sprites</Filter>
-    </Image>
-    <Image Include="GameData\Sprites\backgroundTest.png">
-      <Filter>Game Data\Sprites</Filter>
-    </Image>
-    <Image Include="GameData\Sprites\UI\player1_hud_portrait.png">
-      <Filter>Game Data\Sprites\UI</Filter>
-    </Image>
-    <Image Include="GameData\Sprites\UI\player1_hud_healthbar_background.png">
-      <Filter>Game Data\Sprites\UI</Filter>
-    </Image>
-    <Image Include="GameData\Sprites\UI\player1_hud_healthbar_fill.png">
-      <Filter>Game Data\Sprites\UI</Filter>
-    </Image>
-    <Image Include="GameData\Sprites\UI\player1_hud_healthbar_frame.png">
-      <Filter>Game Data\Sprites\UI</Filter>
-    </Image>
-    <Image Include="GameData\Sprites\UI\mook_hud_portrait.png">
-      <Filter>Game Data\Sprites\UI</Filter>
-    </Image>
     <Image Include="GameData\Sprites\UI\lives_x0.png" />
     <Image Include="GameData\Sprites\UI\lives_x1.png" />
     <Image Include="GameData\Sprites\UI\lives_x2.png" />
     <Image Include="GameData\Sprites\UI\lives_x3.png" />
     <Image Include="GameData\Sprites\UI\lives_x4.png" />
     <Image Include="GameData\Sprites\UI\lives_x5.png" />
+    <Image Include="GameData\Sprites\backgroundTest.png" />
+    <Image Include="GameData\Sprites\enemySpriteSheet.png" />
+    <Image Include="GameData\Sprites\hitbox.png" />
+    <Image Include="GameData\Sprites\playerSpriteSheet.png" />
+    <Image Include="GameData\Sprites\shadow.png" />
+    <Image Include="GameData\Sprites\UI\go_sign.png" />
+    <Image Include="GameData\Sprites\UI\mook_hud_portrait.png" />
+    <Image Include="GameData\Sprites\UI\player1_hud_healthbar_background.png" />
+    <Image Include="GameData\Sprites\UI\player1_hud_healthbar_fill.png" />
+    <Image Include="GameData\Sprites\UI\player1_hud_healthbar_frame.png" />
+    <Image Include="GameData\Sprites\UI\player1_hud_portrait.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="GameData\AnimationData\playerAnimationData.json">
-      <Filter>Game Data\Animation Data</Filter>
-    </None>
-    <None Include="GameData\HitBoxData\playerHitBoxData.json">
-      <Filter>Game Data\HitBoxData</Filter>
-    </None>
-    <None Include="GameData\SpriteSheetData\playerSpriteSheetData.json">
-      <Filter>Game Data\SpriteSheetData</Filter>
-    </None>
-    <None Include="GameData\AnimationData\dummyAnimationData.json">
-      <Filter>Game Data\Animation Data</Filter>
-    </None>
-    <None Include="GameData\HitBoxData\dummyHitBoxData.json">
-      <Filter>Game Data\HitBoxData</Filter>
-    </None>
-    <None Include="GameData\HitBoxData\enemyHitBoxData.json">
-      <Filter>Game Data\HitBoxData</Filter>
-    </None>
-    <None Include="GameData\SpriteSheetData\enemySpriteSheetData.json">
-      <Filter>Game Data\SpriteSheetData</Filter>
-    </None>
-    <None Include="GameData\AnimationData\enemyAnimationData.json">
-      <Filter>Game Data\Animation Data</Filter>
-    </None>
     <None Include="packages.config" />
-    <None Include="GameData\SpriteFonts\goodbye_despair_12pt.spritefont">
-      <Filter>Game Data\SpriteFonts</Filter>
-    </None>
     <None Include="GameData\SpriteFonts\silkscreen_8pt.spritefont" />
+    <None Include="GameData\AnimationData\dummyAnimationData.json" />
+    <None Include="GameData\AnimationData\enemyAnimationData.json" />
+    <None Include="GameData\AnimationData\playerAnimationData.json" />
+    <None Include="GameData\HitBoxData\dummyHitBoxData.json" />
+    <None Include="GameData\HitBoxData\enemyHitBoxData.json" />
+    <None Include="GameData\HitBoxData\playerHitBoxData.json" />
+    <None Include="GameData\SpriteFonts\goodbye_despair_12pt.spritefont" />
+    <None Include="GameData\SpriteSheetData\dummySpriteSheetData.json" />
+    <None Include="GameData\SpriteSheetData\enemySpriteSheetData.json" />
+    <None Include="GameData\SpriteSheetData\playerSpritesheetData.json" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="GameData\EnemyData\typeData.txt">
-      <Filter>Game Data\EnemyData</Filter>
-    </Text>
-    <Text Include="GameData\PlayerData\playerData.txt">
-      <Filter>Game Data\PlayerData</Filter>
-    </Text>
-    <Text Include="GameData\PlayerData\playerDamage.txt">
-      <Filter>Game Data\PlayerData</Filter>
-    </Text>
-    <Text Include="GameData\EnemyData\Mook\mookDamage.txt">
-      <Filter>Game Data\EnemyData\Mook</Filter>
-    </Text>
-    <Text Include="GameData\EnemyData\enemyData.txt">
-      <Filter>Game Data\EnemyData</Filter>
-    </Text>
     <Text Include="GameData\EncounterData\encounterPositions.txt" />
+    <Text Include="GameData\EnemyData\enemyData.txt" />
+    <Text Include="GameData\EnemyData\typeData.txt" />
+    <Text Include="GameData\EnemyData\Mook\mookDamage.txt" />
+    <Text Include="GameData\PlayerData\playerDamage.txt" />
+    <Text Include="GameData\PlayerData\playerData.txt" />
   </ItemGroup>
 </Project>

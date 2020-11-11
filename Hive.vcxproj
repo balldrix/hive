@@ -142,6 +142,7 @@
     <Image Include="GameData\Sprites\hitbox.png" />
     <Image Include="GameData\Sprites\playerSpriteSheet.png" />
     <Image Include="GameData\Sprites\shadow.png" />
+    <Image Include="GameData\Sprites\UI\go_sign.png" />
     <Image Include="GameData\Sprites\UI\lives_x0.png" />
     <Image Include="GameData\Sprites\UI\lives_x1.png" />
     <Image Include="GameData\Sprites\UI\lives_x2.png" />
@@ -163,14 +164,15 @@
     <None Include="GameData\HitBoxData\playerHitBoxData.json" />
     <None Include="GameData\SpriteFonts\goodbye_despair_12pt.spritefont" />
     <None Include="GameData\SpriteFonts\silkscreen_8pt.spritefont" />
+    <None Include="GameData\SpriteSheetData\dummySpriteSheetData.json" />
     <None Include="GameData\SpriteSheetData\enemySpriteSheetData.json" />
-    <None Include="GameData\SpriteSheetData\playerSpriteSheetData.json" />
+    <None Include="GameData\SpriteSheetData\playerSpritesheetData.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="GameData\EncounterData\encounterPositions.txt" />
-    <Text Include="GameData\EnemyData\Mook\mookDamage.txt" />
     <Text Include="GameData\EnemyData\enemyData.txt" />
+    <Text Include="GameData\EnemyData\Mook\mookDamage.txt" />
     <Text Include="GameData\EnemyData\typeData.txt" />
     <Text Include="GameData\PlayerData\playerDamage.txt" />
     <Text Include="GameData\PlayerData\playerData.txt" />
