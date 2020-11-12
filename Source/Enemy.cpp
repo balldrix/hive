@@ -97,7 +97,7 @@ Enemy::Render(Graphics* graphics)
 		// render enemy sprite
 		if(m_animator)
 		{
-			m_sprite->Render(graphics, m_animator->GetCurrentFrame() + m_animator->GetAnimation()->spriteSheetIndex);
+			m_sprite->Render(graphics, m_animator->GetCurrentFrame() + m_animator->GetAnimation()->spritesheetIndex);
 		}
 		else
 		{

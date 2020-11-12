@@ -11,6 +11,7 @@ class CharacterPortrait;
 class Graphics;
 class Texture;
 class Sprite;
+class SpriteSheet;
 
 class InGameHudManager
 {
@@ -27,6 +28,7 @@ public:
 	BarController* GetPlayerHealthBar() const { return m_playerHealthBar; }
 
 	void AddEnemyKill();
+	void EnableTravelPrompt();
 	void UpdatePlayerLives(const int& lives);
 	void HideEnemyHud(std::string id);
 	void ShowEnemyHud(std::string id, Sprite* sprite, BarController* healthBar);
@@ -41,6 +43,8 @@ private:
 	BarController* m_enemyHealthBar;
 	CharacterPortrait* m_playerPortrait;
 	Sprite* m_enemyPortrait;
+	Texture* m_travelPromptTexture;
+	SpriteSheet* m_travelPromptSpritesheet;
 	std::string m_enemyId;
 	SpriteFont* m_despairFont12;
 	int m_killCount;

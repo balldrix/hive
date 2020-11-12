@@ -24,6 +24,7 @@ class NPCManager;
 class InGameHudManager;
 template<class T> class StateMachine;
 class EncounterHandler;
+class TravellingHandler;
 
 class GameplayGameState : public GameState
 {
@@ -49,6 +50,8 @@ public:
 
 	Camera*				GetCamera() const { return m_camera; }
 	Player*				GetPlayer() const { return m_player; }
+	InGameHudManager*	GetHudManager() const { return m_hudManager; }
+	TravellingHandler*  GetTravellingHandler() const { return m_travellingHandler; }
 
 private:			
 	void				LoadAssets();				
@@ -89,7 +92,8 @@ private:
 	
 	InGameHudManager*	m_hudManager;
 	StateMachine<GameplayGameState>* m_sceneStateMachine;
-	EncounterHandler*    m_encounterHandler;
+	EncounterHandler*   m_encounterHandler;
+	TravellingHandler*	m_travellingHandler;
 
 	bool				m_canAttack;				
 	bool				m_running;					

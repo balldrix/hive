@@ -181,7 +181,7 @@ void Player::Render(Graphics* graphics)
 		// render player sprite
 		if(m_animator)
 		{
-			m_sprite->Render(graphics, m_animator->GetCurrentFrame() + m_animator->GetAnimation()->spriteSheetIndex);
+			m_sprite->Render(graphics, m_animator->GetCurrentFrame() + m_animator->GetAnimation()->spritesheetIndex);
 		}
 		else
 		{

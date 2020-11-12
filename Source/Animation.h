@@ -12,7 +12,7 @@ namespace
 	struct Animation
 	{
 		std::string	name = {};
-		int spriteSheetIndex = {};
+		int spritesheetIndex = {};
 		int frameCount = {};
 		int framesPerSecond = {};
 		bool loop = {};
@@ -23,7 +23,7 @@ namespace
 	void from_json(const json& j, Animation& a)
 	{
 		a.name = j.at("name").get<std::string>();
-		a.spriteSheetIndex = j.at("index").get<int>();
+		a.spritesheetIndex = j.at("index").get<int>();
 		a.frameCount = j.at("frameCount").get<int>();
 		a.framesPerSecond = j.at("framesPerSecond").get<int>();
 		a.loop = j.at("loop").get<bool>();

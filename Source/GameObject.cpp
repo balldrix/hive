@@ -112,12 +112,8 @@ void GameObject::Update(float deltaTime)
 	// update ground x position
 	m_groundPosition.x = m_position.x;
 
-	// if object has an animator
-	if(m_animator)
-	{
-		// update animator
+	if(m_animator != nullptr)
 		m_animator->Update(deltaTime);
-	}
 
 	Vector2 screenPosition = m_position;
 	screenPosition.x -= m_camera->GetPosition().x;
@@ -125,23 +121,14 @@ void GameObject::Update(float deltaTime)
 	Vector2 screenGroundPosition = m_groundPosition;
 	screenGroundPosition.x -= m_camera->GetPosition().x;
 
-	// update position of sprite
-	if(m_sprite)
-	{
+	if(m_sprite != nullptr)
 		m_sprite->SetPosition(screenPosition);
-	}
 
-	// update shadow position
-	if(m_shadow)
-	{
+	if(m_shadow != nullptr)
 		m_shadow->SetPosition(screenGroundPosition);
-	}
 
-	// update hitbox
-	if(m_hitBoxManager)
-	{
+	if(m_hitBoxManager != nullptr)
 		m_hitBoxManager->Update();
-	}
 }
 
 void GameObject::Move(const Vector2 &direction)

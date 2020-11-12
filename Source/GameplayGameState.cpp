@@ -22,6 +22,7 @@
 #include "StateMachine.h"
 #include "GameplayOwnedSceneStates.h"
 #include "EncounterHandler.h"
+#include "TravellingHandler.h"
 
 GameplayGameState::GameplayGameState() :
 	m_gameStateManager(nullptr),
@@ -52,6 +53,7 @@ GameplayGameState::GameplayGameState() :
 	m_hudManager(nullptr),
 	m_sceneStateMachine(nullptr),
 	m_encounterHandler(nullptr),
+	m_travellingHandler(nullptr),
 	m_canAttack(true),
 	m_running(false),
 	m_worldWidth(0),
@@ -133,6 +135,7 @@ void GameplayGameState::LoadAssets()
 	m_hudManager = new InGameHudManager();
 	m_sceneStateMachine = new StateMachine<GameplayGameState>(this);
 	m_encounterHandler = new EncounterHandler();
+	m_travellingHandler = new TravellingHandler();
 
 	// load textures
 	m_playerTexture->LoadTexture(m_graphics, "GameData\\Sprites\\playerSpriteSheet.png");
@@ -211,6 +214,12 @@ void GameplayGameState::LoadAssets()
 
 void GameplayGameState::DeleteAssets()
 {
+	if(m_travellingHandler != nullptr)
+	{
+		delete m_travellingHandler;
+		m_travellingHandler = nullptr;
+	}
+
 	if(m_encounterHandler != nullptr)
 	{
 		delete m_encounterHandler;
@@ -463,7 +472,6 @@ void GameplayGameState::ProcessInput()
 void GameplayGameState::Update(float deltaTime)
 {
 	m_deltaTime = deltaTime;
-
 	m_sceneStateMachine->Update();
 }
 

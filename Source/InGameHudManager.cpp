@@ -5,6 +5,7 @@
 #include "CharacterPortrait.h"
 #include "Texture.h"
 #include "Sprite.h"
+#include "SpriteSheet.h"
 
 const int MaxLives = 5;
 
@@ -14,6 +15,8 @@ InGameHudManager::InGameHudManager() :
 	m_playerHealthBar(nullptr),
 	m_playerPortrait(nullptr),
 	m_enemyPortrait(nullptr),
+	m_travelPromptTexture(nullptr),
+	m_travelPromptSpritesheet(nullptr),
 	m_despairFont12(nullptr),
 	m_enemyId(std::string()),
 	m_enemyHealthBar(nullptr),
@@ -57,6 +60,12 @@ void InGameHudManager::Init(Graphics* graphics)
 		sprite->SetPosition(Vector2(74, 6));
 		m_livesLeftSprites.push_back(sprite);
 	}
+
+	m_travelPromptTexture = new Texture();
+	m_travelPromptTexture->LoadTexture(graphics, "GameData//Sprites//UI//go_sign.png");
+
+	m_travelPromptSpritesheet = new SpriteSheet();
+	m_travelPromptSpritesheet->Init(m_travelPromptTexture, "GameData//SpriteSheetData//travellingPromptSpritesheetData.json");
 }
 
 void InGameHudManager::Render(Graphics* graphics)
@@ -77,6 +86,8 @@ void InGameHudManager::Render(Graphics* graphics)
 		Vector2::Zero);
 
 	m_livesLeftSprites[m_playerLivesLeft]->Render(graphics);
+
+	m_travelPromptSpritesheet->Render(graphics, 0);
 }
 
 void InGameHudManager::SetCurrentPlayerHealth(const int& health)
@@ -92,6 +103,11 @@ void InGameHudManager::SetMaxPlayerHealth(const int& health)
 void InGameHudManager::AddEnemyKill()
 {
 	m_killCount++;
+}
+
+void InGameHudManager::EnableTravelPrompt()
+{
+	
 }
 
 void InGameHudManager::UpdatePlayerLives(const int& lives)
@@ -125,6 +141,8 @@ void InGameHudManager::ReleaseAll()
 	{
 		m_livesLeftTextures[i]->Release();
 	}
+
+	m_travelPromptTexture->Release();
 }
 
 void InGameHudManager::Reset()
@@ -136,6 +154,18 @@ void InGameHudManager::Reset()
 
 void InGameHudManager::DeleteAll()
 {
+	if(m_travelPromptSpritesheet != nullptr)
+	{
+		delete m_travelPromptSpritesheet;
+		m_travelPromptSpritesheet = nullptr;
+	}
+
+	if(m_travelPromptTexture != nullptr)
+	{
+		delete m_travelPromptTexture;
+		m_travelPromptTexture = nullptr;
+	}
+
 	for(size_t i = m_livesLeftSprites.size(); i--;)
 	{
 		if(m_livesLeftSprites[i] != nullptr)

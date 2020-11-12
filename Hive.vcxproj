@@ -22,6 +22,7 @@
     <ClCompile Include="Source\EncounterHandler.cpp" />
     <ClCompile Include="Source\EncounterSceneState.cpp" />
     <ClCompile Include="Source\GlobalSceneState.cpp" />
+    <ClCompile Include="Source\TravellingHandler.cpp" />
     <ClCompile Include="Source\TravellingSceneState.cpp" />
     <ClCompile Include="Source\AABB.cpp" />
     <ClCompile Include="Source\AnimatedSprite.cpp" />
@@ -76,6 +77,7 @@
     <ClInclude Include="Source\EncounterSceneState.h" />
     <ClInclude Include="Source\GameplayOwnedSceneStates.h" />
     <ClInclude Include="Source\GlobalSceneState.h" />
+    <ClInclude Include="Source\TravellingHandler.h" />
     <ClInclude Include="Source\TravellingSceneState.h" />
     <ClInclude Include="Source\AABB.h" />
     <ClInclude Include="Source\Animation.h" />
@@ -167,6 +169,7 @@
     <None Include="GameData\SpriteSheetData\dummySpriteSheetData.json" />
     <None Include="GameData\SpriteSheetData\enemySpriteSheetData.json" />
     <None Include="GameData\SpriteSheetData\playerSpritesheetData.json" />
+    <None Include="GameData\SpriteSheetData\travellingpromptSpritesheetData.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
