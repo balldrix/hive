@@ -14,6 +14,9 @@
 #include "Error.h"
 #include "Constants.h"
 
+using namespace PlayerConstants;
+using namespace GlobalConstants;
+
 Player::Player() :
 	m_stateMachine(nullptr),
 	m_lives(0)
@@ -35,13 +38,15 @@ void Player::Init(SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBo
 	m_controlSystem = controlSystem;
 	m_shadow = shadow;
 	m_position.x = m_playerData.objectData.startingPosition.x;
-	m_position.y = m_playerData.objectData.startingPosition.y;
+	m_position.y = RespawnAirPositionY;
+	m_groundPosition.y = m_playerData.objectData.startingPosition.y;
 	m_acceleration = m_playerData.objectData.acceleration;
 	m_deceleration = m_playerData.objectData.deceleration;
 	m_movementSpeed = m_playerData.objectData.walkSpeed;
 	m_animator = animator;
 	m_animator->SetAnimation(0);
 	m_hitBoxManager = hitBoxManager;
+	m_grounded = false;
 
 	m_stateMachine = new StateMachine<Player>(this);
 	m_stateMachine->Init(PlayerIdleState::Instance(), nullptr, PlayerGlobalState::Instance());
@@ -152,16 +157,16 @@ void Player::Kill()
 void Player::Respawn()
 {
 	m_stateMachine->ChangeState((PlayerIdleState::Instance()));
-	m_position = m_camera->GetPosition() + Vector2(GlobalConstants::GAME_WIDTH * 0.5f, GlobalConstants::RespawnGroundPositionY);
+	m_position = m_camera->GetPosition() + Vector2(GameWidth * 0.5f, RespawnGroundPositionY);
 	m_hitBoxManager->SetCurrentHitBox(0);
 	m_groundPosition = m_position;
-	m_position.y = GlobalConstants::RespawnAirPositionY;
+	m_position.y = RespawnAirPositionY;
 	m_deathTimer = 0.0f;
 	m_dead = false;
 	m_active = true;
 	m_grounded = false;
 	m_health = m_playerData.objectData.startingHealth;
-	SetVelocity(m_currentVelocity.x, m_currentVelocity.y + GlobalConstants::FallingSpeed);
+	SetVelocity(m_currentVelocity.x, m_currentVelocity.y + FallingSpeed);
 }
 
 void Player::Render(Graphics* graphics)
@@ -201,7 +206,7 @@ void Player::Reset()
 	m_stateMachine->ChangeState((PlayerIdleState::Instance()));
 	SetPosition(m_playerData.objectData.startingPosition);
 	m_groundPosition = m_position;
-	m_position.y = GlobalConstants::RespawnAirPositionY;
+	m_position.y = RespawnAirPositionY;
 	m_grounded = false;
 	m_hitBoxManager->SetCurrentHitBox(0);
 	m_health = m_playerData.objectData.startingHealth;

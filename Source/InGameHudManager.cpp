@@ -7,6 +7,8 @@
 #include "Sprite.h"
 #include "SpriteSheet.h"
 
+using namespace InGameHudConstants;
+
 const int MaxLives = 5;
 
 InGameHudManager::InGameHudManager() :
@@ -34,8 +36,7 @@ void InGameHudManager::Init(Graphics* graphics)
 {
 	m_playerHealthBar = new BarController();
 	m_playerHealthBar->Init(graphics);
-	m_playerHealthBar->SetPosition(Vector2(InGameHudConstants::HealthBarPositionX,
-		InGameHudConstants::HealthBarPositionY));
+	m_playerHealthBar->SetPosition(Vector2(HealthBarPositionX, HealthBarPositionY));
 
 	m_playerPortrait = new CharacterPortrait();
 	m_playerPortrait->Init(graphics, "GameData//Sprites//UI//player1_hud_portrait.png");
@@ -57,7 +58,7 @@ void InGameHudManager::Init(Graphics* graphics)
 		Sprite* sprite = new Sprite();
 		sprite->Init(m_livesLeftTextures[i]);
 		sprite->SetOrigin(Vector2::Zero);
-		sprite->SetPosition(Vector2(74, 6));
+		sprite->SetPosition(Vector2(LifeCounterPositionX, LifeCounterPositionY));
 		m_livesLeftSprites.push_back(sprite);
 	}
 
@@ -66,6 +67,7 @@ void InGameHudManager::Init(Graphics* graphics)
 
 	m_travelPromptSpritesheet = new SpriteSheet();
 	m_travelPromptSpritesheet->Init(m_travelPromptTexture, "GameData//SpriteSheetData//travellingPromptSpritesheetData.json");
+	m_travelPromptSpritesheet->SetPosition(Vector2(TravelPromptPositionX, TravelPromptPositionY));
 }
 
 void InGameHudManager::Render(Graphics* graphics)

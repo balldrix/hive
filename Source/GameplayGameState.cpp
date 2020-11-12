@@ -24,6 +24,8 @@
 #include "EncounterHandler.h"
 #include "TravellingHandler.h"
 
+using namespace GlobalConstants;
+
 GameplayGameState::GameplayGameState() :
 	m_gameStateManager(nullptr),
 	m_graphics(nullptr),
@@ -94,7 +96,7 @@ void GameplayGameState::LoadAssets()
 
 	// init camera
 	m_camera = new Camera();
-	m_camera->Init(GlobalConstants::GAME_WIDTH, GlobalConstants::GAME_HEIGHT, m_worldWidth);
+	m_camera->Init(GameWidth, GameHeight, m_worldWidth);
 
 	// init control system
 	m_controlSystem = new ControlSystem();

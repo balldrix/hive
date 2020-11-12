@@ -6,6 +6,8 @@
 #include "Camera.h"
 #include "Constants.h"
 
+using namespace GlobalConstants;
+
 GameObject::GameObject() :
 	m_id("GameObject"),
 	m_camera(nullptr),
@@ -84,7 +86,7 @@ void GameObject::Update(float deltaTime)
 	else
 	{
 		// apply gravity
-		SetVelocity(m_currentVelocity.x, m_currentVelocity.y += 0.002f);
+		SetVelocity(m_currentVelocity.x, m_currentVelocity.y += Gravity * deltaTime);
 
 		// true if the y position is close enough to the ground 
 		if(std::abs(m_position.y - m_groundPosition.y) < 2.0f && m_currentVelocity.y > 0.0f)

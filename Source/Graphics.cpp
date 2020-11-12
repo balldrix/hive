@@ -2,6 +2,8 @@
 #include "Constants.h"
 #include "Error.h"
 
+using namespace GlobalConstants;
+
 Graphics::Graphics() :
 	m_hWnd(nullptr),
 	m_hInstance(nullptr),
@@ -14,7 +16,8 @@ Graphics::Graphics() :
 	m_spriteBatch(nullptr),
 	m_fullScreen(false),
 	m_gameWidth(0.0f),
-	m_gameHeight(0.0f)
+	m_gameHeight(0.0f),
+	m_viewport(D3D11_VIEWPORT())
 {
 }
 
@@ -34,8 +37,8 @@ void Graphics::Init(HWND hWnd, HINSTANCE hInstance)
 	m_hWnd = hWnd;
 	m_hInstance = hInstance;
 
-	UINT width = GlobalConstants::GAME_WIDTH;
-	UINT height = GlobalConstants::GAME_HEIGHT;
+	UINT width = GameWidth;
+	UINT height = GameHeight;
 
 	// Initialise DirectX
 	DXGI_SWAP_CHAIN_DESC scd = { 0 };
@@ -161,7 +164,7 @@ void Graphics::BeginScene()
 	m_D3DDeviceContext->OMSetRenderTargets(1, &m_renderTargetView, NULL);
 
 	// clear backbuffer
-	m_D3DDeviceContext->ClearRenderTargetView(m_renderTargetView, GlobalConstants::BACK_COLOUR);
+	m_D3DDeviceContext->ClearRenderTargetView(m_renderTargetView, BackColor);
 
 	// reset Rasterisation state to normal state
 	m_D3DDeviceContext->RSSetState(0);
