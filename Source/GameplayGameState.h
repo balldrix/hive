@@ -7,6 +7,7 @@
 
 #include "pch.h"
 #include "GameState.h"
+#include "AABB.h"
 
 class GameStateManager;
 class Graphics;
@@ -46,7 +47,9 @@ public:
 	void				Render();					
 
 	void				ReleaseAll();
-	void				ResetGame();			
+	void				ResetGame();
+
+	void				SetPlayerBoundaryX(float minX, float maxX);
 
 	Camera*				GetCamera() const { return m_camera; }
 	Player*				GetPlayer() const { return m_player; }
@@ -98,8 +101,7 @@ private:
 	bool				m_canAttack;				
 	bool				m_running;					
 
-	unsigned int		m_worldWidth;
-	unsigned int		m_worldHeight;
+	AABB				m_playerBoundary;
 
 	float				m_deltaTime;
 };

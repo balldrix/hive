@@ -11,6 +11,8 @@ namespace GlobalConstants
 	const unsigned int GameHeight				= 80;							
 	const float BackColor[4]					= { 0.3f, 0.3f, 0.3f, 0.0f };	
 	const float	Gravity							= 4.0f;
+	const float StartingBoundaryMinX			= 1.0f;
+	const float StartingBoundaryMinY			= 61.0f;
 }
 
 namespace PlayerConstants

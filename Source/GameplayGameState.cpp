@@ -26,6 +26,7 @@
 #include "TravelPrompt.h"
 
 using namespace GlobalConstants;
+using namespace InGameHudConstants;
 
 GameplayGameState::GameplayGameState() :
 	m_gameStateManager(nullptr),
@@ -59,15 +60,13 @@ GameplayGameState::GameplayGameState() :
 	m_travellingHandler(nullptr),
 	m_canAttack(true),
 	m_running(false),
-	m_worldWidth(0),
-	m_worldHeight(0),
+	m_playerBoundary(AABB()),
 	m_deltaTime(0.0f),
 	GameState(L"GAMEPLAY")
 {}
 
 GameplayGameState::GameplayGameState(GameStateManager* gameStateManager) : GameplayGameState()
 {
-	// get essential pointers from gamestate manager
 	m_gameStateManager = gameStateManager;
 	m_graphics = m_gameStateManager->GetGraphics();
 	m_input = m_gameStateManager->GetInput();
@@ -79,30 +78,20 @@ GameplayGameState::~GameplayGameState()
 
 void GameplayGameState::OnEntry()
 {
-	// load assets for the gameplay state
 	LoadAssets();
 }
 
 void GameplayGameState::OnExit()
 {
-	// release memory and delete assets
 	ReleaseAll();
 	DeleteAssets();
 }
 
 void GameplayGameState::LoadAssets()
 {
-	m_worldWidth = 1200;
-	m_worldHeight = 80;
-
-	// init camera
 	m_camera = new Camera();
-	m_camera->Init(GameWidth, GameHeight, m_worldWidth);
-
-	// init control system
 	m_controlSystem = new ControlSystem();
 
-	// create texture memory
 	m_playerTexture = new Texture();
 	m_enemyTexture = new Texture();
 	m_mookPortraitTexture = new Texture();
@@ -110,29 +99,22 @@ void GameplayGameState::LoadAssets()
 	m_shadowTexture = new Texture();
 	m_backgroundTexture = new Texture();
 
-	// create sprite memory 
 	m_playerSprite = new Spritesheet();
 	m_playerShadowSprite = new Sprite();
-
 	m_enemySprite = new Spritesheet();
 	m_mookPortraitSprite = new Sprite();
 	m_enemyShadowSprite = new Sprite();
-
 	m_hitBoxSprite = new Sprite();
 	m_backgroundSprite = new Sprite();
 
-	// create animator memory
 	m_playerAnimator = new Animator();
 	m_enemyAnimator = new Animator();
 
-	// create hitbox managers
 	m_playerHitBoxManager = new HitBoxManager();
 	m_enemyHitBoxManager = new HitBoxManager();
 
-	// create enemy manager
 	m_NPCManager = new NPCManager();
 
-	// create objects in memory
 	m_player = new Player();
 	m_background = new Background();
 	m_hudManager = new InGameHudManager();
@@ -140,7 +122,6 @@ void GameplayGameState::LoadAssets()
 	m_encounterHandler = new EncounterHandler();
 	m_travellingHandler = new TravellingHandler();
 
-	// load textures
 	m_playerTexture->LoadTexture(m_graphics, "GameData\\Sprites\\playerSpriteSheet.png");
 	m_enemyTexture->LoadTexture(m_graphics, "GameData\\Sprites\\enemySpritesheet.png");
 	m_mookPortraitTexture->LoadTexture(m_graphics, "GameData\\Sprites\\UI\\mook_hud_portrait.png");
@@ -148,30 +129,25 @@ void GameplayGameState::LoadAssets()
 	m_shadowTexture->LoadTexture(m_graphics, "GameData\\Sprites\\shadow.png");
 	m_backgroundTexture->LoadTexture(m_graphics, "GameData\\Sprites\\backgroundTest.png");
 
-	// init sprites
 	m_playerSprite->Init(m_playerTexture, "GameData\\SpriteSheetData\\playerSpritesheetData.json");
 	m_playerShadowSprite->Init(m_shadowTexture);
 	m_playerShadowSprite->SetAlpha(0.7f);
 	m_enemySprite->Init(m_enemyTexture, "GameData\\SpriteSheetData\\enemySpritesheetData.json");
 	m_mookPortraitSprite->Init(m_mookPortraitTexture);
 	m_mookPortraitSprite->SetOrigin(Vector2::Zero);
-	m_mookPortraitSprite->SetPosition(Vector2(InGameHudConstants::EnemyPortraitPositionX,
-		InGameHudConstants::EnemyPortraitPositionY));
+	m_mookPortraitSprite->SetPosition(Vector2(EnemyPortraitPositionX, EnemyPortraitPositionY));
 	m_enemyShadowSprite->Init(m_shadowTexture);
 	m_enemyShadowSprite->SetAlpha(0.7f);
 	m_hitBoxSprite->Init(m_hitBoxTexture);
 	m_backgroundSprite->Init(m_backgroundTexture);
 	m_backgroundSprite->SetOrigin(Vector2::Zero);
 
-	// init animator
 	m_playerAnimator->Init("GameData\\AnimationData\\playerAnimationData.json");
 	m_enemyAnimator->Init("GameData\\AnimationData\\enemyAnimationData.json");
 
-	// init hitbox managers
 	m_playerHitBoxManager->Init(m_hitBoxSprite, m_player, "GameData\\HitBoxData\\playerHitBoxData.json");
 	m_enemyHitBoxManager->Init(m_hitBoxSprite, "GameData\\HitBoxData\\enemyHitBoxData.json");
 
-	// init game objects
 	m_player->LoadData("GameData\\PlayerData\\playerData.txt", "GameData\\PlayerData\\playerDamage.txt");
 	m_player->Init(m_playerSprite, m_playerShadowSprite, m_playerAnimator, m_playerHitBoxManager, m_controlSystem);
 	m_player->SetCamera(m_camera);
@@ -211,7 +187,11 @@ void GameplayGameState::LoadAssets()
 	m_sceneStateMachine->Init(TravellingSceneState::Instance(), nullptr, GlobalSceneState::Instance());
 	m_encounterHandler->Init("GameData\\EncounterData\\encounterPositions.txt");
 
-	// set running to true
+	m_playerBoundary.SetMin(Vector2(StartingBoundaryMinX, StartingBoundaryMinY));
+	m_playerBoundary.SetMax(Vector2(m_background->GetSprite()->GetWidth() - 1, m_graphics->GetHeight() - 1));
+	
+	m_camera->Init(GameWidth, GameHeight, m_backgroundSprite->GetWidth());
+	
 	m_running = true;
 }
 
@@ -259,14 +239,12 @@ void GameplayGameState::DeleteAssets()
 		m_NPCManager = nullptr;
 	}
 
-	// delete hit box managers
 	if(m_enemyHitBoxManager)
 	{
 		delete m_enemyHitBoxManager;
 		m_enemyHitBoxManager = nullptr;
 	}
 
-	// delete animators
 	if(m_enemyAnimator)
 	{
 		delete m_enemyAnimator;
@@ -279,7 +257,6 @@ void GameplayGameState::DeleteAssets()
 		m_playerAnimator = nullptr;
 	}
 
-	// delete sprites
 	if(m_backgroundSprite)
 	{
 		delete m_backgroundSprite;
@@ -322,7 +299,6 @@ void GameplayGameState::DeleteAssets()
 		m_playerSprite = nullptr;
 	}
 
-	// delete textures
 	if(m_backgroundTexture)
 	{
 		delete m_backgroundTexture;
@@ -359,7 +335,6 @@ void GameplayGameState::DeleteAssets()
 		m_playerTexture = nullptr;
 	}
 
-	// delete control system
 	if(m_controlSystem)
 	{
 		delete m_controlSystem;
@@ -375,7 +350,6 @@ void GameplayGameState::DeleteAssets()
 
 void GameplayGameState::ProcessInput()
 {
-	// quit when escape key is pressed
 	if(m_input->IsKeyDown(ESC_KEY))
 	{
 		PostQuitMessage(0);
@@ -386,28 +360,21 @@ void GameplayGameState::ProcessInput()
 		ResetGame();
 	}
 
-	///////////////////////////////////////////
-	// check if key is pressed down
-	///////////////////////////////////////////
-
 	if(m_input->IsKeyDown(PLAYER_UP_KEY) &&
 		!m_input->IsKeyDown(PLAYER_DOWN_KEY))
 	{
 		if(m_input->IsKeyDown(PLAYER_LEFT_KEY) &&
 			!m_input->IsKeyDown(PLAYER_RIGHT_KEY))
 		{
-			// send up left input to control system
 			m_controlSystem->SetInput(UpLeft);
 		}
 		else if(m_input->IsKeyDown(PLAYER_RIGHT_KEY) &&
 			!m_input->IsKeyDown(PLAYER_LEFT_KEY))
 		{
-			// send up right input to control system
 			m_controlSystem->SetInput(UpRight);
 		}
 		else
 		{
-			// send up input to control system
 			m_controlSystem->SetInput(Up);
 		}
 	}
@@ -417,34 +384,27 @@ void GameplayGameState::ProcessInput()
 		if(m_input->IsKeyDown(PLAYER_LEFT_KEY) &&
 			!m_input->IsKeyDown(PLAYER_RIGHT_KEY))
 		{
-			// send down left input to control system
 			m_controlSystem->SetInput(DownLeft);
 
 		}
 		else if(m_input->IsKeyDown(PLAYER_RIGHT_KEY) &&
 			!m_input->IsKeyDown(PLAYER_LEFT_KEY))
 		{
-			// send down right input to control system
 			m_controlSystem->SetInput(DownRight);
 		}
 		else
 		{
-			// send up input to control system
 			m_controlSystem->SetInput(Down);
-
 		}
 	}
 	else if(m_input->IsKeyDown(PLAYER_RIGHT_KEY) &&
 		!m_input->IsKeyDown(PLAYER_LEFT_KEY))
 	{
-		// send right input to control system
 		m_controlSystem->SetInput(Right);
-
 	}
 	else if(m_input->IsKeyDown(PLAYER_LEFT_KEY) && 
 		!m_input->IsKeyDown(PLAYER_RIGHT_KEY))
 	{
-		// send left input to control system
 		m_controlSystem->SetInput(Left);
 	}
 
@@ -462,7 +422,6 @@ void GameplayGameState::ProcessInput()
 		m_input->IsKeyDown(PLAYER_RIGHT_KEY) ||
 		m_input->IsKeyDown(PLAYER_A_KEY)))
 	{
-		// set player input to none
 		m_controlSystem->SetInput(None);
 	}
 
@@ -535,31 +494,33 @@ void GameplayGameState::ProcessCollisions()
 		}
 	}
 
-	// check player position against world objects
-	if(m_player->GetGroundPosition().x < 1.0f)
+	Vector2 playerBoundaryMin = m_playerBoundary.GetMin();
+	Vector2 playerBoundaryMax = m_playerBoundary.GetMax();
+
+	if(m_player->GetGroundPosition().x < playerBoundaryMin.x)
 	{
-		m_player->SetPosition(Vector2(1.0f, m_player->GetPositionY()));
+		m_player->SetPosition(Vector2(playerBoundaryMin.x, m_player->GetPositionY()));
 		m_player->SetCurrentVelocity(Vector2(0.0f, m_player->GetCurrentVelocity().y));
 		m_player->SetTargetVelocity(Vector2(0.0f, m_player->GetTargetVelocity().y));
 	}
 
-	if(m_player->GetGroundPosition().y < 61.0f)
+	if(m_player->GetGroundPosition().y < playerBoundaryMin.y)
 	{
-		m_player->SetPosition(Vector2(m_player->GetPositionX(), 61.0f));
+		m_player->SetPosition(Vector2(m_player->GetPositionX(), playerBoundaryMin.y));
 		m_player->SetCurrentVelocity(Vector2(m_player->GetCurrentVelocity().x, 0.0f));
 		m_player->SetTargetVelocity(Vector2(m_player->GetTargetVelocity().x, 0.0f));
 	}
 
-	if(m_player->GetGroundPosition().x > m_worldWidth - 1)
+	if(m_player->GetGroundPosition().x > playerBoundaryMax.x)
 	{
-		m_player->SetPosition(Vector2((float)m_worldWidth - 1, m_player->GetPositionY()));
+		m_player->SetPosition(Vector2(playerBoundaryMax.x, m_player->GetPositionY()));
 		m_player->SetCurrentVelocity(Vector2(0.0f, m_player->GetCurrentVelocity().y));
 		m_player->SetTargetVelocity(Vector2(0.0f, m_player->GetTargetVelocity().y));
 	}
 
-	if(m_player->GetGroundPosition().y > m_graphics->GetHeight() - 1)
+	if(m_player->GetGroundPosition().y > playerBoundaryMax.y)
 	{
-		m_player->SetPosition(Vector2(m_player->GetPositionX(), m_graphics->GetHeight() - 1));
+		m_player->SetPosition(Vector2(m_player->GetPositionX(), playerBoundaryMax.y));
 		m_player->SetCurrentVelocity(Vector2(m_player->GetCurrentVelocity().x, 0.0f));
 		m_player->SetTargetVelocity(Vector2(m_player->GetTargetVelocity().x, 0.0f));
 	}
@@ -568,7 +529,6 @@ void GameplayGameState::ProcessCollisions()
 	{
 		Enemy* enemy = enemyList[i];
 
-		// check enemy position against world objects
 		if(enemy->GetGroundPosition().x < 1.0f)
 		{
 			enemy->SetPosition(Vector2(1.0f, enemy->GetPositionY()));
@@ -576,23 +536,9 @@ void GameplayGameState::ProcessCollisions()
 			enemy->SetTargetVelocity(Vector2(0.0f, enemy->GetTargetVelocity().y));
 		}
 
-		if(enemy->GetGroundPosition().y < 61.0f)
+		if(enemy->GetGroundPosition().y < m_background->GetSprite()->GetHeight() - 1)
 		{
-			enemy->SetPosition(Vector2(enemy->GetPositionX(), 61.0f));
-			enemy->SetCurrentVelocity(Vector2(enemy->GetCurrentVelocity().x, 0.0f));
-			enemy->SetTargetVelocity(Vector2(enemy->GetTargetVelocity().x, 0.0f));
-		}
-
-		if(enemy->GetGroundPosition().x > m_worldWidth - 1)
-		{
-			enemy->SetPosition(Vector2((float)m_worldWidth - 1, enemy->GetPositionY()));
-			enemy->SetCurrentVelocity(Vector2(0.0f, enemy->GetCurrentVelocity().y));
-			enemy->SetTargetVelocity(Vector2(0.0f, enemy->GetTargetVelocity().y));
-		}
-
-		if(enemy->GetGroundPosition().y > m_graphics->GetHeight() - 1)
-		{
-			enemy->SetPosition(Vector2(enemy->GetPositionX(), m_graphics->GetHeight() - 1));
+			enemy->SetPosition(Vector2(m_background->GetSprite()->GetHeight() - 1, 61.0f));
 			enemy->SetCurrentVelocity(Vector2(enemy->GetCurrentVelocity().x, 0.0f));
 			enemy->SetTargetVelocity(Vector2(enemy->GetTargetVelocity().x, 0.0f));
 		}
@@ -609,7 +555,6 @@ void GameplayGameState::Render()
 
 void GameplayGameState::ReleaseAll()
 {
-	// release all texture resources
 	if(m_hudManager) { m_hudManager->ReleaseAll(); }
 	if(m_backgroundTexture) { m_backgroundTexture->Release(); }
 	if(m_shadowTexture) { m_shadowTexture->Release(); }
@@ -630,4 +575,13 @@ void GameplayGameState::ResetGame()
 	m_hudManager->Reset();
 	m_encounterHandler->SetEncounterIndex(0);
 	m_sceneStateMachine->ChangeState(TravellingSceneState::Instance());
+	SetPlayerBoundaryX(StartingBoundaryMinX, m_background->GetSprite()->GetWidth());
+}
+
+void GameplayGameState::SetPlayerBoundaryX(float minX, float maxX)
+{
+	Vector2 newMin = Vector2(minX, m_playerBoundary.GetMin().y);
+	Vector2 newMax = Vector2(maxX, m_playerBoundary.GetMax().y);
+	
+	m_playerBoundary.SetAABB(AABB(newMin, newMax));
 }

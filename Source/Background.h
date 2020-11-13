@@ -1,5 +1,5 @@
 // Background.h
-// Christopher Ball 2019
+// Christopher Ball 2019-2020
 // background object
 
 #ifndef _BACKGROUND_H_
@@ -19,6 +19,8 @@ public:
 	void Update(float deltaTime);
 	void Init(Sprite* sprite);
 	void Render(Graphics* graphics);
+
+	Sprite* GetSprite() const { return m_sprite; }
 
 private:
 	Sprite*		m_sprite;
