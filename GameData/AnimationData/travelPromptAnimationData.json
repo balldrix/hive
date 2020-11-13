@@ -1,0 +1,11 @@
+{
+  "animation": [
+    {
+      "name": "Active",
+      "index": 0,
+      "frameCount": 2,
+      "framesPerSecond": 2,
+      "loop": true
+    }
+  ]
+}

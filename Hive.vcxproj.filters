@@ -145,6 +145,7 @@
     <ClCompile Include="Source\EncounterSceneState.cpp" />
     <ClCompile Include="Source\EncounterHandler.cpp" />
     <ClCompile Include="Source\TravellingHandler.cpp" />
+    <ClCompile Include="Source\TravelPrompt.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -333,6 +334,7 @@
     <ClInclude Include="Source\EncounterSceneState.h" />
     <ClInclude Include="Source\EncounterHandler.h" />
     <ClInclude Include="Source\TravellingHandler.h" />
+    <ClInclude Include="Source\TravelPrompt.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\UI\lives_x0.png" />

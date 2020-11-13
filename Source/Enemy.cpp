@@ -31,10 +31,10 @@ Enemy::~Enemy()
 	DeleteAll();
 }
 
-void Enemy::Init(Graphics* graphics, const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, InGameHudManager* inGameUiManager, Sprite* portraitSprite)
+void Enemy::Init(Graphics* graphics, const Vector2& position, Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, InGameHudManager* inGameUiManager, Sprite* portraitSprite)
 {
 	m_position = position;
-	m_sprite = new SpriteSheet(*sprite);
+	m_sprite = new Spritesheet(*sprite);
 	m_shadow = new Sprite(*shadow);
 	m_animator = new Animator(*animator);
 	m_animator->SetAnimation(0);

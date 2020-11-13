@@ -23,7 +23,7 @@ public:
 
 	void					Init(Graphics* graphics,
 									const Vector2& position, 
-									SpriteSheet* sprite, 
+									Spritesheet* sprite, 
 									Sprite* shadow, 
 									Animator* animator, 
 									HitBoxManager* hitBoxManager, 

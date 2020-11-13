@@ -49,19 +49,19 @@ void GameObject::Init(const Vector2& position, Sprite* sprite, Sprite* shadow)
 {
 }
 
-void GameObject::Init(const Vector2& position, SpriteSheet* sprite, Animator* animator, HitBoxManager* hitBoxManager)
+void GameObject::Init(const Vector2& position, Spritesheet* sprite, Animator* animator, HitBoxManager* hitBoxManager)
 {
 }
 
-void GameObject::Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager)
+void GameObject::Init(const Vector2& position, Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager)
 {
 }
 
-void GameObject::Init(const Vector2& position, SpriteSheet* sprite, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem)
+void GameObject::Init(const Vector2& position, Spritesheet* sprite, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem)
 {
 }
 
-void GameObject::Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem)
+void GameObject::Init(const Vector2& position, Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem)
 {
 }
 
@@ -118,10 +118,14 @@ void GameObject::Update(float deltaTime)
 		m_animator->Update(deltaTime);
 
 	Vector2 screenPosition = m_position;
-	screenPosition.x -= m_camera->GetPosition().x;
+	
+	if(m_camera != nullptr)
+		screenPosition.x -= m_camera->GetPosition().x;
 
 	Vector2 screenGroundPosition = m_groundPosition;
-	screenGroundPosition.x -= m_camera->GetPosition().x;
+	
+	if(m_camera != nullptr)
+		screenGroundPosition.x -= m_camera->GetPosition().x;
 
 	if(m_sprite != nullptr)
 		m_sprite->SetPosition(screenPosition);

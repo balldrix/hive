@@ -14,7 +14,7 @@ class Input;
 class Camera;
 class ControlSystem;
 class Texture;
-class SpriteSheet;
+class Spritesheet;
 class Sprite;
 class Animator;
 class Player;
@@ -71,9 +71,9 @@ private:
 	Texture*			m_shadowTexture;			
 	Texture*			m_backgroundTexture;		
 
-	SpriteSheet*		m_playerSprite;				
+	Spritesheet*		m_playerSprite;				
 	Sprite*				m_playerShadowSprite;		
-	SpriteSheet*		m_enemySprite;				
+	Spritesheet*		m_enemySprite;				
 	Sprite*				m_mookPortraitSprite;
 	Sprite*				m_enemyShadowSprite;		
 	Sprite*				m_hitBoxSprite;				

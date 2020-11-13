@@ -32,7 +32,7 @@ Player::~Player()
 	}
 }
 
-void Player::Init(SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem)
+void Player::Init(Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem)
 {
 	m_sprite = sprite;
 	m_controlSystem = controlSystem;

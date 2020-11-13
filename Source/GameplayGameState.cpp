@@ -23,6 +23,7 @@
 #include "GameplayOwnedSceneStates.h"
 #include "EncounterHandler.h"
 #include "TravellingHandler.h"
+#include "TravelPrompt.h"
 
 using namespace GlobalConstants;
 
@@ -110,10 +111,10 @@ void GameplayGameState::LoadAssets()
 	m_backgroundTexture = new Texture();
 
 	// create sprite memory 
-	m_playerSprite = new SpriteSheet();
+	m_playerSprite = new Spritesheet();
 	m_playerShadowSprite = new Sprite();
 
-	m_enemySprite = new SpriteSheet();
+	m_enemySprite = new Spritesheet();
 	m_mookPortraitSprite = new Sprite();
 	m_enemyShadowSprite = new Sprite();
 
@@ -494,6 +495,7 @@ void GameplayGameState::Tick(float deltaTime)
 	m_hudManager->SetMaxPlayerHealth(m_player->GetMaxHealth());
 	m_hudManager->SetCurrentPlayerHealth(m_player->GetHealth());
 	m_hudManager->UpdatePlayerLives(m_player->GetLives());
+	m_hudManager->GetTravelPrompt()->Update(deltaTime);
 
 	if(m_player->IsDead() && m_player->GetLives() > 0)
 		m_player->Respawn();

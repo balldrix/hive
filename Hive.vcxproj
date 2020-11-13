@@ -70,6 +70,7 @@
     <ClCompile Include="Source\SpriteSheet.cpp" />
     <ClCompile Include="Source\Texture.cpp" />
     <ClCompile Include="Source\Timer.cpp" />
+    <ClCompile Include="Source\TravelPrompt.cpp" />
     <ClCompile Include="Source\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +136,7 @@
     <ClInclude Include="Source\StateMachine.h" />
     <ClInclude Include="Source\Texture.h" />
     <ClInclude Include="Source\Timer.h" />
+    <ClInclude Include="Source\TravelPrompt.h" />
     <ClInclude Include="Source\UnitVectors.h" />
     <ClInclude Include="Source\Window.h" />
   </ItemGroup>

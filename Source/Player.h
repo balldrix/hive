@@ -16,7 +16,7 @@ public:
 	Player();
 	virtual					~Player();
 
-	void					Init(SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem);
+	void					Init(Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem);
 
 	void					LoadData(std::string playerDataFile, std::string attackDataFile);
 	bool					LoadPlayerData(std::string filename);

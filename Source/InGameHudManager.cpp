@@ -6,6 +6,7 @@
 #include "Texture.h"
 #include "Sprite.h"
 #include "SpriteSheet.h"
+#include "TravelPrompt.h"
 
 using namespace InGameHudConstants;
 
@@ -17,8 +18,6 @@ InGameHudManager::InGameHudManager() :
 	m_playerHealthBar(nullptr),
 	m_playerPortrait(nullptr),
 	m_enemyPortrait(nullptr),
-	m_travelPromptTexture(nullptr),
-	m_travelPromptSpritesheet(nullptr),
 	m_despairFont12(nullptr),
 	m_enemyId(std::string()),
 	m_enemyHealthBar(nullptr),
@@ -62,12 +61,8 @@ void InGameHudManager::Init(Graphics* graphics)
 		m_livesLeftSprites.push_back(sprite);
 	}
 
-	m_travelPromptTexture = new Texture();
-	m_travelPromptTexture->LoadTexture(graphics, "GameData//Sprites//UI//go_sign.png");
-
-	m_travelPromptSpritesheet = new SpriteSheet();
-	m_travelPromptSpritesheet->Init(m_travelPromptTexture, "GameData//SpriteSheetData//travellingPromptSpritesheetData.json");
-	m_travelPromptSpritesheet->SetPosition(Vector2(TravelPromptPositionX, TravelPromptPositionY));
+	m_travelPrompt = new TravelPrompt();
+	m_travelPrompt->Init(graphics);
 }
 
 void InGameHudManager::Render(Graphics* graphics)
@@ -88,8 +83,7 @@ void InGameHudManager::Render(Graphics* graphics)
 		Vector2::Zero);
 
 	m_livesLeftSprites[m_playerLivesLeft]->Render(graphics);
-
-	m_travelPromptSpritesheet->Render(graphics, 0);
+	m_travelPrompt->Render(graphics);
 }
 
 void InGameHudManager::SetCurrentPlayerHealth(const int& health)
@@ -109,7 +103,7 @@ void InGameHudManager::AddEnemyKill()
 
 void InGameHudManager::EnableTravelPrompt()
 {
-	
+	m_travelPrompt->SetActive(true);
 }
 
 void InGameHudManager::UpdatePlayerLives(const int& lives)
@@ -144,7 +138,7 @@ void InGameHudManager::ReleaseAll()
 		m_livesLeftTextures[i]->Release();
 	}
 
-	m_travelPromptTexture->Release();
+	m_travelPrompt->Release();
 }
 
 void InGameHudManager::Reset()
@@ -156,16 +150,10 @@ void InGameHudManager::Reset()
 
 void InGameHudManager::DeleteAll()
 {
-	if(m_travelPromptSpritesheet != nullptr)
+	if(m_travelPrompt != nullptr)
 	{
-		delete m_travelPromptSpritesheet;
-		m_travelPromptSpritesheet = nullptr;
-	}
-
-	if(m_travelPromptTexture != nullptr)
-	{
-		delete m_travelPromptTexture;
-		m_travelPromptTexture = nullptr;
+		delete m_travelPrompt;
+		m_travelPrompt = nullptr;
 	}
 
 	for(size_t i = m_livesLeftSprites.size(); i--;)

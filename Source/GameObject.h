@@ -14,7 +14,7 @@ using std::map;
 // forward definitions
 class Graphics;
 class Sprite;
-class SpriteSheet;
+class Spritesheet;
 class Animator;
 class ControlSystem;
 class Camera;
@@ -39,10 +39,10 @@ public:
 
 	virtual void	Init(const Vector2& position, Sprite* sprite);
 	virtual void	Init(const Vector2& position, Sprite* sprite, Sprite* shadow);
-	virtual void	Init(const Vector2& position, SpriteSheet* sprite, Animator* animator, HitBoxManager* hitBoxManager);
-	virtual void	Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager);
-	virtual void	Init(const Vector2& position, SpriteSheet* sprite, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem);
-	virtual void	Init(const Vector2& position, SpriteSheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem);
+	virtual void	Init(const Vector2& position, Spritesheet* sprite, Animator* animator, HitBoxManager* hitBoxManager);
+	virtual void	Init(const Vector2& position, Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager);
+	virtual void	Init(const Vector2& position, Spritesheet* sprite, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem);
+	virtual void	Init(const Vector2& position, Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem);
 
 	virtual void	Update(float deltaTime);	// update object
 	virtual void 	Render(Graphics* graphics) = 0;	// render object
@@ -93,7 +93,7 @@ public:
 
 	// pointers for important objects
 	ControlSystem*	GetControlSystem() const { return m_controlSystem; }
-	SpriteSheet*	GetSprite() const { return m_sprite; }
+	Spritesheet*	GetSprite() const { return m_sprite; }
 	Animator*		GetAnimator() const { return m_animator; }
 	HitBoxManager*	GetHitBoxManager() const { return m_hitBoxManager; }
 
@@ -122,7 +122,7 @@ protected:
 	float				m_acceleration;			// acceleration speed
 	float				m_deceleration;			// decceleration speed
 
-	SpriteSheet*		m_sprite;				// object sprite sheet
+	Spritesheet*		m_sprite;				// object sprite sheet
 	Animator*			m_animator;				// animation controller
 
 	Sprite*				m_shadow;				// object shadow
