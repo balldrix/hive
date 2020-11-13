@@ -161,7 +161,8 @@ void NPCManager::SpawnEncounter(int& encounterIndex)
 {
 	for(size_t i = 0; i < m_enemyList.size(); i++)
 	{
-		if(m_enemyList[i]->GetData().encounterIndex == encounterIndex);
+		int enemyEncounterIndex = m_enemyList[i]->GetData().encounterIndex;
+		if(enemyEncounterIndex == encounterIndex)
 			m_enemyList[i]->SetActive(true);
 	}
 }
