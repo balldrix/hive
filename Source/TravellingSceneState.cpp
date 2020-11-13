@@ -29,4 +29,6 @@ void TravellingSceneState::Execute(GameplayGameState* game)
 
 void TravellingSceneState::OnExit(GameplayGameState* game)
 {
+	game->GetTravellingHandler()->SetTravelTimer(0.0f);
+	game->GetHudManager()->DisableTravelPrompt();
 }

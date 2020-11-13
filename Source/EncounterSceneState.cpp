@@ -1,6 +1,7 @@
 #include "EncounterSceneState.h"
 
 #include "GameplayGameState.h"
+#include "InGameHudManager.h"
 #include "Camera.h"
 
 EncounterSceneState* EncounterSceneState::Instance()

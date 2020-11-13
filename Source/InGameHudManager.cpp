@@ -106,6 +106,11 @@ void InGameHudManager::EnableTravelPrompt()
 	m_travelPrompt->SetActive(true);
 }
 
+void InGameHudManager::DisableTravelPrompt()
+{
+	m_travelPrompt->SetActive(false);
+}
+
 void InGameHudManager::UpdatePlayerLives(const int& lives)
 {
 	m_playerLivesLeft = lives;

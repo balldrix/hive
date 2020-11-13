@@ -31,6 +31,7 @@ public:
 
 	void AddEnemyKill();
 	void EnableTravelPrompt();
+	void DisableTravelPrompt();
 	void UpdatePlayerLives(const int& lives);
 	void HideEnemyHud(std::string id);
 	void ShowEnemyHud(std::string id, Sprite* sprite, BarController* healthBar);

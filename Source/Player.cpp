@@ -214,6 +214,7 @@ void Player::Reset()
 	m_dead = false;
 	m_active = true;
 	m_lives = m_playerData.objectData.startingLives;
+	SetVelocity(Vector2::Zero);
 }
 
 int Player::GetDamage() const
