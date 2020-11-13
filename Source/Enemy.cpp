@@ -34,6 +34,8 @@ Enemy::~Enemy()
 void Enemy::Init(Graphics* graphics, const Vector2& position, Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, InGameHudManager* inGameUiManager, Sprite* portraitSprite)
 {
 	m_position = position;
+	m_groundPosition = position;
+	m_grounded = true;
 	m_sprite = new Spritesheet(*sprite);
 	m_shadow = new Sprite(*shadow);
 	m_animator = new Animator(*animator);

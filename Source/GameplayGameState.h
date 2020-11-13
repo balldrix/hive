@@ -55,6 +55,8 @@ public:
 	Player*				GetPlayer() const { return m_player; }
 	InGameHudManager*	GetHudManager() const { return m_hudManager; }
 	TravellingHandler*  GetTravellingHandler() const { return m_travellingHandler; }
+	NPCManager*			GetNPCManager() const { return m_NPCManager; }
+	EncounterHandler*	GetEncounterHandler() const { return m_encounterHandler; }
 
 private:			
 	void				LoadAssets();				

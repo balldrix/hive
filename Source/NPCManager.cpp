@@ -157,6 +157,15 @@ bool NPCManager::InitNPCs(std::string fileName)
 	return true;
 }
 
+void NPCManager::SpawnEncounter(int& encounterIndex)
+{
+	for(size_t i = 0; i < m_enemyList.size(); i++)
+	{
+		if(m_enemyList[i]->GetData().encounterIndex == encounterIndex);
+			m_enemyList[i]->SetActive(true);
+	}
+}
+
 void NPCManager::Render(Graphics* graphics)
 {
 	for(size_t i = 0; i < m_enemyList.size(); i++)

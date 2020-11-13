@@ -77,19 +77,15 @@ void GameObject::SetID(std::string id)
 
 void GameObject::Update(float deltaTime)
 {
-	// true if object is grounded
 	if(m_grounded)
 	{
-		// ground y position
 		m_groundPosition.y = m_position.y;
 	}
 	else
 	{
-		// apply gravity
 		SetVelocity(m_currentVelocity.x, m_currentVelocity.y += Gravity * deltaTime);
 
-		// true if the y position is close enough to the ground 
-		if(std::abs(m_position.y - m_groundPosition.y) < 2.0f && m_currentVelocity.y > 0.0f)
+		if(m_position.y > m_groundPosition.y && m_currentVelocity.y > 0.0f)
 		{
 			m_grounded = true;
 			m_position.y = m_groundPosition.y;

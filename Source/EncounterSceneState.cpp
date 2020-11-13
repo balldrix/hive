@@ -3,6 +3,8 @@
 #include "GameplayGameState.h"
 #include "InGameHudManager.h"
 #include "Camera.h"
+#include "EncounterHandler.h"
+#include "NPCManager.h"
 
 EncounterSceneState* EncounterSceneState::Instance()
 {
@@ -18,6 +20,9 @@ void EncounterSceneState::OnEnter(GameplayGameState* game)
 	float cameraWidth = game->GetCamera()->GetWidth();
 
 	game->SetPlayerBoundaryX(cameraPositionX, cameraPositionX + cameraWidth);
+
+	int index = game->GetEncounterHandler()->GetEncounterIndex();
+	game->GetNPCManager()->SpawnEncounter(index);
 }
 
 void EncounterSceneState::Execute(GameplayGameState* game)

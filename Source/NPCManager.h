@@ -20,6 +20,7 @@ public:
 	void	Init();
 	bool	InitTypes(std::string fileName);
 	bool	InitNPCs(std::string enemyDataFile);
+	void	SpawnEncounter(int& encounterIndex);
 
 	void	Render(Graphics* graphics);
 	void	Update(float deltaTime);

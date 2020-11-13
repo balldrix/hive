@@ -536,9 +536,16 @@ void GameplayGameState::ProcessCollisions()
 			enemy->SetTargetVelocity(Vector2(0.0f, enemy->GetTargetVelocity().y));
 		}
 
-		if(enemy->GetGroundPosition().y < m_background->GetSprite()->GetHeight() - 1)
+		if(enemy->GetGroundPosition().y > playerBoundaryMax.y)
 		{
-			enemy->SetPosition(Vector2(m_background->GetSprite()->GetHeight() - 1, 61.0f));
+			enemy->SetPosition(Vector2(m_background->GetSprite()->GetHeight() - 1, playerBoundaryMax.y));
+			enemy->SetCurrentVelocity(Vector2(enemy->GetCurrentVelocity().x, 0.0f));
+			enemy->SetTargetVelocity(Vector2(enemy->GetTargetVelocity().x, 0.0f));
+		}
+
+		if(enemy->GetGroundPosition().y < playerBoundaryMin.y)
+		{
+			enemy->SetPosition(Vector2(m_background->GetSprite()->GetHeight() - 1, playerBoundaryMin.y));
 			enemy->SetCurrentVelocity(Vector2(enemy->GetCurrentVelocity().x, 0.0f));
 			enemy->SetTargetVelocity(Vector2(enemy->GetTargetVelocity().x, 0.0f));
 		}
