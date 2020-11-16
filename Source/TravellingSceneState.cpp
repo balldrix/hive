@@ -5,6 +5,10 @@
 #include "Player.h"
 #include "InGameHudManager.h"
 #include "TravellingHandler.h"
+#include "Constants.h"
+
+using namespace InGameHudConstants;
+using namespace GlobalConstants;
 
 TravellingSceneState* TravellingSceneState::Instance()
 {
@@ -15,8 +19,9 @@ TravellingSceneState* TravellingSceneState::Instance()
 void TravellingSceneState::OnEnter(GameplayGameState* game)
 {
 	game->GetCamera()->SetTarget(game->GetPlayer());
+	game->GetCamera()->SetBoundary(game->GetCamera()->GetPosition().x);
 	game->GetTravellingHandler()->SetTravelTimer(0.0f);
-	game->SetPlayerBoundaryX(game->GetCamera()->GetPosition().x, game->GetBackground()->GetWidth());
+	game->SetPlayerBoundaryX(game->GetCamera()->GetPosition().x, (float)game->GetBackground()->GetWidth());
 }
 
 void TravellingSceneState::Execute(GameplayGameState* game)
@@ -24,7 +29,7 @@ void TravellingSceneState::Execute(GameplayGameState* game)
 	game->CheckForEncounter();
 	game->GetTravellingHandler()->Update(game->GetDeltaTime());
 
-	if(game->GetTravellingHandler()->GetTravelTimer() > 3.0f)
+	if(game->GetTravellingHandler()->GetTravelTimer() > TravelPromptTime)
 		game->GetHudManager()->EnableTravelPrompt();
 }
 

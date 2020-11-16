@@ -190,7 +190,7 @@ void GameplayGameState::LoadAssets()
 	m_playerBoundary.SetMin(Vector2(StartingBoundaryMinX, StartingBoundaryMinY));
 	m_playerBoundary.SetMax(Vector2((float)m_background->GetSprite()->GetWidth() - 1.0f, (float)m_graphics->GetHeight() - 1.0f));
 	
-	m_camera->Init(GameWidth, GameHeight, m_backgroundSprite->GetWidth());
+	m_camera->Init(GameWidth, m_backgroundSprite->GetWidth() - GameWidth / 2);
 	
 	m_running = true;
 }
@@ -529,23 +529,23 @@ void GameplayGameState::ProcessCollisions()
 	{
 		Enemy* enemy = enemyList[i];
 
-		if(enemy->GetGroundPosition().x < 1.0f)
+		if(enemy->GetGroundPosition().x < StartingBoundaryMinX)
 		{
-			enemy->SetPosition(Vector2(1.0f, enemy->GetPositionY()));
+			enemy->SetPosition(Vector2(StartingBoundaryMinX, enemy->GetPositionY()));
 			enemy->SetCurrentVelocity(Vector2(0.0f, enemy->GetCurrentVelocity().y));
 			enemy->SetTargetVelocity(Vector2(0.0f, enemy->GetTargetVelocity().y));
 		}
 
 		if(enemy->GetGroundPosition().y > playerBoundaryMax.y)
 		{
-			enemy->SetPosition(Vector2((float)m_background->GetSprite()->GetHeight() - 1.0f, playerBoundaryMax.y));
+			enemy->SetPosition(enemy->GetPositionX(), playerBoundaryMax.y);
 			enemy->SetCurrentVelocity(Vector2(enemy->GetCurrentVelocity().x, 0.0f));
 			enemy->SetTargetVelocity(Vector2(enemy->GetTargetVelocity().x, 0.0f));
 		}
 
 		if(enemy->GetGroundPosition().y < playerBoundaryMin.y)
 		{
-			enemy->SetPosition(Vector2((float)m_background->GetSprite()->GetHeight() - 1.0f, playerBoundaryMin.y));
+			enemy->SetPosition(enemy->GetPositionX(), playerBoundaryMin.y);
 			enemy->SetCurrentVelocity(Vector2(enemy->GetCurrentVelocity().x, 0.0f));
 			enemy->SetTargetVelocity(Vector2(enemy->GetTargetVelocity().x, 0.0f));
 		}

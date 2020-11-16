@@ -33,6 +33,7 @@ namespace InGameHudConstants
 	const unsigned int LifeCounterPositionY		= 6;
 	const unsigned int TravelPromptPositionX	= 88;
 	const unsigned int TravelPromptPositionY	= 16;
+	const float TravelPromptTime				= 3.0f;
 }
 
 #endif _CONSTANTS_H_

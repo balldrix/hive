@@ -221,20 +221,20 @@ void GameObject::FlipHorizontally(bool flip)
 	m_hitBoxManager->SetFlipped(flip);
 }
 
-void GameObject::SetPositionX(unsigned int x)
+void GameObject::SetPositionX(float x)
 {
-	m_position.x = (float)x;
+	m_position.x = x;
 }
 
-void GameObject::SetPositionY(unsigned int y)
+void GameObject::SetPositionY(float y)
 {
-	m_position.y = (float)y;
+	m_position.y = y;
 }
 
-void GameObject::SetPosition(unsigned int x, unsigned int y)
+void GameObject::SetPosition(float x, float y)
 {
-	m_position.x = (float)x;
-	m_position.y = (float)y;
+	m_position.x = x;
+	m_position.y = y;
 }
 
 void GameObject::SetPosition(const Vector2& position)

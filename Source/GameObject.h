@@ -60,9 +60,9 @@ public:
 	// Setters
 	void			SetCamera(Camera* cam);
 	void			SetID(std::string id);			// set object ID
-	void			SetPositionX(unsigned int x);
-	void			SetPositionY(unsigned int y);
-	void			SetPosition(unsigned int x, unsigned int y);
+	void			SetPositionX(float x);
+	void			SetPositionY(float y);
+	void			SetPosition(float x, float y);
 	void			SetPosition(const Vector2& position);			// set position
 	void			SetMovementSpeed(float speed);
 	void			SetAcceleration(float accel);
