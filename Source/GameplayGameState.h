@@ -58,6 +58,7 @@ public:
 	NPCManager*			GetNPCManager() const { return m_NPCManager; }
 	EncounterHandler*	GetEncounterHandler() const { return m_encounterHandler; }
 	StateMachine<GameplayGameState>* GetSceneStateMachine() const { return m_sceneStateMachine; }
+	Sprite*				GetBackground() const { return m_backgroundSprite; }
 
 private:			
 	void				LoadAssets();				
