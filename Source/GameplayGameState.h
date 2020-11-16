@@ -57,6 +57,7 @@ public:
 	TravellingHandler*  GetTravellingHandler() const { return m_travellingHandler; }
 	NPCManager*			GetNPCManager() const { return m_NPCManager; }
 	EncounterHandler*	GetEncounterHandler() const { return m_encounterHandler; }
+	StateMachine<GameplayGameState>* GetSceneStateMachine() const { return m_sceneStateMachine; }
 
 private:			
 	void				LoadAssets();				

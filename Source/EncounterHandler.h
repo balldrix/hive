@@ -4,6 +4,8 @@
 
 #pragma once
 
+class Enemy;
+
 #include <string>
 #include <vector>
 
@@ -13,15 +15,22 @@ public:
 	EncounterHandler();
 	~EncounterHandler();
 
-	void Init(std::string encounterDataFile);
-	void SetEncounterIndex(const int& index);
+	void	Init(std::string encounterDataFile, const std::vector<Enemy*>& enemyList);
+	void	SpawnEncounter();
+
+	void	SetEncounterIndex(const int& index);
 	
-	int GetEncounterIndex() const { return m_encounterIndex; }
-	int GetEncounterPosition() const { return m_encounterPositions[m_encounterIndex]; }
+	int		GetEncounterIndex() const { return m_encounterIndex; }
+	int		GetEncounterPosition() const { return m_encounterPositions[m_encounterIndex]; }
+	bool	GetIsEncounterDone();
+
+	void	IncreaseEncounterIndex();
 
 private:
 	bool				LoadData(std::string encounterDataFile);
+
+	std::vector<Enemy*> m_enemyList;
 	int					m_encounterIndex;
 	std::vector<int>    m_encounterPositions;
+	bool				m_isEncounterDone;
 };
-

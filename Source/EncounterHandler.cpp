@@ -1,10 +1,12 @@
 #include "EncounterHandler.h"
 
+#include "Enemy.h"
 #include "Error.h"
 
 EncounterHandler::EncounterHandler()
-	: m_encounterIndex(0) 
+	: m_encounterIndex(0)
 {
+	m_enemyList.clear();
 	m_encounterPositions.clear();
 }
 
@@ -12,8 +14,10 @@ EncounterHandler::~EncounterHandler()
 {
 }
 
-void EncounterHandler::Init(std::string encounterDataFile)
+void EncounterHandler::Init(std::string encounterDataFile, const std::vector<Enemy*>& enemyList)
 {
+	m_enemyList = enemyList;
+
 	if(LoadData(encounterDataFile) == true)
 		return;
 
@@ -21,9 +25,38 @@ void EncounterHandler::Init(std::string encounterDataFile)
 	Error::FileLog(error);
 }
 
+void EncounterHandler::SpawnEncounter()
+{
+	for(size_t i = 0; i < m_enemyList.size(); i++)
+	{
+		int enemyEncounterIndex = m_enemyList[i]->GetData().encounterIndex;
+		if(enemyEncounterIndex == m_encounterIndex)
+			m_enemyList[i]->SetActive(true);
+	}
+}
+
 void EncounterHandler::SetEncounterIndex(const int& index)
 {
 	m_encounterIndex = index;
+}
+
+bool EncounterHandler::GetIsEncounterDone()
+{
+	for(size_t i = 0; i < m_enemyList.size(); i++)
+	{
+		Enemy* enemy = m_enemyList[i];
+		int encounterIndex = enemy->GetData().encounterIndex;
+
+		if(enemy->IsDead() == false && encounterIndex == m_encounterIndex)
+			return false;
+	}
+
+	return true;
+}
+
+void EncounterHandler::IncreaseEncounterIndex()
+{
+	m_encounterIndex++;
 }
 
 bool EncounterHandler::LoadData(std::string encounterDataFile)

@@ -5,6 +5,8 @@
 #include "Camera.h"
 #include "EncounterHandler.h"
 #include "NPCManager.h"
+#include "StateMachine.h"
+#include "GameplayOwnedSceneStates.h"
 
 EncounterSceneState* EncounterSceneState::Instance()
 {
@@ -17,16 +19,21 @@ void EncounterSceneState::OnEnter(GameplayGameState* game)
 	game->GetCamera()->SetTarget(nullptr);
 
 	float cameraPositionX = game->GetCamera()->GetPosition().x;
-	float cameraWidth = game->GetCamera()->GetWidth();
+	unsigned int cameraWidth = game->GetCamera()->GetWidth();
 
 	game->SetPlayerBoundaryX(cameraPositionX, cameraPositionX + cameraWidth);
 
 	int index = game->GetEncounterHandler()->GetEncounterIndex();
-	game->GetNPCManager()->SpawnEncounter(index);
+	game->GetEncounterHandler()->SpawnEncounter();
 }
 
 void EncounterSceneState::Execute(GameplayGameState* game)
 {
+	if(game->GetEncounterHandler()->GetIsEncounterDone() == false)
+		return;
+	
+	game->GetEncounterHandler()->IncreaseEncounterIndex();
+	game->GetSceneStateMachine()->ChangeState(TravellingSceneState::Instance());
 }
 
 void EncounterSceneState::OnExit(GameplayGameState* game)

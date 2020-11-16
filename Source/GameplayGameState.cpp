@@ -185,10 +185,10 @@ void GameplayGameState::LoadAssets()
 	m_hudManager->SetCurrentPlayerHealth(m_player->GetHealth());
 	
 	m_sceneStateMachine->Init(TravellingSceneState::Instance(), nullptr, GlobalSceneState::Instance());
-	m_encounterHandler->Init("GameData\\EncounterData\\encounterPositions.txt");
+	m_encounterHandler->Init("GameData\\EncounterData\\encounterPositions.txt", m_NPCManager->GetEnemyList());
 
 	m_playerBoundary.SetMin(Vector2(StartingBoundaryMinX, StartingBoundaryMinY));
-	m_playerBoundary.SetMax(Vector2(m_background->GetSprite()->GetWidth() - 1, m_graphics->GetHeight() - 1));
+	m_playerBoundary.SetMax(Vector2((float)m_background->GetSprite()->GetWidth() - 1.0f, (float)m_graphics->GetHeight() - 1.0f));
 	
 	m_camera->Init(GameWidth, GameHeight, m_backgroundSprite->GetWidth());
 	
@@ -538,14 +538,14 @@ void GameplayGameState::ProcessCollisions()
 
 		if(enemy->GetGroundPosition().y > playerBoundaryMax.y)
 		{
-			enemy->SetPosition(Vector2(m_background->GetSprite()->GetHeight() - 1, playerBoundaryMax.y));
+			enemy->SetPosition(Vector2((float)m_background->GetSprite()->GetHeight() - 1.0f, playerBoundaryMax.y));
 			enemy->SetCurrentVelocity(Vector2(enemy->GetCurrentVelocity().x, 0.0f));
 			enemy->SetTargetVelocity(Vector2(enemy->GetTargetVelocity().x, 0.0f));
 		}
 
 		if(enemy->GetGroundPosition().y < playerBoundaryMin.y)
 		{
-			enemy->SetPosition(Vector2(m_background->GetSprite()->GetHeight() - 1, playerBoundaryMin.y));
+			enemy->SetPosition(Vector2((float)m_background->GetSprite()->GetHeight() - 1.0f, playerBoundaryMin.y));
 			enemy->SetCurrentVelocity(Vector2(enemy->GetCurrentVelocity().x, 0.0f));
 			enemy->SetTargetVelocity(Vector2(enemy->GetTargetVelocity().x, 0.0f));
 		}
@@ -582,7 +582,7 @@ void GameplayGameState::ResetGame()
 	m_hudManager->Reset();
 	m_encounterHandler->SetEncounterIndex(0);
 	m_sceneStateMachine->ChangeState(TravellingSceneState::Instance());
-	SetPlayerBoundaryX(StartingBoundaryMinX, m_background->GetSprite()->GetWidth());
+	SetPlayerBoundaryX(StartingBoundaryMinX, (float)m_background->GetSprite()->GetWidth());
 }
 
 void GameplayGameState::SetPlayerBoundaryX(float minX, float maxX)
