@@ -190,7 +190,7 @@ void GameplayGameState::LoadAssets()
 	m_playerBoundary.SetMin(Vector2(StartingBoundaryMinX, StartingBoundaryMinY));
 	m_playerBoundary.SetMax(Vector2((float)m_background->GetSprite()->GetWidth() - 1.0f, (float)m_graphics->GetHeight() - 1.0f));
 	
-	m_camera->Init(GameWidth, m_backgroundSprite->GetWidth() - GameWidth / 2);
+	m_camera->Init(GameWidth);
 	
 	m_running = true;
 }
