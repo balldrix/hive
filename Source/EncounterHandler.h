@@ -23,6 +23,7 @@ public:
 	int		GetEncounterIndex() const { return m_encounterIndex; }
 	int		GetEncounterPosition() const { return m_encounterPositions[m_encounterIndex]; }
 	bool	GetIsEncounterDone();
+	size_t	GetNumberOfEncounters() const { return m_encounterPositions.size(); }
 
 	void	IncreaseEncounterIndex();
 

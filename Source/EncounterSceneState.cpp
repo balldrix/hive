@@ -29,10 +29,13 @@ void EncounterSceneState::OnEnter(GameplayGameState* game)
 
 void EncounterSceneState::Execute(GameplayGameState* game)
 {
-	if(game->GetEncounterHandler()->GetIsEncounterDone() == false)
+	EncounterHandler* encounterHandler = game->GetEncounterHandler();
+
+	if(encounterHandler->GetIsEncounterDone() == false ||
+	   encounterHandler->GetEncounterIndex() == encounterHandler->GetNumberOfEncounters() - 1)
 		return;
 	
-	game->GetEncounterHandler()->IncreaseEncounterIndex();
+	encounterHandler->IncreaseEncounterIndex();
 	game->GetSceneStateMachine()->ChangeState(TravellingSceneState::Instance());
 }
 
