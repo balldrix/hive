@@ -439,7 +439,7 @@ void GameplayGameState::Update(float deltaTime)
 
 void GameplayGameState::CheckForEncounter()
 {
-	if(m_player->GetPositionX() < m_encounterHandler->GetEncounterPosition())
+	if(m_camera->GetPosition().x < m_encounterHandler->GetEncounterPosition())
 		return;
 
 	m_sceneStateMachine->ChangeState(EncounterSceneState::Instance());
