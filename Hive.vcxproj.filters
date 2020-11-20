@@ -354,6 +354,7 @@
     <Image Include="GameData\Sprites\UI\player1_hud_healthbar_fill.png" />
     <Image Include="GameData\Sprites\UI\player1_hud_healthbar_frame.png" />
     <Image Include="GameData\Sprites\UI\player1_hud_portrait.png" />
+    <Image Include="GameData\Sprites\kingMookSpritesheet.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -369,6 +370,7 @@
     <None Include="GameData\SpriteSheetData\enemySpriteSheetData.json" />
     <None Include="GameData\SpriteSheetData\playerSpritesheetData.json" />
     <None Include="GameData\SpriteSheetData\travellingpromptSpritesheetData.json" />
+    <None Include="GameData\SpriteSheetData\bossSpriteSheetData.json" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="GameData\EncounterData\encounterPositions.txt" />
@@ -377,5 +379,7 @@
     <Text Include="GameData\EnemyData\Mook\mookDamage.txt" />
     <Text Include="GameData\PlayerData\playerDamage.txt" />
     <Text Include="GameData\PlayerData\playerData.txt" />
+    <Text Include="GameData\EnemyData\Damage\bossDamage.txt" />
+    <Text Include="GameData\EnemyData\Damage\mookDamage.txt" />
   </ItemGroup>
 </Project>

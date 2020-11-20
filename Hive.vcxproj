@@ -144,6 +144,7 @@
     <Image Include="GameData\Sprites\backgroundTest.png" />
     <Image Include="GameData\Sprites\enemySpriteSheet.png" />
     <Image Include="GameData\Sprites\hitbox.png" />
+    <Image Include="GameData\Sprites\kingMookSpritesheet.png" />
     <Image Include="GameData\Sprites\playerSpriteSheet.png" />
     <Image Include="GameData\Sprites\shadow.png" />
     <Image Include="GameData\Sprites\UI\go_sign.png" />
@@ -168,6 +169,7 @@
     <None Include="GameData\HitBoxData\playerHitBoxData.json" />
     <None Include="GameData\SpriteFonts\goodbye_despair_12pt.spritefont" />
     <None Include="GameData\SpriteFonts\silkscreen_8pt.spritefont" />
+    <None Include="GameData\SpriteSheetData\bossSpriteSheetData.json" />
     <None Include="GameData\SpriteSheetData\dummySpriteSheetData.json" />
     <None Include="GameData\SpriteSheetData\enemySpriteSheetData.json" />
     <None Include="GameData\SpriteSheetData\playerSpritesheetData.json" />
@@ -176,6 +178,8 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="GameData\EncounterData\encounterPositions.txt" />
+    <Text Include="GameData\EnemyData\Damage\bossDamage.txt" />
+    <Text Include="GameData\EnemyData\Damage\mookDamage.txt" />
     <Text Include="GameData\EnemyData\enemyData.txt" />
     <Text Include="GameData\EnemyData\Mook\mookDamage.txt" />
     <Text Include="GameData\EnemyData\typeData.txt" />

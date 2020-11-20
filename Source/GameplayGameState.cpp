@@ -164,7 +164,7 @@ void GameplayGameState::LoadAssets()
 		enemyList[i]->Init(m_graphics, enemyList[i]->GetData().objectData.startingPosition, m_enemySprite, m_enemyShadowSprite, m_enemyAnimator, m_enemyHitBoxManager, m_hudManager, m_mookPortraitSprite);
 
 		std::string type = enemyList[i]->GetData().type;
-		std::string enemyDataFile = "GameData\\EnemyData\\" + type + "\\" + type + "Damage.txt";
+		std::string enemyDataFile = "GameData\\EnemyData\\Damage\\" + type + "Damage.txt";
 		
 		if(!enemyList[i]->LoadDamageData(enemyDataFile))
 		{

@@ -9,4 +9,4 @@ Enemy07	Mook 1140 64 2;
 Enemy08 Mook 1145 70 2;
 Enemy09 Mook 1000 79 2;
 Enemy10 Mook 1005 66 2;
-Enemy11 Mook 1435 73 3;
+Enemy11 Boss 1435 73 3;
