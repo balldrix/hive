@@ -1,0 +1,60 @@
+{
+  "animation": [
+    {
+      "name": "Idle",
+      "index": 0,
+      "frameCount": 1,
+      "framesPerSecond": 8,
+      "loop": true
+    },
+    {
+      "name": "Walking",
+      "index": 1,
+      "frameCount": 1,
+      "framesPerSecond": 8,
+      "loop": true
+    },
+    {
+      "name": "Attack1",
+      "index": 2,
+      "frameCount": 1,
+      "framesPerSecond": 8,
+      "loop": true
+    },
+    {
+      "name": "Attack2",
+      "index": 3,
+      "frameCount": 1,
+      "framesPerSecond": 8,
+      "loop": true
+    },
+    {
+      "name": "Attack3",
+      "index": 4,
+      "frameCount": 1,
+      "framesPerSecond": 8,
+      "loop": true
+    },
+    {
+      "name": "Hurt",
+      "index": 5,
+      "frameCount": 1,
+      "framesPerSecond": 8,
+      "loop": true
+    },
+    {
+      "name": "Knockback",
+      "index": 6,
+      "frameCount": 1,
+      "framesPerSecond": 8,
+      "loop": true
+    },
+    {
+      "name": "Dead",
+      "index": 6,
+      "frameCount": 1,
+      "framesPerSecond": 8,
+      "loop": true
+    }
+  ]
+}

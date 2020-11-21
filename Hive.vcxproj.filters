@@ -371,6 +371,8 @@
     <None Include="GameData\SpriteSheetData\playerSpritesheetData.json" />
     <None Include="GameData\SpriteSheetData\travellingpromptSpritesheetData.json" />
     <None Include="GameData\SpriteSheetData\bossSpriteSheetData.json" />
+    <None Include="GameData\AnimationData\travelPromptAnimationData.json" />
+    <None Include="GameData\AnimationData\bossAnimationData.json" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="GameData\EncounterData\encounterPositions.txt" />
