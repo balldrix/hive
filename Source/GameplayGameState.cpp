@@ -35,22 +35,17 @@ GameplayGameState::GameplayGameState() :
 	m_camera(nullptr),
 	m_controlSystem(nullptr),
 	m_playerTexture(nullptr),
-	m_enemyTexture(nullptr),
-	m_mookPortraitTexture(nullptr),
 	m_hitBoxTexture(nullptr),
-	m_shadowTexture(nullptr),
+	m_standardShadowTexture(nullptr),
+	m_largeShadowTexture(nullptr),
 	m_backgroundTexture(nullptr),
 	m_playerSprite(nullptr),
-	m_playerShadowSprite(nullptr),
-	m_enemySprite(nullptr),
-	m_mookPortraitSprite(nullptr),
-	m_enemyShadowSprite(nullptr),
+	m_standardShadowSprite(nullptr),
+	m_largeShadowSprite(nullptr),
 	m_hitBoxSprite(nullptr),
 	m_backgroundSprite(nullptr),
 	m_playerAnimator(nullptr),
-	m_enemyAnimator(nullptr),
 	m_playerHitBoxManager(nullptr),
-	m_enemyHitBoxManager(nullptr),
 	m_NPCManager(nullptr),
 	m_player(nullptr),
 	m_background(nullptr),
@@ -93,25 +88,20 @@ void GameplayGameState::LoadAssets()
 	m_controlSystem = new ControlSystem();
 
 	m_playerTexture = new Texture();
-	m_enemyTexture = new Texture();
-	m_mookPortraitTexture = new Texture();
 	m_hitBoxTexture = new Texture();
-	m_shadowTexture = new Texture();
+	m_standardShadowTexture = new Texture();
+	m_largeShadowTexture = new Texture();
 	m_backgroundTexture = new Texture();
 
 	m_playerSprite = new Spritesheet();
-	m_playerShadowSprite = new Sprite();
-	m_enemySprite = new Spritesheet();
-	m_mookPortraitSprite = new Sprite();
-	m_enemyShadowSprite = new Sprite();
+	m_standardShadowSprite = new Sprite();
+	m_largeShadowSprite = new Sprite();
 	m_hitBoxSprite = new Sprite();
 	m_backgroundSprite = new Sprite();
 
 	m_playerAnimator = new Animator();
-	m_enemyAnimator = new Animator();
 
 	m_playerHitBoxManager = new HitBoxManager();
-	m_enemyHitBoxManager = new HitBoxManager();
 
 	m_NPCManager = new NPCManager();
 
@@ -123,66 +113,37 @@ void GameplayGameState::LoadAssets()
 	m_travellingHandler = new TravellingHandler();
 
 	m_playerTexture->LoadTexture(m_graphics, "GameData\\Sprites\\playerSpriteSheet.png");
-	m_enemyTexture->LoadTexture(m_graphics, "GameData\\Sprites\\enemySpritesheet.png");
-	m_mookPortraitTexture->LoadTexture(m_graphics, "GameData\\Sprites\\UI\\mook_hud_portrait.png");
 	m_hitBoxTexture->LoadTexture(m_graphics, "GameData\\Sprites\\hitbox.png");
-	m_shadowTexture->LoadTexture(m_graphics, "GameData\\Sprites\\shadow.png");
+	m_standardShadowTexture->LoadTexture(m_graphics, "GameData\\Sprites\\shadow.png");
+	m_largeShadowTexture->LoadTexture(m_graphics, "GameData\\Sprites\\shadow_large.png");
 	m_backgroundTexture->LoadTexture(m_graphics, "GameData\\Sprites\\backgroundTest.png");
 
 	m_playerSprite->Init(m_playerTexture, "GameData\\SpriteSheetData\\playerSpritesheetData.json");
-	m_playerShadowSprite->Init(m_shadowTexture);
-	m_playerShadowSprite->SetAlpha(0.7f);
-	m_enemySprite->Init(m_enemyTexture, "GameData\\SpriteSheetData\\enemySpritesheetData.json");
-	m_mookPortraitSprite->Init(m_mookPortraitTexture);
-	m_mookPortraitSprite->SetOrigin(Vector2::Zero);
-	m_mookPortraitSprite->SetPosition(Vector2(EnemyPortraitPositionX, EnemyPortraitPositionY));
-	m_enemyShadowSprite->Init(m_shadowTexture);
-	m_enemyShadowSprite->SetAlpha(0.7f);
+	m_standardShadowSprite->Init(m_standardShadowTexture);
+	m_standardShadowSprite->SetAlpha(0.7f);
+	m_largeShadowSprite->Init(m_largeShadowTexture);
+	m_largeShadowSprite->SetAlpha(0.7f);
 	m_hitBoxSprite->Init(m_hitBoxTexture);
 	m_backgroundSprite->Init(m_backgroundTexture);
 	m_backgroundSprite->SetOrigin(Vector2::Zero);
 
 	m_playerAnimator->Init("GameData\\AnimationData\\playerAnimationData.json");
-	m_enemyAnimator->Init("GameData\\AnimationData\\enemyAnimationData.json");
 
 	m_playerHitBoxManager->Init(m_hitBoxSprite, m_player, "GameData\\HitBoxData\\playerHitBoxData.json");
-	m_enemyHitBoxManager->Init(m_hitBoxSprite, "GameData\\HitBoxData\\enemyHitBoxData.json");
 
 	m_player->LoadData("GameData\\PlayerData\\playerData.txt", "GameData\\PlayerData\\playerDamage.txt");
-	m_player->Init(m_playerSprite, m_playerShadowSprite, m_playerAnimator, m_playerHitBoxManager, m_controlSystem);
+	m_player->Init(m_playerSprite, m_standardShadowSprite, m_playerAnimator, m_playerHitBoxManager, m_controlSystem);
 	m_player->SetCamera(m_camera);
 	m_camera->SetTarget(m_player);
 
-	m_NPCManager->Init();
-
-	std::vector<Enemy*> enemyList = m_NPCManager->GetEnemyList();
-
-	for(size_t i = 0; i < enemyList.size(); i++)
-	{
-		enemyList[i]->SetPlayerTarget(m_player);
-
-		enemyList[i]->Init(m_graphics, enemyList[i]->GetData().objectData.startingPosition, m_enemySprite, m_enemyShadowSprite, m_enemyAnimator, m_enemyHitBoxManager, m_hudManager, m_mookPortraitSprite);
-
-		std::string type = enemyList[i]->GetData().type;
-		std::string enemyDataFile = "GameData\\EnemyData\\Damage\\" + type + "Damage.txt";
-		
-		if(!enemyList[i]->LoadDamageData(enemyDataFile))
-		{
-			std::string error = "Error! Enemy damage data " + enemyDataFile + " not found.";
-			Error::FileLog(error);
-		}
-		
-		enemyList[i]->GetHitBoxManager()->SetOwner(enemyList[i]);
-		enemyList[i]->SetCamera(m_camera);
-		enemyList[i]->SetActive(false);
-	}
-
 	m_background->Init(m_backgroundSprite);
 	m_background->SetCamera(m_camera);
-	m_hudManager->Init(m_graphics);
 
+	m_hudManager->Init(m_graphics);
 	m_hudManager->SetMaxPlayerHealth(m_player->GetMaxHealth());
 	m_hudManager->SetCurrentPlayerHealth(m_player->GetHealth());
+
+	m_NPCManager->Init(m_graphics, m_camera, m_player, m_hudManager, m_standardShadowTexture, m_hitBoxTexture);
 	
 	m_sceneStateMachine->Init(TravellingSceneState::Instance(), nullptr, GlobalSceneState::Instance());
 	m_encounterHandler->Init("GameData\\EncounterData\\encounterPositions.txt", m_NPCManager->GetEnemyList());
@@ -239,18 +200,6 @@ void GameplayGameState::DeleteAssets()
 		m_NPCManager = nullptr;
 	}
 
-	if(m_enemyHitBoxManager)
-	{
-		delete m_enemyHitBoxManager;
-		m_enemyHitBoxManager = nullptr;
-	}
-
-	if(m_enemyAnimator)
-	{
-		delete m_enemyAnimator;
-		m_enemyAnimator = nullptr;
-	}
-
 	if(m_playerAnimator)
 	{
 		delete m_playerAnimator;
@@ -269,28 +218,16 @@ void GameplayGameState::DeleteAssets()
 		m_hitBoxSprite = nullptr;
 	}
 
-	if(m_enemyShadowSprite)
+	if(m_largeShadowSprite)
 	{
-		delete m_enemyShadowSprite;
-		m_enemyShadowSprite = nullptr;
+		delete m_largeShadowSprite;
+		m_largeShadowSprite = nullptr;
 	}
 
-	if(m_mookPortraitSprite)
+	if(m_standardShadowSprite)
 	{
-		delete m_mookPortraitSprite;
-		m_mookPortraitSprite = nullptr;
-	}
-
-	if(m_enemySprite)
-	{
-		delete m_enemySprite;
-		m_enemySprite = nullptr;
-	}
-
-	if(m_playerShadowSprite)
-	{
-		delete m_playerShadowSprite;
-		m_playerShadowSprite = nullptr;
+		delete m_standardShadowSprite;
+		m_standardShadowSprite = nullptr;
 	}
 
 	if(m_playerSprite)
@@ -305,28 +242,22 @@ void GameplayGameState::DeleteAssets()
 		m_backgroundTexture = nullptr;
 	}
 
-	if(m_shadowTexture)
+	if(m_largeShadowTexture != nullptr)
 	{
-		delete m_shadowTexture;
-		m_shadowTexture = nullptr;
+		delete m_largeShadowTexture;
+		m_largeShadowTexture = nullptr;
+	}
+
+	if(m_standardShadowTexture)
+	{
+		delete m_standardShadowTexture;
+		m_standardShadowTexture = nullptr;
 	}
 
 	if(m_hitBoxTexture)
 	{
 		delete m_hitBoxTexture;
 		m_hitBoxTexture = nullptr;
-	}
-
-	if(m_mookPortraitTexture)
-	{
-		delete m_mookPortraitTexture;
-		m_mookPortraitTexture = nullptr;
-	}
-
-	if(m_enemyTexture)
-	{
-		delete m_enemyTexture;
-		m_enemyTexture = nullptr;
 	}
 
 	if(m_playerTexture)
@@ -564,10 +495,9 @@ void GameplayGameState::ReleaseAll()
 {
 	if(m_hudManager) { m_hudManager->ReleaseAll(); }
 	if(m_backgroundTexture) { m_backgroundTexture->Release(); }
-	if(m_shadowTexture) { m_shadowTexture->Release(); }
+	if(m_standardShadowTexture) { m_standardShadowTexture->Release(); }
+	if(m_largeShadowTexture) { m_largeShadowTexture->Release(); }
 	if(m_hitBoxTexture) { m_hitBoxTexture->Release(); }
-	if(m_mookPortraitTexture) { m_mookPortraitTexture->Release(); }
-	if(m_enemyTexture) { m_enemyTexture->Release(); }
 	if(m_playerTexture) { m_playerTexture->Release(); }
 }
 

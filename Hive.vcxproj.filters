@@ -146,6 +146,7 @@
     <ClCompile Include="Source\EncounterHandler.cpp" />
     <ClCompile Include="Source\TravellingHandler.cpp" />
     <ClCompile Include="Source\TravelPrompt.cpp" />
+    <ClCompile Include="Source\NPCFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -335,6 +336,7 @@
     <ClInclude Include="Source\EncounterHandler.h" />
     <ClInclude Include="Source\TravellingHandler.h" />
     <ClInclude Include="Source\TravelPrompt.h" />
+    <ClInclude Include="Source\NPCFactory.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\UI\lives_x0.png" />
@@ -355,12 +357,12 @@
     <Image Include="GameData\Sprites\UI\player1_hud_healthbar_frame.png" />
     <Image Include="GameData\Sprites\UI\player1_hud_portrait.png" />
     <Image Include="GameData\Sprites\kingMookSpritesheet.png" />
+    <Image Include="GameData\Sprites\shadow_large.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="GameData\SpriteFonts\silkscreen_8pt.spritefont" />
     <None Include="GameData\AnimationData\dummyAnimationData.json" />
-    <None Include="GameData\AnimationData\enemyAnimationData.json" />
     <None Include="GameData\AnimationData\playerAnimationData.json" />
     <None Include="GameData\HitBoxData\dummyHitBoxData.json" />
     <None Include="GameData\HitBoxData\enemyHitBoxData.json" />
@@ -373,6 +375,7 @@
     <None Include="GameData\SpriteSheetData\bossSpriteSheetData.json" />
     <None Include="GameData\AnimationData\travelPromptAnimationData.json" />
     <None Include="GameData\AnimationData\bossAnimationData.json" />
+    <None Include="GameData\AnimationData\mookAnimationData.json" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="GameData\EncounterData\encounterPositions.txt" />

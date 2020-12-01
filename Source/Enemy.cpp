@@ -22,8 +22,10 @@ Enemy::Enemy() :
 	m_isHostile(false),
 	m_hudManager(nullptr),
 	m_portraitSprite(nullptr),
+	m_hitBoxSprite(nullptr),
 	m_healthBar(nullptr)
 {}
+
 
 Enemy::~Enemy()
 {
@@ -31,17 +33,29 @@ Enemy::~Enemy()
 	DeleteAll();
 }
 
-void Enemy::Init(Graphics* graphics, const Vector2& position, Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, InGameHudManager* inGameUiManager, Sprite* portraitSprite)
+void Enemy::Init(Graphics* graphics, const Vector2& position, Texture* spriteTexture, Texture* shadowTexture, Texture* hitBoxTexture, InGameHudManager* inGameUiManager, Sprite* portraitSprite)
 {
 	m_position = position;
 	m_groundPosition = position;
 	m_grounded = true;
-	m_sprite = new Spritesheet(*sprite);
-	m_shadow = new Sprite(*shadow);
-	m_animator = new Animator(*animator);
+
+	m_sprite = new Spritesheet();
+	m_sprite->Init(spriteTexture, "GameData\\SpriteSheetData\\enemySpritesheetData.json");
+	
+	m_shadow = new Sprite();
+	m_shadow->Init(shadowTexture);
+	
+	m_animator = new Animator();
+	m_animator->Init("GameData\\AnimationData\\mookAnimationData.json");
 	m_animator->SetAnimation(0);
-	m_hitBoxManager = new HitBoxManager(*hitBoxManager);
+
+	m_hitBoxSprite = new Sprite();
+	m_hitBoxSprite->Init(hitBoxTexture);
+	
+	m_hitBoxManager = new HitBoxManager();
+	m_hitBoxManager->Init(m_hitBoxSprite, "GameData\\HitBoxData\\enemyHitBoxData.json");
 	m_hitBoxManager->SetCurrentHitBox(0);
+	m_hitBoxManager->SetOwner(this);
 	
 	ObjectData data = m_enemyData.objectData;
 	m_movementSpeed = data.walkSpeed;
@@ -56,6 +70,8 @@ void Enemy::Init(Graphics* graphics, const Vector2& position, Spritesheet* sprit
 
 	m_hudManager = inGameUiManager;
 	m_portraitSprite = portraitSprite;
+
+	m_health = data.startingHealth;
 
 	m_healthBar = new BarController();
 	m_healthBar->Init(graphics);
@@ -85,7 +101,6 @@ Enemy::Render(Graphics* graphics)
 	if(m_active == false)
 		return;
 
-	// render shadow first
 	if(m_shadow)
 	{
 		m_shadow->SetDepth(m_groundPosition.y / graphics->GetHeight());
@@ -96,7 +111,6 @@ Enemy::Render(Graphics* graphics)
 	{
 		m_sprite->SetDepth(m_groundPosition.y / graphics->GetHeight());
 
-		// render enemy sprite
 		if(m_animator)
 		{
 			m_sprite->Render(graphics, m_animator->GetCurrentFrame() + m_animator->GetAnimation()->spritesheetIndex);
@@ -240,16 +254,22 @@ void Enemy::DeleteAll()
 		m_healthBar = nullptr;
 	}
 
-	if(m_sprite)
+	if(m_stateMachine)
 	{
-		delete m_sprite;
-		m_sprite = nullptr;
+		delete m_stateMachine;
+		m_stateMachine = nullptr;
 	}
 
-	if(m_shadow)
+	if(m_hitBoxManager)
 	{
-		delete m_shadow;
-		m_shadow = nullptr;
+		delete m_hitBoxManager;
+		m_hitBoxManager = nullptr;
+	}	
+
+	if(m_hitBoxSprite)
+	{
+		delete m_hitBoxSprite;
+		m_hitBoxSprite = nullptr;
 	}
 
 	if(m_animator)
@@ -258,10 +278,16 @@ void Enemy::DeleteAll()
 		m_animator = nullptr;
 	}
 
-	if(m_stateMachine)
+	if(m_shadow)
 	{
-		delete m_stateMachine;
-		m_stateMachine = nullptr;
+		delete m_shadow;
+		m_shadow = nullptr;
+	}
+
+	if(m_sprite)
+	{
+		delete m_sprite;
+		m_sprite = nullptr;
 	}
 }
 

@@ -71,26 +71,21 @@ private:
 	Camera*				m_camera;					
 	ControlSystem*		m_controlSystem;			
 
-	Texture*			m_playerTexture;			
-	Texture*			m_enemyTexture;
-	Texture*			m_mookPortraitTexture;
+	Texture*			m_playerTexture;		
 	Texture*			m_hitBoxTexture;			
-	Texture*			m_shadowTexture;			
+	Texture*			m_standardShadowTexture;			
+	Texture*			m_largeShadowTexture;			
 	Texture*			m_backgroundTexture;		
 
 	Spritesheet*		m_playerSprite;				
-	Sprite*				m_playerShadowSprite;		
-	Spritesheet*		m_enemySprite;				
-	Sprite*				m_mookPortraitSprite;
-	Sprite*				m_enemyShadowSprite;		
+	Sprite*				m_standardShadowSprite;		
+	Sprite*				m_largeShadowSprite;
 	Sprite*				m_hitBoxSprite;				
 	Sprite*				m_backgroundSprite;			
 	
 	Animator*			m_playerAnimator;			
-	Animator*			m_enemyAnimator;			
 
-	HitBoxManager*		m_playerHitBoxManager;		
-	HitBoxManager*		m_enemyHitBoxManager;		
+	HitBoxManager*		m_playerHitBoxManager;
 
 	NPCManager*			m_NPCManager;				
 

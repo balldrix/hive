@@ -14,7 +14,7 @@ EncounterHandler::~EncounterHandler()
 {
 }
 
-void EncounterHandler::Init(std::string encounterDataFile, const std::vector<Enemy*>& enemyList)
+void EncounterHandler::Init(std::string encounterDataFile, std::vector<Enemy*> enemyList)
 {
 	m_enemyList = enemyList;
 

@@ -21,14 +21,13 @@ public:
 	Enemy();
 	virtual					~Enemy();
 
-	void					Init(Graphics* graphics,
-									const Vector2& position, 
-									Spritesheet* sprite, 
-									Sprite* shadow, 
-									Animator* animator, 
-									HitBoxManager* hitBoxManager, 
-									InGameHudManager* inGameUiManager, 
-									Sprite* portraitSprite);
+	virtual void			Init(Graphics* graphics,
+								 const Vector2& position, 
+								 Texture* spriteTexture, 
+								 Texture* shadowTexture,
+								 Texture* hitBoxTexture,
+								 InGameHudManager* inGameUiManager, 
+								 Sprite* portraitSprite);
 
 	void					Update(float deltaTime);
 	void					Render(Graphics* graphics);
@@ -63,6 +62,7 @@ private:
 	Player*					m_playerTarget;
 	InGameHudManager*		m_hudManager;
 	Sprite*					m_portraitSprite;
+	Sprite*					m_hitBoxSprite;
 	BarController*			m_healthBar;
 	StateMachine<Enemy>*	m_stateMachine;
 	float					m_thinkingTimer;

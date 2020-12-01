@@ -1,10 +1,14 @@
 #include "NPCManager.h"
+
 #include "Enemy.h"
 #include "Error.h"
+#include "NPCFactory.h"
 
-NPCManager::NPCManager()
+NPCManager::NPCManager() :
+	m_enemyDataContainer(nullptr),
+	m_NPCFactory(nullptr)
 {
-	m_enemyDataContainer = new EnemyDataContainer();
+	m_enemyList.clear();
 }
 
 NPCManager::~NPCManager()
@@ -12,9 +16,13 @@ NPCManager::~NPCManager()
 	DeleteAll();
 }
 
-void NPCManager::Init()
+void NPCManager::Init(Graphics* graphics, Camera* camera, Player* player, InGameHudManager* hudManager, Texture* standardShadowTexture,
+					  Texture* hitBoxTexture)
 {
 	bool result = false;
+
+	m_enemyDataContainer = new EnemyDataContainer();
+	m_NPCFactory = new NPCFactory();
 
 	result = InitTypes("GameData\\EnemyData\\typeData.txt");
 	if(result == false)
@@ -23,7 +31,8 @@ void NPCManager::Init()
 		PostQuitMessage(0); // quit game
 	}
 
-	result = InitNPCs("GameData\\EnemyData\\enemyData.txt");
+	result = InitNPCs(graphics, camera, player, hudManager, standardShadowTexture, hitBoxTexture, "GameData\\EnemyData\\enemyData.txt");
+
 	if(result == false)
 	{
 		Error::FileLog(" Error initialising enemy list. EnemyManager.cpp line 24");
@@ -100,12 +109,17 @@ bool NPCManager::InitTypes(std::string fileName)
 	return true;
 }
 
-bool NPCManager::InitNPCs(std::string fileName)
+bool NPCManager::InitNPCs(Graphics* graphics, Camera* camera, Player* player, InGameHudManager* hudManager, Texture* standardShadowTexture,
+						  Texture* hitBoxTexture, std::string fileName)
 {
 	std::ifstream file; // ifstream file buffer
 	file.open(fileName); // opens file and reads to buffer
 	if(file) // if file is open
 	{
+		m_NPCFactory->Init(graphics, camera, player, 
+						   hudManager, standardShadowTexture,
+						   hitBoxTexture);
+
 		EnemyData data;
 		std::string result;
 
@@ -142,10 +156,7 @@ bool NPCManager::InitNPCs(std::string fileName)
 			file >> result;
 			data.encounterIndex = std::stoi(result);
 
-			Enemy* enemy = new Enemy();
-			enemy->SetData(data);
-
-			// add npc to list
+			Enemy* enemy = m_NPCFactory->GetEnemy(data);
 			m_enemyList.push_back(enemy);
 		}
 	}
@@ -193,7 +204,14 @@ void NPCManager::DeleteAll()
 	}
 
 	m_enemyList.clear();
-	if(m_enemyDataContainer)
+	
+	if(m_NPCFactory != nullptr)
+	{
+		delete m_NPCFactory;
+		m_NPCFactory = nullptr;
+	}
+	
+	if(m_enemyDataContainer != nullptr)
 	{
 		delete m_enemyDataContainer;
 		m_enemyDataContainer = nullptr;
