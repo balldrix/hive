@@ -2,12 +2,10 @@
 // Christopher Ball 2019
 // manages state when enemy is attacking
 
-#ifndef _ENEMY_ATTACK_STATE_
-#define	_ENEMY_ATTACK_STATE_
+#pragma once
 
 #include "State.h"
 
-// forward declaration
 class Enemy;
 
 class EnemyAttackState : public State<Enemy>
@@ -28,6 +26,3 @@ private:
 	EnemyAttackState(const EnemyAttackState&);
 	EnemyAttackState& operator=(const EnemyAttackState&);
 };
-
-#endif // !_ENEMY_ATTACK_STATE_
-

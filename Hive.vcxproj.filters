@@ -82,9 +82,6 @@
     <ClCompile Include="Source\Enemy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\EnemyDeadState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\EnemyHurtState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -98,12 +95,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\EnemyRunningState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EnemyGlobalState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EnemyAttackState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\PlayerDeadState.cpp">
@@ -147,6 +138,15 @@
     <ClCompile Include="Source\TravellingHandler.cpp" />
     <ClCompile Include="Source\TravelPrompt.cpp" />
     <ClCompile Include="Source\NPCFactory.cpp" />
+    <ClCompile Include="Source\EnemyDeadState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MookEnemyGlobalState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EnemyAttackState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -265,9 +265,6 @@
     <ClInclude Include="Source\Enemy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\EnemyOwnedStates.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\EnemyIdleState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -277,19 +274,10 @@
     <ClInclude Include="Source\EnemyRunningState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\EnemyAttackState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EnemyGlobalState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\EnemyHurtState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\EnemyKnockbackState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EnemyDeadState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\PlayerKnockbackState.h">
@@ -337,6 +325,18 @@
     <ClInclude Include="Source\TravellingHandler.h" />
     <ClInclude Include="Source\TravelPrompt.h" />
     <ClInclude Include="Source\NPCFactory.h" />
+    <ClInclude Include="Source\EnemyDeadState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MookEnemyGlobalState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyAttackState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyOwnedStates.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\UI\lives_x0.png" />

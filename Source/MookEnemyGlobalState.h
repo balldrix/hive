@@ -1,4 +1,4 @@
-// EnemyGlobalState.h
+// MookEnemyGlobalState.h
 // Christopher Ball 2019
 // global state for common enemy methods
 
@@ -9,20 +9,20 @@
 
 class Enemy;
 
-class EnemyGlobalState : public State<Enemy>
+class MookEnemyGlobalState : public State<Enemy>
 {
 public:
 	// static instance call
-	static EnemyGlobalState* Instance();
+	static MookEnemyGlobalState* Instance();
 
 	virtual void OnEnter(Enemy* enemy);
 	virtual void Execute(Enemy* enemy);
 	virtual void OnExit(Enemy* enemy);
 
 private:
-	EnemyGlobalState() {}
-	~EnemyGlobalState() {}
-	EnemyGlobalState(const EnemyGlobalState&);
-	EnemyGlobalState& operator=(const EnemyGlobalState&);
+	MookEnemyGlobalState() {}
+	~MookEnemyGlobalState() {}
+	MookEnemyGlobalState(const MookEnemyGlobalState&);
+	MookEnemyGlobalState& operator=(const MookEnemyGlobalState&);
 };
 #endif // !_ENEMY_GLOBAL_STATE_

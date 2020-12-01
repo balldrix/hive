@@ -12,7 +12,7 @@
 #include "InGameHudManager.h"
 #include "BarController.h"
 #include "Player.h"
-#include "EnemyOwnedStates.h"
+#include "MookEnemyOwnedStates.h"
 #include "StateMachine.h"
 
 Enemy::Enemy() :
@@ -63,7 +63,7 @@ void Enemy::Init(Graphics* graphics, const Vector2& position, Texture* spriteTex
 	m_deceleration = data.deceleration;
 
 	m_stateMachine = new StateMachine<Enemy>(this);
-	m_stateMachine->Init(EnemyIdleState::Instance(), nullptr, EnemyGlobalState::Instance());
+	m_stateMachine->Init(EnemyIdleState::Instance(), nullptr, MookEnemyGlobalState::Instance());
 
 	m_id = m_enemyData.objectData.id;
 	m_health = m_enemyData.objectData.startingHealth;

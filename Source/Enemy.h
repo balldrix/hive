@@ -50,7 +50,7 @@ public:
 	void					ApplyDamage(GameObject* source, const int& amount);
 	void					Knockback(const Vector2& direction, const float& force);
 	
-	void					Attack();
+	virtual void			Attack();
 	void					Kill();
 
 	void					ShowEnemyHud();

@@ -7,18 +7,18 @@
 #include "Animator.h"
 #include "Randomiser.h"
 
-EnemyGlobalState* EnemyGlobalState::Instance()
+MookEnemyGlobalState* MookEnemyGlobalState::Instance()
 {
-	static EnemyGlobalState instance;
+	static MookEnemyGlobalState instance;
 	return &instance;
 }
 
-void EnemyGlobalState::OnEnter(Enemy* enemy)
+void MookEnemyGlobalState::OnEnter(Enemy* enemy)
 {
 
 }
 
-void EnemyGlobalState::Execute(Enemy* enemy)
+void MookEnemyGlobalState::Execute(Enemy* enemy)
 {
 	if(enemy->GetHealth() < 1)
 	{
@@ -68,6 +68,6 @@ void EnemyGlobalState::Execute(Enemy* enemy)
 	}
 }
 
-void EnemyGlobalState::OnExit(Enemy* enemy)
+void MookEnemyGlobalState::OnExit(Enemy* enemy)
 {
 }

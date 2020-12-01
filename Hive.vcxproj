@@ -37,7 +37,7 @@
     <ClCompile Include="Source\EnemyAttackState.cpp" />
     <ClCompile Include="Source\EnemyDataContainer.cpp" />
     <ClCompile Include="Source\EnemyDeadState.cpp" />
-    <ClCompile Include="Source\EnemyGlobalState.cpp" />
+    <ClCompile Include="Source\MookEnemyGlobalState.cpp" />
     <ClCompile Include="Source\EnemyHurtState.cpp" />
     <ClCompile Include="Source\EnemyIdleState.cpp" />
     <ClCompile Include="Source\EnemyKnockbackState.cpp" />
@@ -96,7 +96,7 @@
     <ClInclude Include="Source\EnemyDataContainer.h" />
     <ClInclude Include="Source\EnemyDeadState.h" />
     <ClInclude Include="Source\EnemyFightingState.h" />
-    <ClInclude Include="Source\EnemyGlobalState.h" />
+    <ClInclude Include="Source\MookEnemyGlobalState.h" />
     <ClInclude Include="Source\EnemyHurtState.h" />
     <ClInclude Include="Source\EnemyIdleState.h" />
     <ClInclude Include="Source\EnemyKnockbackState.h" />

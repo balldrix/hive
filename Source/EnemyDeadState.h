@@ -1,9 +1,8 @@
 // EnemyDeadState.h
-// Christopher Ball 2019
+// Christopher Ball 2019-2020
 // manages state when enemy is dead
 
-#ifndef _ENEMY_DEAD_STATE_
-#define	_ENEMY_DEAD_STATE_
+#pragma once
 
 #include "State.h"
 
@@ -27,6 +26,3 @@ private:
 	EnemyDeadState(const EnemyDeadState&);
 	EnemyDeadState& operator=(const EnemyDeadState&);
 };
-
-#endif // !_ENEMY_DEAD_STATE_
-
