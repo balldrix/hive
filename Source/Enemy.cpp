@@ -12,8 +12,9 @@
 #include "InGameHudManager.h"
 #include "BarController.h"
 #include "Player.h"
-#include "MookEnemyOwnedStates.h"
+#include "EnemyOwnedStates.h"
 #include "StateMachine.h"
+#include "Error.h"
 
 Enemy::Enemy() :
 	m_playerTarget(nullptr),
@@ -33,37 +34,48 @@ Enemy::~Enemy()
 	DeleteAll();
 }
 
-void Enemy::Init(Graphics* graphics, const Vector2& position, Texture* spriteTexture, Texture* shadowTexture, Texture* hitBoxTexture, InGameHudManager* inGameUiManager, Sprite* portraitSprite)
+void Enemy::Init(Graphics* graphics,
+				 Camera* camera,
+				 Player* player,
+				 const EnemyData& data, 
+				 Texture* spriteTexture, 
+				 Texture* shadowTexture, 
+				 Texture* hitBoxTexture, 
+				 InGameHudManager* inGameUiManager, 
+				 Sprite* portraitSprite,
+				 State<Enemy>* globalEnemyState)
 {
-	m_position = position;
-	m_groundPosition = position;
+	m_camera = camera;
+	m_playerTarget = player;
+	m_enemyData = data;
+	m_position = data.objectData.startingPosition;
+	m_groundPosition = data.objectData.startingPosition;
 	m_grounded = true;
 
 	m_sprite = new Spritesheet();
-	m_sprite->Init(spriteTexture, "GameData\\SpriteSheetData\\enemySpritesheetData.json");
+	m_sprite->Init(spriteTexture, "GameData\\SpriteSheetData\\" + data.type + "SpritesheetData.json");
 	
 	m_shadow = new Sprite();
 	m_shadow->Init(shadowTexture);
 	
 	m_animator = new Animator();
-	m_animator->Init("GameData\\AnimationData\\mookAnimationData.json");
+	m_animator->Init("GameData\\AnimationData\\" + data.type + "AnimationData.json");
 	m_animator->SetAnimation(0);
 
 	m_hitBoxSprite = new Sprite();
 	m_hitBoxSprite->Init(hitBoxTexture);
 	
 	m_hitBoxManager = new HitBoxManager();
-	m_hitBoxManager->Init(m_hitBoxSprite, "GameData\\HitBoxData\\enemyHitBoxData.json");
+	m_hitBoxManager->Init(m_hitBoxSprite, "GameData\\HitBoxData\\" + data.type + "HitBoxData.json");
 	m_hitBoxManager->SetCurrentHitBox(0);
 	m_hitBoxManager->SetOwner(this);
 	
-	ObjectData data = m_enemyData.objectData;
-	m_movementSpeed = data.walkSpeed;
-	m_acceleration = data.acceleration;
-	m_deceleration = data.deceleration;
+	m_movementSpeed = data.objectData.walkSpeed;
+	m_acceleration = data.objectData.acceleration;
+	m_deceleration = data.objectData.deceleration;
 
 	m_stateMachine = new StateMachine<Enemy>(this);
-	m_stateMachine->Init(EnemyIdleState::Instance(), nullptr, MookEnemyGlobalState::Instance());
+	m_stateMachine->Init(EnemyIdleState::Instance(), nullptr, globalEnemyState);
 
 	m_id = m_enemyData.objectData.id;
 	m_health = m_enemyData.objectData.startingHealth;
@@ -71,7 +83,7 @@ void Enemy::Init(Graphics* graphics, const Vector2& position, Texture* spriteTex
 	m_hudManager = inGameUiManager;
 	m_portraitSprite = portraitSprite;
 
-	m_health = data.startingHealth;
+	m_health = data.objectData.startingHealth;
 
 	m_healthBar = new BarController();
 	m_healthBar->Init(graphics);
@@ -82,6 +94,16 @@ void Enemy::Init(Graphics* graphics, const Vector2& position, Texture* spriteTex
 	float percentage = (float)m_health / (float)m_playerTarget->GetMaxHealth();
 	unsigned int width = (unsigned int)(m_healthBar->GetWidth() * percentage);
 	m_healthBar->SetWidth(width);
+
+	std::string enemyDataFile = "GameData\\EnemyData\\Damage\\" + data.type + "Damage.txt";
+
+	if(!LoadDamageData(enemyDataFile))
+	{
+		std::string error = "Error! Enemy damage data " + enemyDataFile + " not found.";
+		Error::FileLog(error);
+	}
+
+	m_active = false;
 }
 
 void

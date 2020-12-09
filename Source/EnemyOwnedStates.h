@@ -13,3 +13,4 @@
 #include "EnemyKnockbackState.h"
 #include "EnemyDeadState.h"
 #include "EnemyVictoryState.h"
+#include "KingMookEnemyGlobalState.h"

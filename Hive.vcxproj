@@ -22,6 +22,9 @@
     <ClCompile Include="Source\EncounterHandler.cpp" />
     <ClCompile Include="Source\EncounterSceneState.cpp" />
     <ClCompile Include="Source\GlobalSceneState.cpp" />
+    <ClCompile Include="Source\KingMook.cpp" />
+    <ClCompile Include="Source\KingMookEnemyGlobalState.cpp" />
+    <ClCompile Include="Source\KingMookEnemyGlobalState.h" />
     <ClCompile Include="Source\NPCFactory.cpp" />
     <ClCompile Include="Source\TravellingHandler.cpp" />
     <ClCompile Include="Source\TravellingSceneState.cpp" />
@@ -79,6 +82,7 @@
     <ClInclude Include="Source\EncounterSceneState.h" />
     <ClInclude Include="Source\GameplayOwnedSceneStates.h" />
     <ClInclude Include="Source\GlobalSceneState.h" />
+    <ClInclude Include="Source\KingMook.h" />
     <ClInclude Include="Source\NPCFactory.h" />
     <ClInclude Include="Source\TravellingHandler.h" />
     <ClInclude Include="Source\TravellingSceneState.h" />
@@ -144,13 +148,14 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\backgroundTest.png" />
-    <Image Include="GameData\Sprites\enemySpriteSheet.png" />
     <Image Include="GameData\Sprites\hitbox.png" />
     <Image Include="GameData\Sprites\kingMookSpritesheet.png" />
+    <Image Include="GameData\Sprites\mookSpriteSheet.png" />
     <Image Include="GameData\Sprites\playerSpriteSheet.png" />
     <Image Include="GameData\Sprites\shadow.png" />
     <Image Include="GameData\Sprites\shadow_large.png" />
     <Image Include="GameData\Sprites\UI\go_sign.png" />
+    <Image Include="GameData\Sprites\UI\kingMook_hud_portrait.png" />
     <Image Include="GameData\Sprites\UI\lives_x0.png" />
     <Image Include="GameData\Sprites\UI\lives_x1.png" />
     <Image Include="GameData\Sprites\UI\lives_x2.png" />
@@ -169,14 +174,15 @@
     <None Include="GameData\AnimationData\mookAnimationData.json" />
     <None Include="GameData\AnimationData\playerAnimationData.json" />
     <None Include="GameData\AnimationData\travelPromptAnimationData.json" />
+    <None Include="GameData\HitBoxData\bossHitBoxData.json" />
     <None Include="GameData\HitBoxData\dummyHitBoxData.json" />
-    <None Include="GameData\HitBoxData\enemyHitBoxData.json" />
+    <None Include="GameData\HitBoxData\mookHitBoxData.json" />
     <None Include="GameData\HitBoxData\playerHitBoxData.json" />
     <None Include="GameData\SpriteFonts\goodbye_despair_12pt.spritefont" />
     <None Include="GameData\SpriteFonts\silkscreen_8pt.spritefont" />
     <None Include="GameData\SpriteSheetData\bossSpriteSheetData.json" />
     <None Include="GameData\SpriteSheetData\dummySpriteSheetData.json" />
-    <None Include="GameData\SpriteSheetData\enemySpriteSheetData.json" />
+    <None Include="GameData\SpriteSheetData\mookSpritesheetData.json" />
     <None Include="GameData\SpriteSheetData\playerSpritesheetData.json" />
     <None Include="GameData\SpriteSheetData\travellingpromptSpritesheetData.json" />
     <None Include="packages.config" />

@@ -1,13 +1,13 @@
 // Enemy.h
-// Christopher Ball 2019
+// Christopher Ball 2019-2020
 // Enemy class 
 
-#ifndef _ENEMY_H_
-#define _ENEMY_H_
+#pragma once
 
 #include "Constants.h"
 #include "GameObject.h"
 #include "EnemyData.h"
+#include "State.h"
 
 class Graphics;
 class Player;
@@ -22,12 +22,15 @@ public:
 	virtual					~Enemy();
 
 	virtual void			Init(Graphics* graphics,
-								 const Vector2& position, 
+								 Camera* camera,
+								 Player* player,
+								 const EnemyData& data,
 								 Texture* spriteTexture, 
 								 Texture* shadowTexture,
 								 Texture* hitBoxTexture,
 								 InGameHudManager* inGameUiManager, 
-								 Sprite* portraitSprite);
+								 Sprite* portraitSprite,
+								 State<Enemy>* globalEnemyState);
 
 	void					Update(float deltaTime);
 	void					Render(Graphics* graphics);
@@ -68,5 +71,3 @@ private:
 	float					m_thinkingTimer;
 	bool					m_isHostile;
 };
-
-#endif _ENEMY_H_

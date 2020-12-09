@@ -147,6 +147,9 @@
     <ClCompile Include="Source\EnemyAttackState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\KingMook.cpp" />
+    <ClCompile Include="Source\KingMookEnemyGlobalState.h" />
+    <ClCompile Include="Source\KingMookEnemyGlobalState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -337,6 +340,7 @@
     <ClInclude Include="Source\EnemyOwnedStates.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\KingMook.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\UI\lives_x0.png" />
@@ -346,7 +350,6 @@
     <Image Include="GameData\Sprites\UI\lives_x4.png" />
     <Image Include="GameData\Sprites\UI\lives_x5.png" />
     <Image Include="GameData\Sprites\backgroundTest.png" />
-    <Image Include="GameData\Sprites\enemySpriteSheet.png" />
     <Image Include="GameData\Sprites\hitbox.png" />
     <Image Include="GameData\Sprites\playerSpriteSheet.png" />
     <Image Include="GameData\Sprites\shadow.png" />
@@ -358,6 +361,8 @@
     <Image Include="GameData\Sprites\UI\player1_hud_portrait.png" />
     <Image Include="GameData\Sprites\kingMookSpritesheet.png" />
     <Image Include="GameData\Sprites\shadow_large.png" />
+    <Image Include="GameData\Sprites\mookSpriteSheet.png" />
+    <Image Include="GameData\Sprites\UI\kingMook_hud_portrait.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -365,17 +370,18 @@
     <None Include="GameData\AnimationData\dummyAnimationData.json" />
     <None Include="GameData\AnimationData\playerAnimationData.json" />
     <None Include="GameData\HitBoxData\dummyHitBoxData.json" />
-    <None Include="GameData\HitBoxData\enemyHitBoxData.json" />
     <None Include="GameData\HitBoxData\playerHitBoxData.json" />
     <None Include="GameData\SpriteFonts\goodbye_despair_12pt.spritefont" />
     <None Include="GameData\SpriteSheetData\dummySpriteSheetData.json" />
-    <None Include="GameData\SpriteSheetData\enemySpriteSheetData.json" />
     <None Include="GameData\SpriteSheetData\playerSpritesheetData.json" />
     <None Include="GameData\SpriteSheetData\travellingpromptSpritesheetData.json" />
     <None Include="GameData\SpriteSheetData\bossSpriteSheetData.json" />
     <None Include="GameData\AnimationData\travelPromptAnimationData.json" />
     <None Include="GameData\AnimationData\bossAnimationData.json" />
     <None Include="GameData\AnimationData\mookAnimationData.json" />
+    <None Include="GameData\HitBoxData\bossHitBoxData.json" />
+    <None Include="GameData\HitBoxData\mookHitBoxData.json" />
+    <None Include="GameData\SpriteSheetData\mookSpritesheetData.json" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="GameData\EncounterData\encounterPositions.txt" />
