@@ -11,9 +11,9 @@ class KingMookEnemyGlobalState : public State<Enemy>
 public:
 	static KingMookEnemyGlobalState* Instance();
 
-	virtual void OnEnter(Enemy* owner);
-	virtual void Execute(Enemy* owner);
-	virtual void OnExit(Enemy* owner);
+	virtual void OnEnter(Enemy* enemy);
+	virtual void Execute(Enemy* enemy);
+	virtual void OnExit(Enemy* enemy);
 	
 private:
 	KingMookEnemyGlobalState() {}

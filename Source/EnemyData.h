@@ -1,9 +1,8 @@
 // EnemyData.h
-// Christopher Ball 2019
+// Christopher Ball 2019-2020
 // stores enemy data
 
-#ifndef _ENEMYDATA_H_
-#define _ENEMYDATA_H_
+#pragma once
 
 #include "pch.h"
 #include "GameObject.h"
@@ -17,5 +16,3 @@ struct EnemyData
 	float					attackRange;
 	int						encounterIndex;
 };
-
-#endif // !_ENEMYDATA_H_
