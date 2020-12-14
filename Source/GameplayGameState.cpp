@@ -41,7 +41,6 @@ GameplayGameState::GameplayGameState() :
 	m_backgroundTexture(nullptr),
 	m_playerSprite(nullptr),
 	m_standardShadowSprite(nullptr),
-	m_largeShadowSprite(nullptr),
 	m_hitBoxSprite(nullptr),
 	m_backgroundSprite(nullptr),
 	m_playerAnimator(nullptr),
@@ -95,7 +94,6 @@ void GameplayGameState::LoadAssets()
 
 	m_playerSprite = new Spritesheet();
 	m_standardShadowSprite = new Sprite();
-	m_largeShadowSprite = new Sprite();
 	m_hitBoxSprite = new Sprite();
 	m_backgroundSprite = new Sprite();
 
@@ -121,8 +119,6 @@ void GameplayGameState::LoadAssets()
 	m_playerSprite->Init(m_playerTexture, "GameData\\SpriteSheetData\\playerSpritesheetData.json");
 	m_standardShadowSprite->Init(m_standardShadowTexture);
 	m_standardShadowSprite->SetAlpha(0.7f);
-	m_largeShadowSprite->Init(m_largeShadowTexture);
-	m_largeShadowSprite->SetAlpha(0.7f);
 	m_hitBoxSprite->Init(m_hitBoxTexture);
 	m_backgroundSprite->Init(m_backgroundTexture);
 	m_backgroundSprite->SetOrigin(Vector2::Zero);
@@ -216,12 +212,6 @@ void GameplayGameState::DeleteAssets()
 	{
 		delete m_hitBoxSprite;
 		m_hitBoxSprite = nullptr;
-	}
-
-	if(m_largeShadowSprite)
-	{
-		delete m_largeShadowSprite;
-		m_largeShadowSprite = nullptr;
 	}
 
 	if(m_standardShadowSprite)

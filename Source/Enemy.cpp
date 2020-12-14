@@ -57,6 +57,7 @@ void Enemy::Init(Graphics* graphics,
 	
 	m_shadow = new Sprite();
 	m_shadow->Init(shadowTexture);
+	m_shadow->SetAlpha(0.7f);
 	
 	m_animator = new Animator();
 	m_animator->Init("GameData\\AnimationData\\" + data.type + "AnimationData.json");
@@ -144,10 +145,10 @@ Enemy::Render(Graphics* graphics)
 	}
 
 	// render hitbox
-	//if(m_hitBoxManager)
-	//{
-	//	m_hitBoxManager->Render(graphics);
-	//}
+	if(m_hitBoxManager)
+	{
+		m_hitBoxManager->Render(graphics);
+	}
 }
 
 void

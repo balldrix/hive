@@ -14,6 +14,10 @@ KingMookEnemyGlobalState* KingMookEnemyGlobalState::Instance()
 
 void KingMookEnemyGlobalState::OnEnter(Enemy* enemy)
 {
+}
+
+void KingMookEnemyGlobalState::Execute(Enemy* enemy)
+{
 	if(enemy->GetHealth() < 1)
 		return;
 
@@ -58,10 +62,6 @@ void KingMookEnemyGlobalState::OnEnter(Enemy* enemy)
 			enemy->FlipHorizontally(false);
 		}
 	}
-}
-
-void KingMookEnemyGlobalState::Execute(Enemy* enemy)
-{
 }
 
 void KingMookEnemyGlobalState::OnExit(Enemy* enemy)

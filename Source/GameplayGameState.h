@@ -78,8 +78,7 @@ private:
 	Texture*			m_backgroundTexture;		
 
 	Spritesheet*		m_playerSprite;				
-	Sprite*				m_standardShadowSprite;		
-	Sprite*				m_largeShadowSprite;
+	Sprite*				m_standardShadowSprite;	
 	Sprite*				m_hitBoxSprite;				
 	Sprite*				m_backgroundSprite;			
 	

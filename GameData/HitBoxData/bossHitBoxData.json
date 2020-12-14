@@ -5,15 +5,15 @@
       "startup": 0,
       "active": 0,
       "movementBox": {
-        "minX": -3.0,
+        "minX": -5.0,
         "minY": -3.0,
-        "maxX": 2.0,
+        "maxX": 6.0,
         "maxY": 0.0
       },
       "hurtBox": {
-        "minX": -4.0,
+        "minX": -3.0,
         "minY": -14.0,
-        "maxX": 2.0,
+        "maxX": 3.0,
         "maxY": -4.0
       },
       "hitBox": {
@@ -28,15 +28,15 @@
       "startup": 0,
       "active": 0,
       "movementBox": {
-        "minX": -3.0,
+        "minX": -5.0,
         "minY": -3.0,
-        "maxX": 2.0,
+        "maxX": 6.0,
         "maxY": 0.0
       },
       "hurtBox": {
-        "minX": -4.0,
+        "minX": -3.0,
         "minY": -14.0,
-        "maxX": 2.0,
+        "maxX": 3.0,
         "maxY": -4.0
       },
       "hitBox": {
@@ -51,16 +51,16 @@
       "startup": 0,
       "active": 1,
       "movementBox": {
-        "minX": -3.0,
-        "minY": -2.0,
-        "maxX": 2.0,
+        "minX": -5.0,
+        "minY": -3.0,
+        "maxX": 6.0,
         "maxY": 0.0
       },
       "hurtBox": {
-        "minX": -4.0,
-        "minY": -14.0,
-        "maxX": 2.0,
-        "maxY": -4.0
+        "minX": 0.0,
+        "minY": 0.0,
+        "maxX": 0.0,
+        "maxY": 0.0
       },
       "hitBox": {
         "minX": 2.0,
@@ -74,16 +74,16 @@
       "startup": 0,
       "active": 1,
       "movementBox": {
-        "minX": -3.0,
-        "minY": -2.0,
-        "maxX": 2.0,
+        "minX": -5.0,
+        "minY": -3.0,
+        "maxX": 6.0,
         "maxY": 0.0
       },
       "hurtBox": {
-        "minX": -4.0,
-        "minY": -14.0,
-        "maxX": 1.0,
-        "maxY": -4.0
+        "minX": 0.0,
+        "minY": 0.0,
+        "maxX": 0.0,
+        "maxY": 0.0
       },
       "hitBox": {
         "minX": 2.0,
@@ -97,16 +97,16 @@
       "startup": 0,
       "active": 1,
       "movementBox": {
-        "minX": -3.0,
-        "minY": -2.0,
-        "maxX": 2.0,
+        "minX": -5.0,
+        "minY": -3.0,
+        "maxX": 6.0,
         "maxY": 0.0
       },
       "hurtBox": {
-        "minX": -4.0,
-        "minY": -14.0,
-        "maxX": 1.0,
-        "maxY": -4.0
+        "minX": 0.0,
+        "minY": 0.0,
+        "maxX": 0.0,
+        "maxY": 0.0
       },
       "hitBox": {
         "minX": 3.0,
@@ -120,9 +120,9 @@
       "startup": 0,
       "active": 0,
       "movementBox": {
-        "minX": -3.0,
+        "minX": -5.0,
         "minY": -3.0,
-        "maxX": 2.0,
+        "maxX": 6.0,
         "maxY": 0.0
       },
       "hurtBox": {
