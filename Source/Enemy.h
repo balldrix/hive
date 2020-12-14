@@ -60,6 +60,9 @@ public:
 	void					ReleaseAll();
 	void					DeleteAll();
 
+protected:
+	StateMachine<Enemy>*	m_stateMachine;
+
 private:
 	EnemyData				m_enemyData;
 	Player*					m_playerTarget;
@@ -67,7 +70,6 @@ private:
 	Sprite*					m_portraitSprite;
 	Sprite*					m_hitBoxSprite;
 	BarController*			m_healthBar;
-	StateMachine<Enemy>*	m_stateMachine;
 	float					m_thinkingTimer;
 	bool					m_isHostile;
 };

@@ -25,14 +25,14 @@
       "name": "Attack1",
       "index": 2,
       "frameCount": 1,
-      "framesPerSecond": 8,
+      "framesPerSecond": 2,
       "loop": false
     },
     {
       "name": "Attack2",
       "index": 3,
       "frameCount": 1,
-      "framesPerSecond": 8,
+      "framesPerSecond": 2,
       "loop": false
     },
     {

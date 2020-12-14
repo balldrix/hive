@@ -20,14 +20,12 @@ Randomiser* Randomiser::Instance()
 
 double Randomiser::GetRandNum(double min, double max)
 {
-	//std::random_device rd;   // non-deterministic generator  
-	std::uniform_real_distribution<> dist(min, max); // distribute results between 1 and 6 inclusive.  
+	std::uniform_real_distribution<> dist(min, max); // distribute results between min and max inclusive.  
 	return dist(m_generator);
 }
 
 int Randomiser::GetRandNum(int min, int max)
-{
-	//std::random_device rd;   // non-deterministic generator    
-	std::uniform_int_distribution<> dist(min, max); // distribute results between 1 and 6 inclusive.  
+{   
+	std::uniform_int_distribution<> dist(min, max); // distribute results between min and max inclusive.  
     return dist(m_generator);
 }

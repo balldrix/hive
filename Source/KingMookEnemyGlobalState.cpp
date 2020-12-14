@@ -1,8 +1,7 @@
-#include "KingMookEnemyGlobalState.h"
+#include "EnemyOwnedStates.h"
 
 #include "KingMook.h"
 #include "StateMachine.h"
-#include "EnemyOwnedStates.h"
 #include "Player.h"
 #include "Randomiser.h"
 
