@@ -14,5 +14,7 @@ struct EnemyData
 	float					thinkingTime;
 	float					fightingRange;
 	float					attackRange;
+	float					chargeRange;
+	int						chargeSpeed;
 	int						encounterIndex;
 };

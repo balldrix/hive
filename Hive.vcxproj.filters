@@ -150,6 +150,7 @@
     <ClCompile Include="Source\KingMook.cpp" />
     <ClCompile Include="Source\KingMookEnemyGlobalState.h" />
     <ClCompile Include="Source\KingMookEnemyGlobalState.cpp" />
+    <ClCompile Include="Source\KingMookChargeState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -341,6 +342,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\KingMook.h" />
+    <ClInclude Include="Source\KingMookChargeState.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\UI\lives_x0.png" />

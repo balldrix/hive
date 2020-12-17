@@ -23,6 +23,7 @@
     <ClCompile Include="Source\EncounterSceneState.cpp" />
     <ClCompile Include="Source\GlobalSceneState.cpp" />
     <ClCompile Include="Source\KingMook.cpp" />
+    <ClCompile Include="Source\KingMookChargeState.cpp" />
     <ClCompile Include="Source\KingMookEnemyGlobalState.cpp" />
     <ClCompile Include="Source\KingMookEnemyGlobalState.h" />
     <ClCompile Include="Source\NPCFactory.cpp" />
@@ -83,6 +84,7 @@
     <ClInclude Include="Source\GameplayOwnedSceneStates.h" />
     <ClInclude Include="Source\GlobalSceneState.h" />
     <ClInclude Include="Source\KingMook.h" />
+    <ClInclude Include="Source\KingMookChargeState.h" />
     <ClInclude Include="Source\NPCFactory.h" />
     <ClInclude Include="Source\TravellingHandler.h" />
     <ClInclude Include="Source\TravellingSceneState.h" />

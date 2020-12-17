@@ -49,54 +49,50 @@ bool NPCManager::InitTypes(std::string fileName)
 		EnemyData data;
 		std::string line;
 
-		// loop until end of file
 		while(std::getline(file, line))
 		{
 			if(line[0] != '#')
 			{
 				std::string result;
 				std::istringstream iss(line);
+				
 
-				// Type
 				iss >> result;
 				data.type = result;
 
-				// start health
 				iss >> result;
 				data.objectData.startingHealth = std::stoi(result);
 
 				iss >> result;
 				data.objectData.startingLives = std::stoi(result);
 
-				// walk speed
 				iss >> result;
 				data.objectData.walkSpeed = std::stof(result);
 
-				// running speed
 				iss >> result;
 				data.objectData.runningSpeed = std::stof(result);
 
-				// acceleration
 				iss >> result;
 				data.objectData.acceleration = std::stof(result);
 
-				// deceleration
 				iss >> result;
 				data.objectData.deceleration = std::stof(result);
 
-				// thinking time
 				iss >> result;
 				data.thinkingTime = std::stof(result);
 
-				// fighting range
 				iss >> result;
 				data.fightingRange = std::stof(result);
 
-				// attack range
 				iss >> result;
 				data.attackRange = std::stof(result);
 
-				// add enemy type data to list
+				iss >> result;
+				data.chargeRange = std::stof(result);
+
+				iss >> result;
+				data.chargeSpeed = std::stoi(result);
+
 				m_enemyDataContainer->Add(data);
 			}
 		}

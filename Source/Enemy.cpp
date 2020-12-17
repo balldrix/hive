@@ -248,7 +248,7 @@ void Enemy::Attack()
 		break;
 	}
 
-	m_stateMachine->ChangeState((EnemyAttackState::Instance()));
+	m_stateMachine->ChangeState(EnemyAttackState::Instance());
 }
 
 void Enemy::Kill()
