@@ -75,14 +75,7 @@ public:
 
 	bool IsInState(const State<T>& state) const
 	{
-		if(m_currentState == state)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return typeid(*m_currentState) == typeid(state);
 	}
 
 private:

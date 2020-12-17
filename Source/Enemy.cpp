@@ -1,4 +1,5 @@
 #include "Enemy.h"
+
 #include "Graphics.h"
 #include "Sprite.h"
 #include "SpriteSheet.h"
@@ -145,10 +146,8 @@ Enemy::Render(Graphics* graphics)
 	}
 
 	// render hitbox
-	if(m_hitBoxManager)
-	{
-		m_hitBoxManager->Render(graphics);
-	}
+	//if(m_hitBoxManager)
+		//m_hitBoxManager->Render(graphics);
 }
 
 void

@@ -1,4 +1,5 @@
 #include "EnemyOwnedStates.h"
+
 #include "StateMachine.h"
 #include "PlayerOwnedStates.h"
 #include "Enemy.h"
@@ -26,28 +27,12 @@ void EnemyIdleState::OnEnter(Enemy* enemy)
 
 void EnemyIdleState::Execute(Enemy* enemy)
 {
-	// true if enemy is withing attack range
-	if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() < enemy->GetData().attackRange &&
-		(enemy->GetPositionY() - enemy->GetPlayerTarget()->GetPositionY()) < 5.0f)
-	{
-		double randnum = Randomiser::Instance()->GetRandNum(0.02, 1.8);
-		double time = randnum * enemy->GetData().thinkingTime;
-		float timer = enemy->GetTimer();
-		if(timer > time)
-		{
-			enemy->Stop();
+	if(enemy->GetPlayerTarget()->GetKnockbackCount() < 1 && enemy->GetPlayerTarget()->GetHealth() < 1)
+		enemy->GetStateMachine()->ChangeState(EnemyVictoryState::Instance());
 
-			// reset timer
-			enemy->ResetTimer();
-			enemy->Attack();
-		}
-		return;
-	}
-
-	// true if timer is greater than thinking time with random adjustment
 	if(enemy->GetTimer() > enemy->GetData().thinkingTime * Randomiser::Instance()->GetRandNum(0.4, 1.0) &&
-		enemy->GetHealth() > 0 &&
-		(enemy->GetPlayerTarget()->GetStateMachine()->GetCurrentState() != PlayerKnockbackState::Instance() &&
+	   enemy->GetHealth() > 0 &&
+	   (enemy->GetPlayerTarget()->GetStateMachine()->GetCurrentState() != PlayerKnockbackState::Instance() &&
 		enemy->GetPlayerTarget()->GetStateMachine()->GetCurrentState() != PlayerDeadState::Instance()))
 	{
 		// true if enemy is outside fighting range
@@ -66,7 +51,7 @@ void EnemyIdleState::Execute(Enemy* enemy)
 
 		}
 		else if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() > enemy->GetData().attackRange &&
-			(enemy->GetPositionY() - enemy->GetPlayerTarget()->GetPositionY()) < 5.0f)
+				(enemy->GetPositionY() - enemy->GetPlayerTarget()->GetPositionY()) < 5.0f)
 		{
 			// change to walking state
 			enemy->GetStateMachine()->ChangeState(EnemyWalkingState::Instance());
@@ -76,8 +61,27 @@ void EnemyIdleState::Execute(Enemy* enemy)
 		enemy->ResetTimer();
 	}
 
-	if(enemy->GetPlayerTarget()->GetKnockbackCount() < 1 && enemy->GetPlayerTarget()->GetHealth() < 1)
-		enemy->GetStateMachine()->ChangeState(EnemyVictoryState::Instance());
+	if(enemy->IsHostile() == false)
+		return;
+
+	const float VerticalRange = 5.0f;
+
+	if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() < enemy->GetData().attackRange &&
+		(enemy->GetPositionY() - enemy->GetPlayerTarget()->GetPositionY()) < VerticalRange)
+	{
+		double randnum = Randomiser::Instance()->GetRandNum(0.02, 1.8);
+		double time = randnum * enemy->GetData().thinkingTime;
+		float timer = enemy->GetTimer();
+		if(timer > time)
+		{
+			enemy->Stop();
+
+			// reset timer
+			enemy->ResetTimer();
+			enemy->Attack();
+		}
+		return;
+	}
 }
 
 void EnemyIdleState::OnExit(Enemy* enemy)
