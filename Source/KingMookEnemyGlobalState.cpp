@@ -1,8 +1,9 @@
-#include "EnemyOwnedStates.h"
+#include "KingMookEnemyGlobalState.h"
 
 #include "Enemy.h"
 #include "KingMook.h"
 #include "StateMachine.h"
+#include "EnemyOwnedStates.h"
 #include "Player.h"
 #include "Randomiser.h"
 #include "PlayerOwnedStates.h"
