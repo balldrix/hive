@@ -8,6 +8,8 @@
 #include "Animator.h"
 #include "Randomiser.h"
 
+using namespace GameplayConstants;
+
 EnemyIdleState* EnemyIdleState::Instance()
 {
 	static EnemyIdleState instance("Idle");
@@ -64,10 +66,8 @@ void EnemyIdleState::Execute(Enemy* enemy)
 	if(enemy->IsHostile() == false)
 		return;
 
-	const float VerticalRange = 5.0f;
-
 	if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() < enemy->GetData().attackRange &&
-		(enemy->GetPositionY() - enemy->GetPlayerTarget()->GetPositionY()) < VerticalRange)
+		fabs(enemy->GetPositionY() - enemy->GetPlayerTarget()->GetPositionY()) < VerticalHitRange)
 	{
 		double randnum = Randomiser::Instance()->GetRandNum(0.02, 1.8);
 		double time = randnum * enemy->GetData().thinkingTime;

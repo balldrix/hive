@@ -18,7 +18,4 @@ public:
 private:
 	KingMookEnemyGlobalState() {}
 	~KingMookEnemyGlobalState() {}
-	KingMookEnemyGlobalState(std::string name);
-	KingMookEnemyGlobalState(const KingMookEnemyGlobalState&);
-	KingMookEnemyGlobalState& operator=(const KingMookEnemyGlobalState&);
 };

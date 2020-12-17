@@ -15,6 +15,11 @@ namespace GlobalConstants
 	const float StartingBoundaryMinY			= 61.0f;
 }
 
+namespace GameplayConstants
+{
+	const float VerticalHitRange				= 3.0f;
+}
+
 namespace PlayerConstants
 {
 	const float RespawnGroundPositionY			= 70.0f;

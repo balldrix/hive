@@ -25,6 +25,7 @@
 #include "TravellingHandler.h"
 #include "TravelPrompt.h"
 
+using namespace GameplayConstants;
 using namespace GlobalConstants;
 using namespace InGameHudConstants;
 
@@ -391,7 +392,7 @@ void GameplayGameState::ProcessCollisions()
 
 		// true if player hitbox is active and 
 		if(m_player->GetHitBoxManager()->IsHitBoxActive() &&
-			enemy->GetGroundPosition().y - m_player->GetGroundPosition().y < 8.0f)
+			fabs(enemy->GetGroundPosition().y - m_player->GetGroundPosition().y) < VerticalHitRange)
 		{
 			// check player hitbox vs enemy hurtboxes
 			if(m_player->GetHitBoxManager()->GetHitBox().OnCollision(
@@ -403,7 +404,7 @@ void GameplayGameState::ProcessCollisions()
 		}
 
 		if(enemy->GetHitBoxManager()->IsHitBoxActive() &&
-			m_player->GetGroundPosition().y - enemy->GetGroundPosition().y < 8.0f)
+			fabs(m_player->GetGroundPosition().y - enemy->GetGroundPosition().y) < VerticalHitRange)
 		{
 			// check player hitbox vs enemy hurtboxes
 			if(enemy->GetHitBoxManager()->GetHitBox().OnCollision(
