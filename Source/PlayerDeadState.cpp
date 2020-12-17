@@ -11,11 +11,17 @@ PlayerDeadState* PlayerDeadState::Instance()
 	return &instance;
 }
 
+PlayerDeadState::PlayerDeadState(std::string name)
+{
+	m_name = name;
+}
+
 void PlayerDeadState::OnEnter(Player* player)
 {
 	player->GetAnimator()->Reset();
 	player->GetAnimator()->SetAnimation(m_name);
 	player->GetHitBoxManager()->KillAll();
+	player->ResetKnockoutTimer();
 }
 
 void PlayerDeadState::Execute(Player* player)
@@ -53,9 +59,4 @@ void PlayerDeadState::Execute(Player* player)
 
 void PlayerDeadState::OnExit(Player* player)
 {
-}
-
-PlayerDeadState::PlayerDeadState(std::string name)
-{
-	m_name = name;
 }

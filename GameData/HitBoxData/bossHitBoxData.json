@@ -95,7 +95,7 @@
     {
       "name": "Attack3",
       "startup": 0,
-      "active": 1,
+      "active": 2,
       "movementBox": {
         "minX": -5.0,
         "minY": -3.0,

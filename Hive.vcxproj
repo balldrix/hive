@@ -339,7 +339,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties GameData_4AnimationData_4bossAnimationData_1json__JsonSchema="http://jsonapi.org/schema" GameData_4AnimationData_4dummyAnimationData_1json__JsonSchema="http://jsonapi.org/schema" />
+      <UserProperties GameData_4AnimationData_4dummyAnimationData_1json__JsonSchema="http://jsonapi.org/schema" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

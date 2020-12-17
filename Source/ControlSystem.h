@@ -1,5 +1,5 @@
 // ControlSystem.h
-// Christopher Ball 2019
+// Christopher Ball 2019-2020
 // Manages player input and combos
 
 #ifndef _CONTROL_SYSTEM_H_
@@ -9,7 +9,7 @@ const unsigned int MaxCombo = 4;
 const float ComboTimeLimit = 1.5f; // time given to allow combos again
 const float InputTimeLimit = 0.15f; // time given to link combos
 
-enum Controls
+enum class Controls
 {
 	None,
 	UpLeft,

@@ -41,11 +41,13 @@ public:
 	void					Knockback(const Vector2& direction, const float& force);
 	void					Kill();
 	void					Respawn();
+	void					ResetKnockoutTimer();
 
 private:
 	PlayerData				m_playerData;
 	StateMachine<Player>*	m_stateMachine;
-	int m_lives;
+	int						m_lives;
+	float					m_knockoutTimer;
 };
 
 #endif _PLAYER_H_

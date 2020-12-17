@@ -29,34 +29,34 @@ void PlayerGlobalState::Execute(Player* player)
 
 		switch(lastPressed)
 		{
-		case None:
+		case Controls::None:
 			player->Move(Vector2::Zero);
 			break;
-		case UpLeft:
+		case Controls::UpLeft:
 			player->Move(UnitVectors::UpLeft);
 			break;
-		case Up:
+		case Controls::Up:
 			player->Move(UnitVectors::Up);
 			break;
-		case UpRight:
+		case Controls::UpRight:
 			player->Move(UnitVectors::UpRight);
 			break;
-		case Right:
+		case Controls::Right:
 			player->Move(UnitVectors::Right);
 			break;
-		case DownRight:
+		case Controls::DownRight:
 			player->Move(UnitVectors::DownRight);
 			break;
-		case Down:
+		case Controls::Down:
 			player->Move(UnitVectors::Down);
 			break;
-		case DownLeft:
+		case Controls::DownLeft:
 			player->Move(UnitVectors::DownLeft);
 			break;
-		case Left:
+		case Controls::Left:
 			player->Move(UnitVectors::Left);
 			break;
-		case Attack:
+		case Controls::Attack:
 			player->Attack();
 			break;
 		default:

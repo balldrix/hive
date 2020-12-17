@@ -287,16 +287,16 @@ void GameplayGameState::ProcessInput()
 		if(m_input->IsKeyDown(PLAYER_LEFT_KEY) &&
 			!m_input->IsKeyDown(PLAYER_RIGHT_KEY))
 		{
-			m_controlSystem->SetInput(UpLeft);
+			m_controlSystem->SetInput(Controls::UpLeft);
 		}
 		else if(m_input->IsKeyDown(PLAYER_RIGHT_KEY) &&
 			!m_input->IsKeyDown(PLAYER_LEFT_KEY))
 		{
-			m_controlSystem->SetInput(UpRight);
+			m_controlSystem->SetInput(Controls::UpRight);
 		}
 		else
 		{
-			m_controlSystem->SetInput(Up);
+			m_controlSystem->SetInput(Controls::Up);
 		}
 	}
 	else if(m_input->IsKeyDown(PLAYER_DOWN_KEY) &&
@@ -305,34 +305,34 @@ void GameplayGameState::ProcessInput()
 		if(m_input->IsKeyDown(PLAYER_LEFT_KEY) &&
 			!m_input->IsKeyDown(PLAYER_RIGHT_KEY))
 		{
-			m_controlSystem->SetInput(DownLeft);
+			m_controlSystem->SetInput(Controls::DownLeft);
 
 		}
 		else if(m_input->IsKeyDown(PLAYER_RIGHT_KEY) &&
 			!m_input->IsKeyDown(PLAYER_LEFT_KEY))
 		{
-			m_controlSystem->SetInput(DownRight);
+			m_controlSystem->SetInput(Controls::DownRight);
 		}
 		else
 		{
-			m_controlSystem->SetInput(Down);
+			m_controlSystem->SetInput(Controls::Down);
 		}
 	}
 	else if(m_input->IsKeyDown(PLAYER_RIGHT_KEY) &&
 		!m_input->IsKeyDown(PLAYER_LEFT_KEY))
 	{
-		m_controlSystem->SetInput(Right);
+		m_controlSystem->SetInput(Controls::Right);
 	}
 	else if(m_input->IsKeyDown(PLAYER_LEFT_KEY) && 
 		!m_input->IsKeyDown(PLAYER_RIGHT_KEY))
 	{
-		m_controlSystem->SetInput(Left);
+		m_controlSystem->SetInput(Controls::Left);
 	}
 
 	if(m_input->IsKeyDown(PLAYER_A_KEY) &&
 		m_controlSystem->CanAttack())
 	{
-		m_controlSystem->SetInput(Attack);
+		m_controlSystem->SetInput(Controls::Attack);
 		m_controlSystem->CanAttack(false);
 		return;
 	}
@@ -343,7 +343,7 @@ void GameplayGameState::ProcessInput()
 		m_input->IsKeyDown(PLAYER_RIGHT_KEY) ||
 		m_input->IsKeyDown(PLAYER_A_KEY)))
 	{
-		m_controlSystem->SetInput(None);
+		m_controlSystem->SetInput(Controls::None);
 	}
 
 	if(!m_input->IsKeyDown(PLAYER_A_KEY))

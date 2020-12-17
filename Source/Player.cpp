@@ -19,7 +19,8 @@ using namespace GlobalConstants;
 
 Player::Player() :
 	m_stateMachine(nullptr),
-	m_lives(0)
+	m_lives(0),
+	m_knockoutTimer(0.0f)
 {
 }
 
@@ -115,6 +116,9 @@ bool Player::LoadPlayerData(std::string filename)
 
 				file >> result;
 				m_playerData.deathTime = std::stof(result);
+
+				file >> result;
+				m_playerData.knockoutDuration = std::stof(result);
 			}
 		}
 	}
@@ -141,11 +145,17 @@ void Player::Update(float deltaTime)
 	if(m_stateMachine->GetCurrentState() != PlayerAttackState::Instance())
 		m_controlSystem->Update(deltaTime);
 
-	if(m_stateMachine->GetCurrentState() == PlayerDeadState::Instance())
+	if(m_stateMachine->GetCurrentState() == PlayerDeadState::Instance() && m_health <= 0)
 		m_deathTimer += deltaTime;
 
 	if(m_deathTimer > m_playerData.deathTime)
 		Kill();
+
+	if(m_stateMachine->GetCurrentState() == PlayerDeadState::Instance() && m_health > 0)
+		m_knockoutTimer += deltaTime;
+
+	if(m_knockoutTimer > m_playerData.knockoutDuration)
+		m_stateMachine->ChangeState(PlayerIdleState::Instance());
 }
 
 void Player::Kill()
@@ -162,11 +172,17 @@ void Player::Respawn()
 	m_groundPosition = m_position;
 	m_position.y = RespawnAirPositionY;
 	m_deathTimer = 0.0f;
+	m_knockoutTimer = 0.0f;
 	m_dead = false;
 	m_active = true;
 	m_grounded = false;
 	m_health = m_playerData.objectData.startingHealth;
 	SetVelocity(m_currentVelocity.x, m_currentVelocity.y + FallingSpeed);
+}
+
+void Player::ResetKnockoutTimer()
+{
+	m_knockoutTimer = 0.0f;
 }
 
 void Player::Render(Graphics* graphics)

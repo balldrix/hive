@@ -38,9 +38,9 @@
     {
       "name": "Attack3",
       "index": 4,
-      "frameCount": 1,
-      "framesPerSecond": 8,
-      "loop": true
+      "frameCount": 2,
+      "framesPerSecond": 1,
+      "loop": false
     },
     {
       "name": "Hurt",

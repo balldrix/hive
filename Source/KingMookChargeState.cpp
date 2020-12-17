@@ -1,8 +1,9 @@
-#include "KingMookChargeState.h"
+#include "EnemyOwnedStates.h"
 
 #include "Enemy.h"
 #include "Animator.h"
 #include "Player.h"
+#include "StateMachine.h"
 
 KingMookChargeState* KingMookChargeState::Instance()
 {
@@ -28,6 +29,8 @@ void KingMookChargeState::OnEnter(Enemy* enemy)
 
 void KingMookChargeState::Execute(Enemy* enemy)
 {
+	if(enemy->GetAnimator()->IsDone() == true)
+		enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
 }
 
 void KingMookChargeState::OnExit(Enemy* enemy)

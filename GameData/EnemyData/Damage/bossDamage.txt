@@ -2,4 +2,4 @@
 
 Attack1 8
 Attack2 10
-Attack3 15
+Attack3 16
