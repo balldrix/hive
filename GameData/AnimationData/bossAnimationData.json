@@ -44,7 +44,7 @@
     },
     {
       "name": "Hurt",
-      "index": 5,
+      "index": 6,
       "frameCount": 1,
       "framesPerSecond": 8,
       "loop": false
@@ -58,7 +58,7 @@
     },
     {
       "name": "Dead",
-      "index": 6,
+      "index": 7,
       "frameCount": 1,
       "framesPerSecond": 8,
       "loop": true
