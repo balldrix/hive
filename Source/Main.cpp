@@ -17,7 +17,7 @@ void ShutDown();
 // WndProc call back needed for windows messages like key and mouse input
 LRESULT CALLBACK WndProc(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam);
 
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE pPrevInstance, PSTR lpCmdLine, INT nCmdShow)
+int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, _In_ int nCmdShow)
 {
 	// initialise Window
 	window = new Window();
