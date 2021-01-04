@@ -18,6 +18,7 @@ InGameHudManager::InGameHudManager() :
 	m_playerHealthBar(nullptr),
 	m_playerPortrait(nullptr),
 	m_enemyPortrait(nullptr),
+	m_travelPrompt(nullptr),
 	m_despairFont12(nullptr),
 	m_enemyId(std::string()),
 	m_enemyHealthBar(nullptr),
@@ -82,7 +83,7 @@ void InGameHudManager::Render(Graphics* graphics)
 
 	m_despairFont12->DrawString(graphics->GetSpriteBatch(),
 		s.c_str(),
-		Vector2(115, 10),
+		Vector2(KillCountPositionX, KillCountPositionY),
 		Colors::YellowGreen, 0,
 		origin);
 
