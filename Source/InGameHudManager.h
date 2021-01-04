@@ -51,6 +51,8 @@ private:
 	SpriteFont* m_despairFont12;
 	int m_killCount;
 	int m_playerLivesLeft;
+
+	Vector2 GetKillCountStringOrigin(std::string s);
 };
 
 #endif _INGAME_HUD_MANAGER_H_
