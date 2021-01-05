@@ -24,6 +24,29 @@
       }
     },
     {
+      "name": "Hurt",
+      "startup": 0,
+      "active": 0,
+      "movementBox": {
+        "minX": -3.0,
+        "minY": -3.0,
+        "maxX": 2.0,
+        "maxY": 0.0
+      },
+      "hurtBox": {
+        "minX": -4.0,
+        "minY": -14.0,
+        "maxX": 2.0,
+        "maxY": -4.0
+      },
+      "hitBox": {
+        "minX": 0.0,
+        "minY": 0.0,
+        "maxX": 0.0,
+        "maxY": 0.0
+      }
+    },
+    {
       "name": "Walking",
       "startup": 0,
       "active": 0,

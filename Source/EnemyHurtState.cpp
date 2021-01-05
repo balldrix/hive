@@ -22,9 +22,10 @@ void EnemyHurtState::OnEnter(Enemy* enemy)
 void EnemyHurtState::Execute(Enemy* enemy)
 {
 	if(enemy->GetAnimator()->IsDone())
-	{
 		enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
-	}
+
+	if(enemy->GetPlayerTarget()->GetHitBoxManager()->IsHitBoxActive() == false)
+		enemy->GetHitBoxManager()->SetCurrentHitBox(m_name);
 }
 
 
