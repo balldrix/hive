@@ -400,6 +400,8 @@ void GameplayGameState::ProcessCollisions()
 			{
 				enemy->ApplyDamage(m_player, m_player->GetDamage());
 				enemy->ShowEnemyHud();
+				m_player->GetHitBoxManager()->KillAll();
+				return;
 			}
 		}
 
@@ -412,6 +414,7 @@ void GameplayGameState::ProcessCollisions()
 			{
 				m_player->ApplyDamage(enemy, enemy->GetDamage());
 				enemy->ShowEnemyHud();
+				return;
 			}
 		}
 	}
