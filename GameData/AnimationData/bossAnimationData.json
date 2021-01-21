@@ -3,62 +3,62 @@
     {
       "name": "Idle",
       "index": 0,
-      "frameCount": 1,
-      "framesPerSecond": 8,
+      "frameCount": 2,
+      "framesPerSecond": 3,
       "loop": true
     },
     {
       "name": "Running",
-      "index": 1,
-      "frameCount": 1,
-      "framesPerSecond": 8,
+      "index": 2,
+      "frameCount": 4,
+      "framesPerSecond": 3,
       "loop": true
     },
     {
       "name": "Walking",
-      "index": 1,
-      "frameCount": 1,
-      "framesPerSecond": 8,
+      "index": 2,
+      "frameCount": 4,
+      "framesPerSecond": 3,
       "loop": true
     },
     {
       "name": "Attack1",
-      "index": 2,
+      "index": 6,
       "frameCount": 1,
       "framesPerSecond": 2,
       "loop": false
     },
     {
       "name": "Attack2",
-      "index": 3,
+      "index": 7,
       "frameCount": 1,
       "framesPerSecond": 2,
       "loop": false
     },
     {
       "name": "Attack3",
-      "index": 4,
-      "frameCount": 2,
-      "framesPerSecond": 1,
+      "index": 8,
+      "frameCount": 4,
+      "framesPerSecond": 3,
       "loop": false
     },
     {
       "name": "Hurt",
-      "index": 6,
+      "index": 12,
       "frameCount": 1,
       "framesPerSecond": 8,
       "loop": false
     },
     {
       "name": "Knockback",
-      "index": 6,
+      "index": 12,
       "frameCount": 1,
       "framesPerSecond": 8,
       "loop": false
     },
     {
       "name": "Dead",
-      "index": 7,
+      "index": 13,
       "frameCount": 1,
       "framesPerSecond": 8,
       "loop": true
