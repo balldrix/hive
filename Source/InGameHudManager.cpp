@@ -18,6 +18,7 @@ InGameHudManager::InGameHudManager() :
 	m_playerHealthBar(nullptr),
 	m_playerPortrait(nullptr),
 	m_enemyPortrait(nullptr),
+	m_travelPrompt(nullptr),
 	m_despairFont12(nullptr),
 	m_enemyId(std::string()),
 	m_enemyHealthBar(nullptr),
@@ -76,14 +77,28 @@ void InGameHudManager::Render(Graphics* graphics)
 	if(m_enemyHealthBar != nullptr)
 		m_enemyHealthBar->Render(graphics);
 
+	std::string s = std::to_string(m_killCount);
+
+	Vector2 origin = GetKillCountStringOrigin(s);
+
 	m_despairFont12->DrawString(graphics->GetSpriteBatch(),
-		std::to_string(m_killCount).c_str(),
-		Vector2(105, 0),
+		s.c_str(),
+		Vector2(KillCountPositionX, KillCountPositionY),
 		Colors::YellowGreen, 0,
-		Vector2::Zero);
+		origin);
 
 	m_livesLeftSprites[m_playerLivesLeft]->Render(graphics);
 	m_travelPrompt->Render(graphics);
+}
+
+Vector2 InGameHudManager::GetKillCountStringOrigin(std::string s)
+{
+	XMVECTOR size = m_despairFont12->MeasureString(s.c_str());
+	float stringSizeX = XMVectorGetX(size);
+	float stringSizeY = XMVectorGetY(size);
+
+	RECT bounds = m_despairFont12->MeasureDrawBounds(s.c_str(), Vector2::Zero);
+	return Vector2(stringSizeX, stringSizeY / 2);
 }
 
 void InGameHudManager::SetCurrentPlayerHealth(const int& health)

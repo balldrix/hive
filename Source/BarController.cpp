@@ -56,11 +56,10 @@ void BarController::Render(Graphics* graphics)
 	m_backgroundSprite->Render(graphics);
 
 	RECT rect;
-	unsigned int leftPos = m_fillSprite->GetWidth() - m_width;
-	rect.left = leftPos;
+	rect.left = 0;
 	rect.top = 0;
 	rect.bottom = m_fillSprite->GetHeight();
-	rect.right = leftPos + ((m_width / m_maxValue) * m_currentValue);
+	rect.right = (m_width / (float)m_maxValue) * m_currentValue;
 
 	m_fillSprite->SetSourceRect(rect);
 

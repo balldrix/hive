@@ -27,7 +27,7 @@ double Randomiser::GetRandNum(double min, double max)
 float Randomiser::GetRandNum(float min, float max)
 {
 	std::uniform_real_distribution<> dist(min, max); // distribute results between min and max inclusive.  
-	return dist(m_generator);
+	return (float)dist(m_generator);
 }
 
 int Randomiser::GetRandNum(int min, int max)

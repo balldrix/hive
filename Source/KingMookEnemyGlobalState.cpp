@@ -1,7 +1,9 @@
-#include "EnemyOwnedStates.h"
+#include "KingMookEnemyGlobalState.h"
 
+#include "Enemy.h"
 #include "KingMook.h"
 #include "StateMachine.h"
+#include "EnemyOwnedStates.h"
 #include "Player.h"
 #include "Randomiser.h"
 #include "PlayerOwnedStates.h"
@@ -10,11 +12,6 @@ KingMookEnemyGlobalState* KingMookEnemyGlobalState::Instance()
 {
 	static KingMookEnemyGlobalState instance;
 	return &instance;
-}
-
-KingMookEnemyGlobalState::KingMookEnemyGlobalState(std::string name)
-{
-	m_name = name;
 }
 
 void KingMookEnemyGlobalState::OnEnter(Enemy* enemy)
