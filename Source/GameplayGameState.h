@@ -2,8 +2,7 @@
 // Christopher Ball 2019-2020
 // the game state for the main gameplay state
 
-#ifndef _GAMEPLAYGAMESTATE_H_
-#define _GAMEPLAYGAMESTATE_H_
+#pragma once
 
 #include "pch.h"
 #include "GameState.h"
@@ -26,6 +25,7 @@ class InGameHudManager;
 template<class T> class StateMachine;
 class EncounterHandler;
 class TravellingHandler;
+class GameOverScreen;
 
 class GameplayGameState : public GameState
 {
@@ -96,6 +96,9 @@ private:
 	EncounterHandler*   m_encounterHandler;
 	TravellingHandler*	m_travellingHandler;
 
+	GameOverScreen*		m_gameOverScreen;
+	GameOverScreen*		m_playerWonScreen;
+
 	bool				m_canAttack;				
 	bool				m_running;					
 
@@ -103,5 +106,3 @@ private:
 
 	float				m_deltaTime;
 };
-
-#endif _GAMEPLAYGAMESTATE_H_

@@ -24,6 +24,7 @@
 #include "EncounterHandler.h"
 #include "TravellingHandler.h"
 #include "TravelPrompt.h"
+#include "GameOverScreen.h"
 
 using namespace GlobalConstants;
 using namespace InGameHudConstants;
@@ -52,6 +53,7 @@ GameplayGameState::GameplayGameState() :
 	m_sceneStateMachine(nullptr),
 	m_encounterHandler(nullptr),
 	m_travellingHandler(nullptr),
+	m_gameOverScreen(nullptr),
 	m_canAttack(true),
 	m_running(false),
 	m_playerBoundary(AABB()),
