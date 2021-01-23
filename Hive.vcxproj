@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="Source\EncounterHandler.cpp" />
     <ClCompile Include="Source\EncounterSceneState.cpp" />
+    <ClCompile Include="Source\GameOverScreen.cpp" />
     <ClCompile Include="Source\GlobalSceneState.cpp" />
     <ClCompile Include="Source\KingMook.cpp" />
     <ClCompile Include="Source\KingMookChargeState.cpp" />
@@ -81,6 +82,7 @@
   <ItemGroup>
     <ClInclude Include="Source\EncounterHandler.h" />
     <ClInclude Include="Source\EncounterSceneState.h" />
+    <ClInclude Include="Source\GameOverScreen.h" />
     <ClInclude Include="Source\GameplayOwnedSceneStates.h" />
     <ClInclude Include="Source\GlobalSceneState.h" />
     <ClInclude Include="Source\KingMook.h" />
