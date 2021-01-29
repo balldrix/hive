@@ -19,9 +19,9 @@ HitBox::~HitBox()
 void HitBox::Init(Sprite* sprite, AABB box, Color colour)
 {
 	// init sprite
-	m_sprite = Sprite(*sprite);
-	m_sprite.SetColour(colour);
-	m_sprite.SetAlpha(0.25f);
+	m_spriteSheet = Sprite(*sprite);
+	m_spriteSheet.SetColour(colour);
+	m_spriteSheet.SetAlpha(0.25f);
 
 	m_colour = colour; // store colour variable
 
@@ -29,7 +29,7 @@ void HitBox::Init(Sprite* sprite, AABB box, Color colour)
 	m_boundingBox = box;
 
 	// zero origin
-	m_sprite.SetOrigin(Vector2::Zero);
+	m_spriteSheet.SetOrigin(Vector2::Zero);
 }
 
 // update hitbox
@@ -61,8 +61,8 @@ void HitBox::Render(Graphics* graphics)
 	rect.right = (LONG)box.GetMax().x;
 	rect.bottom = (LONG)box.GetMax().y;
 
-	m_sprite.SetDepth(1.0f);
-	m_sprite.Render(graphics, m_position, rect);
+	m_spriteSheet.SetDepth(1.0f);
+	m_spriteSheet.Render(graphics, m_position, rect);
 }
 
 void HitBox::SetAABB(const AABB& boundingBox)

@@ -93,7 +93,7 @@ public:
 
 	// pointers for important objects
 	ControlSystem*	GetControlSystem() const { return m_controlSystem; }
-	Spritesheet*	GetSprite() const { return m_sprite; }
+	Spritesheet*	GetSprite() const { return m_spriteSheet; }
 	Animator*		GetAnimator() const { return m_animator; }
 	HitBoxManager*	GetHitBoxManager() const { return m_hitBoxManager; }
 
@@ -122,7 +122,7 @@ protected:
 	float				m_acceleration;			// acceleration speed
 	float				m_deceleration;			// decceleration speed
 
-	Spritesheet*		m_sprite;				// object sprite sheet
+	Spritesheet*		m_spriteSheet;				// object sprite sheet
 	Animator*			m_animator;				// animation controller
 
 	Sprite*				m_shadow;				// object shadow

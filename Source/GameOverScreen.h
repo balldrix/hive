@@ -6,8 +6,9 @@
 #include <string>
 
 class Graphics;
+class Animator;
 class Texture;
-class SpriteSheet;
+class Spritesheet;
 
 class GameOverScreen
 {
@@ -15,14 +16,17 @@ public:
 	GameOverScreen();
 	~GameOverScreen();
 
-	void Init(Graphics* graphics, std::string textureFile);
+	void Init(Graphics* graphics, Animator* animator, std::string texturePath);
+	void Update(float deltaTime);
 	void Render(Graphics* graphics);
-	void ReleaseAll();
+	void Release();
+	void Reset();
+
 private:
 	void DeleteAll();
 
-	Graphics* m_graphics;
-	Texture* m_gameOverTexture;
-	SpriteSheet* m_gameOverTexture;
-	
+	Animator* m_animator;
+	Texture* m_texture;
+	Spritesheet* m_spriteSheet;
+	bool m_isActive;
 };

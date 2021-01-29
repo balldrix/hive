@@ -16,7 +16,7 @@
     },
     {
       "name": "Walking",
-      "index": 2,
+      "index": 2, 
       "frameCount": 4,
       "framesPerSecond": 3,
       "loop": true

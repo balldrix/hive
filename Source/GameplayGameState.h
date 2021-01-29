@@ -25,7 +25,7 @@ class InGameHudManager;
 template<class T> class StateMachine;
 class EncounterHandler;
 class TravellingHandler;
-class GameOverScreen;
+class GameOverScreenController;
 
 class GameplayGameState : public GameState
 {
@@ -96,8 +96,7 @@ private:
 	EncounterHandler*   m_encounterHandler;
 	TravellingHandler*	m_travellingHandler;
 
-	GameOverScreen*		m_gameOverScreen;
-	GameOverScreen*		m_playerWonScreen;
+	GameOverScreenController* m_gameOverScreenController;
 
 	bool				m_canAttack;				
 	bool				m_running;					

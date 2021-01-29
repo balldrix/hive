@@ -39,7 +39,7 @@ public:
 
 private:
 	GameObject* m_owner;	// owner of the hitbox manager
-	Sprite* m_sprite; // debug sprite
+	Sprite* m_spriteSheet; // debug sprite
 	HitBoxData* m_currentHitBoxData; // current hit box in use
 	std::vector<HitBoxData> m_hitBoxDataList; // list of all hitboxes in this manager
 	HitBox m_movementBox;	// hit box to block movement in scene
