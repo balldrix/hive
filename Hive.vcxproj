@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="Source\EncounterHandler.cpp" />
     <ClCompile Include="Source\EncounterSceneState.cpp" />
+    <ClCompile Include="Source\GameOverSceneState.cpp" />
     <ClCompile Include="Source\GameOverScreen.cpp" />
     <ClCompile Include="Source\GameOverScreenController.cpp" />
     <ClCompile Include="Source\GlobalSceneState.cpp" />
@@ -82,6 +83,7 @@
   <ItemGroup>
     <ClInclude Include="Source\EncounterHandler.h" />
     <ClInclude Include="Source\EncounterSceneState.h" />
+    <ClInclude Include="Source\GameOverSceneState.h" />
     <ClInclude Include="Source\GameOverScreen.h" />
     <ClInclude Include="Source\GameOverScreenController.h" />
     <ClInclude Include="Source\GameplayOwnedSceneStates.h" />
@@ -344,7 +346,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties GameData_4AnimationData_4dummyAnimationData_1json__JsonSchema="http://jsonapi.org/schema" GameData_4SpriteSheetData_4gameOverSpritesheetData_1json__JsonSchema="https://beaujs.com/schema.json" />
+      <UserProperties GameData_4AnimationData_4dummyAnimationData_1json__JsonSchema="http://jsonapi.org/schema" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

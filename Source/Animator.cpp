@@ -26,6 +26,7 @@ void Animator::Init(std::string fileName)
 	json animation = data["animation"];
 
 	m_animationList = animation.get<std::vector<Animation>>();
+	SetAnimation(0);
 }
 
 void Animator::Update(float deltaTime)

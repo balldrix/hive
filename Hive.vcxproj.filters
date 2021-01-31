@@ -150,6 +150,7 @@
     <ClCompile Include="Source\KingMookChargeState.cpp" />
     <ClCompile Include="Source\GameOverScreen.cpp" />
     <ClCompile Include="Source\GameOverScreenController.cpp" />
+    <ClCompile Include="Source\GameOverSceneState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -341,6 +342,7 @@
     <ClInclude Include="Source\KingMookChargeState.h" />
     <ClInclude Include="Source\GameOverScreen.h" />
     <ClInclude Include="Source\GameOverScreenController.h" />
+    <ClInclude Include="Source\GameOverSceneState.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\UI\lives_x0.png" />

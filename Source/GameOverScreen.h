@@ -21,6 +21,7 @@ public:
 	void Render(Graphics* graphics);
 	void Release();
 	void Reset();
+	void Enable();
 
 private:
 	void DeleteAll();

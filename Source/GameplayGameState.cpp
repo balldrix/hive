@@ -494,6 +494,7 @@ void GameplayGameState::Render()
 	m_player->Render(m_graphics);
 	m_NPCManager->Render(m_graphics);
 	m_hudManager->Render(m_graphics);
+	m_gameOverScreenController->Render(m_graphics);
 }
 
 void GameplayGameState::ReleaseAll()
@@ -516,8 +517,8 @@ void GameplayGameState::ResetGame()
 	m_camera->Reset();
 	m_camera->SetTarget(m_player);
 	m_hudManager->Reset();
-	m_encounterHandler->SetEncounterIndex(0);
 	m_sceneStateMachine->ChangeState(TravellingSceneState::Instance());
+	m_encounterHandler->SetEncounterIndex(0);
 	SetPlayerBoundaryX(StartingBoundaryMinX, (float)m_background->GetSprite()->GetWidth());
 	m_gameOverScreenController->Reset();
 }

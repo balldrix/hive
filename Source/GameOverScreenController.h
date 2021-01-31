@@ -19,6 +19,8 @@ public:
 	void ReleaseAll();
 	void Reset();
 
+	void EnableWinScreen();
+
 private:
 	void DeleteAll();
 

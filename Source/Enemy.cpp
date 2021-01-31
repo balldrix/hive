@@ -161,6 +161,7 @@ Enemy::Reset()
 	m_health = m_enemyData.objectData.startingHealth;
 	m_thinkingTimer = 0.0f;
 	m_active = false;
+	m_dead = false;
 }
 
 void Enemy::SetData(const EnemyData& data)

@@ -3,6 +3,9 @@
 #include "Texture.h"
 #include "Animator.h"
 #include "SpriteSheet.h"
+#include "Constants.h"
+
+using namespace GlobalConstants;
 
 GameOverScreen::GameOverScreen() :
 	m_animator(nullptr),
@@ -26,6 +29,8 @@ void GameOverScreen::Init(Graphics* graphics, Animator* animator, std::string te
 
 	m_spriteSheet = new Spritesheet();
 	m_spriteSheet->Init(m_texture, "GameData\\SpriteSheetData\\gameOverSpritesheetData.json");
+	m_spriteSheet->SetPosition(Vector2(GameWidth * 0.5f, GameHeight * 0.5f));
+	m_spriteSheet->SetDepth(1.0f);
 }
 
 void GameOverScreen::Update(float deltaTime)
@@ -48,6 +53,12 @@ void GameOverScreen::Release()
 void GameOverScreen::Reset()
 {
 	m_isActive = false;
+	m_animator->Reset();
+}
+
+void GameOverScreen::Enable()
+{
+	m_isActive = true;
 }
 
 void GameOverScreen::DeleteAll()

@@ -59,6 +59,7 @@ public:
 	EncounterHandler*	GetEncounterHandler() const { return m_encounterHandler; }
 	StateMachine<GameplayGameState>* GetSceneStateMachine() const { return m_sceneStateMachine; }
 	Sprite*				GetBackground() const { return m_backgroundSprite; }
+	GameOverScreenController* GetGameOverScreenController() const { return m_gameOverScreenController; }
 
 private:			
 	void				LoadAssets();				

@@ -51,6 +51,11 @@ void GameOverScreenController::Reset()
 	m_playerWonScreen->Reset();
 }
 
+void GameOverScreenController::EnableWinScreen()
+{
+	m_playerWonScreen->Enable();
+}
+
 void GameOverScreenController::DeleteAll()
 {
 	if(m_playerWonScreen != nullptr)
