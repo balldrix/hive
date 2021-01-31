@@ -5,7 +5,6 @@
 #include "Camera.h"
 #include "ControlSystem.h"
 #include "Texture.h"
-#include "AnimatedSprite.h"
 #include "SpriteSheet.h"
 #include "Sprite.h"
 #include "Animator.h"
@@ -24,6 +23,7 @@
 #include "EncounterHandler.h"
 #include "TravellingHandler.h"
 #include "TravelPrompt.h"
+#include "GameOverScreenController.h"
 
 using namespace GameplayConstants;
 using namespace GlobalConstants;
@@ -53,6 +53,7 @@ GameplayGameState::GameplayGameState() :
 	m_sceneStateMachine(nullptr),
 	m_encounterHandler(nullptr),
 	m_travellingHandler(nullptr),
+	m_gameOverScreenController(nullptr),
 	m_canAttack(true),
 	m_running(false),
 	m_playerBoundary(AABB()),
@@ -150,11 +151,20 @@ void GameplayGameState::LoadAssets()
 	
 	m_camera->Init(GameWidth);
 	
+	m_gameOverScreenController = new GameOverScreenController();
+	m_gameOverScreenController->Init(m_graphics);
+
 	m_running = true;
 }
 
 void GameplayGameState::DeleteAssets()
 {
+	if(m_gameOverScreenController != nullptr)
+	{
+		delete m_gameOverScreenController;
+		m_gameOverScreenController = nullptr;
+	}
+
 	if(m_travellingHandler != nullptr)
 	{
 		delete m_travellingHandler;
@@ -377,6 +387,7 @@ void GameplayGameState::Tick(float deltaTime)
 	m_hudManager->SetCurrentPlayerHealth(m_player->GetHealth());
 	m_hudManager->UpdatePlayerLives(m_player->GetLives());
 	m_hudManager->GetTravelPrompt()->Update(deltaTime);
+	m_gameOverScreenController->Update(deltaTime);
 
 	if(m_player->IsDead() && m_player->GetLives() > 0)
 		m_player->Respawn();
@@ -483,16 +494,18 @@ void GameplayGameState::Render()
 	m_player->Render(m_graphics);
 	m_NPCManager->Render(m_graphics);
 	m_hudManager->Render(m_graphics);
+	m_gameOverScreenController->Render(m_graphics);
 }
 
 void GameplayGameState::ReleaseAll()
 {
-	if(m_hudManager) { m_hudManager->ReleaseAll(); }
-	if(m_backgroundTexture) { m_backgroundTexture->Release(); }
-	if(m_standardShadowTexture) { m_standardShadowTexture->Release(); }
-	if(m_largeShadowTexture) { m_largeShadowTexture->Release(); }
-	if(m_hitBoxTexture) { m_hitBoxTexture->Release(); }
-	if(m_playerTexture) { m_playerTexture->Release(); }
+	if(m_hudManager != nullptr) { m_hudManager->ReleaseAll(); }
+	if(m_backgroundTexture != nullptr) { m_backgroundTexture->Release(); }
+	if(m_standardShadowTexture != nullptr) { m_standardShadowTexture->Release(); }
+	if(m_largeShadowTexture != nullptr) { m_largeShadowTexture->Release(); }
+	if(m_hitBoxTexture != nullptr) { m_hitBoxTexture->Release(); }
+	if(m_playerTexture != nullptr) { m_playerTexture->Release(); }
+	if(m_gameOverScreenController != nullptr) { m_gameOverScreenController->ReleaseAll(); }
 }
 
 void GameplayGameState::ResetGame()
@@ -504,9 +517,10 @@ void GameplayGameState::ResetGame()
 	m_camera->Reset();
 	m_camera->SetTarget(m_player);
 	m_hudManager->Reset();
-	m_encounterHandler->SetEncounterIndex(0);
 	m_sceneStateMachine->ChangeState(TravellingSceneState::Instance());
+	m_encounterHandler->SetEncounterIndex(0);
 	SetPlayerBoundaryX(StartingBoundaryMinX, (float)m_background->GetSprite()->GetWidth());
+	m_gameOverScreenController->Reset();
 }
 
 void GameplayGameState::SetPlayerBoundaryX(float minX, float maxX)

@@ -36,7 +36,7 @@ public:
 
 private:
 	AABB m_boundingBox;		// aabb bounding box
-	Sprite m_sprite;		// hitbox 
+	Sprite m_spriteSheet;		// hitbox 
 	Vector2 m_position;		// hit box position
 	Color m_colour;			// vertex colour
 	bool m_flipped;			// flipped hitbox

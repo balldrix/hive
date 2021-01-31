@@ -31,12 +31,16 @@ void EncounterSceneState::Execute(GameplayGameState* game)
 {
 	EncounterHandler* encounterHandler = game->GetEncounterHandler();
 
-	if(encounterHandler->GetIsEncounterDone() == false ||
-	   encounterHandler->GetEncounterIndex() == encounterHandler->GetNumberOfEncounters() - 1)
+	if(encounterHandler->GetIsEncounterDone() == false)
 		return;
 	
 	encounterHandler->IncreaseEncounterIndex();
-	game->GetSceneStateMachine()->ChangeState(TravellingSceneState::Instance());
+
+	if(encounterHandler->GetEncounterIndex() < encounterHandler->GetNumberOfEncounters())
+		game->GetSceneStateMachine()->ChangeState(TravellingSceneState::Instance());
+
+	if(encounterHandler->GetEncounterIndex() == encounterHandler->GetNumberOfEncounters())
+		game->GetSceneStateMachine()->ChangeState(GameOverSceneState::Instance());
 }
 
 void EncounterSceneState::OnExit(GameplayGameState* game)

@@ -20,10 +20,10 @@ public:
 	void Init(Sprite* sprite);
 	void Render(Graphics* graphics);
 
-	Sprite* GetSprite() const { return m_sprite; }
+	Sprite* GetSprite() const { return m_spriteSheet; }
 
 private:
-	Sprite*		m_sprite;
+	Sprite*		m_spriteSheet;
 	void		Reset();
 };
 

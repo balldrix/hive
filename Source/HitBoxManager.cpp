@@ -8,7 +8,7 @@
 
 HitBoxManager::HitBoxManager() :
 	m_owner(nullptr),
-	m_sprite(nullptr),
+	m_spriteSheet(nullptr),
 	m_currentHitBoxData(nullptr),
 	m_hitBoxDataList(0)
 {
@@ -27,7 +27,7 @@ void HitBoxManager::Init(Sprite* sprite, std::string fileName)
 
 void HitBoxManager::Init(Sprite* sprite, GameObject* owner, std::string fileName)
 {
-	m_sprite = sprite;
+	m_spriteSheet = sprite;
 	m_owner = owner;
 
 	LoadData(fileName);

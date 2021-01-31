@@ -18,7 +18,7 @@ GameObject::GameObject() :
 	m_movementSpeed(0.0f),
 	m_acceleration(0.0f),
 	m_deceleration(0.0f),
-	m_sprite(nullptr),
+	m_spriteSheet(nullptr),
 	m_animator(nullptr),
 	m_shadow(nullptr),
 	m_hitBoxManager(nullptr),
@@ -123,8 +123,8 @@ void GameObject::Update(float deltaTime)
 	if(m_camera != nullptr)
 		screenGroundPosition.x -= m_camera->GetPosition().x;
 
-	if(m_sprite != nullptr)
-		m_sprite->SetPosition(screenPosition);
+	if(m_spriteSheet != nullptr)
+		m_spriteSheet->SetPosition(screenPosition);
 
 	if(m_shadow != nullptr)
 		m_shadow->SetPosition(screenGroundPosition);
@@ -209,12 +209,12 @@ void GameObject::FlipHorizontally(bool flip)
 	if(flip == true)
 	{
 		// flip sprite
-		m_sprite->SetFlipEffect(SpriteEffects::SpriteEffects_FlipHorizontally);
+		m_spriteSheet->SetFlipEffect(SpriteEffects::SpriteEffects_FlipHorizontally);
 
 	}
 	else
 	{
-		m_sprite->SetFlipEffect(SpriteEffects::SpriteEffects_None);
+		m_spriteSheet->SetFlipEffect(SpriteEffects::SpriteEffects_None);
 	}
 
 	// flip hitboxes

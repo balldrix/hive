@@ -35,7 +35,7 @@ Player::~Player()
 
 void Player::Init(Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem)
 {
-	m_sprite = sprite;
+	m_spriteSheet = sprite;
 	m_controlSystem = controlSystem;
 	m_shadow = shadow;
 	m_position.x = m_playerData.objectData.startingPosition.x;
@@ -194,19 +194,19 @@ void Player::Render(Graphics* graphics)
 		m_shadow->Render(graphics);
 	}
 
-	if(m_sprite)
+	if(m_spriteSheet)
 	{
 		// set layer depth
-		m_sprite->SetDepth(m_groundPosition.y / graphics->GetHeight());
+		m_spriteSheet->SetDepth(m_groundPosition.y / graphics->GetHeight());
 
 		// render player sprite
 		if(m_animator)
 		{
-			m_sprite->Render(graphics, m_animator->GetCurrentFrame() + m_animator->GetAnimation()->spritesheetIndex);
+			m_spriteSheet->Render(graphics, m_animator->GetCurrentFrame() + m_animator->GetAnimation()->spritesheetIndex);
 		}
 		else
 		{
-			m_sprite->Render(graphics, 0);
+			m_spriteSheet->Render(graphics, 0);
 		}
 	}
 

@@ -1,0 +1,134 @@
+﻿{
+  "frames": [
+    {
+      "name": "frame 1",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 100,
+        "h": 100
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 100,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 100,
+        "h": 100
+      },
+      "duration": 100,
+      "origin": {
+        "x": 49,
+        "y": 49
+      }
+    },
+    {
+      "name": "frame 2",
+      "frame": {
+        "x": 100,
+        "y": 0,
+        "w": 100,
+        "h": 100
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 100,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 100,
+        "h": 100
+      },
+      "duration": 100,
+      "origin": {
+        "x": 49,
+        "y": 49
+      }
+    },
+    {
+      "name": "frame 3",
+      "frame": {
+        "x": 200,
+        "y": 0,
+        "w": 100,
+        "h": 100
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 100,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 100,
+        "h": 100
+      },
+      "duration": 100,
+      "origin": {
+        "x": 49,
+        "y": 49
+      }
+    },
+    {
+      "name": "frame 4",
+      "frame": {
+        "x": 0,
+        "y": 100,
+        "w": 100,
+        "h": 100
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 100,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 100,
+        "h": 100
+      },
+      "duration": 100,
+      "origin": {
+        "x": 49,
+        "y": 49
+      }
+    },
+    {
+      "name": "frame 3",
+      "frame": {
+        "x": 100,
+        "y": 100,
+        "w": 100,
+        "h": 100
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 100,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 100,
+        "h": 100
+      },
+      "duration": 100,
+      "origin": {
+        "x": 49,
+        "y": 49
+      }
+    }
+  ]
+}

@@ -64,9 +64,6 @@
     <ClCompile Include="Source\SpriteSheet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\AnimatedSprite.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Animator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -151,6 +148,9 @@
     <ClCompile Include="Source\KingMookEnemyGlobalState.h" />
     <ClCompile Include="Source\KingMookEnemyGlobalState.cpp" />
     <ClCompile Include="Source\KingMookChargeState.cpp" />
+    <ClCompile Include="Source\GameOverScreen.cpp" />
+    <ClCompile Include="Source\GameOverScreenController.cpp" />
+    <ClCompile Include="Source\GameOverSceneState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -216,9 +216,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\AnimatedSprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\State.h">
@@ -343,6 +340,9 @@
     </ClInclude>
     <ClInclude Include="Source\KingMook.h" />
     <ClInclude Include="Source\KingMookChargeState.h" />
+    <ClInclude Include="Source\GameOverScreen.h" />
+    <ClInclude Include="Source\GameOverScreenController.h" />
+    <ClInclude Include="Source\GameOverSceneState.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\UI\lives_x0.png" />
@@ -365,6 +365,7 @@
     <Image Include="GameData\Sprites\shadow_large.png" />
     <Image Include="GameData\Sprites\mookSpriteSheet.png" />
     <Image Include="GameData\Sprites\UI\kingMook_hud_portrait.png" />
+    <Image Include="GameData\Sprites\UI\player_won_screen.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -384,6 +385,8 @@
     <None Include="GameData\HitBoxData\bossHitBoxData.json" />
     <None Include="GameData\HitBoxData\mookHitBoxData.json" />
     <None Include="GameData\SpriteSheetData\mookSpritesheetData.json" />
+    <None Include="GameData\SpriteSheetData\gameOverSpritesheetData.json" />
+    <None Include="GameData\AnimationData\gameOverAnimationData.json" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="GameData\EncounterData\encounterPositions.txt" />

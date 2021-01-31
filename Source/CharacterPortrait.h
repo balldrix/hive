@@ -15,10 +15,11 @@ public:
 
 	void Init(Graphics* graphics, std::string texturePath);
 	void Render(Graphics* graphics);
-	void DeleteAll();
 	void ReleaseAll();
 
 private:
+	void DeleteAll();
+
 	Texture* m_playerPortraitTexture;
-	Sprite* m_playerPortraitSprite;
+	Sprite* m_playerPortraitSprite;	
 };

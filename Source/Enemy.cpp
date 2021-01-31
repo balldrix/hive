@@ -53,8 +53,8 @@ void Enemy::Init(Graphics* graphics,
 	m_groundPosition = data.objectData.startingPosition;
 	m_grounded = true;
 
-	m_sprite = new Spritesheet();
-	m_sprite->Init(spriteTexture, "GameData\\SpriteSheetData\\" + data.type + "SpritesheetData.json");
+	m_spriteSheet = new Spritesheet();
+	m_spriteSheet->Init(spriteTexture, "GameData\\SpriteSheetData\\" + data.type + "SpritesheetData.json");
 	
 	m_shadow = new Sprite();
 	m_shadow->Init(shadowTexture);
@@ -131,17 +131,17 @@ Enemy::Render(Graphics* graphics)
 		m_shadow->Render(graphics);
 	}
 
-	if(m_sprite)
+	if(m_spriteSheet)
 	{
-		m_sprite->SetDepth(m_groundPosition.y / graphics->GetHeight());
+		m_spriteSheet->SetDepth(m_groundPosition.y / graphics->GetHeight());
 
 		if(m_animator)
 		{
-			m_sprite->Render(graphics, m_animator->GetCurrentFrame() + m_animator->GetAnimation()->spritesheetIndex);
+			m_spriteSheet->Render(graphics, m_animator->GetCurrentFrame() + m_animator->GetAnimation()->spritesheetIndex);
 		}
 		else
 		{
-			m_sprite->Render(graphics, 0);
+			m_spriteSheet->Render(graphics, 0);
 		}
 	}
 
@@ -161,6 +161,7 @@ Enemy::Reset()
 	m_health = m_enemyData.objectData.startingHealth;
 	m_thinkingTimer = 0.0f;
 	m_active = false;
+	m_dead = false;
 }
 
 void Enemy::SetData(const EnemyData& data)
@@ -306,10 +307,10 @@ void Enemy::DeleteAll()
 		m_shadow = nullptr;
 	}
 
-	if(m_sprite)
+	if(m_spriteSheet)
 	{
-		delete m_sprite;
-		m_sprite = nullptr;
+		delete m_spriteSheet;
+		m_spriteSheet = nullptr;
 	}
 }
 

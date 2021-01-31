@@ -2,7 +2,7 @@
 #include "Sprite.h"
 #include "Camera.h"
 
-Background::Background() : m_sprite(nullptr)
+Background::Background() : m_spriteSheet(nullptr)
 {
 }
 
@@ -15,20 +15,20 @@ void Background::Update(float deltaTime)
 	Vector2 screenPosition {};
 	screenPosition.x -= m_camera->GetPosition().x;
 
-	if(m_sprite)
+	if(m_spriteSheet)
 	{
-		m_sprite->SetPosition(screenPosition);
+		m_spriteSheet->SetPosition(screenPosition);
 	}
 }
 
 void Background::Init(Sprite* sprite)
 {
-	m_sprite = sprite;
+	m_spriteSheet = sprite;
 }
 
 void Background::Render(Graphics* graphics)
 {
-	m_sprite->Render(graphics);
+	m_spriteSheet->Render(graphics);
 }
 
 void Background::Reset()

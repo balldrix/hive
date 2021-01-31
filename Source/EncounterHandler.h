@@ -20,7 +20,7 @@ public:
 
 	void	SetEncounterIndex(const int& index);
 	
-	int		GetEncounterIndex() const { return m_encounterIndex; }
+	size_t	GetEncounterIndex() const { return m_encounterIndex; }
 	int		GetEncounterPosition() const { return m_encounterPositions[m_encounterIndex]; }
 	bool	GetIsEncounterDone();
 	size_t	GetNumberOfEncounters() const { return m_encounterPositions.size(); }
@@ -31,7 +31,7 @@ private:
 	bool				LoadData(std::string encounterDataFile);
 
 	std::vector<Enemy*> m_enemyList;
-	int					m_encounterIndex;
+	size_t				m_encounterIndex;
 	std::vector<int>    m_encounterPositions;
 	bool				m_isEncounterDone;
 };
