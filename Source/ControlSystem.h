@@ -1,5 +1,5 @@
 // ControlSystem.h
-// Christopher Ball 2019-2020
+// Christopher Ball 2019-2021
 // Manages player input and combos
 
 #ifndef _CONTROL_SYSTEM_H_

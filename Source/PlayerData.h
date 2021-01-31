@@ -1,5 +1,5 @@
 // PlayerData.h
-// Christopher Ball 2020
+// Christopher Ball 2019-2021
 // stores player data
 
 #ifndef _PLAYERDATA_H_

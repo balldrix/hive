@@ -1,5 +1,5 @@
 // EnemyDataContainer.h
-// Christopher Ball 2020
+// Christopher Ball 2019-2021
 // container of enemy data
 
 #ifndef _ENEMYDATACONTAINER_H_

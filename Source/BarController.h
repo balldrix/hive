@@ -1,5 +1,5 @@
 // BarController.h
-// Christopher Ball 2019-2020
+// Christopher Ball 2019-2021
 
 #ifndef _BARCONTROLLER_H_
 #define _BARCONTROLLER_H_

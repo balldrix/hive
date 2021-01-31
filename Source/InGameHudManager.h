@@ -1,5 +1,5 @@
 // InGameHudManager.h
-// Christopher Ball 2019-2020
+// Christopher Ball 2019-2021
 
 #ifndef _INGAME_HUD_MANAGER_H_
 #define _INGAME_HUD_MANAGER_H_

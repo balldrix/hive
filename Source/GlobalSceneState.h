@@ -1,5 +1,5 @@
 // GlobalSceneState.h
-// Christopher Ball 2019-2020
+// Christopher Ball 2019-2021
 // The global scene state during gameplay
 
 #pragma once

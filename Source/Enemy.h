@@ -1,5 +1,5 @@
 // Enemy.h
-// Christopher Ball 2019-2020
+// Christopher Ball 2019-2021
 // Enemy class 
 
 #pragma once
