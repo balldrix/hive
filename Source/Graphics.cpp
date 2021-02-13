@@ -40,6 +40,12 @@ void Graphics::Init(HWND hWnd, HINSTANCE hInstance)
 	UINT width = GameWidth;
 	UINT height = GameHeight;
 
+	UINT createDeviceFlags = NULL;
+
+#ifdef _DEBUG
+	createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
+#endif
+
 	// Initialise DirectX
 	DXGI_SWAP_CHAIN_DESC scd = { 0 };
 	scd.BufferCount = 1;
@@ -54,10 +60,11 @@ void Graphics::Init(HWND hWnd, HINSTANCE hInstance)
 	scd.SampleDesc.Quality = 0;
 	scd.Windowed = !m_fullScreen;
 	scd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
+	scd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 	result = D3D11CreateDeviceAndSwapChain(NULL,
 										   D3D_DRIVER_TYPE_HARDWARE,
 										   NULL,
-										   NULL,
+										   createDeviceFlags,
 										   NULL,
 										   NULL,
 										   D3D11_SDK_VERSION,

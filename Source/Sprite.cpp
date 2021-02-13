@@ -37,7 +37,10 @@ void Sprite::Init(Texture* texture)
 	// and get data from the Texture2D resource
 	D3D11_TEXTURE2D_DESC desc;
 	tex2D->GetDesc(&desc);
+	
+#ifndef _DEBUG
 	tex2D->Release();
+#endif
 
 	// set dimensions
 	m_width = desc.Width;

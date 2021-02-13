@@ -23,7 +23,7 @@ Window::Init(HINSTANCE hInstance, INT cmdShow, WNDPROC winProc)
 
 	// setup window class to register window
 	WNDCLASS wc = { 0 };
-	wc.style = CS_CLASSDC;
+	wc.style = CS_HREDRAW | CS_VREDRAW;
 	wc.lpfnWndProc = winProc;
 	wc.hInstance = hInstance;
 	wc.lpszClassName = WndClassName;
