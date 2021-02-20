@@ -26,11 +26,8 @@ public:
 
 	void				ProcessInput(); // read inputs
 	void				Update(float deltaTime); // update all objects in the scene
-	void				AI();
 	void				ProcessCollisions();
 	void				Render(); // Render scene
-
-	void				SetDisplayMode(DisplayMode mode);
 
 	void				ReleaseAll(); // release all pointers
 	void				DeleteAll(); // delete all pointers

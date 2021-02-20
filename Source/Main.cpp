@@ -82,9 +82,7 @@ void ShutDown()
 	CoUninitialize();
 }
 
-LRESULT CALLBACK
-WndProc(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK WndProc(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-	// send message handler from game engine to WndProc callback function
 	return game->MessageHandler(hWindow, msg, wParam, lParam);
 }

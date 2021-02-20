@@ -26,8 +26,7 @@ Game::~Game()
 	DeleteAll(); // delete all pointers
 }
 
-void
-Game::Init(Graphics* graphics)
+void Game::Init(Graphics* graphics)
 {
 	// allow multi threading
 	CoInitializeEx(NULL, COINIT_MULTITHREADED);
@@ -51,8 +50,7 @@ Game::Init(Graphics* graphics)
 	m_currentTime = m_timer.GetTicks();
 }
 
-void
-Game::Run()
+void Game::Run()
 {
 	float newTime = m_timer.GetTicks(); // get cpu tick count
 	float deltaTime = (newTime - m_currentTime) * m_timerFreq; // calculate time taken since last update
@@ -69,28 +67,15 @@ Game::Run()
 	m_input->ClearKeysPressed(); // clear keys pressed
 }
 
-void
-Game::ProcessInput()
+void Game::ProcessInput()
 {
-	// process game state input
 	m_gameStateManager->ProcessInput();
-
-	// if Alt+Enter toggle fullscreen/window
-	if(m_input->IsKeyDown(ALT_KEY) && m_input->WasKeyPressed(ENTER_KEY))
-	{
-		SetDisplayMode(DisplayMode::FULLSCREEN); // toggle fullscreen/window
-	}
 }
 
-void
-Game::Update(float deltaTime)
+void Game::Update(float deltaTime)
 {
 	// update game state
 	m_gameStateManager->Update(deltaTime);
-}
-
-void Game::AI()
-{
 }
 
 void Game::ProcessCollisions()
@@ -98,8 +83,7 @@ void Game::ProcessCollisions()
 	m_gameStateManager->ProcessCollisions();
 }
 
-void
-Game::Render()
+void Game::Render()
 {
 	// prepare graphics render target and clear backbuffer
 	m_graphics->BeginScene();
@@ -111,21 +95,13 @@ Game::Render()
 	m_graphics->PresentBackBuffer();
 }
 
-void Game::SetDisplayMode(DisplayMode mode)
-{
-	ReleaseAll();
-	m_graphics->ChangeDisplayMode(mode);
-}
-
-void
-Game::ReleaseAll()
+void Game::ReleaseAll()
 {
 	m_graphics->ReleaseAll(); // release all graphics related pointers
 	m_gameStateManager->ReleaseAll(); // release all states
 }
 
-void
-Game::DeleteAll()
+void Game::DeleteAll()
 {
 	// delete game state manager
 	if(m_gameStateManager)
@@ -148,33 +124,42 @@ Game::DeleteAll()
 	}
 }
 
-LRESULT
-Game::MessageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam)
+LRESULT Game::MessageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	// handle msg values in switch statement
 	switch(msg)
 	{
 		case WM_DESTROY:
 			PostQuitMessage(0); // post quit window
-			return 0;
+			break;
 		case WM_KEYDOWN: case WM_SYSKEYDOWN:
 			m_input->SetKeyDown(wParam); // set keyboard key down
-			return 0;
+			break;
 		case WM_KEYUP: case WM_SYSKEYUP:
 			m_input->SetKeyUp(wParam); // set keyboard key up
-			return 0;
+			break;
 		case WM_MOUSEMOVE:
 			m_input->SetMouseIn(lParam); // set mouse position
-			return 0;
+			break;
 		case WM_LBUTTONDOWN:
 			m_input->SetMouseClicked(true);
 			m_input->SetMouseIn(lParam);
-			return 0;
+			break;
 		case WM_LBUTTONUP:
 			m_input->SetMouseClicked(false);
 			m_input->SetMouseIn(lParam);
-			return 0;
+			break;
+		case WM_WINDOWPOSCHANGED:
+			if(this == nullptr)
+				break;
+
+			BOOL fullscreen;
+			m_graphics->GetSwapChain()->GetFullscreenState(&fullscreen, nullptr);
+			
+			if(fullscreen != (BOOL)m_graphics->GetFullscreen())
+				m_graphics->ChangeDisplayMode(fullscreen);
+			break;
 	}
-	// else return default
+
 	return DefWindowProc(hWindow, msg, wParam, lParam);
 }

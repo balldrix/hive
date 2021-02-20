@@ -1,6 +1,7 @@
 #include "Graphics.h"
 #include "Constants.h"
 #include "Error.h"
+#include "Window.h"
 
 using namespace GlobalConstants;
 
@@ -14,7 +15,7 @@ Graphics::Graphics() :
 	m_backbuffer(nullptr),
 	m_samplerState(nullptr),
 	m_spriteBatch(nullptr),
-	m_fullScreen(false),
+	m_fullscreen(false),
 	m_gameWidth(0.0f),
 	m_gameHeight(0.0f),
 	m_viewport(D3D11_VIEWPORT())
@@ -58,7 +59,7 @@ void Graphics::Init(HWND hWnd, HINSTANCE hInstance)
 	scd.OutputWindow = m_hWnd;
 	scd.SampleDesc.Count = 1;
 	scd.SampleDesc.Quality = 0;
-	scd.Windowed = !m_fullScreen;
+	scd.Windowed = !m_fullscreen;
 	scd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 	scd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 	result = D3D11CreateDeviceAndSwapChain(NULL,
@@ -100,7 +101,8 @@ void Graphics::Init(HWND hWnd, HINSTANCE hInstance)
 	}
 
 	// create render target view
-	result = m_D3DDevice->CreateRenderTargetView(m_backbuffer, nullptr, &m_renderTargetView);
+	if(m_backbuffer)
+		result = m_D3DDevice->CreateRenderTargetView(m_backbuffer, nullptr, &m_renderTargetView);
 
 	// error checking
 	if(result != S_OK)
@@ -148,7 +150,8 @@ void Graphics::Init(HWND hWnd, HINSTANCE hInstance)
 	}
 
 	// initialse sprite batch engine
-	m_spriteBatch = new SpriteBatch(m_D3DDeviceContext);
+	if(m_D3DDeviceContext)
+		m_spriteBatch = new SpriteBatch(m_D3DDeviceContext);
 
 	// set game dimensions
 	m_gameWidth = (float)width;
@@ -195,33 +198,14 @@ void Graphics::PresentBackBuffer()
 	m_swapchain->Present(0, 0);
 }
 
-void Graphics::ChangeDisplayMode(DisplayMode mode)
+void Graphics::ChangeDisplayMode(bool fullscreen)
 {
-	switch(mode)
-	{
-	case FULLSCREEN:
-		if(m_fullScreen)
-		{
-			return;
-		}
+	m_fullscreen = fullscreen;
 
-		m_fullScreen = true;
-		break;
-	case WINDOW:
-		if(!m_fullScreen)
-		{
-			return;
-		}
-
-		m_fullScreen = false;
-		break;
-	default:
-		m_fullScreen = !m_fullScreen;
-		break;
-	}
-
+	ReleaseAll();
 	Init(m_hWnd, m_hInstance);
-
-	// update window
 	UpdateWindow(m_hWnd);
+
+	//if(m_fullscreen == true)
+//		m_swapchain->ResizeBuffers(1, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), DXGI_FORMAT_UNKNOWN, 0);
 }

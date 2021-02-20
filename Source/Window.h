@@ -14,13 +14,13 @@ class Window
 		Window();
 		~Window();
 		void Init(HINSTANCE hInstance, INT cmdShow, WNDPROC winProc); // initialise window
-		HWND GetHwnd() { return m_hWindow; } // get handle to window
-
+		HINSTANCE GetInstance() noexcept;
+		HWND GetHwnd() const { return m_hWindow; }
 	private:
-		HWND m_hWindow; // window handle
-		unsigned int m_width; // width of window
-		unsigned int m_height; // height of window
+		HINSTANCE m_hInst;
+		HWND m_hWindow;
+		int m_width;
+		int m_height;
 };
-
 
 #endif _WINDOW_H_

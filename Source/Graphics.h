@@ -8,13 +8,6 @@
 
 #include "pch.h"
 
-enum DisplayMode
-{
-	TOGGLE,
-	FULLSCREEN,
-	WINDOW
-};
-
 class Graphics
 {
 public:
@@ -25,17 +18,19 @@ public:
 	void						BeginScene();								// prepare render target for rendering scene
 	
 	void						PresentBackBuffer();						// present backbuffer to screen
-	void						ChangeDisplayMode(DisplayMode mode);
+	void						ChangeDisplayMode(bool fullscreen);
 
-	ID3D11Device*				GetDevice() { return m_D3DDevice; }			// return graphics device pointer
-	ID3D11DeviceContext*		GetDeviceContext() { return m_D3DDeviceContext; }	// return graphics context pointer
-	
+	ID3D11Device*				GetDevice() const { return m_D3DDevice; }			// return graphics device pointer
+	ID3D11DeviceContext*		GetDeviceContext() const { return m_D3DDeviceContext; }	// return graphics context pointer
+	IDXGISwapChain*				GetSwapChain() const { return m_swapchain; }
+
 	SpriteBatch*				GetSpriteBatch() const { return m_spriteBatch; }	// return spritebatch pointer
 	
 	float						GetWidth()	const { return m_gameWidth; }					// return game window width
 	float						GetHeight()	const { return m_gameHeight; }					// return game window height
 	
-	HWND						GetHwnd()		const { return m_hWnd; }						// return window handle
+	HWND						GetHwnd()	const { return m_hWnd; }						// return window handle
+	bool						GetFullscreen() const { return m_fullscreen; }
 
 private:
 	HWND						m_hWnd;					// handle to the window
@@ -53,7 +48,7 @@ private:
 	SpriteBatch*				m_spriteBatch;			// spritebatch for drawing sprites to backbuffer
 	D3D11_VIEWPORT				m_viewport;				// game viewport
 
-	bool						m_fullScreen;			// fullscreen setting
+	bool						m_fullscreen;			// fullscreen setting
 	
 	float						m_gameWidth;			// client window width
 	float						m_gameHeight;			// client window height
