@@ -1,9 +1,8 @@
 // Timer.h
-// Christopher Ball
+// Christopher Ball 2019-2021
 // gets cpu time and frequency for delta time management
 
-#ifndef _TIMER_H_
-#define _TIMER_H_
+#pragma once
 
 #include "pch.h"
 
@@ -16,5 +15,3 @@ public:
 	float	GetTicks(); // get cpu time in ticks
 	float	GetFrequency(); // get cpu frequency
 };
-
-#endif _TIMER_H_

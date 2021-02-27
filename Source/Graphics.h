@@ -1,10 +1,7 @@
 // Graphics.h
-// Christopher Ball 2019
-// This class manages DirectX and all the functions for 
-// drawing to the screen
+// Christopher Ball 2019-2021
 
-#ifndef _GRAPHICS_H_
-#define _GRAPHICS_H_
+#pragma once
 
 #include "pch.h"
 
@@ -13,45 +10,45 @@ class Graphics
 public:
 	Graphics();					
 	~Graphics();			
-	void						Init(HWND hWindow, HINSTANCE hInstance);	// initialises graphics device
-	void						ReleaseAll();								// release all ID3D11 pointers
-	void						BeginScene();								// prepare render target for rendering scene
-	
-	void						PresentBackBuffer();						// present backbuffer to screen
-	void						ChangeDisplayMode(bool fullscreen);
+	void						Init(HWND hWindow, HINSTANCE hInstance);	
+	void						CreateResources(UINT width, UINT height);
 
-	ID3D11Device*				GetDevice() const { return m_D3DDevice; }			// return graphics device pointer
-	ID3D11DeviceContext*		GetDeviceContext() const { return m_D3DDeviceContext; }	// return graphics context pointer
+	void						ReleaseAll();								
+	void						BeginScene();								
+	
+	void						PresentBackBuffer();
+
+	ID3D11Device*				GetDevice() const { return m_D3DDevice; }			
+	ID3D11DeviceContext*		GetDeviceContext() const { return m_D3DDeviceContext; }
 	IDXGISwapChain*				GetSwapChain() const { return m_swapchain; }
 
-	SpriteBatch*				GetSpriteBatch() const { return m_spriteBatch; }	// return spritebatch pointer
+	SpriteBatch*				GetSpriteBatch() const { return m_spriteBatch; }	
 	
-	float						GetWidth()	const { return m_gameWidth; }					// return game window width
-	float						GetHeight()	const { return m_gameHeight; }					// return game window height
+	float						GetWidth()	const { return m_gameWidth; }			
+	float						GetHeight()	const { return m_gameHeight; }			
 	
-	HWND						GetHwnd()	const { return m_hWnd; }						// return window handle
+	HWND						GetHwnd()	const { return m_hWnd; }		
+	HINSTANCE					GetHInstance() const { return m_hInstance; }
 	bool						GetFullscreen() const { return m_fullscreen; }
 
 private:
-	HWND						m_hWnd;					// handle to the window
-	HINSTANCE					m_hInstance;			// instance of our window
+	HWND						m_hWnd;				
+	HINSTANCE					m_hInstance;		
 	
-	IDXGISwapChain*				m_swapchain;			// pointer to swapchain of sourceRect buffers
-	ID3D11Device*				m_D3DDevice;			// pointer to D3D Device
-	ID3D11DeviceContext*		m_D3DDeviceContext;		// pointer to D3D Context
+	IDXGISwapChain*				m_swapchain;		
+	ID3D11Device*				m_D3DDevice;		
+	ID3D11DeviceContext*		m_D3DDeviceContext;	
 
-	ID3D11RenderTargetView*		m_renderTargetView;		// pointer to render target view
-	ID3D11Texture2D*			m_backbuffer;			// pointer to 2d backbuffer
+	ID3D11RenderTargetView*		m_renderTargetView;	
+	ID3D11Texture2D*			m_backbuffer;		
 
-	ID3D11SamplerState*			m_samplerState;			// pointer to sampler state object
+	ID3D11SamplerState*			m_samplerState;		
 
-	SpriteBatch*				m_spriteBatch;			// spritebatch for drawing sprites to backbuffer
-	D3D11_VIEWPORT				m_viewport;				// game viewport
+	SpriteBatch*				m_spriteBatch;		
+	D3D11_VIEWPORT				m_viewport;			
 
-	bool						m_fullscreen;			// fullscreen setting
+	bool						m_fullscreen;		
 	
-	float						m_gameWidth;			// client window width
-	float						m_gameHeight;			// client window height
+	float						m_gameWidth;		
+	float						m_gameHeight;		
 };
-
-#endif _GRAPHICS_H_

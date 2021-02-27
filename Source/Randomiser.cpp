@@ -4,7 +4,7 @@
 
 Randomiser::Randomiser()
 {
-	m_generator = std::mt19937((int)time(NULL));
+	m_generator = std::mt19937((int)time(nullptr));
 }
 
 Randomiser::~Randomiser()

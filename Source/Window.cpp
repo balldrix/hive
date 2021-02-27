@@ -7,7 +7,10 @@ Window::Window() :
 	m_hInst(nullptr),
 	m_hWindow(nullptr),
 	m_width(0),
-	m_height(0)
+	m_height(0),
+	m_minimized(false),
+	m_maximized(false),
+	m_resizing(false)
 {
 }
 	
@@ -32,30 +35,38 @@ void Window::Init(HINSTANCE hInstance, INT cmdShow, WNDPROC winProc)
 	wcx.lpszClassName = WndClassName;
 	RegisterClassEx(&wcx);
 
-	// adjust window boundary to maintain game dimensions
-	RECT rc = { 0, 0, (long)m_width, (long)m_height };
+	RECT rc = { 100, 100, (long)m_width + rc.left, (long)m_height + rc.top };
 	AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
 
-	// create window
-	m_hWindow = CreateWindow(WndClassName,
-						   WindowName,
-						   WS_OVERLAPPEDWINDOW,
-						   300,
-						   200,
-						   rc.right - rc.left,
-						   rc.bottom - rc.top,
-						   NULL,
-						   NULL,
-						   hInstance,
-						   NULL);
-	// hide cursor
-	ShowCursor(false);
+	m_hWindow = CreateWindow(
+		WndClassName, WindowName, 
+		WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU,
+		CW_USEDEFAULT, CW_USEDEFAULT, rc.right - rc.left, rc.bottom - rc.top,
+		nullptr,
+		nullptr,
+		hInstance,
+		this);
 
-	// show window
-	ShowWindow(m_hWindow, cmdShow);
+	ShowCursor(true);
+	ShowWindow(m_hWindow, SW_SHOWDEFAULT);
 }
 
 HINSTANCE Window::GetInstance() noexcept
 {
 	return HINSTANCE();
+}
+
+void Window::SetMinimized(bool value)
+{
+	m_minimized = value;
+}
+
+void Window::SetMaximized(bool value)
+{
+	m_maximized = value;
+}
+
+void Window::SetResizing(bool value)
+{
+	m_resizing = value;
 }

@@ -24,7 +24,6 @@ Graphics::Graphics() :
 
 Graphics::~Graphics()
 {
-	// delete 2d sprite batch engine
 	if(m_spriteBatch)
 	{
 		delete m_spriteBatch;
@@ -34,18 +33,12 @@ Graphics::~Graphics()
 
 void Graphics::Init(HWND hWnd, HINSTANCE hInstance)
 {
-	HRESULT result; // used for error checking
+	HRESULT result;
 	m_hWnd = hWnd;
 	m_hInstance = hInstance;
 
 	UINT width = GameWidth;
 	UINT height = GameHeight;
-
-	UINT createDeviceFlags = NULL;
-
-#ifdef _DEBUG
-	createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
-#endif
 
 	// Initialise DirectX
 	DXGI_SWAP_CHAIN_DESC scd = { 0 };
@@ -53,8 +46,10 @@ void Graphics::Init(HWND hWnd, HINSTANCE hInstance)
 	scd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 	scd.BufferDesc.Width = width;
 	scd.BufferDesc.Height = height;
-	scd.BufferDesc.RefreshRate.Numerator = 60;
-	scd.BufferDesc.RefreshRate.Denominator = 1;
+	scd.BufferDesc.RefreshRate.Numerator = 0;
+	scd.BufferDesc.RefreshRate.Denominator = 0;
+	scd.BufferDesc.Scaling = DXGI_MODE_SCALING_CENTERED;
+	scd.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
 	scd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
 	scd.OutputWindow = m_hWnd;
 	scd.SampleDesc.Count = 1;
@@ -62,18 +57,20 @@ void Graphics::Init(HWND hWnd, HINSTANCE hInstance)
 	scd.Windowed = !m_fullscreen;
 	scd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 	scd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
-	result = D3D11CreateDeviceAndSwapChain(NULL,
-										   D3D_DRIVER_TYPE_HARDWARE,
-										   NULL,
-										   createDeviceFlags,
-										   NULL,
-										   NULL,
-										   D3D11_SDK_VERSION,
-										   &scd,
-										   &m_swapchain,
-										   &m_D3DDevice,
-										   NULL,
-										   &m_D3DDeviceContext);
+	
+	result = D3D11CreateDeviceAndSwapChain(
+		nullptr,
+		D3D_DRIVER_TYPE_HARDWARE,
+		nullptr,
+		0,
+		nullptr,
+		0,
+		D3D11_SDK_VERSION,
+		&scd,
+		&m_swapchain,
+		&m_D3DDevice,
+		nullptr,
+		&m_D3DDeviceContext);
 
 	// error checking
 	if(result != S_OK)
@@ -86,8 +83,15 @@ void Graphics::Init(HWND hWnd, HINSTANCE hInstance)
 		PostQuitMessage(0); // quit game
 	}
 
+	CreateResources(width, height);
+}
+
+void Graphics::CreateResources(UINT width, UINT height)
+{
+	m_swapchain->ResizeBuffers(1, width, height, DXGI_FORMAT_R8G8B8A8_UNORM, 0);
+
 	// Get backbuffer pointer from swapchain
-	result = m_swapchain->GetBuffer(0, __uuidof(m_backbuffer), (void**)&m_backbuffer);
+	HRESULT result = m_swapchain->GetBuffer(0, __uuidof(m_backbuffer), (void**) &m_backbuffer);
 
 	// error checking
 	if(result != S_OK)
@@ -118,8 +122,8 @@ void Graphics::Init(HWND hWnd, HINSTANCE hInstance)
 	m_backbuffer->Release();
 
 	// initialise viewport
-	m_viewport.Width = (float)width;
-	m_viewport.Height = (float)height;
+	m_viewport.Width = (float) width;
+	m_viewport.Height = (float) height;
 	m_viewport.MinDepth = 0.0f;
 	m_viewport.MaxDepth = 1.0f;
 	m_viewport.TopLeftX = 0;
@@ -132,7 +136,7 @@ void Graphics::Init(HWND hWnd, HINSTANCE hInstance)
 	sd.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
 	sd.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
 	sd.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
-	sd.MaxAnisotropy = (m_D3DDevice->GetFeatureLevel() > D3D_FEATURE_LEVEL_9_1) ? D3D11_MAX_MAXANISOTROPY : 2;
+	sd.MaxAnisotropy = (m_D3DDevice->GetFeatureLevel() > D3D_FEATURE_LEVEL_9_1)?D3D11_MAX_MAXANISOTROPY:2;
 	sd.MaxLOD = D3D11_FLOAT32_MAX;
 	sd.ComparisonFunc = D3D11_COMPARISON_NEVER;
 
@@ -154,13 +158,13 @@ void Graphics::Init(HWND hWnd, HINSTANCE hInstance)
 		m_spriteBatch = new SpriteBatch(m_D3DDeviceContext);
 
 	// set game dimensions
-	m_gameWidth = (float)width;
-	m_gameHeight = (float)height;
+	m_gameWidth = (float) width;
+	m_gameHeight = (float) height;
 }
 
 void Graphics::ReleaseAll()
 {
-	if(m_swapchain) { m_swapchain->SetFullscreenState(FALSE, NULL); }    // switch to windowed mode
+	if(m_swapchain) { m_swapchain->SetFullscreenState(FALSE, nullptr); }    // switch to windowed mode
 	if(m_samplerState) { m_samplerState->Release(); }
 	if(m_renderTargetView) { m_renderTargetView->Release(); }
 	if(m_D3DDeviceContext) { m_D3DDeviceContext->Release(); }
@@ -171,7 +175,7 @@ void Graphics::ReleaseAll()
 void Graphics::BeginScene()
 {
 	// bind render target view and depth stencil view in graphics pipeline
-	m_D3DDeviceContext->OMSetRenderTargets(1, &m_renderTargetView, NULL);
+	m_D3DDeviceContext->OMSetRenderTargets(1, &m_renderTargetView, nullptr);
 
 	// clear backbuffer
 	m_D3DDeviceContext->ClearRenderTargetView(m_renderTargetView, BackColor);
@@ -191,21 +195,6 @@ void Graphics::BeginScene()
 
 void Graphics::PresentBackBuffer()
 {
-	// end sprite batch rendering
 	m_spriteBatch->End();
-
-	// present backbuffer
 	m_swapchain->Present(0, 0);
-}
-
-void Graphics::ChangeDisplayMode(bool fullscreen)
-{
-	m_fullscreen = fullscreen;
-
-	ReleaseAll();
-	Init(m_hWnd, m_hInstance);
-	UpdateWindow(m_hWnd);
-
-	//if(m_fullscreen == true)
-//		m_swapchain->ResizeBuffers(1, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), DXGI_FORMAT_UNKNOWN, 0);
 }

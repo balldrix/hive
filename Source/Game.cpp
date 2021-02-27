@@ -1,6 +1,7 @@
 #include "Game.h"
 
 #include "pch.h"
+#include "Window.h"
 #include "Graphics.h"
 #include "Input.h"
 
@@ -10,6 +11,7 @@
 #include "GameplayGameState.h"
 
 Game::Game() :
+	m_window(nullptr),
 	m_graphics(nullptr),
 	m_spriteBatch(nullptr),
 	m_input(nullptr),
@@ -17,7 +19,9 @@ Game::Game() :
 	m_timerFreq(0.0f),
 	m_gameTime(0.0f),
 	m_currentTime(0.0f),
-	m_retryAudio(false)
+	m_retryAudio(false),
+	m_clientWidth(0),
+	m_clientHeight(0)
 {
 }
 
@@ -26,45 +30,50 @@ Game::~Game()
 	DeleteAll(); // delete all pointers
 }
 
-void Game::Init(Graphics* graphics)
+void Game::Init(Window* window, Graphics* graphics)
 {
 	// allow multi threading
 	CoInitializeEx(NULL, COINIT_MULTITHREADED);
 
-	m_graphics = graphics; // copy pointer address to 
-
-	// create new input class
+	m_window = window;
+	m_graphics = graphics;
+	
 	m_input = new Input();
 
-	// create new game state manager
 	m_gameStateManager = new GameStateManager();
 	m_gameStateManager->Init(m_graphics,
 							 m_input);
 
-	// add game states to state list and switch to front end
 	m_gameStateManager->AddState(new GameplayGameState(m_gameStateManager));
 	m_gameStateManager->SwitchState(L"GAMEPLAY");
 
-	// get cpu frequency and current time in ticks
 	m_timerFreq = m_timer.GetFrequency();
 	m_currentTime = m_timer.GetTicks();
+	m_paused = false;
 }
 
 void Game::Run()
 {
-	float newTime = m_timer.GetTicks(); // get cpu tick count
-	float deltaTime = (newTime - m_currentTime) * m_timerFreq; // calculate time taken since last update
+	float newTime = m_timer.GetTicks();
+	float deltaTime = (newTime - m_currentTime) * m_timerFreq;
 
-	m_currentTime = newTime; // keep current time for next update
+	m_currentTime = newTime;
 
-	ProcessInput();			// read key and mouse input into game
-	Update(deltaTime);		// update game
-	Render();				// render objects	
-	ProcessCollisions();	// check for collisions
+	if(m_paused == false)
+	{
+		ProcessInput();		
+		Update(deltaTime);	
+		Render();			
+		ProcessCollisions();
+	}
+	else
+	{
+		deltaTime = 0.0f;
+		Sleep(100);
+	}
 
-	m_gameTime += deltaTime; // increment game time
-
-	m_input->ClearKeysPressed(); // clear keys pressed
+	m_gameTime += deltaTime;
+	m_input->ClearKeysPressed();
 }
 
 void Game::ProcessInput()
@@ -74,7 +83,6 @@ void Game::ProcessInput()
 
 void Game::Update(float deltaTime)
 {
-	// update game state
 	m_gameStateManager->Update(deltaTime);
 }
 
@@ -85,47 +93,47 @@ void Game::ProcessCollisions()
 
 void Game::Render()
 {
-	// prepare graphics render target and clear backbuffer
 	m_graphics->BeginScene();
-
-	// render game state
 	m_gameStateManager->Render();
-
-	// display backbuffer on screen
 	m_graphics->PresentBackBuffer();
 }
 
 void Game::ReleaseAll()
 {
-	m_graphics->ReleaseAll(); // release all graphics related pointers
-	m_gameStateManager->ReleaseAll(); // release all states
+	m_graphics->ReleaseAll();
+	m_gameStateManager->ReleaseAll();
 }
 
 void Game::DeleteAll()
 {
-	// delete game state manager
 	if(m_gameStateManager)
 	{
 		delete m_gameStateManager;
 		m_gameStateManager = nullptr;
 	}
 
-	// delete input object
 	if(m_input)
 	{
 		delete m_input;
 		m_input = nullptr;
 	}
 
-	// clear graphics object pointer
 	if(m_graphics)
 	{
 		m_graphics = nullptr;
+	}
+
+	if(m_window)
+	{
+		m_window = nullptr;
 	}
 }
 
 LRESULT Game::MessageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+	if(this == nullptr)
+		return DefWindowProc(hWindow, msg, wParam, lParam);
+
 	// handle msg values in switch statement
 	switch(msg)
 	{
@@ -149,15 +157,69 @@ LRESULT Game::MessageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lPara
 			m_input->SetMouseClicked(false);
 			m_input->SetMouseIn(lParam);
 			break;
-		case WM_WINDOWPOSCHANGED:
-			if(this == nullptr)
-				break;
+		case WM_SIZE:
+			// Save the new client area dimensions.
+			m_clientWidth = LOWORD(lParam);
+			m_clientHeight = HIWORD(lParam);
 
-			BOOL fullscreen;
-			m_graphics->GetSwapChain()->GetFullscreenState(&fullscreen, nullptr);
-			
-			if(fullscreen != (BOOL)m_graphics->GetFullscreen())
-				m_graphics->ChangeDisplayMode(fullscreen);
+			if(m_graphics != nullptr && m_graphics->GetDevice() != nullptr)
+			{
+				if(wParam == SIZE_MINIMIZED)
+				{
+					m_paused = true;
+					m_window->SetMinimized(true);
+					m_window->SetMaximized(false);
+				}
+				else if(wParam == SIZE_MAXIMIZED)
+				{
+					m_paused = false;
+					m_window->SetMinimized(false);
+					m_window->SetMaximized(true);
+					m_graphics->CreateResources(m_clientWidth, m_clientHeight);
+				}
+				else if(wParam == SIZE_RESTORED)
+				{
+					if(m_window->GetMinimized() == true)
+					{
+						m_paused = false;
+						m_window->SetMinimized(false);
+						m_graphics->CreateResources(m_clientWidth, m_clientHeight);
+					}
+
+					// Restoring from maximized state?
+					else if(m_window->GetMaximized() == true)
+					{
+						m_paused = false;
+						m_window->SetMaximized(false);
+						m_graphics->CreateResources(m_clientWidth, m_clientHeight);
+					}
+					else if(m_window->GetResizing())
+					{
+						// If user is dragging the resize bars, we do not resize 
+						// the buffers here because as the user continuously 
+						// drags the resize bars, a stream of WM_SIZE messages are
+						// sent to the window, and it would be pointless (and slow)
+						// to resize for each WM_SIZE message received from dragging
+						// the resize bars.  So instead, we reset after the user is 
+						// done resizing the window and releases the resize bars, which 
+						// sends a WM_EXITSIZEMOVE message.
+					}
+					else // API call such as SetWindowPos or mSwapChain->SetFullscreenState.
+					{
+						m_graphics->CreateResources(m_clientWidth, m_clientHeight);
+					}
+				}
+			}
+			break;
+		case WM_ENTERSIZEMOVE:
+			m_paused = true;
+			m_window->SetResizing(true);
+			return 0;
+		case WM_EXITSIZEMOVE:
+			m_paused = false;
+			m_window->SetResizing(false);
+			if(m_graphics != nullptr) 
+				m_graphics->CreateResources(m_clientWidth, m_clientHeight);
 			break;
 	}
 

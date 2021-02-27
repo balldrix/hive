@@ -1,51 +1,49 @@
 // Game.h
-// Christopher Ball 2019
-// The game class manages the main game loop
-// and interacting with game state manager to 
-// call update and render the correct state
+// Christopher Ball 2019-2021
 
-#ifndef _GAME_H_
-#define _GAME_H_
+#pragma once
 
 #include "pch.h"
-#include "Graphics.h"
 #include "Timer.h"
 
-// forward declarations
+class Window;
+class Graphics;
 class Input;
 class GameStateManager;
+
 
 class Game
 {
 public:
 	Game();
 	~Game();
-	void				Init(Graphics* graphics);	// initialises game class and passes pointer to the graphics class
+	void				Init(Window* window, Graphics* graphics);
 
-	void				Run(); // main game function
+	void				Run();
 
-	void				ProcessInput(); // read inputs
-	void				Update(float deltaTime); // update all objects in the scene
+	void				ProcessInput(); 
+	void				Update(float deltaTime);
 	void				ProcessCollisions();
-	void				Render(); // Render scene
+	void				Render();
 
-	void				ReleaseAll(); // release all pointers
-	void				DeleteAll(); // delete all pointers
+	void				ReleaseAll();
+	void				DeleteAll();
 
-	LRESULT				MessageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam); // deals with windows messages
+	LRESULT				MessageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam);
 
 private:
-	Graphics*			m_graphics; // pointer to graphics class for access to the gpu device
-	SpriteBatch*		m_spriteBatch; // 2d sprites engine
-	Input*				m_input; // manages key and mouse inputs
-	GameStateManager*	m_gameStateManager; // manager to switch and call current game state for render/update calls
+	Window*				m_window;
+	Graphics*			m_graphics; 
+	SpriteBatch*		m_spriteBatch;
+	Input*				m_input; 
+	GameStateManager*	m_gameStateManager; 
 		
-	Timer				m_timer; // helper object for time step
-	float				m_timerFreq; // timer frequency 
-	float				m_gameTime;	// game timer
-	float				m_currentTime; // tick time
-
-	bool				m_retryAudio; // sets if audio device is lost
+	Timer				m_timer;
+	float				m_timerFreq;
+	float				m_gameTime;
+	float				m_currentTime;
+	float				m_clientWidth;
+	float				m_clientHeight;
+	bool				m_paused;
+	bool				m_retryAudio;
 };
-
-#endif _GAME_H_
