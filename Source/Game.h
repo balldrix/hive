@@ -11,39 +11,42 @@ class Graphics;
 class Input;
 class GameStateManager;
 
-
 class Game
 {
 public:
 	Game();
 	~Game();
-	void				Init(Window* window, Graphics* graphics);
+	void Init(Window* window, Graphics* graphics);
 
-	void				Run();
+	void Run();
 
-	void				ProcessInput(); 
-	void				Update(float deltaTime);
-	void				ProcessCollisions();
-	void				Render();
+	void ProcessInput();
+	void Update(float deltaTime);
+	void ProcessCollisions();
+	void Render();
 
-	void				ReleaseAll();
-	void				DeleteAll();
+	void ReleaseAll();
+	void DeleteAll();
 
-	LRESULT				MessageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam);
+	void OnSuspending();
+	void OnResuming();
+	void OnWindowSizeChanged(int width, int height);
+
+	LRESULT MessageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam);
 
 private:
-	Window*				m_window;
-	Graphics*			m_graphics; 
-	SpriteBatch*		m_spriteBatch;
-	Input*				m_input; 
-	GameStateManager*	m_gameStateManager; 
-		
-	Timer				m_timer;
-	float				m_timerFreq;
-	float				m_gameTime;
-	float				m_currentTime;
-	float				m_clientWidth;
-	float				m_clientHeight;
-	bool				m_paused;
-	bool				m_retryAudio;
+	Window* m_window;
+	Graphics* m_graphics;
+	SpriteBatch* m_spriteBatch;
+	Input* m_input;
+	GameStateManager* m_gameStateManager;
+
+	Timer m_timer;
+	float m_timerFreq;
+	float m_gameTime;
+	float m_currentTime;
+	float m_clientWidth;
+	float m_clientHeight;
+	bool m_paused;
+	bool m_retryAudio;
 };

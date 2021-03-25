@@ -8,6 +8,8 @@
 
 #include "pch.h"
 
+using namespace DirectX;
+
 class AABB
 {
 public:

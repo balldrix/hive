@@ -37,15 +37,11 @@ void Graphics::Init(HWND hWnd, HINSTANCE hInstance)
 	m_hWnd = hWnd;
 	m_hInstance = hInstance;
 
-	UINT width = GameWidth;
-	UINT height = GameHeight;
-
-	// Initialise DirectX
 	DXGI_SWAP_CHAIN_DESC scd = { 0 };
-	scd.BufferCount = 1;
+	scd.BufferCount = 2;
 	scd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-	scd.BufferDesc.Width = width;
-	scd.BufferDesc.Height = height;
+	scd.BufferDesc.Width = GameWidth;
+	scd.BufferDesc.Height = GameHeight;
 	scd.BufferDesc.RefreshRate.Numerator = 0;
 	scd.BufferDesc.RefreshRate.Denominator = 0;
 	scd.BufferDesc.Scaling = DXGI_MODE_SCALING_CENTERED;
@@ -55,16 +51,28 @@ void Graphics::Init(HWND hWnd, HINSTANCE hInstance)
 	scd.SampleDesc.Count = 1;
 	scd.SampleDesc.Quality = 0;
 	scd.Windowed = !m_fullscreen;
-	scd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
+	scd.Flags = 0;
 	scd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 	
+	static const D3D_FEATURE_LEVEL featureLevels[] =
+	{
+		// TODO: Modify for supported Direct3D feature levels
+		D3D_FEATURE_LEVEL_11_1,
+		D3D_FEATURE_LEVEL_11_0,
+		D3D_FEATURE_LEVEL_10_1,
+		D3D_FEATURE_LEVEL_10_0,
+		D3D_FEATURE_LEVEL_9_3,
+		D3D_FEATURE_LEVEL_9_2,
+		D3D_FEATURE_LEVEL_9_1,
+	};
+
 	result = D3D11CreateDeviceAndSwapChain(
 		nullptr,
 		D3D_DRIVER_TYPE_HARDWARE,
 		nullptr,
 		0,
-		nullptr,
-		0,
+		featureLevels,
+		_countof(featureLevels),
 		D3D11_SDK_VERSION,
 		&scd,
 		&m_swapchain,
@@ -83,12 +91,17 @@ void Graphics::Init(HWND hWnd, HINSTANCE hInstance)
 		PostQuitMessage(0); // quit game
 	}
 
-	CreateResources(width, height);
+	CreateResources(GameWidth, GameHeight);
 }
 
 void Graphics::CreateResources(UINT width, UINT height)
 {
-	m_swapchain->ResizeBuffers(1, width, height, DXGI_FORMAT_R8G8B8A8_UNORM, 0);
+	ID3D11RenderTargetView* nullViews[] = { nullptr };
+	m_D3DDeviceContext->OMSetRenderTargets(_countof(nullViews), nullViews, nullptr);
+	m_renderTargetView = nullptr;
+	m_D3DDeviceContext->Flush();
+
+	if(m_swapchain != nullptr) { m_swapchain->ResizeBuffers(2, width, height, DXGI_FORMAT_R8G8B8A8_UNORM, 0); }
 
 	// Get backbuffer pointer from swapchain
 	HRESULT result = m_swapchain->GetBuffer(0, __uuidof(m_backbuffer), (void**) &m_backbuffer);
@@ -158,8 +171,8 @@ void Graphics::CreateResources(UINT width, UINT height)
 		m_spriteBatch = new SpriteBatch(m_D3DDeviceContext);
 
 	// set game dimensions
-	m_gameWidth = (float) width;
-	m_gameHeight = (float) height;
+	m_gameWidth = width;
+	m_gameHeight = height;
 }
 
 void Graphics::ReleaseAll()

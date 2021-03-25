@@ -9,6 +9,9 @@
 #include "GameState.h"
 
 #include "GameplayGameState.h"
+#include "Constants.h"
+
+using namespace GlobalConstants;
 
 Game::Game() :
 	m_window(nullptr),
@@ -37,7 +40,7 @@ void Game::Init(Window* window, Graphics* graphics)
 
 	m_window = window;
 	m_graphics = graphics;
-	
+
 	m_input = new Input();
 
 	m_gameStateManager = new GameStateManager();
@@ -61,9 +64,9 @@ void Game::Run()
 
 	if(m_paused == false)
 	{
-		ProcessInput();		
-		Update(deltaTime);	
-		Render();			
+		ProcessInput();
+		Update(deltaTime);
+		Render();
 		ProcessCollisions();
 	}
 	else
@@ -129,19 +132,76 @@ void Game::DeleteAll()
 	}
 }
 
+void Game::OnSuspending()
+{
+}
+
+void Game::OnResuming()
+{
+}
+
+void Game::OnWindowSizeChanged(int width, int height)
+{
+	m_graphics->CreateResources(width, height);
+}
+
 LRESULT Game::MessageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-	if(this == nullptr)
-		return DefWindowProc(hWindow, msg, wParam, lParam);
+	static bool s_in_sizemove = false;
+	static bool s_in_suspend = false;
+	static bool s_minimized = false;
+	static bool s_fullscreen = false;
 
 	// handle msg values in switch statement
 	switch(msg)
 	{
+		case WM_PAINT:
+			if(s_in_sizemove && this != nullptr)
+			{
+				Run();
+			}
+			else
+			{
+				PAINTSTRUCT ps;
+				(void) BeginPaint(hWindow, &ps);
+				EndPaint(hWindow, &ps);
+			}
+		break;
+
 		case WM_DESTROY:
 			PostQuitMessage(0); // post quit window
 			break;
 		case WM_KEYDOWN: case WM_SYSKEYDOWN:
 			m_input->SetKeyDown(wParam); // set keyboard key down
+
+			if(wParam == VK_RETURN && (lParam & 0x60000000) == 0x20000000)
+			{
+				// Implements the classic ALT+ENTER fullscreen toggle
+				if(s_fullscreen)
+				{
+					SetWindowLongPtr(hWindow, GWL_STYLE, WS_OVERLAPPEDWINDOW);
+					SetWindowLongPtr(hWindow, GWL_EXSTYLE, 0);
+
+					int width = WindowWidth;
+					int height = WindowHeight;
+
+					ShowWindow(hWindow, SW_SHOWNORMAL);
+
+					SetWindowPos(hWindow, HWND_TOP, 0, 0, width, height, SWP_NOMOVE | SWP_NOZORDER | SWP_FRAMECHANGED);
+				}
+				else
+				{
+					SetWindowLongPtr(hWindow, GWL_STYLE, 0);
+					SetWindowLongPtr(hWindow, GWL_EXSTYLE, WS_EX_TOPMOST);
+
+					SetWindowPos(hWindow, HWND_TOP, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
+
+					ShowWindow(hWindow, SW_SHOWMAXIMIZED);
+				}
+
+				s_fullscreen = !s_fullscreen;
+			}
+
 			break;
 		case WM_KEYUP: case WM_SYSKEYUP:
 			m_input->SetKeyUp(wParam); // set keyboard key up
@@ -158,68 +218,41 @@ LRESULT Game::MessageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lPara
 			m_input->SetMouseIn(lParam);
 			break;
 		case WM_SIZE:
-			// Save the new client area dimensions.
-			m_clientWidth = LOWORD(lParam);
-			m_clientHeight = HIWORD(lParam);
-
-			if(m_graphics != nullptr && m_graphics->GetDevice() != nullptr)
+			if(wParam == SIZE_MINIMIZED)
 			{
-				if(wParam == SIZE_MINIMIZED)
+				if(!s_minimized)
 				{
-					m_paused = true;
-					m_window->SetMinimized(true);
-					m_window->SetMaximized(false);
-				}
-				else if(wParam == SIZE_MAXIMIZED)
-				{
-					m_paused = false;
-					m_window->SetMinimized(false);
-					m_window->SetMaximized(true);
-					m_graphics->CreateResources(m_clientWidth, m_clientHeight);
-				}
-				else if(wParam == SIZE_RESTORED)
-				{
-					if(m_window->GetMinimized() == true)
-					{
-						m_paused = false;
-						m_window->SetMinimized(false);
-						m_graphics->CreateResources(m_clientWidth, m_clientHeight);
-					}
-
-					// Restoring from maximized state?
-					else if(m_window->GetMaximized() == true)
-					{
-						m_paused = false;
-						m_window->SetMaximized(false);
-						m_graphics->CreateResources(m_clientWidth, m_clientHeight);
-					}
-					else if(m_window->GetResizing())
-					{
-						// If user is dragging the resize bars, we do not resize 
-						// the buffers here because as the user continuously 
-						// drags the resize bars, a stream of WM_SIZE messages are
-						// sent to the window, and it would be pointless (and slow)
-						// to resize for each WM_SIZE message received from dragging
-						// the resize bars.  So instead, we reset after the user is 
-						// done resizing the window and releases the resize bars, which 
-						// sends a WM_EXITSIZEMOVE message.
-					}
-					else // API call such as SetWindowPos or mSwapChain->SetFullscreenState.
-					{
-						m_graphics->CreateResources(m_clientWidth, m_clientHeight);
-					}
+					s_minimized = true;
+					if(!s_in_suspend && this != nullptr)
+						OnSuspending();
+					s_in_suspend = true;
 				}
 			}
+			else if(s_minimized)
+			{
+				s_minimized = false;
+				if(s_in_suspend && this != nullptr)
+					OnResuming();
+				s_in_suspend = false;
+			}
+			else if(!s_in_sizemove && this != nullptr)
+			{
+				OnWindowSizeChanged(LOWORD(lParam), HIWORD(lParam));
+			}			
 			break;
 		case WM_ENTERSIZEMOVE:
 			m_paused = true;
-			m_window->SetResizing(true);
+			s_in_sizemove = true;
 			return 0;
 		case WM_EXITSIZEMOVE:
 			m_paused = false;
-			m_window->SetResizing(false);
-			if(m_graphics != nullptr) 
-				m_graphics->CreateResources(m_clientWidth, m_clientHeight);
+			s_in_sizemove = false;
+
+			RECT rc;
+			GetClientRect(hWindow, &rc);
+
+			if(m_graphics != nullptr)
+				m_graphics->CreateResources(rc.right - rc.left, rc.bottom - rc.top);
 			break;
 	}
 

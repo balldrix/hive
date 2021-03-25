@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <winsdkver.h>
 #define _WIN32_WINNT 0x0601
 #include <sdkddkver.h>
 
@@ -45,12 +46,15 @@
 
 #define STRICT
 
+#define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
+#include <wrl/client.h>
 #include <mmsystem.h>
 
-#include <d3d11.h>
-#include <d3dcompiler.h>
-#include <GeometricPrimitive.h>
+#include <d3d11_1.h>
+#include <dxgi1_2.h>
+#include <DirectXMath.h>
+#include <DirectXColors.h>
 
 #include <vector>
 #include <fstream>

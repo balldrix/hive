@@ -10,7 +10,7 @@ class Graphics
 public:
 	Graphics();					
 	~Graphics();			
-	void						Init(HWND hWindow, HINSTANCE hInstance);	
+	void						Init(HWND hWindow, HINSTANCE hInstance);
 	void						CreateResources(UINT width, UINT height);
 
 	void						ReleaseAll();								

@@ -19,24 +19,28 @@ LRESULT CALLBACK WndProc(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam);
 
 int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, _In_ int nCmdShow)
 {
-	// initialise Window
+	UNREFERENCED_PARAMETER(hPrevInstance);
+	UNREFERENCED_PARAMETER(lpCmdLine);
+
+	if(!XMVerifyCPUSupport())
+		return 1;
+
+	HRESULT hr = CoInitializeEx(nullptr, COINITBASE_MULTITHREADED);
+	if(FAILED(hr))
+		return 1;
+
 	window = new Window();
 	window->Init(hInstance, nCmdShow, WndProc);
-	
-	// initialise graphics
+
 	graphics = new Graphics();
 	graphics->Init(window->GetHwnd(), hInstance);
 
-	// initialise game engine
 	game = new Game();
 	game->Init(window, graphics);
 
-	// start message processes where the magic happens
 	MSG msg = {0};
-
 	while(msg.message != WM_QUIT)
 	{
-		// peek at windows message queue 
 		if(PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
 		{
 			TranslateMessage(&msg);
@@ -44,12 +48,10 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 		}
 		else
 		{
-			// run game
 			game->Run();
 		}
 	}
 
-	// release game related objects and delete pointers
 	game->ReleaseAll(); 
 	ShutDown();
 	
@@ -58,26 +60,13 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 
 void ShutDown()
 {
-	if(game)
-	{
-		// delete game class and null pointer
-		delete game;
-		game = nullptr;
-	}
-
-	if(graphics)
-	{
-		// delete graphics class and null pointer
-		delete graphics;
-		graphics = nullptr;
-	}
-
-	if(window)
-	{
-		// delete window class and null pointer
-		delete window;
-		window = nullptr;
-	}
+	delete game;
+	delete graphics;
+	delete window;
+	
+	game = nullptr;
+	graphics = nullptr;
+	window = nullptr;
 	
 	CoUninitialize();
 }

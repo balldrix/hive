@@ -35,12 +35,12 @@ void Window::Init(HINSTANCE hInstance, INT cmdShow, WNDPROC winProc)
 	wcx.lpszClassName = WndClassName;
 	RegisterClassEx(&wcx);
 
-	RECT rc = { 100, 100, (long)m_width + rc.left, (long)m_height + rc.top };
+	RECT rc = { 0, 0, (long)m_width + rc.left, (long)m_height + rc.top };
 	AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
 
 	m_hWindow = CreateWindow(
 		WndClassName, WindowName, 
-		WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU,
+		WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, CW_USEDEFAULT, rc.right - rc.left, rc.bottom - rc.top,
 		nullptr,
 		nullptr,
@@ -48,7 +48,7 @@ void Window::Init(HINSTANCE hInstance, INT cmdShow, WNDPROC winProc)
 		this);
 
 	ShowCursor(true);
-	ShowWindow(m_hWindow, SW_SHOWDEFAULT);
+	ShowWindow(m_hWindow, cmdShow);
 }
 
 HINSTANCE Window::GetInstance() noexcept
