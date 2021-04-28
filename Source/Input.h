@@ -1,10 +1,4 @@
-// Input.h
-// Christopher Ball 2019
-// Manages keyboard and mouse input
-// technique learnt from Charles Kelly - Programming 2D Games
-
-#ifndef _INPUT_H_
-#define _INPUT_H_
+#pragma once
 
 #include "pch.h"
 
@@ -82,5 +76,3 @@ private:
 	UINT m_mouseY;					// mouse y position
 	bool m_mouseClicked;			// L mouse button
 };
-
-#endif _INPUT_H_

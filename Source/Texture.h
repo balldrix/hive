@@ -1,10 +1,4 @@
-// Texture.h
-// Christopher Ball 2019
-// a class to load and store textures
-// for use in Sprites
-
-#ifndef _TEXTURE_H_
-#define _TEXTURE_H_
+#pragma once
 
 #include "pch.h"
 
@@ -24,5 +18,3 @@ private:
 	ID3D11ShaderResourceView*	m_texture; // shader resource view
 	ID3D11Resource*				m_resource; // texture resource
 };
-
-#endif _TEXTURE_H_

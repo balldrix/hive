@@ -1,9 +1,4 @@
-// PlayerAttackState.h
-// Christopher Ball 2019
-// Player normal attack state
-
-#ifndef _PLAYER_ATTACK_STATE_
-#define _PLAYER_ATTACK_STATE_
+#pragma once
 
 #include "State.h"
 
@@ -28,5 +23,3 @@ private:
 	PlayerAttackState(const PlayerAttackState&);
 	PlayerAttackState& operator=(const PlayerAttackState&);
 };
-
-#endif // _PLAYER_ATTACK_STATE_

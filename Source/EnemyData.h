@@ -1,7 +1,3 @@
-// EnemyData.h
-// Christopher Ball 2019-2021
-// stores enemy data
-
 #pragma once
 
 #include "pch.h"

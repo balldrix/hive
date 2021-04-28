@@ -1,9 +1,4 @@
-// Camera.h
-// Christopher Ball 2019
-// tracks camera position
-
-#ifndef _CAMERA_H_
-#define _CAMERA_H_
+#pragma once
 
 #include "pch.h"  
 
@@ -44,5 +39,3 @@ private:
 	float			m_boundary;
 	float			m_threshold;
 };
-
-#endif // !_CAMERA_H_

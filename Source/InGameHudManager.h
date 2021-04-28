@@ -1,8 +1,4 @@
-// InGameHudManager.h
-// Christopher Ball 2019-2021
-
-#ifndef _INGAME_HUD_MANAGER_H_
-#define _INGAME_HUD_MANAGER_H_
+#pragma once
 
 #include "pch.h"
 
@@ -54,5 +50,3 @@ private:
 
 	Vector2 GetKillCountStringOrigin(std::string s);
 };
-
-#endif _INGAME_HUD_MANAGER_H_

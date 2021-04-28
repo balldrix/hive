@@ -21,39 +21,44 @@ Window::~Window()
 }
 
 
-void Window::Init(HINSTANCE hInstance, INT cmdShow, WNDPROC winProc)
+int Window::Init(HINSTANCE hInstance, INT cmdShow, WNDPROC wndProc)
 {
-	m_hInst = GetModuleHandle(nullptr);
+	m_hInst = hInstance;
 	m_width = WindowWidth;
 	m_height = WindowHeight;
 
-	WNDCLASSEX wcx = { 0 };
-	wcx.cbSize = sizeof(WNDCLASSEX);
-	wcx.style = CS_HREDRAW | CS_VREDRAW;
-	wcx.lpfnWndProc = winProc;
-	wcx.hInstance = hInstance;
-	wcx.lpszClassName = WndClassName;
-	RegisterClassEx(&wcx);
+    WNDCLASSEXW wcex = {};
+    wcex.cbSize = sizeof(WNDCLASSEXW);
+    wcex.style = CS_HREDRAW | CS_VREDRAW;
+    wcex.lpfnWndProc = wndProc;
+    wcex.hInstance = hInstance;
+    wcex.hIcon = LoadIconW(hInstance, L"IDI_ICON");
+    wcex.hCursor = LoadCursorW(nullptr, IDC_ARROW);
+    wcex.hbrBackground = reinterpret_cast<HBRUSH>(COLOR_WINDOW + 1);
+    wcex.lpszClassName = WndClassName;
+    wcex.hIconSm = LoadIconW(wcex.hInstance, L"IDI_ICON");
+    if(!RegisterClassExW(&wcex))
+        return 1;
 
-	RECT rc = { 0, 0, (long)m_width + rc.left, (long)m_height + rc.top };
-	AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
+    RECT rc = { 0, 0, static_cast<LONG>(WindowWidth), static_cast<LONG>(WindowHeight) };
 
-	m_hWindow = CreateWindow(
-		WndClassName, WindowName, 
-		WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT, rc.right - rc.left, rc.bottom - rc.top,
-		nullptr,
-		nullptr,
-		hInstance,
-		this);
+    AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
 
-	ShowCursor(true);
-	ShowWindow(m_hWindow, cmdShow);
-}
+    m_hWindow = CreateWindowExW(0, WndClassName, WindowName, WS_OVERLAPPEDWINDOW,
+                                CW_USEDEFAULT, CW_USEDEFAULT, rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, hInstance,
+                                nullptr);
+    // TODO: Change to CreateWindowExW(WS_EX_TOPMOST, L"Direct3D_Win32_Game1WindowClass", L"Direct3D Win32 Game1", WS_POPUP,
+    // to default to fullscreen.
 
-HINSTANCE Window::GetInstance() noexcept
-{
-	return HINSTANCE();
+    if(!m_hWindow)
+        return 1;
+
+    ShowWindow(m_hWindow, cmdShow);
+    // TODO: Change nCmdShow to SW_SHOWMAXIMIZED to default to fullscreen.
+
+    GetClientRect(m_hWindow, &rc);
+
+    return 0;
 }
 
 void Window::SetMinimized(bool value)

@@ -41,7 +41,7 @@ void InGameHudManager::Init(Graphics* graphics)
 	m_playerPortrait = new CharacterPortrait();
 	m_playerPortrait->Init(graphics, "GameData//Sprites//UI//player1_hud_portrait.png");
 
-	m_despairFont12 = new SpriteFont(graphics->GetDevice(), L"GameData//SpriteFonts//goodbye_despair_12pt.spritefont");
+	m_despairFont12 = new SpriteFont(graphics->GetDevice().Get(), L"GameData//SpriteFonts//goodbye_despair_12pt.spritefont");
 
 	m_playerLivesLeft = MaxLives;
 
@@ -81,7 +81,7 @@ void InGameHudManager::Render(Graphics* graphics)
 
 	Vector2 origin = GetKillCountStringOrigin(s);
 
-	m_despairFont12->DrawString(graphics->GetSpriteBatch(),
+	m_despairFont12->DrawString(graphics->GetSpriteBatch().get(),
 		s.c_str(),
 		Vector2(KillCountPositionX, KillCountPositionY),
 		Colors::YellowGreen, 0,

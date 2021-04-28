@@ -1,7 +1,3 @@
-// EnemyAttackState.h
-// Christopher Ball 2019
-// manages state when enemy is attacking
-
 #pragma once
 
 #include "State.h"

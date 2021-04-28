@@ -1,13 +1,7 @@
-// SpriteFrameData.h
-// Christopher Ball 2019
-// hold sprite frame data from json file
-
-#ifndef _SPRITEFRAMEDATA_H_
-#define _SPRITEFRAMEDATA_H_
+#pragma once
 
 #include "pch.h"
 
-// sprite sourceRect data
 namespace
 {
 	struct SpriteFrameData
@@ -39,6 +33,3 @@ namespace
 		s.origin.y = origin["y"];
 	}
 }
-
-#endif // !_SPRITEFRAMEDATA_H_
-

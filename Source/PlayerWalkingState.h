@@ -1,19 +1,12 @@
-// PlayerWalkingState.h
-// Christopher Ball 2019
-// Player walking state
-
-#ifndef _PLAYER_WALKING_STATE_
-#define _PLAYER_WALKING_STATE_
+#pragma once
 
 #include "State.h"
 
-// forward declaration
 class Player;
 
 class PlayerWalkingState : public State<Player>
 {
 public:
-	// static instance call
 	static PlayerWalkingState* Instance();
 
 	virtual void OnEnter(Player* player);
@@ -27,5 +20,3 @@ private:
 	PlayerWalkingState(const PlayerWalkingState&);
 	PlayerWalkingState& operator=(const PlayerWalkingState&);
 };
-
-#endif // !_PLAYER_WALKING_STATE_

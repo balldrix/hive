@@ -1,9 +1,4 @@
-// HitBoxManager.h
-// Christopher Ball 2019
-// manages hitbox data
-
-#ifndef _HITBOXMANAGER_H_
-#define _HITBOXMANAGER_H_
+#pragma once
 
 #include "pch.h"
 #include "HitBox.h"
@@ -55,5 +50,3 @@ private:
 	void SetHurtBox();
 	void SetHitBox();
 };
-
-#endif _HITBOXMANAGER_

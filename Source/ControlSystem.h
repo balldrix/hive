@@ -1,9 +1,4 @@
-// ControlSystem.h
-// Christopher Ball 2019-2021
-// Manages player input and combos
-
-#ifndef _CONTROL_SYSTEM_H_
-#define _CONTROL_SYSTEM_H_
+#pragma once
 
 const unsigned int MaxCombo = 4;
 const float ComboTimeLimit = 1.5f; // time given to allow combos again
@@ -24,7 +19,6 @@ enum class Controls
 	MaxControls
 };
 
-// player controls enum
 class ControlSystem
 {
 public:	
@@ -56,5 +50,3 @@ private:
 	bool m_canCombo;
 	int m_comboCounter;
 };
-
-#endif _CONTROLS_H_

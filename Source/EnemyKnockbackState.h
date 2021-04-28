@@ -1,9 +1,4 @@
-// EnemyKnockbackState.h
-// Christopher Ball 2019
-// manages state when enemy is knocked back
-
-#ifndef _ENEMY_KNOCKBACK_STATE_
-#define	_ENEMY_KNOCKBACK_STATE_
+#pragma once
 
 #include "State.h"
 
@@ -27,6 +22,4 @@ private:
 	EnemyKnockbackState(const EnemyKnockbackState&);
 	EnemyKnockbackState& operator=(const EnemyKnockbackState&);
 };
-
-#endif // !_ENEMY_KNOCKBACK_STATE_
 

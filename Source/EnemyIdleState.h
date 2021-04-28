@@ -1,9 +1,4 @@
-// EnemyIdleState.h
-// Christopher Ball 2019
-// manages state when enemy is idle
-
-#ifndef _ENEMY_IDLE_STATE_
-#define	_ENEMY_IDLE_STATE_
+#pragma once
 
 #include "State.h"
 
@@ -27,6 +22,4 @@ private:
 	EnemyIdleState(const EnemyIdleState&);
 	EnemyIdleState& operator=(const EnemyIdleState&);
 };
-
-#endif // !_ENEMY_IDLE_STATE_
 

@@ -1,19 +1,12 @@
-// EnemyWalkingState.h
-// Christopher Ball 2019
-// manages state when enemy is walking
-
-#ifndef _ENEMY_WALKING_STATE_
-#define	_ENEMY_WALKING_STATE_
+#pragma once
 
 #include "State.h"
 
-// forward declaration
 class Enemy;
 
 class EnemyWalkingState : public State<Enemy>
 {
 public:
-	// static instance call
 	static EnemyWalkingState* Instance();
 
 	virtual void OnEnter(Enemy* enemy);
@@ -27,5 +20,3 @@ private:
 	EnemyWalkingState(const EnemyWalkingState&);
 	EnemyWalkingState& operator=(const EnemyWalkingState&);
 };
-
-#endif // !_ENEMY_WALKING_STATE_

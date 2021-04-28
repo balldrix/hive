@@ -1,21 +1,16 @@
-// HitBoxData.h
-// Christopher Ball 2019
-// stores hitbox data using json
-
 #include "pch.h"
 #include "AABB.h"
 
-#ifndef _HITBOXDATA_H_
-#define _HITBOXDATA_H_
+#pragma once
 
 namespace
 {
 	struct HitBoxData
 	{
-		std::string	name; // name of hitbox data should be same as animation state name
-		AABB movementBox; // hit box to block movement in scene
-		AABB hitBox; // hit box (red) is what will do damage to other character
-		AABB hurtBox; // hit box that set character's vulnerable area
+		std::string	name; 
+		AABB movementBox; 
+		AABB hitBox; 
+		AABB hurtBox; 
 		int startupFrames = 0;
 		int activeFrames = 0;
 	};
@@ -42,5 +37,3 @@ namespace
 		a.hurtBox.SetMax(Vector2(hurts["maxX"], hurts["maxY"]));
 	}
 }
-
-#endif // !_HITBOXDATA_H_

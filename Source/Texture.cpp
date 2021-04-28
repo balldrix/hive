@@ -1,6 +1,7 @@
 #include "Texture.h"
 #include "Graphics.h"
 #include "Error.h"
+#include "WICTextureLoader.h"
 
 Texture::Texture() :
 	m_texture(nullptr),
@@ -19,7 +20,7 @@ Texture::LoadTexture(Graphics* graphics, std::string filename)
 	std::wstring textureFile = std::wstring(filename.begin(), filename.end());
 
 	// load texture from file
-	HRESULT result = CreateWICTextureFromFile(graphics->GetDevice(), nullptr, textureFile.c_str(), &m_resource, &m_texture, 0);
+	HRESULT result = CreateWICTextureFromFile(graphics->GetDevice().Get(), nullptr, textureFile.c_str(), &m_resource, &m_texture, 0);
 	
 	// if load result is not ok
 	if(result != S_OK)

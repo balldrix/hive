@@ -4,9 +4,7 @@
 #include "Error.h"
 
 GameStateManager::GameStateManager() :
-	m_currentState(nullptr),
-	m_graphics(nullptr),
-	m_input(nullptr)
+	m_currentState(nullptr)
 {
 }
 
@@ -33,7 +31,6 @@ GameStateManager::~GameStateManager()
 
 void GameStateManager::Init(Graphics* graphics, Input* input)
 {
-	// copy pointers
 	m_graphics = graphics;
 	m_input = input;
 }

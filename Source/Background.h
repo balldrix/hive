@@ -1,9 +1,4 @@
-// Background.h
-// Christopher Ball 2019-2021
-// background object
-
-#ifndef _BACKGROUND_H_
-#define _BACKGROUND_H_
+#pragma once
 
 #include "GameObject.h"
 
@@ -26,5 +21,3 @@ private:
 	Sprite*		m_spriteSheet;
 	void		Reset();
 };
-
-#endif // !_BACKGROUND_H_

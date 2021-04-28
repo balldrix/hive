@@ -1,20 +1,13 @@
-// PlayerIdleState.h
-// Christopher Ball 2019
-// Player state when Idle
-
-#ifndef _PLAYER_IDLE_STATE_
-#define	_PLAYER_IDLE_STATE_
+#pragma once
 
 #include "State.h"
 
-// forward declaration
 class Player;
 
 class PlayerIdleState : public State<Player>
 {
 public:
 
-	// static instance call
 	static PlayerIdleState* Instance();
 
 	virtual void OnEnter(Player* player);
@@ -28,5 +21,3 @@ private:
 	PlayerIdleState(const PlayerIdleState&);
 	PlayerIdleState& operator=(const PlayerIdleState&);
 };
-
-#endif // !_PLAYER_IDLE_STATE_

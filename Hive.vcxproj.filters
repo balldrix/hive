@@ -343,6 +343,7 @@
     <ClInclude Include="Source\GameOverScreen.h" />
     <ClInclude Include="Source\GameOverScreenController.h" />
     <ClInclude Include="Source\GameOverSceneState.h" />
+    <ClInclude Include="Source\json.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\UI\lives_x0.png" />

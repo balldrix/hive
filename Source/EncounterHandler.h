@@ -1,7 +1,3 @@
-// EncounterHandler.h
-// Christopher Ball 2019-2021
-// handles encounter data
-
 #pragma once
 
 class Enemy;

@@ -1,14 +1,13 @@
-#ifndef _CONSTANTS_H_
-#define _CONSTANTS_H_
+#pragma once
 
 namespace GlobalConstants
 {
 	const wchar_t WindowName[]					= L"Hive";				
 	const wchar_t WndClassName[]				= L"MyWndClass";			
-	const unsigned int WindowWidth				= 960;					
-	const unsigned int WindowHeight				= 640;						
-	const unsigned int GameWidth				= 120;							
-	const unsigned int GameHeight				= 80;							
+	const int WindowWidth						= 960;					
+	const int WindowHeight						= 640;						
+	const int GameWidth							= 120;							
+	const int GameHeight						= 80;							
 	const float BackColor[4]					= { 0.3f, 0.3f, 0.3f, 0.0f };	
 	const float	Gravity							= 4.0f;
 	const float StartingBoundaryMinX			= 1.0f;
@@ -42,5 +41,3 @@ namespace InGameHudConstants
 	const unsigned int KillCountPositionY		= 10;
 	const float TravelPromptTime				= 3.0f;
 }
-
-#endif _CONSTANTS_H_

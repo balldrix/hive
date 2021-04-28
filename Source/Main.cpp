@@ -1,20 +1,13 @@
-// Main.cpp
-// Hive Project
-// Christopher Ball 2019
-
 #include "Window.h"
 #include "Graphics.h"
 #include "Game.h"
 
-// Global Variables
 Graphics* graphics = nullptr;
 Window* window	= nullptr;
 Game* game = nullptr;
 
-// Prototype Functions
 void ShutDown();
 
-// WndProc call back needed for windows messages like key and mouse input
 LRESULT CALLBACK WndProc(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam);
 
 int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, _In_ int nCmdShow)
@@ -55,7 +48,9 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	game->ReleaseAll(); 
 	ShutDown();
 	
-	return (int)msg.wParam;
+	CoUninitialize();
+
+	return static_cast<int>(msg.wParam);
 }
 
 void ShutDown()
@@ -68,7 +63,6 @@ void ShutDown()
 	graphics = nullptr;
 	window = nullptr;
 	
-	CoUninitialize();
 }
 
 LRESULT CALLBACK WndProc(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam)

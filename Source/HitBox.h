@@ -1,9 +1,4 @@
-// HitBox.h
-// Christopher Ball 2019
-// hitbox data and texture
-
-#ifndef _HITBOX_H_
-#define _HITBOX_H_
+#pragma once
 
 #include "pch.h"
 #include "AABB.h"
@@ -41,5 +36,3 @@ private:
 	Color m_colour;			// vertex colour
 	bool m_flipped;			// flipped hitbox
 };
-
-#endif _HITBOX_H_

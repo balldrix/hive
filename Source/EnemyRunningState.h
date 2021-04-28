@@ -1,19 +1,12 @@
-// EnemyRunningState.h
-// Christopher Ball 2019
-// manages state when enemy is running
-
-#ifndef _ENEMY_RUNNING_STATE_
-#define	_ENEMY_RUNNING_STATE_
+#pragma once
 
 #include "State.h"
 
-// forward declaration
 class Enemy;
 
 class EnemyRunningState : public State<Enemy>
 {
 public:
-	// static instance call
 	static EnemyRunningState* Instance();
 
 	virtual void OnEnter(Enemy* enemy);
@@ -27,5 +20,3 @@ private:
 	EnemyRunningState(const EnemyRunningState&);
 	EnemyRunningState& operator=(const EnemyRunningState&);
 };
-
-#endif // !_ENEMY_RUNNING_STATE_

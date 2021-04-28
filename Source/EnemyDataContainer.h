@@ -1,9 +1,4 @@
-// EnemyDataContainer.h
-// Christopher Ball 2019-2021
-// container of enemy data
-
-#ifndef _ENEMYDATACONTAINER_H_
-#define	_ENEMYDATACONTAINER_H_
+#pragma once
 
 #include "EnemyData.h"
 
@@ -19,5 +14,3 @@ public:
 private:
 	std::vector<EnemyData> m_dataList;
 };
-
-#endif // !_ENEMYDATACONTAINER_H_

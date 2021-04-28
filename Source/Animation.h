@@ -1,11 +1,6 @@
-// Animation.h
-// Christopher Ball 2019
-// animation frame data
-
 #include "pch.h"
 
-#ifndef _ANIMATION_H_
-#define _ANIMATION_H_
+#pragma once
 
 namespace
 {
@@ -29,5 +24,3 @@ namespace
 		a.loop = j.at("loop").get<bool>();
 	}
 }
-
-#endif // !_ANIMATION_H_

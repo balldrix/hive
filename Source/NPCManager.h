@@ -1,9 +1,4 @@
-// NPCManager.h
-// Christopher Ball 2019
-// initialises and spawns the npc enemies
-
-#ifndef _NPC_MANAGER_H_
-#define _NPC_MANAGER_H_
+#pragma once
 
 #include "pch.h"
 #include "EnemyDataContainer.h"
@@ -40,5 +35,3 @@ private:
 	std::vector<Enemy*>		m_enemyList;
 	EnemyDataContainer*		m_enemyDataContainer;
 };
-
-#endif // !_NPC_MANAGER_H_

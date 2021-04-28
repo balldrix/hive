@@ -1,59 +1,42 @@
 #include "Graphics.h"
+
+#include "pch.h"
+#include "Window.h"
 #include "Constants.h"
 #include "Error.h"
-#include "Window.h"
 
 using namespace GlobalConstants;
+using namespace DirectX;
+
+using Microsoft::WRL::ComPtr;
 
 Graphics::Graphics() :
-	m_hWnd(nullptr),
+	m_window(nullptr),
 	m_hInstance(nullptr),
-	m_swapchain(nullptr),
-	m_D3DDevice(nullptr),
-	m_D3DDeviceContext(nullptr),
-	m_renderTargetView(nullptr),
-	m_backbuffer(nullptr),
-	m_samplerState(nullptr),
-	m_spriteBatch(nullptr),
+	m_featureLevel(D3D_FEATURE_LEVEL_9_1),
 	m_fullscreen(false),
-	m_gameWidth(0.0f),
-	m_gameHeight(0.0f),
-	m_viewport(D3D11_VIEWPORT())
+	m_gameWidth(0),
+	m_gameHeight(0)
 {
 }
 
-Graphics::~Graphics()
-{
-	if(m_spriteBatch)
-	{
-		delete m_spriteBatch;
-		m_spriteBatch = nullptr;
-	}
-}
+Graphics::~Graphics() { }
 
 void Graphics::Init(HWND hWnd, HINSTANCE hInstance)
 {
-	HRESULT result;
-	m_hWnd = hWnd;
-	m_hInstance = hInstance;
+	m_window = hWnd;
+	CreateDevice();
+	CreateResources();
+}
 
-	DXGI_SWAP_CHAIN_DESC scd = { 0 };
-	scd.BufferCount = 2;
-	scd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-	scd.BufferDesc.Width = GameWidth;
-	scd.BufferDesc.Height = GameHeight;
-	scd.BufferDesc.RefreshRate.Numerator = 0;
-	scd.BufferDesc.RefreshRate.Denominator = 0;
-	scd.BufferDesc.Scaling = DXGI_MODE_SCALING_CENTERED;
-	scd.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
-	scd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-	scd.OutputWindow = m_hWnd;
-	scd.SampleDesc.Count = 1;
-	scd.SampleDesc.Quality = 0;
-	scd.Windowed = !m_fullscreen;
-	scd.Flags = 0;
-	scd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
-	
+void Graphics::CreateDevice()
+{
+	UINT creationFlags = 0;
+
+#ifdef _DEBUG
+	creationFlags |= D3D11_CREATE_DEVICE_DEBUG;
+#endif
+
 	static const D3D_FEATURE_LEVEL featureLevels[] =
 	{
 		// TODO: Modify for supported Direct3D feature levels
@@ -66,82 +49,132 @@ void Graphics::Init(HWND hWnd, HINSTANCE hInstance)
 		D3D_FEATURE_LEVEL_9_1,
 	};
 
-	result = D3D11CreateDeviceAndSwapChain(
-		nullptr,
+	// Create the DX11 API device object, and get a corresponding context.
+	ComPtr<ID3D11Device> device;
+	ComPtr<ID3D11DeviceContext> context;
+	DX::ThrowIfFailed(D3D11CreateDevice(
+		nullptr,                            // specify nullptr to use the default adapter
 		D3D_DRIVER_TYPE_HARDWARE,
 		nullptr,
-		0,
+		creationFlags,
 		featureLevels,
 		_countof(featureLevels),
 		D3D11_SDK_VERSION,
-		&scd,
-		&m_swapchain,
-		&m_D3DDevice,
-		nullptr,
-		&m_D3DDeviceContext);
+		device.ReleaseAndGetAddressOf(),    // returns the Direct3D device created
+		&m_featureLevel,                    // returns feature level of device created
+		context.ReleaseAndGetAddressOf()    // returns the device immediate context
+	));
 
-	// error checking
-	if(result != S_OK)
+#ifndef NDEBUG
+	ComPtr<ID3D11Debug> d3dDebug;
+	if(SUCCEEDED(device.As(&d3dDebug)))
 	{
-		// log error in txt file
-		Error::FileLog("Error Creating D3D11 Device in Graphics.cpp Line 55; \n");
-
-		MessageBox(m_hWnd, L"Graphics Init Error. See Logs/Error.txt", L"Error!", MB_OK); // message
-
-		PostQuitMessage(0); // quit game
+		ComPtr<ID3D11InfoQueue> d3dInfoQueue;
+		if(SUCCEEDED(d3dDebug.As(&d3dInfoQueue)))
+		{
+#ifdef _DEBUG
+			d3dInfoQueue->SetBreakOnSeverity(D3D11_MESSAGE_SEVERITY_CORRUPTION, true);
+			d3dInfoQueue->SetBreakOnSeverity(D3D11_MESSAGE_SEVERITY_ERROR, true);
+#endif
+			D3D11_MESSAGE_ID hide[] =
+			{
+				D3D11_MESSAGE_ID_SETPRIVATEDATA_CHANGINGPARAMS,
+				// TODO: Add more message IDs here as needed.
+			};
+			D3D11_INFO_QUEUE_FILTER filter = {};
+			filter.DenyList.NumIDs = _countof(hide);
+			filter.DenyList.pIDList = hide;
+			d3dInfoQueue->AddStorageFilterEntries(&filter);
+		}
 	}
+#endif
 
-	CreateResources(GameWidth, GameHeight);
+	DX::ThrowIfFailed(device.As(&m_d3dDevice));
+	DX::ThrowIfFailed(context.As(&m_d3dDeviceContext));
+
+	m_gameWidth = GameWidth;
+	m_gameHeight = GameHeight;
 }
 
-void Graphics::CreateResources(UINT width, UINT height)
+void Graphics::CreateResources()
 {
 	ID3D11RenderTargetView* nullViews[] = { nullptr };
-	m_D3DDeviceContext->OMSetRenderTargets(_countof(nullViews), nullViews, nullptr);
-	m_renderTargetView = nullptr;
-	m_D3DDeviceContext->Flush();
+	m_d3dDeviceContext->OMSetRenderTargets(_countof(nullViews), nullViews, nullptr);
+	m_renderTargetView.Reset();
+	m_d3dDeviceContext->Flush();
 
-	if(m_swapchain != nullptr) { m_swapchain->ResizeBuffers(2, width, height, DXGI_FORMAT_R8G8B8A8_UNORM, 0); }
+	const UINT backBufferWidth = static_cast<UINT>(m_gameWidth);
+	const UINT backBufferHeight = static_cast<UINT>(m_gameHeight);
+	const DXGI_FORMAT backBufferFormat = DXGI_FORMAT_B8G8R8A8_UNORM;
+	const DXGI_FORMAT depthBufferFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	constexpr UINT backBufferCount = 2;
 
-	// Get backbuffer pointer from swapchain
-	HRESULT result = m_swapchain->GetBuffer(0, __uuidof(m_backbuffer), (void**) &m_backbuffer);
-
-	// error checking
-	if(result != S_OK)
+	// If the swap chain already exists, resize it, otherwise create one.
+	if(m_swapChain)
 	{
-		// log error in txt file
-		Error::FileLog("Error getting Back Buffer in Graphics.cpp Line 76; \n");
+		HRESULT hr = m_swapChain->ResizeBuffers(backBufferCount, backBufferWidth, backBufferHeight, backBufferFormat, 0);
 
-		MessageBox(m_hWnd, L"Graphics Init Error. See Logs/Error.txt", L"Error!", MB_OK); // message box
+		if(hr == DXGI_ERROR_DEVICE_REMOVED || hr == DXGI_ERROR_DEVICE_RESET)
+		{
+			// If the device was removed for any reason, a new device and swap chain will need to be created.
+			OnDeviceLost();
 
-		PostQuitMessage(0); // quit game
+			// Everything is set up now. Do not continue execution of this method. OnDeviceLost will reenter this method 
+			// and correctly set up the new device.
+			return;
+		}
+		else
+		{
+			DX::ThrowIfFailed(hr);
+		}
+	}
+	else
+	{
+		// First, retrieve the underlying DXGI Device from the D3D Device.
+		ComPtr<IDXGIDevice1> dxgiDevice;
+		DX::ThrowIfFailed(m_d3dDevice.As(&dxgiDevice));
+
+		// Identify the physical adapter (GPU or card) this device is running on.
+		ComPtr<IDXGIAdapter> dxgiAdapter;
+		DX::ThrowIfFailed(dxgiDevice->GetAdapter(dxgiAdapter.GetAddressOf()));
+
+		// And obtain the factory object that created it.
+		ComPtr<IDXGIFactory2> dxgiFactory;
+		DX::ThrowIfFailed(dxgiAdapter->GetParent(IID_PPV_ARGS(dxgiFactory.GetAddressOf())));
+
+		// Create a descriptor for the swap chain.
+		DXGI_SWAP_CHAIN_DESC1 swapChainDesc = {};
+		swapChainDesc.Width = backBufferWidth;
+		swapChainDesc.Height = backBufferHeight;
+		swapChainDesc.Format = backBufferFormat;
+		swapChainDesc.SampleDesc.Count = 1;
+		swapChainDesc.SampleDesc.Quality = 0;
+		swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+		swapChainDesc.BufferCount = backBufferCount;
+
+		DXGI_SWAP_CHAIN_FULLSCREEN_DESC fsSwapChainDesc = {};
+		fsSwapChainDesc.Windowed = TRUE;
+
+		// Create a SwapChain from a Win32 window.
+		DX::ThrowIfFailed(dxgiFactory->CreateSwapChainForHwnd(
+			m_d3dDevice.Get(),
+			m_window,
+			&swapChainDesc,
+			&fsSwapChainDesc,
+			nullptr,
+			m_swapChain.ReleaseAndGetAddressOf()
+		));
+
+		// This template does not support exclusive fullscreen mode and prevents DXGI from responding to the ALT+ENTER shortcut.
+		DX::ThrowIfFailed(dxgiFactory->MakeWindowAssociation(m_window, DXGI_MWA_NO_ALT_ENTER));
 	}
 
-	// create render target view
-	if(m_backbuffer)
-		result = m_D3DDevice->CreateRenderTargetView(m_backbuffer, nullptr, &m_renderTargetView);
+	// Obtain the backbuffer for this window which will be the final 3D rendertarget.
+	ComPtr<ID3D11Texture2D> backBuffer;
+	DX::ThrowIfFailed(m_swapChain->GetBuffer(0, IID_PPV_ARGS(backBuffer.GetAddressOf())));
 
-	// error checking
-	if(result != S_OK)
-	{
-		// log error in txt file
-		Error::FileLog("Error Creating Render Target in Graphics Line 86; \n");
-
-		MessageBox(m_hWnd, L"Graphics Init Error. See Logs/Error.txt", L"Error!", MB_OK); // message box
-
-		PostQuitMessage(0); // quit game
-	}
-
-	m_backbuffer->Release();
-
-	// initialise viewport
-	m_viewport.Width = (float) width;
-	m_viewport.Height = (float) height;
-	m_viewport.MinDepth = 0.0f;
-	m_viewport.MaxDepth = 1.0f;
-	m_viewport.TopLeftX = 0;
-	m_viewport.TopLeftY = 0;
-	m_D3DDeviceContext->RSSetViewports(1, &m_viewport);
+	// Create a view interface on the rendertarget to use on bind.
+	DX::ThrowIfFailed(m_d3dDevice->CreateRenderTargetView(backBuffer.Get(), nullptr, m_renderTargetView.ReleaseAndGetAddressOf()));
 
 	// create samplerstate description
 	D3D11_SAMPLER_DESC sd = {};
@@ -149,65 +182,61 @@ void Graphics::CreateResources(UINT width, UINT height)
 	sd.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
 	sd.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
 	sd.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
-	sd.MaxAnisotropy = (m_D3DDevice->GetFeatureLevel() > D3D_FEATURE_LEVEL_9_1)?D3D11_MAX_MAXANISOTROPY:2;
+	sd.MaxAnisotropy = (m_d3dDevice->GetFeatureLevel() > D3D_FEATURE_LEVEL_9_1)?D3D11_MAX_MAXANISOTROPY:2;
 	sd.MaxLOD = D3D11_FLOAT32_MAX;
 	sd.ComparisonFunc = D3D11_COMPARISON_NEVER;
 
-	result = m_D3DDevice->CreateSamplerState(&sd, &m_samplerState);
+	DX::ThrowIfFailed(m_d3dDevice->CreateSamplerState(&sd, &m_samplerState));
 
-	// error checking
-	if(result != S_OK)
-	{
-		// log error in txt file
-		Error::FileLog("Error Creating Sampler State in Graphics Line 128; \n");
-
-		MessageBox(m_hWnd, L"Graphics Init Error. See Logs/Error.txt", L"Error!", MB_OK); // message box
-
-		PostQuitMessage(0); // quit game
-	}
-
-	// initialse sprite batch engine
-	if(m_D3DDeviceContext)
-		m_spriteBatch = new SpriteBatch(m_D3DDeviceContext);
-
-	// set game dimensions
-	m_gameWidth = width;
-	m_gameHeight = height;
-}
-
-void Graphics::ReleaseAll()
-{
-	if(m_swapchain) { m_swapchain->SetFullscreenState(FALSE, nullptr); }    // switch to windowed mode
-	if(m_samplerState) { m_samplerState->Release(); }
-	if(m_renderTargetView) { m_renderTargetView->Release(); }
-	if(m_D3DDeviceContext) { m_D3DDeviceContext->Release(); }
-	if(m_D3DDevice) { m_D3DDevice->Release(); }
-	if(m_swapchain) { m_swapchain->Release(); }
+	if(m_d3dDeviceContext)
+		m_spriteBatch = std::make_shared<SpriteBatch>(m_d3dDeviceContext.Get());
 }
 
 void Graphics::BeginScene()
 {
-	// bind render target view and depth stencil view in graphics pipeline
-	m_D3DDeviceContext->OMSetRenderTargets(1, &m_renderTargetView, nullptr);
+	m_d3dDeviceContext->ClearRenderTargetView(m_renderTargetView.Get(), BackColor);
+	m_d3dDeviceContext->OMSetRenderTargets(1, m_renderTargetView.GetAddressOf(), nullptr);
 
-	// clear backbuffer
-	m_D3DDeviceContext->ClearRenderTargetView(m_renderTargetView, BackColor);
-
-	// reset Rasterisation state to normal state
-	m_D3DDeviceContext->RSSetState(0);
-
-	// reset depth stencil state to normal state
-	m_D3DDeviceContext->OMSetDepthStencilState(0, 0);
-
-	// reset viewport
-	m_D3DDeviceContext->RSSetViewports(1, &m_viewport);
-
-	// begin sprite scene
-	m_spriteBatch->Begin(SpriteSortMode_FrontToBack, nullptr, m_samplerState);
+	CD3D11_VIEWPORT viewport(0.0f, 0.0f, static_cast<float>(m_gameWidth), static_cast<float>(m_gameHeight));
+	m_d3dDeviceContext->RSSetViewports(1, &viewport);
+	
+	m_spriteBatch->Begin(SpriteSortMode_FrontToBack, nullptr, m_samplerState.Get());
 }
 
 void Graphics::PresentBackBuffer()
 {
 	m_spriteBatch->End();
-	m_swapchain->Present(0, 0);
+	HRESULT hr = m_swapChain->Present(1, 0);
+
+	// If the device was reset we must completely reinitialize the renderer.
+	if(hr == DXGI_ERROR_DEVICE_REMOVED || hr == DXGI_ERROR_DEVICE_RESET)
+	{
+		OnDeviceLost();
+	}
+	else
+	{
+		DX::ThrowIfFailed(hr);
+	}
+}
+
+void Graphics::OnDeviceLost()
+{
+	m_renderTargetView.Reset();
+	m_swapChain.Reset();
+	m_d3dDeviceContext.Reset();
+	m_d3dDevice.Reset();
+
+	CreateDevice();
+
+	CreateResources();
+}
+
+void Graphics::SetWidth(int width)
+{
+	m_gameWidth = width;
+}
+
+void Graphics::SetHeight(int height)
+{
+	m_gameHeight = height;
 }

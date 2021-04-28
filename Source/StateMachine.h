@@ -1,9 +1,4 @@
-// StateMachine.h
-// Christopher Ball 2019
-// manages game object states
-
-#ifndef _STATEMACHINE_H_
-#define _STATEMACHINE_H_
+#pragma once
 
 #include "State.h"
 
@@ -50,39 +45,23 @@ public:
 	void ChangeState(State<T>* newState)
 	{
 		assert(m_currentState && newState);
-
-		// store previous state
 		m_previousState = m_currentState;
-
-		// call on exit for current state
 		m_currentState->OnExit(m_owner);
-
-		// set new state
 		m_currentState = newState;
-
-		// call on entry for new state
 		m_currentState->OnEnter(m_owner);
 	}
 
-	void RevertToPreviousState()
-	{
-		ChangeState(m_previousState);
-	}
+	void RevertToPreviousState() { ChangeState(m_previousState); }
 
 	State<T>* GetCurrentState() const { return m_currentState; }
 	State<T>* GetPreviousState() const { return m_previousState; }
 	State<T>* GetGlobalState() const { return m_globalState; }
 
-	bool IsInState(const State<T>& state) const
-	{
-		return typeid(*m_currentState) == typeid(state);
-	}
+	bool IsInState(const State<T>& state) const { return typeid(*m_currentState) == typeid(state); }
 
 private:
-	T* m_owner;						// pointer to owner of state
-	State<T>* m_currentState;		// current state to update
-	State<T>* m_previousState;		// record of previous state
-	State<T>* m_globalState;		// global state for common methods
+	T* m_owner;				
+	State<T>* m_currentState;
+	State<T>* m_previousState;
+	State<T>* m_globalState;
 };
-
-#endif // !_STATEMACHINE_H_

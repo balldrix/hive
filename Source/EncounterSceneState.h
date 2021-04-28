@@ -1,7 +1,3 @@
-// EncounterSceneState.h
-// Christopher Ball 2019-2021
-// Deals with encounters during gameplay
-
 #pragma once
 
 #include "State.h"

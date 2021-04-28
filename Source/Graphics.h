@@ -1,6 +1,3 @@
-// Graphics.h
-// Christopher Ball 2019-2021
-
 #pragma once
 
 #include "pch.h"
@@ -9,46 +6,54 @@ class Graphics
 {
 public:
 	Graphics();					
-	~Graphics();			
-	void						Init(HWND hWindow, HINSTANCE hInstance);
-	void						CreateResources(UINT width, UINT height);
+	~Graphics();
 
-	void						ReleaseAll();								
-	void						BeginScene();								
-	
-	void						PresentBackBuffer();
+	Graphics(Graphics&&) = default;
+	Graphics& operator= (Graphics&&) = default;
 
-	ID3D11Device*				GetDevice() const { return m_D3DDevice; }			
-	ID3D11DeviceContext*		GetDeviceContext() const { return m_D3DDeviceContext; }
-	IDXGISwapChain*				GetSwapChain() const { return m_swapchain; }
+	Graphics(Graphics const&) = delete;
+	Graphics& operator= (Graphics const&) = delete;
 
-	SpriteBatch*				GetSpriteBatch() const { return m_spriteBatch; }	
+	void Init(HWND hWindow, HINSTANCE hInstance);
+	void CreateDevice();
+	void CreateResources();
+							
+	void BeginScene();								
 	
-	float						GetWidth()	const { return m_gameWidth; }			
-	float						GetHeight()	const { return m_gameHeight; }			
+	void PresentBackBuffer();
+
+	void OnDeviceLost();
+
+	Microsoft::WRL::ComPtr<ID3D11Device1> GetDevice() const { return m_d3dDevice; }
+	Microsoft::WRL::ComPtr<ID3D11DeviceContext> GetDeviceContext() const { return m_d3dDeviceContext; }
+	Microsoft::WRL::ComPtr<IDXGISwapChain1> GetSwapChain() const { return m_swapChain; }
+	std::shared_ptr<SpriteBatch> GetSpriteBatch() const { return m_spriteBatch; }
+
+	int GetWidth()	const { return m_gameWidth; }
+	int GetHeight()	const { return m_gameHeight; }
 	
-	HWND						GetHwnd()	const { return m_hWnd; }		
-	HINSTANCE					GetHInstance() const { return m_hInstance; }
-	bool						GetFullscreen() const { return m_fullscreen; }
+	HWND GetHwnd()	const { return m_window; }		
+	HINSTANCE GetHInstance() const { return m_hInstance; }
+	bool GetFullscreen() const { return m_fullscreen; }
+
+	void SetWidth(int width);
+	void SetHeight(int height);
 
 private:
-	HWND						m_hWnd;				
-	HINSTANCE					m_hInstance;		
+	HWND											m_window;				
+	HINSTANCE										m_hInstance;		
 	
-	IDXGISwapChain*				m_swapchain;		
-	ID3D11Device*				m_D3DDevice;		
-	ID3D11DeviceContext*		m_D3DDeviceContext;	
-
-	ID3D11RenderTargetView*		m_renderTargetView;	
-	ID3D11Texture2D*			m_backbuffer;		
-
-	ID3D11SamplerState*			m_samplerState;		
-
-	SpriteBatch*				m_spriteBatch;		
-	D3D11_VIEWPORT				m_viewport;			
-
-	bool						m_fullscreen;		
+	D3D_FEATURE_LEVEL                               m_featureLevel;
+	Microsoft::WRL::ComPtr<ID3D11Device1>			m_d3dDevice;
+	Microsoft::WRL::ComPtr<ID3D11DeviceContext>		m_d3dDeviceContext;
 	
-	float						m_gameWidth;		
-	float						m_gameHeight;		
+	Microsoft::WRL::ComPtr<IDXGISwapChain1>			m_swapChain;
+	Microsoft::WRL::ComPtr<ID3D11RenderTargetView>	m_renderTargetView;
+	Microsoft::WRL::ComPtr<ID3D11Texture2D>			m_backbuffer;
+	Microsoft::WRL::ComPtr<ID3D11SamplerState>		m_samplerState;
+
+	std::shared_ptr<SpriteBatch>					m_spriteBatch;
+	bool											m_fullscreen;		
+	int												m_gameWidth;		
+	int												m_gameHeight;		
 };

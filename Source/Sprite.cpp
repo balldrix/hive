@@ -77,7 +77,6 @@ void Sprite::Render(Graphics* graphics)
 void Sprite::Render(Graphics* graphics, float alpha)
 {
 	SetAlpha(alpha);
-
 	Render(graphics);
 }
 

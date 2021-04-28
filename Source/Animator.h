@@ -1,9 +1,4 @@
-// Animator.h
-// Christopher Ball 2019
-// Class for animating sprites
-
-#ifndef _ANIMATOR_H_
-#define _ANIMATOR_H_
+#pragma once
 
 #include "pch.h"
 #include "Animation.h"
@@ -38,5 +33,3 @@ private:
 	bool m_animDone;						// has non looping anination finished
 	float m_animationTimer;					// timer
 };
-
-#endif // !_ANIMATOR_H_

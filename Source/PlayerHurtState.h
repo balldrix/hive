@@ -1,19 +1,12 @@
-// PlayerHurtState.h
-// Christopher Ball 2019
-// Manages player hurt state
-
-#ifndef _PLAYER_HURT_STATE_
-#define	_PLAYER_HURT_STATE_
+#pragma once
 
 #include "State.h"
 
-// forward declaration
 class Player;
 
 class PlayerHurtState : public State<Player>
 {
 public:
-	// static instance call
 	static PlayerHurtState* Instance();
 
 	virtual void OnEnter(Player* enemy);
@@ -27,6 +20,3 @@ private:
 	PlayerHurtState(const PlayerHurtState&);
 	PlayerHurtState& operator=(const PlayerHurtState&);
 };
-
-#endif // !_PLAYER_HURT_STATE_
-

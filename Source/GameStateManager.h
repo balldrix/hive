@@ -1,13 +1,7 @@
-// "GameStateManager.h"
-// Christopher Ball 2019
-// manages game states
-
-#ifndef _GAMESTATEMANAGER_H_
-#define _GAMESTATEMANAGER_H_
+#pragma once
 
 #include "pch.h"
 
-// forward declarations
 class Graphics;
 class Input;
 class GameState;
@@ -18,30 +12,27 @@ public:
 	GameStateManager();
 	~GameStateManager();
 
-	void							Init(Graphics* graphics, Input* input);		// initialise game state manager
+	void							Init(Graphics* graphics, Input* input);		
 
-	void							AddState(GameState* state);					// add game state to list
-	void							SwitchState(const wchar_t* stateName);		// switch game state
-	GameState*						GetCurrentState() const;					// return current game state
-	const wchar_t*					GetCurrentStateName() const;				// get current state name
+	void							AddState(GameState* state);					
+	void							SwitchState(const wchar_t* stateName);		
+	GameState*						GetCurrentState() const;					
+	const wchar_t*					GetCurrentStateName() const;				
 
-	void							ProcessInput();								// process input for game state
-	void							Update(float deltaTime);					// update game state
-	void							ProcessCollisions();						// collision checking
-	void							Render();									// render game state
+	void							ProcessInput();								
+	void							Update(float deltaTime);					
+	void							ProcessCollisions();						
+	void							Render();									
 
-	void							ReleaseAll();								// release all game state resources
+	void							ReleaseAll();								
 
-	Graphics*						GetGraphics() const { return m_graphics; }	// return graphics pointer
-	Input*							GetInput() const { return m_input; }		// return input pointer
+	Graphics*						GetGraphics() const { return m_graphics; }	
+	Input*							GetInput() const { return m_input; }		
 
 private:
-	GameState*						m_currentState;								// pointer to current game state
-	std::vector<GameState*>			m_stateList;								// list of game states
+	GameState*						m_currentState;								
+	std::vector<GameState*>			m_stateList;								
 
-	Graphics*						m_graphics;									// pointer to graphics class
-	Input*							m_input;									// pointer to input clas
+	Graphics*						m_graphics;									
+	Input*							m_input;									
 };
-
-
-#endif _GAMESTATEMANAGER_H_

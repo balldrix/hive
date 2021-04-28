@@ -1,9 +1,4 @@
-// Randomiser.h
-// Christopher Ball 2019-2021
-// Utility class with template to randomise numbers
-
-#ifndef _RANDOMISER_H_
-#define _RANDOMISER_H_
+#pragma once
 
 #include "pch.h"
 
@@ -23,6 +18,3 @@ public:
 private:
 	Randomiser();
 };
-
-#endif _RANDOMISER_H_
-

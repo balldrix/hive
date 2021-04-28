@@ -1,6 +1,3 @@
-// Game.h
-// Christopher Ball 2019-2021
-
 #pragma once
 
 #include "pch.h"
@@ -14,8 +11,15 @@ class GameStateManager;
 class Game
 {
 public:
-	Game();
-	~Game();
+	Game() noexcept;
+	~Game() = default;
+
+	Game(Game&&) = default;
+	Game& operator= (Game&&) = default;
+
+	Game(Game const&) = delete;
+	Game& operator= (Game const&) = delete;
+
 	void Init(Window* window, Graphics* graphics);
 
 	void Run();

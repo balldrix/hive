@@ -1,12 +1,10 @@
-#ifndef _PLAYER_H_
-#define _PLAYER_H_
+#pragma once
 
 #include "pch.h"
 #include "GameObject.h"
 #include "State.h"
 #include "PlayerData.h"
 
-// forward declarations
 class ControlSystem;
 template<class T> class StateMachine;
 
@@ -31,11 +29,8 @@ public:
 	int						GetDamage() const;
 	int						GetLives() const { return m_lives; }
 
-	// movement
 	void					Move(const Vector2& direction);
 	void					Stop();
-
-	// attacks
 	void					Attack();
 	void					ApplyDamage(GameObject* source, const int& amount);
 	void					Knockback(const Vector2& direction, const float& force);
@@ -49,5 +44,3 @@ private:
 	int						m_lives;
 	float					m_knockoutTimer;
 };
-
-#endif _PLAYER_H_

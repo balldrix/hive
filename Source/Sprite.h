@@ -1,14 +1,7 @@
-// Sprite.h
-// Christopher Ball 2019
-// sprite class contains texture, position, alpha
-// rotation and scale of the 2D sprite
-
-#ifndef _SPRITE_H_
-#define _SPRITE_H_
+#pragma once
 
 #include "pch.h"
 
-// forward declarations
 class Graphics;
 class Texture;
 
@@ -23,8 +16,6 @@ public:
 	void				Render(Graphics* graphics, const Vector2& position); 
 	void				Render(Graphics* graphics, const Vector2& position, const RECT& destination); 
 
-	// helper methods
-	// setters
 	void				SetPosition(const Vector2& position);
 	void				SetScale(const float& scale); 
 	void				SetRotation(const float& rotation); 
@@ -35,7 +26,6 @@ public:
 	void				SetFlipEffect(SpriteEffects effect);
 	void				SetDepth(const float &depth);
 
-	// getters
 	const Vector2		GetPosition() const		{ return m_position; }
 	const float			GetScale() const		{ return m_scale; }
 	const float			GetRotation() const		{ return m_rotation; }
@@ -48,19 +38,17 @@ public:
 	const float			GetDepth() const		{ return m_depth;}
 
 protected:
-	Texture*			m_texture;			// texture pointer
+	Texture*			m_texture;			
 
-	Vector2				m_position;			// sprite position
-	float				m_scale;			// scaler
-	float				m_rotation;			// rotation angle in radians
-	float				m_alpha;			// alpha value 0.0f - 1.0f
-	Color				m_colour;			// colour tint
-	Vector2				m_origin;			// sprite origin i.e. middle
-	RECT				m_rect;				// source rect
-	UINT				m_width;			// sprite width
-	UINT				m_height;			// sprite height
-	SpriteEffects		m_spriteEffects;	// sprite effects
-	float				m_depth;			// sprite depth for layering
+	Vector2				m_position;			
+	float				m_scale;			
+	float				m_rotation;			
+	float				m_alpha;			
+	Color				m_colour;			
+	Vector2				m_origin;			
+	RECT				m_rect;				
+	UINT				m_width;			
+	UINT				m_height;			
+	SpriteEffects		m_spriteEffects;	
+	float				m_depth;			
 };
-
-#endif _SPRITE_H_

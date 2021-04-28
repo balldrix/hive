@@ -1,8 +1,4 @@
-// BarController.h
-// Christopher Ball 2019-2021
-
-#ifndef _BARCONTROLLER_H_
-#define _BARCONTROLLER_H_
+#pragma once
 
 #include "pch.h"
 
@@ -43,5 +39,3 @@ private:
 
 	unsigned int    m_width;
 };
-
-#endif // !_BARCONTROLLER_H_

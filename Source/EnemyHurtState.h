@@ -1,9 +1,4 @@
-// EnemyHurtState.h
-// Christopher Ball 2019
-// manages state when enemy is hurt
-
-#ifndef _ENEMY_HURT_STATE_
-#define	_ENEMY_HURT_STATE_
+#pragma once
 
 #include "State.h"
 
@@ -27,6 +22,3 @@ private:
 	EnemyHurtState(const EnemyHurtState&);
 	EnemyHurtState& operator=(const EnemyHurtState&);
 };
-
-#endif // !_ENEMY_HURT_STATE_
-

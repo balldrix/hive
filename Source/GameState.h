@@ -1,10 +1,4 @@
-// GameState.h
-// Christopher Ball 2019
-// game state abstract class for
-// all game states
-
-#ifndef _GAMESTATE_H_
-#define _GAMESTATE_H_
+#pragma once
 
 class GameState
 {
@@ -30,5 +24,3 @@ protected:
 	float			m_inputTimer; 				// var used to create input delay
 	bool			m_inputReady; 				// has a key been pressed already?
 };
-
-#endif _GAMESTATE_H_

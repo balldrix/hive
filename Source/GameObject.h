@@ -1,9 +1,4 @@
-// GameObject.h
-// Christopher Ball 2019
-// A base class for objects used in game
-
-#ifndef _GAMEOBJECT_H_
-#define _GAMEOBJECT_H_
+#pragma once
 
 #include "pch.h"
 #include "HitBoxManager.h"
@@ -140,5 +135,3 @@ protected:
 	bool				m_active;				// object active or not
 	map<string, int>	m_damageData;			// damage data map
 };
-
-#endif _GAMEOBJECT_H_

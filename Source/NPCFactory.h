@@ -1,5 +1,3 @@
-// Christopher Ball 2019-2021
-
 #pragma once
 
 #include "EnemyData.h"

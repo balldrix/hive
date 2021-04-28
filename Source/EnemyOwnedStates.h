@@ -1,7 +1,3 @@
-// EnemyOwnedStates.h
-// Christopher Ball 2019-2021
-// list of states owned by the enemy class
-
 #pragma once
 
 #include "EnemyIdleState.h"

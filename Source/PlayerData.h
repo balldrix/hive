@@ -1,9 +1,4 @@
-// PlayerData.h
-// Christopher Ball 2019-2021
-// stores player data
-
-#ifndef _PLAYERDATA_H_
-#define _PLAYERDATA_H_
+#pragma once
 
 #include "GameObject.h"
 
@@ -13,5 +8,3 @@ struct PlayerData
 	float deathTime = 0.0f;
 	float knockoutDuration = 0.0f;
 };
-
-#endif // !_PLAYERDATA_H_

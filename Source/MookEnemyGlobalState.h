@@ -1,9 +1,4 @@
-// MookEnemyGlobalState.h
-// Christopher Ball 2019
-// global state for common enemy methods
-
-#ifndef _ENEMY_GLOBAL_STATE_
-#define	_ENEMY_GLOBAL_STATE_
+#pragma once
 
 #include "State.h"
 
@@ -25,4 +20,3 @@ private:
 	MookEnemyGlobalState(const MookEnemyGlobalState&);
 	MookEnemyGlobalState& operator=(const MookEnemyGlobalState&);
 };
-#endif // !_ENEMY_GLOBAL_STATE_

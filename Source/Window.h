@@ -1,6 +1,3 @@
-// Window.h
-// Christopher Ball 2019-2021
-
 #pragma once
 
 #include "pch.h"
@@ -10,8 +7,8 @@ class Window
 	public:
 		Window();
 		~Window();
-		void Init(HINSTANCE hInstance, INT cmdShow, WNDPROC winProc);
-		HINSTANCE GetInstance() noexcept;
+		int Init(HINSTANCE hInstance, INT cmdShow, WNDPROC wndProc);
+		HINSTANCE GetInstance() noexcept { return HINSTANCE(); }
 		HWND GetHwnd() const { return m_hWindow; }
 
 		bool GetMinimized() const { return m_minimized; }
