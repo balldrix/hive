@@ -1,5 +1,3 @@
-#pragma once
-
 #include "PlayerGlobalState.h"
 #include "PlayerIdleState.h"
 #include "PlayerWalkingState.h"

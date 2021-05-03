@@ -1,6 +1,8 @@
-#include "EnemyOwnedStates.h"
+#include "EnemyHurtState.h"
+
 #include "StateMachine.h"
 #include "Enemy.h"
+#include "EnemyOwnedStates.h"
 #include "Player.h"
 #include "Animator.h"
 #include "HitBoxManager.h"

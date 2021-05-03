@@ -28,7 +28,7 @@
     <ClCompile Include="Source\KingMook.cpp" />
     <ClCompile Include="Source\KingMookChargeState.cpp" />
     <ClCompile Include="Source\KingMookEnemyGlobalState.cpp" />
-    <ClCompile Include="Source\KingMookEnemyGlobalState.h" />
+    <ClInclude Include="Source\KingMookEnemyGlobalState.h" />
     <ClCompile Include="Source\NPCFactory.cpp" />
     <ClCompile Include="Source\TravellingHandler.cpp" />
     <ClCompile Include="Source\TravellingSceneState.cpp" />

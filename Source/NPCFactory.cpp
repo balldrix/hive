@@ -7,6 +7,8 @@
 #include "Spritesheet.h"
 #include "Texture.h"
 #include "KingMook.h"
+#include "KingMookEnemyGlobalState.h"
+#include "MookEnemyGlobalState.h"
 #include "EnemyOwnedStates.h"
 
 using namespace InGameHudConstants;

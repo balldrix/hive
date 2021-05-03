@@ -145,7 +145,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\KingMook.cpp" />
-    <ClCompile Include="Source\KingMookEnemyGlobalState.h" />
     <ClCompile Include="Source\KingMookEnemyGlobalState.cpp" />
     <ClCompile Include="Source\KingMookChargeState.cpp" />
     <ClCompile Include="Source\GameOverScreen.cpp" />
@@ -344,6 +343,7 @@
     <ClInclude Include="Source\GameOverScreenController.h" />
     <ClInclude Include="Source\GameOverSceneState.h" />
     <ClInclude Include="Source\json.hpp" />
+    <ClInclude Include="Source\KingMookEnemyGlobalState.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\UI\lives_x0.png" />

@@ -1,8 +1,9 @@
-#include "EnemyOwnedStates.h"
+#include "EnemyIdleState.h"
 
 #include "StateMachine.h"
 #include "PlayerOwnedStates.h"
 #include "Enemy.h"
+#include "EnemyOwnedStates.h"
 #include "Player.h"
 #include "HitBoxManager.h"
 #include "Animator.h"

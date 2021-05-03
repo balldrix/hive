@@ -1,7 +1,8 @@
-#include "EnemyOwnedStates.h"
+#include "MookEnemyGlobalState.h"
 
 #include "StateMachine.h"
 #include "Enemy.h"
+#include "EnemyOwnedStates.h"
 #include "Player.h"
 #include "UnitVectors.h"
 #include "SpriteSheet.h"
