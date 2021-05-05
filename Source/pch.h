@@ -35,13 +35,12 @@
 #include <memory>
 #include <stdexcept>
 #include <SimpleMath.h>
-#include "json.hpp"
 #include <SpriteBatch.h>
 #include <SpriteFont.h>
+#include <nlohmann/json.hpp>
 
 using namespace DirectX;
 using namespace SimpleMath;
-
 using json = nlohmann::json;
 
 namespace DX
