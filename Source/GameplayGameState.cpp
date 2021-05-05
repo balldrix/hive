@@ -379,8 +379,8 @@ void GameplayGameState::CheckForEncounter()
 
 void GameplayGameState::Tick(float deltaTime)
 {
-	m_player->Update(deltaTime);
 	m_camera->Update(deltaTime);
+	m_player->Update(deltaTime);
 	m_NPCManager->Update(deltaTime);
 	m_background->Update(deltaTime);
 	m_hudManager->SetMaxPlayerHealth(m_player->GetMaxHealth());
