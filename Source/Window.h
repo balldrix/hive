@@ -14,10 +14,14 @@ class Window
 		bool GetMinimized() const { return m_minimized; }
 		bool GetMaximized() const { return m_maximized; }
 		bool GetResizing() const { return m_resizing; }
+		int GetWidth() const { return m_width; }
+		int GetHeight() const { return m_height; }
 
 		void SetMinimized(bool value);
 		void SetMaximized(bool value);
 		void SetResizing(bool value);
+		void SetWidth(int width);
+		void SetHeight(int height);
 
 	private:
 		HINSTANCE m_hInst;

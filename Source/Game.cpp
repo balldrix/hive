@@ -122,8 +122,8 @@ void Game::OnResuming()
 
 void Game::OnWindowSizeChanged(int width, int height)
 {
-	m_graphics->SetWidth(width);
-	m_graphics->SetHeight(height);
+	m_window->SetWidth(width);
+	m_window->SetHeight(height);
 	m_graphics->CreateResources();
 }
 

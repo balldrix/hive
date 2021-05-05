@@ -6,8 +6,8 @@ using namespace GlobalConstants;
 Window::Window() :
 	m_hInst(nullptr),
 	m_hWindow(nullptr),
-	m_width(0),
-	m_height(0),
+	m_width(WindowWidth),
+	m_height(WindowHeight),
 	m_minimized(false),
 	m_maximized(false),
 	m_resizing(false)
@@ -24,8 +24,6 @@ Window::~Window()
 int Window::Init(HINSTANCE hInstance, INT cmdShow, WNDPROC wndProc)
 {
 	m_hInst = hInstance;
-	m_width = WindowWidth;
-	m_height = WindowHeight;
 
     WNDCLASSEXW wcex = {};
     wcex.cbSize = sizeof(WNDCLASSEXW);
@@ -40,7 +38,7 @@ int Window::Init(HINSTANCE hInstance, INT cmdShow, WNDPROC wndProc)
     if(!RegisterClassExW(&wcex))
         return 1;
 
-    RECT rc = { 0, 0, static_cast<LONG>(WindowWidth), static_cast<LONG>(WindowHeight) };
+    RECT rc = { 0, 0, static_cast<LONG>(m_width), static_cast<LONG>(m_height) };
 
     AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
 
@@ -74,4 +72,14 @@ void Window::SetMaximized(bool value)
 void Window::SetResizing(bool value)
 {
 	m_resizing = value;
+}
+
+void Window::SetWidth(int width)
+{
+    m_width = width;
+}
+
+void Window::SetHeight(int height)
+{
+    m_height = height;
 }

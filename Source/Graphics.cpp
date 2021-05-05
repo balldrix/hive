@@ -15,8 +15,8 @@ Graphics::Graphics() :
 	m_hInstance(nullptr),
 	m_featureLevel(D3D_FEATURE_LEVEL_9_1),
 	m_fullscreen(false),
-	m_gameWidth(0),
-	m_gameHeight(0)
+	m_backBufferWidth(GameWidth),
+	m_backbufferHeight(GameHeight)
 {
 }
 
@@ -91,9 +91,6 @@ void Graphics::CreateDevice()
 
 	DX::ThrowIfFailed(device.As(&m_d3dDevice));
 	DX::ThrowIfFailed(context.As(&m_d3dDeviceContext));
-
-	m_gameWidth = GameWidth;
-	m_gameHeight = GameHeight;
 }
 
 void Graphics::CreateResources()
@@ -103,8 +100,8 @@ void Graphics::CreateResources()
 	m_renderTargetView.Reset();
 	m_d3dDeviceContext->Flush();
 
-	const UINT backBufferWidth = static_cast<UINT>(GameWidth);
-	const UINT backBufferHeight = static_cast<UINT>(GameHeight);
+	const UINT backBufferWidth = static_cast<UINT>(m_backBufferWidth);
+	const UINT backBufferHeight = static_cast<UINT>(m_backbufferHeight);
 	const DXGI_FORMAT backBufferFormat = DXGI_FORMAT_B8G8R8A8_UNORM;
 	const DXGI_FORMAT depthBufferFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
 	constexpr UINT backBufferCount = 2;
@@ -197,7 +194,7 @@ void Graphics::BeginScene()
 	m_d3dDeviceContext->ClearRenderTargetView(m_renderTargetView.Get(), BackColor);
 	m_d3dDeviceContext->OMSetRenderTargets(1, m_renderTargetView.GetAddressOf(), nullptr);
 
-	CD3D11_VIEWPORT viewport(0.0f, 0.0f, static_cast<float>(m_gameWidth), static_cast<float>(m_gameHeight));
+	CD3D11_VIEWPORT viewport(0.0f, 0.0f, static_cast<float>(m_backBufferWidth), static_cast<float>(m_backbufferHeight));
 	m_d3dDeviceContext->RSSetViewports(1, &viewport);
 	
 	m_spriteBatch->Begin(SpriteSortMode_FrontToBack, nullptr, m_samplerState.Get());
@@ -233,10 +230,10 @@ void Graphics::OnDeviceLost()
 
 void Graphics::SetWidth(int width)
 {
-	m_gameWidth = width;
+	m_backBufferWidth = width;
 }
 
 void Graphics::SetHeight(int height)
 {
-	m_gameHeight = height;
+	m_backbufferHeight = height;
 }

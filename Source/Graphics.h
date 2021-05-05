@@ -29,8 +29,8 @@ public:
 	Microsoft::WRL::ComPtr<IDXGISwapChain1> GetSwapChain() const { return m_swapChain; }
 	std::shared_ptr<SpriteBatch> GetSpriteBatch() const { return m_spriteBatch; }
 
-	int GetWidth()	const { return m_gameWidth; }
-	int GetHeight()	const { return m_gameHeight; }
+	int GetWidth()	const { return m_backBufferWidth; }
+	int GetHeight()	const { return m_backbufferHeight; }
 	
 	HWND GetHwnd()	const { return m_window; }		
 	HINSTANCE GetHInstance() const { return m_hInstance; }
@@ -54,6 +54,6 @@ private:
 
 	std::shared_ptr<SpriteBatch>					m_spriteBatch;
 	bool											m_fullscreen;		
-	int												m_gameWidth;		
-	int												m_gameHeight;		
+	int												m_backBufferWidth;		
+	int												m_backbufferHeight;		
 };
