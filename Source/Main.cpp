@@ -1,6 +1,7 @@
 #include "Window.h"
 #include "Graphics.h"
 #include "Game.h"
+#include "AudioEngine.h"
 
 Graphics* graphics = nullptr;
 Window* window	= nullptr;
@@ -30,6 +31,8 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 
 	game = new Game();
 	game->Init(window, graphics);
+
+	AudioEngine::Init();
 
 	MSG msg = {0};
 	while(msg.message != WM_QUIT)

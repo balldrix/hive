@@ -1,7 +1,8 @@
 #include "Texture.h"
+
 #include "Graphics.h"
 #include "Error.h"
-#include "WICTextureLoader.h"
+#include <DirectXTK/WICTextureLoader.h>
 
 Texture::Texture() :
 	m_texture(nullptr),

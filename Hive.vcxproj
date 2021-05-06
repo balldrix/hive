@@ -28,8 +28,10 @@
     <ClCompile Include="Source\KingMook.cpp" />
     <ClCompile Include="Source\KingMookChargeState.cpp" />
     <ClCompile Include="Source\KingMookEnemyGlobalState.cpp" />
+    <ClInclude Include="Source\AudioEngine.h" />
     <ClInclude Include="Source\KingMookEnemyGlobalState.h" />
     <ClCompile Include="Source\NPCFactory.cpp" />
+    <ClCompile Include="Source\AudioEngine.cpp" />
     <ClCompile Include="Source\TravellingHandler.cpp" />
     <ClCompile Include="Source\TravellingSceneState.cpp" />
     <ClCompile Include="Source\AABB.cpp" />
@@ -195,7 +197,6 @@
     <None Include="GameData\SpriteSheetData\mookSpritesheetData.json" />
     <None Include="GameData\SpriteSheetData\playerSpritesheetData.json" />
     <None Include="GameData\SpriteSheetData\travellingpromptSpritesheetData.json" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="GameData\EncounterData\encounterPositions.txt" />
@@ -243,10 +244,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings" />
-  <ImportGroup Label="Shared">
-    <Import Project="packages\Microsoft.XAudio2.Redist.1.2.6\build\native\Microsoft.XAudio2.Redist.targets" Condition="Exists('packages\Microsoft.XAudio2.Redist.1.2.6\build\native\Microsoft.XAudio2.Redist.targets')" />
-    <Import Project="packages\directxtk_desktop_2017.2021.4.7.2\build\native\directxtk_desktop_2017.targets" Condition="Exists('packages\directxtk_desktop_2017.2021.4.7.2\build\native\directxtk_desktop_2017.targets')" />
-  </ImportGroup>
+  <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
@@ -358,11 +356,4 @@
       <UserProperties GameData_4AnimationData_4dummyAnimationData_1json__JsonSchema="http://jsonapi.org/schema" />
     </VisualStudio>
   </ProjectExtensions>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('packages\Microsoft.XAudio2.Redist.1.2.6\build\native\Microsoft.XAudio2.Redist.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.XAudio2.Redist.1.2.6\build\native\Microsoft.XAudio2.Redist.targets'))" />
-    <Error Condition="!Exists('packages\directxtk_desktop_2017.2021.4.7.2\build\native\directxtk_desktop_2017.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\directxtk_desktop_2017.2021.4.7.2\build\native\directxtk_desktop_2017.targets'))" />
-  </Target>
 </Project>

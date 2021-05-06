@@ -34,9 +34,9 @@
 #include <random>
 #include <memory>
 #include <stdexcept>
-#include <SimpleMath.h>
-#include <SpriteBatch.h>
-#include <SpriteFont.h>
+#include <DirectXTK/SimpleMath.h>
+#include <DirectXTK/SpriteBatch.h>
+#include <DirectXTK/SpriteFont.h>
 #include <nlohmann/json.hpp>
 
 using namespace DirectX;
@@ -49,7 +49,6 @@ namespace DX
     {
         if(FAILED(hr))
         {
-            // Set a breakpoint on this line to catch DirectX API errors
             throw std::exception();
         }
     }

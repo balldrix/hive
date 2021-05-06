@@ -150,6 +150,7 @@
     <ClCompile Include="Source\GameOverScreen.cpp" />
     <ClCompile Include="Source\GameOverScreenController.cpp" />
     <ClCompile Include="Source\GameOverSceneState.cpp" />
+    <ClCompile Include="Source\AudioEngine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -344,6 +345,7 @@
     <ClInclude Include="Source\GameOverSceneState.h" />
     <ClInclude Include="Source\json.hpp" />
     <ClInclude Include="Source\KingMookEnemyGlobalState.h" />
+    <ClInclude Include="Source\AudioEngine.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\UI\lives_x0.png" />
@@ -369,7 +371,6 @@
     <Image Include="GameData\Sprites\UI\player_won_screen.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="GameData\SpriteFonts\silkscreen_8pt.spritefont" />
     <None Include="GameData\AnimationData\dummyAnimationData.json" />
     <None Include="GameData\AnimationData\playerAnimationData.json" />
