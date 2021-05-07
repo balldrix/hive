@@ -3,12 +3,12 @@
 #include <AL/alc.h>
 #include <stdexcept>
 
-AudioEngine* AudioEngine::m_instance = nullptr;
+AudioEngine* AudioEngine::s_instance = nullptr;
 
 void AudioEngine::Init(unsigned int channels)
 {
-	if(m_instance == nullptr)
-		m_instance = new AudioEngine(channels);	
+	if(s_instance == nullptr)
+		s_instance = new AudioEngine(channels);	
 }
 
 AudioEngine::AudioEngine(unsigned int channels)

@@ -151,6 +151,8 @@
     <ClCompile Include="Source\GameOverScreenController.cpp" />
     <ClCompile Include="Source\GameOverSceneState.cpp" />
     <ClCompile Include="Source\AudioEngine.cpp" />
+    <ClCompile Include="Source\Sound.cpp" />
+    <ClCompile Include="Source\SoundManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -346,6 +348,8 @@
     <ClInclude Include="Source\json.hpp" />
     <ClInclude Include="Source\KingMookEnemyGlobalState.h" />
     <ClInclude Include="Source\AudioEngine.h" />
+    <ClInclude Include="Source\Sound.h" />
+    <ClInclude Include="Source\SoundManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\UI\lives_x0.png" />
