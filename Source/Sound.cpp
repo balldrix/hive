@@ -91,6 +91,11 @@ void Sound::LoadFromWav(const char* filename)
 			alDeleteBuffers(1, &buffer);
 		return;
 	}
-
+	
+	m_length = sfinfo.frames / sfinfo.samplerate;
+	m_samplerate = sfinfo.samplerate;
+	m_bitrate = 16;
+	m_size = numBytes;
+	m_channels = sfinfo.channels;
 	m_buffer = buffer;
 }

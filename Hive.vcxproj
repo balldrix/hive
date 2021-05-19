@@ -29,12 +29,14 @@
     <ClCompile Include="Source\KingMook.cpp" />
     <ClCompile Include="Source\KingMookChargeState.cpp" />
     <ClCompile Include="Source\KingMookEnemyGlobalState.cpp" />
+    <ClInclude Include="Source\SoundEmitter.h" />
     <ClInclude Include="Source\SoundManager.h" />
     <ClInclude Include="Source\Sound.h" />
     <ClInclude Include="Source\AudioEngine.h" />
     <ClInclude Include="Source\KingMookEnemyGlobalState.h" />
     <ClCompile Include="Source\NPCFactory.cpp" />
     <ClCompile Include="Source\AudioEngine.cpp" />
+    <ClCompile Include="Source\SoundEmitter.cpp" />
     <ClCompile Include="Source\SoundManager.cpp" />
     <ClCompile Include="Source\TravellingHandler.cpp" />
     <ClCompile Include="Source\TravellingSceneState.cpp" />

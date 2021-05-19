@@ -153,6 +153,7 @@
     <ClCompile Include="Source\AudioEngine.cpp" />
     <ClCompile Include="Source\Sound.cpp" />
     <ClCompile Include="Source\SoundManager.cpp" />
+    <ClCompile Include="Source\SoundEmitter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -350,6 +351,7 @@
     <ClInclude Include="Source\AudioEngine.h" />
     <ClInclude Include="Source\Sound.h" />
     <ClInclude Include="Source\SoundManager.h" />
+    <ClInclude Include="Source\SoundEmitter.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\UI\lives_x0.png" />

@@ -4,6 +4,7 @@
 #include "Window.h"
 #include "Graphics.h"
 #include "Input.h"
+#include "AudioEngine.h"
 
 #include "GameStateManager.h"
 #include "GameState.h"
@@ -82,6 +83,7 @@ void Game::ProcessInput()
 void Game::Update(float deltaTime)
 {
 	m_gameStateManager->Update(deltaTime);
+	AudioEngine::Instance()->Update(deltaTime);
 }
 
 void Game::ProcessCollisions()

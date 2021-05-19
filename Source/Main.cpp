@@ -2,6 +2,7 @@
 #include "Graphics.h"
 #include "Game.h"
 #include "AudioEngine.h"
+#include "SoundManager.h"
 
 Graphics* graphics = nullptr;
 Window* window	= nullptr;
@@ -66,6 +67,8 @@ void ShutDown()
 	graphics = nullptr;
 	window = nullptr;
 	
+	SoundManager::DeleteSounds();
+	AudioEngine::Destroy();
 }
 
 LRESULT CALLBACK WndProc(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam)

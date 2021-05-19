@@ -154,6 +154,8 @@ void GameplayGameState::LoadAssets()
 	m_gameOverScreenController = new GameOverScreenController();
 	m_gameOverScreenController->Init(m_graphics);
 
+	
+
 	m_running = true;
 }
 
