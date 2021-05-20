@@ -20,12 +20,12 @@ HitBoxManager::~HitBoxManager()
 	//m_hitBoxDataList.clear();
 }
 
-void HitBoxManager::Init(Sprite* sprite, std::string fileName)
+void HitBoxManager::Init(Sprite* sprite, const std::string &fileName)
 {
 	Init(sprite, nullptr, fileName);
 }
 
-void HitBoxManager::Init(Sprite* sprite, GameObject* owner, std::string fileName)
+void HitBoxManager::Init(Sprite* sprite, GameObject* owner, const std::string &fileName)
 {
 	m_spriteSheet = sprite;
 	m_owner = owner;
@@ -74,7 +74,7 @@ void HitBoxManager::SetFlipped(bool flip)
 	m_hurtBox.SetFlipped(flip);
 }
 
-void HitBoxManager::SetCurrentHitBox(std::string name)
+void HitBoxManager::SetCurrentHitBox(const std::string &name)
 {
 	int index = 0;
 
@@ -117,7 +117,7 @@ bool HitBoxManager::IsHitBoxActive()
 	return false;
 }
 
-void HitBoxManager::LoadData(std::string fileName)
+void HitBoxManager::LoadData(const std::string &fileName)
 {
 	// read file
 	std::ifstream file(fileName);

@@ -15,7 +15,7 @@ Texture::~Texture()
 }
 
 void 
-Texture::LoadTexture(Graphics* graphics, std::string filename)
+Texture::LoadTexture(Graphics* graphics, const std::string &filename)
 {
 	// convert string to wstring LPCWSTR
 	std::wstring textureFile = std::wstring(filename.begin(), filename.end());

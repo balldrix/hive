@@ -16,7 +16,7 @@ public:
 private:
 	PlayerKnockbackState() {}
 	~PlayerKnockbackState() {}
-	PlayerKnockbackState(std::string name);
+	PlayerKnockbackState(const std::string &name);
 	PlayerKnockbackState(const PlayerKnockbackState&);
 	PlayerKnockbackState& operator=(const PlayerKnockbackState&);
 };

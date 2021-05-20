@@ -45,7 +45,7 @@ void EnemyWalkingState::OnExit(Enemy* enemy)
 {
 }
 
-EnemyWalkingState::EnemyWalkingState(std::string name)
+EnemyWalkingState::EnemyWalkingState(const std::string &name)
 {
 	m_name = name;
 }

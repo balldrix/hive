@@ -15,7 +15,7 @@ CharacterPortrait::~CharacterPortrait()
 	DeleteAll();
 }
 
-void CharacterPortrait::Init(Graphics* graphics, std::string texturePath)
+void CharacterPortrait::Init(Graphics* graphics, const std::string &texturePath)
 {
 	m_playerPortraitTexture = new Texture();
 	m_playerPortraitTexture->LoadTexture(graphics, texturePath);

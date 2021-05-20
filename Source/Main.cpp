@@ -30,10 +30,11 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	graphics = new Graphics();
 	graphics->Init(window->GetHwnd(), hInstance);
 
+	AudioEngine::Init();
+
 	game = new Game();
 	game->Init(window, graphics);
 
-	AudioEngine::Init();
 
 	MSG msg = {0};
 	while(msg.message != WM_QUIT)

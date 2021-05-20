@@ -14,7 +14,7 @@ EncounterHandler::~EncounterHandler()
 {
 }
 
-void EncounterHandler::Init(std::string encounterDataFile, std::vector<Enemy*> enemyList)
+void EncounterHandler::Init(const std::string &encounterDataFile, std::vector<Enemy*> enemyList)
 {
 	m_enemyList = enemyList;
 
@@ -59,7 +59,7 @@ void EncounterHandler::IncreaseEncounterIndex()
 	m_encounterIndex++;
 }
 
-bool EncounterHandler::LoadData(std::string encounterDataFile)
+bool EncounterHandler::LoadData(const std::string &encounterDataFile)
 {
 	std::ifstream file;
 	file.open(encounterDataFile);

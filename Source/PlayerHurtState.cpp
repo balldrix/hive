@@ -31,7 +31,7 @@ void PlayerHurtState::OnExit(Player* player)
 {
 }
 
-PlayerHurtState::PlayerHurtState(std::string name)
+PlayerHurtState::PlayerHurtState(const std::string &name)
 {
 	m_name = name;
 }

@@ -45,7 +45,7 @@ void EnemyKnockbackState::OnExit(Enemy* enemy)
 {
 }
 
-EnemyKnockbackState::EnemyKnockbackState(std::string name)
+EnemyKnockbackState::EnemyKnockbackState(const std::string &name)
 {
 	m_name = name;
 }

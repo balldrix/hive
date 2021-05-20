@@ -16,7 +16,7 @@ public:
 private:
 	EnemyRunningState() {}
 	~EnemyRunningState() {}
-	EnemyRunningState(std::string name);
+	EnemyRunningState(const std::string &name);
 	EnemyRunningState(const EnemyRunningState&);
 	EnemyRunningState& operator=(const EnemyRunningState&);
 };

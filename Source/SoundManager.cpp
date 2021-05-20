@@ -8,7 +8,7 @@ SoundManager::~SoundManager()
 {
 }
 
-void SoundManager::AddSound(std::string filename)
+void SoundManager::AddSound(const std::string &filename)
 {
 	if(!GetSound(filename))
 	{
@@ -20,7 +20,7 @@ void SoundManager::AddSound(std::string filename)
 	}
 }
 
-Sound* SoundManager::GetSound(std::string name)
+Sound* SoundManager::GetSound(const std::string &name)
 {
 	std::map<std::string, Sound*>::iterator soundIterator = s_sounds.find(name);
 	if(soundIterator != s_sounds.end())

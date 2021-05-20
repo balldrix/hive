@@ -5,8 +5,10 @@
 #include "State.h"
 #include "PlayerData.h"
 
+
 class ControlSystem;
 template<class T> class StateMachine;
+class SoundEmitter;
 
 class Player : public GameObject
 {
@@ -16,8 +18,8 @@ public:
 
 	void					Init(Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem);
 
-	void					LoadData(std::string playerDataFile, std::string attackDataFile);
-	bool					LoadPlayerData(std::string filename);
+	void					LoadData(const std::string &playerDataFile, const std::string &attackDataFile);
+	bool					LoadPlayerData(const std::string &filename);
 	void					Update(float deltaTime);
 	void					Render(Graphics* graphics);
 	void					Reset();
@@ -41,6 +43,7 @@ public:
 private:
 	PlayerData				m_playerData;
 	StateMachine<Player>*	m_stateMachine;
+	SoundEmitter*			m_soundEmitter;
 	int						m_lives;
 	float					m_knockoutTimer;
 };

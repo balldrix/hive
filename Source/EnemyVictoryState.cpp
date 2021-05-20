@@ -24,7 +24,7 @@ void EnemyVictoryState::OnExit(Enemy* enemy)
 {
 }
 
-EnemyVictoryState::EnemyVictoryState(std::string name)
+EnemyVictoryState::EnemyVictoryState(const std::string &name)
 {
 	m_name = name;
 }

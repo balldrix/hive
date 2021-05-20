@@ -14,14 +14,14 @@ public:
 	HitBoxManager();
 	~HitBoxManager();
 
-	void Init(Sprite* sprite, std::string fileName);
-	void Init(Sprite* sprite, GameObject* owner, std::string fileName);
+	void Init(Sprite* sprite, const std::string &fileName);
+	void Init(Sprite* sprite, GameObject* owner, const std::string &fileName);
 	void Update();
 	void Render(Graphics* graphics);
 
 	void SetOwner(GameObject* owner);
 	void SetFlipped(bool flip); // flip the hitbox data
-	void SetCurrentHitBox(std::string name);
+	void SetCurrentHitBox(const std::string &name);
 	void SetCurrentHitBox(const int& index);
 
 	HitBox GetMovementBox() const { return m_movementBox; }
@@ -41,10 +41,8 @@ private:
 	HitBox m_hurtBox;		// hurt box that set character's vulnerable area
 	HitBox m_hitBox;		// hit box (red) is what will do damage to other character
 
-	// load json data
-	void LoadData(std::string fileName);
+	void LoadData(const std::string &fileName);
 
-	// set hitboxes
 	void SetAllHitBoxes();
 	void SetMovementBox();
 	void SetHurtBox();

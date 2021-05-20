@@ -8,11 +8,11 @@ class Animator
 public:
 	Animator();
 	~Animator();
-	void Init(std::string fileName);		// init animator
+	void Init(const std::string &fileName);		// init animator
 	void Update(float deltaTime);			// update animation sourceRect
 
 	void SetAnimation(unsigned int index);	// set current animation to play using index
-	void SetAnimation(std::string name);	// set current animation to play using string
+	void SetAnimation(const std::string &name);	// set current animation to play using string
 
 	Animation* GetAnimation() const { return m_currentAnimation; }	// return pointer to current animation playing
 	int GetCurrentFrame() const { return m_currentFrame; }			// return current sourceRect in animation

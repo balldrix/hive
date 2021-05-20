@@ -35,7 +35,7 @@ void EnemyHurtState::OnExit(Enemy* enemy)
 {
 }
 
-EnemyHurtState::EnemyHurtState(std::string name)
+EnemyHurtState::EnemyHurtState(const std::string &name)
 {
 	m_name = name;
 }

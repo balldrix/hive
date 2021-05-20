@@ -11,7 +11,7 @@ public:
 	EncounterHandler();
 	~EncounterHandler();
 
-	void	Init(std::string encounterDataFile, std::vector<Enemy*> enemyList);
+	void	Init(const std::string &encounterDataFile, std::vector<Enemy*> enemyList);
 	void	SpawnEncounter();
 
 	void	SetEncounterIndex(const int& index);
@@ -24,7 +24,7 @@ public:
 	void	IncreaseEncounterIndex();
 
 private:
-	bool				LoadData(std::string encounterDataFile);
+	bool	LoadData(const std::string &encounterDataFile);
 
 	std::vector<Enemy*> m_enemyList;
 	size_t				m_encounterIndex;

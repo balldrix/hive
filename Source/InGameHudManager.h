@@ -29,8 +29,8 @@ public:
 	void EnableTravelPrompt();
 	void DisableTravelPrompt();
 	void UpdatePlayerLives(const int& lives);
-	void HideEnemyHud(std::string id);
-	void ShowEnemyHud(std::string id, Sprite* sprite, BarController* healthBar);
+	void HideEnemyHud(const std::string &id);
+	void ShowEnemyHud(const std::string &id, Sprite* sprite, BarController* healthBar);
 	void ReleaseAll();
 	void Reset();
 	void DeleteAll();
@@ -48,5 +48,5 @@ private:
 	int m_killCount;
 	int m_playerLivesLeft;
 
-	Vector2 GetKillCountStringOrigin(std::string s);
+	Vector2 GetKillCountStringOrigin(const std::string &s);
 };

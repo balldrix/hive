@@ -42,7 +42,7 @@ void PlayerKnockbackState::OnExit(Player* player)
 {
 }
 
-PlayerKnockbackState::PlayerKnockbackState(std::string name)
+PlayerKnockbackState::PlayerKnockbackState(const std::string &name)
 {
 	m_name = name;
 }

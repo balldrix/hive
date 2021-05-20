@@ -4,5 +4,5 @@
 
 namespace Error
 {
-	void FileLog(std::string message);
+	void FileLog(const std::string &message);
 };

@@ -14,7 +14,7 @@ EnemyAttackState* EnemyAttackState::Instance()
 	return &instance;
 }
 
-void EnemyAttackState::SetAttack(std::string name)
+void EnemyAttackState::SetAttack(const std::string &name)
 {
 	m_name = name;
 }
@@ -44,7 +44,7 @@ void EnemyAttackState::OnExit(Enemy* enemy)
 {
 }
 
-EnemyAttackState::EnemyAttackState(std::string name)
+EnemyAttackState::EnemyAttackState(const std::string &name)
 {
 	m_name = name;
 }

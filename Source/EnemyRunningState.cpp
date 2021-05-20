@@ -46,7 +46,7 @@ void EnemyRunningState::OnExit(Enemy* enemy)
 	enemy->GetAnimator()->Reset();
 }
 
-EnemyRunningState::EnemyRunningState(std::string name)
+EnemyRunningState::EnemyRunningState(const std::string &name)
 {
 	m_name = name;
 }

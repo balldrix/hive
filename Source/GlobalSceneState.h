@@ -16,7 +16,7 @@ public:
 private:
 	GlobalSceneState() {}
 	~GlobalSceneState() {}
-	GlobalSceneState(std::string name);
+	GlobalSceneState(const std::string &name);
 	GlobalSceneState(const GlobalSceneState&);
 	GlobalSceneState& operator=(const GlobalSceneState&);
 };

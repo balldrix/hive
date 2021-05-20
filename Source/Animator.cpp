@@ -16,7 +16,7 @@ Animator::~Animator()
 	m_animationList.clear();
 }
 
-void Animator::Init(std::string fileName)
+void Animator::Init(const std::string &fileName)
 {
 	// read file
 	std::ifstream file(fileName);
@@ -84,7 +84,7 @@ void Animator::SetAnimation(unsigned int index)
 	m_animDone = false;
 }
 
-void Animator::SetAnimation(std::string name)
+void Animator::SetAnimation(const std::string &name)
 {
 	Animation newAnimation;
 

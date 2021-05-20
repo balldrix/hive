@@ -1,4 +1,5 @@
 #include "Player.h"
+
 #include "Graphics.h"
 #include "Sprite.h"
 #include "ControlSystem.h"
@@ -13,6 +14,7 @@
 #include "Camera.h"
 #include "Error.h"
 #include "Constants.h"
+#include "SoundEmitter.h"
 
 using namespace PlayerConstants;
 using namespace GlobalConstants;
@@ -20,7 +22,8 @@ using namespace GlobalConstants;
 Player::Player() :
 	m_stateMachine(nullptr),
 	m_lives(0),
-	m_knockoutTimer(0.0f)
+	m_knockoutTimer(0.0f),
+	m_soundEmitter(nullptr)
 {
 }
 
@@ -56,7 +59,7 @@ void Player::Init(Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBo
 	m_lives = m_playerData.objectData.startingLives;
 }
 
-void Player::LoadData(std::string playerDataFile, std::string damageDataFile)
+void Player::LoadData(const std::string &playerDataFile, const std::string &damageDataFile)
 {
 	if(!LoadPlayerData(playerDataFile))
 	{
@@ -73,7 +76,7 @@ void Player::LoadData(std::string playerDataFile, std::string damageDataFile)
 	}
 }
 
-bool Player::LoadPlayerData(std::string filename)
+bool Player::LoadPlayerData(const std::string &filename)
 {
 	std::ifstream file;
 	file.open(filename);

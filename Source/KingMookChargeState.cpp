@@ -12,7 +12,7 @@ KingMookChargeState* KingMookChargeState::Instance()
     return &instance;
 }
 
-KingMookChargeState::KingMookChargeState(std::string name)
+KingMookChargeState::KingMookChargeState(const std::string &name)
 {
 	m_name = name;
 }

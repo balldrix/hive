@@ -12,7 +12,7 @@ Spritesheet::~Spritesheet()
 	m_frames.clear();
 }
 
-void Spritesheet::Init(Texture* texture, std::string fileName)
+void Spritesheet::Init(Texture* texture, const std::string &fileName)
 {
 	// init sprite sheet as one big sprite
 	Sprite::Init(texture);

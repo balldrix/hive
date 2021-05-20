@@ -34,7 +34,7 @@ void PlayerWalkingState::OnExit(Player* player)
 	player->GetAnimator()->Reset();
 }
 
-PlayerWalkingState::PlayerWalkingState(std::string name)
+PlayerWalkingState::PlayerWalkingState(const std::string &name)
 {
 	m_name = name;
 }

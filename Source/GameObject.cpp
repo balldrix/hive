@@ -70,7 +70,7 @@ void GameObject::SetCamera(Camera* cam)
 	m_camera = cam;
 }
 
-void GameObject::SetID(std::string id)
+void GameObject::SetID(const std::string &id)
 {
 	m_id = id;
 }
@@ -171,7 +171,7 @@ float GameObject::Lerp(float target, float current, float amount)
 	return target;
 }
 
-bool GameObject::LoadDamageData(std::string filename)
+bool GameObject::LoadDamageData(const std::string &filename)
 {
 	std::ifstream file;
 	file.open(filename);

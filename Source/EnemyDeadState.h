@@ -18,7 +18,7 @@ public:
 private:
 	EnemyDeadState() {}
 	~EnemyDeadState() {}
-	EnemyDeadState(std::string name);
+	EnemyDeadState(const std::string &name);
 	EnemyDeadState(const EnemyDeadState&);
 	EnemyDeadState& operator=(const EnemyDeadState&);
 };

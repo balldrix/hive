@@ -13,7 +13,7 @@ public:
 	GameOverScreen();
 	~GameOverScreen();
 
-	void Init(Graphics* graphics, Animator* animator, std::string texturePath);
+	void Init(Graphics* graphics, Animator* animator, const std::string &texturePath);
 	void Update(float deltaTime);
 	void Render(Graphics* graphics);
 	void Release();

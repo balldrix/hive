@@ -9,7 +9,7 @@ class Texture
 public:
 	Texture();
 	~Texture();
-	void LoadTexture(Graphics* graphics, std::string filename); // load texture from file
+	void LoadTexture(Graphics* graphics, const std::string &filename); // load texture from file
 	ID3D11ShaderResourceView*	GetTexture() { return m_texture; } // return pointer to shader resource view
 	ID3D11Resource* GetResource() { return m_resource; } // return pointer to texture resource
 	void Release(); // release shader resource

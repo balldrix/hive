@@ -16,7 +16,7 @@ public:
 private:
 	EnemyVictoryState() {}
 	~EnemyVictoryState() {}
-	EnemyVictoryState(std::string name);
+	EnemyVictoryState(const std::string &name);
 	EnemyVictoryState(const EnemyVictoryState&);
 	EnemyVictoryState& operator=(const EnemyVictoryState&);
 };

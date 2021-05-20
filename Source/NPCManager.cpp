@@ -40,7 +40,7 @@ void NPCManager::Init(Graphics* graphics, Camera* camera, Player* player, InGame
 	}
 }
 
-bool NPCManager::InitTypes(std::string fileName)
+bool NPCManager::InitTypes(const std::string &fileName)
 {
 	std::ifstream file; // ifstream file buffer
 	file.open(fileName); // opens file and reads to buffer
@@ -106,7 +106,7 @@ bool NPCManager::InitTypes(std::string fileName)
 }
 
 bool NPCManager::InitNPCs(Graphics* graphics, Camera* camera, Player* player, InGameHudManager* hudManager, Texture* standardShadowTexture,
-						  Texture* hitBoxTexture, std::string fileName)
+						  Texture* hitBoxTexture, const std::string &fileName)
 {
 	std::ifstream file; // ifstream file buffer
 	file.open(fileName); // opens file and reads to buffer

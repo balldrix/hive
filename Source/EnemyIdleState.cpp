@@ -89,7 +89,7 @@ void EnemyIdleState::OnExit(Enemy* enemy)
 {
 }
 
-EnemyIdleState::EnemyIdleState(std::string name)
+EnemyIdleState::EnemyIdleState(const std::string &name)
 {
 	m_name = name;
 }

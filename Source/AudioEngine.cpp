@@ -37,6 +37,8 @@ AudioEngine::AudioEngine(unsigned int channels) :
 		else
 			break;
 	}
+
+	ALenum error = alGetError();
 }
 
 AudioEngine::~AudioEngine()

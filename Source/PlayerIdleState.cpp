@@ -6,7 +6,7 @@
 #include "ControlSystem.h"
 #include "UnitVectors.h"
 
-PlayerIdleState::PlayerIdleState(std::string name)
+PlayerIdleState::PlayerIdleState(const std::string &name)
 {
 	m_name = name;
 }

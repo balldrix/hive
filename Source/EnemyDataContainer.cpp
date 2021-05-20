@@ -14,7 +14,7 @@ void EnemyDataContainer::Add(EnemyData& data)
 	m_dataList.push_back(data);
 }
 
-EnemyData EnemyDataContainer::GetData(std::string type)
+EnemyData EnemyDataContainer::GetData(const std::string &type)
 {
 	for(size_t i = 0; i < m_dataList.size(); i++)
 	{

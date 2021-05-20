@@ -61,7 +61,7 @@ void EnemyDeadState::OnExit(Enemy* enemy)
 {
 }
 
-EnemyDeadState::EnemyDeadState(std::string name)
+EnemyDeadState::EnemyDeadState(const std::string &name)
 {
 	m_name = name;
 }

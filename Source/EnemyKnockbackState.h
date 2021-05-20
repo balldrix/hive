@@ -18,7 +18,7 @@ public:
 private:
 	EnemyKnockbackState() {}
 	~EnemyKnockbackState() {}
-	EnemyKnockbackState(std::string name);
+	EnemyKnockbackState(const std::string &name);
 	EnemyKnockbackState(const EnemyKnockbackState&);
 	EnemyKnockbackState& operator=(const EnemyKnockbackState&);
 };

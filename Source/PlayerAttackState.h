@@ -10,7 +10,7 @@ class PlayerAttackState : public State<Player>
 public:
 	// static instance call
 	static PlayerAttackState* Instance();
-	void SetAttack(std::string name);
+	void SetAttack(const std::string &name);
 
 	virtual void OnEnter(Player* player);
 	virtual void Execute(Player* player);
@@ -19,7 +19,7 @@ public:
 private:
 	PlayerAttackState() {}
 	~PlayerAttackState() {}
-	PlayerAttackState(std::string name);
+	PlayerAttackState(const std::string &name);
 	PlayerAttackState(const PlayerAttackState&);
 	PlayerAttackState& operator=(const PlayerAttackState&);
 };

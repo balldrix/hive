@@ -9,7 +9,7 @@ class Spritesheet : public Sprite
 public:
 	Spritesheet();
 	~Spritesheet();
-	void Init(Texture* texture, std::string fileName);
+	void Init(Texture* texture, const std::string &fileName);
 	void Render(Graphics* graphics, int frameNum);
 	void Render(Graphics* graphics, Vector2 position, int frameNum);
 

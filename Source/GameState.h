@@ -7,20 +7,20 @@ public:
 	GameState(const wchar_t* stateName);
 	virtual ~GameState(void) {};
 
-	virtual void	OnEntry() {};				//  load all assetts when entering state
-	virtual void	OnExit() {};				// delete all assetts when changing state
+	virtual void	OnEntry() {};				
+	virtual void	OnExit() {};				
 
-	virtual void	ProcessInput() {};			// process keyboard and mouse input
-	virtual void	Update(float deltaTime) {}; // update game state
-	virtual void	ProcessCollisions() {};		// check for collisions
-	virtual void	Render() {};				// render game state
+	virtual void	ProcessInput() {};			
+	virtual void	Update(float deltaTime) {}; 
+	virtual void	ProcessCollisions() {};		
+	virtual void	Render() {};				
 
-	virtual void	ReleaseAll() {};			// release all resources in state
+	virtual void	ReleaseAll() {};			
 
-	virtual const wchar_t*	GetStateName() const; // return name of current state
+	virtual const wchar_t*	GetStateName() const; 
 
 protected:
-	const wchar_t*	m_stateName; 				// name of game state
-	float			m_inputTimer; 				// var used to create input delay
-	bool			m_inputReady; 				// has a key been pressed already?
+	const wchar_t*	m_stateName; 
+	float			m_inputTimer; 
+	bool			m_inputReady; 
 };

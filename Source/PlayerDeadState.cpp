@@ -11,7 +11,7 @@ PlayerDeadState* PlayerDeadState::Instance()
 	return &instance;
 }
 
-PlayerDeadState::PlayerDeadState(std::string name)
+PlayerDeadState::PlayerDeadState(const std::string &name)
 {
 	m_name = name;
 }

@@ -91,7 +91,7 @@ void InGameHudManager::Render(Graphics* graphics)
 	m_travelPrompt->Render(graphics);
 }
 
-Vector2 InGameHudManager::GetKillCountStringOrigin(std::string s)
+Vector2 InGameHudManager::GetKillCountStringOrigin(const std::string &s)
 {
 	XMVECTOR size = m_despairFont12->MeasureString(s.c_str());
 	float stringSizeX = XMVectorGetX(size);
@@ -131,7 +131,7 @@ void InGameHudManager::UpdatePlayerLives(const int& lives)
 	m_playerLivesLeft = lives;
 }
 
-void InGameHudManager::HideEnemyHud(std::string id)
+void InGameHudManager::HideEnemyHud(const std::string &id)
 {
 	if(m_enemyId != id)
 		return;
@@ -141,7 +141,7 @@ void InGameHudManager::HideEnemyHud(std::string id)
 	m_enemyId = std::string();
 }
 
-void InGameHudManager::ShowEnemyHud(std::string id, Sprite* portrait, BarController* healthBar)
+void InGameHudManager::ShowEnemyHud(const std::string &id, Sprite* portrait, BarController* healthBar)
 {
 	m_enemyId = id;
 	m_enemyPortrait = portrait;

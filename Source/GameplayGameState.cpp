@@ -1,4 +1,7 @@
 #include "GameplayGameState.h"
+
+#include "pch.h"
+
 #include "GameStateManager.h"
 #include "Graphics.h"
 #include "Input.h"
@@ -16,7 +19,6 @@
 #include "HitBoxManager.h"
 #include "NPCManager.h"
 #include "Enemy.h"
-#include "pch.h"
 #include "Error.h"
 #include "StateMachine.h"
 #include "GameplayOwnedSceneStates.h"
@@ -24,9 +26,12 @@
 #include "TravellingHandler.h"
 #include "TravelPrompt.h"
 #include "GameOverScreenController.h"
+#include "SoundManager.h"
+#include "Sound.h"
+#include "AudioEngine.h"
 
-using namespace GameplayConstants;
 using namespace GlobalConstants;
+using namespace GameplayConstants;
 using namespace InGameHudConstants;
 
 GameplayGameState::GameplayGameState() :
@@ -85,6 +90,8 @@ void GameplayGameState::OnExit()
 
 void GameplayGameState::LoadAssets()
 {
+	SoundManager::AddSound("GameData\\Sounds\\cow.wav");
+
 	m_camera = new Camera();
 	m_controlSystem = new ControlSystem();
 
@@ -152,9 +159,7 @@ void GameplayGameState::LoadAssets()
 	m_camera->Init(GameWidth);
 	
 	m_gameOverScreenController = new GameOverScreenController();
-	m_gameOverScreenController->Init(m_graphics);
-
-	
+	m_gameOverScreenController->Init(m_graphics);	
 
 	m_running = true;
 }

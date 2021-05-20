@@ -20,7 +20,7 @@ GameOverScreen::~GameOverScreen()
 	DeleteAll();
 }
 
-void GameOverScreen::Init(Graphics* graphics, Animator* animator, std::string texturePath)
+void GameOverScreen::Init(Graphics* graphics, Animator* animator, const std::string &texturePath)
 {
 	m_animator = animator;
 

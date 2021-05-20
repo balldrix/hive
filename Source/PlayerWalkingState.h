@@ -16,7 +16,7 @@ public:
 private:
 	PlayerWalkingState() {}
 	~PlayerWalkingState() {}
-	PlayerWalkingState(std::string name);
+	PlayerWalkingState(const std::string &name);
 	PlayerWalkingState(const PlayerWalkingState&);
 	PlayerWalkingState& operator=(const PlayerWalkingState&);
 };

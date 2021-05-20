@@ -15,7 +15,7 @@ public:
 private:
 	GameOverSceneState() {}
 	~GameOverSceneState() {}
-	GameOverSceneState(std::string name);
+	GameOverSceneState(const std::string &name);
 	GameOverSceneState(const GameOverSceneState&);
 	GameOverSceneState& operator=(const GameOverSceneState&);
 };

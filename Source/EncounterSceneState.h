@@ -15,7 +15,7 @@ public:
 private:
 	EncounterSceneState() {}
 	~EncounterSceneState() {}
-	EncounterSceneState(std::string name);
+	EncounterSceneState(const std::string &name);
 	EncounterSceneState(const EncounterSceneState&);
 	EncounterSceneState& operator=(const EncounterSceneState&);
 };

@@ -9,7 +9,7 @@ public:
 	~EnemyDataContainer();
 
 	void Add(EnemyData& data);
-	EnemyData GetData(std::string type);
+	EnemyData GetData(const std::string &type);
 
 private:
 	std::vector<EnemyData> m_dataList;

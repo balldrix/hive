@@ -16,7 +16,7 @@ public:
 private:
 	TravellingSceneState() {}
 	~TravellingSceneState() {}
-	TravellingSceneState(std::string name);
+	TravellingSceneState(const std::string &name);
 	TravellingSceneState(const TravellingSceneState&);
 	TravellingSceneState& operator=(const TravellingSceneState&);
 };

@@ -13,7 +13,7 @@ PlayerAttackState* PlayerAttackState::Instance()
 	return &instance;
 }
 
-void PlayerAttackState::SetAttack(std::string name)
+void PlayerAttackState::SetAttack(const std::string &name)
 {
 	m_name = name;
 }
@@ -47,7 +47,7 @@ void PlayerAttackState::OnExit(Player* player)
 {
 }
 
-PlayerAttackState::PlayerAttackState(std::string name)
+PlayerAttackState::PlayerAttackState(const std::string &name)
 {
 	m_name = name;
 }

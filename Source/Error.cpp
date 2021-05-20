@@ -1,7 +1,7 @@
 #include "Error.h"
 
 void 
-Error::FileLog(std::string message)
+Error::FileLog(const std::string &message)
 {
 	time_t rawTime; // raw time
 	struct tm timeInfo; // struct for time information

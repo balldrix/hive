@@ -62,8 +62,8 @@ private:
 	void								DeleteAssets();				
 
 	GameStateManager*					m_gameStateManager;			
-	Graphics*			m_graphics;					
-	Input*				m_input;
+	Graphics*							m_graphics;					
+	Input*								m_input;
 	
 	Camera*								m_camera;					
 	ControlSystem*						m_controlSystem;			

@@ -47,14 +47,14 @@ public:
 
 	float			GetLerpAmount(float num);
 	float			Lerp(float target, float current, float amount);
-	bool			LoadDamageData(std::string damageDataFile);
+	bool			LoadDamageData(const std::string &damageDataFile);
 
 	// flip sprite and hitboxes
 	void			FlipHorizontally(bool flip);
 
 	// Setters
 	void			SetCamera(Camera* cam);
-	void			SetID(std::string id);			// set object ID
+	void			SetID(const std::string &id);			// set object ID
 	void			SetPositionX(float x);
 	void			SetPositionY(float y);
 	void			SetPosition(float x, float y);

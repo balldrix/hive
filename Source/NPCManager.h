@@ -18,9 +18,9 @@ public:
 
 	void	Init(Graphics* graphics, Camera* camera, Player* player, InGameHudManager* hudManager, Texture* standardShadowTexture,
 				 Texture* hitBoxTexture);
-	bool	InitTypes(std::string fileName);
+	bool	InitTypes(const std::string &fileName);
 	bool	InitNPCs(Graphics* graphics, Camera* camera, Player* player, InGameHudManager* hudManager, Texture* standardShadowTexture,
-					 Texture* hitBoxTexture, std::string enemyDataFile);
+					 Texture* hitBoxTexture, const std::string &enemyDataFile);
 
 	void	Render(Graphics* graphics);
 	void	Update(float deltaTime);

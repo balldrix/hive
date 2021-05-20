@@ -16,7 +16,7 @@ public:
 private:
 	PlayerDeadState() {}
 	~PlayerDeadState() {}
-	PlayerDeadState(std::string name);
+	PlayerDeadState(const std::string &name);
 	PlayerDeadState(const PlayerDeadState&);
 	PlayerDeadState& operator=(const PlayerDeadState&);
 };
