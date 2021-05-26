@@ -7,7 +7,7 @@
 class ALCdevice;
 class ALCcontext;
 
-class SoundEmitter;
+class SoundSource;
 
 struct OALSource
 {
@@ -33,13 +33,13 @@ public:
 
 	static void Destroy() { delete s_instance; }
 
-	void SetListenerPosition(const Vector3& position) { m_listenerPosition = position; }
+	void SetListener(GameObject* object) { m_listener = object; }
 	void SetMasterVolume(float volume);
 
 	Vector3 GetListenerPosition() { return m_listenerPosition; }
 
-	void AddSoundEmitter(SoundEmitter* soundEmitter) { m_soundEmitters.push_back(soundEmitter); }
-	void RemoveSoundEmitter(SoundEmitter* soundEmitter);
+	void AddSoundSource(SoundSource* soundSource) { m_soundEmitters.push_back(soundSource); }
+	void RemoveSoundSource(SoundSource* soundSource);
 
 	void Update(float deltaTime);
 
@@ -50,8 +50,10 @@ protected:
 	void UpdateListener();
 	void UpdateTemporaryEmitters(float deltaTime);
 
-	void AttachSources(std::vector<SoundEmitter*>::iterator from, std::vector<SoundEmitter*>::iterator to);
-	void DetachSources(std::vector<SoundEmitter*>::iterator from, std::vector<SoundEmitter*>::iterator to);
+	void SetListenerPosition(const Vector3& position) { m_listenerPosition = position; }
+
+	void AttachSources(std::vector<SoundSource*>::iterator from, std::vector<SoundSource*>::iterator to);
+	void DetachSources(std::vector<SoundSource*>::iterator from, std::vector<SoundSource*>::iterator to);
 
 	void CullTargets();
 	OALSource* GetSource();
@@ -63,8 +65,8 @@ protected:
 	GameObject* m_listener;
 
 	std::vector<OALSource*> m_sources;
-	std::vector<SoundEmitter*> m_soundEmitters;
-	std::vector<SoundEmitter*> m_frameEmitters;
+	std::vector<SoundSource*> m_soundEmitters;
+	std::vector<SoundSource*> m_frameEmitters;
 
 	static AudioEngine* s_instance;
 };

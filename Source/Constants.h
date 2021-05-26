@@ -41,3 +41,8 @@ namespace InGameHudConstants
 	const unsigned int KillCountPositionY		= 10;
 	const float TravelPromptTime				= 3.0f;
 }
+
+namespace AudioConstants
+{
+	const unsigned int MaxPlayerPunchSounds		= 4;
+}

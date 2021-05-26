@@ -90,7 +90,10 @@ void GameplayGameState::OnExit()
 
 void GameplayGameState::LoadAssets()
 {
-	SoundManager::AddSound("GameData\\Sounds\\cow.wav");
+	SoundManager::AddSound(L"GameData\\Sounds\\punch_001.wav");
+	SoundManager::AddSound(L"GameData\\Sounds\\punch_002.wav");
+	SoundManager::AddSound(L"GameData\\Sounds\\punch_003.wav");
+	SoundManager::AddSound(L"GameData\\Sounds\\punch_004.wav");
 
 	m_camera = new Camera();
 	m_controlSystem = new ControlSystem();

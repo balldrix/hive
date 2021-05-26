@@ -17,7 +17,7 @@ public:
 	Animation* GetAnimation() const { return m_currentAnimation; }	// return pointer to current animation playing
 	int GetCurrentFrame() const { return m_currentFrame; }			// return current sourceRect in animation
 
-	void Play() { m_paused = false; }			// play animation
+	void AddSoundSource() { m_paused = false; }			// play animation
 	void Pause() { m_paused = true; }			// pause animation
 	bool IsPaused() const { return m_paused; }	// check if paused
 	bool IsDone() const { return m_animDone; }	//

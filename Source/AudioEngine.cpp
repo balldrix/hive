@@ -1,10 +1,12 @@
 #include "AudioEngine.h"
 
-#include "SoundEmitter.h"
 #include <AL/al.h>
 #include <AL/alc.h>
 #include <stdexcept>
 #include <algorithm>
+
+#include "SoundSource.h"
+#include "GameObject.h"
 
 AudioEngine* AudioEngine::s_instance = nullptr;
 
@@ -68,13 +70,15 @@ void AudioEngine::UpdateListener()
 	if(m_listener == nullptr)
 		return;
 
+	SetListenerPosition(Vector3(m_listener->GetPositionX(), m_listener->GetPositionY() - m_listener->GetGroundPosition().y, m_listener->GetPositionY()));
+
 	alListenerfv(AL_POSITION, (float*) &m_listenerPosition);
 	alListenerfv(AL_ORIENTATION, (float*) &Vector3::Up);
 }
 
 void AudioEngine::UpdateTemporaryEmitters(float deltaTime)
 {
-	for(std::vector<SoundEmitter*>::iterator i = m_frameEmitters.begin(); i != m_frameEmitters.end();)
+	for(std::vector<SoundSource*>::iterator i = m_frameEmitters.begin(); i != m_frameEmitters.end();)
 	{
 		if((*i)->GetTimeLeft() < 0.0f && !(*i)->GetLooping())
 		{
@@ -89,11 +93,11 @@ void AudioEngine::UpdateTemporaryEmitters(float deltaTime)
 	}
 }
 
-void AudioEngine::RemoveSoundEmitter(SoundEmitter* soundEmitter)
+void AudioEngine::RemoveSoundSource(SoundSource* soundEmitter)
 {
-	for(std::vector<SoundEmitter*>::iterator i = m_soundEmitters.begin(); i != m_soundEmitters.end();)
+	for(std::vector<SoundSource*>::iterator i = m_soundEmitters.begin(); i != m_soundEmitters.end();)
 	{
-		SoundEmitter* s = *i;
+		SoundSource* s = *i;
 		if(s == soundEmitter)
 		{
 			m_soundEmitters.erase(i);
@@ -111,7 +115,7 @@ void AudioEngine::Update(float deltaTime)
 	UpdateListener();
 	UpdateTemporaryEmitters(deltaTime);
 
-	for(std::vector<SoundEmitter*>::iterator i = m_soundEmitters.begin(); i != m_soundEmitters.end(); ++i)
+	for(std::vector<SoundSource*>::iterator i = m_soundEmitters.begin(); i != m_soundEmitters.end(); ++i)
 	{
 		m_frameEmitters.push_back((*i));
 		(*i)->Update(deltaTime);
@@ -121,7 +125,7 @@ void AudioEngine::Update(float deltaTime)
 
 	if(m_frameEmitters.size() > m_sources.size())
 	{
-		std::sort(m_frameEmitters.begin(), m_frameEmitters.end(), SoundEmitter::CompareNodesByPriority);
+		std::sort(m_frameEmitters.begin(), m_frameEmitters.end(), SoundSource::CompareNodesByPriority);
 
 		DetachSources(m_frameEmitters.begin() + (m_sources.size() + 1), m_frameEmitters.end());
 		AttachSources(m_frameEmitters.begin(), m_frameEmitters.begin() + m_sources.size());
@@ -134,9 +138,9 @@ void AudioEngine::Update(float deltaTime)
 	m_frameEmitters.clear();
 }
 
-void AudioEngine::AttachSources(std::vector<SoundEmitter*>::iterator from, std::vector<SoundEmitter*>::iterator to)
+void AudioEngine::AttachSources(std::vector<SoundSource*>::iterator from, std::vector<SoundSource*>::iterator to)
 {
-	for(std::vector<SoundEmitter*>::iterator i = from; i != to; ++i)
+	for(std::vector<SoundSource*>::iterator i = from; i != to; ++i)
 	{
 		if(!(*i)->GetSource())
 		{
@@ -145,9 +149,9 @@ void AudioEngine::AttachSources(std::vector<SoundEmitter*>::iterator from, std::
 	}
 }
 
-void AudioEngine::DetachSources(std::vector<SoundEmitter*>::iterator from, std::vector<SoundEmitter*>::iterator to)
+void AudioEngine::DetachSources(std::vector<SoundSource*>::iterator from, std::vector<SoundSource*>::iterator to)
 {
-	for(std::vector<SoundEmitter*>::iterator i = from; i != to; ++i)
+	for(std::vector<SoundSource*>::iterator i = from; i != to; ++i)
 	{
 		(*i)->DetachSource();
 	}
@@ -155,9 +159,9 @@ void AudioEngine::DetachSources(std::vector<SoundEmitter*>::iterator from, std::
 
 void AudioEngine::CullTargets()
 {
-	for(std::vector<SoundEmitter*>::iterator i = m_frameEmitters.begin(); i != m_frameEmitters.end();)
+	for(std::vector<SoundSource*>::iterator i = m_frameEmitters.begin(); i != m_frameEmitters.end();)
 	{
-		SoundEmitter* emitter = (*i);
+		SoundSource* emitter = (*i);
 		float distance;
 
 		if(emitter->GetTarget() != nullptr)

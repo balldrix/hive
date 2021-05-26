@@ -1,35 +1,35 @@
-#include "SoundEmitter.h"
+#include "SoundSource.h"
 
 #include "AudioEngine.h"
 
-SoundEmitter::SoundEmitter()
+SoundSource::SoundSource()
 {
 	Reset();
 }
 
-SoundEmitter::SoundEmitter(Sound* sound)
+SoundSource::SoundSource(Sound* sound)
 {
 	Reset();
 	SetSound(sound);
 }
 
-void SoundEmitter::Reset()
+void SoundSource::Reset()
 {
 	m_priority = SoundPriority::Low;
 	m_volume = 1.0f;
 	m_radius = 500.0f;
 	m_timeLeft = 0.0f;
-	m_isLooping = true;
+	m_isLooping = false;
 	m_currentSource = nullptr;
 	m_sound = nullptr;
 }
 
-SoundEmitter::~SoundEmitter()
+SoundSource::~SoundSource()
 {
 	DetachSource();
 }
 
-void SoundEmitter::AttachSource(OALSource* source)
+void SoundSource::AttachSource(OALSource* source)
 {
 	m_currentSource = source;
 
@@ -46,7 +46,7 @@ void SoundEmitter::AttachSource(OALSource* source)
 	alSourcePlay(m_currentSource->source);
 }
 
-void SoundEmitter::DetachSource()
+void SoundSource::DetachSource()
 {
 	if(!m_currentSource)
 		return;
@@ -59,12 +59,12 @@ void SoundEmitter::DetachSource()
 	m_currentSource = nullptr;
 }
 
-bool SoundEmitter::CompareNodesByPriority(SoundEmitter* a, SoundEmitter* b)
+bool SoundSource::CompareNodesByPriority(SoundSource* a, SoundSource* b)
 {
 	return a->m_priority > b->m_priority;
 }
 
-void SoundEmitter::Update(float deltaTime)
+void SoundSource::Update(float deltaTime)
 {
 	m_timeLeft -= deltaTime;
 
@@ -88,7 +88,7 @@ void SoundEmitter::Update(float deltaTime)
 	alSourcef(m_currentSource->source, AL_REFERENCE_DISTANCE, m_radius * 0.2f);
 }
 
-void SoundEmitter::SetSound(Sound* sound)
+void SoundSource::SetSound(Sound* sound)
 {
 	m_sound = sound;
 	DetachSource();

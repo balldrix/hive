@@ -14,7 +14,11 @@
 #include "Camera.h"
 #include "Error.h"
 #include "Constants.h"
-#include "SoundEmitter.h"
+#include "AudioEngine.h"
+#include "SoundManager.h"
+#include "SoundSource.h"
+#include "Sound.h"
+#include "Randomiser.h"
 
 using namespace PlayerConstants;
 using namespace GlobalConstants;
@@ -23,7 +27,7 @@ Player::Player() :
 	m_stateMachine(nullptr),
 	m_lives(0),
 	m_knockoutTimer(0.0f),
-	m_soundEmitter(nullptr)
+	m_soundSource(nullptr)
 {
 }
 
@@ -34,6 +38,8 @@ Player::~Player()
 		delete m_stateMachine;
 		m_stateMachine = nullptr;
 	}
+
+	AudioEngine::Instance()->RemoveSoundSource(m_soundSource);
 }
 
 void Player::Init(Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem)
@@ -57,6 +63,11 @@ void Player::Init(Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBo
 
 	m_health = m_playerData.objectData.startingHealth;
 	m_lives = m_playerData.objectData.startingLives;
+
+	m_soundSource = new SoundSource();
+	m_soundSource->SetTarget(this);
+	AudioEngine::Instance()->AddSoundSource(m_soundSource);
+	AudioEngine::Instance()->SetListener(this);
 }
 
 void Player::LoadData(const std::string &playerDataFile, const std::string &damageDataFile)
@@ -334,3 +345,12 @@ void Player::Knockback(const Vector2& direction, const float& force)
 	SetMovementSpeed(force);
 }
 
+void Player::PlayPunchSound()
+{
+	int randomNum = Randomiser::Instance()->GetRandNum(1, AudioConstants::MaxPlayerPunchSounds);
+	
+	std::wstring punchSound = L"punch_00" + std::to_wstring(randomNum);
+
+	m_soundSource->SetSound(SoundManager::GetSound(punchSound));
+	m_soundSource->SetLooping(false);
+}

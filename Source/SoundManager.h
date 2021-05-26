@@ -7,13 +7,13 @@
 class SoundManager
 {
 public:
-	static void AddSound(const std::string &filename);
-	static Sound* GetSound(const std::string &name);
+	static void AddSound(const std::wstring &filename);
+	static Sound* GetSound(const std::wstring &name);
 
 	static void DeleteSounds();
 protected:
 	SoundManager();
 	~SoundManager();
 
-	static std::map<std::string, Sound*> s_sounds;
+	static std::map<std::wstring, Sound*> s_sounds;
 };

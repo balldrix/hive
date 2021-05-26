@@ -14,15 +14,15 @@ enum class SoundPriority
 
 struct OALSource;
 
-class SoundEmitter
+class SoundSource
 {
 public:
-	SoundEmitter();
-	SoundEmitter(Sound* sound);
-	~SoundEmitter();
+	SoundSource();
+	SoundSource(Sound* sound);
+	~SoundSource();
 
 	void			Reset();
-	
+
 	void			SetSound(Sound* sound);
 	void			SetPriority(SoundPriority priority) { m_priority = priority; }
 	void			SetVolume(float volume) { m_volume = std::min(1.0f, std::max(0.0f, volume)); }
@@ -42,7 +42,7 @@ public:
 	void			AttachSource(OALSource* source);
 	void			DetachSource();
 
-	static bool		CompareNodesByPriority(SoundEmitter* a, SoundEmitter* b);
+	static bool		CompareNodesByPriority(SoundSource* a, SoundSource* b);
 
 	virtual void	Update(float deltaTime);
 

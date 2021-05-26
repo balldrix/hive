@@ -2,13 +2,11 @@
 
 #include "State.h"
 
-// forward declaration
 class Player;
 
 class PlayerAttackState : public State<Player>
 {
 public:
-	// static instance call
 	static PlayerAttackState* Instance();
 	void SetAttack(const std::string &name);
 

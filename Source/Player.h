@@ -8,7 +8,7 @@
 
 class ControlSystem;
 template<class T> class StateMachine;
-class SoundEmitter;
+class SoundSource;
 
 class Player : public GameObject
 {
@@ -40,10 +40,12 @@ public:
 	void					Respawn();
 	void					ResetKnockoutTimer();
 
+	void					PlayPunchSound();
+
 private:
 	PlayerData				m_playerData;
 	StateMachine<Player>*	m_stateMachine;
-	SoundEmitter*			m_soundEmitter;
+	SoundSource*			m_soundSource;
 	int						m_lives;
 	float					m_knockoutTimer;
 };

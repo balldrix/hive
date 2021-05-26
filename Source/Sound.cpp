@@ -8,7 +8,7 @@
 #include "SoundManager.h"
 #include "Error.h"
 
-std::map<std::string, Sound*> SoundManager::s_sounds;
+std::map<std::wstring, Sound*> SoundManager::s_sounds;
 
 Sound::Sound() : 
     m_length(0),
@@ -104,7 +104,7 @@ void Sound::LoadFromWav(const char* filename)
         return;
     }
 	
-	m_length = sfinfo.frames / sfinfo.samplerate;
+	m_length = (float)sfinfo.frames / sfinfo.samplerate;
 	m_samplerate = sfinfo.samplerate;
 	m_bitrate = 16;
 	m_size = num_bytes;
