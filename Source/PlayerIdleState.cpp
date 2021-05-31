@@ -29,7 +29,6 @@ void PlayerIdleState::Execute(Player* player)
 {
 	if(player->GetCurrentVelocity() != Vector2::Zero)
 		player->GetStateMachine()->ChangeState((PlayerWalkingState::Instance()));
-
 }
 
 void PlayerIdleState::OnExit(Player* player)

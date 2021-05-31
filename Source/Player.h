@@ -40,12 +40,13 @@ public:
 	void					Respawn();
 	void					ResetKnockoutTimer();
 
-	void					PlayPunchSound();
+	void					PlayAudio(const std::string &name);
 
 private:
-	PlayerData				m_playerData;
-	StateMachine<Player>*	m_stateMachine;
-	SoundSource*			m_soundSource;
-	int						m_lives;
-	float					m_knockoutTimer;
+	PlayerData							m_playerData;
+	StateMachine<Player>*				m_stateMachine;
+	SoundSource*						m_soundSource;
+	int									m_lives;
+	float								m_knockoutTimer;
+	std::map<std::string, std::wstring>	m_playerSounds;
 };

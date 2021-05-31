@@ -27,6 +27,8 @@ void PlayerWalkingState::Execute(Player* player)
 	{
 		player->GetStateMachine()->ChangeState(PlayerIdleState::Instance());
 	}
+
+
 }
 
 void PlayerWalkingState::OnExit(Player* player)

@@ -91,7 +91,6 @@ void GameplayGameState::OnExit()
 void GameplayGameState::LoadAssets()
 {
 	SoundManager::AddSound(L"GameData\\Sounds\\punch_001.wav");
-	SoundManager::AddSound(L"GameData\\Sounds\\punch_002.wav");
 	SoundManager::AddSound(L"GameData\\Sounds\\punch_003.wav");
 	SoundManager::AddSound(L"GameData\\Sounds\\punch_004.wav");
 

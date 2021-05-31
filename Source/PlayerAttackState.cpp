@@ -27,7 +27,7 @@ void PlayerAttackState::OnEnter(Player* player)
 	player->GetHitBoxManager()->SetCurrentHitBox(m_name);
 	player->GetControlSystem()->CanAttack(false);
 
-	player->PlayPunchSound();
+	player->PlayAudio(m_name);
 }
 
 void PlayerAttackState::Execute(Player* player)

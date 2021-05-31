@@ -68,6 +68,18 @@ void Player::Init(Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBo
 	m_soundSource->SetTarget(this);
 	AudioEngine::Instance()->AddSoundSource(m_soundSource);
 	AudioEngine::Instance()->SetListener(this);
+
+	m_playerSounds =
+	{
+		{ "Attack1",	L"punch_001" },
+		{ "Attack2",	L"punch_003" },
+		{ "Attack3",	L"punch_004" },
+		{ "Walking",	L"walk_001"},
+		{ "Hurt1",		L"hit_001"},
+		{ "Hurt2",		L"hit_002"},
+		{ "Hurt3",		L"hit_003"},
+		{ "Dead",		L"scream"}
+	};
 }
 
 void Player::LoadData(const std::string &playerDataFile, const std::string &damageDataFile)
@@ -150,10 +162,7 @@ void Player::Update(float deltaTime)
 	if(m_dead == true)
 		return;
 
-	// update player state machine
 	m_stateMachine->Update();
-
-	// update object
 	GameObject::Update(deltaTime);
 
 	if(m_stateMachine->GetCurrentState() != PlayerAttackState::Instance())
@@ -345,12 +354,9 @@ void Player::Knockback(const Vector2& direction, const float& force)
 	SetMovementSpeed(force);
 }
 
-void Player::PlayPunchSound()
+void Player::PlayAudio(const std::string &name)
 {
-	int randomNum = Randomiser::Instance()->GetRandNum(1, AudioConstants::MaxPlayerPunchSounds);
-	
-	std::wstring punchSound = L"punch_00" + std::to_wstring(randomNum);
-
-	m_soundSource->SetSound(SoundManager::GetSound(punchSound));
+	std::wstring soundName = m_playerSounds[name];
+	m_soundSource->SetSound(SoundManager::GetSound(soundName));
 	m_soundSource->SetLooping(false);
 }
