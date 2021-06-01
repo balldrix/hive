@@ -31,40 +31,28 @@ void Animator::Init(const std::string &fileName)
 
 void Animator::Update(float deltaTime)
 {
-	// if paused
 	if(m_paused)
-	{
 		return;
-	}
 
-	// update timer
 	m_animationTimer += deltaTime;
 
-	// calculate frame rate
 	float frameRate;
 	frameRate = 1 / (float)m_currentAnimation->framesPerSecond;
 
-	// if timer has gone over rate
 	if(m_animationTimer > frameRate)
 	{
-		// reset timer
 		m_animationTimer -= frameRate;
 
-		// if animation is not over
 		if(!m_animDone)
 		{
-			// if frame count is below max num of frames in animation
 			if(m_currentFrame < ((unsigned int)m_currentAnimation->frameCount - 1))
 			{
-				// increase frame count
 				m_currentFrame++;
 			}
 			else
 			{
-				// if animation should loop
 				if(m_currentAnimation->loop)
 				{
-					// reset frame count
 					m_currentFrame = 0;
 				}
 				else

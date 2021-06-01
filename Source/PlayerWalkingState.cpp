@@ -24,11 +24,10 @@ void PlayerWalkingState::Execute(Player* player)
 {
 	if(player->GetCurrentVelocity() == Vector2::Zero &&
 		player->GetTargetVelocity() == Vector2::Zero)
-	{
-		player->GetStateMachine()->ChangeState(PlayerIdleState::Instance());
-	}
+			player->GetStateMachine()->ChangeState(PlayerIdleState::Instance());
 
-
+	if(player->IsGrounded())
+		player->PlayWalkingSounds();
 }
 
 void PlayerWalkingState::OnExit(Player* player)

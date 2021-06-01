@@ -2,13 +2,9 @@
 
 #include <filesystem>
 
-SoundManager::SoundManager()
-{
-}
+SoundManager::SoundManager() { }
 
-SoundManager::~SoundManager()
-{
-}
+SoundManager::~SoundManager() { }
 
 void SoundManager::AddSound(const std::wstring &filename)
 {

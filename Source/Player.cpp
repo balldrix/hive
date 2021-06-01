@@ -27,7 +27,8 @@ Player::Player() :
 	m_stateMachine(nullptr),
 	m_lives(0),
 	m_knockoutTimer(0.0f),
-	m_soundSource(nullptr)
+	m_punchSoundSource(nullptr),
+	m_footStepsSoundSource(nullptr)
 {
 }
 
@@ -39,7 +40,14 @@ Player::~Player()
 		m_stateMachine = nullptr;
 	}
 
-	AudioEngine::Instance()->RemoveSoundSource(m_soundSource);
+	AudioEngine::Instance()->RemoveSoundSource(m_punchSoundSource);
+	AudioEngine::Instance()->RemoveSoundSource(m_footStepsSoundSource);
+
+	delete m_punchSoundSource;
+	delete m_footStepsSoundSource;
+	
+	m_punchSoundSource = nullptr;
+	m_footStepsSoundSource = nullptr;
 }
 
 void Player::Init(Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem)
@@ -64,17 +72,25 @@ void Player::Init(Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBo
 	m_health = m_playerData.objectData.startingHealth;
 	m_lives = m_playerData.objectData.startingLives;
 
-	m_soundSource = new SoundSource();
-	m_soundSource->SetTarget(this);
-	AudioEngine::Instance()->AddSoundSource(m_soundSource);
+	m_punchSoundSource = new SoundSource();
+	m_footStepsSoundSource = new SoundSource();
+
+	m_punchSoundSource->SetTarget(this);
+	m_footStepsSoundSource->SetTarget(this);
+
 	AudioEngine::Instance()->SetListener(this);
+	AudioEngine::Instance()->AddSoundSource(m_punchSoundSource);
+	AudioEngine::Instance()->AddSoundSource(m_footStepsSoundSource);
 
 	m_playerSounds =
 	{
 		{ "Attack1",	L"punch_001" },
 		{ "Attack2",	L"punch_003" },
 		{ "Attack3",	L"punch_004" },
-		{ "Walking",	L"walk_001"},
+		{ "Walking1",	L"walk_001"},
+		{ "Walking2",	L"walk_002"},
+		{ "Walking3",	L"walk_003"},
+		{ "Walking4",	L"walk_004"},
 		{ "Hurt1",		L"hit_001"},
 		{ "Hurt2",		L"hit_002"},
 		{ "Hurt3",		L"hit_003"},
@@ -279,14 +295,12 @@ void Player::Move(const Vector2& direction)
 	SetTargetVelocity(direction);
 }
 
-// stop velocity
 void Player::Stop()
 {
 	SetTargetVelocity(Vector2::Zero);
 	SetCurrentVelocity(Vector2::Zero);
 }
 
-// normal attack behaviour
 void Player::Attack()
 {
 	if(m_animator->GetAnimation()->name == "Idle" || m_animator->GetAnimation()->name == "Walking")
@@ -354,9 +368,23 @@ void Player::Knockback(const Vector2& direction, const float& force)
 	SetMovementSpeed(force);
 }
 
-void Player::PlayAudio(const std::string &name)
+void Player::PlayPunchSound(const std::string &name)
 {
 	std::wstring soundName = m_playerSounds[name];
-	m_soundSource->SetSound(SoundManager::GetSound(soundName));
-	m_soundSource->SetLooping(false);
+	m_punchSoundSource->SetSound(SoundManager::GetSound(soundName));
+	m_punchSoundSource->SetLooping(false);
+}
+
+void Player::PlayWalkingSounds()
+{
+	if(m_currentWalkingFrame == m_animator->GetCurrentFrame())
+		return;
+
+	m_currentWalkingFrame = m_animator->GetCurrentFrame();
+	
+	uint32_t randomWalkIndex = Randomiser::Instance()->GetRandNum(1, 4);
+
+	std::wstring soundName = m_playerSounds["Walking" + std::to_string(randomWalkIndex)];
+	m_footStepsSoundSource->SetSound(SoundManager::GetSound(soundName));
+	m_footStepsSoundSource->SetLooping(false);
 }
