@@ -27,7 +27,7 @@ void PlayerWalkingState::Execute(Player* player)
 			player->GetStateMachine()->ChangeState(PlayerIdleState::Instance());
 
 	if(player->IsGrounded())
-		player->PlayWalkingSounds();
+		player->PlayWalkingSound();
 }
 
 void PlayerWalkingState::OnExit(Player* player)

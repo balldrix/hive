@@ -28,7 +28,8 @@ Player::Player() :
 	m_lives(0),
 	m_knockoutTimer(0.0f),
 	m_punchSoundSource(nullptr),
-	m_footStepsSoundSource(nullptr)
+	m_footStepsSoundSource(nullptr),
+	m_vocalSoundSource(nullptr)
 {
 }
 
@@ -40,14 +41,17 @@ Player::~Player()
 		m_stateMachine = nullptr;
 	}
 
-	AudioEngine::Instance()->RemoveSoundSource(m_punchSoundSource);
+	AudioEngine::Instance()->RemoveSoundSource(m_vocalSoundSource);
 	AudioEngine::Instance()->RemoveSoundSource(m_footStepsSoundSource);
+	AudioEngine::Instance()->RemoveSoundSource(m_punchSoundSource);
 
-	delete m_punchSoundSource;
+	delete m_vocalSoundSource;
 	delete m_footStepsSoundSource;
+	delete m_punchSoundSource;
 	
-	m_punchSoundSource = nullptr;
+	m_vocalSoundSource = nullptr;
 	m_footStepsSoundSource = nullptr;
+	m_punchSoundSource = nullptr;
 }
 
 void Player::Init(Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem)
@@ -74,13 +78,16 @@ void Player::Init(Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBo
 
 	m_punchSoundSource = new SoundSource();
 	m_footStepsSoundSource = new SoundSource();
+	m_vocalSoundSource = new SoundSource();
 
 	m_punchSoundSource->SetTarget(this);
 	m_footStepsSoundSource->SetTarget(this);
+	m_vocalSoundSource->SetTarget(this);
 
 	AudioEngine::Instance()->SetListener(this);
 	AudioEngine::Instance()->AddSoundSource(m_punchSoundSource);
 	AudioEngine::Instance()->AddSoundSource(m_footStepsSoundSource);
+	AudioEngine::Instance()->AddSoundSource(m_vocalSoundSource);
 
 	m_playerSounds =
 	{
@@ -332,15 +339,12 @@ void Player::ApplyDamage(GameObject* source, const int& amount)
 {
 	m_health -= amount;
 
-	// true if health has gone or damage is high
 	if(m_health < 1 || amount > 15)
 	{
-		// set knockback state
 		m_stateMachine->ChangeState(PlayerKnockbackState::Instance());
 
 		Vector2 direction = Vector2::Zero;
 
-		// calculate direction to knockback
 		if(this->GetPositionX() < source->GetPositionX())
 		{
 			direction = UnitVectors::UpLeft;
@@ -350,16 +354,15 @@ void Player::ApplyDamage(GameObject* source, const int& amount)
 			direction = UnitVectors::UpRight;
 		}
 
-		// knockback with force
 		Knockback(direction, 80.0f);
-
-		// bounce 
 		SetKnockbackCount(2);
 	}
 	else
 	{
 		m_stateMachine->ChangeState(PlayerHurtState::Instance());
 	}
+
+	PlayHurtSound();
 }
 
 void Player::Knockback(const Vector2& direction, const float& force)
@@ -375,16 +378,25 @@ void Player::PlayPunchSound(const std::string &name)
 	m_punchSoundSource->SetLooping(false);
 }
 
-void Player::PlayWalkingSounds()
+void Player::PlayWalkingSound()
 {
-	if(m_currentWalkingFrame == m_animator->GetCurrentFrame())
+	if(m_recentFootstepFrame == m_animator->GetCurrentFrame())
 		return;
 
-	m_currentWalkingFrame = m_animator->GetCurrentFrame();
+	m_recentFootstepFrame = m_animator->GetCurrentFrame();
 	
 	uint32_t randomWalkIndex = Randomiser::Instance()->GetRandNum(1, 4);
 
-	std::wstring soundName = m_playerSounds["Walking" + std::to_string(randomWalkIndex)];
+	std::wstring soundName = m_playerSounds[m_stateMachine->GetCurrentState()->GetName() + std::to_string(randomWalkIndex)];
 	m_footStepsSoundSource->SetSound(SoundManager::GetSound(soundName));
 	m_footStepsSoundSource->SetLooping(false);
+}
+
+void Player::PlayHurtSound()
+{
+	uint32_t randomHurtSound = Randomiser::Instance()->GetRandNum(1, 3);
+
+	std::wstring soundName = m_playerSounds[m_stateMachine->GetCurrentState()->GetName() + std::to_string(randomHurtSound)];
+	m_vocalSoundSource->SetSound(SoundManager::GetSound(soundName));
+	m_vocalSoundSource->SetLooping(false);
 }
