@@ -26,7 +26,6 @@ void PlayerHurtState::Execute(Player* player)
 	}
 }
 
-
 void PlayerHurtState::OnExit(Player* player)
 {
 }

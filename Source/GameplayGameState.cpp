@@ -100,6 +100,7 @@ void GameplayGameState::LoadAssets()
 	SoundManager::AddSound(L"GameData\\Sounds\\hit_001.wav");
 	SoundManager::AddSound(L"GameData\\Sounds\\hit_002.wav");
 	SoundManager::AddSound(L"GameData\\Sounds\\hit_003.wav");
+	SoundManager::AddSound(L"GameData\\Sounds\\scream.ogg");
 
 	m_camera = new Camera();
 	m_controlSystem = new ControlSystem();

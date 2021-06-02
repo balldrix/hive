@@ -43,6 +43,7 @@ public:
 	void					PlayPunchSound(const std::string &name);	
 	void					PlayWalkingSound();
 	void					PlayHurtSound();
+	void					PlayDeathSound();
 
 private:
 	PlayerData							m_playerData;

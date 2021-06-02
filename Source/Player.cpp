@@ -29,7 +29,8 @@ Player::Player() :
 	m_knockoutTimer(0.0f),
 	m_punchSoundSource(nullptr),
 	m_footStepsSoundSource(nullptr),
-	m_vocalSoundSource(nullptr)
+	m_vocalSoundSource(nullptr),
+	m_recentFootstepFrame(0)
 {
 }
 
@@ -77,12 +78,16 @@ void Player::Init(Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBo
 	m_lives = m_playerData.objectData.startingLives;
 
 	m_punchSoundSource = new SoundSource();
-	m_footStepsSoundSource = new SoundSource();
-	m_vocalSoundSource = new SoundSource();
-
 	m_punchSoundSource->SetTarget(this);
+	m_punchSoundSource->SetLooping(false);
+
+	m_footStepsSoundSource = new SoundSource();
 	m_footStepsSoundSource->SetTarget(this);
+	m_footStepsSoundSource->SetLooping(false);
+
+	m_vocalSoundSource = new SoundSource();
 	m_vocalSoundSource->SetTarget(this);
+	m_vocalSoundSource->SetLooping(false);
 
 	AudioEngine::Instance()->SetListener(this);
 	AudioEngine::Instance()->AddSoundSource(m_punchSoundSource);
@@ -375,7 +380,6 @@ void Player::PlayPunchSound(const std::string &name)
 {
 	std::wstring soundName = m_playerSounds[name];
 	m_punchSoundSource->SetSound(SoundManager::GetSound(soundName));
-	m_punchSoundSource->SetLooping(false);
 }
 
 void Player::PlayWalkingSound()
@@ -389,7 +393,6 @@ void Player::PlayWalkingSound()
 
 	std::wstring soundName = m_playerSounds[m_stateMachine->GetCurrentState()->GetName() + std::to_string(randomWalkIndex)];
 	m_footStepsSoundSource->SetSound(SoundManager::GetSound(soundName));
-	m_footStepsSoundSource->SetLooping(false);
 }
 
 void Player::PlayHurtSound()
@@ -398,5 +401,10 @@ void Player::PlayHurtSound()
 
 	std::wstring soundName = m_playerSounds[m_stateMachine->GetCurrentState()->GetName() + std::to_string(randomHurtSound)];
 	m_vocalSoundSource->SetSound(SoundManager::GetSound(soundName));
-	m_vocalSoundSource->SetLooping(false);
+}
+
+void Player::PlayDeathSound()
+{
+	std::wstring soundName = m_playerSounds[m_stateMachine->GetCurrentState()->GetName()];
+	m_vocalSoundSource->SetSound(SoundManager::GetSound(soundName));
 }

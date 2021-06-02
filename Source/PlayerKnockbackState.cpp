@@ -20,13 +20,11 @@ void PlayerKnockbackState::OnEnter(Player* player)
 
 void PlayerKnockbackState::Execute(Player* player)
 {
-	// true if moving to the left
 	if(player->GetCurrentVelocity().x < 0)
 	{
 		player->FlipHorizontally(false);
 	}
 
-	// true if moving to the right
 	if(player->GetCurrentVelocity().x > 0)
 	{
 		player->FlipHorizontally(true);

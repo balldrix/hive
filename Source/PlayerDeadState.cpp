@@ -22,19 +22,19 @@ void PlayerDeadState::OnEnter(Player* player)
 	player->GetAnimator()->SetAnimation(m_name);
 	player->GetHitBoxManager()->KillAll();
 	player->ResetKnockoutTimer();
+
+	if(player->GetHealth() <= 0)
+		player->PlayDeathSound();
 }
 
 void PlayerDeadState::Execute(Player* player)
 {
-	// true if the knock back count is up
 	if(player->GetKnockbackCount() < 1 && player->IsGrounded())
 	{
-		// stop all movement
 		player->SetTargetVelocity(Vector2::Zero);
 	}
 	else
 	{
-		// calculate direction to knockback
 		Vector2 direction = Vector2::Zero;
 
 		if(player->GetCurrentVelocity().x > 0)
@@ -46,13 +46,8 @@ void PlayerDeadState::Execute(Player* player)
 			direction = UnitVectors::UpLeft;
 		}
 
-		// knockback with  50.0f force
 		player->Knockback(direction, 30.0f);
-
-		// reduce knock back amount
 		player->SetKnockbackCount(player->GetKnockbackCount() - 1);
-
-		// reset anim
 		player->GetStateMachine()->ChangeState(PlayerKnockbackState::Instance());
 	}
 }
