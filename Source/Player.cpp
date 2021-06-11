@@ -36,12 +36,6 @@ Player::Player() :
 
 Player::~Player()
 {
-	if(m_stateMachine)
-	{
-		delete m_stateMachine;
-		m_stateMachine = nullptr;
-	}
-
 	AudioEngine::Instance()->RemoveSoundSource(m_vocalSoundSource);
 	AudioEngine::Instance()->RemoveSoundSource(m_footStepsSoundSource);
 	AudioEngine::Instance()->RemoveSoundSource(m_punchSoundSource);
@@ -49,10 +43,12 @@ Player::~Player()
 	delete m_vocalSoundSource;
 	delete m_footStepsSoundSource;
 	delete m_punchSoundSource;
+	delete m_stateMachine;
 	
 	m_vocalSoundSource = nullptr;
 	m_footStepsSoundSource = nullptr;
 	m_punchSoundSource = nullptr;
+	m_stateMachine = nullptr;
 }
 
 void Player::Init(Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem)
@@ -406,5 +402,9 @@ void Player::PlayHurtSound()
 void Player::PlayDeathSound()
 {
 	std::wstring soundName = m_playerSounds[m_stateMachine->GetCurrentState()->GetName()];
-	m_vocalSoundSource->SetSound(SoundManager::GetSound(soundName));
+	
+	Sound* sound = SoundManager::GetSound(soundName);
+	
+	if(m_vocalSoundSource->GetSound() != sound)	
+		m_vocalSoundSource->SetSound(sound);
 }

@@ -1,5 +1,6 @@
 #include "Enemy.h"
 
+#include "pch.h"
 #include "Graphics.h"
 #include "Sprite.h"
 #include "SpriteSheet.h"
@@ -7,7 +8,6 @@
 #include "HitBoxManager.h"
 #include "Resources.h"
 #include "ControlSystem.h"
-#include "pch.h"
 #include "UnitVectors.h"
 #include "Randomiser.h"
 #include "InGameHudManager.h"
@@ -16,16 +16,20 @@
 #include "EnemyOwnedStates.h"
 #include "StateMachine.h"
 #include "Error.h"
+#include "AudioEngine.h"
+#include "SoundSource.h"
+#include "SoundManager.h"
 
 Enemy::Enemy() :
 	m_playerTarget(nullptr),
 	m_stateMachine(nullptr),
-	m_thinkingTimer(0.0f),
-	m_isHostile(false),
 	m_hudManager(nullptr),
 	m_portraitSprite(nullptr),
 	m_hitBoxSprite(nullptr),
-	m_healthBar(nullptr)
+	m_healthBar(nullptr),
+	m_vocalSoundSource(nullptr),
+	m_thinkingTimer(0.0f),
+	m_isHostile(false)
 {}
 
 
@@ -105,6 +109,12 @@ void Enemy::Init(Graphics* graphics,
 		Error::FileLog(error);
 	}
 
+	m_vocalSoundSource = new SoundSource();
+	m_vocalSoundSource->SetTarget(this);
+	m_vocalSoundSource->SetLooping(false);
+
+	AudioEngine::Instance()->AddSoundSource(m_vocalSoundSource);
+	
 	m_active = false;
 }
 
@@ -271,47 +281,33 @@ void Enemy::ReleaseAll()
 
 void Enemy::DeleteAll()
 {
-	if(m_healthBar)
-	{
-		delete m_healthBar;
-		m_healthBar = nullptr;
-	}
+	AudioEngine::Instance()->RemoveSoundSource(m_vocalSoundSource);
 
-	if(m_stateMachine)
-	{
-		delete m_stateMachine;
-		m_stateMachine = nullptr;
-	}
+	delete m_vocalSoundSource;
+	delete m_healthBar;
+	delete m_stateMachine;
+	delete m_hitBoxManager;
+	delete m_hitBoxSprite;
+	delete m_animator;
+	delete m_shadow;
+	delete m_spriteSheet;
 
-	if(m_hitBoxManager)
-	{
-		delete m_hitBoxManager;
-		m_hitBoxManager = nullptr;
-	}	
+	m_vocalSoundSource = nullptr;
+	m_healthBar = nullptr;
+	m_stateMachine = nullptr;
+	m_hitBoxManager = nullptr;
+	m_hitBoxSprite = nullptr;
+	m_animator = nullptr;
+	m_shadow = nullptr;
+	m_spriteSheet = nullptr;	
+}
 
-	if(m_hitBoxSprite)
-	{
-		delete m_hitBoxSprite;
-		m_hitBoxSprite = nullptr;
-	}
+void Enemy::PlayEntranceSound()
+{
+	uint32_t randomNumber = Randomiser::Instance()->GetRandNum(1, 4);
 
-	if(m_animator)
-	{
-		delete m_animator;
-		m_animator = nullptr;
-	}
-
-	if(m_shadow)
-	{
-		delete m_shadow;
-		m_shadow = nullptr;
-	}
-
-	if(m_spriteSheet)
-	{
-		delete m_spriteSheet;
-		m_spriteSheet = nullptr;
-	}
+	std::wstring soundName = L"mook_entrance_00" + std::to_wstring(randomNumber);
+	m_vocalSoundSource->SetSound(SoundManager::GetSound(soundName));
 }
 
 int Enemy::GetDamage() const

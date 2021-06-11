@@ -101,6 +101,10 @@ void GameplayGameState::LoadAssets()
 	SoundManager::AddSound(L"GameData\\Sounds\\hit_002.wav");
 	SoundManager::AddSound(L"GameData\\Sounds\\hit_003.wav");
 	SoundManager::AddSound(L"GameData\\Sounds\\scream.ogg");
+	SoundManager::AddSound(L"GameData\\Sounds\\mook_entrance_001.wav");
+	SoundManager::AddSound(L"GameData\\Sounds\\mook_entrance_002.wav");
+	SoundManager::AddSound(L"GameData\\Sounds\\mook_entrance_003.wav");
+	SoundManager::AddSound(L"GameData\\Sounds\\mook_entrance_004.wav");
 
 	m_camera = new Camera();
 	m_controlSystem = new ControlSystem();

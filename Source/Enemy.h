@@ -10,6 +10,7 @@ class Player;
 class BarController;
 class InGameHudManager;
 template<class T> class StateMachine;
+class SoundSource;
 
 class Enemy : public GameObject
 {
@@ -56,6 +57,8 @@ public:
 	void					ReleaseAll();
 	void					DeleteAll();
 
+	void					PlayEntranceSound();
+
 protected:
 	StateMachine<Enemy>*	m_stateMachine;
 
@@ -66,6 +69,7 @@ private:
 	Sprite*					m_portraitSprite;
 	Sprite*					m_hitBoxSprite;
 	BarController*			m_healthBar;
+	SoundSource*			m_vocalSoundSource;
 	float					m_thinkingTimer;
 	bool					m_isHostile;
 };
