@@ -29,6 +29,7 @@ Enemy::Enemy() :
 	m_healthBar(nullptr),
 	m_vocalSoundSource(nullptr),
 	m_footStepsSource(nullptr),
+	m_punchSoundSource(nullptr),
 	m_thinkingTimer(0.0f),
 	m_isHostile(false)
 {}
@@ -47,9 +48,11 @@ void Enemy::ReleaseAll()
 
 void Enemy::DeleteAll()
 {
+	AudioEngine::Instance()->RemoveSoundSource(m_punchSoundSource);
 	AudioEngine::Instance()->RemoveSoundSource(m_footStepsSource);
 	AudioEngine::Instance()->RemoveSoundSource(m_vocalSoundSource);
 
+	delete m_punchSoundSource;
 	delete m_footStepsSource;
 	delete m_vocalSoundSource;
 	delete m_healthBar;
@@ -60,6 +63,7 @@ void Enemy::DeleteAll()
 	delete m_shadow;
 	delete m_spriteSheet;
 
+	m_punchSoundSource = nullptr;
 	m_footStepsSource = nullptr;
 	m_vocalSoundSource = nullptr;
 	m_healthBar = nullptr;
@@ -149,8 +153,13 @@ void Enemy::Init(Graphics* graphics,
 	m_footStepsSource->SetTarget(this);
 	m_footStepsSource->SetLooping(true);
 
+	m_punchSoundSource = new SoundSource();
+	m_punchSoundSource->SetTarget(this);
+	m_punchSoundSource->SetLooping(false);
+
 	AudioEngine::Instance()->AddSoundSource(m_vocalSoundSource);
 	AudioEngine::Instance()->AddSoundSource(m_footStepsSource);
+	AudioEngine::Instance()->AddSoundSource(m_punchSoundSource);
 	
 	m_active = false;
 }
@@ -330,6 +339,15 @@ void Enemy::PlayWalkingSound()
 void Enemy::StopWalkingSound()
 {
 	m_footStepsSource->SetSound(nullptr);
+}
+
+void Enemy::PlayPunchSound()
+{
+	Sound* sound = SoundManager::GetSound(L"mook_punch_001");
+	
+	float randomPitch = Randomiser::Instance()->GetRandNum(0.98f, 1.2f);
+	m_punchSoundSource->SetPitch(randomPitch);
+	m_punchSoundSource->SetSound(sound);
 }
 
 int Enemy::GetDamage() const

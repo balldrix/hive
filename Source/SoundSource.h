@@ -29,6 +29,7 @@ public:
 	void			SetLooping(bool state) { m_isLooping = state; }
 	void			SetRadius(float value) { m_radius = std::max(0.0f, value); }
 	void			SetTarget(GameObject* target) { m_target = target; }
+	void			SetPitch(float value) { m_pitch = value; }
 
 	Sound*			GetSound() { return m_sound; }
 	SoundPriority	GetPriority() { return m_priority; }
@@ -56,4 +57,5 @@ protected:
 	GameObject*		m_target;
 	bool			m_isLooping;
 	float			m_timeLeft;
+	float			m_pitch;
 };

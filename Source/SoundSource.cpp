@@ -17,11 +17,12 @@ void SoundSource::Reset()
 {
 	m_priority = SoundPriority::Low;
 	m_volume = 1.0f;
-	m_radius = 500.0f;
+	m_radius = 120.0f;
 	m_timeLeft = 0.0f;
 	m_isLooping = false;
 	m_currentSource = nullptr;
 	m_sound = nullptr;
+	m_pitch = 1.0f;
 }
 
 SoundSource::~SoundSource()
@@ -89,6 +90,7 @@ void SoundSource::Update(float deltaTime)
 	alSourcei(m_currentSource->source, AL_LOOPING, m_isLooping);
 	alSourcef(m_currentSource->source, AL_MAX_DISTANCE, m_radius);
 	alSourcef(m_currentSource->source, AL_REFERENCE_DISTANCE, m_radius * 0.2f);
+	alSourcef(m_currentSource->source, AL_PITCH, m_pitch);
 }
 
 void SoundSource::SetSound(Sound* sound)

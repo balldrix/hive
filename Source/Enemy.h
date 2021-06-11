@@ -60,6 +60,7 @@ public:
 	void					PlayEntranceSound();
 	void					PlayWalkingSound();
 	void					StopWalkingSound();
+	void					PlayPunchSound();
 
 protected:
 	StateMachine<Enemy>*	m_stateMachine;
@@ -73,6 +74,7 @@ private:
 	BarController*			m_healthBar;
 	SoundSource*			m_vocalSoundSource;
 	SoundSource*			m_footStepsSource;
+	SoundSource*			m_punchSoundSource;
 	float					m_thinkingTimer;
 	bool					m_isHostile;
 };
