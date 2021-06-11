@@ -105,6 +105,7 @@ void GameplayGameState::LoadAssets()
 	SoundManager::AddSound(L"GameData\\Sounds\\mook_entrance_002.wav");
 	SoundManager::AddSound(L"GameData\\Sounds\\mook_entrance_003.wav");
 	SoundManager::AddSound(L"GameData\\Sounds\\mook_entrance_004.wav");
+	SoundManager::AddSound(L"GameData\\Sounds\\mook_walk.wav");
 
 	m_camera = new Camera();
 	m_controlSystem = new ControlSystem();

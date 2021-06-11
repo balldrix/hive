@@ -58,6 +58,8 @@ public:
 	void					DeleteAll();
 
 	void					PlayEntranceSound();
+	void					PlayWalkingSound();
+	void					StopWalkingSound();
 
 protected:
 	StateMachine<Enemy>*	m_stateMachine;
@@ -70,6 +72,7 @@ private:
 	Sprite*					m_hitBoxSprite;
 	BarController*			m_healthBar;
 	SoundSource*			m_vocalSoundSource;
+	SoundSource*			m_footStepsSource;
 	float					m_thinkingTimer;
 	bool					m_isHostile;
 };

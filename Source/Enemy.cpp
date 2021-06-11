@@ -28,6 +28,7 @@ Enemy::Enemy() :
 	m_hitBoxSprite(nullptr),
 	m_healthBar(nullptr),
 	m_vocalSoundSource(nullptr),
+	m_footStepsSource(nullptr),
 	m_thinkingTimer(0.0f),
 	m_isHostile(false)
 {}
@@ -37,6 +38,37 @@ Enemy::~Enemy()
 {
 	ReleaseAll();
 	DeleteAll();
+}
+
+void Enemy::ReleaseAll()
+{
+	m_healthBar->ReleaseAll();
+}
+
+void Enemy::DeleteAll()
+{
+	AudioEngine::Instance()->RemoveSoundSource(m_footStepsSource);
+	AudioEngine::Instance()->RemoveSoundSource(m_vocalSoundSource);
+
+	delete m_footStepsSource;
+	delete m_vocalSoundSource;
+	delete m_healthBar;
+	delete m_stateMachine;
+	delete m_hitBoxManager;
+	delete m_hitBoxSprite;
+	delete m_animator;
+	delete m_shadow;
+	delete m_spriteSheet;
+
+	m_footStepsSource = nullptr;
+	m_vocalSoundSource = nullptr;
+	m_healthBar = nullptr;
+	m_stateMachine = nullptr;
+	m_hitBoxManager = nullptr;
+	m_hitBoxSprite = nullptr;
+	m_animator = nullptr;
+	m_shadow = nullptr;
+	m_spriteSheet = nullptr;
 }
 
 void Enemy::Init(Graphics* graphics,
@@ -113,7 +145,12 @@ void Enemy::Init(Graphics* graphics,
 	m_vocalSoundSource->SetTarget(this);
 	m_vocalSoundSource->SetLooping(false);
 
+	m_footStepsSource = new SoundSource();
+	m_footStepsSource->SetTarget(this);
+	m_footStepsSource->SetLooping(true);
+
 	AudioEngine::Instance()->AddSoundSource(m_vocalSoundSource);
+	AudioEngine::Instance()->AddSoundSource(m_footStepsSource);
 	
 	m_active = false;
 }
@@ -274,40 +311,25 @@ void Enemy::ShowEnemyHud()
 	m_hudManager->ShowEnemyHud(m_id, m_portraitSprite, m_healthBar);
 }
 
-void Enemy::ReleaseAll()
-{
-	m_healthBar->ReleaseAll();
-}
-
-void Enemy::DeleteAll()
-{
-	AudioEngine::Instance()->RemoveSoundSource(m_vocalSoundSource);
-
-	delete m_vocalSoundSource;
-	delete m_healthBar;
-	delete m_stateMachine;
-	delete m_hitBoxManager;
-	delete m_hitBoxSprite;
-	delete m_animator;
-	delete m_shadow;
-	delete m_spriteSheet;
-
-	m_vocalSoundSource = nullptr;
-	m_healthBar = nullptr;
-	m_stateMachine = nullptr;
-	m_hitBoxManager = nullptr;
-	m_hitBoxSprite = nullptr;
-	m_animator = nullptr;
-	m_shadow = nullptr;
-	m_spriteSheet = nullptr;	
-}
-
 void Enemy::PlayEntranceSound()
 {
 	uint32_t randomNumber = Randomiser::Instance()->GetRandNum(1, 4);
 
 	std::wstring soundName = L"mook_entrance_00" + std::to_wstring(randomNumber);
 	m_vocalSoundSource->SetSound(SoundManager::GetSound(soundName));
+}
+
+void Enemy::PlayWalkingSound()
+{
+	Sound* sound = SoundManager::GetSound(L"mook_walk");
+
+	if(m_footStepsSource->GetSound() != sound)
+		m_footStepsSource->SetSound(sound);
+}
+
+void Enemy::StopWalkingSound()
+{
+	m_footStepsSource->SetSound(nullptr);
 }
 
 int Enemy::GetDamage() const

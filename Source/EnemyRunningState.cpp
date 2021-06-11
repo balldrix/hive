@@ -35,6 +35,7 @@ void EnemyRunningState::OnEnter(Enemy* enemy)
 	}
 
 	enemy->SetTargetVelocity(direction);
+	enemy->PlayWalkingSound();
 }
 
 void EnemyRunningState::Execute(Enemy* enemy)
@@ -44,6 +45,7 @@ void EnemyRunningState::Execute(Enemy* enemy)
 void EnemyRunningState::OnExit(Enemy* enemy)
 {
 	enemy->GetAnimator()->Reset();
+	enemy->StopWalkingSound();
 }
 
 EnemyRunningState::EnemyRunningState(const std::string &name)

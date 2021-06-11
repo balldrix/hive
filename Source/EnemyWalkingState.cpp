@@ -30,6 +30,7 @@ void EnemyWalkingState::OnEnter(Enemy* enemy)
 	direction.Normalize();
 
 	enemy->SetVelocity(direction);
+	enemy->PlayWalkingSound();
 }
 
 void EnemyWalkingState::Execute(Enemy* enemy)
@@ -43,6 +44,7 @@ void EnemyWalkingState::Execute(Enemy* enemy)
 
 void EnemyWalkingState::OnExit(Enemy* enemy)
 {
+	enemy->StopWalkingSound();
 }
 
 EnemyWalkingState::EnemyWalkingState(const std::string &name)

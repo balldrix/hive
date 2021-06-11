@@ -66,6 +66,9 @@ bool SoundSource::CompareNodesByPriority(SoundSource* a, SoundSource* b)
 
 void SoundSource::Update(float deltaTime)
 {
+	if(m_sound == nullptr)
+		return;
+
 	m_timeLeft -= deltaTime;
 
 	while(m_isLooping && m_timeLeft < 0.0f)
