@@ -6,7 +6,6 @@
 using std::string;
 using std::map;
 
-// forward definitions
 class Graphics;
 class Sprite;
 class Spritesheet;
@@ -39,8 +38,8 @@ public:
 	virtual void	Init(const Vector2& position, Spritesheet* sprite, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem);
 	virtual void	Init(const Vector2& position, Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem);
 
-	virtual void	Update(float deltaTime);	// update object
-	virtual void 	Render(Graphics* graphics) = 0;	// render object
+	virtual void	Update(float deltaTime);	
+	virtual void 	Render(Graphics* graphics) = 0;	
 
 	virtual void	Move(const Vector2& direction);
 	virtual void	Stop();
@@ -54,11 +53,11 @@ public:
 
 	// Setters
 	void			SetCamera(Camera* cam);
-	void			SetID(const std::string &id);			// set object ID
+	void			SetID(const std::string &id);			
 	void			SetPositionX(float x);
 	void			SetPositionY(float y);
 	void			SetPosition(float x, float y);
-	void			SetPosition(const Vector2& position);			// set position
+	void			SetPosition(const Vector2& position);			
 	void			SetMovementSpeed(float speed);
 	void			SetAcceleration(float accel);
 	void			SetDeceleration(float decel);
@@ -73,10 +72,10 @@ public:
 	void			SetHealth(int health);
 	void			SetKnockbackCount(int count);
 	void			SetGrounded(bool grounded);
-	void			SetActive(bool active);					// set active or not
+	void			SetActive(bool active);					
 
 	// getters
-	std::string		GetID() const { return m_id; }					// return object ID
+	std::string		GetID() const { return m_id; }					
 	float			GetPositionX() const { return m_position.x; }
 	float			GetPositionY() const { return m_position.y; }
 	Vector2			GetPosition() const { return m_position; }
@@ -85,6 +84,7 @@ public:
 	Vector2			GetTargetVelocity() const { return m_targetVelocity; }
 	float			GetMovementSpeed()	const { return m_movementSpeed; }
 	virtual int		GetDamage() const;
+	Vector3			GetFacingDirection() const { return m_facingDirection; };
 
 	// pointers for important objects
 	ControlSystem*	GetControlSystem() const { return m_controlSystem; }
@@ -97,41 +97,42 @@ public:
 	int				GetKnockbackCount() const { return m_knockbackCount; }
 	float			GetDeathTimer() const { return m_deathTimer; }
 
-	virtual void	ApplyDamage(GameObject* source, const int& amount); // apply damage
-	virtual void	Knockback(const Vector2& direction, const float& force); // knock back with force
+	virtual void	ApplyDamage(GameObject* source, const int& amount);
+	virtual void	Knockback(const Vector2& direction, const float& force);
 
 	bool			IsGrounded() const { return m_grounded; }
 	bool			IsDead() const { return m_dead; }
-	bool			IsActive() const { return m_active; }		// return if active
+	bool			IsActive() const { return m_active; }		
 	
-	virtual void	Reset() = 0;	// must override reset method
+	virtual void	Reset() = 0;
 
 protected:
- 	std::string			m_id;					// object ID
-	Camera*				m_camera;				// pointer to camera
-	Vector2				m_position;				// object position
-	Vector2				m_groundPosition;		// y position of grounded feet
-	Vector2				m_currentVelocity;		// current object velocity
-	Vector2				m_targetVelocity;		// target velocity
-	float				m_movementSpeed;		// current object speed
-	float				m_acceleration;			// acceleration speed
-	float				m_deceleration;			// decceleration speed
+ 	std::string			m_id;					
+	Camera*				m_camera;				
+	Vector2				m_position;				
+	Vector2				m_groundPosition;		
+	Vector2				m_currentVelocity;		
+	Vector2				m_targetVelocity;		
+	float				m_movementSpeed;		
+	float				m_acceleration;			
+	float				m_deceleration;			
+	Vector3				m_facingDirection;
 
-	Spritesheet*		m_spriteSheet;				// object sprite sheet
-	Animator*			m_animator;				// animation controller
+	Spritesheet*		m_spriteSheet;			
+	Animator*			m_animator;				
 
-	Sprite*				m_shadow;				// object shadow
+	Sprite*				m_shadow;				
 
-	HitBoxManager*		m_hitBoxManager;		// hit box manager
-	ControlSystem*		m_controlSystem;		// pointer to control system	
+	HitBoxManager*		m_hitBoxManager;		
+	ControlSystem*		m_controlSystem;		
 
-	int					m_health;				// object health
-	int					m_knockbackCount;		// number of knockbacks
+	int					m_health;				
+	int					m_knockbackCount;		
 
-	float				m_deathTimer;			// timer running while object is dead
+	float				m_deathTimer;			
 
-	bool				m_grounded;				// true when object is grounded
-	bool				m_dead;					// true when object is dead/destroyed
-	bool				m_active;				// object active or not
-	map<string, int>	m_damageData;			// damage data map
+	bool				m_grounded;				
+	bool				m_dead;					
+	bool				m_active;				
+	map<string, int>	m_damageData;			
 };

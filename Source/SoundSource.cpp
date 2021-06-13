@@ -16,6 +16,7 @@ SoundSource::SoundSource(Sound* sound)
 void SoundSource::Reset()
 {
 	m_priority = SoundPriority::Low;
+	m_position = Vector3::Zero;
 	m_volume = 1.0f;
 	m_radius = 120.0f;
 	m_timeLeft = 0.0f;
@@ -23,6 +24,7 @@ void SoundSource::Reset()
 	m_currentSource = nullptr;
 	m_sound = nullptr;
 	m_pitch = 1.0f;
+	m_isRelative = false;
 }
 
 SoundSource::~SoundSource()
@@ -78,19 +80,20 @@ void SoundSource::Update(float deltaTime)
 	if(m_currentSource == nullptr)
 		return;
 
-	Vector3 position;
+	Vector3 listenerPosition = AudioEngine::Instance()->GetListenerPosition();
 
 	if(m_target != nullptr)
-		position = Vector3(m_target->GetPositionX(), m_target->GetPositionY() - m_target->GetGroundPosition().y, m_target->GetPositionY());
-	else
-		position = m_position;
+		m_position = Vector3(m_target->GetPositionX(), m_target->GetPositionY() - m_target->GetGroundPosition().y, m_target->GetPositionY());
 
-	alSourcefv(m_currentSource->source, AL_POSITION, (float*) &position);
+	Vector3 relativePosition = (m_position - listenerPosition) * 1.6f;
+
+	alSourcefv(m_currentSource->source, AL_POSITION, (float*) &relativePosition);
 	alSourcef(m_currentSource->source, AL_GAIN, m_volume);
 	alSourcei(m_currentSource->source, AL_LOOPING, m_isLooping);
 	alSourcef(m_currentSource->source, AL_MAX_DISTANCE, m_radius);
 	alSourcef(m_currentSource->source, AL_REFERENCE_DISTANCE, m_radius * 0.2f);
 	alSourcef(m_currentSource->source, AL_PITCH, m_pitch);
+	alSourcei(m_currentSource->source, AL_SOURCE_RELATIVE, m_isRelative);
 }
 
 void SoundSource::SetSound(Sound* sound)

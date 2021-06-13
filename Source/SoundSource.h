@@ -30,6 +30,7 @@ public:
 	void			SetRadius(float value) { m_radius = std::max(0.0f, value); }
 	void			SetTarget(GameObject* target) { m_target = target; }
 	void			SetPitch(float value) { m_pitch = value; }
+	void			SetRelative(bool value) { m_isRelative = value; }
 
 	Sound*			GetSound() { return m_sound; }
 	SoundPriority	GetPriority() { return m_priority; }
@@ -58,4 +59,5 @@ protected:
 	bool			m_isLooping;
 	float			m_timeLeft;
 	float			m_pitch;
+	bool			m_isRelative;
 };

@@ -15,7 +15,8 @@ Sound::Sound() :
     m_bitrate(0),
     m_samplerate(0),
     m_size(0),
-    m_channels(0)
+    m_channels(0),
+    m_buffer(0)
 {
 }
 

@@ -73,7 +73,17 @@ void AudioEngine::UpdateListener()
 	SetListenerPosition(Vector3(m_listener->GetPositionX(), m_listener->GetPositionY() - m_listener->GetGroundPosition().y, m_listener->GetPositionY()));
 
 	alListenerfv(AL_POSITION, (float*) &m_listenerPosition);
-	alListenerfv(AL_ORIENTATION, (float*) &Vector3::Up);
+
+	Vector3 facingDirection = m_listener->GetFacingDirection();
+	float orientation[6];
+	orientation[0] = facingDirection.x;
+	orientation[1] = facingDirection.y;
+	orientation[2] = facingDirection.z;
+	orientation[3] = 0.0f;
+	orientation[4] = 1.0f;
+	orientation[5] = 0.0;
+
+	alListenerfv(AL_ORIENTATION, orientation);
 }
 
 void AudioEngine::UpdateTemporaryEmitters(float deltaTime)

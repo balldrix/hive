@@ -76,14 +76,17 @@ void Player::Init(Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBo
 	m_punchSoundSource = new SoundSource();
 	m_punchSoundSource->SetTarget(this);
 	m_punchSoundSource->SetLooping(false);
+	m_punchSoundSource->SetRelative(true);
 
 	m_footStepsSoundSource = new SoundSource();
 	m_footStepsSoundSource->SetTarget(this);
 	m_footStepsSoundSource->SetLooping(false);
+	m_footStepsSoundSource->SetRelative(true);
 
 	m_vocalSoundSource = new SoundSource();
 	m_vocalSoundSource->SetTarget(this);
 	m_vocalSoundSource->SetLooping(false);
+	m_vocalSoundSource->SetRelative(true);
 
 	AudioEngine::Instance()->SetListener(this);
 	AudioEngine::Instance()->AddSoundSource(m_punchSoundSource);

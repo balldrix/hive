@@ -18,6 +18,7 @@ GameObject::GameObject() :
 	m_movementSpeed(0.0f),
 	m_acceleration(0.0f),
 	m_deceleration(0.0f),
+	m_facingDirection(Vector3::Right),
 	m_spriteSheet(nullptr),
 	m_animator(nullptr),
 	m_shadow(nullptr),
@@ -205,19 +206,17 @@ bool GameObject::LoadDamageData(const std::string &filename)
 
 void GameObject::FlipHorizontally(bool flip)
 {
-	// true if flip param is true
 	if(flip == true)
 	{
-		// flip sprite
+		m_facingDirection = Vector3::Left;
 		m_spriteSheet->SetFlipEffect(SpriteEffects::SpriteEffects_FlipHorizontally);
-
 	}
 	else
 	{
+		m_facingDirection = Vector3::Right;
 		m_spriteSheet->SetFlipEffect(SpriteEffects::SpriteEffects_None);
 	}
 
-	// flip hitboxes
 	m_hitBoxManager->SetFlipped(flip);
 }
 

@@ -148,14 +148,17 @@ void Enemy::Init(Graphics* graphics,
 	m_vocalSoundSource = new SoundSource();
 	m_vocalSoundSource->SetTarget(this);
 	m_vocalSoundSource->SetLooping(false);
+	m_vocalSoundSource->SetRelative(true);
 
 	m_footStepsSource = new SoundSource();
 	m_footStepsSource->SetTarget(this);
 	m_footStepsSource->SetLooping(true);
+	m_footStepsSource->SetRelative(true);
 
 	m_punchSoundSource = new SoundSource();
 	m_punchSoundSource->SetTarget(this);
 	m_punchSoundSource->SetLooping(false);
+	m_punchSoundSource->SetRelative(true);
 
 	AudioEngine::Instance()->AddSoundSource(m_vocalSoundSource);
 	AudioEngine::Instance()->AddSoundSource(m_footStepsSource);
