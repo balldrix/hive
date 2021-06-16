@@ -61,6 +61,7 @@ public:
 	void					PlayWalkingSound();
 	void					StopWalkingSound();
 	void					PlayPunchSound();
+	void					PlayHurtSound();
 
 protected:
 	StateMachine<Enemy>*	m_stateMachine;

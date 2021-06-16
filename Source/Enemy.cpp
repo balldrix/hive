@@ -280,6 +280,8 @@ void Enemy::ApplyDamage(GameObject* source, const int& amount)
 	{
 		m_stateMachine->ChangeState(EnemyHurtState::Instance());
 	}
+
+	PlayHurtSound();
 }
 
 void Enemy::Knockback(const Vector2& direction, const float& force)
@@ -351,6 +353,14 @@ void Enemy::PlayPunchSound()
 	float randomPitch = Randomiser::Instance()->GetRandNum(0.98f, 1.2f);
 	m_punchSoundSource->SetPitch(randomPitch);
 	m_punchSoundSource->SetSound(sound);
+}
+
+void Enemy::PlayHurtSound()
+{
+	uint32_t randomNumber = Randomiser::Instance()->GetRandNum(1, 4);
+
+	std::wstring soundName = L"mook_hit_00" + std::to_wstring(randomNumber);
+	m_vocalSoundSource->SetSound(SoundManager::GetSound(soundName));
 }
 
 int Enemy::GetDamage() const
