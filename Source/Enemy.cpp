@@ -363,6 +363,14 @@ void Enemy::PlayHurtSound()
 	m_vocalSoundSource->SetSound(SoundManager::GetSound(soundName));
 }
 
+void Enemy::PlayDeathSound()
+{
+	Sound* sound = SoundManager::GetSound(L"mook_death");
+
+	if(m_vocalSoundSource->GetSound() != sound)
+		m_vocalSoundSource->SetSound(sound);
+}
+
 int Enemy::GetDamage() const
 {
 	std::string stateName = m_stateMachine->GetCurrentState()->GetName();

@@ -3,6 +3,8 @@
 #include "Randomiser.h"
 #include "EnemyOwnedStates.h"
 #include "StateMachine.h"
+#include "SoundSource.h"
+#include "SoundManager.h"
 
 KingMook::~KingMook()
 {
@@ -25,4 +27,10 @@ void KingMook::Attack()
 	}
 
 	m_stateMachine->ChangeState((EnemyAttackState::Instance()));
+}
+
+void KingMook::PlayEntranceSound()
+{
+	std::wstring soundName = L"boss_entrance_001";
+	m_vocalSoundSource->SetSound(SoundManager::GetSound(soundName));
 }

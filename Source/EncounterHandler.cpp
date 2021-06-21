@@ -32,8 +32,10 @@ void EncounterHandler::SpawnEncounter()
 		int enemyEncounterIndex = m_enemyList[i]->GetData().encounterIndex;
 		
 		if(enemyEncounterIndex == m_encounterIndex)
+		{
 			m_enemyList[i]->SetActive(true);
 			m_enemyList[i]->PlayEntranceSound();
+		}
 	}
 }
 

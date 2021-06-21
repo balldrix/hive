@@ -9,4 +9,5 @@ public:
 	virtual ~KingMook();
 
 	virtual void Attack();
+	virtual void PlayEntranceSound();
 };
