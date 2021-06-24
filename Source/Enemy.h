@@ -58,15 +58,18 @@ public:
 	void					DeleteAll();
 
 	virtual void			PlayEntranceSound();
-	void					PlayWalkingSound();
+	virtual void			PlayWalkingSound();
 	void					StopWalkingSound();
-	void					PlayPunchSound();
+	virtual void			PlayPunchSound();
 	void					PlayHurtSound();
 	void					PlayDeathSound();
 
 protected:
 	StateMachine<Enemy>*	m_stateMachine;
 	SoundSource*			m_vocalSoundSource;
+	SoundSource*			m_footStepsSoundSource;
+	SoundSource*			m_punchSoundSource;
+	int						m_recentFootstepFrame;
 
 private:
 	EnemyData				m_enemyData;
@@ -75,8 +78,6 @@ private:
 	Sprite*					m_portraitSprite;
 	Sprite*					m_hitBoxSprite;
 	BarController*			m_healthBar;
-	SoundSource*			m_footStepsSource;
-	SoundSource*			m_punchSoundSource;
 	float					m_thinkingTimer;
 	bool					m_isHostile;
 };

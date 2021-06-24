@@ -23,8 +23,6 @@ void EnemyIdleState::OnEnter(Enemy* enemy)
 	enemy->GetAnimator()->SetAnimation(m_name);
 	enemy->GetHitBoxManager()->SetCurrentHitBox(m_name);
 	enemy->ResetTimer();
-
-	// stop movement
 	enemy->SetTargetVelocity(Vector2::Zero);
 }
 

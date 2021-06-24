@@ -35,11 +35,11 @@ void EnemyRunningState::OnEnter(Enemy* enemy)
 	}
 
 	enemy->SetTargetVelocity(direction);
-	enemy->PlayWalkingSound();
 }
 
 void EnemyRunningState::Execute(Enemy* enemy)
 {
+	enemy->PlayWalkingSound();
 }
 
 void EnemyRunningState::OnExit(Enemy* enemy)

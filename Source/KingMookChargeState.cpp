@@ -30,10 +30,13 @@ void KingMookChargeState::OnEnter(Enemy* enemy)
 
 void KingMookChargeState::Execute(Enemy* enemy)
 {
+	enemy->PlayWalkingSound();
+
 	if(enemy->GetAnimator()->IsDone() == true)
 		enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
 }
 
 void KingMookChargeState::OnExit(Enemy* enemy)
 {
+	enemy->StopWalkingSound();
 }

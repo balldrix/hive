@@ -5,6 +5,7 @@
 #include "StateMachine.h"
 #include "SoundSource.h"
 #include "SoundManager.h"
+#include "Animator.h"
 
 KingMook::~KingMook()
 {
@@ -33,4 +34,25 @@ void KingMook::PlayEntranceSound()
 {
 	std::wstring soundName = L"boss_entrance_001";
 	m_vocalSoundSource->SetSound(SoundManager::GetSound(soundName));
+}
+
+void KingMook::PlayWalkingSound()
+{
+	if(m_recentFootstepFrame == m_animator->GetCurrentFrame())
+		return;
+
+	m_recentFootstepFrame = m_animator->GetCurrentFrame();
+
+	uint32_t randomWalkIndex = Randomiser::Instance()->GetRandNum(1, 3);
+
+	std::wstring soundName = L"boss_walk_00" + std::to_wstring(randomWalkIndex);
+	m_footStepsSoundSource->SetSound(SoundManager::GetSound(soundName));
+}
+
+void KingMook::PlayPunchSound()
+{
+	uint32_t randomWalkIndex = Randomiser::Instance()->GetRandNum(1, 4);
+
+	std::wstring soundName = L"boss_punch_00" + std::to_wstring(randomWalkIndex);
+	m_punchSoundSource->SetSound(SoundManager::GetSound(soundName));
 }

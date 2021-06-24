@@ -30,11 +30,12 @@ void EnemyWalkingState::OnEnter(Enemy* enemy)
 	direction.Normalize();
 
 	enemy->SetVelocity(direction);
-	enemy->PlayWalkingSound();
 }
 
 void EnemyWalkingState::Execute(Enemy* enemy)
 {
+	enemy->PlayWalkingSound();
+
 	if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() < enemy->GetData().attackRange)
 	{
 		// change to idle state
