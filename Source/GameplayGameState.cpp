@@ -120,6 +120,7 @@ void GameplayGameState::LoadAssets()
 	SoundManager::AddSound(L"GameData\\Sounds\\boss_punch_002.wav");
 	SoundManager::AddSound(L"GameData\\Sounds\\boss_punch_003.wav");
 	SoundManager::AddSound(L"GameData\\Sounds\\boss_punch_004.wav");
+	SoundManager::AddSound(L"GameData\\Sounds\\travelling_master.wav");
 
 	m_camera = new Camera();
 	m_controlSystem = new ControlSystem();
