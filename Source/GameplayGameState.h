@@ -22,6 +22,7 @@ template<class T> class StateMachine;
 class EncounterHandler;
 class TravellingHandler;
 class GameOverScreenController;
+class SoundSource;
 
 class GameplayGameState : public GameState
 {
@@ -94,6 +95,8 @@ private:
 	TravellingHandler*					m_travellingHandler;
 
 	GameOverScreenController*			m_gameOverScreenController;
+
+	SoundSource*						m_musicSoundSource;
 
 	bool								m_canAttack;				
 	bool								m_running;					

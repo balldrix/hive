@@ -29,6 +29,7 @@
 #include "SoundManager.h"
 #include "Sound.h"
 #include "AudioEngine.h"
+#include "SoundSource.h"
 
 using namespace GlobalConstants;
 using namespace GameplayConstants;
@@ -59,6 +60,7 @@ GameplayGameState::GameplayGameState() :
 	m_encounterHandler(nullptr),
 	m_travellingHandler(nullptr),
 	m_gameOverScreenController(nullptr),
+	m_musicSoundSource(nullptr),
 	m_canAttack(true),
 	m_running(false),
 	m_playerBoundary(AABB()),
@@ -191,11 +193,26 @@ void GameplayGameState::LoadAssets()
 	m_gameOverScreenController = new GameOverScreenController();
 	m_gameOverScreenController->Init(m_graphics);	
 
+	m_musicSoundSource = new SoundSource();
+	m_musicSoundSource->SetTarget(m_player);
+	m_musicSoundSource->SetLooping(true);
+	m_musicSoundSource->SetRelative(true);
+
+	AudioEngine::Instance()->AddSoundSource(m_musicSoundSource);
+
+	const std::wstring musicTitle = L"travelling_master";
+	m_musicSoundSource->SetSound(SoundManager::GetSound(musicTitle));
+
 	m_running = true;
 }
 
 void GameplayGameState::DeleteAssets()
 {
+	AudioEngine::Instance()->RemoveSoundSource(m_musicSoundSource);
+
+	delete m_musicSoundSource;
+	m_musicSoundSource = nullptr;
+
 	if(m_gameOverScreenController != nullptr)
 	{
 		delete m_gameOverScreenController;
