@@ -344,7 +344,6 @@ void Player::Attack()
 		}
 
 		m_stateMachine->ChangeState((PlayerAttackState::Instance()));
-		m_controlSystem->SetControlsDown(Controls::None);
 	}
 }
 

@@ -220,10 +220,15 @@ LRESULT Game::MessageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lPara
 
 
 	case WM_DESTROY:
-		PostQuitMessage(0); // post quit window
+		PostQuitMessage(0);
 		break;
 	case WM_KEYDOWN: case WM_SYSKEYDOWN:
-		m_input->SetKeyDown(wParam); // set keyboard key down
+		
+		if(lParam & (1 << 30))
+			return 0;
+			
+		m_input->SetKeyDown(wParam);
+		OutputDebugString(L"pressed key/n");		
 
 		if(wParam == VK_RETURN && (lParam & 0x60000000) == 0x20000000)
 		{

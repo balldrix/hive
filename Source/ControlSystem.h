@@ -27,9 +27,8 @@ public:
 
 	void Update(float deltaTime);
 
-	void SetControlsDown(const Controls& controls);
 	void SetControlsPressed(const Controls& controls);
-	void CanAttack(bool canAttack);
+	void SetCanAttack(bool canAttack);
 
 	Controls GetKeyPressed() const { return m_controlsDown; }
 	Controls GetLastKeyPressed() const { return m_lastControlsPressed; }
@@ -37,7 +36,7 @@ public:
 
 	void IncrementComboCount();
 	
-	bool SetCanAttack() const { return m_canAttack; }
+	bool CanAttack() const { return m_canAttack; }
 	bool CanCombo() const { return m_canCombo; }
 	bool CanRun() const { return m_canRun; }
 

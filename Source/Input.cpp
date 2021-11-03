@@ -75,17 +75,16 @@ void Input::ClearAll()
 
 bool Input::IsKeyDown(UCHAR key) const
 {
-	return m_keysDown[key];
+	if(key < MAX_KEY_ARRAY)
+		return m_keysDown[key];
+	else
+		return false;
 }
 
 bool Input::WasKeyPressed(UCHAR key) const
 {
 	if(key < MAX_KEY_ARRAY)
-	{
 		return m_keysPressed[key];
-	}
 	else
-	{
 		return false;
-	}
 }

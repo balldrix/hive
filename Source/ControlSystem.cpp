@@ -18,11 +18,6 @@ ControlSystem::~ControlSystem()
 {
 }
 
-void ControlSystem::SetControlsDown(const Controls& input)
-{
-	m_controlsDown = input;
-}
-
 void ControlSystem::SetControlsPressed(const Controls& controls)
 {
 	m_lastControlsPressed = controls;
@@ -34,7 +29,7 @@ void ControlSystem::SetControlsPressed(const Controls& controls)
 	m_doubleTapTimer = 0.0f;
 }
 
-void ControlSystem::CanAttack(bool canAttack)
+void ControlSystem::SetCanAttack(bool canAttack)
 {
 	m_canAttack = canAttack;
 }
