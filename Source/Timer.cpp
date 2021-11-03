@@ -8,8 +8,7 @@ Timer::~Timer()
 {
 }
 
-float	
-Timer::GetTicks()
+float Timer::GetTicks()
 {
 	LARGE_INTEGER ticks;
 
@@ -20,8 +19,7 @@ Timer::GetTicks()
 	return (float)ticks.QuadPart; // return time
 }
 
-float
-Timer::GetFrequency()
+float Timer::GetFrequency()
 {
 	LARGE_INTEGER frequency;
 

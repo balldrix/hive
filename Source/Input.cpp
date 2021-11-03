@@ -13,52 +13,45 @@ Input::~Input()
 {
 }
 
-void
-Input::SetKeyDown(WPARAM wParam)
+void Input::SetKeyDown(WPARAM wParam)
 {
 	if(wParam < MAX_KEY_ARRAY)
 	{
-		m_keysPressed[wParam] = true; // set keypressed to true
+		m_keysPressed[wParam] = true;
 		m_keysDown[wParam] = true;
 	}
 }
 
-void
-Input::SetKeyUp(WPARAM wParam)
+void Input::SetKeyUp(WPARAM wParam)
 {
 	if(wParam < MAX_KEY_ARRAY)
 	{
-		m_keysDown[wParam] = false; // set keypressed to false
+		m_keysDown[wParam] = false;
 	}
 }
 
-void
-Input::SetMouseIn(LPARAM lParam)
+void Input::SetMouseIn(LPARAM lParam)
 {
-	m_mouseX = (short)LOWORD(lParam); // set mouse x position
-	m_mouseY = (short)HIWORD(lParam); // set mouse y position
+	m_mouseX = (short)LOWORD(lParam);
+	m_mouseY = (short)HIWORD(lParam);
 }
 
-void
-Input::SetMouseX(UINT x)
+void Input::SetMouseX(UINT x)
 {
 	m_mouseX = x;
 }
 
-void
-Input::SetMouseY(UINT y)
+void Input::SetMouseY(UINT y)
 {
 	m_mouseY = y;
 }
 
-void
-Input::SetMouseClicked(bool button)
+void Input::SetMouseClicked(bool button)
 {
 	m_mouseClicked = button;
 }
 
-void
-Input::ClearKeysDown()
+void Input::ClearKeysDown()
 {
 	for(size_t i = 0; i < MAX_KEY_ARRAY; i++)
 	{
@@ -82,7 +75,7 @@ void Input::ClearAll()
 
 bool Input::IsKeyDown(UCHAR key) const
 {
-	return m_keysDown[key]; // return keypressed state
+	return m_keysDown[key];
 }
 
 bool Input::WasKeyPressed(UCHAR key) const

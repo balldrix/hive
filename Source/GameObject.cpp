@@ -108,7 +108,6 @@ void GameObject::Update(float deltaTime)
 
 	m_position += (m_currentVelocity * m_movementSpeed) * deltaTime;
 	
-	// update ground x position
 	m_groundPosition.x = m_position.x;
 
 	if(m_animator != nullptr)

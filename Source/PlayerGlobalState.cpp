@@ -18,16 +18,13 @@ void PlayerGlobalState::OnEnter(Player* player)
 
 void PlayerGlobalState::Execute(Player* player)
 {
-	// true if the player is not knocked back or dead
 	if(player->GetStateMachine()->GetCurrentState() != PlayerKnockbackState::Instance() &&
 		player->GetStateMachine()->GetCurrentState() != PlayerDeadState::Instance())
 	{
+		Controls keyPressed;
+		keyPressed = player->GetControlSystem()->GetKeyPressed();
 
-		// check for keypress
-		Controls lastPressed;
-		lastPressed = player->GetControlSystem()->GetLastPressed();
-
-		switch(lastPressed)
+		switch(keyPressed)
 		{
 		case Controls::None:
 			player->Move(Vector2::Zero);
@@ -43,6 +40,13 @@ void PlayerGlobalState::Execute(Player* player)
 			break;
 		case Controls::Right:
 			player->Move(UnitVectors::Right);
+			
+			if(player->GetControlSystem()->GetLastKeyPressed() == Controls::Right &&
+				player->GetControlSystem()->CanRun())
+				player->Run();
+			else
+				player->Walk();
+
 			break;
 		case Controls::DownRight:
 			player->Move(UnitVectors::DownRight);
@@ -55,6 +59,13 @@ void PlayerGlobalState::Execute(Player* player)
 			break;
 		case Controls::Left:
 			player->Move(UnitVectors::Left);
+
+			if(player->GetControlSystem()->GetLastKeyPressed() == Controls::Left &&
+				player->GetControlSystem()->CanRun())
+				player->Run();
+			else
+				player->Walk();
+
 			break;
 		case Controls::Attack:
 			player->Attack();
@@ -70,7 +81,6 @@ void PlayerGlobalState::Execute(Player* player)
 			player->FlipHorizontally(false);
 	}
 }
-
 
 void PlayerGlobalState::OnExit(Player* player)
 {

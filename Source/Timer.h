@@ -8,6 +8,6 @@ public:
 	Timer();
 	~Timer();
 
-	float	GetTicks(); // get cpu time in ticks
-	float	GetFrequency(); // get cpu frequency
+	float	GetTicks();
+	float	GetFrequency();
 };

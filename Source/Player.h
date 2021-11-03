@@ -31,6 +31,8 @@ public:
 	int						GetDamage() const;
 	int						GetLives() const { return m_lives; }
 
+	void					Run();
+	void					Walk();
 	void					Move(const Vector2& direction);
 	void					Stop();
 	void					Attack();

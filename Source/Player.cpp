@@ -292,13 +292,22 @@ int Player::GetDamage() const
 	return m_damageData.at(stateName);
 }
 
+void Player::Run()
+{
+	//m_movementSpeed = m_playerData.objectData.runningSpeed;
+	m_movementSpeed = m_playerData.objectData.walkSpeed * 2.0f;
+}
+
+void Player::Walk()
+{
+	m_movementSpeed = m_playerData.objectData.walkSpeed;
+}
+
 void Player::Move(const Vector2& direction)
 {
-	// true if switching direction
 	if(direction.x < 0 && m_currentVelocity.x > 0 ||
 		direction.x > 0 && m_currentVelocity.x < 0)
 	{
-		// slow down before switching
 		SetTargetVelocityX(0.0f);
 		return;
 	}
@@ -335,7 +344,7 @@ void Player::Attack()
 		}
 
 		m_stateMachine->ChangeState((PlayerAttackState::Instance()));
-		m_controlSystem->SetInput(Controls::None);
+		m_controlSystem->SetControlsDown(Controls::None);
 	}
 }
 

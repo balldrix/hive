@@ -27,7 +27,7 @@ public:
 	void							ReleaseAll();								
 
 	Graphics*						GetGraphics() const { return m_graphics; }	
-	Input*							GetInput() const { return m_input; }		
+	Input*							GetInput() const { return m_input; }	
 
 private:
 	GameState*						m_currentState;								

@@ -27,26 +27,32 @@ public:
 
 	void Update(float deltaTime);
 
-	void SetInput(Controls input);
+	void SetControlsDown(const Controls& controls);
+	void SetControlsPressed(const Controls& controls);
 	void CanAttack(bool canAttack);
 
-	Controls GetLastPressed();
+	Controls GetKeyPressed() const { return m_controlsDown; }
+	Controls GetLastKeyPressed() const { return m_lastControlsPressed; }
 	int GetComboCounter() const { return m_comboCounter; }
 
 	void IncrementComboCount();
 	
-	bool CanAttack() const { return m_canAttack; }
+	bool SetCanAttack() const { return m_canAttack; }
 	bool CanCombo() const { return m_canCombo; }
+	bool CanRun() const { return m_canRun; }
 
-	void ResetTimers();
+	void Reset();
 
 private:
-	Controls m_playerInput;
+	Controls m_controlsDown;
+	Controls m_lastControlsPressed;
 
 	float m_inputTimer;
 	float m_comboTimer;
+	float m_doubleTapTimer;
 
 	bool m_canAttack;
 	bool m_canCombo;
 	int m_comboCounter;
+	bool m_canRun;
 };

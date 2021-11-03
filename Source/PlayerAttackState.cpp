@@ -38,7 +38,7 @@ void PlayerAttackState::Execute(Player* player)
 	if(player->GetAnimator()->IsDone())
 	{
 		player->GetStateMachine()->ChangeState(PlayerIdleState::Instance());
-		player->GetControlSystem()->ResetTimers();
+		player->GetControlSystem()->Reset();
 		player->GetControlSystem()->IncrementComboCount();
 	}
 }

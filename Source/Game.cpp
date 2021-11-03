@@ -4,6 +4,7 @@
 #include "Window.h"
 #include "Graphics.h"
 #include "Input.h"
+#include "Timer.h"
 #include "AudioEngine.h"
 
 #include "GameStateManager.h"
