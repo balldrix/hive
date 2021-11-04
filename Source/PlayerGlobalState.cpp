@@ -18,6 +18,11 @@ void PlayerGlobalState::OnEnter(Player* player)
 
 void PlayerGlobalState::Execute(Player* player)
 {
+	if(player->GetCurrentVelocity().x < 0)
+		player->FlipHorizontally(true);
+
+	if(player->GetCurrentVelocity().x > 0)
+		player->FlipHorizontally(false);
 }
 
 void PlayerGlobalState::OnExit(Player* player)
