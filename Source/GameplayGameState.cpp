@@ -337,14 +337,10 @@ void GameplayGameState::DeleteAssets()
 void GameplayGameState::ProcessInput()
 {
 	if(m_input->IsKeyDown(ESC_KEY))
-	{
 		PostQuitMessage(0);
-	}
 
 	if(m_input->IsKeyDown('R'))
-	{
 		ResetGame();
-	}
 
 	if(m_input->IsKeyDown(PLAYER_UP_KEY) &&
 		!m_input->IsKeyDown(PLAYER_DOWN_KEY))
@@ -364,8 +360,7 @@ void GameplayGameState::ProcessInput()
 			m_player->Move(UnitVectors::Up);
 		}
 	}
-	else if(m_input->IsKeyDown(PLAYER_DOWN_KEY) &&
-		!m_input->IsKeyDown(PLAYER_UP_KEY))
+	else if(m_input->IsKeyDown(PLAYER_DOWN_KEY))
 	{
 		if(m_input->IsKeyDown(PLAYER_LEFT_KEY) &&
 			!m_input->IsKeyDown(PLAYER_RIGHT_KEY))
@@ -382,27 +377,35 @@ void GameplayGameState::ProcessInput()
 			m_player->Move(UnitVectors::Down);
 		}
 	}
-	else if(m_input->WasKeyPressed(PLAYER_RIGHT_KEY) &&
+	else if(m_input->IsKeyDown(PLAYER_RIGHT_KEY) &&
 		!m_input->IsKeyDown(PLAYER_LEFT_KEY))
 	{
-		m_controlSystem->SetControlsPressed(Controls::Right);
 		m_player->Move(UnitVectors::Right);
-
-		if(m_controlSystem->GetLastKeyPressed() == Controls::Right &&
-			m_controlSystem->CanRun())
-		{
-			m_player->Run();
-		}
-		else
-		{
-			m_player->Walk();
-		}
 	}
-	else if(m_input->WasKeyPressed(PLAYER_LEFT_KEY) &&
+	else if(m_input->IsKeyDown(PLAYER_LEFT_KEY) &&
 		!m_input->IsKeyDown(PLAYER_RIGHT_KEY))
 	{
-		m_controlSystem->SetControlsPressed(Controls::Left);
 		m_player->Move(UnitVectors::Left);
+	}
+
+	if(m_input->WasKeyPressed(PLAYER_RIGHT_KEY))
+	{
+		m_controlSystem->SetControlsPressed(Controls::Right);
+
+			if(m_controlSystem->GetLastKeyPressed() == Controls::Right &&
+				m_controlSystem->CanRun())
+			{
+				m_player->Run();
+			}
+			else
+			{
+				m_player->Walk();
+			}
+	}
+	
+	if(m_input->WasKeyPressed(PLAYER_LEFT_KEY))
+	{
+		m_controlSystem->SetControlsPressed(Controls::Left);
 
 		if(m_controlSystem->GetLastKeyPressed() == Controls::Left &&
 			m_controlSystem->CanRun())
