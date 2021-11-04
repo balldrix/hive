@@ -1,8 +1,9 @@
 #pragma once
 
 const unsigned int MaxCombo = 4;
-const float ComboTimeLimit = 1.5f; // time given to allow combos again
-const float InputTimeLimit = 0.15f; // time given to link combos
+const float ComboResetTime = 1.5f;
+const float ComboWindowDuration = 0.15f;
+const float DoubleTapWindowDuration = 0.6f;
 
 enum class Controls
 {

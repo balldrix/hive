@@ -21,10 +21,11 @@ ControlSystem::~ControlSystem()
 void ControlSystem::SetControlsPressed(const Controls& controls)
 {
 	m_lastControlsPressed = controls;
-	m_canRun = false;
 
-	if(m_doubleTapTimer < InputTimeLimit)
+	if(m_doubleTapTimer < DoubleTapWindowDuration)
 		m_canRun = true;
+	else
+		m_canRun = false;
 
 	m_doubleTapTimer = 0.0f;
 }
@@ -58,14 +59,14 @@ void ControlSystem::Update(float deltaTime)
 	m_comboTimer += deltaTime;
 	m_doubleTapTimer += deltaTime;
 
-	if(m_inputTimer > InputTimeLimit)
+	if(m_inputTimer > ComboWindowDuration)
 	{
 		m_canCombo = false;
 		m_comboCounter = 0;
 		m_lastControlsPressed = Controls::None;
 	}
 
-	if(m_comboTimer > ComboTimeLimit)
+	if(m_comboTimer > ComboResetTime)
 	{
 		m_canCombo = true;
 		m_comboTimer = 0.0f;
