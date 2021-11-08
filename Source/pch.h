@@ -29,6 +29,8 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <stdio.h>
+#include <wchar.h>
 #include <algorithm>
 #include <map>
 #include <random>

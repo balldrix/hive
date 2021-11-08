@@ -23,9 +23,14 @@ void ControlSystem::SetControlsPressed(const Controls& controls)
 	m_lastControlsPressed = controls;
 
 	if(m_doubleTapTimer < DoubleTapWindowDuration)
+	{
 		m_canRun = true;
+
+	}
 	else
+	{
 		m_canRun = false;
+	}
 
 	m_doubleTapTimer = 0.0f;
 }

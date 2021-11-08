@@ -160,6 +160,9 @@ bool Player::LoadPlayerData(const std::string &filename)
 				data.walkSpeed = std::stof(result);
 
 				file >> result;
+				data.runningSpeed = std::stof(result);
+
+				file >> result;
 				data.acceleration = std::stof(result);
 
 				file >> result;
@@ -294,8 +297,7 @@ int Player::GetDamage() const
 
 void Player::Run()
 {
-	//m_movementSpeed = m_playerData.objectData.runningSpeed;
-	m_movementSpeed = m_playerData.objectData.walkSpeed * 2.0f;
+	m_movementSpeed = m_playerData.objectData.runningSpeed;
 }
 
 void Player::Walk()

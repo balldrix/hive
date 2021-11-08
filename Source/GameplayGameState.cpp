@@ -391,16 +391,12 @@ void GameplayGameState::ProcessInput()
 	if(m_input->WasKeyPressed(PLAYER_RIGHT_KEY))
 	{
 		m_controlSystem->SetControlsPressed(Controls::Right);
-
-			if(m_controlSystem->GetLastKeyPressed() == Controls::Right &&
-				m_controlSystem->CanRun())
-			{
-				m_player->Run();
-			}
-			else
-			{
-				m_player->Walk();
-			}
+			
+		if(m_controlSystem->GetLastKeyPressed() == Controls::Right &&
+			m_controlSystem->CanRun())
+		{
+			m_player->Run();
+		}
 	}
 	
 	if(m_input->WasKeyPressed(PLAYER_LEFT_KEY))
@@ -412,17 +408,12 @@ void GameplayGameState::ProcessInput()
 		{
 			m_player->Run();
 		}
-		else
-		{
-			m_player->Walk();
-		}
 	}
 
 	if(m_input->IsKeyDown(PLAYER_A_KEY) &&
 		m_controlSystem->CanAttack())
 	{
 		m_player->Attack();
-		m_controlSystem->SetControlsPressed(Controls::Attack);
 		m_controlSystem->SetCanAttack(false);		
 		return;
 	}
@@ -434,6 +425,7 @@ void GameplayGameState::ProcessInput()
 		m_input->IsKeyDown(PLAYER_A_KEY)))
 	{
 		m_player->Move(Vector2::Zero);
+		m_player->Walk();
 	}
 
 	if(!m_input->WasKeyPressed(PLAYER_A_KEY))

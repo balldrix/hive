@@ -3,7 +3,7 @@
 const unsigned int MaxCombo = 4;
 const float ComboResetTime = 1.5f;
 const float ComboWindowDuration = 0.15f;
-const float DoubleTapWindowDuration = 0.6f;
+const float DoubleTapWindowDuration = 0.2f;
 
 enum class Controls
 {

@@ -227,8 +227,7 @@ LRESULT Game::MessageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lPara
 		if(lParam & (1 << 30))
 			return 0;
 			
-		m_input->SetKeyDown(wParam);
-		OutputDebugString(L"pressed key/n");		
+		m_input->SetKeyDown(wParam);	
 
 		if(wParam == VK_RETURN && (lParam & 0x60000000) == 0x20000000)
 		{

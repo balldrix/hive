@@ -106,8 +106,7 @@ void GameObject::Update(float deltaTime)
 	y = Lerp(m_targetVelocity.y, m_currentVelocity.y, t * deltaTime);
 	m_currentVelocity.y = y;
 
-	m_position += (m_currentVelocity * m_movementSpeed) * deltaTime;
-	
+	m_position += (m_currentVelocity * m_movementSpeed) * deltaTime;	
 	m_groundPosition.x = m_position.x;
 
 	if(m_animator != nullptr)
