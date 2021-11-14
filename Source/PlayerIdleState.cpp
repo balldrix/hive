@@ -27,7 +27,12 @@ void PlayerIdleState::OnEnter(Player* player)
 
 void PlayerIdleState::Execute(Player* player)
 {
-	if(player->GetCurrentVelocity() != Vector2::Zero)
+	if(player->GetCurrentVelocity() == Vector2::Zero)
+		return;
+
+	if(player->GetMovementSpeed() == player->GetRunSpeed())
+		player->GetStateMachine()->ChangeState((PlayerRunningState::Instance()));
+	else if(player->GetMovementSpeed() == player->GetWalkSpeed())
 		player->GetStateMachine()->ChangeState((PlayerWalkingState::Instance()));
 }
 

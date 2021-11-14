@@ -28,6 +28,8 @@ public:
 
 	virtual int				GetMaxHealth() const { return m_playerData.objectData.startingHealth; }
 	float					GetWalkSpeed() const { return m_playerData.objectData.walkSpeed; }
+	float					GetRunSpeed() const { return m_playerData.objectData.runningSpeed; }
+
 	int						GetDamage() const;
 	int						GetLives() const { return m_lives; }
 

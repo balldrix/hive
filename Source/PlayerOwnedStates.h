@@ -5,3 +5,4 @@
 #include "PlayerKnockbackState.h"
 #include "PlayerHurtState.h"
 #include "PlayerDeadState.h"
+#include "PlayerRunningState.h"
