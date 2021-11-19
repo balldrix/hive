@@ -38,6 +38,7 @@ public:
 	void					Move(const Vector2& direction);
 	void					Stop();
 	void					Attack();
+	void					Dodge();
 	void					ApplyDamage(GameObject* source, const int& amount);
 	void					Knockback(const Vector2& direction, const float& force);
 	void					Kill();

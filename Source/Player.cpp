@@ -349,6 +349,10 @@ void Player::Attack()
 	}
 }
 
+void Player::Dodge()
+{
+}
+
 void Player::ApplyDamage(GameObject* source, const int& amount)
 {
 	m_health -= amount;

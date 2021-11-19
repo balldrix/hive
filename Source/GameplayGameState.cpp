@@ -410,6 +410,12 @@ void GameplayGameState::ProcessInput()
 		}
 	}
 
+	if(m_input->IsKeyDown(PLAYER_B_KEY))
+	{
+		m_player->Dodge();
+		return;
+	}
+
 	if(m_input->IsKeyDown(PLAYER_A_KEY) &&
 		m_controlSystem->CanAttack())
 	{
@@ -422,7 +428,8 @@ void GameplayGameState::ProcessInput()
 		m_input->IsKeyDown(PLAYER_DOWN_KEY) ||
 		m_input->IsKeyDown(PLAYER_LEFT_KEY) ||
 		m_input->IsKeyDown(PLAYER_RIGHT_KEY) ||
-		m_input->IsKeyDown(PLAYER_A_KEY)))
+		m_input->IsKeyDown(PLAYER_A_KEY) ||
+		m_input->IsKeyDown(PLAYER_B_KEY)))
 	{
 		m_player->Move(Vector2::Zero);
 		m_player->Walk();

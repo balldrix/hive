@@ -17,6 +17,7 @@ enum class Controls
 	DownLeft,
 	Left,
 	Attack,
+	Roll,
 	MaxControls
 };
 
