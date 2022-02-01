@@ -297,16 +297,25 @@ int Player::GetDamage() const
 
 void Player::Run()
 {
+	if(m_stateMachine->IsInState(*PlayerDodgeState::Instance()) == true)
+		return;
+
 	m_movementSpeed = m_playerData.objectData.runningSpeed;
 }
 
 void Player::Walk()
 {
+	if(m_stateMachine->IsInState(*PlayerDodgeState::Instance()) == true)
+		return;
+
 	m_movementSpeed = m_playerData.objectData.walkSpeed;
 }
 
 void Player::Move(const Vector2& direction)
 {
+	if(m_stateMachine->IsInState(*PlayerDodgeState::Instance()) == true)
+		return;
+
 	if(direction.x < 0 && m_currentVelocity.x > 0 ||
 		direction.x > 0 && m_currentVelocity.x < 0)
 	{
@@ -351,6 +360,11 @@ void Player::Attack()
 
 void Player::Dodge()
 {
+	if(m_stateMachine->IsInState(*PlayerDodgeState::Instance()) == true)
+		return;
+
+	m_movementSpeed = DodgeSpeed;
+	m_stateMachine->ChangeState(PlayerDodgeState::Instance());
 }
 
 void Player::ApplyDamage(GameObject* source, const int& amount)

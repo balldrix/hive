@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added 
 - Double tap running.
+- Dodge move.
 
 ### Changed
 - Player control processed directly in gameplay game state without using control system buffer.

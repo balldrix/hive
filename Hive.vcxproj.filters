@@ -190,7 +190,12 @@
     <ClCompile Include="Source\TravelPrompt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\PlayerRunningState.cpp" />
+    <ClCompile Include="Source\PlayerRunningState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerDodgeState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -433,6 +438,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\PlayerRunningState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerDodgeState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

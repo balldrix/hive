@@ -410,10 +410,9 @@ void GameplayGameState::ProcessInput()
 		}
 	}
 
-	if(m_input->IsKeyDown(PLAYER_B_KEY))
+	if(m_input->WasKeyPressed(PLAYER_B_KEY))
 	{
 		m_player->Dodge();
-		return;
 	}
 
 	if(m_input->IsKeyDown(PLAYER_A_KEY) &&

@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\PlayerDodgeState.cpp" />
     <ClCompile Include="Source\PlayerRunningState.cpp" />
     <ClCompile Include="Source\Sound.cpp" />
     <ClCompile Include="Source\EncounterHandler.cpp" />
@@ -30,6 +31,7 @@
     <ClCompile Include="Source\KingMook.cpp" />
     <ClCompile Include="Source\KingMookChargeState.cpp" />
     <ClCompile Include="Source\KingMookEnemyGlobalState.cpp" />
+    <ClInclude Include="Source\PlayerDodgeState.h" />
     <ClInclude Include="Source\PlayerRunningState.h" />
     <ClInclude Include="Source\SoundSource.h" />
     <ClInclude Include="Source\SoundManager.h" />

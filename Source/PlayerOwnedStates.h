@@ -6,3 +6,4 @@
 #include "PlayerHurtState.h"
 #include "PlayerDeadState.h"
 #include "PlayerRunningState.h"
+#include "PlayerDodgeState.h"
