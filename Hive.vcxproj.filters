@@ -196,6 +196,8 @@
     <ClCompile Include="Source\PlayerDodgeState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\TilemapHandler.cpp" />
+    <ClCompile Include="Source\LevelRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -443,6 +445,9 @@
     <ClInclude Include="Source\PlayerDodgeState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\TilemapData.h" />
+    <ClInclude Include="Source\TilemapHandler.h" />
+    <ClInclude Include="Source\LevelRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\backgroundTest.png">

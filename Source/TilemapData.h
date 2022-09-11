@@ -4,21 +4,21 @@
 
 namespace 
 {
-	struct TilemapData
-	{
-		unsigned int height = {};
-		std::vector<TilemapLayer> layers;
-		unsigned int tileheight = {};
-		unsigned int tilewidth = {};
-		unsigned int width = {};
-	};
-
 	struct TilemapLayer
 	{
 		std::vector<unsigned int> data;
 		unsigned int height;
 		unsigned int id = {};
 		std::string name = {};
+		unsigned int width = {};
+	};
+
+	struct TilemapData
+	{
+		unsigned int height = {};
+		std::vector<TilemapLayer> layers;
+		unsigned int tileheight = {};
+		unsigned int tilewidth = {};
 		unsigned int width = {};
 	};
 

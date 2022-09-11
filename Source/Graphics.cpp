@@ -148,6 +148,7 @@ void Graphics::CreateResources()
 		swapChainDesc.SampleDesc.Quality = 0;
 		swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
 		swapChainDesc.BufferCount = backBufferCount;
+		//swapChainDesc.AlphaMode = DXGI_ALPHA_MODE_PREMULTIPLIED;
 
 		DXGI_SWAP_CHAIN_FULLSCREEN_DESC fsSwapChainDesc = {};
 		fsSwapChainDesc.Windowed = TRUE;
@@ -197,7 +198,7 @@ void Graphics::BeginScene()
 	CD3D11_VIEWPORT viewport(0.0f, 0.0f, static_cast<float>(m_backBufferWidth), static_cast<float>(m_backbufferHeight));
 	m_d3dDeviceContext->RSSetViewports(1, &viewport);
 	
-	m_spriteBatch->Begin(SpriteSortMode_FrontToBack, nullptr, m_samplerState.Get());
+	m_spriteBatch->Begin(SpriteSortMode_FrontToBack, NULL, m_samplerState.Get());
 }
 
 void Graphics::PresentBackBuffer()

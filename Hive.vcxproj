@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\LevelRenderer.cpp" />
     <ClCompile Include="Source\PlayerDodgeState.cpp" />
     <ClCompile Include="Source\PlayerRunningState.cpp" />
     <ClCompile Include="Source\Sound.cpp" />
@@ -31,6 +32,7 @@
     <ClCompile Include="Source\KingMook.cpp" />
     <ClCompile Include="Source\KingMookChargeState.cpp" />
     <ClCompile Include="Source\KingMookEnemyGlobalState.cpp" />
+    <ClInclude Include="Source\LevelRenderer.h" />
     <ClInclude Include="Source\PlayerDodgeState.h" />
     <ClInclude Include="Source\PlayerRunningState.h" />
     <ClInclude Include="Source\SoundSource.h" />
@@ -42,6 +44,7 @@
     <ClCompile Include="Source\AudioEngine.cpp" />
     <ClCompile Include="Source\SoundSource.cpp" />
     <ClCompile Include="Source\SoundManager.cpp" />
+    <ClCompile Include="Source\TilemapHandler.cpp" />
     <ClCompile Include="Source\TravellingHandler.cpp" />
     <ClCompile Include="Source\TravellingSceneState.cpp" />
     <ClCompile Include="Source\AABB.cpp" />
@@ -104,6 +107,8 @@
     <ClInclude Include="Source\KingMook.h" />
     <ClInclude Include="Source\KingMookChargeState.h" />
     <ClInclude Include="Source\NPCFactory.h" />
+    <ClInclude Include="Source\TilemapData.h" />
+    <ClInclude Include="Source\TilemapHandler.h" />
     <ClInclude Include="Source\TravellingHandler.h" />
     <ClInclude Include="Source\TravellingSceneState.h" />
     <ClInclude Include="Source\AABB.h" />
@@ -229,26 +234,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>

@@ -3,6 +3,7 @@
 #include "pch.h"
 #include "GameState.h"
 #include "AABB.h"
+#include "TilemapData.h"
 
 class GameStateManager;
 class Graphics;
@@ -23,6 +24,7 @@ class EncounterHandler;
 class TravellingHandler;
 class GameOverScreenController;
 class SoundSource;
+class LevelRenderer;
 
 class GameplayGameState : public GameState
 {
@@ -93,6 +95,7 @@ private:
 	StateMachine<GameplayGameState>*	m_sceneStateMachine;
 	EncounterHandler*					m_encounterHandler;
 	TravellingHandler*					m_travellingHandler;
+	LevelRenderer*						m_levelRenderer;
 
 	GameOverScreenController*			m_gameOverScreenController;
 

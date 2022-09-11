@@ -24,6 +24,7 @@
 #include "GameplayOwnedSceneStates.h"
 #include "EncounterHandler.h"
 #include "TravellingHandler.h"
+#include "LevelRenderer.h"
 #include "TravelPrompt.h"
 #include "GameOverScreenController.h"
 #include "SoundManager.h"
@@ -55,6 +56,7 @@ GameplayGameState::GameplayGameState() :
 	m_NPCManager(nullptr),
 	m_player(nullptr),
 	m_background(nullptr),
+	m_levelRenderer(nullptr),
 	m_hudManager(nullptr),
 	m_sceneStateMachine(nullptr),
 	m_encounterHandler(nullptr),
@@ -146,6 +148,7 @@ void GameplayGameState::LoadAssets()
 
 	m_player = new Player();
 	m_background = new Background();
+	m_levelRenderer = new LevelRenderer();
 	m_hudManager = new InGameHudManager();
 	m_sceneStateMachine = new StateMachine<GameplayGameState>(this);
 	m_encounterHandler = new EncounterHandler();
@@ -175,6 +178,7 @@ void GameplayGameState::LoadAssets()
 
 	m_background->Init(m_backgroundSprite);
 	m_background->SetCamera(m_camera);
+	m_levelRenderer->Init(m_graphics, m_camera);
 
 	m_hudManager->Init(m_graphics);
 	m_hudManager->SetMaxPlayerHealth(m_player->GetMaxHealth());
@@ -247,6 +251,12 @@ void GameplayGameState::DeleteAssets()
 	{
 		delete m_background;
 		m_background = nullptr;
+	}
+
+	if(m_levelRenderer != nullptr)
+	{
+		delete m_levelRenderer;
+		m_levelRenderer = nullptr;
 	}
 
 	if(m_player)
@@ -567,10 +577,11 @@ void GameplayGameState::ProcessCollisions()
 
 void GameplayGameState::Render()
 {
-	m_background->Render(m_graphics);
-	m_player->Render(m_graphics);
+	//m_background->Render(m_graphics);
+	m_levelRenderer->Render(m_graphics);
+	//m_player->Render(m_graphics);
 	m_NPCManager->Render(m_graphics);
-	m_hudManager->Render(m_graphics);
+	//m_hudManager->Render(m_graphics);
 	m_gameOverScreenController->Render(m_graphics);
 }
 
