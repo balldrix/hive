@@ -17,11 +17,15 @@ public:
 	void Update(float deltaTime);
 	void Render(Graphics* graphics);
 
+
 	void DeleteAll();
 
 	unsigned int GetWidth() const { return m_tilemapHandler->GetTilemapData().width; }
 
 private:
+	
+	void RenderTile(Graphics* graphics, unsigned int x, unsigned int y);
+	
 	Camera* m_camera;
 	TilemapHandler* m_tilemapHandler;
 	Texture* m_tileSetTexture;

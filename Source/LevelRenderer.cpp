@@ -3,6 +3,7 @@
 #include "LevelRenderer.h"
 #include "Sprite.h"
 #include "Texture.h"
+#include "TilemapHandler.h"
 
 LevelRenderer::LevelRenderer() :
 	m_camera(nullptr),
@@ -37,15 +38,39 @@ void LevelRenderer::Update(float deltaTime)
 
 void LevelRenderer::Render(Graphics* graphics)
 {
+	auto mapWidth = m_tilemapHandler->GetTilemapData().width;
+	auto mapHeight = m_tilemapHandler->GetTilemapData().height;
+
+	for(size_t x = 0; x < mapWidth; x++)
+	{
+		for(size_t y = 0; y < mapHeight; y++)
+		{
+			RenderTile(graphics, x, y);
+		}
+	}
+}
+
+void LevelRenderer::RenderTile(Graphics* graphics, unsigned int posX, unsigned int posY)
+{
+	auto layerData = m_tilemapHandler->GetTilemapData().layers[0].data;
+	auto tileMapWidth = m_tilemapHandler->GetTilemapData().width;
+	auto tileWidth = m_tilemapHandler->GetTilemapData().tilewidth;
+	auto tileHeight = m_tilemapHandler->GetTilemapData().tileheight;
+	auto tileValue = layerData[posY * tileMapWidth + posX] - 1;
+	auto spriteWidth = m_tileSetSprite->GetWidth();
+	auto spriteHeight = m_tileSetSprite->GetHeight();
+	
+	auto tileSetWidth = spriteWidth / tileWidth;
+
 	RECT rect;
 
-	rect.left = 0;
-	rect.right = m_tilemapHandler->GetTilemapData().tilewidth;
-	rect.top = 0;
-	rect.bottom = m_tilemapHandler->GetTilemapData().tileheight;
+	rect.left = (tileValue % tileSetWidth) * tileWidth;
+	rect.right = rect.left + tileWidth;
+	rect.top = (tileValue / tileSetWidth) * tileHeight;
+	rect.bottom = rect.top + tileHeight;
 
-	//m_tileSetSprite->SetSourceRect(rect);
-	m_tileSetSprite->Render(graphics, Vector2(0, 0));
+	m_tileSetSprite->SetSourceRect(rect);
+	m_tileSetSprite->Render(graphics, Vector2(posX * tileWidth, posY * tileHeight));
 }
 
 void LevelRenderer::DeleteAll()
