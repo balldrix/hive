@@ -15,7 +15,6 @@ class Spritesheet;
 class Sprite;
 class Animator;
 class Player;
-class Background;
 class HitBoxManager;
 class NPCManager;
 class InGameHudManager;
@@ -89,8 +88,7 @@ private:
 	NPCManager*							m_NPCManager;				
 
 	Player*								m_player;					
-	Background*							m_background;				
-	
+
 	InGameHudManager*					m_hudManager;
 	StateMachine<GameplayGameState>*	m_sceneStateMachine;
 	EncounterHandler*					m_encounterHandler;

@@ -19,7 +19,7 @@ public:
 
 	void DeleteAll();
 
-	unsigned int GetWidth() const { return m_tilemapHandler->GetTilemapData().width; }
+	unsigned int GetLevelPixelWidth() const { return m_tilemapHandler->GetTilemapData().width * m_tileWidth; }
 
 private:
 

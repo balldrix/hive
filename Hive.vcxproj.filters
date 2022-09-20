@@ -109,9 +109,6 @@
     <ClCompile Include="Source\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Background.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\EnemyDataContainer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -350,9 +347,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Background.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\EnemyDataContainer.h">

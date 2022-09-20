@@ -12,7 +12,6 @@
 #include "Sprite.h"
 #include "Animator.h"
 #include "Player.h"
-#include "Background.h"
 #include "InGameHudManager.h"
 #include "Resources.h"
 #include "UnitVectors.h"
@@ -55,7 +54,6 @@ GameplayGameState::GameplayGameState() :
 	m_playerHitBoxManager(nullptr),
 	m_NPCManager(nullptr),
 	m_player(nullptr),
-	m_background(nullptr),
 	m_levelRenderer(nullptr),
 	m_hudManager(nullptr),
 	m_sceneStateMachine(nullptr),
@@ -147,7 +145,6 @@ void GameplayGameState::LoadAssets()
 	m_NPCManager = new NPCManager();
 
 	m_player = new Player();
-	m_background = new Background();
 	m_levelRenderer = new LevelRenderer();
 	m_hudManager = new InGameHudManager();
 	m_sceneStateMachine = new StateMachine<GameplayGameState>(this);
@@ -176,8 +173,6 @@ void GameplayGameState::LoadAssets()
 	m_player->SetCamera(m_camera);
 	m_camera->SetTarget(m_player);
 
-	m_background->Init(m_backgroundSprite);
-	m_background->SetCamera(m_camera);
 	m_levelRenderer->Init(m_graphics, m_camera);
 
 	m_hudManager->Init(m_graphics);
@@ -190,7 +185,7 @@ void GameplayGameState::LoadAssets()
 	m_encounterHandler->Init("GameData\\EncounterData\\encounterPositions.txt", m_NPCManager->GetEnemyList());
 
 	m_playerBoundary.SetMin(Vector2(StartingBoundaryMinX, StartingBoundaryMinY));
-	m_playerBoundary.SetMax(Vector2((float)m_background->GetSprite()->GetWidth() - 1.0f, (float)m_graphics->GetHeight() - 1.0f));
+	m_playerBoundary.SetMax(Vector2((float)m_levelRenderer->GetLevelPixelWidth() - 1.0f, (float)m_graphics->GetHeight() - 1.0f));
 	
 	m_camera->Init(GameWidth);
 	
@@ -245,12 +240,6 @@ void GameplayGameState::DeleteAssets()
 	{
 		delete m_hudManager;
 		m_hudManager = nullptr;
-	}
-
-	if(m_background)
-	{
-		delete m_background;
-		m_background = nullptr;
 	}
 
 	if(m_levelRenderer != nullptr)
@@ -469,7 +458,6 @@ void GameplayGameState::Tick(float deltaTime)
 	m_camera->Update(deltaTime);
 	m_player->Update(deltaTime);
 	m_NPCManager->Update(deltaTime);
-	m_background->Update(deltaTime);
 	m_hudManager->SetMaxPlayerHealth(m_player->GetMaxHealth());
 	m_hudManager->SetCurrentPlayerHealth(m_player->GetHealth());
 	m_hudManager->UpdatePlayerLives(m_player->GetLives());
@@ -577,7 +565,6 @@ void GameplayGameState::ProcessCollisions()
 
 void GameplayGameState::Render()
 {
-	//m_background->Render(m_graphics);
 	m_levelRenderer->Render(m_graphics);
 	//m_player->Render(m_graphics);
 	m_NPCManager->Render(m_graphics);
@@ -607,7 +594,7 @@ void GameplayGameState::ResetGame()
 	m_hudManager->Reset();
 	m_sceneStateMachine->ChangeState(TravellingSceneState::Instance());
 	m_encounterHandler->SetEncounterIndex(0);
-	SetPlayerBoundaryX(StartingBoundaryMinX, (float)m_background->GetSprite()->GetWidth());
+	SetPlayerBoundaryX(StartingBoundaryMinX, (float)m_levelRenderer->GetLevelPixelWidth());
 	m_gameOverScreenController->Reset();
 }
 

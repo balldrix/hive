@@ -49,7 +49,6 @@
     <ClCompile Include="Source\TravellingSceneState.cpp" />
     <ClCompile Include="Source\AABB.cpp" />
     <ClCompile Include="Source\Animator.cpp" />
-    <ClCompile Include="Source\Background.cpp" />
     <ClCompile Include="Source\BarController.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\CharacterPortrait.cpp" />
@@ -114,7 +113,6 @@
     <ClInclude Include="Source\AABB.h" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\Animator.h" />
-    <ClInclude Include="Source\Background.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\CharacterPortrait.h" />
     <ClInclude Include="Source\Constants.h" />

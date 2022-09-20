@@ -10,7 +10,12 @@ LevelRenderer::LevelRenderer() :
 	m_camera(nullptr),
 	m_tilemapHandler(nullptr),
 	m_tileSetTexture(nullptr),
-	m_tileSetSprite(nullptr)
+	m_tileSetSprite(nullptr),
+	m_tileWidth(0),
+	m_tileHeight(0),
+	m_tileSetSpriteWidth(0),
+	m_tileSetSpriteHeight(0),
+	m_tileSetWidth(0)
 {
 }
 
@@ -80,7 +85,7 @@ void LevelRenderer::RenderTile(Graphics* graphics, unsigned int tileId, unsigned
 	rect.bottom = rect.top + m_tileHeight;
 
 	m_tileSetSprite->SetSourceRect(rect);
-	m_tileSetSprite->Render(graphics, Vector2(posX * m_tileWidth, posY * m_tileHeight));
+	m_tileSetSprite->Render(graphics, Vector2((float)(posX * m_tileWidth), (float(posY * m_tileHeight))));
 }
 
 void LevelRenderer::DeleteAll()
