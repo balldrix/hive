@@ -4,6 +4,7 @@
 #include "Sprite.h"
 #include "Texture.h"
 #include "TilemapHandler.h"
+#include "TilemapData.h"
 
 LevelRenderer::LevelRenderer() :
 	m_camera(nullptr),
@@ -30,6 +31,12 @@ void LevelRenderer::Init(Graphics* graphics, Camera* camera)
 	m_tileSetTexture->LoadTexture(graphics, "GameData\\Tilesets\\ts_bunker.png");
 	m_tileSetSprite->Init(m_tileSetTexture);
 	m_tileSetSprite->SetOrigin(Vector2(0, 0));
+
+	m_tileWidth = m_tilemapHandler->GetTilemapData().tilewidth;
+	m_tileHeight = m_tilemapHandler->GetTilemapData().tileheight;
+	m_tileSetSpriteWidth = m_tileSetSprite->GetWidth();
+	m_tileSetSpriteHeight = m_tileSetSprite->GetHeight();
+	m_tileSetWidth = m_tileSetSpriteWidth / m_tileWidth;
 }
 
 void LevelRenderer::Update(float deltaTime)
@@ -38,39 +45,42 @@ void LevelRenderer::Update(float deltaTime)
 
 void LevelRenderer::Render(Graphics* graphics)
 {
-	auto mapWidth = m_tilemapHandler->GetTilemapData().width;
-	auto mapHeight = m_tilemapHandler->GetTilemapData().height;
+	auto numLayers = m_tilemapHandler->GetTilemapData().layers.size();
+	auto layers = m_tilemapHandler->GetTilemapData().layers;
 
-	for(size_t x = 0; x < mapWidth; x++)
+	for(auto i = layers.begin(); i != layers.end(); ++i)
 	{
-		for(size_t y = 0; y < mapHeight; y++)
+		RenderLayer(graphics, *i);
+	}
+}
+
+void LevelRenderer::RenderLayer(Graphics* graphics, const TilemapLayer& layer)
+{
+	auto layerData = layer;
+	auto tileMapWidth = m_tilemapHandler->GetTilemapData().width;
+	auto tileMapHeight = m_tilemapHandler->GetTilemapData().height;
+
+	for(size_t x = 0; x < tileMapWidth; x++)
+	{
+		for(size_t y = 0; y < tileMapHeight; y++)
 		{
-			RenderTile(graphics, x, y);
+			auto tileId = layer.data[y * tileMapWidth + x] - 1;
+			RenderTile(graphics, tileId, x, y);
 		}
 	}
 }
 
-void LevelRenderer::RenderTile(Graphics* graphics, unsigned int posX, unsigned int posY)
+void LevelRenderer::RenderTile(Graphics* graphics, unsigned int tileId, unsigned int posX, unsigned int posY)
 {
-	auto layerData = m_tilemapHandler->GetTilemapData().layers[0].data;
-	auto tileMapWidth = m_tilemapHandler->GetTilemapData().width;
-	auto tileWidth = m_tilemapHandler->GetTilemapData().tilewidth;
-	auto tileHeight = m_tilemapHandler->GetTilemapData().tileheight;
-	auto tileValue = layerData[posY * tileMapWidth + posX] - 1;
-	auto spriteWidth = m_tileSetSprite->GetWidth();
-	auto spriteHeight = m_tileSetSprite->GetHeight();
-	
-	auto tileSetWidth = spriteWidth / tileWidth;
-
 	RECT rect;
 
-	rect.left = (tileValue % tileSetWidth) * tileWidth;
-	rect.right = rect.left + tileWidth;
-	rect.top = (tileValue / tileSetWidth) * tileHeight;
-	rect.bottom = rect.top + tileHeight;
+	rect.left = (tileId % m_tileSetWidth) * m_tileWidth;
+	rect.right = rect.left + m_tileWidth;
+	rect.top = (tileId / m_tileSetWidth) * m_tileHeight;
+	rect.bottom = rect.top + m_tileHeight;
 
 	m_tileSetSprite->SetSourceRect(rect);
-	m_tileSetSprite->Render(graphics, Vector2(posX * tileWidth, posY * tileHeight));
+	m_tileSetSprite->Render(graphics, Vector2(posX * m_tileWidth, posY * m_tileHeight));
 }
 
 void LevelRenderer::DeleteAll()
