@@ -83,6 +83,6 @@
    { "name": "idle", "from": 0, "to": 1, "loop": true, "color": "#000000ff" },
    { "name": "swing_1", "from": 2, "to": 7, "loop": false, "color": "#000000ff" }
   ],
-  "origin": { "x": 10, "y": 39 }
+  "origin": { "x": 11, "y": 38 }
  }
 }

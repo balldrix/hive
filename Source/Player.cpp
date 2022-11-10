@@ -240,13 +240,6 @@ void Player::ResetKnockoutTimer()
 
 void Player::Render(Graphics* graphics)
 {
-	// render shadow first
-	if(m_shadow)
-	{
-		m_shadow->SetDepth(m_groundPosition.y / graphics->GetHeight());
-		m_shadow->Render(graphics);
-	}
-
 	if(m_spriteSheet)
 	{
 		// set layer depth
@@ -261,6 +254,12 @@ void Player::Render(Graphics* graphics)
 		{
 			m_spriteSheet->Render(graphics, 0);
 		}
+	}
+
+	if(m_shadow)
+	{
+		m_shadow->SetDepth(m_groundPosition.y / graphics->GetHeight());
+		m_shadow->Render(graphics);
 	}
 
 	// render hitbox

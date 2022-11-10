@@ -47,7 +47,7 @@ GameplayGameState::GameplayGameState() :
 	m_largeShadowTexture(nullptr),
 	m_backgroundTexture(nullptr),
 	m_playerSprite(nullptr),
-	m_standardShadowSprite(nullptr),
+	m_playerShadowSprite(nullptr),
 	m_hitBoxSprite(nullptr),
 	m_backgroundSprite(nullptr),
 	m_playerAnimator(nullptr),
@@ -134,7 +134,7 @@ void GameplayGameState::LoadAssets()
 	m_backgroundTexture = new Texture();
 
 	m_playerSprite = new Spritesheet();
-	m_standardShadowSprite = new Sprite();
+	m_playerShadowSprite = new Sprite();
 	m_hitBoxSprite = new Sprite();
 	m_backgroundSprite = new Sprite();
 
@@ -158,8 +158,8 @@ void GameplayGameState::LoadAssets()
 	m_backgroundTexture->LoadTexture(m_graphics, "GameData\\Sprites\\backgroundTest.png");
 
 	m_playerSprite->Init(m_playerTexture, "GameData\\SpriteSheetData\\playerSpritesheetData.json");
-	m_standardShadowSprite->Init(m_standardShadowTexture);
-	m_standardShadowSprite->SetAlpha(0.7f);
+	m_playerShadowSprite->Init(m_largeShadowTexture);
+	m_playerShadowSprite->SetAlpha(0.7f);
 	m_hitBoxSprite->Init(m_hitBoxTexture);
 	m_backgroundSprite->Init(m_backgroundTexture);
 	m_backgroundSprite->SetOrigin(Vector2::Zero);
@@ -169,7 +169,7 @@ void GameplayGameState::LoadAssets()
 	m_playerHitBoxManager->Init(m_hitBoxSprite, m_player, "GameData\\HitBoxData\\playerHitBoxData.json");
 
 	m_player->LoadData("GameData\\PlayerData\\playerData.txt", "GameData\\PlayerData\\playerDamage.txt");
-	m_player->Init(m_playerSprite, m_standardShadowSprite, m_playerAnimator, m_playerHitBoxManager, m_controlSystem);
+	m_player->Init(m_playerSprite, m_playerShadowSprite, m_playerAnimator, m_playerHitBoxManager, m_controlSystem);
 	m_player->SetCamera(m_camera);
 	m_camera->SetTarget(m_player);
 
@@ -278,10 +278,10 @@ void GameplayGameState::DeleteAssets()
 		m_hitBoxSprite = nullptr;
 	}
 
-	if(m_standardShadowSprite)
+	if(m_playerShadowSprite)
 	{
-		delete m_standardShadowSprite;
-		m_standardShadowSprite = nullptr;
+		delete m_playerShadowSprite;
+		m_playerShadowSprite = nullptr;
 	}
 
 	if(m_playerSprite)

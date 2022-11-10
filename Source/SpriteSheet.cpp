@@ -48,7 +48,7 @@ Vector2 Spritesheet::OffsetOrigin(unsigned int frameNum)
 	Vector2 origin = m_origin;
 
 	if(m_spriteEffects == SpriteEffects_FlipHorizontally)
-		origin.x += m_frames[frameNum].spriteSourceSize.left;
+		origin.x += m_frames[frameNum].spriteSourceSize.left + 1;
 
 	return origin;
 }
