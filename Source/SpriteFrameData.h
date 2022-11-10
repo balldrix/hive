@@ -6,30 +6,38 @@ namespace
 {
 	struct SpriteFrameData
 	{
-		RECT	sourceRect;
-		bool	rotated;
-		Vector2	size;
-		Vector2	origin;
+		std::string filename = {};
+		RECT frame = {};
+		bool rotated = {};
+		bool trimmed = {};
+		RECT spriteSourceSize = {};
+		Vector2	sourceSize = {};
+		float duration = {};
 	};
 
 	void from_json(const json& j, SpriteFrameData& s)
 	{
+		s.filename = j.at("filename").get<std::string>();
+
 		json rect = j["frame"];
-		s.sourceRect.left = rect["x"];
-		s.sourceRect.top = rect["y"];
-		s.sourceRect.right = s.sourceRect.left + rect["w"];
-		s.sourceRect.bottom = s.sourceRect.top + rect["h"];
+		s.frame.left = rect["x"];
+		s.frame.top = rect["y"];
+		s.frame.right = s.frame.left + rect["w"];
+		s.frame.bottom = s.frame.top + rect["h"];
 
-		// rotation
 		s.rotated = j["rotated"];
+		s.trimmed = j["trimmed"];
 
-		// size
+		rect = j["spriteSourceSize"];
+		s.spriteSourceSize.left = rect["x"];
+		s.spriteSourceSize.top = rect["y"];
+		s.spriteSourceSize.right = s.spriteSourceSize.left + rect["w"];
+		s.spriteSourceSize.bottom = s.spriteSourceSize.top + rect["h"];
+		
 		json size = j["sourceSize"];
-		s.size.x = size["w"];
-		s.size.y = size["h"];
+		s.sourceSize.x = size["w"];
+		s.sourceSize.y = size["h"];
 
-		json origin = j["origin"];
-		s.origin.x = origin["x"];
-		s.origin.y = origin["y"];
+		s.duration = j["duration"];
 	}
 }

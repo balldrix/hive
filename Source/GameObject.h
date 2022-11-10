@@ -15,14 +15,14 @@ class Camera;
 
 struct ObjectData
 {
-	std::string				id;
-	unsigned int			startingHealth;
-	unsigned int			startingLives;
-	Vector2					startingPosition;
-	float					walkSpeed;
-	float					runningSpeed;
-	float					acceleration;
-	float					deceleration;
+	std::string				id = {};
+	unsigned int			startingHealth = {};
+	unsigned int			startingLives = {};
+	Vector2					startingPosition = {};
+	float					walkSpeed = {};
+	float					runningSpeed = {};
+	float					acceleration = {};
+	float					deceleration = {};
 };
 
 class GameObject

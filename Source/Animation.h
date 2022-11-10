@@ -7,10 +7,10 @@ namespace
 	struct Animation
 	{
 		std::string	name = {};
-		int spritesheetIndex = {};
-		int frameCount = {};
-		int framesPerSecond = {};
+		unsigned int from = {};
+		unsigned int to = {};
 		bool loop = {};
+		unsigned int frameCount = 1;
 
 		Animation() = default;
 	};
@@ -18,9 +18,10 @@ namespace
 	void from_json(const json& j, Animation& a)
 	{
 		a.name = j.at("name").get<std::string>();
-		a.spritesheetIndex = j.at("index").get<int>();
-		a.frameCount = j.at("frameCount").get<int>();
-		a.framesPerSecond = j.at("framesPerSecond").get<int>();
+		a.from = j.at("from").get<unsigned int>();
+		a.to = j.at("to").get<unsigned int>();
 		a.loop = j.at("loop").get<bool>();
+
+ 		a.frameCount += a.to - a.from;
 	}
 }

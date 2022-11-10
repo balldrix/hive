@@ -88,7 +88,7 @@ void InGameHudManager::Render(Graphics* graphics)
 		origin);
 
 	m_livesLeftSprites[m_playerLivesLeft]->Render(graphics);
-	m_travelPrompt->Render(graphics);
+	//m_travelPrompt->Render(graphics);
 }
 
 Vector2 InGameHudManager::GetKillCountStringOrigin(const std::string &s)

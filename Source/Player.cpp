@@ -255,7 +255,7 @@ void Player::Render(Graphics* graphics)
 		// render player sprite
 		if(m_animator)
 		{
-			m_spriteSheet->Render(graphics, m_animator->GetCurrentFrame() + m_animator->GetAnimation()->spritesheetIndex);
+			m_spriteSheet->Render(graphics, m_animator->GetCurrentFrame() + m_animator->GetAnimation()->from);
 		}
 		else
 		{
@@ -334,14 +334,14 @@ void Player::Stop()
 
 void Player::Attack()
 {
-	if(m_animator->GetAnimation()->name == "Idle" || m_animator->GetAnimation()->name == "Walking")
+	if(m_animator->GetAnimation()->name == "idle" || m_animator->GetAnimation()->name == "Walking")
 	{
 		// use combo counter to get the correct attack 
 		switch(m_controlSystem->GetComboCounter())
 		{
 		case 0:
 		case 1:
-			PlayerAttackState::Instance()->SetAttack("Attack1");
+			PlayerAttackState::Instance()->SetAttack("swing_1");
 			break;
 		case 2:
 			PlayerAttackState::Instance()->SetAttack("Attack2");

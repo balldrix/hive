@@ -1,8 +1,10 @@
 #include "Animator.h"
+#include "SpriteSheet.h"
 #include "Error.h"
 
 Animator::Animator() :
 	m_currentAnimation(nullptr),
+	m_spriteSheet(nullptr),
 	m_paused(false),
 	m_currentFrame(0),
 	m_animDone(false),
@@ -16,16 +18,18 @@ Animator::~Animator()
 	m_animationList.clear();
 }
 
-void Animator::Init(const std::string &fileName)
+void Animator::Init(const std::string& fileName, Spritesheet* spriteSheet)
 {
 	// read file
 	std::ifstream file(fileName);
 
 	// parse data from file
 	json data = json::parse(file);
-	json animation = data["animation"];
+	json meta = data["meta"];
+	json frameTags = meta["frameTags"];
 
-	m_animationList = animation.get<std::vector<Animation>>();
+	m_animationList = frameTags.get<std::vector<Animation>>();
+	m_spriteSheet = spriteSheet;
 	SetAnimation(0);
 }
 
@@ -36,31 +40,28 @@ void Animator::Update(float deltaTime)
 
 	m_animationTimer += deltaTime;
 
-	float frameRate;
-	frameRate = 1 / (float)m_currentAnimation->framesPerSecond;
+	SpriteFrameData frameData = m_spriteSheet->GetFrameData(m_currentAnimation->from + m_currentFrame);
+	float duration = frameData.duration * .001;
 
-	if(m_animationTimer > frameRate)
+	if(m_animationTimer > duration)
 	{
-		m_animationTimer -= frameRate;
+		m_animationTimer = 0;
 
 		if(!m_animDone)
 		{
-			if(m_currentFrame < ((unsigned int)m_currentAnimation->frameCount - 1))
+			m_currentFrame++;
+
+			if(m_currentFrame < m_currentAnimation->frameCount)
+				return;
+
+			if(m_currentAnimation->loop)
 			{
-				m_currentFrame++;
+				m_currentFrame = 0;
+				return;
 			}
-			else
-			{
-				if(m_currentAnimation->loop)
-				{
-					m_currentFrame = 0;
-				}
-				else
-				{
-					m_currentFrame = m_currentAnimation->frameCount - 1;
-					m_animDone = true;
-				}
-			}
+
+			m_currentFrame = m_currentAnimation->frameCount - 1;
+			m_animDone = true;
 		}
 	}
 }
@@ -72,7 +73,7 @@ void Animator::SetAnimation(unsigned int index)
 	m_animDone = false;
 }
 
-void Animator::SetAnimation(const std::string &name)
+void Animator::SetAnimation(const std::string& name)
 {
 	Animation newAnimation;
 
@@ -85,7 +86,7 @@ void Animator::SetAnimation(const std::string &name)
 			return;
 		}
 	}
-	
+
 	// unable to find animation with string so call error function
 	std::string error = " Error! No animation with name " + name + " found. Check animation data.";
 	Error::FileLog(error);

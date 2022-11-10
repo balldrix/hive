@@ -122,7 +122,7 @@ void GameplayGameState::LoadAssets()
 	SoundManager::AddSound(L"GameData\\Sounds\\boss_punch_002.wav");
 	SoundManager::AddSound(L"GameData\\Sounds\\boss_punch_003.wav");
 	SoundManager::AddSound(L"GameData\\Sounds\\boss_punch_004.wav");
-	SoundManager::AddSound(L"GameData\\Sounds\\travelling_master.wav");
+	//SoundManager::AddSound(L"GameData\\Sounds\\travelling_master.wav");
 
 	m_camera = new Camera();
 	m_controlSystem = new ControlSystem();
@@ -151,7 +151,7 @@ void GameplayGameState::LoadAssets()
 	m_encounterHandler = new EncounterHandler();
 	m_travellingHandler = new TravellingHandler();
 
-	m_playerTexture->LoadTexture(m_graphics, "GameData\\Sprites\\playerSpriteSheet.png");
+	m_playerTexture->LoadTexture(m_graphics, "GameData\\Sprites\\playerSpritesheet.png");
 	m_hitBoxTexture->LoadTexture(m_graphics, "GameData\\Sprites\\hitbox.png");
 	m_standardShadowTexture->LoadTexture(m_graphics, "GameData\\Sprites\\shadow.png");
 	m_largeShadowTexture->LoadTexture(m_graphics, "GameData\\Sprites\\shadow_large.png");
@@ -164,7 +164,7 @@ void GameplayGameState::LoadAssets()
 	m_backgroundSprite->Init(m_backgroundTexture);
 	m_backgroundSprite->SetOrigin(Vector2::Zero);
 
-	m_playerAnimator->Init("GameData\\AnimationData\\playerAnimationData.json");
+	m_playerAnimator->Init("GameData\\SpriteSheetData\\playerSpritesheetData.json", m_playerSprite);
 
 	m_playerHitBoxManager->Init(m_hitBoxSprite, m_player, "GameData\\HitBoxData\\playerHitBoxData.json");
 
@@ -197,10 +197,10 @@ void GameplayGameState::LoadAssets()
 	m_musicSoundSource->SetLooping(true);
 	m_musicSoundSource->SetRelative(true);
 
-	AudioEngine::Instance()->AddSoundSource(m_musicSoundSource);
+	/*AudioEngine::Instance()->AddSoundSource(m_musicSoundSource);
 
 	const std::wstring musicTitle = L"travelling_master";
-	m_musicSoundSource->SetSound(SoundManager::GetSound(musicTitle));
+	m_musicSoundSource->SetSound(SoundManager::GetSound(musicTitle));*/
 
 	m_running = true;
 }
@@ -457,11 +457,11 @@ void GameplayGameState::Tick(float deltaTime)
 {
 	m_camera->Update(deltaTime);
 	m_player->Update(deltaTime);
-	m_NPCManager->Update(deltaTime);
+//	m_NPCManager->Update(deltaTime);
 	m_hudManager->SetMaxPlayerHealth(m_player->GetMaxHealth());
 	m_hudManager->SetCurrentPlayerHealth(m_player->GetHealth());
 	m_hudManager->UpdatePlayerLives(m_player->GetLives());
-	m_hudManager->GetTravelPrompt()->Update(deltaTime);
+//	m_hudManager->GetTravelPrompt()->Update(deltaTime);
 	m_gameOverScreenController->Update(deltaTime);
 
 	if(m_player->IsDead() && m_player->GetLives() > 0)
@@ -566,9 +566,9 @@ void GameplayGameState::ProcessCollisions()
 void GameplayGameState::Render()
 {
 	m_levelRenderer->Render(m_graphics);
-	//m_player->Render(m_graphics);
+	m_player->Render(m_graphics);
 	m_NPCManager->Render(m_graphics);
-	//m_hudManager->Render(m_graphics);
+	m_hudManager->Render(m_graphics);
 	m_gameOverScreenController->Render(m_graphics);
 }
 

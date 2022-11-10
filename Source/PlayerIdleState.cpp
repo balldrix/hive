@@ -13,7 +13,7 @@ PlayerIdleState::PlayerIdleState(const std::string &name)
 
 PlayerIdleState* PlayerIdleState::Instance()
 {
-	static PlayerIdleState instance("Idle");
+	static PlayerIdleState instance("idle");
 	return &instance;
 }
 

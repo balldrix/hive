@@ -7,7 +7,7 @@ namespace
 	struct TilemapLayer
 	{
 		std::vector<unsigned int> data;
-		unsigned int height;
+		unsigned int height = {};
 		unsigned int id = {};
 		std::string name = {};
 		unsigned int width = {};
