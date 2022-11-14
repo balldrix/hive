@@ -14,7 +14,6 @@ public:
 	~LevelRenderer();
 
 	void Init(Graphics* graphics, Camera* camera);
-	void Update(float deltaTime);
 	void Render(Graphics* graphics);
 
 	void DeleteAll();
@@ -25,7 +24,7 @@ private:
 
 	void RenderLayer(Graphics* graphics, const TilemapLayer& layer);
 	void RenderTile(Graphics* graphics, unsigned int tileId, unsigned int x, unsigned int y);
-	
+
 	Camera* m_camera;
 	TilemapHandler* m_tilemapHandler;
 	Texture* m_tileSetTexture;

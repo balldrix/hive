@@ -27,7 +27,7 @@ LevelRenderer::~LevelRenderer()
 void LevelRenderer::Init(Graphics* graphics, Camera* camera)
 {
 	m_camera = camera;
-	
+
 	m_tilemapHandler = new TilemapHandler();
 	m_tileSetTexture = new Texture();
 	m_tileSetSprite = new Sprite();
@@ -42,10 +42,6 @@ void LevelRenderer::Init(Graphics* graphics, Camera* camera)
 	m_tileSetSpriteWidth = m_tileSetSprite->GetWidth();
 	m_tileSetSpriteHeight = m_tileSetSprite->GetHeight();
 	m_tileSetWidth = m_tileSetSpriteWidth / m_tileWidth;
-}
-
-void LevelRenderer::Update(float deltaTime)
-{
 }
 
 void LevelRenderer::Render(Graphics* graphics)
@@ -77,15 +73,18 @@ void LevelRenderer::RenderLayer(Graphics* graphics, const TilemapLayer& layer)
 
 void LevelRenderer::RenderTile(Graphics* graphics, unsigned int tileId, unsigned int posX, unsigned int posY)
 {
-	RECT rect;
-
+	RECT rect {};
 	rect.left = (tileId % m_tileSetWidth) * m_tileWidth;
 	rect.right = rect.left + m_tileWidth;
 	rect.top = (tileId / m_tileSetWidth) * m_tileHeight;
 	rect.bottom = rect.top + m_tileHeight;
 
+	Vector2 spritePosition = { (float)(posX * m_tileWidth), (float)(posY * m_tileHeight) };
+	spritePosition.x -= m_camera->GetPosition().x;
+
 	m_tileSetSprite->SetSourceRect(rect);
-	m_tileSetSprite->Render(graphics, Vector2((float)(posX * m_tileWidth), (float(posY * m_tileHeight))));
+	m_tileSetSprite->SetPosition(spritePosition);
+	m_tileSetSprite->Render(graphics);
 }
 
 void LevelRenderer::DeleteAll()
