@@ -8,9 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added 
 - Double tap running.
 - Dodge move.
+- Player is faster and more responsive.
+- Tileset and tilemap for background.
 
 ### Changed
 - Player control processed directly in gameplay game state without using control system buffer.
+- Native resolution changed to 160 x 90.
+- Player sprites has new character design.
 
 ### Removed
 - Input buffer removed.
