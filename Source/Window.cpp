@@ -1,5 +1,5 @@
 #include "Window.h"
-#include "Constants.h"
+#include "GlobalConstants.h"
 
 using namespace GlobalConstants;
 

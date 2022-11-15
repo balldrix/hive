@@ -4,9 +4,9 @@
 #include "Animator.h"
 #include "ControlSystem.h"
 #include "Camera.h"
-#include "Constants.h"
+#include "GameplayConstants.h"
 
-using namespace GlobalConstants;
+using namespace GameplayConstants;
 
 GameObject::GameObject() :
 	m_id("GameObject"),

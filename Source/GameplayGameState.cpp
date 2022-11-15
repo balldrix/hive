@@ -30,6 +30,9 @@
 #include "Sound.h"
 #include "AudioEngine.h"
 #include "SoundSource.h"
+#include "GlobalConstants.h"
+#include "GameplayConstants.h"
+#include "InGameHudConstants.h"
 
 using namespace GlobalConstants;
 using namespace GameplayConstants;

@@ -214,7 +214,7 @@
     <ClInclude Include="Source\AABB.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Constants.h">
+    <ClInclude Include="Source\GameplayConstants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game.h">
@@ -442,6 +442,10 @@
     <ClInclude Include="Source\TilemapData.h" />
     <ClInclude Include="Source\TilemapHandler.h" />
     <ClInclude Include="Source\LevelRenderer.h" />
+    <ClInclude Include="Source\GlobalConstants.h" />
+    <ClInclude Include="Source\InGameHudConstants.h" />
+    <ClInclude Include="Source\PlayerConstants.h" />
+    <ClInclude Include="Source\AudioConstants.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\backgroundTest.png">

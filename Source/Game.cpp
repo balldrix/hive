@@ -11,7 +11,7 @@
 #include "GameState.h"
 
 #include "GameplayGameState.h"
-#include "Constants.h"
+#include "GlobalConstants.h"
 
 using namespace GlobalConstants;
 

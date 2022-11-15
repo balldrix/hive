@@ -8,6 +8,7 @@
 #include "HitBoxManager.h"
 #include "Animator.h"
 #include "Randomiser.h"
+#include "GameplayConstants.h"
 
 using namespace GameplayConstants;
 

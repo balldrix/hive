@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Constants.h"
 #include "GameObject.h"
 #include "EnemyData.h"
 #include "State.h"

@@ -5,7 +5,8 @@
 #include "Player.h"
 #include "InGameHudManager.h"
 #include "TravellingHandler.h"
-#include "Constants.h"
+#include "GlobalConstants.h"
+#include "InGameHudConstants.h"
 
 using namespace InGameHudConstants;
 using namespace GlobalConstants;

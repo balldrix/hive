@@ -19,6 +19,9 @@
 #include "AudioEngine.h"
 #include "SoundSource.h"
 #include "SoundManager.h"
+#include "InGameHudConstants.h"
+
+using namespace InGameHudConstants;
 
 Enemy::Enemy() :
 	m_playerTarget(nullptr),
@@ -132,7 +135,7 @@ void Enemy::Init(Graphics* graphics,
 	m_healthBar->Init(graphics);
 	m_healthBar->SetMaxValue(m_health);
 	m_healthBar->SetCurrentValue(m_health);
-	m_healthBar->SetPosition(Vector2(InGameHudConstants::HealthBarPositionX, InGameHudConstants::EnemyHealthBarPositionY));
+	m_healthBar->SetPosition(Vector2(HealthBarPositionX, EnemyHealthBarPositionY));
 
 	float percentage = (float)m_health / (float)m_playerTarget->GetMaxHealth();
 	unsigned int width = (unsigned int)(m_healthBar->GetWidth() * percentage);

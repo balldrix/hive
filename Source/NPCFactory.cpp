@@ -10,6 +10,7 @@
 #include "KingMookEnemyGlobalState.h"
 #include "MookEnemyGlobalState.h"
 #include "EnemyOwnedStates.h"
+#include "InGameHudConstants.h"
 
 using namespace InGameHudConstants;
 

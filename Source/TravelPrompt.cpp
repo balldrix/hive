@@ -1,7 +1,7 @@
 #include "TravelPrompt.h"
 
 #include "Animator.h"
-#include "Constants.h"
+#include "InGameHudConstants.h"
 #include "Spritesheet.h"
 #include "Texture.h"
 #include "GameObject.h"

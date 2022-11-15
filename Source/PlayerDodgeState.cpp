@@ -3,7 +3,7 @@
 #include "Player.h"
 #include "Animator.h"
 #include "HitBoxManager.h"
-#include "Constants.h"
+#include "PlayerConstants.h"
 #include "StateMachine.h"
 #include "PlayerIdleState.h"
 

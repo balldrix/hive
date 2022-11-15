@@ -32,7 +32,11 @@
     <ClCompile Include="Source\KingMook.cpp" />
     <ClCompile Include="Source\KingMookChargeState.cpp" />
     <ClCompile Include="Source\KingMookEnemyGlobalState.cpp" />
+    <ClInclude Include="Source\AudioConstants.h" />
+    <ClInclude Include="Source\GlobalConstants.h" />
+    <ClInclude Include="Source\InGameHudConstants.h" />
     <ClInclude Include="Source\LevelRenderer.h" />
+    <ClInclude Include="Source\PlayerConstants.h" />
     <ClInclude Include="Source\PlayerDodgeState.h" />
     <ClInclude Include="Source\PlayerRunningState.h" />
     <ClInclude Include="Source\SoundSource.h" />
@@ -115,7 +119,7 @@
     <ClInclude Include="Source\Animator.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\CharacterPortrait.h" />
-    <ClInclude Include="Source\Constants.h" />
+    <ClInclude Include="Source\GameplayConstants.h" />
     <ClInclude Include="Source\ControlSystem.h" />
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\EnemyAttackState.h" />

@@ -1,6 +1,6 @@
 #include "InGameHudManager.h"
 #include "BarController.h"
-#include "Constants.h"
+#include "InGameHudConstants.h"
 #include "Graphics.h"
 #include "CharacterPortrait.h"
 #include "Texture.h"

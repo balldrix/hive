@@ -3,7 +3,7 @@
 #include "Texture.h"
 #include "Animator.h"
 #include "SpriteSheet.h"
-#include "Constants.h"
+#include "GlobalConstants.h"
 
 using namespace GlobalConstants;
 
