@@ -24,7 +24,7 @@ void PlayerDodgeState::OnEnter(Player* player)
 	Vector2 direction = player->GetCurrentVelocity();
 	direction.Normalize();
 
-	player->SetCurrentVelocity(direction);
+	player->SetCurrentVelocity(direction * DodgeDirectionModifier);
 	player->SetTargetVelocity(Vector2::Zero);
 }
 

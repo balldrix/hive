@@ -11,7 +11,7 @@ namespace GlobalConstants
 	const float BackColor[4]					= { 0.3f, 0.3f, 0.3f, 1.0f };	
 	const float	Gravity							= 4.0f;
 	const float StartingBoundaryMinX			= 1.0f;
-	const float StartingBoundaryMinY			= 61.0f;
+	const float StartingBoundaryMinY			= 49.0f;
 }
 
 namespace GameplayConstants
@@ -25,6 +25,7 @@ namespace PlayerConstants
 	const float RespawnAirPositionY				= -20.0f;
 	const float FallingSpeed					= 5.0f;
 	const float DodgeSpeed						= 100.0f;
+	const unsigned int DodgeDirectionModifier	= 3;
 }
 
 namespace InGameHudConstants
