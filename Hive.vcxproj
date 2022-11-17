@@ -21,7 +21,7 @@
   <ItemGroup>
     <ClCompile Include="Source\LevelRenderer.cpp" />
     <ClCompile Include="Source\PlayerDodgeState.cpp" />
-    <ClCompile Include="Source\PlayerRunningState.cpp" />
+    <ClCompile Include="Source\PlayerSprintingState.cpp" />
     <ClCompile Include="Source\Sound.cpp" />
     <ClCompile Include="Source\EncounterHandler.cpp" />
     <ClCompile Include="Source\EncounterSceneState.cpp" />
@@ -38,7 +38,7 @@
     <ClInclude Include="Source\LevelRenderer.h" />
     <ClInclude Include="Source\PlayerConstants.h" />
     <ClInclude Include="Source\PlayerDodgeState.h" />
-    <ClInclude Include="Source\PlayerRunningState.h" />
+    <ClInclude Include="Source\PlayerSprintingState.h" />
     <ClInclude Include="Source\SoundSource.h" />
     <ClInclude Include="Source\SoundManager.h" />
     <ClInclude Include="Source\Sound.h" />
@@ -89,7 +89,7 @@
     <ClCompile Include="Source\PlayerIdleState.cpp" />
     <ClCompile Include="Source\PlayerAttackState.cpp" />
     <ClCompile Include="Source\PlayerKnockbackState.cpp" />
-    <ClCompile Include="Source\PlayerWalkingState.cpp" />
+    <ClCompile Include="Source\PlayerRunningState.cpp" />
     <ClCompile Include="Source\Randomiser.cpp" />
     <ClCompile Include="Source\Sprite.cpp" />
     <ClCompile Include="Source\Spritesheet.cpp" />
@@ -158,7 +158,7 @@
     <ClInclude Include="Source\PlayerAttackState.h" />
     <ClInclude Include="Source\PlayerKnockbackState.h" />
     <ClInclude Include="Source\PlayerOwnedStates.h" />
-    <ClInclude Include="Source\PlayerWalkingState.h" />
+    <ClInclude Include="Source\PlayerRunningState.h" />
     <ClInclude Include="Source\Randomiser.h" />
     <ClInclude Include="Source\Resources.h" />
     <ClInclude Include="Source\Sprite.h" />

@@ -31,9 +31,9 @@ void PlayerIdleState::Execute(Player* player)
 		return;
 
 	if(player->GetMovementSpeed() == player->GetRunSpeed())
-		player->GetStateMachine()->ChangeState((PlayerRunningState::Instance()));
+		player->GetStateMachine()->ChangeState((PlayerSprintingState::Instance()));
 	else if(player->GetMovementSpeed() == player->GetWalkSpeed())
-		player->GetStateMachine()->ChangeState((PlayerWalkingState::Instance()));
+		player->GetStateMachine()->ChangeState((PlayerRunningState::Instance()));
 }
 
 void PlayerIdleState::OnExit(Player* player)

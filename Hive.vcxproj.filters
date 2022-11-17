@@ -52,7 +52,7 @@
     <ClCompile Include="Source\PlayerIdleState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\PlayerWalkingState.cpp">
+    <ClCompile Include="Source\PlayerRunningState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\ControlSystem.cpp">
@@ -187,7 +187,7 @@
     <ClCompile Include="Source\TravelPrompt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\PlayerRunningState.cpp">
+    <ClCompile Include="Source\PlayerSprintingState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\PlayerDodgeState.cpp">
@@ -271,7 +271,7 @@
     <ClInclude Include="Source\PlayerIdleState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\PlayerWalkingState.h">
+    <ClInclude Include="Source\PlayerRunningState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\ControlSystem.h">
@@ -433,7 +433,7 @@
     <ClInclude Include="Source\Sound.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\PlayerRunningState.h">
+    <ClInclude Include="Source\PlayerSprintingState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\PlayerDodgeState.h">

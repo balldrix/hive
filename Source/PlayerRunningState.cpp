@@ -1,11 +1,15 @@
 #include "PlayerOwnedStates.h"
-#include "Player.h"
-#include "Animator.h"
+
 #include "StateMachine.h"
+#include "Player.h"
+#include "HitBoxManager.h"
+#include "Animator.h"
+#include "ControlSystem.h"
+#include "UnitVectors.h"
 
 PlayerRunningState* PlayerRunningState::Instance()
 {
-	static PlayerRunningState instance("Running");
+	static PlayerRunningState instance("run");
 	return &instance;
 }
 
@@ -20,7 +24,7 @@ void PlayerRunningState::Execute(Player* player)
 {
 	if(player->GetCurrentVelocity() == Vector2::Zero &&
 		player->GetTargetVelocity() == Vector2::Zero)
-		player->GetStateMachine()->ChangeState(PlayerIdleState::Instance());
+			player->GetStateMachine()->ChangeState(PlayerIdleState::Instance());
 
 	if(player->IsGrounded())
 		player->PlayWalkingSound();
