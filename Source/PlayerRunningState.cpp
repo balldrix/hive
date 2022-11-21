@@ -26,6 +26,9 @@ void PlayerRunningState::Execute(Player* player)
 		player->GetTargetVelocity() == Vector2::Zero)
 			player->GetStateMachine()->ChangeState(PlayerIdleState::Instance());
 
+	if(player->GetMovementSpeed() == player->GetRunSpeed())
+		player->GetStateMachine()->ChangeState((PlayerSprintingState::Instance()));
+
 	if(player->IsGrounded())
 		player->PlayWalkingSound();
 }
