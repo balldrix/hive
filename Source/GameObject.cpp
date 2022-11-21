@@ -204,18 +204,21 @@ bool GameObject::LoadDamageData(const std::string &filename)
 
 void GameObject::FlipHorizontally(bool flip)
 {
+	auto facingDirection = Vector3::Right;
+	auto spriteSheetEffects = SpriteEffects::SpriteEffects_None;
+
 	if(flip == true)
 	{
-		m_facingDirection = Vector3::Left;
-		m_spriteSheet->SetFlipEffect(SpriteEffects::SpriteEffects_FlipHorizontally);
-	}
-	else
-	{
-		m_facingDirection = Vector3::Right;
-		m_spriteSheet->SetFlipEffect(SpriteEffects::SpriteEffects_None);
-	}
+		facingDirection = Vector3::Left;
+		spriteSheetEffects = SpriteEffects::SpriteEffects_FlipHorizontally;
+	}	
 
+	m_facingDirection = facingDirection;
+	m_spriteSheet->SetFlipEffect(spriteSheetEffects);
 	m_hitBoxManager->SetFlipped(flip);
+
+	if(m_shadow != nullptr)
+		m_shadow->SetFlipEffect(spriteSheetEffects);
 }
 
 void GameObject::SetPositionX(float x)

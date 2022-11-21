@@ -163,6 +163,8 @@ void GameplayGameState::LoadAssets()
 	m_playerSprite->Init(m_playerTexture, "GameData\\SpriteSheetData\\playerSpritesheetData.json");
 	m_playerShadowSprite->Init(m_largeShadowTexture);
 	m_playerShadowSprite->SetAlpha(0.7f);
+	Vector2 origin = m_playerShadowSprite->GetOrigin();
+	m_playerShadowSprite->SetOrigin(origin + Vector2(-2, 0));
 	m_hitBoxSprite->Init(m_hitBoxTexture);
 	m_backgroundSprite->Init(m_backgroundTexture);
 	m_backgroundSprite->SetOrigin(Vector2::Zero);
