@@ -416,7 +416,7 @@ void GameplayGameState::ProcessInput()
 
 	if(m_input->WasKeyPressed(PLAYER_B_KEY))
 	{
-		m_player->Dodge();
+		m_player->Block();
 	}
 
 	if(m_input->IsKeyDown(PLAYER_A_KEY) &&

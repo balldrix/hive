@@ -20,7 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\LevelRenderer.cpp" />
-    <ClCompile Include="Source\PlayerDodgeState.cpp" />
+    <ClCompile Include="Source\PlayerBlockState.cpp" />
     <ClCompile Include="Source\PlayerSprintingState.cpp" />
     <ClCompile Include="Source\Sound.cpp" />
     <ClCompile Include="Source\EncounterHandler.cpp" />
@@ -37,7 +37,7 @@
     <ClInclude Include="Source\InGameHudConstants.h" />
     <ClInclude Include="Source\LevelRenderer.h" />
     <ClInclude Include="Source\PlayerConstants.h" />
-    <ClInclude Include="Source\PlayerDodgeState.h" />
+    <ClInclude Include="Source\PlayerBlockState.h" />
     <ClInclude Include="Source\PlayerSprintingState.h" />
     <ClInclude Include="Source\SoundSource.h" />
     <ClInclude Include="Source\SoundManager.h" />
@@ -341,12 +341,12 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

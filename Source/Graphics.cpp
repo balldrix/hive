@@ -2,7 +2,7 @@
 
 #include "pch.h"
 #include "Window.h"
-#include "Constants.h"
+#include "GlobalConstants.h"
 #include "Error.h"
 
 using namespace GlobalConstants;

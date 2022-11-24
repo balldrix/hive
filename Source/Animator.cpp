@@ -41,7 +41,7 @@ void Animator::Update(float deltaTime)
 	m_animationTimer += deltaTime;
 
 	SpriteFrameData frameData = m_spriteSheet->GetFrameData(m_currentAnimation->from + m_currentFrame);
-	float duration = frameData.duration * .001;
+	float duration = (float)frameData.duration * .001f;
 
 	if(m_animationTimer > duration)
 	{

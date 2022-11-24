@@ -16,7 +16,7 @@ public:
 private:
 	PlayerRunningState() {}
 	~PlayerRunningState() {}
-	PlayerRunningState(const std::string &name);
+	PlayerRunningState(const std::string& name);
 	PlayerRunningState(const PlayerRunningState&);
 	PlayerRunningState& operator=(const PlayerRunningState&);
 };

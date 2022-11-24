@@ -190,7 +190,7 @@
     <ClCompile Include="Source\PlayerSprintingState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\PlayerDodgeState.cpp">
+    <ClCompile Include="Source\PlayerBlockState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\TilemapHandler.cpp" />
@@ -436,7 +436,7 @@
     <ClInclude Include="Source\PlayerSprintingState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\PlayerDodgeState.h">
+    <ClInclude Include="Source\PlayerBlockState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\TilemapData.h" />
