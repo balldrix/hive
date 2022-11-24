@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added 
 - Double tap running.
-- Dodge move.
+- Block move.
 - Player is faster and more responsive.
 - Tileset and tilemap for background.
 
