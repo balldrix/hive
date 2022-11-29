@@ -24,7 +24,7 @@
     "trimmed": true,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 39 },
     "sourceSize": { "w": 53, "h": 39 },
-    "duration": 100
+    "duration": 40
    },
    {
     "filename": "block-3",
@@ -33,7 +33,7 @@
     "trimmed": true,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 39 },
     "sourceSize": { "w": 53, "h": 39 },
-    "duration": 100
+    "duration": 40
    },
    {
     "filename": "block-4",
