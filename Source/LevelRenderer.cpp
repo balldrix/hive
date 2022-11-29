@@ -66,7 +66,7 @@ void LevelRenderer::RenderLayer(Graphics* graphics, const TilemapLayer& layer)
 		for(size_t y = 0; y < tileMapHeight; y++)
 		{
 			auto tileId = layer.data[y * tileMapWidth + x] - 1;
-			RenderTile(graphics, tileId, x, y);
+			RenderTile(graphics, tileId, (unsigned int)x, (unsigned int)y);
 		}
 	}
 }
