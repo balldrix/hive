@@ -14,7 +14,7 @@ using namespace GameplayConstants;
 
 EnemyIdleState* EnemyIdleState::Instance()
 {
-	static EnemyIdleState instance("Idle");
+	static EnemyIdleState instance("idle");
 	return &instance;
 }
 

@@ -22,8 +22,6 @@ void EncounterSceneState::OnEnter(GameplayGameState* game)
 	float cameraWidth = game->GetCamera()->GetWidth();
 
 	game->SetPlayerBoundaryX(cameraPositionX, cameraPositionX + cameraWidth);
-
-	int index = game->GetEncounterHandler()->GetEncounterIndex();
 	game->GetEncounterHandler()->SpawnEncounter();
 }
 

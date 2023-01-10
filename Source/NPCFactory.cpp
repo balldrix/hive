@@ -22,7 +22,6 @@ NPCFactory::NPCFactory() :
 	m_mookTexture(nullptr),
 	m_kingMookTexture(nullptr),
 	m_standardShadowTexture(nullptr),
-	m_largeShadowTexture(nullptr),
 	m_mookPortraitTexture(nullptr),
 	m_kingMookPortraitTexture(nullptr),
 	m_hitBoxTexture(nullptr),
@@ -57,9 +56,6 @@ void NPCFactory::Init(Graphics* graphics,
 
 	m_kingMookTexture = new Texture();
 	m_kingMookTexture->LoadTexture(m_graphics, "GameData\\Sprites\\kingMookSpritesheet.png");
-
-	m_largeShadowTexture = new Texture();
-	m_largeShadowTexture->LoadTexture(m_graphics, "GameData\\Sprites\\shadow_large.png");
 
 	m_mookPortraitTexture = new Texture();
 	m_mookPortraitTexture->LoadTexture(m_graphics, "GameData\\Sprites\\UI\\mook_hud_portrait.png");
@@ -107,7 +103,7 @@ Enemy* NPCFactory::CreateBoss(EnemyData& data)
 {
 	m_boss = new KingMook();
 	m_boss->Init(m_graphics, m_camera, m_player, data,
-				 m_kingMookTexture, m_largeShadowTexture,
+				 m_kingMookTexture, m_standardShadowTexture,
 				 m_hitBoxTexture,
 				 m_hudManager, m_kingMookPortraitSprite,
 				 KingMookEnemyGlobalState::Instance());
@@ -119,7 +115,6 @@ void NPCFactory::ReleaseAll()
 {
 	if(m_mookTexture != nullptr) { m_mookTexture->Release(); }
 	if(m_kingMookTexture != nullptr) { m_kingMookTexture->Release(); }
-	if(m_largeShadowTexture != nullptr) { m_largeShadowTexture->Release(); }
 	if(m_mookPortraitTexture != nullptr) { m_mookPortraitTexture->Release(); }
 	if(m_kingMookPortraitTexture != nullptr) { m_kingMookPortraitTexture->Release(); }
 }
@@ -148,12 +143,6 @@ void NPCFactory::DeleteAll()
 	{
 		delete m_mookPortraitTexture;
 		m_mookPortraitTexture = nullptr;
-	}
-
-	if(m_largeShadowTexture != nullptr)
-	{
-		delete m_largeShadowTexture;
-		m_largeShadowTexture = nullptr;
 	}
 
 	if(m_kingMookTexture != nullptr)

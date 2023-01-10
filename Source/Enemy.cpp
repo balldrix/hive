@@ -105,7 +105,7 @@ void Enemy::Init(Graphics* graphics,
 	m_shadow->SetAlpha(0.7f);
 	
 	m_animator = new Animator();
-	//m_animator->Init("GameData\\AnimationData\\" + data.type + "AnimationData.json");
+	m_animator->Init("GameData\\SpriteSheetData\\" + data.type + "SpritesheetData.json", m_spriteSheet);
 	m_animator->SetAnimation(0);
 
 	m_hitBoxSprite = new Sprite();
@@ -190,7 +190,7 @@ Enemy::Render(Graphics* graphics)
 
 	if(m_shadow)
 	{
-		m_shadow->SetDepth(m_groundPosition.y / graphics->GetHeight());
+		m_shadow->SetDepth(m_groundPosition.y / graphics->GetHeight() - 0.1f);
 		m_shadow->Render(graphics);
 	}
 

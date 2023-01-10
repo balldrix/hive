@@ -152,8 +152,8 @@ bool NPCManager::InitNPCs(Graphics* graphics, Camera* camera, Player* player, In
 			file >> result;
 			data.encounterIndex = std::stoi(result);
 
-			//Enemy* enemy = m_NPCFactory->GetEnemy(data);
-			//m_enemyList.push_back(enemy);
+			Enemy* enemy = m_NPCFactory->GetEnemy(data);
+			m_enemyList.push_back(enemy);
 		}
 	}
 	else

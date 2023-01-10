@@ -1,5 +1,6 @@
 # trigger_position
 
+0
 240
 602
 1012

@@ -47,7 +47,6 @@ GameplayGameState::GameplayGameState() :
 	m_playerTexture(nullptr),
 	m_hitBoxTexture(nullptr),
 	m_standardShadowTexture(nullptr),
-	m_largeShadowTexture(nullptr),
 	m_backgroundTexture(nullptr),
 	m_playerSprite(nullptr),
 	m_playerShadowSprite(nullptr),
@@ -133,7 +132,6 @@ void GameplayGameState::LoadAssets()
 	m_playerTexture = new Texture();
 	m_hitBoxTexture = new Texture();
 	m_standardShadowTexture = new Texture();
-	m_largeShadowTexture = new Texture();
 	m_backgroundTexture = new Texture();
 
 	m_playerSprite = new Spritesheet();
@@ -156,12 +154,11 @@ void GameplayGameState::LoadAssets()
 
 	m_playerTexture->LoadTexture(m_graphics, "GameData\\Sprites\\playerSpritesheet.png");
 	m_hitBoxTexture->LoadTexture(m_graphics, "GameData\\Sprites\\hitbox.png");
-	m_standardShadowTexture->LoadTexture(m_graphics, "GameData\\Sprites\\shadow.png");
-	m_largeShadowTexture->LoadTexture(m_graphics, "GameData\\Sprites\\shadow_large.png");
+	m_standardShadowTexture->LoadTexture(m_graphics, "GameData\\Sprites\\shadow_large.png");
 	m_backgroundTexture->LoadTexture(m_graphics, "GameData\\Sprites\\backgroundTest.png");
 
 	m_playerSprite->Init(m_playerTexture, "GameData\\SpriteSheetData\\playerSpritesheetData.json");
-	m_playerShadowSprite->Init(m_largeShadowTexture);
+	m_playerShadowSprite->Init(m_standardShadowTexture);
 	m_playerShadowSprite->SetAlpha(0.7f);
 	m_hitBoxSprite->Init(m_hitBoxTexture);
 	m_backgroundSprite->Init(m_backgroundTexture);
@@ -299,12 +296,6 @@ void GameplayGameState::DeleteAssets()
 		m_backgroundTexture = nullptr;
 	}
 
-	if(m_largeShadowTexture != nullptr)
-	{
-		delete m_largeShadowTexture;
-		m_largeShadowTexture = nullptr;
-	}
-
 	if(m_standardShadowTexture)
 	{
 		delete m_standardShadowTexture;
@@ -421,7 +412,6 @@ void GameplayGameState::ProcessInput()
 		m_controlSystem->CanAttack())
 	{
 		m_player->Attack();
-		m_controlSystem->SetCanAttack(false);		
 		return;
 	}
 
@@ -434,11 +424,6 @@ void GameplayGameState::ProcessInput()
 	{
 		m_player->Move(Vector2::Zero);
 		m_player->Walk();
-	}
-
-	if(!m_input->WasKeyPressed(PLAYER_A_KEY))
-	{
-		m_controlSystem->SetCanAttack(true);
 	}
 }
 
@@ -460,7 +445,7 @@ void GameplayGameState::Tick(float deltaTime)
 {
 	m_camera->Update(deltaTime);
 	m_player->Update(deltaTime);
-//	m_NPCManager->Update(deltaTime);
+	m_NPCManager->Update(deltaTime);
 	m_hudManager->SetMaxPlayerHealth(m_player->GetMaxHealth());
 	m_hudManager->SetCurrentPlayerHealth(m_player->GetHealth());
 	m_hudManager->UpdatePlayerLives(m_player->GetLives());
@@ -580,7 +565,6 @@ void GameplayGameState::ReleaseAll()
 	if(m_hudManager != nullptr) { m_hudManager->ReleaseAll(); }
 	if(m_backgroundTexture != nullptr) { m_backgroundTexture->Release(); }
 	if(m_standardShadowTexture != nullptr) { m_standardShadowTexture->Release(); }
-	if(m_largeShadowTexture != nullptr) { m_largeShadowTexture->Release(); }
 	if(m_hitBoxTexture != nullptr) { m_hitBoxTexture->Release(); }
 	if(m_playerTexture != nullptr) { m_playerTexture->Release(); }
 	if(m_gameOverScreenController != nullptr) { m_gameOverScreenController->ReleaseAll(); }

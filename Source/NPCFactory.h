@@ -39,7 +39,6 @@ private:
 	Texture* m_mookTexture;
 	Texture* m_kingMookTexture;
 	Texture* m_standardShadowTexture;
-	Texture* m_largeShadowTexture;
 	Texture* m_mookPortraitTexture;
 	Texture* m_kingMookPortraitTexture;
 	Texture* m_hitBoxTexture;
