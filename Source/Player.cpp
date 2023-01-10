@@ -259,7 +259,7 @@ void Player::Render(Graphics* graphics)
 
 	if(m_shadow)
 	{
-		m_shadow->SetDepth(m_groundPosition.y / graphics->GetHeight());
+		m_shadow->SetDepth(m_groundPosition.y / graphics->GetHeight() - 0.1f);
 		m_shadow->Render(graphics);
 	}
 
@@ -334,27 +334,22 @@ void Player::Stop()
 
 void Player::Attack()
 {
-	if(m_animator->GetAnimation()->name == "idle" || m_animator->GetAnimation()->name == "Walking")
+	// use combo counter to get the correct attack 
+	switch(m_controlSystem->GetComboCounter())
 	{
-		// use combo counter to get the correct attack 
-		switch(m_controlSystem->GetComboCounter())
-		{
 		case 0:
-		case 1:
+			m_stateMachine->ChangeState(PlayerAttackState::Instance());
 			PlayerAttackState::Instance()->SetAttack("swing_1");
+		case 1:
+			m_stateMachine->ChangeState(PlayerAttackState::Instance());
+			PlayerAttackState::Instance()->SetAttack("swing_2");
 			break;
 		case 2:
-			PlayerAttackState::Instance()->SetAttack("Attack2");
-			break;
 		case 3:
-			PlayerAttackState::Instance()->SetAttack("Attack3");
-			break;
 		default:
-			PlayerAttackState::Instance()->SetAttack("Attack1");
+			m_stateMachine->ChangeState(PlayerAttackState::Instance());
+			PlayerAttackState::Instance()->SetAttack("swing_1");
 			break;
-		}
-
-		m_stateMachine->ChangeState((PlayerAttackState::Instance()));
 	}
 }
 

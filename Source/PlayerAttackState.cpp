@@ -26,6 +26,7 @@ void PlayerAttackState::OnEnter(Player* player)
 	player->GetAnimator()->SetAnimation(m_name);
 	player->GetHitBoxManager()->SetCurrentHitBox(m_name);
 	player->GetControlSystem()->SetCanAttack(false);
+	player->GetControlSystem()->IncrementComboCount();
 
 	player->PlayPunchSound(m_name);
 }
@@ -35,11 +36,17 @@ void PlayerAttackState::Execute(Player* player)
 	player->SetTargetVelocity(Vector2::Zero);
 	player->SetCurrentVelocity(Vector2::Zero);
 
+	if(player->GetAnimator()->GetCurrentFrame() == player->GetAnimator()->GetAnimation()->frameCount - 1 &&
+		player->GetControlSystem()->CanCombo())
+	{
+		player->GetControlSystem()->SetCanAttack(true);
+	}
+
 	if(player->GetAnimator()->IsDone())
 	{
 		player->GetStateMachine()->ChangeState(PlayerIdleState::Instance());
 		player->GetControlSystem()->Reset();
-		player->GetControlSystem()->IncrementComboCount();
+		player->GetControlSystem()->SetCanAttack(true);
 	}
 }
 

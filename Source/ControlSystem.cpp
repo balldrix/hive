@@ -25,7 +25,6 @@ void ControlSystem::SetControlsPressed(const Controls& controls)
 	if(m_doubleTapTimer < DoubleTapWindowDuration)
 	{
 		m_canRun = true;
-
 	}
 	else
 	{
@@ -54,8 +53,9 @@ void ControlSystem::Reset()
 {
 	m_inputTimer = 0.0f;
 	m_comboTimer = 0.0f;
-	m_canCombo = true;
+	m_canCombo = false;
 	m_lastControlsPressed = Controls::None;
+	m_comboCounter = 0;
 }
 
 void ControlSystem::Update(float deltaTime)
@@ -66,14 +66,14 @@ void ControlSystem::Update(float deltaTime)
 
 	if(m_inputTimer > ComboWindowDuration)
 	{
-		m_canCombo = false;
+		m_canCombo = true;
 		m_comboCounter = 0;
 		m_lastControlsPressed = Controls::None;
 	}
 
 	if(m_comboTimer > ComboResetTime)
 	{
-		m_canCombo = true;
+		m_canCombo = false;
 		m_comboTimer = 0.0f;
 	}
 }
