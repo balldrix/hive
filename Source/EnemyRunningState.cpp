@@ -8,7 +8,7 @@
 
 EnemyRunningState* EnemyRunningState::Instance()
 {
-	static EnemyRunningState instance("Running");
+	static EnemyRunningState instance("run");
 	return &instance;
 }
 

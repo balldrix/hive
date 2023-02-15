@@ -1,57 +1,129 @@
 { "frames": [
    {
-    "filename": "idle-0",
-    "frame": { "x": 0, "y": 0, "w": 29, "h": 31 },
+    "filename": "idle0",
+    "frame": { "x": 0, "y": 0, "w": 36, "h": 31 },
     "rotated": false,
     "trimmed": true,
-    "spriteSourceSize": { "x": 11, "y": 8, "w": 29, "h": 31 },
+    "spriteSourceSize": { "x": 11, "y": 8, "w": 36, "h": 31 },
     "sourceSize": { "w": 53, "h": 39 },
     "duration": 200
    },
    {
-    "filename": "idle-1",
-    "frame": { "x": 29, "y": 0, "w": 29, "h": 31 },
+    "filename": "idle1",
+    "frame": { "x": 36, "y": 0, "w": 36, "h": 31 },
     "rotated": false,
     "trimmed": true,
-    "spriteSourceSize": { "x": 11, "y": 8, "w": 29, "h": 31 },
+    "spriteSourceSize": { "x": 11, "y": 8, "w": 36, "h": 31 },
     "sourceSize": { "w": 53, "h": 39 },
     "duration": 200
    },
    {
-    "filename": "idle-2",
-    "frame": { "x": 58, "y": 0, "w": 29, "h": 31 },
+    "filename": "idle2",
+    "frame": { "x": 72, "y": 0, "w": 36, "h": 31 },
     "rotated": false,
     "trimmed": true,
-    "spriteSourceSize": { "x": 11, "y": 8, "w": 29, "h": 31 },
+    "spriteSourceSize": { "x": 11, "y": 8, "w": 36, "h": 31 },
     "sourceSize": { "w": 53, "h": 39 },
     "duration": 200
    },
    {
-    "filename": "idle-3",
-    "frame": { "x": 87, "y": 0, "w": 29, "h": 31 },
+    "filename": "idle3",
+    "frame": { "x": 108, "y": 0, "w": 36, "h": 31 },
     "rotated": false,
     "trimmed": true,
-    "spriteSourceSize": { "x": 11, "y": 8, "w": 29, "h": 31 },
+    "spriteSourceSize": { "x": 11, "y": 8, "w": 36, "h": 31 },
     "sourceSize": { "w": 53, "h": 39 },
     "duration": 200
    },
    {
-    "filename": "idle-4",
-    "frame": { "x": 116, "y": 0, "w": 29, "h": 31 },
+    "filename": "idle4",
+    "frame": { "x": 0, "y": 31, "w": 36, "h": 31 },
     "rotated": false,
     "trimmed": true,
-    "spriteSourceSize": { "x": 11, "y": 8, "w": 29, "h": 31 },
+    "spriteSourceSize": { "x": 11, "y": 8, "w": 36, "h": 31 },
     "sourceSize": { "w": 53, "h": 39 },
     "duration": 200
    },
    {
-    "filename": "idle-5",
-    "frame": { "x": 145, "y": 0, "w": 29, "h": 31 },
+    "filename": "idle5",
+    "frame": { "x": 36, "y": 31, "w": 36, "h": 31 },
     "rotated": false,
     "trimmed": true,
-    "spriteSourceSize": { "x": 11, "y": 8, "w": 29, "h": 31 },
+    "spriteSourceSize": { "x": 11, "y": 8, "w": 36, "h": 31 },
     "sourceSize": { "w": 53, "h": 39 },
     "duration": 200
+   },
+   {
+    "filename": "run6",
+    "frame": { "x": 72, "y": 31, "w": 36, "h": 31 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 11, "y": 8, "w": 36, "h": 31 },
+    "sourceSize": { "w": 53, "h": 39 },
+    "duration": 80
+   },
+   {
+    "filename": "run7",
+    "frame": { "x": 108, "y": 31, "w": 36, "h": 31 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 11, "y": 8, "w": 36, "h": 31 },
+    "sourceSize": { "w": 53, "h": 39 },
+    "duration": 80
+   },
+   {
+    "filename": "run8",
+    "frame": { "x": 0, "y": 62, "w": 36, "h": 31 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 11, "y": 8, "w": 36, "h": 31 },
+    "sourceSize": { "w": 53, "h": 39 },
+    "duration": 80
+   },
+   {
+    "filename": "run9",
+    "frame": { "x": 36, "y": 62, "w": 36, "h": 31 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 11, "y": 8, "w": 36, "h": 31 },
+    "sourceSize": { "w": 53, "h": 39 },
+    "duration": 80
+   },
+   {
+    "filename": "run10",
+    "frame": { "x": 72, "y": 62, "w": 36, "h": 31 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 11, "y": 8, "w": 36, "h": 31 },
+    "sourceSize": { "w": 53, "h": 39 },
+    "duration": 80
+   },
+   {
+    "filename": "run11",
+    "frame": { "x": 108, "y": 62, "w": 36, "h": 31 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 11, "y": 8, "w": 36, "h": 31 },
+    "sourceSize": { "w": 53, "h": 39 },
+    "duration": 80
+   },
+   {
+    "filename": "run12",
+    "frame": { "x": 0, "y": 93, "w": 36, "h": 31 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 11, "y": 8, "w": 36, "h": 31 },
+    "sourceSize": { "w": 53, "h": 39 },
+    "duration": 80
+   },
+   {
+    "filename": "run13",
+    "frame": { "x": 36, "y": 93, "w": 36, "h": 31 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 11, "y": 8, "w": 36, "h": 31 },
+    "sourceSize": { "w": 53, "h": 39 },
+    "duration": 80
    }
  ],
     "meta": {
@@ -60,8 +132,8 @@
         "image": "mookSpriteSheet.png",
         "format": "RGBA8888",
         "size": {
-            "w": 174,
-            "h": 31
+            "w": 144,
+            "h": 124
         },
         "scale": "1",
         "frameTags": [
@@ -69,6 +141,13 @@
                 "name": "idle",
                 "from": 0,
                 "to": 5,
+                "loop": true,
+                "color": "#000000ff"
+            },
+            {
+                "name": "run",
+                "from": 6,
+                "to": 13,
                 "loop": true,
                 "color": "#000000ff"
             }

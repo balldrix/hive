@@ -10,7 +10,7 @@
 
 EnemyWalkingState* EnemyWalkingState::Instance()
 {
-	static EnemyWalkingState instance("Walking");
+	static EnemyWalkingState instance("run");
 	return &instance;
 }
 

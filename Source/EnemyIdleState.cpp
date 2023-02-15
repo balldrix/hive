@@ -78,7 +78,7 @@ void EnemyIdleState::Execute(Enemy* enemy)
 
 			// reset timer
 			enemy->ResetTimer();
-			enemy->Attack();
+			//enemy->Attack();
 		}
 		return;
 	}
