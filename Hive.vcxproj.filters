@@ -512,16 +512,10 @@
     <Image Include="GameData\Tilesets\ts_bunker.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="GameData\AnimationData\bossAnimationData.json">
-      <Filter>Data</Filter>
-    </None>
     <None Include="GameData\HitBoxData\bossHitBoxData.json">
       <Filter>Data</Filter>
     </None>
     <None Include="GameData\SpriteSheetData\bossSpriteSheetData.json">
-      <Filter>Data</Filter>
-    </None>
-    <None Include="GameData\AnimationData\dummyAnimationData.json">
       <Filter>Data</Filter>
     </None>
     <None Include="GameData\HitBoxData\dummyHitBoxData.json">
@@ -530,16 +524,10 @@
     <None Include="GameData\SpriteSheetData\dummySpriteSheetData.json">
       <Filter>Data</Filter>
     </None>
-    <None Include="GameData\AnimationData\gameOverAnimationData.json">
-      <Filter>Data</Filter>
-    </None>
     <None Include="GameData\SpriteSheetData\gameOverSpritesheetData.json">
       <Filter>Data</Filter>
     </None>
     <None Include="GameData\SpriteFonts\goodbye_despair_12pt.spritefont">
-      <Filter>Data</Filter>
-    </None>
-    <None Include="GameData\AnimationData\mookAnimationData.json">
       <Filter>Data</Filter>
     </None>
     <None Include="GameData\SpriteSheetData\mookSpritesheetData.json">
@@ -558,9 +546,6 @@
       <Filter>Data</Filter>
     </None>
     <None Include="GameData\SpriteSheetData\travellingpromptSpritesheetData.json">
-      <Filter>Data</Filter>
-    </None>
-    <None Include="GameData\AnimationData\travelPromptAnimationData.json">
       <Filter>Data</Filter>
     </None>
     <None Include="GameData\SpriteSheetData\playerSpritesheetData.json" />

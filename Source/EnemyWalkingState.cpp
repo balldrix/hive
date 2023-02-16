@@ -10,7 +10,7 @@
 
 EnemyWalkingState* EnemyWalkingState::Instance()
 {
-	static EnemyWalkingState instance("run");
+	static EnemyWalkingState instance("walk");
 	return &instance;
 }
 
@@ -35,10 +35,15 @@ void EnemyWalkingState::OnEnter(Enemy* enemy)
 void EnemyWalkingState::Execute(Enemy* enemy)
 {
 	enemy->PlayWalkingSound();
+	auto distance = (enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length();
 
-	if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() < enemy->GetData().attackRange)
+	if(distance < enemy->GetData().attackRange)
 	{
-		// change to idle state
+		enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
+	}
+
+	if(distance > enemy->GetData().fightingRange)
+	{
 		enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
 	}
 }

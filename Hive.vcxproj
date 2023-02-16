@@ -197,12 +197,7 @@
     <Image Include="GameData\Tilesets\ts_bunker.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="GameData\AnimationData\bossAnimationData.json" />
-    <None Include="GameData\AnimationData\dummyAnimationData.json" />
-    <None Include="GameData\AnimationData\gameOverAnimationData.json" />
-    <None Include="GameData\AnimationData\mookAnimationData.json" />
     <None Include="GameData\AnimationData\playerAnimationData.json" />
-    <None Include="GameData\AnimationData\travelPromptAnimationData.json" />
     <None Include="GameData\HitBoxData\bossHitBoxData.json" />
     <None Include="GameData\HitBoxData\dummyHitBoxData.json" />
     <None Include="GameData\HitBoxData\mookHitBoxData.json" />
@@ -409,7 +404,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties GameData_4AnimationData_4dummyAnimationData_1json__JsonSchema="http://jsonapi.org/schema" />
+      <UserProperties />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

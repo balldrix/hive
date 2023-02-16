@@ -40,26 +40,15 @@ void EnemyIdleState::Execute(Enemy* enemy)
 		// true if enemy is outside fighting range
 		if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() > enemy->GetData().fightingRange)
 		{
-			// radomise next action
-			int randNum = Randomiser::Instance()->GetRandNum(0, 1);
-			if(randNum > 0)
-			{
-				enemy->GetStateMachine()->ChangeState(EnemyRunningState::Instance());
-			}
-			else
-			{
-				enemy->GetStateMachine()->ChangeState(EnemyWalkingState::Instance());
-			}
-
+			enemy->GetStateMachine()->ChangeState(EnemyRunningState::Instance());
+			
 		}
 		else if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() > enemy->GetData().attackRange &&
-				(enemy->GetPositionY() - enemy->GetPlayerTarget()->GetPositionY()) < 5.0f)
+				(enemy->GetPositionY() - enemy->GetPlayerTarget()->GetPositionY()) < enemy->GetData().fightingRange)
 		{
-			// change to walking state
 			enemy->GetStateMachine()->ChangeState(EnemyWalkingState::Instance());
 		}
 
-		// reset timer
 		enemy->ResetTimer();
 	}
 
@@ -76,7 +65,6 @@ void EnemyIdleState::Execute(Enemy* enemy)
 		{
 			enemy->Stop();
 
-			// reset timer
 			enemy->ResetTimer();
 			//enemy->Attack();
 		}
