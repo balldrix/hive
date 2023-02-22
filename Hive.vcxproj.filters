@@ -195,6 +195,7 @@
     </ClCompile>
     <ClCompile Include="Source\TilemapHandler.cpp" />
     <ClCompile Include="Source\LevelRenderer.cpp" />
+    <ClCompile Include="Source\EnemyAttackRunState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -446,6 +447,7 @@
     <ClInclude Include="Source\InGameHudConstants.h" />
     <ClInclude Include="Source\PlayerConstants.h" />
     <ClInclude Include="Source\AudioConstants.h" />
+    <ClInclude Include="Source\EnemyAttackRunState.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\backgroundTest.png">

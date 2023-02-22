@@ -5,6 +5,8 @@
 #include "HitBoxManager.h"
 #include "Animator.h"
 #include "UnitVectors.h"
+#include "StateMachine.h"
+#include "EnemyAttackRunState.h"
 
 EnemyRunningState* EnemyRunningState::Instance()
 {
@@ -19,6 +21,9 @@ void EnemyRunningState::OnEnter(Enemy* enemy)
 	enemy->GetHitBoxManager()->SetCurrentHitBox(m_name);
 
 	enemy->SetMovementSpeed(enemy->GetData().objectData.runningSpeed);
+
+	if(enemy->GetStateMachine()->GetPreviousState() == EnemyAttackRunState::Instance())
+		return;
 
 	Vector2 direction = Vector2::Zero;
 	float targetXPosition = enemy->GetPlayerTarget()->GetPositionX();

@@ -528,13 +528,6 @@ void GameplayGameState::ProcessCollisions()
 	{
 		Enemy* enemy = enemyList[i];
 
-		if(enemy->GetGroundPosition().x < StartingBoundaryMinX)
-		{
-			enemy->SetPosition(Vector2(StartingBoundaryMinX, enemy->GetPositionY()));
-			enemy->SetCurrentVelocity(Vector2(0.0f, enemy->GetCurrentVelocity().y));
-			enemy->SetTargetVelocity(Vector2(0.0f, enemy->GetTargetVelocity().y));
-		}
-
 		if(enemy->GetGroundPosition().y > playerBoundaryMax.y)
 		{
 			enemy->SetPosition(enemy->GetPositionX(), playerBoundaryMax.y);

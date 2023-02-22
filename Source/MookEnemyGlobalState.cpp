@@ -8,6 +8,7 @@
 #include "SpriteSheet.h"
 #include "Animator.h"
 #include "Randomiser.h"
+#include "EnemyAttackRunState.h"
 
 MookEnemyGlobalState* MookEnemyGlobalState::Instance()
 {
@@ -43,9 +44,24 @@ void MookEnemyGlobalState::Execute(Enemy* enemy)
 	{
 		if(enemy->IsHostile() == false)
 		{
-			enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
 			enemy->SetHostile(true);
 		}
+			
+		auto playerPos = Vector2(enemy->GetPlayerTarget()->GetPositionX(), 0);
+		auto enemyPos = Vector2(enemy->GetPositionX(), 0);
+		Vector2 dirToPlayer = (playerPos - enemyPos);
+		dirToPlayer.Normalize();
+		auto facingDir = Vector2(enemy->GetFacingDirection());
+
+		if(enemy->GetStateMachine()->GetCurrentState() == EnemyRunningState::Instance() &&
+			(dirToPlayer == facingDir))
+		{
+			enemy->GetStateMachine()->ChangeState(EnemyAttackRunState::Instance());
+			return;
+		}
+
+		if(enemy->GetStateMachine()->GetCurrentState() == EnemyWalkingState::Instance())
+			enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
 	}
 	else
 	{
