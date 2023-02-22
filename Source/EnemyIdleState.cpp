@@ -23,16 +23,24 @@ void EnemyIdleState::OnEnter(Enemy* enemy)
 	enemy->GetAnimator()->Reset();
 	enemy->GetAnimator()->SetAnimation(m_name);
 	enemy->GetHitBoxManager()->SetCurrentHitBox(m_name);
-	enemy->ResetTimer();
+	enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4, 1.0));
 	enemy->SetTargetVelocity(Vector2::Zero);
 }
 
 void EnemyIdleState::Execute(Enemy* enemy)
 {
+	if(enemy->GetCurrentVelocity().LengthSquared() < 0.01f)
+	{
+		if(enemy->GetPlayerTarget()->GetPositionX() < enemy->GetPositionX())
+			enemy->FlipHorizontally(true);
+		else
+			enemy->FlipHorizontally(false);
+	}
+
 	if(enemy->GetPlayerTarget()->GetKnockbackCount() < 1 && enemy->GetPlayerTarget()->GetHealth() < 1)
 		enemy->GetStateMachine()->ChangeState(EnemyVictoryState::Instance());
 
-	if(enemy->GetTimer() > enemy->GetData().thinkingTime * Randomiser::Instance()->GetRandNum(0.4, 1.0) &&
+	if(enemy->GetTimer() < 0 &&
 	   enemy->GetHealth() > 0 &&
 	   (enemy->GetPlayerTarget()->GetStateMachine()->GetCurrentState() != PlayerKnockbackState::Instance() &&
 		enemy->GetPlayerTarget()->GetStateMachine()->GetCurrentState() != PlayerDeadState::Instance()))
@@ -41,15 +49,14 @@ void EnemyIdleState::Execute(Enemy* enemy)
 		if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() > enemy->GetData().fightingRange)
 		{
 			enemy->GetStateMachine()->ChangeState(EnemyRunningState::Instance());
-			
+			enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4, 1.0));
 		}
 		else if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() > enemy->GetData().attackRange &&
 				(enemy->GetPositionY() - enemy->GetPlayerTarget()->GetPositionY()) < enemy->GetData().fightingRange)
 		{
 			enemy->GetStateMachine()->ChangeState(EnemyWalkingState::Instance());
-		}
-
-		enemy->ResetTimer();
+			enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4, 1.0));
+		}		
 	}
 
 	if(enemy->IsHostile() == false)
@@ -59,13 +66,12 @@ void EnemyIdleState::Execute(Enemy* enemy)
 		fabs(enemy->GetPositionY() - enemy->GetPlayerTarget()->GetPositionY()) < VerticalHitRange)
 	{
 		double randnum = Randomiser::Instance()->GetRandNum(0.02, 1.8);
-		double time = randnum * enemy->GetData().thinkingTime;
-		float timer = enemy->GetTimer();
-		if(timer > time)
+	
+		if(enemy->GetTimer() < 0)
 		{
 			enemy->Stop();
 
-			enemy->ResetTimer();
+			enemy->ResetTimer(randnum);
 			//enemy->Attack();
 		}
 		return;

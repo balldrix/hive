@@ -62,7 +62,7 @@ void KingMookEnemyGlobalState::Execute(Enemy* enemy)
 		if(randNum > 0 && timer > thinkingTime)
 		{
 			enemy->GetStateMachine()->ChangeState(KingMookChargeState::Instance());
-			enemy->ResetTimer();
+			enemy->ResetTimer(0);
 			return;
 		}
 	}
@@ -74,7 +74,7 @@ void KingMookEnemyGlobalState::Execute(Enemy* enemy)
 		if(enemy->GetTimer() > enemy->GetData().thinkingTime * Randomiser::Instance()->GetRandNum(0.8f, 2.0f))
 		{
 			enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
-			enemy->ResetTimer();	
+			enemy->ResetTimer(0);	
 		}
 	}
 }

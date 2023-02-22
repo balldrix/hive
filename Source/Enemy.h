@@ -36,7 +36,7 @@ public:
 	void					SetDead();
 	void					SetPlayerTarget(Player* player);
 	void					SetHostile(bool isHostile);
-	void					ResetTimer();
+	void					ResetTimer(float timerMod);
 
 	Player*					GetPlayerTarget() const { return m_playerTarget; }
 	StateMachine<Enemy>*	GetStateMachine() const { return m_stateMachine; }

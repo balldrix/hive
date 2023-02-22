@@ -179,7 +179,7 @@ Enemy::Update(float deltaTime)
 
 	m_stateMachine->Update();
 	GameObject::Update(deltaTime);
-	m_thinkingTimer += deltaTime;
+	m_thinkingTimer -= deltaTime;
 }
 
 void
@@ -247,9 +247,9 @@ void Enemy::SetHostile(bool isHostile)
 	m_isHostile = isHostile;
 }
 
-void Enemy::ResetTimer()
+void Enemy::ResetTimer(float timerMod)
 {
-	m_thinkingTimer = 0.0f;
+	m_thinkingTimer = GetData().thinkingTime * timerMod;
 }
 
 void Enemy::ApplyDamage(GameObject* source, const int& amount)

@@ -32,12 +32,11 @@ void MookEnemyGlobalState::Execute(Enemy* enemy)
 		enemy->GetStateMachine()->GetCurrentState() == EnemyRunningState::Instance()) &&
 		(enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() > enemy->GetData().fightingRange)
 	{
-		if(enemy->GetTimer() > enemy->GetData().thinkingTime * Randomiser::Instance()->GetRandNum(0.8, 2.0))
+		if(enemy->GetTimer() < 0.0f)
 		{
 			enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
+			enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.8, 2.0));
 		}
-
-		enemy->ResetTimer();
 	}
 
 	if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() < enemy->GetData().fightingRange)
