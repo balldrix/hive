@@ -28,9 +28,12 @@ void MookEnemyGlobalState::Execute(Enemy* enemy)
 		return;
 	}
 
-	if((enemy->GetStateMachine()->GetCurrentState() == EnemyWalkingState::Instance() ||
-		enemy->GetStateMachine()->GetCurrentState() == EnemyRunningState::Instance()) &&
-		(enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() > enemy->GetData().fightingRange)
+	auto currentState = enemy->GetStateMachine()->GetCurrentState();
+	auto distance = (enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length();
+
+	if((currentState == EnemyWalkingState::Instance() ||
+		currentState == EnemyRunningState::Instance()) &&
+		distance > enemy->GetData().fightingRange)
 	{
 		if(enemy->GetTimer() < 0.0f)
 		{
@@ -39,7 +42,7 @@ void MookEnemyGlobalState::Execute(Enemy* enemy)
 		}
 	}
 
-	if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() < enemy->GetData().fightingRange)
+	if(distance < enemy->GetData().fightingRange)
 	{
 		if(enemy->IsHostile() == false)
 		{
@@ -52,14 +55,15 @@ void MookEnemyGlobalState::Execute(Enemy* enemy)
 		dirToPlayer.Normalize();
 		auto facingDir = Vector2(enemy->GetFacingDirection());
 
-		if(enemy->GetStateMachine()->GetCurrentState() == EnemyRunningState::Instance() &&
+		if(currentState == EnemyRunningState::Instance() &&
 			(dirToPlayer == facingDir))
 		{
 			enemy->GetStateMachine()->ChangeState(EnemyAttackRunState::Instance());
 			return;
 		}
 
-		if(enemy->GetStateMachine()->GetCurrentState() == EnemyWalkingState::Instance())
+		if(currentState == EnemyWalkingState::Instance() &&
+			(distance < enemy->GetData().attackRange))
 			enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
 	}
 	else
@@ -68,8 +72,8 @@ void MookEnemyGlobalState::Execute(Enemy* enemy)
 	}
 
 	// true if the enemy is not knocked back or dead
-	if(enemy->GetStateMachine()->GetCurrentState() != EnemyKnockbackState::Instance() &&
-		enemy->GetStateMachine()->GetCurrentState() != EnemyDeadState::Instance())
+	if(currentState != EnemyKnockbackState::Instance() &&
+		currentState != EnemyDeadState::Instance())
 	{
 		// true if moving to the left
 		if(enemy->GetCurrentVelocity().x < 0)
