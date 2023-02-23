@@ -94,7 +94,7 @@ Enemy* NPCFactory::CreateMook(EnemyData& data)
 				 m_mookTexture, m_standardShadowTexture,
 				 m_hitBoxTexture,
 				 m_hudManager, m_mookPortraitSprite,
-				 MookEnemyGlobalState::Instance());
+				 MookRunningEnemyGlobalState::Instance());
 
 	return m_mook;
 }

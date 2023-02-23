@@ -1,3 +1,3 @@
 # type HP starting_lives walk_speed running_speed acceleration deceleration thinking_time fight_range attack_range charge_range charge_speed
-Mook 30 1 30 80 5 5 3.5 60.0 10.0 0.0 100
+Mook 30 1 30 90 5 5 3.5 100.0 60.0 120.0 100
 Boss 70 1 10 10 2.0 3.5 5.0 30.0 10.0 60.0 70

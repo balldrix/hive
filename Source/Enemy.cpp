@@ -167,7 +167,9 @@ void Enemy::Init(Graphics* graphics,
 	AudioEngine::Instance()->AddSoundSource(m_vocalSoundSource);
 	AudioEngine::Instance()->AddSoundSource(m_footStepsSoundSource);
 	AudioEngine::Instance()->AddSoundSource(m_punchSoundSource);
-	
+
+	ResetTimer(Randomiser::Instance()->GetRandNum(0.8, 2.0));
+
 	m_active = false;
 }
 
@@ -222,7 +224,7 @@ Enemy::Reset()
 	m_movementSpeed = m_enemyData.objectData.walkSpeed;
 	m_hitBoxManager->SetCurrentHitBox(0);
 	m_health = m_enemyData.objectData.startingHealth;
-	m_thinkingTimer = 0.0f;
+	ResetTimer(Randomiser::Instance()->GetRandNum(0.8, 2.0));
 	m_active = false;
 	m_dead = false;
 }

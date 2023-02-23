@@ -4,19 +4,19 @@
 
 class Enemy;
 
-class MookEnemyGlobalState : public State<Enemy>
+class MookRunningEnemyGlobalState : public State<Enemy>
 {
 public:
 	// static instance call
-	static MookEnemyGlobalState* Instance();
+	static MookRunningEnemyGlobalState* Instance();
 
 	virtual void OnEnter(Enemy* enemy);
 	virtual void Execute(Enemy* enemy);
 	virtual void OnExit(Enemy* enemy);
 
 private:
-	MookEnemyGlobalState() {}
-	~MookEnemyGlobalState() {}
-	MookEnemyGlobalState(const MookEnemyGlobalState&);
-	MookEnemyGlobalState& operator=(const MookEnemyGlobalState&);
+	MookRunningEnemyGlobalState() {}
+	~MookRunningEnemyGlobalState() {}
+	MookRunningEnemyGlobalState(const MookRunningEnemyGlobalState&);
+	MookRunningEnemyGlobalState& operator=(const MookRunningEnemyGlobalState&);
 };
