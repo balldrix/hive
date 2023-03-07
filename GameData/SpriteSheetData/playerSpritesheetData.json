@@ -18,7 +18,7 @@
     "duration": 500
    },
    {
-    "filename": "block-2",
+    "filename": "block-0",
     "frame": { "x": 100, "y": 0, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -27,7 +27,7 @@
     "duration": 40
    },
    {
-    "filename": "block-3",
+    "filename": "block-1",
     "frame": { "x": 150, "y": 0, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -36,7 +36,7 @@
     "duration": 40
    },
    {
-    "filename": "block-4",
+    "filename": "block-2",
     "frame": { "x": 200, "y": 0, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -45,7 +45,7 @@
     "duration": 500
    },
    {
-    "filename": "run-5",
+    "filename": "run-0",
     "frame": { "x": 250, "y": 0, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -54,7 +54,7 @@
     "duration": 100
    },
    {
-    "filename": "run-6",
+    "filename": "run-1",
     "frame": { "x": 0, "y": 39, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -63,7 +63,7 @@
     "duration": 100
    },
    {
-    "filename": "run-7",
+    "filename": "run-2",
     "frame": { "x": 50, "y": 39, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -72,7 +72,7 @@
     "duration": 100
    },
    {
-    "filename": "run-8",
+    "filename": "run-3",
     "frame": { "x": 100, "y": 39, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -81,7 +81,7 @@
     "duration": 100
    },
    {
-    "filename": "run-9",
+    "filename": "run-4",
     "frame": { "x": 150, "y": 39, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -90,7 +90,7 @@
     "duration": 100
    },
    {
-    "filename": "run-10",
+    "filename": "run-5",
     "frame": { "x": 200, "y": 39, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -99,7 +99,7 @@
     "duration": 100
    },
    {
-    "filename": "run-11",
+    "filename": "run-6",
     "frame": { "x": 250, "y": 39, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -108,7 +108,7 @@
     "duration": 100
    },
    {
-    "filename": "run-12",
+    "filename": "run-7",
     "frame": { "x": 0, "y": 78, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -117,7 +117,7 @@
     "duration": 100
    },
    {
-    "filename": "sprint-13",
+    "filename": "sprint-0",
     "frame": { "x": 50, "y": 78, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -126,7 +126,7 @@
     "duration": 60
    },
    {
-    "filename": "sprint-14",
+    "filename": "sprint-1",
     "frame": { "x": 100, "y": 78, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -135,7 +135,7 @@
     "duration": 60
    },
    {
-    "filename": "sprint-15",
+    "filename": "sprint-2",
     "frame": { "x": 150, "y": 78, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -144,7 +144,7 @@
     "duration": 60
    },
    {
-    "filename": "sprint-16",
+    "filename": "sprint-3",
     "frame": { "x": 200, "y": 78, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -153,7 +153,7 @@
     "duration": 60
    },
    {
-    "filename": "sprint-17",
+    "filename": "sprint-4",
     "frame": { "x": 250, "y": 78, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -162,7 +162,7 @@
     "duration": 60
    },
    {
-    "filename": "sprint-18",
+    "filename": "sprint-5",
     "frame": { "x": 0, "y": 117, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -171,7 +171,7 @@
     "duration": 60
    },
    {
-    "filename": "sprint-19",
+    "filename": "sprint-6",
     "frame": { "x": 50, "y": 117, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -180,7 +180,7 @@
     "duration": 60
    },
    {
-    "filename": "sprint-20",
+    "filename": "sprint-7",
     "frame": { "x": 100, "y": 117, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -189,7 +189,7 @@
     "duration": 60
    },
    {
-    "filename": "swing_1-21",
+    "filename": "swing_1-0",
     "frame": { "x": 0, "y": 0, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -198,7 +198,7 @@
     "duration": 100
    },
    {
-    "filename": "swing_1-22",
+    "filename": "swing_1-1",
     "frame": { "x": 150, "y": 117, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -207,7 +207,7 @@
     "duration": 100
    },
    {
-    "filename": "swing_1-23",
+    "filename": "swing_1-2",
     "frame": { "x": 200, "y": 117, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -216,7 +216,7 @@
     "duration": 50
    },
    {
-    "filename": "swing_1-24",
+    "filename": "swing_1-3",
     "frame": { "x": 250, "y": 117, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -225,7 +225,7 @@
     "duration": 50
    },
    {
-    "filename": "swing_1-25",
+    "filename": "swing_1-4",
     "frame": { "x": 0, "y": 156, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -234,7 +234,7 @@
     "duration": 50
    },
    {
-    "filename": "swing_1-26",
+    "filename": "swing_1-5",
     "frame": { "x": 50, "y": 156, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -243,7 +243,7 @@
     "duration": 500
    },
    {
-    "filename": "swing_2-27",
+    "filename": "swing_2-0",
     "frame": { "x": 100, "y": 156, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -252,7 +252,7 @@
     "duration": 100
    },
    {
-    "filename": "swing_2-28",
+    "filename": "swing_2-1",
     "frame": { "x": 150, "y": 156, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -261,7 +261,7 @@
     "duration": 100
    },
    {
-    "filename": "swing_2-29",
+    "filename": "swing_2-2",
     "frame": { "x": 200, "y": 156, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -270,7 +270,7 @@
     "duration": 50
    },
    {
-    "filename": "swing_2-30",
+    "filename": "swing_2-3",
     "frame": { "x": 250, "y": 156, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -279,7 +279,7 @@
     "duration": 50
    },
    {
-    "filename": "swing_2-31",
+    "filename": "swing_2-4",
     "frame": { "x": 0, "y": 195, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -288,7 +288,7 @@
     "duration": 50
    },
    {
-    "filename": "swing_2-32",
+    "filename": "swing_2-5",
     "frame": { "x": 50, "y": 195, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -299,8 +299,7 @@
  ],
     "meta": {
         "app": "https://www.aseprite.org/",
-        "version": "1.3-beta21-x64",
-        "image": "playerSpritesheet.png",
+        "version": "1.3-rc1-x64",
         "format": "RGBA8888",
         "size": {
             "w": 300,

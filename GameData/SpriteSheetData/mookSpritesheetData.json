@@ -1,6 +1,6 @@
 { "frames": [
    {
-    "filename": "idle0",
+    "filename": "idle-0",
     "frame": { "x": 0, "y": 0, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -9,7 +9,7 @@
     "duration": 200
    },
    {
-    "filename": "idle1",
+    "filename": "idle-1",
     "frame": { "x": 39, "y": 0, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -18,7 +18,7 @@
     "duration": 200
    },
    {
-    "filename": "idle2",
+    "filename": "idle-2",
     "frame": { "x": 78, "y": 0, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -27,7 +27,7 @@
     "duration": 200
    },
    {
-    "filename": "idle3",
+    "filename": "idle-3",
     "frame": { "x": 117, "y": 0, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -36,7 +36,7 @@
     "duration": 200
    },
    {
-    "filename": "idle4",
+    "filename": "idle-4",
     "frame": { "x": 156, "y": 0, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -45,7 +45,7 @@
     "duration": 200
    },
    {
-    "filename": "idle5",
+    "filename": "idle-5",
     "frame": { "x": 195, "y": 0, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -54,7 +54,7 @@
     "duration": 200
    },
    {
-    "filename": "walk6",
+    "filename": "walk-0",
     "frame": { "x": 0, "y": 37, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -63,7 +63,7 @@
     "duration": 100
    },
    {
-    "filename": "walk7",
+    "filename": "walk-1",
     "frame": { "x": 39, "y": 37, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -72,7 +72,7 @@
     "duration": 100
    },
    {
-    "filename": "walk8",
+    "filename": "walk-2",
     "frame": { "x": 78, "y": 37, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -81,7 +81,7 @@
     "duration": 100
    },
    {
-    "filename": "walk9",
+    "filename": "walk-3",
     "frame": { "x": 117, "y": 37, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -90,7 +90,7 @@
     "duration": 100
    },
    {
-    "filename": "walk10",
+    "filename": "walk-4",
     "frame": { "x": 156, "y": 37, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -99,7 +99,7 @@
     "duration": 100
    },
    {
-    "filename": "walk11",
+    "filename": "walk-5",
     "frame": { "x": 195, "y": 37, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -108,7 +108,7 @@
     "duration": 100
    },
    {
-    "filename": "walk12",
+    "filename": "walk-6",
     "frame": { "x": 0, "y": 74, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -117,7 +117,7 @@
     "duration": 100
    },
    {
-    "filename": "walk13",
+    "filename": "walk-7",
     "frame": { "x": 39, "y": 74, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -126,7 +126,7 @@
     "duration": 100
    },
    {
-    "filename": "run14",
+    "filename": "run-0",
     "frame": { "x": 78, "y": 74, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -135,7 +135,7 @@
     "duration": 80
    },
    {
-    "filename": "run15",
+    "filename": "run-1",
     "frame": { "x": 117, "y": 74, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -144,7 +144,7 @@
     "duration": 80
    },
    {
-    "filename": "run16",
+    "filename": "run-2",
     "frame": { "x": 156, "y": 74, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -153,7 +153,7 @@
     "duration": 80
    },
    {
-    "filename": "run17",
+    "filename": "run-3",
     "frame": { "x": 195, "y": 74, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -162,7 +162,7 @@
     "duration": 80
    },
    {
-    "filename": "run18",
+    "filename": "run-4",
     "frame": { "x": 0, "y": 111, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -171,7 +171,7 @@
     "duration": 80
    },
    {
-    "filename": "run19",
+    "filename": "run-5",
     "frame": { "x": 39, "y": 111, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -180,7 +180,7 @@
     "duration": 80
    },
    {
-    "filename": "run20",
+    "filename": "run-6",
     "frame": { "x": 78, "y": 111, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -189,7 +189,7 @@
     "duration": 80
    },
    {
-    "filename": "run21",
+    "filename": "run-7",
     "frame": { "x": 117, "y": 111, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -198,7 +198,7 @@
     "duration": 80
    },
    {
-    "filename": "attackRun22",
+    "filename": "attackRun-0",
     "frame": { "x": 156, "y": 111, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -207,7 +207,7 @@
     "duration": 120
    },
    {
-    "filename": "attackRun23",
+    "filename": "attackRun-1",
     "frame": { "x": 195, "y": 111, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -216,7 +216,7 @@
     "duration": 120
    },
    {
-    "filename": "attackRun24",
+    "filename": "attackRun-2",
     "frame": { "x": 0, "y": 148, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -225,7 +225,7 @@
     "duration": 120
    },
    {
-    "filename": "attackRun25",
+    "filename": "attackRun-3",
     "frame": { "x": 39, "y": 148, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -234,7 +234,7 @@
     "duration": 120
    },
    {
-    "filename": "attackRun26",
+    "filename": "attackRun-4",
     "frame": { "x": 78, "y": 148, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -243,7 +243,7 @@
     "duration": 120
    },
    {
-    "filename": "attackRun27",
+    "filename": "attackRun-5",
     "frame": { "x": 117, "y": 148, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -252,7 +252,7 @@
     "duration": 120
    },
    {
-    "filename": "attackRun28",
+    "filename": "attackRun-6",
     "frame": { "x": 156, "y": 148, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -261,7 +261,7 @@
     "duration": 120
    },
    {
-    "filename": "attackRun29",
+    "filename": "attackRun-7",
     "frame": { "x": 195, "y": 148, "w": 39, "h": 37 },
     "rotated": false,
     "trimmed": true,
@@ -272,8 +272,7 @@
  ],
     "meta": {
         "app": "https://www.aseprite.org/",
-        "version": "1.3-beta21-x64",
-        "image": "mookSpriteSheet.png",
+        "version": "1.3-rc1-x64",
         "format": "RGBA8888",
         "size": {
             "w": 234,
