@@ -91,7 +91,7 @@ bool NPCManager::InitTypes(const std::string &fileName)
 				data.chargeRange = std::stof(result);
 
 				iss >> result;
-				data.chargeSpeed = std::stoi(result);
+				data.chargeSpeed = std::stof(result);
 
 				m_enemyDataContainer->Add(data);
 			}
