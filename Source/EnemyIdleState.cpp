@@ -23,7 +23,7 @@ void EnemyIdleState::OnEnter(Enemy* enemy)
 	enemy->GetAnimator()->Reset();
 	enemy->GetAnimator()->SetAnimation(m_name);
 	enemy->GetHitBoxManager()->SetCurrentHitBox(m_name);
-	enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4, 1.0));
+	enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4f, 1.0f));
 	enemy->SetTargetVelocity(Vector2::Zero);
 }
 
@@ -49,13 +49,13 @@ void EnemyIdleState::Execute(Enemy* enemy)
 		if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() > enemy->GetData().fightingRange)
 		{
 			enemy->GetStateMachine()->ChangeState(EnemyRunningState::Instance());
-			enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4, 1.0));
+			enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4f, 1.0f));
 		}
 		else if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() > enemy->GetData().attackRange &&
 				(enemy->GetPositionY() - enemy->GetPlayerTarget()->GetPositionY()) < enemy->GetData().fightingRange)
 		{
 			enemy->GetStateMachine()->ChangeState(EnemyWalkingState::Instance());
-			enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4, 1.0));
+			enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4f, 1.0f));
 		}		
 	}
 
@@ -65,7 +65,7 @@ void EnemyIdleState::Execute(Enemy* enemy)
 	if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() < enemy->GetData().attackRange &&
 		fabs(enemy->GetPositionY() - enemy->GetPlayerTarget()->GetPositionY()) < VerticalHitRange)
 	{
-		double randnum = Randomiser::Instance()->GetRandNum(0.02, 1.8);
+		double randnum = Randomiser::Instance()->GetRandNum(0.02f, 1.8f);
 	
 		if(enemy->GetTimer() < 0)
 		{

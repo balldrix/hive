@@ -264,10 +264,10 @@ void Player::Render(Graphics* graphics)
 	}
 
 	// render hitbox
-	//if(m_hitBoxManager)
-	//{
-	//	m_hitBoxManager->Render(graphics);
-	//}
+	if(m_hitBoxManager)
+	{
+		m_hitBoxManager->Render(graphics);
+	}
 }
 
 void Player::Reset()
