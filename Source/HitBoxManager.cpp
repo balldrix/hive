@@ -10,7 +10,8 @@ HitBoxManager::HitBoxManager() :
 	m_owner(nullptr),
 	m_spriteSheet(nullptr),
 	m_currentHitBoxData(nullptr),
-	m_hitBoxDataList(0)
+	m_hitBoxDataList(0),
+	m_isVisible(false)
 {
 }
 
@@ -51,6 +52,9 @@ void HitBoxManager::Update()
 // render boxes
 void HitBoxManager::Render(Graphics* graphics)
 {
+	if(!m_isVisible)
+		return;
+
 	m_movementBox.Render(graphics);
 	m_hurtBox.Render(graphics);
 

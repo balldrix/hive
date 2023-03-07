@@ -23,6 +23,7 @@ public:
 	void SetFlipped(bool flip); // flip the hitbox data
 	void SetCurrentHitBox(const std::string &name);
 	void SetCurrentHitBox(const int& index);
+	void SetVisible(bool isVisible) { m_isVisible = isVisible; }
 
 	HitBox GetMovementBox() const { return m_movementBox; }
 	HitBox GetHurtBox() const { return m_hurtBox; }
@@ -40,6 +41,8 @@ private:
 	HitBox m_movementBox;	// hit box to block movement in scene
 	HitBox m_hurtBox;		// hurt box that set character's vulnerable area
 	HitBox m_hitBox;		// hit box (red) is what will do damage to other character
+
+	bool m_isVisible;
 
 	void LoadData(const std::string &fileName);
 

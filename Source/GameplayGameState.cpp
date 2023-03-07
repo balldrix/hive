@@ -67,6 +67,7 @@ GameplayGameState::GameplayGameState() :
 	m_running(false),
 	m_playerBoundary(AABB()),
 	m_deltaTime(0.0f),
+	m_displayHitBoxes(false),
 	GameState(L"GAMEPLAY")
 {}
 
@@ -90,6 +91,20 @@ void GameplayGameState::OnExit()
 {
 	ReleaseAll();
 	DeleteAssets();
+}
+
+void GameplayGameState::ToggleHitBoxes()
+{
+	m_displayHitBoxes = !m_displayHitBoxes;
+
+	m_player->GetHitBoxManager()->SetVisible(m_displayHitBoxes);
+
+	auto npcList = m_NPCManager->GetEnemyList();
+
+	for(Enemy* enemy : npcList)
+	{
+		enemy->GetHitBoxManager()->SetVisible(m_displayHitBoxes);
+	}
 }
 
 void GameplayGameState::LoadAssets()
@@ -335,6 +350,11 @@ void GameplayGameState::ProcessInput()
 	if(m_input->IsKeyDown('R'))
 		ResetGame();
 
+	if(m_input->WasKeyPressed(F4_KEY))
+	{
+		ToggleHitBoxes();
+	}
+
 	if(m_input->IsKeyDown(PLAYER_UP_KEY) &&
 		!m_input->IsKeyDown(PLAYER_DOWN_KEY))
 	{
@@ -406,6 +426,11 @@ void GameplayGameState::ProcessInput()
 	if(m_input->WasKeyPressed(PLAYER_B_KEY))
 	{
 		m_player->Block();
+	}
+
+	if(m_input->IsKeyDown(PLAYER_B_KEY))
+	{
+		return;
 	}
 
 	if(m_input->IsKeyDown(PLAYER_A_KEY) &&

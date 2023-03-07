@@ -59,6 +59,7 @@ public:
 	Sprite*								GetBackground() const { return m_backgroundSprite; }
 	GameOverScreenController*			GetGameOverScreenController() const { return m_gameOverScreenController; }
 
+	void								ToggleHitBoxes();
 private:			
 	void								LoadAssets();				
 	void								DeleteAssets();				
@@ -104,4 +105,5 @@ private:
 	AABB								m_playerBoundary;
 
 	float								m_deltaTime;
+	bool								m_displayHitBoxes;
 };

@@ -26,8 +26,6 @@ void PlayerBlockState::OnEnter(Player* player)
 
 void PlayerBlockState::Execute(Player* player)
 {
-	if(player->GetAnimator()->IsDone())
-		player->GetStateMachine()->ChangeState(PlayerIdleState::Instance());
 }
 
 void PlayerBlockState::OnExit(Player* player)
