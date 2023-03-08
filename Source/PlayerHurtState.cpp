@@ -7,7 +7,7 @@
 
 PlayerHurtState* PlayerHurtState::Instance()
 {
-	static PlayerHurtState instance("Hurt");
+	static PlayerHurtState instance("hurt");
 	return &instance;
 }
 
