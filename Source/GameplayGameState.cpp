@@ -468,6 +468,9 @@ void GameplayGameState::CheckForEncounter()
 
 void GameplayGameState::Tick(float deltaTime)
 {
+	
+
+
 	m_camera->Update(deltaTime);
 	m_player->Update(deltaTime);
 	m_NPCManager->Update(deltaTime);
@@ -475,6 +478,8 @@ void GameplayGameState::Tick(float deltaTime)
 	m_hudManager->SetCurrentPlayerHealth(m_player->GetHealth());
 	m_hudManager->UpdatePlayerLives(m_player->GetLives());
 //	m_hudManager->GetTravelPrompt()->Update(deltaTime);
+	
+	// TODO move to new game state
 	m_gameOverScreenController->Update(deltaTime);
 
 	if(m_player->IsDead() && m_player->GetLives() > 0)
@@ -485,13 +490,17 @@ void GameplayGameState::ProcessCollisions()
 {
 	std::vector<Enemy*> enemyList = m_NPCManager->GetEnemyList();
 
+	auto isPlayerHitBoxActive = m_player->GetHitBoxManager()->IsHitBoxActive();
+	auto playerGroundPositionX = m_player->GetGroundPosition().x;
+	auto playerGroundPositionY = m_player->GetGroundPosition().y;
+
 	for(size_t i = 0; i < enemyList.size(); i++)
 	{
 		Enemy* enemy = enemyList[i];
 
 		// true if player hitbox is active and 
-		if(m_player->GetHitBoxManager()->IsHitBoxActive() &&
-			fabs(enemy->GetGroundPosition().y - m_player->GetGroundPosition().y) < VerticalHitRange)
+		if(isPlayerHitBoxActive &&
+			fabs(enemy->GetGroundPosition().y - playerGroundPositionY) < VerticalHitRange)
 		{
 			// check player hitbox vs enemy hurtboxes
 			if(m_player->GetHitBoxManager()->GetHitBox().OnCollision(
@@ -505,7 +514,7 @@ void GameplayGameState::ProcessCollisions()
 		}
 
 		if(enemy->GetHitBoxManager()->IsHitBoxActive() &&
-			fabs(m_player->GetGroundPosition().y - enemy->GetGroundPosition().y) < VerticalHitRange)
+			fabs(playerGroundPositionY - enemy->GetGroundPosition().y) < VerticalHitRange)
 		{
 			// check player hitbox vs enemy hurtboxes
 			if(enemy->GetHitBoxManager()->GetHitBox().OnCollision(
@@ -521,28 +530,28 @@ void GameplayGameState::ProcessCollisions()
 	Vector2 playerBoundaryMin = m_playerBoundary.GetMin();
 	Vector2 playerBoundaryMax = m_playerBoundary.GetMax();
 
-	if(m_player->GetGroundPosition().x < playerBoundaryMin.x)
+	if(playerGroundPositionX < playerBoundaryMin.x)
 	{
 		m_player->SetPosition(Vector2(playerBoundaryMin.x, m_player->GetPositionY()));
 		m_player->SetCurrentVelocity(Vector2(0.0f, m_player->GetCurrentVelocity().y));
 		m_player->SetTargetVelocity(Vector2(0.0f, m_player->GetTargetVelocity().y));
 	}
 
-	if(m_player->GetGroundPosition().y < playerBoundaryMin.y)
+	if(playerGroundPositionY < playerBoundaryMin.y)
 	{
 		m_player->SetPosition(Vector2(m_player->GetPositionX(), playerBoundaryMin.y));
 		m_player->SetCurrentVelocity(Vector2(m_player->GetCurrentVelocity().x, 0.0f));
 		m_player->SetTargetVelocity(Vector2(m_player->GetTargetVelocity().x, 0.0f));
 	}
 
-	if(m_player->GetGroundPosition().x > playerBoundaryMax.x)
+	if(playerGroundPositionX > playerBoundaryMax.x)
 	{
 		m_player->SetPosition(Vector2(playerBoundaryMax.x, m_player->GetPositionY()));
 		m_player->SetCurrentVelocity(Vector2(0.0f, m_player->GetCurrentVelocity().y));
 		m_player->SetTargetVelocity(Vector2(0.0f, m_player->GetTargetVelocity().y));
 	}
 
-	if(m_player->GetGroundPosition().y > playerBoundaryMax.y)
+	if(playerGroundPositionY > playerBoundaryMax.y)
 	{
 		m_player->SetPosition(Vector2(m_player->GetPositionX(), playerBoundaryMax.y));
 		m_player->SetCurrentVelocity(Vector2(m_player->GetCurrentVelocity().x, 0.0f));
