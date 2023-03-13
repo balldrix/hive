@@ -67,6 +67,7 @@ GameplayGameState::GameplayGameState() :
 	m_running(false),
 	m_playerBoundary(AABB()),
 	m_deltaTime(0.0f),
+	m_stopTimer(0.0f),
 	m_displayHitBoxes(false),
 	GameState(L"GAMEPLAY")
 {}
@@ -468,8 +469,11 @@ void GameplayGameState::CheckForEncounter()
 
 void GameplayGameState::Tick(float deltaTime)
 {
-	
-
+	if(m_stopTimer > 0)
+	{
+		m_stopTimer -= deltaTime;
+		return;
+	}
 
 	m_camera->Update(deltaTime);
 	m_player->Update(deltaTime);
@@ -520,8 +524,16 @@ void GameplayGameState::ProcessCollisions()
 			if(enemy->GetHitBoxManager()->GetHitBox().OnCollision(
 				m_player->GetHitBoxManager()->GetHurtBox()))
 			{
+				auto enemyVelocity = enemy->GetCurrentVelocity();
+				enemyVelocity.Normalize();
 				m_player->ApplyDamage(enemy, enemy->GetDamage());
+				m_player->SetPositionX(m_player->GetPositionX() + enemyVelocity.x);
+				
+				if(m_player->GetFacingDirection() == enemy->GetFacingDirection())
+					m_player->FlipHorizontally(m_player->GetFacingDirection() != Vector3::Left);
+
 				enemy->ShowEnemyHud();
+				m_stopTimer = 0.2f;
 				return;
 			}
 		}

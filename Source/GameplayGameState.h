@@ -105,5 +105,6 @@ private:
 	AABB								m_playerBoundary;
 
 	float								m_deltaTime;
+	float								m_stopTimer;
 	bool								m_displayHitBoxes;
 };
