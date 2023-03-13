@@ -196,6 +196,7 @@
     <ClCompile Include="Source\TilemapHandler.cpp" />
     <ClCompile Include="Source\LevelRenderer.cpp" />
     <ClCompile Include="Source\EnemyAttackRunState.cpp" />
+    <ClCompile Include="Source\DamageData.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

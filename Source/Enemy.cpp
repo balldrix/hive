@@ -20,6 +20,7 @@
 #include "SoundSource.h"
 #include "SoundManager.h"
 #include "InGameHudConstants.h"
+#include "DamageData.h"
 
 using namespace InGameHudConstants;
 
@@ -168,7 +169,7 @@ void Enemy::Init(Graphics* graphics,
 	AudioEngine::Instance()->AddSoundSource(m_footStepsSoundSource);
 	AudioEngine::Instance()->AddSoundSource(m_punchSoundSource);
 
-	ResetTimer(Randomiser::Instance()->GetRandNum(0.8, 2.0));
+	ResetTimer(Randomiser::Instance()->GetRandNum(0.8f, 2.0f));
 
 	m_active = false;
 }
@@ -224,7 +225,7 @@ Enemy::Reset()
 	m_movementSpeed = m_enemyData.objectData.walkSpeed;
 	m_hitBoxManager->SetCurrentHitBox(0);
 	m_health = m_enemyData.objectData.startingHealth;
-	ResetTimer(Randomiser::Instance()->GetRandNum(0.8, 2.0));
+	ResetTimer(Randomiser::Instance()->GetRandNum(0.8f, 2.0f));
 	m_active = false;
 	m_dead = false;
 }
@@ -377,11 +378,11 @@ void Enemy::PlayDeathSound()
 		m_vocalSoundSource->SetSound(sound);
 }
 
-int Enemy::GetDamage() const
+DamageData Enemy::GetDamageData() const
 {
 	std::string stateName = m_stateMachine->GetCurrentState()->GetName();
 	if(m_damageData.count(stateName) == 0)
-		return 0;
+		return DamageData();
 
 	return m_damageData.at(stateName);
 }

@@ -1,5 +1,6 @@
-# attack_name damage_value
+# attack_name damage_value hitstop_duration
 
-Attack1 2
-Attack2 3
-Attack3 5
+attackRun 2 0.2
+attack1 2 0.2
+attack2 3 0.25
+attack3 5 0.3

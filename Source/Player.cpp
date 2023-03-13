@@ -20,6 +20,7 @@
 #include "SoundSource.h"
 #include "Sound.h"
 #include "Randomiser.h"
+#include "DamageData.h"
 
 using namespace PlayerConstants;
 using namespace GlobalConstants;
@@ -286,11 +287,11 @@ void Player::Reset()
 	SetVelocity(Vector2::Zero);
 }
 
-int Player::GetDamage() const
+DamageData Player::GetDamageData() const
 {
 	std::string stateName = m_stateMachine->GetCurrentState()->GetName();
 	if(m_damageData.count(stateName) == 0)
-		return 0;
+		return DamageData();
 
 	return m_damageData.at(stateName);
 }

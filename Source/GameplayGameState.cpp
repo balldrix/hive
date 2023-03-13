@@ -510,9 +510,12 @@ void GameplayGameState::ProcessCollisions()
 			if(m_player->GetHitBoxManager()->GetHitBox().OnCollision(
 				enemy->GetHitBoxManager()->GetHurtBox()))
 			{
-				enemy->ApplyDamage(m_player, m_player->GetDamage());
+				auto damageData = m_player->GetDamageData();
+
+				enemy->ApplyDamage(m_player, damageData.amount);
 				enemy->ShowEnemyHud();
 				m_player->GetHitBoxManager()->KillAll();
+				m_stopTimer = damageData.hitStopDuration;
 				return;
 			}
 		}
@@ -524,16 +527,18 @@ void GameplayGameState::ProcessCollisions()
 			if(enemy->GetHitBoxManager()->GetHitBox().OnCollision(
 				m_player->GetHitBoxManager()->GetHurtBox()))
 			{
+				auto damageData = enemy->GetDamageData();
 				auto enemyVelocity = enemy->GetCurrentVelocity();
 				enemyVelocity.Normalize();
-				m_player->ApplyDamage(enemy, enemy->GetDamage());
+
+				m_player->ApplyDamage(enemy, damageData.amount);
 				m_player->SetPositionX(m_player->GetPositionX() + enemyVelocity.x);
 				
 				if(m_player->GetFacingDirection() == enemy->GetFacingDirection())
 					m_player->FlipHorizontally(m_player->GetFacingDirection() != Vector3::Left);
 
 				enemy->ShowEnemyHud();
-				m_stopTimer = 0.2f;
+				m_stopTimer = damageData.hitStopDuration;
 				return;
 			}
 		}

@@ -65,7 +65,7 @@ void EnemyIdleState::Execute(Enemy* enemy)
 	if((enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length() < enemy->GetData().attackRange &&
 		fabs(enemy->GetPositionY() - enemy->GetPlayerTarget()->GetPositionY()) < VerticalHitRange)
 	{
-		double randnum = Randomiser::Instance()->GetRandNum(0.02f, 1.8f);
+		float randnum = Randomiser::Instance()->GetRandNum(0.02f, 1.8f);
 	
 		if(enemy->GetTimer() < 0)
 		{

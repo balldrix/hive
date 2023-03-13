@@ -4,7 +4,7 @@
 #include "GameObject.h"
 #include "State.h"
 #include "PlayerData.h"
-
+#include "DamageData.h"
 
 class ControlSystem;
 template<class T> class StateMachine;
@@ -30,7 +30,7 @@ public:
 	float					GetWalkSpeed() const { return m_playerData.objectData.walkSpeed; }
 	float					GetRunSpeed() const { return m_playerData.objectData.runningSpeed; }
 
-	int						GetDamage() const;
+	virtual DamageData		GetDamageData() const;
 	int						GetLives() const { return m_lives; }
 
 	void					Run();

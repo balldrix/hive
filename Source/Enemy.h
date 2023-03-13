@@ -2,6 +2,7 @@
 
 #include "GameObject.h"
 #include "EnemyData.h"
+#include "DamageData.h"
 #include "State.h"
 
 class Graphics;
@@ -43,7 +44,7 @@ public:
 	float					GetTimer() const { return m_thinkingTimer; }
 	bool					IsHostile() const { return m_isHostile; }
 	EnemyData				GetData() const { return m_enemyData; }
-	int						GetDamage() const;
+	virtual DamageData		GetDamageData() const;
 	InGameHudManager*		GetUiManager() const { return m_hudManager; }
 
 	void					ApplyDamage(GameObject* source, const int& amount);

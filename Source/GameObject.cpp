@@ -185,11 +185,19 @@ bool GameObject::LoadDamageData(const std::string &filename)
 			if(line[0] != '#')
 			{
 				std::string attackName = "";
-				std::string value = "";
+				std::string damageAmount = "";
+				std::string hitStopDuration = "";
 
 				file >> attackName;
-				file >> value;
-				m_damageData[attackName] = std::stoi(value);
+				file >> damageAmount;
+				file >> hitStopDuration;
+
+				DamageData data;
+				data.attackName = attackName;
+				data.amount = std::stoi(damageAmount);
+				data.hitStopDuration = std::stof(hitStopDuration);
+
+				m_damageData.insert({ attackName, data });
 			}
 		}
 	}
@@ -336,7 +344,7 @@ void GameObject::Knockback(const Vector2& direction, const float& force)
 {
 }
 
-int GameObject::GetDamage() const
+DamageData GameObject::GetDamageData() const
 {
-	return 0;
+	return DamageData();
 }
