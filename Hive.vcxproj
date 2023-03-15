@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="Source\DamageData.h" />
     <ClCompile Include="Source\EnemyAttackRunState.cpp" />
+    <ClCompile Include="Source\ImpactFx.cpp" />
     <ClCompile Include="Source\LevelRenderer.cpp" />
     <ClCompile Include="Source\PlayerBlockState.cpp" />
     <ClCompile Include="Source\PlayerSprintingState.cpp" />
@@ -37,6 +38,7 @@
     <ClInclude Include="Source\AudioConstants.h" />
     <ClInclude Include="Source\EnemyAttackRunState.h" />
     <ClInclude Include="Source\GlobalConstants.h" />
+    <ClInclude Include="Source\ImpactFx.h" />
     <ClInclude Include="Source\InGameHudConstants.h" />
     <ClInclude Include="Source\LevelRenderer.h" />
     <ClInclude Include="Source\PlayerConstants.h" />
@@ -197,6 +199,7 @@
     <Image Include="GameData\Sprites\UI\player1_hud_healthbar_frame.png" />
     <Image Include="GameData\Sprites\UI\player1_hud_portrait.png" />
     <Image Include="GameData\Sprites\UI\player_won_screen.png" />
+    <Image Include="GameData\Sprites\vfx.png" />
     <Image Include="GameData\Tilesets\ts_bunker.png" />
   </ItemGroup>
   <ItemGroup>
@@ -214,6 +217,7 @@
     <None Include="GameData\SpriteSheetData\mookSpritesheetData.json" />
     <None Include="GameData\SpriteSheetData\playerSpritesheetData.json" />
     <None Include="GameData\SpriteSheetData\travellingpromptSpritesheetData.json" />
+    <None Include="GameData\SpriteSheetData\vfx.json" />
     <None Include="GameData\Tilemaps\tm_bunker.json" />
   </ItemGroup>
   <ItemGroup>

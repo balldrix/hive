@@ -197,6 +197,7 @@
     <ClCompile Include="Source\LevelRenderer.cpp" />
     <ClCompile Include="Source\EnemyAttackRunState.cpp" />
     <ClCompile Include="Source\DamageData.h" />
+    <ClCompile Include="Source\ImpactFx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -449,6 +450,7 @@
     <ClInclude Include="Source\PlayerConstants.h" />
     <ClInclude Include="Source\AudioConstants.h" />
     <ClInclude Include="Source\EnemyAttackRunState.h" />
+    <ClInclude Include="Source\ImpactFx.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\backgroundTest.png">
@@ -513,6 +515,7 @@
     </Image>
     <Image Include="GameData\Sprites\playerSpritesheet.png" />
     <Image Include="GameData\Tilesets\ts_bunker.png" />
+    <Image Include="GameData\Sprites\vfx.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GameData\HitBoxData\bossHitBoxData.json">
@@ -554,6 +557,7 @@
     <None Include="GameData\SpriteSheetData\playerSpritesheetData.json" />
     <None Include="GameData\Tilemaps\tm_bunker.json" />
     <None Include="GameData\Sounds\scream.ogg" />
+    <None Include="GameData\SpriteSheetData\vfx.json" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="GameData\EnemyData\Damage\bossDamage.txt">

@@ -24,6 +24,7 @@ class TravellingHandler;
 class GameOverScreenController;
 class SoundSource;
 class LevelRenderer;
+class ImpactFx;
 
 class GameplayGameState : public GameState
 {
@@ -48,6 +49,7 @@ public:
 	void								ResetGame();
 
 	void								SetPlayerBoundaryX(float minX, float maxX);
+	void								ToggleHitBoxes();
 
 	Camera*								GetCamera() const { return m_camera; }
 	Player*								GetPlayer() const { return m_player; }
@@ -59,7 +61,6 @@ public:
 	Sprite*								GetBackground() const { return m_backgroundSprite; }
 	GameOverScreenController*			GetGameOverScreenController() const { return m_gameOverScreenController; }
 
-	void								ToggleHitBoxes();
 private:			
 	void								LoadAssets();				
 	void								DeleteAssets();				
@@ -107,4 +108,9 @@ private:
 	float								m_deltaTime;
 	float								m_stopTimer;
 	bool								m_displayHitBoxes;
+
+	Texture*							m_impactFxTexture;
+	Spritesheet*						m_impactFxSpritesheet;
+	Animator*							m_impactFxAnimator;
+	ImpactFx*							m_impactFx;
 };
