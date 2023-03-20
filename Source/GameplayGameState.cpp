@@ -33,7 +33,7 @@
 #include "GlobalConstants.h"
 #include "GameplayConstants.h"
 #include "InGameHudConstants.h"
-#include "ImpactFx.h"
+#include "Particle.h"
 
 using namespace GlobalConstants;
 using namespace GameplayConstants;
@@ -213,7 +213,7 @@ void GameplayGameState::LoadAssets()
 	m_impactFxAnimator = new Animator();
 	m_impactFxAnimator->Init("GameData\\SpriteSheetData\\vfx.json", m_impactFxSpritesheet);
 
-	m_impactFx = new ImpactFx();
+	m_impactFx = new Particle();
 	m_impactFx->Init(m_impactFxSpritesheet, m_impactFxAnimator);
 
 	/*AudioEngine::Instance()->AddSoundSource(m_musicSoundSource);
@@ -445,6 +445,8 @@ void GameplayGameState::Tick(float deltaTime)
 
 	if(m_player->IsDead() && m_player->GetLives() > 0)
 		m_player->Respawn();
+
+	m_impactFx->Update(deltaTime);
 }
 
 void GameplayGameState::ProcessCollisions()
@@ -468,10 +470,13 @@ void GameplayGameState::ProcessCollisions()
 				enemy->GetHitBoxManager()->GetHurtBox()))
 			{
 				auto damageData = m_player->GetDamageData();
+				auto hitPosition = enemy->GetPosition() + (enemy->GetPosition() - m_player->GetPosition());
+				hitPosition.y += enemy->GetSprite()->GetHeight() * 0.5f;
 
 				enemy->ApplyDamage(m_player, damageData.amount);
 				enemy->ShowEnemyHud();
 				m_stopTimer = damageData.hitStopDuration;
+				m_impactFx->Emit(m_player->GetPosition() + hitPosition);
 				return;
 			}
 		}
@@ -487,6 +492,9 @@ void GameplayGameState::ProcessCollisions()
 				auto enemyVelocity = enemy->GetCurrentVelocity();
 				enemyVelocity.Normalize();
 
+				auto hitPosition = enemy->GetPosition();// +(enemy->GetPosition() - m_player->GetPosition());
+				//hitPosition.y += enemy->GetSprite()->GetHeight() * 0.5f;
+
 				m_player->ApplyDamage(enemy, damageData.amount);
 				m_player->SetPositionX(m_player->GetPositionX() + enemyVelocity.x);
 				
@@ -494,8 +502,8 @@ void GameplayGameState::ProcessCollisions()
 					m_player->FlipHorizontally(m_player->GetFacingDirection() != Vector3::Left);
 
 				enemy->ShowEnemyHud();
-				m_stopTimer = damageData.hitStopDuration;
-
+				m_stopTimer = damageData.hitStopDuration;m_impactFx->Emit(enemy->GetPosition());
+				m_impactFx->Emit(hitPosition);
 				
 				return;
 			}
@@ -560,6 +568,7 @@ void GameplayGameState::Render()
 	m_NPCManager->Render(m_graphics);
 	m_hudManager->Render(m_graphics);
 	m_gameOverScreenController->Render(m_graphics);
+	m_impactFx->Render(m_graphics);
 }
 
 void GameplayGameState::ReleaseAll()
