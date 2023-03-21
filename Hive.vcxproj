@@ -21,7 +21,7 @@
   <ItemGroup>
     <ClCompile Include="Source\DamageData.h" />
     <ClCompile Include="Source\EnemyAttackRunState.cpp" />
-    <ClCompile Include="Source\Particle.cpp" />
+    <ClCompile Include="Source\ImpactFx.cpp" />
     <ClCompile Include="Source\LevelRenderer.cpp" />
     <ClCompile Include="Source\PlayerBlockState.cpp" />
     <ClCompile Include="Source\PlayerSprintingState.cpp" />
@@ -38,7 +38,7 @@
     <ClInclude Include="Source\AudioConstants.h" />
     <ClInclude Include="Source\EnemyAttackRunState.h" />
     <ClInclude Include="Source\GlobalConstants.h" />
-    <ClInclude Include="Source\Particle.h" />
+    <ClInclude Include="Source\ImpactFX.h" />
     <ClInclude Include="Source\InGameHudConstants.h" />
     <ClInclude Include="Source\LevelRenderer.h" />
     <ClInclude Include="Source\PlayerConstants.h" />

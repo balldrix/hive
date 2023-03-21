@@ -6,17 +6,17 @@ class Spritesheet;
 class Animator;
 class Graphics;
 
-class Particle
+class ImpactFx
 {
 public:
-	Particle();
-	~Particle();
+	ImpactFx();
+	~ImpactFx();
 
 	void Init(Spritesheet* spritesheet, Animator* animator);
 	void Render(Graphics* graphics);
 	void Update(float deltaTime);
 
-	void Emit(const Vector2& position);
+	void DisplayFx(const Vector2& position);
 
 private:
 

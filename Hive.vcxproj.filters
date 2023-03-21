@@ -197,7 +197,7 @@
     <ClCompile Include="Source\LevelRenderer.cpp" />
     <ClCompile Include="Source\EnemyAttackRunState.cpp" />
     <ClCompile Include="Source\DamageData.h" />
-    <ClCompile Include="Source\Particle.cpp" />
+    <ClCompile Include="Source\ImpactFx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -450,7 +450,7 @@
     <ClInclude Include="Source\PlayerConstants.h" />
     <ClInclude Include="Source\AudioConstants.h" />
     <ClInclude Include="Source\EnemyAttackRunState.h" />
-    <ClInclude Include="Source\Particle.h" />
+    <ClInclude Include="Source\ImpactFX.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\backgroundTest.png">

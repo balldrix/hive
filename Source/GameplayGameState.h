@@ -24,7 +24,7 @@ class TravellingHandler;
 class GameOverScreenController;
 class SoundSource;
 class LevelRenderer;
-class Particle;
+class ImpactFx;
 
 class GameplayGameState : public GameState
 {
@@ -112,5 +112,5 @@ private:
 	Texture*							m_impactFxTexture;
 	Spritesheet*						m_impactFxSpritesheet;
 	Animator*							m_impactFxAnimator;
-	Particle*							m_impactFx;
+	ImpactFx*							m_impactFx;
 };
