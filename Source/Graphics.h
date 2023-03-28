@@ -2,6 +2,8 @@
 
 #include "pch.h"
 
+using VertexType = DirectX::VertexPositionColor;
+
 class Graphics
 {
 public:
@@ -18,7 +20,11 @@ public:
 	void CreateDevice();
 	void CreateResources();
 							
-	void BeginScene();								
+	void Begin2DScene();								
+	void Begin3DScene();
+
+	void End2DScene();
+	void End3DScene();
 	
 	void PresentBackBuffer();
 
@@ -28,6 +34,7 @@ public:
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> GetDeviceContext() const { return m_d3dDeviceContext; }
 	Microsoft::WRL::ComPtr<IDXGISwapChain1> GetSwapChain() const { return m_swapChain; }
 	std::shared_ptr<SpriteBatch> GetSpriteBatch() const { return m_spriteBatch; }
+	std::shared_ptr<DirectX::PrimitiveBatch<VertexType>> GetPrimitiveBatch() const { return m_primitiveBatch; }
 
 	int GetWidth()	const { return m_backBufferWidth; }
 	int GetHeight()	const { return m_backbufferHeight; }
@@ -40,20 +47,26 @@ public:
 	void SetHeight(int height);
 
 private:
-	HWND											m_window;				
-	HINSTANCE										m_hInstance;		
+	HWND m_window;				
+	HINSTANCE m_hInstance;		
 	
-	D3D_FEATURE_LEVEL                               m_featureLevel;
-	Microsoft::WRL::ComPtr<ID3D11Device1>			m_d3dDevice;
-	Microsoft::WRL::ComPtr<ID3D11DeviceContext>		m_d3dDeviceContext;
+	D3D_FEATURE_LEVEL m_featureLevel;
+	Microsoft::WRL::ComPtr<ID3D11Device1> m_d3dDevice;
+	Microsoft::WRL::ComPtr<ID3D11DeviceContext> m_d3dDeviceContext;
 	
-	Microsoft::WRL::ComPtr<IDXGISwapChain1>			m_swapChain;
-	Microsoft::WRL::ComPtr<ID3D11RenderTargetView>	m_renderTargetView;
-	Microsoft::WRL::ComPtr<ID3D11Texture2D>			m_backbuffer;
-	Microsoft::WRL::ComPtr<ID3D11SamplerState>		m_samplerState;
+	Microsoft::WRL::ComPtr<IDXGISwapChain1> m_swapChain;
+	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> m_renderTargetView;
+	Microsoft::WRL::ComPtr<ID3D11Texture2D> m_backbuffer;
+	Microsoft::WRL::ComPtr<ID3D11SamplerState> m_samplerState;
+	
+	std::unique_ptr<DirectX::CommonStates> m_commonStates;
+	std::unique_ptr<DirectX::BasicEffect> m_effect;
+	Microsoft::WRL::ComPtr<ID3D11InputLayout> m_inputLayout;
 
-	std::shared_ptr<SpriteBatch>					m_spriteBatch;
-	bool											m_fullscreen;		
-	int												m_backBufferWidth;		
-	int												m_backbufferHeight;		
+	std::shared_ptr<SpriteBatch> m_spriteBatch;
+	std::shared_ptr<DirectX::PrimitiveBatch<VertexType>> m_primitiveBatch;
+	
+	bool m_fullscreen;		
+	int m_backBufferWidth;		
+	int m_backbufferHeight;		
 };

@@ -100,11 +100,19 @@ void GameStateManager::ProcessCollisions()
 	}
 }
 
-void GameStateManager::Render()
+void GameStateManager::RenderSprites()
 {
 	if(m_currentState != nullptr)
 	{
-		m_currentState->Render();
+		m_currentState->RenderSprites();
+	}
+}
+
+void GameStateManager::Render3D()
+{
+	if(m_currentState != nullptr)
+	{
+		m_currentState->Render3D();
 	}
 }
 

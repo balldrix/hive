@@ -94,8 +94,14 @@ void Game::ProcessCollisions()
 
 void Game::Render()
 {
-	m_graphics->BeginScene();
-	m_gameStateManager->Render();
+	m_graphics->Begin2DScene();
+	m_gameStateManager->RenderSprites();
+	m_graphics->End2DScene();
+	
+	m_graphics->Begin3DScene();
+	m_gameStateManager->Render3D();
+	m_graphics->End3DScene();
+
 	m_graphics->PresentBackBuffer();
 }
 

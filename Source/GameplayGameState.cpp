@@ -558,7 +558,7 @@ void GameplayGameState::ProcessCollisions()
 	}
 }
 
-void GameplayGameState::Render()
+void GameplayGameState::RenderSprites()
 {
 	m_levelRenderer->Render(m_graphics);
 	m_player->Render(m_graphics);
@@ -566,6 +566,16 @@ void GameplayGameState::Render()
 	m_hudManager->Render(m_graphics);
 	m_gameOverScreenController->Render(m_graphics);
 	m_impactFx->Render(m_graphics);
+}
+
+void GameplayGameState::Render3D()
+{
+	VertexPositionColor v1(Vector3(-0.5f, -0.5f, 0.0f), Colors::DarkRed);
+	VertexPositionColor v2(Vector3(0.5f, -0.5f, 0.0f), Colors::DarkRed);
+	VertexPositionColor v3(Vector3(0.5f, 0.5f, 0.0f), Colors::DarkRed);
+	VertexPositionColor v4(Vector3(-0.5f, 0.5f, 0.0f), Colors::DarkRed);
+
+	m_graphics->GetPrimitiveBatch()->DrawQuad(v1, v2, v3, v4);;
 }
 
 void GameplayGameState::ReleaseAll()

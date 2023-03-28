@@ -21,6 +21,14 @@
 #include <dxgi1_2.h>
 #include <DirectXMath.h>
 #include <DirectXColors.h>
+#include <DirectXTK/SimpleMath.h>
+#include <DirectXTK/SpriteBatch.h>
+#include <DirectXTK/SpriteFont.h>
+#include <directXTK/CommonStates.h>
+#include <directxtk/Effects.h>
+#include <directXTK/PrimitiveBatch.h>
+#include <directXTK/VertexTypes.h>
+#include <directxtk/DirectXHelpers.h>
 
 #include <cstdint>
 #include <cmath>
@@ -36,12 +44,11 @@
 #include <random>
 #include <memory>
 #include <stdexcept>
-#include <DirectXTK/SimpleMath.h>
-#include <DirectXTK/SpriteBatch.h>
-#include <DirectXTK/SpriteFont.h>
+
 #include <nlohmann/json.hpp>
 
 using namespace DirectX;
+using namespace DirectX::DX11;
 using namespace SimpleMath;
 using json = nlohmann::json;
 

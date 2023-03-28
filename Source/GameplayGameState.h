@@ -43,7 +43,8 @@ public:
 	void								ProcessInput();				
 	void								Update(float deltaTime);	
 	void								ProcessCollisions();		
-	void								Render();					
+	void								RenderSprites();					
+	void								Render3D();
 
 	void								ReleaseAll();
 	void								ResetGame();
