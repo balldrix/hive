@@ -22,8 +22,7 @@ public:
 	void							ProcessInput();								
 	void							Update(float deltaTime);					
 	void							ProcessCollisions();						
-	void							RenderSprites();									
-	void							Render3D();
+	void							Render();									
 
 	void							ReleaseAll();								
 

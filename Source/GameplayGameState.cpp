@@ -34,6 +34,7 @@
 #include "GameplayConstants.h"
 #include "InGameHudConstants.h"
 #include "ImpactFx.h"
+#include "ParticleSystem.h"
 
 using namespace GlobalConstants;
 using namespace GameplayConstants;
@@ -74,6 +75,7 @@ GameplayGameState::GameplayGameState() :
 	m_impactFxTexture(nullptr),
 	m_impactFxAnimator(nullptr),
 	m_impactFx(nullptr),
+	m_particleSystem(nullptr),
 	GameState(L"GAMEPLAY")
 {}
 
@@ -216,6 +218,13 @@ void GameplayGameState::LoadAssets()
 	m_impactFx = new ImpactFx();
 	m_impactFx->Init(m_impactFxSpritesheet, m_impactFxAnimator);
 
+	m_particleSystem = new ParticleSystem();
+	m_particleSystem->Init(m_graphics);
+
+	m_particleData.ColorBegin = Colors::Red;
+	m_particleData.ColorEnd = Colors::DarkRed;
+	m_particleData.LifeTime = 5.0f;
+
 	/*AudioEngine::Instance()->AddSoundSource(m_musicSoundSource);
 
 	const std::wstring musicTitle = L"travelling_master";
@@ -226,6 +235,9 @@ void GameplayGameState::LoadAssets()
 
 void GameplayGameState::DeleteAssets()
 {
+	delete m_particleSystem;
+	m_particleSystem = nullptr;
+
 	delete m_impactFx;
 	m_impactFx = nullptr;
 
@@ -447,6 +459,7 @@ void GameplayGameState::Tick(float deltaTime)
 		m_player->Respawn();
 
 	m_impactFx->Update(deltaTime);
+	m_particleSystem->Update(deltaTime);
 }
 
 void GameplayGameState::ProcessCollisions()
@@ -501,6 +514,14 @@ void GameplayGameState::ProcessCollisions()
 				enemy->ShowEnemyHud();
 				m_stopTimer = damageData.hitStopDuration;m_impactFx->DisplayFx(enemy->GetPosition());
 				m_impactFx->DisplayFx(Vector2(playerGroundPositionX, playerGroundPositionY - spriteHeight * 0.5f));
+
+				m_particleData.Velocity = (enemy->GetCurrentVelocity() - Vector2(0.0f, 1.0f)) * enemy->GetMovementSpeed() * 0.1f;
+				m_particleData.Position = m_impactFx->Position();
+
+				for(int i = 0; i < 200; i++)
+				{
+					m_particleSystem->Emit(m_particleData);
+				}
 				
 				return;
 			}
@@ -558,7 +579,7 @@ void GameplayGameState::ProcessCollisions()
 	}
 }
 
-void GameplayGameState::RenderSprites()
+void GameplayGameState::Render()
 {
 	m_levelRenderer->Render(m_graphics);
 	m_player->Render(m_graphics);
@@ -566,16 +587,7 @@ void GameplayGameState::RenderSprites()
 	m_hudManager->Render(m_graphics);
 	m_gameOverScreenController->Render(m_graphics);
 	m_impactFx->Render(m_graphics);
-}
-
-void GameplayGameState::Render3D()
-{
-	VertexPositionColor v1(Vector3(-0.5f, -0.5f, 0.0f), Colors::DarkRed);
-	VertexPositionColor v2(Vector3(0.5f, -0.5f, 0.0f), Colors::DarkRed);
-	VertexPositionColor v3(Vector3(0.5f, 0.5f, 0.0f), Colors::DarkRed);
-	VertexPositionColor v4(Vector3(-0.5f, 0.5f, 0.0f), Colors::DarkRed);
-
-	m_graphics->GetPrimitiveBatch()->DrawQuad(v1, v2, v3, v4);;
+	m_particleSystem->Render(m_graphics); 
 }
 
 void GameplayGameState::ReleaseAll()

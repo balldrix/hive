@@ -148,7 +148,6 @@ void Graphics::CreateResources()
 		swapChainDesc.SampleDesc.Quality = 0;
 		swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
 		swapChainDesc.BufferCount = backBufferCount;
-		//swapChainDesc.AlphaMode = DXGI_ALPHA_MODE_PREMULTIPLIED;
 
 		DXGI_SWAP_CHAIN_FULLSCREEN_DESC fsSwapChainDesc = {};
 		fsSwapChainDesc.Windowed = TRUE;
@@ -188,18 +187,9 @@ void Graphics::CreateResources()
 
 	if(m_d3dDeviceContext)
 		m_spriteBatch = std::make_shared<SpriteBatch>(m_d3dDeviceContext.Get());
-
-	m_commonStates = std::make_unique<CommonStates>(m_d3dDevice.Get());
-	m_effect = std::make_unique<BasicEffect>(m_d3dDevice.Get());
-	m_effect->SetVertexColorEnabled(true);
-
-	DX::ThrowIfFailed(CreateInputLayoutFromEffect<VertexType>(m_d3dDevice.Get(), m_effect.get(),
-		m_inputLayout.ReleaseAndGetAddressOf()));
-	
-	m_primitiveBatch = std::make_shared<PrimitiveBatch<VertexType>>(m_d3dDeviceContext.Get());
 }
 
-void Graphics::Begin2DScene()
+void Graphics::Begin()
 {
 	m_d3dDeviceContext->ClearRenderTargetView(m_renderTargetView.Get(), BackColor);
 	m_d3dDeviceContext->OMSetRenderTargets(1, m_renderTargetView.GetAddressOf(), nullptr);	
@@ -210,31 +200,9 @@ void Graphics::Begin2DScene()
 	m_spriteBatch->Begin(SpriteSortMode_FrontToBack, NULL, m_samplerState.Get());
 }
 
-void Graphics::Begin3DScene()
-{
-	m_effect->Apply(m_d3dDeviceContext.Get());
-
-	m_d3dDeviceContext->IASetInputLayout(m_inputLayout.Get());
-
-	m_primitiveBatch->Begin();
-
-	m_d3dDeviceContext->OMSetBlendState(m_commonStates->Opaque(), nullptr, 0xFFFFFFFF);
-	m_d3dDeviceContext->OMSetDepthStencilState(m_commonStates->DepthNone(), 0);
-	m_d3dDeviceContext->RSSetState(m_commonStates->CullNone());
-}
-
-void Graphics::End2DScene()
-{
-	m_spriteBatch->End();
-}
-
-void Graphics::End3DScene() 
-{
-	m_primitiveBatch->End();
-}
-
 void Graphics::PresentBackBuffer()
 {
+	m_spriteBatch->End();
 	HRESULT hr = m_swapChain->Present(1, 0);
 
 	// If the device was reset we must completely reinitialize the renderer.
@@ -250,10 +218,6 @@ void Graphics::PresentBackBuffer()
 
 void Graphics::OnDeviceLost()
 {
-	m_commonStates.reset();
-	m_effect.reset();
-	m_primitiveBatch.reset();
-	m_inputLayout.Reset();
 	m_renderTargetView.Reset();
 	m_swapChain.Reset();
 	m_d3dDeviceContext.Reset();

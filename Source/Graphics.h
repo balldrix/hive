@@ -20,11 +20,7 @@ public:
 	void CreateDevice();
 	void CreateResources();
 							
-	void Begin2DScene();								
-	void Begin3DScene();
-
-	void End2DScene();
-	void End3DScene();
+	void Begin();
 	
 	void PresentBackBuffer();
 
@@ -34,7 +30,6 @@ public:
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> GetDeviceContext() const { return m_d3dDeviceContext; }
 	Microsoft::WRL::ComPtr<IDXGISwapChain1> GetSwapChain() const { return m_swapChain; }
 	std::shared_ptr<SpriteBatch> GetSpriteBatch() const { return m_spriteBatch; }
-	std::shared_ptr<DirectX::PrimitiveBatch<VertexType>> GetPrimitiveBatch() const { return m_primitiveBatch; }
 
 	int GetWidth()	const { return m_backBufferWidth; }
 	int GetHeight()	const { return m_backbufferHeight; }
@@ -58,13 +53,8 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> m_renderTargetView;
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> m_backbuffer;
 	Microsoft::WRL::ComPtr<ID3D11SamplerState> m_samplerState;
-	
-	std::unique_ptr<DirectX::CommonStates> m_commonStates;
-	std::unique_ptr<DirectX::BasicEffect> m_effect;
-	Microsoft::WRL::ComPtr<ID3D11InputLayout> m_inputLayout;
 
 	std::shared_ptr<SpriteBatch> m_spriteBatch;
-	std::shared_ptr<DirectX::PrimitiveBatch<VertexType>> m_primitiveBatch;
 	
 	bool m_fullscreen;		
 	int m_backBufferWidth;		

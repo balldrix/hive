@@ -24,6 +24,7 @@
     <ClCompile Include="Source\ImpactFx.cpp" />
     <ClCompile Include="Source\LevelRenderer.cpp" />
     <ClCompile Include="Source\ParticleSystem.cpp" />
+    <ClCompile Include="Source\PixelTexture.cpp" />
     <ClCompile Include="Source\PlayerBlockState.cpp" />
     <ClCompile Include="Source\PlayerSprintingState.cpp" />
     <ClCompile Include="Source\Sound.cpp" />
@@ -43,6 +44,7 @@
     <ClInclude Include="Source\InGameHudConstants.h" />
     <ClInclude Include="Source\LevelRenderer.h" />
     <ClInclude Include="Source\ParticleSystem.h" />
+    <ClInclude Include="Source\PixelTexture.h" />
     <ClInclude Include="Source\PlayerConstants.h" />
     <ClInclude Include="Source\PlayerBlockState.h" />
     <ClInclude Include="Source\PlayerSprintingState.h" />
@@ -369,7 +371,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

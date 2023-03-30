@@ -4,6 +4,7 @@
 #include "GameState.h"
 #include "AABB.h"
 #include "TilemapData.h"
+#include "ParticleSystem.h"
 
 class GameStateManager;
 class Graphics;
@@ -31,87 +32,88 @@ class GameplayGameState : public GameState
 public:
 	GameplayGameState();
 	GameplayGameState(GameStateManager* gameStateManager);
-	virtual								~GameplayGameState();
+	virtual ~GameplayGameState();
 
-	void								CheckForEncounter();
-	void								Tick(float deltaTime);
-	float								GetDeltaTime() const { return m_deltaTime; }
+	void CheckForEncounter();
+	void Tick(float deltaTime);
+	float GetDeltaTime() const { return m_deltaTime; }
 
-	void								OnEntry();					
-	void								OnExit();					
-	
-	void								ProcessInput();				
-	void								Update(float deltaTime);	
-	void								ProcessCollisions();		
-	void								RenderSprites();					
-	void								Render3D();
+	void OnEntry();
+	void OnExit();
 
-	void								ReleaseAll();
-	void								ResetGame();
+	void ProcessInput();
+	void Update(float deltaTime);
+	void ProcessCollisions();
+	void Render();
 
-	void								SetPlayerBoundaryX(float minX, float maxX);
-	void								ToggleHitBoxes();
+	void ReleaseAll();
+	void ResetGame();
 
-	Camera*								GetCamera() const { return m_camera; }
-	Player*								GetPlayer() const { return m_player; }
-	InGameHudManager*					GetHudManager() const { return m_hudManager; }
-	TravellingHandler*					GetTravellingHandler() const { return m_travellingHandler; }
-	NPCManager*							GetNPCManager() const { return m_NPCManager; }
-	EncounterHandler*					GetEncounterHandler() const { return m_encounterHandler; }
-	StateMachine<GameplayGameState>*	GetSceneStateMachine() const { return m_sceneStateMachine; }
-	Sprite*								GetBackground() const { return m_backgroundSprite; }
-	GameOverScreenController*			GetGameOverScreenController() const { return m_gameOverScreenController; }
+	void SetPlayerBoundaryX(float minX, float maxX);
+	void ToggleHitBoxes();
 
-private:			
-	void								LoadAssets();				
-	void								DeleteAssets();				
+	Camera* GetCamera() const { return m_camera; }
+	Player* GetPlayer() const { return m_player; }
+	InGameHudManager* GetHudManager() const { return m_hudManager; }
+	TravellingHandler* GetTravellingHandler() const { return m_travellingHandler; }
+	NPCManager* GetNPCManager() const { return m_NPCManager; }
+	EncounterHandler* GetEncounterHandler() const { return m_encounterHandler; }
+	StateMachine<GameplayGameState>* GetSceneStateMachine() const { return m_sceneStateMachine; }
+	Sprite* GetBackground() const { return m_backgroundSprite; }
+	GameOverScreenController* GetGameOverScreenController() const { return m_gameOverScreenController; }
 
-	GameStateManager*					m_gameStateManager;			
-	Graphics*							m_graphics;					
-	Input*								m_input;
-	
-	Camera*								m_camera;					
-	ControlSystem*						m_controlSystem;			
+private:
+	void LoadAssets();
+	void DeleteAssets();
 
-	Texture*							m_playerTexture;		
-	Texture*							m_hitBoxTexture;			
-	Texture*							m_standardShadowTexture;			
-	Texture*							m_backgroundTexture;		
+	GameStateManager* m_gameStateManager;
+	Graphics* m_graphics;
+	Input* m_input;
 
-	Spritesheet*						m_playerSprite;				
-	Sprite*								m_playerShadowSprite;	
-	Sprite*								m_hitBoxSprite;				
-	Sprite*								m_backgroundSprite;			
-	
-	Animator*							m_playerAnimator;			
+	Camera* m_camera;
+	ControlSystem* m_controlSystem;
 
-	HitBoxManager*						m_playerHitBoxManager;
+	Texture* m_playerTexture;
+	Texture* m_hitBoxTexture;
+	Texture* m_standardShadowTexture;
+	Texture* m_backgroundTexture;
 
-	NPCManager*							m_NPCManager;				
+	Spritesheet* m_playerSprite;
+	Sprite* m_playerShadowSprite;
+	Sprite* m_hitBoxSprite;
+	Sprite* m_backgroundSprite;
 
-	Player*								m_player;					
+	Animator* m_playerAnimator;
 
-	InGameHudManager*					m_hudManager;
-	StateMachine<GameplayGameState>*	m_sceneStateMachine;
-	EncounterHandler*					m_encounterHandler;
-	TravellingHandler*					m_travellingHandler;
-	LevelRenderer*						m_levelRenderer;
+	HitBoxManager* m_playerHitBoxManager;
 
-	GameOverScreenController*			m_gameOverScreenController;
+	NPCManager* m_NPCManager;
 
-	SoundSource*						m_musicSoundSource;
+	Player* m_player;
 
-	bool								m_canAttack;				
-	bool								m_running;					
+	InGameHudManager* m_hudManager;
+	StateMachine<GameplayGameState>* m_sceneStateMachine;
+	EncounterHandler* m_encounterHandler;
+	TravellingHandler* m_travellingHandler;
+	LevelRenderer* m_levelRenderer;
 
-	AABB								m_playerBoundary;
+	GameOverScreenController* m_gameOverScreenController;
 
-	float								m_deltaTime;
-	float								m_stopTimer;
-	bool								m_displayHitBoxes;
+	SoundSource* m_musicSoundSource;
 
-	Texture*							m_impactFxTexture;
-	Spritesheet*						m_impactFxSpritesheet;
-	Animator*							m_impactFxAnimator;
-	ImpactFx*							m_impactFx;
+	bool m_canAttack;
+	bool m_running;
+
+	AABB m_playerBoundary;
+
+	float m_deltaTime;
+	float m_stopTimer;
+	bool m_displayHitBoxes;
+
+	Texture* m_impactFxTexture;
+	Spritesheet* m_impactFxSpritesheet;
+	Animator* m_impactFxAnimator;
+	ImpactFx* m_impactFx;
+	ParticleSystem* m_particleSystem;
+	ParticleData m_particleData;
 };

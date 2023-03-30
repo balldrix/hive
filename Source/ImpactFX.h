@@ -17,6 +17,7 @@ public:
 	void Update(float deltaTime);
 
 	void DisplayFx(const Vector2& position);
+	Vector2 Position() const { return m_position; }
 
 private:
 

@@ -3,6 +3,7 @@
 #include "pch.h"
 
 class Graphics;
+class PixelTexture;
 
 const unsigned int MAX_PARTICLES = 1000;
 
@@ -10,26 +11,27 @@ struct ParticleData
 {
 	Vector2 Position;
 	Vector2 Velocity;
-	Vector2 VelocityVariation;
+	Vector2 VelocityVariation = Vector2::One;
 	Color ColorBegin;
 	Color ColorEnd;
-	float SizeBegin;
-	float SizeEnd;
-	float SizeVariation;
+	float SizeBegin = 1.0f;
+	float SizeEnd = 1.0f;
+	float SizeVariation = 1.0f;
 	float LifeTime = 1.0f;
 };
 
-class ParticlaSystem
+class ParticleSystem
 {
 public:
-	ParticlaSystem();
+	ParticleSystem();
+	~ParticleSystem();
 	
+	void Init(Graphics* graphics);
+
 	void Update(float deltaTime);
 	void Render(Graphics* graphics);
 
 	void Emit(const ParticleData& particleData);
-
-
 private:
 	struct Particle
 	{
@@ -47,7 +49,9 @@ private:
 		bool Active = false;
 	};
 
-	//int m_quadVertexArray;
+	void DeleteAll();
+
+	PixelTexture* m_texture;
 	std::vector<Particle> m_particlePool;
 	unsigned int m_poolIndex = 0;
 };

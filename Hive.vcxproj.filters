@@ -199,6 +199,7 @@
     <ClCompile Include="Source\DamageData.h" />
     <ClCompile Include="Source\ImpactFx.cpp" />
     <ClCompile Include="Source\ParticleSystem.cpp" />
+    <ClCompile Include="Source\PixelTexture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -453,6 +454,7 @@
     <ClInclude Include="Source\EnemyAttackRunState.h" />
     <ClInclude Include="Source\ImpactFX.h" />
     <ClInclude Include="Source\ParticleSystem.h" />
+    <ClInclude Include="Source\PixelTexture.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\backgroundTest.png">
