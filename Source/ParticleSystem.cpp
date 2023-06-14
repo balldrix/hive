@@ -47,7 +47,7 @@ void ParticleSystem::Render(Graphics* graphics)
 		if(particle.LifeRemaining <= 0.0f)
 			continue;
 
-		float life = particle.LifeRemaining / particle.LifeRemaining;
+		float life = particle.LifeRemaining / particle.LifeTime;
 		Color colour = Color::Lerp(particle.ColorBegin, particle.ColorEnd, life);
 		colour.w *= life;
 		
@@ -79,8 +79,11 @@ void ParticleSystem::Emit(const ParticleData& particleData)
 
 	// velocity
 	particle.Velocity = particleData.Velocity;
-	particle.Velocity.x += particleData.VelocityVariation.x * (Randomiser::Instance()->GetRandNum(-5.0f, 5.0f));
-	particle.Velocity.y += particleData.VelocityVariation.y * (Randomiser::Instance()->GetRandNum(-5.0f, 5.0f));
+	particle.Velocity.x *= (Randomiser::Instance()->GetRandNum(-5.0f, 5.0f));
+	particle.Velocity.y *= (Randomiser::Instance()->GetRandNum(-5.0f, 5.0f));
+	//particle.Velocity.Normalize();
+
+	particle.Velocity *= particleData.VelocityVariation * Randomiser::Instance()->GetRandNum(1.0f, 5.0f);
 
 	// color
 

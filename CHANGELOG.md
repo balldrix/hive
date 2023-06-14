@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Block move.
 - Player is faster and more responsive.
 - Tileset and tilemap for background.
+- Blood Particle FX
+- Impact Sprite FX
+- HitStops
 
 ### Changed
 - Player control processed directly in gameplay game state without using control system buffer.

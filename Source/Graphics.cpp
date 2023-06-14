@@ -185,6 +185,27 @@ void Graphics::CreateResources()
 
 	DX::ThrowIfFailed(m_d3dDevice->CreateSamplerState(&sd, &m_samplerState));
 
+	// Clear the blend state description.
+	D3D11_BLEND_DESC bsd;
+	ZeroMemory(&bsd, sizeof(D3D11_BLEND_DESC));
+
+	// Create an alpha enabled blend state description.
+	bsd.RenderTarget[0].BlendEnable = TRUE;
+	//bsd.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;
+	bsd.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+	bsd.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+	bsd.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+	bsd.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+	bsd.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+	bsd.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+	bsd.RenderTarget[0].RenderTargetWriteMask = 0x0f;
+
+	// Create the blend state using the description.
+	DX::ThrowIfFailed(m_d3dDevice->CreateBlendState(&bsd, &m_alphaEnabledBlendState));
+
+	bsd.RenderTarget[0].BlendEnable = TRUE;
+	DX::ThrowIfFailed(m_d3dDevice->CreateBlendState(&bsd, &m_alphaDisabledBlendState));
+
 	if(m_d3dDeviceContext)
 		m_spriteBatch = std::make_shared<SpriteBatch>(m_d3dDeviceContext.Get());
 }
@@ -197,11 +218,15 @@ void Graphics::Begin()
 	CD3D11_VIEWPORT viewport(0.0f, 0.0f, static_cast<float>(m_backBufferWidth), static_cast<float>(m_backbufferHeight));
 	m_d3dDeviceContext->RSSetViewports(1, &viewport);
 	
-	m_spriteBatch->Begin(SpriteSortMode_FrontToBack, NULL, m_samplerState.Get());
+	m_spriteBatch->Begin(SpriteSortMode_FrontToBack, m_alphaEnabledBlendState.Get(), m_samplerState.Get());
+
+	TurnOnAlphaBlending();
 }
 
 void Graphics::PresentBackBuffer()
 {
+	TurnOffAlphaBlending();
+
 	m_spriteBatch->End();
 	HRESULT hr = m_swapChain->Present(1, 0);
 
@@ -218,6 +243,8 @@ void Graphics::PresentBackBuffer()
 
 void Graphics::OnDeviceLost()
 {
+	m_alphaDisabledBlendState.Reset();
+	m_alphaEnabledBlendState.Reset();
 	m_renderTargetView.Reset();
 	m_swapChain.Reset();
 	m_d3dDeviceContext.Reset();
@@ -236,4 +263,32 @@ void Graphics::SetWidth(int width)
 void Graphics::SetHeight(int height)
 {
 	m_backbufferHeight = height;
+}
+
+void Graphics::TurnOnAlphaBlending()
+{
+	float blendFactor[4];
+
+	// Setup the blend factor.
+	blendFactor[0] = 0.0f;
+	blendFactor[1] = 0.0f;
+	blendFactor[2] = 0.0f;
+	blendFactor[3] = 0.0f;
+
+	// Turn on the alpha blending.
+	m_d3dDeviceContext->OMSetBlendState(m_alphaEnabledBlendState.Get(), blendFactor, 0xffffffff);
+}
+
+void Graphics::TurnOffAlphaBlending()
+{
+	float blendFactor[4];
+
+	// Setup the blend factor.
+	blendFactor[0] = 0.0f;
+	blendFactor[1] = 0.0f;
+	blendFactor[2] = 0.0f;
+	blendFactor[3] = 0.0f;
+
+	// Turn on the alpha blending.
+	m_d3dDeviceContext->OMSetBlendState(m_alphaDisabledBlendState.Get(), blendFactor, 0xffffffff);
 }

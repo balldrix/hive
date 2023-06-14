@@ -42,6 +42,9 @@ public:
 	void SetHeight(int height);
 
 private:
+	void TurnOnAlphaBlending();
+	void TurnOffAlphaBlending();
+
 	HWND m_window;				
 	HINSTANCE m_hInstance;		
 	
@@ -53,6 +56,8 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> m_renderTargetView;
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> m_backbuffer;
 	Microsoft::WRL::ComPtr<ID3D11SamplerState> m_samplerState;
+	Microsoft::WRL::ComPtr<ID3D11BlendState> m_alphaEnabledBlendState;
+	Microsoft::WRL::ComPtr<ID3D11BlendState> m_alphaDisabledBlendState;
 
 	std::shared_ptr<SpriteBatch> m_spriteBatch;
 	

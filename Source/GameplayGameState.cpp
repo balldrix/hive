@@ -223,7 +223,7 @@ void GameplayGameState::LoadAssets()
 
 	m_particleData.ColorBegin = Colors::Red;
 	m_particleData.ColorEnd = Colors::DarkRed;
-	m_particleData.LifeTime = 5.0f;
+	m_particleData.LifeTime = 1.0f;
 
 	/*AudioEngine::Instance()->AddSoundSource(m_musicSoundSource);
 
