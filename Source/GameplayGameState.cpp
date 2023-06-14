@@ -35,6 +35,7 @@
 #include "InGameHudConstants.h"
 #include "ImpactFx.h"
 #include "ParticleSystem.h"
+#include "Randomiser.h"
 
 using namespace GlobalConstants;
 using namespace GameplayConstants;
@@ -515,11 +516,16 @@ void GameplayGameState::ProcessCollisions()
 				m_stopTimer = damageData.hitStopDuration;m_impactFx->DisplayFx(enemy->GetPosition());
 				m_impactFx->DisplayFx(Vector2(playerGroundPositionX, playerGroundPositionY - spriteHeight * 0.5f));
 
-				m_particleData.Velocity = (enemy->GetCurrentVelocity() - Vector2(0.0f, 1.0f)) * enemy->GetMovementSpeed() * 0.1f;
+				m_particleData.Velocity = enemy->GetCurrentVelocity();
 				m_particleData.Position = m_impactFx->Position();
 
 				for(int i = 0; i < 200; i++)
 				{
+					m_particleData.VelocityVariation.x = (Randomiser::Instance()->GetRandNum(1.0f, 5.0f));
+					m_particleData.VelocityVariation.y = (Randomiser::Instance()->GetRandNum(-10.0f, 1.0f));
+					m_particleData.VelocityVariation.Normalize();
+					m_particleData.VelocityVariation *= Randomiser::Instance()->GetRandNum(1.0f, 40.0f);
+
 					m_particleSystem->Emit(m_particleData);
 				}
 				

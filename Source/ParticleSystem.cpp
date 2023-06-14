@@ -34,9 +34,8 @@ void ParticleSystem::Update(float deltaTime)
 			continue;
 
 		particle.LifeRemaining -= deltaTime;
-		particle.Velocity += Vector2(0.0f, 20.0f) * deltaTime;
+		particle.Velocity += Vector2(0.0f, 50.0f) * deltaTime;
 		particle.Position += particle.Velocity * deltaTime;
-		particle.Rotation += 0.01f * deltaTime;
 	}
 }
 
@@ -74,19 +73,29 @@ void ParticleSystem::Render(Graphics* graphics)
 void ParticleSystem::Emit(const ParticleData& particleData)
 {
 	Particle& particle = m_particlePool[m_poolIndex];
-	particle.Position = particleData.Position;
+
+	// position
+	auto randomOffset = Randomiser::Instance()->GetRandNum(-1.0f, 1.0f);
+	auto positionOffset = Vector2(Randomiser::Instance()->GetRandNum(-1.0f, 1.0f), Randomiser::Instance()->GetRandNum(-1.0f, 1.0f));
+	positionOffset.Normalize();
+
+	auto randomDistance = Randomiser::Instance()->GetRandNum(0.0f, 2.0f);
+
+	particle.Position = particleData.Position + positionOffset * randomDistance;
 	particle.Rotation = 0;
 
 	// velocity
 	particle.Velocity = particleData.Velocity;
-	particle.Velocity.x *= (Randomiser::Instance()->GetRandNum(-5.0f, 5.0f));
-	particle.Velocity.y *= (Randomiser::Instance()->GetRandNum(-5.0f, 5.0f));
-	//particle.Velocity.Normalize();
+	
+	Vector2 velocityOffset;
+	velocityOffset = particleData.VelocityVariation;
 
-	particle.Velocity *= particleData.VelocityVariation * Randomiser::Instance()->GetRandNum(1.0f, 5.0f);
+	if (particle.Velocity.x < 0)
+		velocityOffset.x *= -1;
+
+	particle.Velocity += velocityOffset;
 
 	// color
-
 	particle.ColorBegin = particleData.ColorBegin;
 	particle.ColorEnd = particleData.ColorEnd;
 
