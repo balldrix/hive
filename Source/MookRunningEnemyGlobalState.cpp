@@ -1,4 +1,4 @@
-#include "MookEnemyGlobalState.h"
+#include "MookRunningEnemyGlobalState.h"
 
 #include "StateMachine.h"
 #include "Enemy.h"
@@ -13,18 +13,18 @@
 
 using namespace GameplayConstants;
 
-MookEnemyGlobalState* MookEnemyGlobalState::Instance()
+MookRunningEnemyGlobalState* MookRunningEnemyGlobalState::Instance()
 {
-	static MookEnemyGlobalState instance;
+	static MookRunningEnemyGlobalState instance;
 	return &instance;
 }
 
-void MookEnemyGlobalState::OnEnter(Enemy* enemy)
+void MookRunningEnemyGlobalState::OnEnter(Enemy* enemy)
 {
 
 }
 
-void MookEnemyGlobalState::Execute(Enemy* enemy)
+void MookRunningEnemyGlobalState::Execute(Enemy* enemy)
 {
 	if(enemy->GetHealth() < 1)
 	{
@@ -40,8 +40,9 @@ void MookEnemyGlobalState::Execute(Enemy* enemy)
 	{
 		if(enemy->GetTimer() < 0.0f)
 		{
-			enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
+			//enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
 			enemy->SetPosition(enemy->GetPositionX(), enemy->GetPlayerTarget()->GetGroundPosition().y + 1);
+			enemy->GetStateMachine()->ChangeState(EnemyRunningState::Instance());
 			enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.8f, 2.0f));
 		}
 	}
@@ -67,9 +68,9 @@ void MookEnemyGlobalState::Execute(Enemy* enemy)
 			return;
 		}
 
-		if(currentState == EnemyWalkingState::Instance() &&
+		/*if(currentState == EnemyWalkingState::Instance() &&
 			(distance < enemy->GetData().attackRange))
-			enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
+			enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());*/
 	}
 	else
 	{
@@ -94,6 +95,6 @@ void MookEnemyGlobalState::Execute(Enemy* enemy)
 	}
 }
 
-void MookEnemyGlobalState::OnExit(Enemy* enemy)
+void MookRunningEnemyGlobalState::OnExit(Enemy* enemy)
 {
 }

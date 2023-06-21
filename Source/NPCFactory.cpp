@@ -8,6 +8,7 @@
 #include "Texture.h"
 #include "KingMook.h"
 #include "KingMookEnemyGlobalState.h"
+#include "MookRunningEnemyGlobalState.h"
 #include "MookEnemyGlobalState.h"
 #include "EnemyOwnedStates.h"
 #include "InGameHudConstants.h"
@@ -26,9 +27,7 @@ NPCFactory::NPCFactory() :
 	m_kingMookPortraitTexture(nullptr),
 	m_hitBoxTexture(nullptr),
 	m_mookPortraitSprite(nullptr),
-	m_kingMookPortraitSprite(nullptr),
-    m_mook(nullptr),
-	m_boss(nullptr)
+	m_kingMookPortraitSprite(nullptr)
 {
 }
 
@@ -81,6 +80,9 @@ Enemy* NPCFactory::GetEnemy(EnemyData data)
 	if(data.type == "Mook")
 		return CreateMook(data);
 
+	if (data.type == "MookRunner")
+		return CreateMookRunner(data);
+
 	if(data.type == "Boss")
 		return CreateBoss(data);
 
@@ -89,26 +91,38 @@ Enemy* NPCFactory::GetEnemy(EnemyData data)
 
 Enemy* NPCFactory::CreateMook(EnemyData& data)
 {
-	m_mook = new Enemy();
-	m_mook->Init(m_graphics, m_camera, m_player, data,
+	auto mook = new Enemy();
+	mook->Init(m_graphics, m_camera, m_player, data,
 				 m_mookTexture, m_standardShadowTexture,
 				 m_hitBoxTexture,
 				 m_hudManager, m_mookPortraitSprite,
-				 MookRunningEnemyGlobalState::Instance());
+				 MookEnemyGlobalState::Instance());
 
-	return m_mook;
+	return mook;
+}
+
+Enemy* NPCFactory::CreateMookRunner(EnemyData& data)
+{
+	auto mook = new Enemy();
+	mook->Init(m_graphics, m_camera, m_player, data,
+		m_mookTexture, m_standardShadowTexture,
+		m_hitBoxTexture,
+		m_hudManager, m_mookPortraitSprite,
+		MookRunningEnemyGlobalState::Instance());
+
+	return mook;
 }
 
 Enemy* NPCFactory::CreateBoss(EnemyData& data)
 {
-	m_boss = new KingMook();
-	m_boss->Init(m_graphics, m_camera, m_player, data,
+	auto boss = new KingMook();
+	boss->Init(m_graphics, m_camera, m_player, data,
 				 m_kingMookTexture, m_standardShadowTexture,
 				 m_hitBoxTexture,
 				 m_hudManager, m_kingMookPortraitSprite,
 				 KingMookEnemyGlobalState::Instance());
 
-	return m_boss;
+	return boss;
 }
 
 void NPCFactory::ReleaseAll()
@@ -121,39 +135,17 @@ void NPCFactory::ReleaseAll()
 
 void NPCFactory::DeleteAll()
 {
-	if(m_kingMookPortraitSprite != nullptr)
-	{
 		delete m_kingMookPortraitSprite;
-		m_kingMookPortraitSprite = nullptr;
-	}
-
-	if(m_mookPortraitSprite != nullptr)
-	{
 		delete m_mookPortraitSprite;
-		m_mookPortraitSprite = nullptr;
-	}
-
-	if(m_kingMookPortraitTexture != nullptr)
-	{
 		delete m_kingMookPortraitTexture;
-		m_kingMookPortraitTexture = nullptr;
-	}
-
-	if(m_mookPortraitTexture != nullptr)
-	{
 		delete m_mookPortraitTexture;
-		m_mookPortraitTexture = nullptr;
-	}
-
-	if(m_kingMookTexture != nullptr)
-	{
 		delete m_kingMookTexture;
-		m_kingMookTexture = nullptr;
-	}
-
-	if(m_mookTexture != nullptr)
-	{
 		delete m_mookTexture;
+
+		m_kingMookPortraitSprite = nullptr;
+		m_mookPortraitSprite = nullptr;
+		m_kingMookPortraitTexture = nullptr;
+		m_mookPortraitTexture = nullptr;
+		m_kingMookTexture = nullptr;
 		m_mookTexture = nullptr;
-	}
 }

@@ -25,6 +25,7 @@ void NPCManager::Init(Graphics* graphics, Camera* camera, Player* player, InGame
 	m_NPCFactory = new NPCFactory();
 
 	result = InitTypes("GameData\\EnemyData\\typeData.txt");
+
 	if(result == false)
 	{
 		Error::FileLog(" Error initialising enemy type data. EnemyManager.cpp line 17");

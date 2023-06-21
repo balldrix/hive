@@ -28,6 +28,7 @@ public:
 
 private:
 	Enemy* CreateMook(EnemyData& data);
+	Enemy* CreateMookRunner(EnemyData& data);
 	Enemy* CreateBoss(EnemyData& data);
 	void DeleteAll();
 	void ReleaseAll();
@@ -44,6 +45,4 @@ private:
 	Texture* m_hitBoxTexture;
 	Sprite* m_mookPortraitSprite;
 	Sprite* m_kingMookPortraitSprite;
-	Enemy* m_mook;
-	Enemy* m_boss;
 };

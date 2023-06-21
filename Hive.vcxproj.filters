@@ -193,13 +193,30 @@
     <ClCompile Include="Source\PlayerBlockState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\TilemapHandler.cpp" />
-    <ClCompile Include="Source\LevelRenderer.cpp" />
-    <ClCompile Include="Source\EnemyAttackRunState.cpp" />
-    <ClCompile Include="Source\DamageData.h" />
-    <ClCompile Include="Source\ImpactFx.cpp" />
-    <ClCompile Include="Source\ParticleSystem.cpp" />
-    <ClCompile Include="Source\PixelTexture.cpp" />
+    <ClCompile Include="Source\DamageData.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EnemyAttackRunState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ImpactFx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LevelRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MookRunningEnemyGlobalState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ParticleSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PixelTexture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TilemapHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -444,17 +461,42 @@
     <ClInclude Include="Source\PlayerBlockState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\TilemapData.h" />
-    <ClInclude Include="Source\TilemapHandler.h" />
-    <ClInclude Include="Source\LevelRenderer.h" />
-    <ClInclude Include="Source\GlobalConstants.h" />
-    <ClInclude Include="Source\InGameHudConstants.h" />
-    <ClInclude Include="Source\PlayerConstants.h" />
-    <ClInclude Include="Source\AudioConstants.h" />
-    <ClInclude Include="Source\EnemyAttackRunState.h" />
-    <ClInclude Include="Source\ImpactFX.h" />
-    <ClInclude Include="Source\ParticleSystem.h" />
-    <ClInclude Include="Source\PixelTexture.h" />
+    <ClInclude Include="Source\AudioConstants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyAttackRunState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\InGameHudConstants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ImpactFX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GlobalConstants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LevelRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ParticleSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MookRunningEnemyGlobalState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PixelTexture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerConstants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TilemapData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TilemapHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\backgroundTest.png">
@@ -517,9 +559,15 @@
     <Image Include="GameData\Sprites\shadow.png">
       <Filter>Data</Filter>
     </Image>
-    <Image Include="GameData\Sprites\playerSpritesheet.png" />
-    <Image Include="GameData\Tilesets\ts_bunker.png" />
-    <Image Include="GameData\Sprites\vfx.png" />
+    <Image Include="GameData\Sprites\playerSpritesheet.png">
+      <Filter>Data</Filter>
+    </Image>
+    <Image Include="GameData\Tilesets\ts_bunker.png">
+      <Filter>Data</Filter>
+    </Image>
+    <Image Include="GameData\Sprites\vfx.png">
+      <Filter>Data</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameData\HitBoxData\bossHitBoxData.json">
@@ -558,10 +606,20 @@
     <None Include="GameData\SpriteSheetData\travellingpromptSpritesheetData.json">
       <Filter>Data</Filter>
     </None>
-    <None Include="GameData\SpriteSheetData\playerSpritesheetData.json" />
-    <None Include="GameData\Tilemaps\tm_bunker.json" />
-    <None Include="GameData\Sounds\scream.ogg" />
-    <None Include="GameData\SpriteSheetData\vfx.json" />
+    <None Include="GameData\SpriteSheetData\playerSpritesheetData.json">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="GameData\Sounds\scream.ogg">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="GameData\Tilemaps\tm_bunker.json">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="GameData\SpriteSheetData\vfx.json">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="GameData\HitBoxData\mookRunnerHitBoxData.json" />
+    <None Include="GameData\SpriteSheetData\mookRunnerSpritesheetData.json" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="GameData\EnemyData\Damage\bossDamage.txt">
@@ -588,38 +646,101 @@
     <Text Include="GameData\EnemyData\typeData.txt">
       <Filter>Data</Filter>
     </Text>
+    <Text Include="GameData\EnemyData\Damage\mookRunnerDamage.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Media Include="GameData\Sounds\boss_entrance_001.wav" />
-    <Media Include="GameData\Sounds\boss_punch_001.wav" />
-    <Media Include="GameData\Sounds\boss_punch_002.wav" />
-    <Media Include="GameData\Sounds\boss_punch_003.wav" />
-    <Media Include="GameData\Sounds\boss_punch_004.wav" />
-    <Media Include="GameData\Sounds\boss_walk_001.wav" />
-    <Media Include="GameData\Sounds\boss_walk_002.wav" />
-    <Media Include="GameData\Sounds\boss_walk_003.wav" />
-    <Media Include="GameData\Sounds\hit_001.wav" />
-    <Media Include="GameData\Sounds\hit_002.wav" />
-    <Media Include="GameData\Sounds\hit_003.wav" />
-    <Media Include="GameData\Sounds\mook_death.wav" />
-    <Media Include="GameData\Sounds\mook_entrance_001.wav" />
-    <Media Include="GameData\Sounds\mook_entrance_002.wav" />
-    <Media Include="GameData\Sounds\mook_entrance_003.wav" />
-    <Media Include="GameData\Sounds\mook_entrance_004.wav" />
-    <Media Include="GameData\Sounds\mook_hit_001.wav" />
-    <Media Include="GameData\Sounds\mook_hit_002.wav" />
-    <Media Include="GameData\Sounds\mook_hit_003.wav" />
-    <Media Include="GameData\Sounds\mook_hit_004.wav" />
-    <Media Include="GameData\Sounds\mook_punch_001.wav" />
-    <Media Include="GameData\Sounds\mook_walk.wav" />
-    <Media Include="GameData\Sounds\punch_001.wav" />
-    <Media Include="GameData\Sounds\punch_002.wav" />
-    <Media Include="GameData\Sounds\punch_003.wav" />
-    <Media Include="GameData\Sounds\punch_004.wav" />
-    <Media Include="GameData\Sounds\travelling_master.wav" />
-    <Media Include="GameData\Sounds\walk_001.wav" />
-    <Media Include="GameData\Sounds\walk_002.wav" />
-    <Media Include="GameData\Sounds\walk_003.wav" />
-    <Media Include="GameData\Sounds\walk_004.wav" />
+    <Media Include="GameData\Sounds\boss_entrance_001.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\boss_punch_001.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\boss_punch_002.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\boss_punch_003.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\boss_punch_004.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\boss_walk_001.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\boss_walk_002.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\boss_walk_003.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\hit_001.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\hit_002.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\hit_003.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\mook_death.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\mook_entrance_001.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\mook_entrance_002.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\mook_entrance_003.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\mook_entrance_004.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\mook_hit_001.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\mook_hit_002.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\mook_hit_003.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\mook_hit_004.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\mook_punch_001.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\mook_walk.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\punch_001.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\punch_002.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\punch_003.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\punch_004.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\travelling_master.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\walk_001.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\walk_002.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\walk_003.wav">
+      <Filter>Data</Filter>
+    </Media>
+    <Media Include="GameData\Sounds\walk_004.wav">
+      <Filter>Data</Filter>
+    </Media>
   </ItemGroup>
 </Project>

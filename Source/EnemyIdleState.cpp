@@ -72,7 +72,7 @@ void EnemyIdleState::Execute(Enemy* enemy)
 			enemy->Stop();
 
 			enemy->ResetTimer(randnum);
-			//enemy->Attack();
+			enemy->Attack();
 		}
 		return;
 	}
