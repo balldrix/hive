@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="Source\DamageData.h" />
     <ClCompile Include="Source\EnemyAttackRunState.cpp" />
+    <ClCompile Include="Source\EnemyIdleState.cpp" />
     <ClCompile Include="Source\ImpactFx.cpp" />
     <ClCompile Include="Source\LevelRenderer.cpp" />
     <ClCompile Include="Source\MookRunningEnemyGlobalState.cpp" />
@@ -40,6 +41,7 @@
     <ClCompile Include="Source\KingMookEnemyGlobalState.cpp" />
     <ClInclude Include="Source\AudioConstants.h" />
     <ClInclude Include="Source\EnemyAttackRunState.h" />
+    <ClInclude Include="Source\EnemyIdleState.h" />
     <ClInclude Include="Source\GlobalConstants.h" />
     <ClInclude Include="Source\ImpactFX.h" />
     <ClInclude Include="Source\InGameHudConstants.h" />
@@ -74,7 +76,6 @@
     <ClCompile Include="Source\EnemyDeadState.cpp" />
     <ClCompile Include="Source\MookEnemyGlobalState.cpp" />
     <ClCompile Include="Source\EnemyHurtState.cpp" />
-    <ClCompile Include="Source\EnemyIdleState.cpp" />
     <ClCompile Include="Source\EnemyKnockbackState.cpp" />
     <ClCompile Include="Source\EnemyRunningState.cpp" />
     <ClCompile Include="Source\EnemyVictoryState.cpp" />
@@ -140,7 +141,6 @@
     <ClInclude Include="Source\EnemyFightingState.h" />
     <ClInclude Include="Source\MookEnemyGlobalState.h" />
     <ClInclude Include="Source\EnemyHurtState.h" />
-    <ClInclude Include="Source\EnemyIdleState.h" />
     <ClInclude Include="Source\EnemyKnockbackState.h" />
     <ClInclude Include="Source\EnemyOwnedStates.h" />
     <ClInclude Include="Source\EnemyRunningState.h" />

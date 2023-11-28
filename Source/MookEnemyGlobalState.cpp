@@ -9,9 +9,6 @@
 #include "Animator.h"
 #include "Randomiser.h"
 #include "EnemyAttackRunState.h"
-#include "GameplayConstants.h"
-
-using namespace GameplayConstants;
 
 MookEnemyGlobalState* MookEnemyGlobalState::Instance()
 {
@@ -36,40 +33,22 @@ void MookEnemyGlobalState::Execute(Enemy* enemy)
 
 	if((currentState == EnemyWalkingState::Instance() ||
 		currentState == EnemyRunningState::Instance()) &&
-		distance > enemy->GetData().chargeRange)
+		distance > enemy->GetData().fightingRange)
 	{
 		if(enemy->GetTimer() < 0.0f)
 		{
 			enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
-			enemy->SetPosition(enemy->GetPositionX(), enemy->GetPlayerTarget()->GetGroundPosition().y + 1);
-			enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.8f, 2.0f));
+			enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.8, 2.0));
 		}
 	}
 
-	if(distance < enemy->GetData().attackRange &&
-		fabs(enemy->GetPositionY() - enemy->GetPlayerTarget()->GetPositionY()) < VerticalHitRange)
+	if(distance <= enemy->GetData().fightingRange)
 	{
-		if(enemy->IsHostile() == false)
+		if (enemy->IsHostile() == false)
 		{
+			enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
 			enemy->SetHostile(true);
 		}
-			
-		auto playerPos = Vector2(enemy->GetPlayerTarget()->GetPositionX(), 0);
-		auto enemyPos = Vector2(enemy->GetPositionX(), 0);
-		Vector2 dirToPlayer = (playerPos - enemyPos);
-		dirToPlayer.Normalize();
-		auto facingDir = Vector2(enemy->GetFacingDirection());
-
-		if(currentState == EnemyRunningState::Instance() &&
-			(dirToPlayer == facingDir))
-		{
-			enemy->GetStateMachine()->ChangeState(EnemyAttackRunState::Instance());
-			return;
-		}
-
-		if(currentState == EnemyWalkingState::Instance() &&
-			(distance < enemy->GetData().attackRange))
-			enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
 	}
 	else
 	{

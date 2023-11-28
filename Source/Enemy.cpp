@@ -303,16 +303,16 @@ void Enemy::Attack()
 	switch(randomNum)
 	{
 	case 0:
-		EnemyAttackState::Instance()->SetAttack("Attack1");
+		EnemyAttackState::Instance()->SetAttack("attackNormal");
 		break;
 	case 1:
-		EnemyAttackState::Instance()->SetAttack("Attack2");
+		EnemyAttackState::Instance()->SetAttack("attackNormal");
 		break;
 	case 2:
-		EnemyAttackState::Instance()->SetAttack("Attack3");
+		EnemyAttackState::Instance()->SetAttack("attackNormal");
 		break;
 	default:
-		EnemyAttackState::Instance()->SetAttack("Attack1");
+		EnemyAttackState::Instance()->SetAttack("attackNormal");
 		break;
 	}
 

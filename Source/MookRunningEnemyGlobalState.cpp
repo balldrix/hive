@@ -34,13 +34,11 @@ void MookRunningEnemyGlobalState::Execute(Enemy* enemy)
 	auto currentState = enemy->GetStateMachine()->GetCurrentState();
 	auto distance = (enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length();
 
-	if((currentState == EnemyWalkingState::Instance() ||
-		currentState == EnemyRunningState::Instance()) &&
+	if(currentState == EnemyWalkingState::Instance() &&
 		distance > enemy->GetData().chargeRange)
 	{
 		if(enemy->GetTimer() < 0.0f)
 		{
-			//enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
 			enemy->SetPosition(enemy->GetPositionX(), enemy->GetPlayerTarget()->GetGroundPosition().y + 1);
 			enemy->GetStateMachine()->ChangeState(EnemyRunningState::Instance());
 			enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.8f, 2.0f));
@@ -49,12 +47,7 @@ void MookRunningEnemyGlobalState::Execute(Enemy* enemy)
 
 	if(distance < enemy->GetData().attackRange &&
 		fabs(enemy->GetPositionY() - enemy->GetPlayerTarget()->GetPositionY()) < VerticalHitRange)
-	{
-		if(enemy->IsHostile() == false)
-		{
-			enemy->SetHostile(true);
-		}
-			
+	{		
 		auto playerPos = Vector2(enemy->GetPlayerTarget()->GetPositionX(), 0);
 		auto enemyPos = Vector2(enemy->GetPositionX(), 0);
 		Vector2 dirToPlayer = (playerPos - enemyPos);
@@ -67,14 +60,6 @@ void MookRunningEnemyGlobalState::Execute(Enemy* enemy)
 			enemy->GetStateMachine()->ChangeState(EnemyAttackRunState::Instance());
 			return;
 		}
-
-		/*if(currentState == EnemyWalkingState::Instance() &&
-			(distance < enemy->GetData().attackRange))
-			enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());*/
-	}
-	else
-	{
-		enemy->SetHostile(false);
 	}
 
 	// true if the enemy is not knocked back or dead
