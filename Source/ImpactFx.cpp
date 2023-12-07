@@ -28,7 +28,7 @@ void ImpactFx::Render(Graphics* graphics)
 		return;
 
 	auto framenum = m_animator->GetCurrentFrame();
-	m_spritesheet->SetDepth(m_position.y / graphics->GetHeight());
+	m_spritesheet->SetDepth(0.9f);
 	m_spritesheet->Render(graphics, m_position, framenum);
 }
 

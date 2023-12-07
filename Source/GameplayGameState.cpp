@@ -513,7 +513,8 @@ void GameplayGameState::ProcessCollisions()
 					m_player->FlipHorizontally(m_player->GetFacingDirection() != Vector3::Left);
 
 				enemy->ShowEnemyHud();
-				m_stopTimer = damageData.hitStopDuration;m_impactFx->DisplayFx(enemy->GetPosition());
+				m_stopTimer = damageData.hitStopDuration;
+				//m_impactFx->DisplayFx(enemy->GetPosition());
 				m_impactFx->DisplayFx(Vector2(playerGroundPositionX, playerGroundPositionY - spriteHeight * 0.5f));
 
 				m_particleData.Velocity = enemy->GetCurrentVelocity();
@@ -592,8 +593,8 @@ void GameplayGameState::Render()
 	m_NPCManager->Render(m_graphics);
 	m_hudManager->Render(m_graphics);
 	m_gameOverScreenController->Render(m_graphics);
-	m_impactFx->Render(m_graphics);
 	m_particleSystem->Render(m_graphics); 
+	m_impactFx->Render(m_graphics);
 }
 
 void GameplayGameState::ReleaseAll()

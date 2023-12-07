@@ -66,7 +66,7 @@ void ParticleSystem::Render(Graphics* graphics)
 			Vector2::Zero,
 			size,
 			SpriteEffects_None,
-			1.0f);
+			0.8f);
 	}
 }
 
