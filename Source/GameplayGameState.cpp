@@ -222,10 +222,6 @@ void GameplayGameState::LoadAssets()
 	m_particleSystem = new ParticleSystem();
 	m_particleSystem->Init(m_graphics);
 
-	m_particleData.ColorBegin = Colors::Red;
-	m_particleData.ColorEnd = Colors::DarkRed;
-	m_particleData.LifeTime = 1.0f;
-
 	/*AudioEngine::Instance()->AddSoundSource(m_musicSoundSource);
 
 	const std::wstring musicTitle = L"travelling_master";
@@ -471,6 +467,7 @@ void GameplayGameState::ProcessCollisions()
 	auto playerGroundPositionX = m_player->GetGroundPosition().x;
 	auto playerGroundPositionY = m_player->GetGroundPosition().y;
 
+
 	for(size_t i = 0; i < enemyList.size(); i++)
 	{
 		Enemy* enemy = enemyList[i];
@@ -484,10 +481,21 @@ void GameplayGameState::ProcessCollisions()
 				enemy->GetHitBoxManager()->GetHurtBox()))
 			{
 				auto damageData = m_player->GetDamageData();
+				auto groundPosition = enemy->GetGroundPosition();
+				auto frameData = enemy->GetSprite()->GetFrameData(enemy->GetAnimator()->GetCurrentFrame());
+				auto spriteHeight = frameData.spriteSourceSize.bottom;
 
 				enemy->ApplyDamage(m_player, damageData.amount);
 				enemy->ShowEnemyHud();
+
 				m_stopTimer = damageData.hitStopDuration;
+				
+				//m_impactFx->DisplayFx(Vector2(playerGroundPositionX, playerGroundPositionY - spriteHeight * 0.5f));
+				//SpawnParticles(m_impactFx->Position(), enemy->GetCurrentVelocity(), (Color)Colors::Red, (Color)Colors::DarkRed, 1.0f, 200);
+				
+				m_impactFx->DisplayFx(Vector2(groundPosition.x, groundPosition.y - spriteHeight * 0.5f));
+				SpawnParticles(m_impactFx->Position(), m_player->GetCurrentVelocity(), (Color)Colors::Green, (Color)Colors::DarkGreen, 1.0f, 200);
+
 				return;
 			}
 		}
@@ -514,21 +522,9 @@ void GameplayGameState::ProcessCollisions()
 
 				enemy->ShowEnemyHud();
 				m_stopTimer = damageData.hitStopDuration;
-				//m_impactFx->DisplayFx(enemy->GetPosition());
 				m_impactFx->DisplayFx(Vector2(playerGroundPositionX, playerGroundPositionY - spriteHeight * 0.5f));
 
-				m_particleData.Velocity = enemy->GetCurrentVelocity();
-				m_particleData.Position = m_impactFx->Position();
-
-				for(int i = 0; i < 200; i++)
-				{
-					m_particleData.VelocityVariation.x = (Randomiser::Instance()->GetRandNum(1.0f, 5.0f));
-					m_particleData.VelocityVariation.y = (Randomiser::Instance()->GetRandNum(-10.0f, 1.0f));
-					m_particleData.VelocityVariation.Normalize();
-					m_particleData.VelocityVariation *= Randomiser::Instance()->GetRandNum(1.0f, 40.0f);
-
-					m_particleSystem->Emit(m_particleData);
-				}
+				SpawnParticles(m_impactFx->Position(), enemy->GetCurrentVelocity(), (Color)Colors::Red, (Color)Colors::DarkRed, 1.0f, 200);
 				
 				return;
 			}
@@ -583,6 +579,25 @@ void GameplayGameState::ProcessCollisions()
 			enemy->SetCurrentVelocity(Vector2(enemy->GetCurrentVelocity().x, 0.0f));
 			enemy->SetTargetVelocity(Vector2(enemy->GetTargetVelocity().x, 0.0f));
 		}
+	}
+}
+
+void GameplayGameState::SpawnParticles(const Vector2& position, const Vector2& velocity, Color startColour, Color endColour, float lifeTime, unsigned int number)
+{
+	m_particleData.Velocity = velocity;
+	m_particleData.Position = position;
+	m_particleData.ColorBegin = startColour;
+	m_particleData.ColorEnd = endColour;
+	m_particleData.LifeTime = lifeTime;
+
+	for (unsigned int i = 0; i < number; i++)
+	{
+		m_particleData.VelocityVariation.x = (Randomiser::Instance()->GetRandNum(1.0f, 5.0f));
+		m_particleData.VelocityVariation.y = (Randomiser::Instance()->GetRandNum(-10.0f, 1.0f));
+		m_particleData.VelocityVariation.Normalize();
+		m_particleData.VelocityVariation *= Randomiser::Instance()->GetRandNum(1.0f, 40.0f);
+
+		m_particleSystem->Emit(m_particleData);
 	}
 }
 

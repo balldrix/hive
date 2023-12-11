@@ -30,8 +30,8 @@ public:
 
 	void Update(float deltaTime);
 	void Render(Graphics* graphics);
-
 	void Emit(const ParticleData& particleData);
+	
 private:
 	struct Particle
 	{

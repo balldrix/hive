@@ -44,6 +44,7 @@ public:
 	void ProcessInput();
 	void Update(float deltaTime);
 	void ProcessCollisions();
+	void SpawnParticles(const Vector2& position, const Vector2& velocity, Color startColour, Color endColour, float lifeTime, unsigned int number);
 	void Render();
 
 	void ReleaseAll();
