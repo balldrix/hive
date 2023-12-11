@@ -198,7 +198,7 @@
     "duration": 60
    },
    {
-    "filename": "swing_1-0",
+    "filename": "attackNormal_1-0",
     "frame": { "x": 0, "y": 0, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -207,7 +207,7 @@
     "duration": 100
    },
    {
-    "filename": "swing_1-1",
+    "filename": "attackNormal_1-1",
     "frame": { "x": 200, "y": 117, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -216,7 +216,7 @@
     "duration": 100
    },
    {
-    "filename": "swing_1-2",
+    "filename": "attackNormal_1-2",
     "frame": { "x": 250, "y": 117, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -225,7 +225,7 @@
     "duration": 50
    },
    {
-    "filename": "swing_1-3",
+    "filename": "attackNormal_1-3",
     "frame": { "x": 0, "y": 156, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -234,7 +234,7 @@
     "duration": 50
    },
    {
-    "filename": "swing_1-4",
+    "filename": "attackNormal_1-4",
     "frame": { "x": 50, "y": 156, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -243,7 +243,7 @@
     "duration": 50
    },
    {
-    "filename": "swing_1-5",
+    "filename": "attackNormal_1-5",
     "frame": { "x": 100, "y": 156, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -252,7 +252,7 @@
     "duration": 500
    },
    {
-    "filename": "swing_2-0",
+    "filename": "attackNormal_2-0",
     "frame": { "x": 150, "y": 156, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -261,7 +261,7 @@
     "duration": 100
    },
    {
-    "filename": "swing_2-1",
+    "filename": "attackNormal_2-1",
     "frame": { "x": 200, "y": 156, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -270,7 +270,7 @@
     "duration": 100
    },
    {
-    "filename": "swing_2-2",
+    "filename": "attackNormal_2-2",
     "frame": { "x": 250, "y": 156, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -279,7 +279,7 @@
     "duration": 50
    },
    {
-    "filename": "swing_2-3",
+    "filename": "attackNormal_2-3",
     "frame": { "x": 0, "y": 195, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -288,7 +288,7 @@
     "duration": 50
    },
    {
-    "filename": "swing_2-4",
+    "filename": "attackNormal_2-4",
     "frame": { "x": 50, "y": 195, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -297,7 +297,7 @@
     "duration": 50
    },
    {
-    "filename": "swing_2-5",
+    "filename": "attackNormal_2-5",
     "frame": { "x": 100, "y": 195, "w": 50, "h": 39 },
     "rotated": false,
     "trimmed": true,
@@ -353,14 +353,14 @@
                 "color": "#000000ff"
             },
             {
-                "name": "swing_1",
+                "name": "attackNormal_1",
                 "from": 22,
                 "to": 27,
                 "loop": false,
                 "color": "#000000ff"
             },
             {
-                "name": "swing_2",
+                "name": "attackNormal_2",
                 "from": 28,
                 "to": 33,
                 "loop": false,

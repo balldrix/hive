@@ -340,16 +340,16 @@ void Player::Attack()
 	{
 		case 0:
 			m_stateMachine->ChangeState(PlayerAttackState::Instance());
-			PlayerAttackState::Instance()->SetAttack("swing_1");
+			PlayerAttackState::Instance()->SetAttack("attackNormal_1");
 		case 1:
 			m_stateMachine->ChangeState(PlayerAttackState::Instance());
-			PlayerAttackState::Instance()->SetAttack("swing_2");
+			PlayerAttackState::Instance()->SetAttack("attackNormal_2");
 			break;
 		case 2:
 		case 3:
 		default:
 			m_stateMachine->ChangeState(PlayerAttackState::Instance());
-			PlayerAttackState::Instance()->SetAttack("swing_1");
+			PlayerAttackState::Instance()->SetAttack("attackNormal_2");
 			break;
 	}
 }

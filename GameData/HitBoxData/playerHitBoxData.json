@@ -93,9 +93,9 @@
 			}
 		},
 		{
-			"name": "swing_1",
-			"startup": 3,
-			"active": 2,
+			"name": "attackNormal_1",
+			"startup": 5,
+			"active": 1,
 			"movementBox": {
 				"minX": -8.0,
 				"minY": -2.0,
@@ -116,9 +116,9 @@
 			}
 		},
 		{
-			"name": "swing_2",
-			"startup": 3,
-			"active": 2,
+			"name": "attackNormal_2",
+			"startup": 5,
+			"active": 1,
 			"movementBox": {
 				"minX": -8.0,
 				"minY": -2.0,
