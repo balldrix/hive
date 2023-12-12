@@ -32,7 +32,8 @@ Player::Player() :
 	m_punchSoundSource(nullptr),
 	m_footStepsSoundSource(nullptr),
 	m_vocalSoundSource(nullptr),
-	m_recentFootstepFrame(0)
+	m_recentFootstepFrame(0),
+	m_blockTimer(0.0f)
 {
 }
 
@@ -197,16 +198,21 @@ void Player::Update(float deltaTime)
 	m_stateMachine->Update();
 	GameObject::Update(deltaTime);
 
-	if(m_stateMachine->GetCurrentState() != PlayerAttackState::Instance())
+	if(!m_stateMachine->IsInState(*PlayerAttackState::Instance()))
 		m_controlSystem->Update(deltaTime);
 
-	if(m_stateMachine->GetCurrentState() == PlayerDeadState::Instance() && m_health <= 0)
+	if(m_stateMachine->IsInState(*PlayerDeadState::Instance()) && m_health <= 0)
 		m_deathTimer += deltaTime;
 
 	if(m_deathTimer > m_playerData.deathTime)
 		Kill();
 
-	if(m_stateMachine->GetCurrentState() == PlayerDeadState::Instance() && m_health > 0)
+	if (m_stateMachine->IsInState(*PlayerBlockState::Instance()))
+	{
+		m_blockTimer += deltaTime;
+	}
+
+	if(m_stateMachine->IsInState(*PlayerDeadState::Instance()) && m_health > 0)
 		m_knockoutTimer += deltaTime;
 
 	if(m_knockoutTimer > m_playerData.knockoutDuration)
@@ -356,7 +362,7 @@ void Player::Attack()
 
 void Player::Block()
 {
-	if(m_stateMachine->IsInState(*PlayerBlockState::Instance()) == true)
+	if(m_stateMachine->IsInState(*PlayerBlockState::Instance()))
 		return;
 
 	m_stateMachine->ChangeState(PlayerBlockState::Instance());
@@ -364,6 +370,16 @@ void Player::Block()
 
 void Player::ApplyDamage(GameObject* source, const int& amount)
 {
+	PlayHurtSound();
+
+	if (m_stateMachine->IsInState(*PlayerBlockState::Instance()))
+	{
+		m_health -= 1;
+		m_hitBoxManager->KillAll();
+		m_blockTimer = 0;
+		return;
+	}
+
 	m_health -= amount;
 
 	if(m_health < 1 || amount > 15)
@@ -388,8 +404,6 @@ void Player::ApplyDamage(GameObject* source, const int& amount)
 	{
 		m_stateMachine->ChangeState(PlayerHurtState::Instance());
 	}
-
-	PlayHurtSound();
 }
 
 void Player::Knockback(const Vector2& direction, const float& force)

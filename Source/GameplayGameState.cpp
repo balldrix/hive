@@ -36,6 +36,8 @@
 #include "ImpactFx.h"
 #include "ParticleSystem.h"
 #include "Randomiser.h"
+#include "PlayerBlockState.h"
+#include "PlayerIdleState.h"
 
 using namespace GlobalConstants;
 using namespace GameplayConstants;
@@ -390,9 +392,13 @@ void GameplayGameState::ProcessInput()
 		}
 	}
 
-	if(m_input->WasKeyPressed(PLAYER_B_KEY))
+	if(m_input->IsKeyDown(PLAYER_B_KEY))
 	{
 		m_player->Block();
+	}
+	else if(m_player->GetStateMachine()->IsInState(*PlayerBlockState::Instance()))
+	{
+		m_player->GetStateMachine()->ChangeState(PlayerIdleState::Instance());
 	}
 
 	if(m_input->IsKeyDown(PLAYER_B_KEY))
@@ -400,7 +406,7 @@ void GameplayGameState::ProcessInput()
 		return;
 	}
 
-	if(m_input->IsKeyDown(PLAYER_A_KEY) &&
+	if(m_input->WasKeyPressed(PLAYER_A_KEY) &&
 		m_controlSystem->CanAttack())
 	{
 		m_player->Attack();
