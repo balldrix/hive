@@ -9,7 +9,7 @@
 
 EnemyHurtState* EnemyHurtState::Instance()
 {
-	static EnemyHurtState instance("Hurt");
+	static EnemyHurtState instance("hurt");
 	return &instance;
 }
 
