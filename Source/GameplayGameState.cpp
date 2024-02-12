@@ -478,11 +478,11 @@ void GameplayGameState::ProcessCollisions()
 	{
 		Enemy* enemy = enemyList[i];
 
-		// true if player hitbox is active and 
+		// true if player hitbox is active and enemy is in vertical range
 		if(isPlayerHitBoxActive &&
 			fabs(enemy->GetGroundPosition().y - playerGroundPositionY) < VerticalHitRange)
 		{
-			// check player hitbox vs enemy hurtboxes
+			// check player has hit an enemy
 			if(m_player->GetHitBoxManager()->GetHitBox().OnCollision(
 				enemy->GetHitBoxManager()->GetHurtBox()))
 			{
@@ -494,22 +494,20 @@ void GameplayGameState::ProcessCollisions()
 				enemy->ApplyDamage(m_player, damageData.amount);
 				enemy->ShowEnemyHud();
 
-				m_stopTimer = damageData.hitStopDuration;
-				
-				//m_impactFx->DisplayFx(Vector2(playerGroundPositionX, playerGroundPositionY - spriteHeight * 0.5f));
-				//SpawnParticles(m_impactFx->Position(), enemy->GetCurrentVelocity(), (Color)Colors::Red, (Color)Colors::DarkRed, 1.0f, 200);
-				
+				m_stopTimer = damageData.hitStopDuration;				
 				m_impactFx->DisplayFx(Vector2(groundPosition.x, groundPosition.y - spriteHeight * 0.5f));
+
 				SpawnParticles(m_impactFx->Position(), m_player->GetCurrentVelocity(), (Color)Colors::Green, (Color)Colors::DarkGreen, 1.0f, 200);
 
 				return;
 			}
 		}
 
+		// true if enemy hitbox is active and player is in vertical range
 		if(enemy->GetHitBoxManager()->IsHitBoxActive() &&
 			fabs(playerGroundPositionY - enemy->GetGroundPosition().y) < VerticalHitRange)
 		{
-			// check player hitbox vs enemy hurtboxes
+			// check enemy has hit the player
 			if(enemy->GetHitBoxManager()->GetHitBox().OnCollision(
 				m_player->GetHitBoxManager()->GetHurtBox()))
 			{
@@ -530,7 +528,16 @@ void GameplayGameState::ProcessCollisions()
 				m_stopTimer = damageData.hitStopDuration;
 				m_impactFx->DisplayFx(Vector2(playerGroundPositionX, playerGroundPositionY - spriteHeight * 0.5f));
 
-				SpawnParticles(m_impactFx->Position(), enemy->GetCurrentVelocity(), (Color)Colors::Red, (Color)Colors::DarkRed, 1.0f, 200);
+				if(m_player->GetStateMachine()->IsInState(*PlayerBlockState::Instance()))
+				{
+					Vector2 normalDirection = m_player->GetGroundPosition() - enemy->GetGroundPosition();
+					normalDirection.Normalize();
+					m_player->SetPositionX((m_player->GetGroundPosition() + Vector2(normalDirection * 2.0f)).x);
+				}
+				else 
+				{
+					SpawnParticles(m_impactFx->Position(), enemy->GetCurrentVelocity(), (Color)Colors::Red, (Color)Colors::DarkRed, 1.0f, 200);
+				}
 				
 				return;
 			}
