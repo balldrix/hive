@@ -16,11 +16,12 @@ void PlayerHurtState::OnEnter(Player* player)
 	player->GetAnimator()->Reset();
 	player->GetAnimator()->SetAnimation(m_name);
 	player->GetHitBoxManager()->KillAll();
+	player->SetHurtTimer(0.0f);
 }
 
 void PlayerHurtState::Execute(Player* player)
 {
-	if(player->GetAnimator()->IsDone())
+	if (player->GetHurtTimer() > 0.5f)
 	{
 		player->GetStateMachine()->ChangeState(PlayerIdleState::Instance());
 	}

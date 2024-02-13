@@ -42,7 +42,7 @@ void EnemyWalkingState::Execute(Enemy* enemy)
 		enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
 	}
 
-	if(distance > enemy->GetData().fightingRange)
+	if(distance > enemy->GetData().hostileRange)
 	{
 		enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
 	}

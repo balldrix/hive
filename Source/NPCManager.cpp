@@ -83,7 +83,7 @@ bool NPCManager::InitTypes(const std::string &fileName)
 				data.thinkingTime = std::stof(result);
 
 				iss >> result;
-				data.fightingRange = std::stof(result);
+				data.hostileRange = std::stof(result);
 
 				iss >> result;
 				data.attackRange = std::stof(result);

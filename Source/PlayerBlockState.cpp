@@ -26,15 +26,6 @@ void PlayerBlockState::OnEnter(Player* player)
 
 void PlayerBlockState::Execute(Player* player)
 {
-	if (player->GetHitBoxManager()->IsHitBoxActive())
-		return;
-
-	auto timer = player->GetBlockTimer();
-	
-	if (timer > 0.2f)
-	{
-		player->GetHitBoxManager()->SetCurrentHitBox(m_name);
-	}
 }
 
 void PlayerBlockState::OnExit(Player* player)

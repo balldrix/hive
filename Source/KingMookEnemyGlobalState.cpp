@@ -38,7 +38,7 @@ void KingMookEnemyGlobalState::Execute(Enemy* enemy)
 			enemy->FlipHorizontally(false);
 	}
 
-	if(toPlayerTarget.Length() < enemy->GetData().fightingRange &&
+	if(toPlayerTarget.Length() < enemy->GetData().hostileRange &&
 	   enemy->GetStateMachine()->GetCurrentState() != KingMookChargeState::Instance() &&
 	   enemy->GetPlayerTarget()->GetStateMachine()->IsInState(*PlayerDeadState::Instance()) == false)
 	{
@@ -53,7 +53,7 @@ void KingMookEnemyGlobalState::Execute(Enemy* enemy)
 		enemy->SetHostile(false);
 	}
 
-	if(toPlayerTarget.Length() > enemy->GetData().fightingRange &&
+	if(toPlayerTarget.Length() > enemy->GetData().hostileRange &&
 	   toPlayerTarget.Length() < enemy->GetData().chargeRange)
 	{
 		int randNum = Randomiser::Instance()->GetRandNum(0, 1);
@@ -69,7 +69,7 @@ void KingMookEnemyGlobalState::Execute(Enemy* enemy)
 
 	if((enemy->GetStateMachine()->GetCurrentState() == EnemyWalkingState::Instance() ||
 		enemy->GetStateMachine()->GetCurrentState() == EnemyRunningState::Instance()) &&
-	   toPlayerTarget.Length() > enemy->GetData().fightingRange)
+	   toPlayerTarget.Length() > enemy->GetData().hostileRange)
 	{
 		if(enemy->GetTimer() > enemy->GetData().thinkingTime * Randomiser::Instance()->GetRandNum(0.8f, 2.0f))
 		{

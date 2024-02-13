@@ -31,18 +31,7 @@ void MookEnemyGlobalState::Execute(Enemy* enemy)
 	auto currentState = enemy->GetStateMachine()->GetCurrentState();
 	auto distance = (enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length();
 
-	if((currentState == EnemyWalkingState::Instance() ||
-		currentState == EnemyRunningState::Instance()) &&
-		distance > enemy->GetData().fightingRange)
-	{
-		if(enemy->GetTimer() < 0.0f)
-		{
-			enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
-			enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.8, 2.0));
-		}
-	}
-
-	if(distance <= enemy->GetData().fightingRange)
+	if(distance <= enemy->GetData().hostileRange)
 	{
 		if (enemy->IsHostile() == false)
 		{

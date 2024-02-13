@@ -8,7 +8,7 @@ struct EnemyData
 	std::string				type;
 	ObjectData				objectData;
 	float					thinkingTime;
-	float					fightingRange;
+	float					hostileRange;
 	float					attackRange;
 	float					chargeRange;
 	float					chargeSpeed;

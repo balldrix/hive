@@ -50,8 +50,8 @@ void EnemyIdleState::Execute(Enemy* enemy)
 	if((enemy->GetPlayerTarget()->GetStateMachine()->GetCurrentState() != PlayerKnockbackState::Instance() &&
 		enemy->GetPlayerTarget()->GetStateMachine()->GetCurrentState() != PlayerDeadState::Instance()))
 	{
-		// true if enemy is outside fighting range
-		if(distance > enemy->GetData().fightingRange)
+		// true if enemy is outside hostile range
+		if(distance > enemy->GetData().hostileRange)
 		{
 			enemy->GetStateMachine()->ChangeState(EnemyRunningState::Instance());
 			enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4, 1.0));

@@ -23,6 +23,7 @@ void PlayerIdleState::OnEnter(Player* player)
 	player->GetAnimator()->Reset();
 	player->GetAnimator()->SetAnimation(m_name);
 	player->GetHitBoxManager()->SetCurrentHitBox(m_name);
+	player->GetControlSystem()->SetCanAttack(true);
 }
 
 void PlayerIdleState::Execute(Player* player)

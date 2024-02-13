@@ -32,9 +32,9 @@ public:
 
 	virtual DamageData					GetDamageData() const;
 	int									GetLives() const { return m_lives; }
-	
-	float								GetBlockTimer() const { return m_blockTimer; }
-	inline void							SetBlockTimer(const float& time) { m_blockTimer = time; }
+
+	float								GetHurtTimer() const { return m_hurtTimer; }
+	inline void							SetHurtTimer(const float& time) { m_hurtTimer = time; }
 
 	void								Run();
 	void								Walk();
@@ -61,7 +61,7 @@ private:
 	SoundSource*						m_vocalSoundSource;
 	int									m_lives;
 	float								m_knockoutTimer;
-	float								m_blockTimer;
+	float								m_hurtTimer;
 	std::map<std::string, std::wstring>	m_playerSounds;
 	int									m_recentFootstepFrame;
 };

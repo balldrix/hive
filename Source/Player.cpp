@@ -33,7 +33,7 @@ Player::Player() :
 	m_footStepsSoundSource(nullptr),
 	m_vocalSoundSource(nullptr),
 	m_recentFootstepFrame(0),
-	m_blockTimer(0.0f)
+	m_hurtTimer(0.0f)
 {
 }
 
@@ -207,9 +207,9 @@ void Player::Update(float deltaTime)
 	if(m_deathTimer > m_playerData.deathTime)
 		Kill();
 
-	if (m_stateMachine->IsInState(*PlayerBlockState::Instance()))
+	if (m_stateMachine->IsInState(*PlayerHurtState::Instance()))
 	{
-		m_blockTimer += deltaTime;
+		m_hurtTimer += deltaTime;
 	}
 
 	if(m_stateMachine->IsInState(*PlayerDeadState::Instance()) && m_health > 0)
@@ -376,7 +376,6 @@ void Player::ApplyDamage(GameObject* source, const int& amount)
 	{
 		m_health -= 1;
 		m_hitBoxManager->KillAll();
-		m_blockTimer = 0;
 		return;
 	}
 
