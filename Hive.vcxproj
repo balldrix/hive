@@ -187,6 +187,7 @@
     <Image Include="GameData\Sprites\backgroundTest.png" />
     <Image Include="GameData\Sprites\hitbox.png" />
     <Image Include="GameData\Sprites\kingMookSpritesheet.png" />
+    <Image Include="GameData\Sprites\mookRunnerSpriteSheet.png" />
     <Image Include="GameData\Sprites\mookSpriteSheet.png" />
     <Image Include="GameData\Sprites\playerSpritesheet.png" />
     <Image Include="GameData\Sprites\shadow.png" />

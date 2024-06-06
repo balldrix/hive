@@ -1,6 +1,6 @@
 # id type x_position y_position encounter_index
-Enemy01 Mook 220 65 0;
-#Enemy02 MookRunner 372 79 0;
+Enemy01 Mook 160 65 0;
+Enemy02 MookRunner 170 79 0;
 #Enemy03 Mook 370 62 0;
 #Enemy04 Mook 595 64 1;
 #Enemy05 Mook 732 70 1;

@@ -564,6 +564,7 @@
     <Image Include="GameData\Sprites\vfx.png">
       <Filter>Data</Filter>
     </Image>
+    <Image Include="GameData\Sprites\mookRunnerSpriteSheet.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GameData\HitBoxData\bossHitBoxData.json">

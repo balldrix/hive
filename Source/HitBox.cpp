@@ -25,10 +25,7 @@ void HitBox::Init(Sprite* sprite, AABB box, Color colour)
 
 	m_colour = colour; // store colour variable
 
-	// set bounding box
 	m_boundingBox = box;
-
-	// zero origin
 	m_spriteSheet.SetOrigin(Vector2::Zero);
 }
 
