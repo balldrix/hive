@@ -29,6 +29,7 @@
     <ClCompile Include="Source\PixelTexture.cpp" />
     <ClCompile Include="Source\PlayerBlockState.cpp" />
     <ClCompile Include="Source\PlayerSprintingState.cpp" />
+    <ClCompile Include="Source\RunningEnemy.cpp" />
     <ClCompile Include="Source\Sound.cpp" />
     <ClCompile Include="Source\EncounterHandler.cpp" />
     <ClCompile Include="Source\EncounterSceneState.cpp" />
@@ -52,6 +53,7 @@
     <ClInclude Include="Source\PlayerConstants.h" />
     <ClInclude Include="Source\PlayerBlockState.h" />
     <ClInclude Include="Source\PlayerSprintingState.h" />
+    <ClInclude Include="Source\RunningEnemy.h" />
     <ClInclude Include="Source\SoundSource.h" />
     <ClInclude Include="Source\SoundManager.h" />
     <ClInclude Include="Source\Sound.h" />

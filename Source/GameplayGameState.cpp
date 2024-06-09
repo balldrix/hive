@@ -91,6 +91,7 @@ GameplayGameState::GameplayGameState(GameStateManager* gameStateManager) : Gamep
 
 GameplayGameState::~GameplayGameState()
 {
+	OnExit();
 }
 
 void GameplayGameState::OnEntry()

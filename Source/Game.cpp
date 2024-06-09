@@ -26,7 +26,8 @@ Game::Game() noexcept :
 	m_currentTime(0.0f),
 	m_retryAudio(false),
 	m_clientWidth(0),
-	m_clientHeight(0)
+	m_clientHeight(0),
+	m_paused(false)
 {
 }
 
@@ -101,6 +102,7 @@ void Game::Render()
 
 void Game::ReleaseAll()
 {
+	m_gameStateManager->GetCurrentState()->OnExit();
 	m_gameStateManager->ReleaseAll();
 }
 

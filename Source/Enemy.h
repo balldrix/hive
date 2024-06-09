@@ -15,7 +15,7 @@ class SoundSource;
 class Enemy : public GameObject
 {
 public:
-	Enemy();
+							Enemy();
 	virtual					~Enemy();
 
 	virtual void			Init(Graphics* graphics,
@@ -27,7 +27,8 @@ public:
 								 Texture* hitBoxTexture,
 								 InGameHudManager* inGameUiManager, 
 								 Sprite* portraitSprite,
-								 State<Enemy>* globalEnemyState);
+								 State<Enemy>* globalEnemyState,
+								 State<Enemy>* startingState);
 
 	void					Update(float deltaTime);
 	void					Render(Graphics* graphics);
@@ -47,7 +48,7 @@ public:
 	virtual DamageData		GetDamageData() const;
 	InGameHudManager*		GetUiManager() const { return m_hudManager; }
 
-	void					ApplyDamage(GameObject* source, const int& amount);
+	virtual void			ApplyDamage(GameObject* source, const int& amount);
 	void					Knockback(const Vector2& direction, const float& force);
 	
 	virtual void			Attack();
@@ -80,4 +81,5 @@ private:
 	BarController*			m_healthBar;
 	float					m_thinkingTimer;
 	bool					m_isHostile;
+	State<Enemy>*			m_startingState;
 };

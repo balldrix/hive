@@ -36,9 +36,9 @@ Enemy::Enemy() :
 	m_punchSoundSource(nullptr),
 	m_thinkingTimer(0.0f),
 	m_isHostile(false),
-	m_recentFootstepFrame(0)
+	m_recentFootstepFrame(0),
+	m_startingState(nullptr)
 {}
-
 
 Enemy::~Enemy()
 {
@@ -68,6 +68,7 @@ void Enemy::DeleteAll()
 	delete m_shadow;
 	delete m_spriteSheet;
 
+	m_startingState = nullptr;
 	m_punchSoundSource = nullptr;
 	m_footStepsSoundSource = nullptr;
 	m_vocalSoundSource = nullptr;
@@ -89,7 +90,8 @@ void Enemy::Init(Graphics* graphics,
 				 Texture* hitBoxTexture, 
 				 InGameHudManager* inGameUiManager, 
 				 Sprite* portraitSprite,
-				 State<Enemy>* globalEnemyState)
+				 State<Enemy>* globalEnemyState,
+				 State<Enemy>* startingState)
 {
 	m_camera = camera;
 	m_playerTarget = player;
@@ -121,8 +123,10 @@ void Enemy::Init(Graphics* graphics,
 	m_acceleration = data.objectData.acceleration;
 	m_deceleration = data.objectData.deceleration;
 
+	m_startingState = startingState;
 	m_stateMachine = new StateMachine<Enemy>(this);
 	m_stateMachine->Init(EnemyIdleState::Instance(), nullptr, globalEnemyState);
+	m_stateMachine->ChangeState(startingState);
 
 	m_id = m_enemyData.objectData.id;
 	m_health = m_enemyData.objectData.startingHealth;
@@ -219,7 +223,7 @@ Enemy::Render(Graphics* graphics)
 void
 Enemy::Reset()
 {
-	m_stateMachine->ChangeState(EnemyIdleState::Instance());
+	m_stateMachine->ChangeState(m_startingState);
 	m_position = m_enemyData.objectData.startingPosition;
 	m_grounded = true;
 	m_movementSpeed = m_enemyData.objectData.walkSpeed;

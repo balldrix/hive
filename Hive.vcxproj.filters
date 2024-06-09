@@ -215,6 +215,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\EnemyIdleState.cpp" />
+    <ClCompile Include="Source\RunningEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -493,6 +494,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\EnemyIdleState.h" />
+    <ClInclude Include="Source\RunningEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\backgroundTest.png">

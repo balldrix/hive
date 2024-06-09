@@ -16,7 +16,7 @@
 using namespace InGameHudConstants;
 
 NPCFactory::NPCFactory() :
-    m_graphics(nullptr),
+	m_graphics(nullptr),
 	m_camera(nullptr),
 	m_player(nullptr),
 	m_hudManager(nullptr),
@@ -33,8 +33,8 @@ NPCFactory::NPCFactory() :
 
 NPCFactory::~NPCFactory()
 {
-    ReleaseAll();
-    DeleteAll();
+	ReleaseAll();
+	DeleteAll();
 }
 
 void NPCFactory::Init(Graphics* graphics, 
@@ -44,7 +44,7 @@ void NPCFactory::Init(Graphics* graphics,
 					  Texture* standardShadowTexture,
 					  Texture* hitBoxTexture)
 {
-    m_graphics = graphics;
+	m_graphics = graphics;
 	m_camera = camera;
 	m_player = player;
 	m_hudManager = hudManager;
@@ -93,10 +93,11 @@ Enemy* NPCFactory::CreateMook(EnemyData& data)
 {
 	auto mook = new Enemy();
 	mook->Init(m_graphics, m_camera, m_player, data,
-				 m_mookTexture, m_standardShadowTexture,
-				 m_hitBoxTexture,
-				 m_hudManager, m_mookPortraitSprite,
-				 MookEnemyGlobalState::Instance());
+				m_mookTexture, m_standardShadowTexture,
+				m_hitBoxTexture,
+				m_hudManager, m_mookPortraitSprite,
+				MookEnemyGlobalState::Instance(),
+				EnemyIdleState::Instance());
 
 	return mook;
 }
@@ -105,10 +106,11 @@ Enemy* NPCFactory::CreateMookRunner(EnemyData& data)
 {
 	auto mook = new Enemy();
 	mook->Init(m_graphics, m_camera, m_player, data,
-		m_mookTexture, m_standardShadowTexture,
-		m_hitBoxTexture,
-		m_hudManager, m_mookPortraitSprite,
-		MookRunningEnemyGlobalState::Instance());
+				m_mookTexture, m_standardShadowTexture,
+				m_hitBoxTexture,
+				m_hudManager, m_mookPortraitSprite,
+				MookRunningEnemyGlobalState::Instance(),
+				EnemyRunningState::Instance());
 
 	return mook;
 }
@@ -117,10 +119,11 @@ Enemy* NPCFactory::CreateBoss(EnemyData& data)
 {
 	auto boss = new KingMook();
 	boss->Init(m_graphics, m_camera, m_player, data,
-				 m_kingMookTexture, m_standardShadowTexture,
-				 m_hitBoxTexture,
-				 m_hudManager, m_kingMookPortraitSprite,
-				 KingMookEnemyGlobalState::Instance());
+				m_kingMookTexture, m_standardShadowTexture,
+				m_hitBoxTexture,
+				m_hudManager, m_kingMookPortraitSprite,
+				KingMookEnemyGlobalState::Instance(),
+				EnemyIdleState::Instance());
 
 	return boss;
 }

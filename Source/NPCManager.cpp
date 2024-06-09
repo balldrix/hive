@@ -191,26 +191,17 @@ void NPCManager::Reset()
 
 void NPCManager::DeleteAll()
 {
-	for(size_t i = m_enemyList.size() - 1; i-- > 0;)
+	for (const Enemy* i : m_enemyList)
 	{
-		if(m_enemyList[i] != nullptr)
-		{
-			delete m_enemyList[i];
-			m_enemyList[i] = nullptr;
-		}
+		delete i;
+		i = nullptr;
 	}
 
 	m_enemyList.clear();
 	
-	if(m_NPCFactory != nullptr)
-	{
-		delete m_NPCFactory;
-		m_NPCFactory = nullptr;
-	}
-	
-	if(m_enemyDataContainer != nullptr)
-	{
-		delete m_enemyDataContainer;
-		m_enemyDataContainer = nullptr;
-	}
+	delete m_NPCFactory;
+	delete m_enemyDataContainer;
+
+	m_NPCFactory = nullptr;	
+	m_enemyDataContainer = nullptr;
 }
