@@ -23,7 +23,7 @@ void EnemyIdleState::OnEnter(Enemy* enemy)
 	enemy->GetAnimator()->Reset();
 	enemy->GetAnimator()->SetAnimation(m_name);
 	enemy->GetHitBoxManager()->SetCurrentHitBox(m_name);
-	enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4, 1.0));
+	enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4f, 1.0f));
 	enemy->SetTargetVelocity(Vector2::Zero);
 }
 
@@ -54,12 +54,12 @@ void EnemyIdleState::Execute(Enemy* enemy)
 		if(distance > enemy->GetData().hostileRange)
 		{
 			enemy->GetStateMachine()->ChangeState(EnemyRunningState::Instance());
-			enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4, 1.0));
+			enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4f, 1.0f));
 		}
 		else if(distance > enemy->GetData().attackRange)
 		{
 			enemy->GetStateMachine()->ChangeState(EnemyWalkingState::Instance());
-			enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4, 1.0));
+			enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4f, 1.0f));
 		}			
 	}
 

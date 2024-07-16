@@ -101,21 +101,21 @@ void Enemy::Init(Graphics* graphics,
 	m_grounded = true;
 
 	m_spriteSheet = new Spritesheet();
-	m_spriteSheet->Init(spriteTexture, "GameData\\SpriteSheetData\\" + data.type + "SpritesheetData.json");
+	m_spriteSheet->Init(spriteTexture, "GameData\\SpriteSheetData\\" + data.sheetName + "SpritesheetData.json");
 	
 	m_shadow = new Sprite();
 	m_shadow->Init(shadowTexture);
 	m_shadow->SetAlpha(0.7f);
 	
 	m_animator = new Animator();
-	m_animator->Init("GameData\\SpriteSheetData\\" + data.type + "SpritesheetData.json", m_spriteSheet);
+	m_animator->Init("GameData\\SpriteSheetData\\" + data.sheetName + "SpritesheetData.json", m_spriteSheet);
 	m_animator->SetAnimation(0);
 
 	m_hitBoxSprite = new Sprite();
 	m_hitBoxSprite->Init(hitBoxTexture);
 	
 	m_hitBoxManager = new HitBoxManager();
-	m_hitBoxManager->Init(m_hitBoxSprite, "GameData\\HitBoxData\\" + data.type + "HitBoxData.json");
+	m_hitBoxManager->Init(m_hitBoxSprite, "GameData\\HitBoxData\\" + data.sheetName + "HitBoxData.json");
 	m_hitBoxManager->SetCurrentHitBox(0);
 	m_hitBoxManager->SetOwner(this);
 	

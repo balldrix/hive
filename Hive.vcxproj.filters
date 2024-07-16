@@ -216,6 +216,7 @@
     </ClCompile>
     <ClCompile Include="Source\EnemyIdleState.cpp" />
     <ClCompile Include="Source\RunningEnemy.cpp" />
+    <ClCompile Include="Source\RunningEnemyDeadState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -495,6 +496,7 @@
     </ClInclude>
     <ClInclude Include="Source\EnemyIdleState.h" />
     <ClInclude Include="Source\RunningEnemy.h" />
+    <ClInclude Include="Source\RunningEnemyDeadState.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\backgroundTest.png">
@@ -618,7 +620,6 @@
       <Filter>Data</Filter>
     </None>
     <None Include="GameData\HitBoxData\mookRunnerHitBoxData.json" />
-    <None Include="GameData\SpriteSheetData\mookRunnerSpritesheetData.json" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="GameData\EnemyData\Damage\bossDamage.txt">

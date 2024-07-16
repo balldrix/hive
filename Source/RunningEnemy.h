@@ -2,9 +2,12 @@
 
 #include "Enemy.h"
 
-class RunningEnemy : Enemy
+class RunningEnemy : public Enemy
 {
 public:
 	
 	RunningEnemy();
+
+	void ApplyDamage(GameObject* source, const int& amount);
+	void Reset();
 };

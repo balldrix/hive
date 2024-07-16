@@ -18,21 +18,21 @@ public:
 							Enemy();
 	virtual					~Enemy();
 
-	virtual void			Init(Graphics* graphics,
-								 Camera* camera,
-								 Player* player,
-								 const EnemyData& data,
-								 Texture* spriteTexture, 
-								 Texture* shadowTexture,
-								 Texture* hitBoxTexture,
-								 InGameHudManager* inGameUiManager, 
-								 Sprite* portraitSprite,
-								 State<Enemy>* globalEnemyState,
-								 State<Enemy>* startingState);
+	void					Init(Graphics* graphics,
+								Camera* camera,
+								Player* player,
+								const EnemyData& data,
+								Texture* spriteTexture,
+								Texture* shadowTexture,
+								Texture* hitBoxTexture,
+								InGameHudManager* inGameUiManager,
+								Sprite* portraitSprite,
+								State<Enemy>* globalEnemyState,
+								State<Enemy>* startingState);
 
 	void					Update(float deltaTime);
 	void					Render(Graphics* graphics);
-	void					Reset();
+	virtual void			Reset();
 
 	void					SetData(const EnemyData& data);
 	void					SetDead();
@@ -71,9 +71,9 @@ protected:
 	SoundSource*			m_footStepsSoundSource;
 	SoundSource*			m_punchSoundSource;
 	int						m_recentFootstepFrame;
+	EnemyData				m_enemyData;
 
 private:
-	EnemyData				m_enemyData;
 	Player*					m_playerTarget;
 	InGameHudManager*		m_hudManager;
 	Sprite*					m_portraitSprite;

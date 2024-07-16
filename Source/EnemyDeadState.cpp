@@ -10,7 +10,7 @@
 
 EnemyDeadState* EnemyDeadState::Instance()
 {
-	static EnemyDeadState instance("Dead");
+	static EnemyDeadState instance("dead");
 	return &instance;
 }
 

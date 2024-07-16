@@ -34,14 +34,21 @@ void MookRunningEnemyGlobalState::Execute(Enemy* enemy)
 	auto currentState = enemy->GetStateMachine()->GetCurrentState();
 	auto distance = (enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length();
 
-	if(currentState == EnemyWalkingState::Instance() &&
-		distance > enemy->GetData().chargeRange)
+	if(enemy->GetTimer() < 0.0f)
 	{
-		if(enemy->GetTimer() < 0.0f)
+		if(currentState == EnemyIdleState::Instance() &&
+			distance > enemy->GetData().chargeRange)
 		{
-			enemy->SetPosition(enemy->GetPositionX(), enemy->GetPlayerTarget()->GetGroundPosition().y + 1);
-			enemy->GetStateMachine()->ChangeState(EnemyRunningState::Instance());
+				enemy->SetPosition(enemy->GetPositionX(), enemy->GetPlayerTarget()->GetGroundPosition().y + 1);
+				enemy->GetStateMachine()->ChangeState(EnemyRunningState::Instance());
+				enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.8f, 2.0f));
+		}
+
+		if (currentState == EnemyRunningState::Instance() &&
+			distance > enemy->GetData().chargeRange)
+		{
 			enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.8f, 2.0f));
+			enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
 		}
 	}
 

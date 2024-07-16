@@ -6,6 +6,7 @@
 struct EnemyData
 {
 	std::string				type;
+	std::string				sheetName;
 	ObjectData				objectData;
 	float					thinkingTime;
 	float					hostileRange;

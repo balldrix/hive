@@ -30,6 +30,7 @@
     <ClCompile Include="Source\PlayerBlockState.cpp" />
     <ClCompile Include="Source\PlayerSprintingState.cpp" />
     <ClCompile Include="Source\RunningEnemy.cpp" />
+    <ClCompile Include="Source\RunningEnemyDeadState.cpp" />
     <ClCompile Include="Source\Sound.cpp" />
     <ClCompile Include="Source\EncounterHandler.cpp" />
     <ClCompile Include="Source\EncounterSceneState.cpp" />
@@ -54,6 +55,7 @@
     <ClInclude Include="Source\PlayerBlockState.h" />
     <ClInclude Include="Source\PlayerSprintingState.h" />
     <ClInclude Include="Source\RunningEnemy.h" />
+    <ClInclude Include="Source\RunningEnemyDeadState.h" />
     <ClInclude Include="Source\SoundSource.h" />
     <ClInclude Include="Source\SoundManager.h" />
     <ClInclude Include="Source\Sound.h" />
@@ -224,7 +226,6 @@
     <None Include="GameData\SpriteSheetData\bossSpriteSheetData.json" />
     <None Include="GameData\SpriteSheetData\dummySpriteSheetData.json" />
     <None Include="GameData\SpriteSheetData\gameOverSpritesheetData.json" />
-    <None Include="GameData\SpriteSheetData\mookRunnerSpritesheetData.json" />
     <None Include="GameData\SpriteSheetData\mookSpritesheetData.json" />
     <None Include="GameData\SpriteSheetData\playerSpritesheetData.json" />
     <None Include="GameData\SpriteSheetData\travellingpromptSpritesheetData.json" />

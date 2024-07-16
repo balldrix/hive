@@ -1,12 +1,12 @@
 # id type x_position y_position encounter_index
-Enemy01 Mook 160 65 0;
-Enemy02 MookRunner 170 79 0;
-#Enemy03 Mook 370 62 0;
-#Enemy04 Mook 595 64 1;
-#Enemy05 Mook 732 70 1;
-#Enemy06 Mook 730 79 1;
-#Enemy07 Mook 1140 64 2;
-#Enemy08 Mook 1145 70 2;
-#Enemy09 Mook 1000 79 2;
-#Enemy10 Mook 1005 66 2;
-#Enemy11 Boss 1435 73 3;
+#Enemy01 Mook Mook 160 65 0;
+Enemy02 MookRunner Mook 170 79 0;
+#Enemy03 Mook Mook 370 62 0;
+#Enemy04 Mook Mook 595 64 1;
+#Enemy05 Mook Mook 732 70 1;
+#Enemy06 Mook Mook 730 79 1;
+#Enemy07 Mook Mook 1140 64 2;
+#Enemy08 Mook Mook 1145 70 2;
+#Enemy09 Mook Mook 1000 79 2;
+#Enemy10 Mook Mook 1005 66 2;
+#Enemy11 Boss Boss 1435 73 3;

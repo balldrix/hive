@@ -142,6 +142,10 @@ bool NPCManager::InitNPCs(Graphics* graphics, Camera* camera, Player* player, In
 			
 			data.objectData.id = id;
 
+			// sheet name
+			file >> result;
+			data.sheetName = result;
+
 			// start position X
 			file >> result;
 			data.objectData.startingPosition.x = std::stof(result);

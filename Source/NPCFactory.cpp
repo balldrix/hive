@@ -2,6 +2,7 @@
 
 #include "Animator.h"
 #include "Enemy.h"
+#include "RunningEnemy.h"
 #include "Error.h"
 #include "Sprite.h"
 #include "Spritesheet.h"
@@ -104,7 +105,7 @@ Enemy* NPCFactory::CreateMook(EnemyData& data)
 
 Enemy* NPCFactory::CreateMookRunner(EnemyData& data)
 {
-	auto mook = new Enemy();
+	auto mook = new RunningEnemy();
 	mook->Init(m_graphics, m_camera, m_player, data,
 				m_mookTexture, m_standardShadowTexture,
 				m_hitBoxTexture,
