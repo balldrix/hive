@@ -8,8 +8,11 @@ const float CameraSpeedMod = 0.2f;
 
 Camera::Camera() :
 	m_trackingTarget(nullptr),
-	m_position(Vector2::Zero),
+	m_position(Vector3::Zero),
+	m_viewMatrix(XMMatrixIdentity()),
+	m_projectionMatrix(XMMatrixIdentity()),
 	m_width(0.0f),
+	m_height(0.0f),
 	m_boundary(0.0f),
 	m_threshold(0.0f)
 {
@@ -19,12 +22,18 @@ Camera::~Camera()
 {
 }
 
-void Camera::Init(float width)
+void Camera::Init(float width, float height)
 {
 	m_width = width;
+	m_height = height;
 	m_threshold = m_width / CameraThresholdMod;
 	m_boundary = 0.0f;
-	m_position = Vector2::Zero;
+	m_position.x = 0.0f;
+	m_position.y = 0.0f;
+	m_position.z = -10.0f;
+
+	SetViewMatrix();
+	SetProjectionMatrix();
 }
 
 void Camera::Update(float deltaTime)
@@ -34,6 +43,7 @@ void Camera::Update(float deltaTime)
 
 	TrackTarget(deltaTime);
 	ClampCameraToBoundary();
+	SetViewMatrix();
 }
 
 void Camera::TrackTarget(float deltaTime)
@@ -79,7 +89,17 @@ void Camera::UpdatePosition(float deltaTime)
 	float speed = m_trackingTarget->GetMovementSpeed();
 	float velocityX = m_trackingTarget->GetCurrentVelocity().x;
 	
-	m_position.x += velocityX * speed * deltaTime;
+	m_position.x = velocityX * speed * deltaTime;
+}
+
+void Camera::SetViewMatrix()
+{
+	m_viewMatrix = XMMatrixLookAtLH(m_position, Vector3::UnitZ, Vector3::UnitY);
+}
+
+void Camera::SetProjectionMatrix()
+{
+	m_projectionMatrix = XMMatrixOrthographicOffCenterLH(0, m_width, 0, m_height, 0.1f, 1000.0f);
 }
 
 void Camera::SetTarget(GameObject* target)
@@ -87,7 +107,7 @@ void Camera::SetTarget(GameObject* target)
 	m_trackingTarget = target;
 }
 
-void Camera::SetPosition(const Vector2& position)
+void Camera::SetPosition(const Vector3& position)
 {
 	m_position = position;
 }
@@ -104,6 +124,7 @@ void Camera::SetBoundary(float x)
 
 void Camera::Reset()
 {
-	m_position = Vector2::Zero;
+	m_position = Vector3::Zero;
+	m_position.z = -10.0f;
 	m_boundary = 0.0f;
 }

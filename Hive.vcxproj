@@ -24,11 +24,14 @@
     <ClCompile Include="Source\EnemyIdleState.cpp" />
     <ClCompile Include="Source\ImpactFx.cpp" />
     <ClCompile Include="Source\LevelRenderer.cpp" />
+    <ClCompile Include="Source\Material.cpp" />
     <ClCompile Include="Source\MookRunningEnemyGlobalState.cpp" />
     <ClCompile Include="Source\ParticleSystem.cpp" />
     <ClCompile Include="Source\PixelTexture.cpp" />
     <ClCompile Include="Source\PlayerBlockState.cpp" />
     <ClCompile Include="Source\PlayerSprintingState.cpp" />
+    <ClCompile Include="Source\QuadMesh.cpp" />
+    <ClCompile Include="Source\Shader.cpp" />
     <ClCompile Include="Source\RunningEnemy.cpp" />
     <ClCompile Include="Source\RunningEnemyDeadState.cpp" />
     <ClCompile Include="Source\Sound.cpp" />
@@ -42,18 +45,23 @@
     <ClCompile Include="Source\KingMookChargeState.cpp" />
     <ClCompile Include="Source\KingMookEnemyGlobalState.cpp" />
     <ClInclude Include="Source\AudioConstants.h" />
+    <ClInclude Include="Source\ConstantBuffers.h" />
     <ClInclude Include="Source\EnemyAttackRunState.h" />
     <ClInclude Include="Source\EnemyIdleState.h" />
     <ClInclude Include="Source\GlobalConstants.h" />
     <ClInclude Include="Source\ImpactFX.h" />
     <ClInclude Include="Source\InGameHudConstants.h" />
+    <ClInclude Include="Source\D3dInputLayouts.h" />
     <ClInclude Include="Source\LevelRenderer.h" />
+    <ClInclude Include="Source\Material.h" />
     <ClInclude Include="Source\MookRunningEnemyGlobalState.h" />
     <ClInclude Include="Source\ParticleSystem.h" />
     <ClInclude Include="Source\PixelTexture.h" />
     <ClInclude Include="Source\PlayerConstants.h" />
     <ClInclude Include="Source\PlayerBlockState.h" />
     <ClInclude Include="Source\PlayerSprintingState.h" />
+    <ClInclude Include="Source\QuadMesh.h" />
+    <ClInclude Include="Source\Shader.h" />
     <ClInclude Include="Source\RunningEnemy.h" />
     <ClInclude Include="Source\RunningEnemyDeadState.h" />
     <ClInclude Include="Source\SoundSource.h" />
@@ -65,6 +73,7 @@
     <ClCompile Include="Source\AudioEngine.cpp" />
     <ClCompile Include="Source\SoundSource.cpp" />
     <ClCompile Include="Source\SoundManager.cpp" />
+    <ClCompile Include="Source\Tile.cpp" />
     <ClCompile Include="Source\TilemapHandler.cpp" />
     <ClCompile Include="Source\TravellingHandler.cpp" />
     <ClCompile Include="Source\TravellingSceneState.cpp" />
@@ -126,6 +135,8 @@
     <ClInclude Include="Source\KingMook.h" />
     <ClInclude Include="Source\KingMookChargeState.h" />
     <ClInclude Include="Source\NPCFactory.h" />
+    <ClInclude Include="Source\TextureCoords.h" />
+    <ClInclude Include="Source\Tile.h" />
     <ClInclude Include="Source\TilemapData.h" />
     <ClInclude Include="Source\TilemapHandler.h" />
     <ClInclude Include="Source\TravellingHandler.h" />
@@ -231,6 +242,22 @@
     <None Include="GameData\SpriteSheetData\travellingpromptSpritesheetData.json" />
     <None Include="GameData\SpriteSheetData\vfx.json" />
     <None Include="GameData\Tilemaps\tm_bunker.json" />
+    <FxCompile Include="Shaders\pointLight.vs">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
+      <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Shaders\pointLight.ps">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
+      <FileType>Document</FileType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="GameData\EncounterData\encounterPositions.txt" />

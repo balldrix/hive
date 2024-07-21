@@ -5,7 +5,10 @@
 class Camera;
 class Graphics;
 class Texture;
-class Sprite;
+class Material;
+class QuadMesh;
+class Shader;
+class Tile;
 
 class LevelRenderer
 {
@@ -13,7 +16,7 @@ public:
 	LevelRenderer();
 	~LevelRenderer();
 
-	void Init(Graphics* graphics, Camera* camera);
+	void Init(Graphics* graphics, Camera* camera, Shader* shader);
 	void Render(Graphics* graphics);
 
 	void DeleteAll();
@@ -26,9 +29,13 @@ private:
 	void RenderTile(Graphics* graphics, unsigned int tileId, unsigned int x, unsigned int y);
 
 	Camera* m_camera;
+	Shader* m_shader;
 	TilemapHandler* m_tilemapHandler;
-	Texture* m_tileSetTexture;
-	Sprite* m_tileSetSprite;
+	Texture* m_texture;
+	Material* m_material;
+	QuadMesh* m_quadMesh;
+	Tile* m_tile;
+
 	unsigned int m_tileWidth;
 	unsigned int m_tileHeight;
 	unsigned int m_tileSetSpriteWidth;

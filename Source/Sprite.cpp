@@ -103,7 +103,6 @@ void Sprite::Render(Graphics* graphics, const Vector2& position, const RECT& des
 	SetPosition(position);
 
 	// draw sprite
-	//graphics->GetSpriteBatch()->Draw(m_texture->GetTexture(), destination, m_colour);
 	graphics->GetSpriteBatch()->Draw(m_texture->GetTexture(), destination, &m_rect,
 		m_colour,
 		m_rotation,

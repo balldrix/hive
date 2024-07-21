@@ -11,6 +11,7 @@ class Graphics;
 class Input;
 class Camera;
 class ControlSystem;
+class QuadMesh;
 class Texture;
 class Spritesheet;
 class Sprite;
@@ -26,6 +27,7 @@ class GameOverScreenController;
 class SoundSource;
 class LevelRenderer;
 class ImpactFx;
+class Shader;
 
 class GameplayGameState : public GameState
 {
@@ -73,6 +75,9 @@ private:
 
 	Camera* m_camera;
 	ControlSystem* m_controlSystem;
+
+	QuadMesh* m_quadMesh;
+	Shader* m_pointLightShader;
 
 	Texture* m_playerTexture;
 	Texture* m_hitBoxTexture;

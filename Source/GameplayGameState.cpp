@@ -7,6 +7,7 @@
 #include "Input.h"
 #include "Camera.h"
 #include "ControlSystem.h"
+#include "QuadMesh.h"
 #include "Texture.h"
 #include "SpriteSheet.h"
 #include "Sprite.h"
@@ -38,10 +39,14 @@
 #include "Randomiser.h"
 #include "PlayerBlockState.h"
 #include "PlayerIdleState.h"
+#include "Shader.h"
+#include "D3dInputLayouts.h"
 
 using namespace GlobalConstants;
 using namespace GameplayConstants;
 using namespace InGameHudConstants;
+
+const int MAX_LIGHTS = 4;
 
 GameplayGameState::GameplayGameState() :
 	m_gameStateManager(nullptr),
@@ -79,6 +84,7 @@ GameplayGameState::GameplayGameState() :
 	m_impactFxAnimator(nullptr),
 	m_impactFx(nullptr),
 	m_particleSystem(nullptr),
+	m_pointLightShader(nullptr),
 	GameState(L"GAMEPLAY")
 {}
 
@@ -142,6 +148,7 @@ void GameplayGameState::LoadAssets()
 	m_camera = new Camera();
 	m_controlSystem = new ControlSystem();
 
+	m_pointLightShader = new Shader();
 	m_playerTexture = new Texture();
 	m_hitBoxTexture = new Texture();
 	m_standardShadowTexture = new Texture();
@@ -186,7 +193,10 @@ void GameplayGameState::LoadAssets()
 	m_player->SetCamera(m_camera);
 	m_camera->SetTarget(m_player);
 
-	m_levelRenderer->Init(m_graphics, m_camera);
+	m_pointLightShader->LoadVertexShader(m_graphics, L"Shaders\\pointLight.vs", "PointLightVertexShader", PTInputElementDesc, ARRAYSIZE(PTInputElementDesc));
+	m_pointLightShader->LoadPixelShader(m_graphics, L"Shaders\\pointLight.ps", "PointLightPixelShader");
+
+	m_levelRenderer->Init(m_graphics, m_camera, m_pointLightShader);
 
 	m_hudManager->Init(m_graphics);
 	m_hudManager->SetMaxPlayerHealth(m_player->GetMaxHealth());
@@ -200,7 +210,7 @@ void GameplayGameState::LoadAssets()
 	m_playerBoundary.SetMin(Vector2(StartingBoundaryMinX, StartingBoundaryMinY));
 	m_playerBoundary.SetMax(Vector2((float)m_levelRenderer->GetLevelPixelWidth() - 1.0f, (float)m_graphics->GetHeight() - 1.0f));
 	
-	m_camera->Init(GameWidth);
+	m_camera->Init(GameWidth, GameHeight);
 	
 	m_gameOverScreenController = new GameOverScreenController();
 	m_gameOverScreenController->Init(m_graphics);	
@@ -263,6 +273,7 @@ void GameplayGameState::DeleteAssets()
 
 	delete m_encounterHandler;
 	m_encounterHandler = nullptr;
+
 	delete m_sceneStateMachine;
 	m_sceneStateMachine = nullptr;
 
@@ -304,6 +315,9 @@ void GameplayGameState::DeleteAssets()
 
 	delete m_playerTexture;
 	m_playerTexture = nullptr;
+
+	delete m_pointLightShader;
+	m_pointLightShader = nullptr;
 
 	delete m_controlSystem;
 	m_controlSystem = nullptr;
@@ -430,6 +444,7 @@ void GameplayGameState::Update(float deltaTime)
 {
 	m_deltaTime = deltaTime;
 	m_sceneStateMachine->Update();
+	m_camera->Update(deltaTime);
 }
 
 void GameplayGameState::CheckForEncounter()
@@ -617,6 +632,25 @@ void GameplayGameState::SpawnParticles(const Vector2& position, const Vector2& v
 
 void GameplayGameState::Render()
 {
+	m_graphics->SetViewMatrix(m_camera->GetViewMatrix());
+	m_graphics->SetProjectionMatrix(m_camera->GetProjectionMatrix());
+
+	XMFLOAT4 colors[NumLights];
+
+	colors[0] = (XMFLOAT4)Colors::Purple;
+	colors[1] = (XMFLOAT4)Colors::Purple;
+	colors[2] = (XMFLOAT4)Colors::Purple;
+
+	m_graphics->SetLightColors(colors);
+	
+	XMFLOAT4 lightPositions[NumLights];
+
+	lightPositions[0] =  XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f);
+	lightPositions[1] =  XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f);
+	lightPositions[2] =  XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f);
+
+	m_graphics->SetLightPositions(lightPositions);
+	
 	m_levelRenderer->Render(m_graphics);
 	m_player->Render(m_graphics);
 	m_NPCManager->Render(m_graphics);
@@ -634,6 +668,7 @@ void GameplayGameState::ReleaseAll()
 	if(m_hitBoxTexture != nullptr) { m_hitBoxTexture->Release(); }
 	if(m_playerTexture != nullptr) { m_playerTexture->Release(); }
 	if(m_gameOverScreenController != nullptr) { m_gameOverScreenController->ReleaseAll(); }
+	if(m_pointLightShader != nullptr) { m_pointLightShader->Release(); }
 }
 
 void GameplayGameState::ResetGame()

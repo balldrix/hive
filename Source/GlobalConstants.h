@@ -9,4 +9,5 @@ namespace GlobalConstants
 	const int GameWidth = 160;
 	const int GameHeight = 90;
 	const float BackColor[4] = { 0.3f, 0.3f, 0.3f, 1.0f };
+	const int NumLights = 3;
 }

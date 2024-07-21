@@ -217,6 +217,10 @@
     <ClCompile Include="Source\EnemyIdleState.cpp" />
     <ClCompile Include="Source\RunningEnemy.cpp" />
     <ClCompile Include="Source\RunningEnemyDeadState.cpp" />
+    <ClCompile Include="Source\Shader.cpp" />
+    <ClCompile Include="Source\QuadMesh.cpp" />
+    <ClCompile Include="Source\Material.cpp" />
+    <ClCompile Include="Source\Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -497,6 +501,13 @@
     <ClInclude Include="Source\EnemyIdleState.h" />
     <ClInclude Include="Source\RunningEnemy.h" />
     <ClInclude Include="Source\RunningEnemyDeadState.h" />
+    <ClInclude Include="Source\Shader.h" />
+    <ClInclude Include="Source\QuadMesh.h" />
+    <ClInclude Include="Source\Material.h" />
+    <ClInclude Include="Source\Tile.h" />
+    <ClInclude Include="Source\D3dInputLayouts.h" />
+    <ClInclude Include="Source\ConstantBuffers.h" />
+    <ClInclude Include="Source\TextureCoords.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\backgroundTest.png">
@@ -742,5 +753,9 @@
     <Media Include="GameData\Sounds\walk_004.wav">
       <Filter>Data</Filter>
     </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Shaders\pointLight.vs" />
+    <FxCompile Include="Shaders\pointLight.ps" />
   </ItemGroup>
 </Project>
