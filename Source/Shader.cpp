@@ -10,8 +10,6 @@ Shader::Shader() :
 {
 }
 
-Shader::Shader(const Shader&) {}
-
 Shader::~Shader() {}
 
 void Shader::LoadVertexShader(Graphics* graphics, std::wstring filename, std::string entryPoint, D3D11_INPUT_ELEMENT_DESC* inputElement, int numElements)

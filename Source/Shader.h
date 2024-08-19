@@ -8,7 +8,6 @@ class Shader
 {
 public:
 	Shader();
-	Shader(const Shader&);
 	~Shader();
 	void LoadVertexShader(Graphics* graphics, std::wstring filename, std::string entryPoint, D3D11_INPUT_ELEMENT_DESC* inputElement, int numElements);
 	void LoadPixelShader(Graphics* graphics, std::wstring filename, std::string entryPoint);
@@ -18,6 +17,7 @@ public:
 	ID3D11InputLayout* GetInputLayout() const { return m_vertexLayout; }
 
 private:
+	Shader(const Shader&);
 	ID3D11VertexShader* m_vertexShader;
 	ID3D11PixelShader* m_pixelShader;
 	ID3D11InputLayout* m_vertexLayout;

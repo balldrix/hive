@@ -11,22 +11,25 @@ class QuadMesh
 {
 public:
 	QuadMesh();
-	QuadMesh(const QuadMesh&);
+	QuadMesh(const QuadMesh&) = default;
 	~QuadMesh();
 
 	void Init(Graphics* graphics);
-	void Render(Graphics* graphics);
-	void Render(Graphics* graphics, const TextureCoords& rect);
-	void Release();
+	void CreateInstanceBuffer(Graphics* graphics, const unsigned int& numInstances);
 	
-	void SetVertexBuffer(Graphics* graphics);
+	void Render(Graphics* graphics);
+	void RenderInstanced(Graphics* graphics, unsigned int* stride, const unsigned int& instanceCount);
+	void Release();
+
+	ID3D11Buffer* GetInstanceBuffer() const { return m_instanceBuffer; }
 
 private:
+
 	ID3D11Buffer* m_vertexBuffer;
 	ID3D11Buffer* m_indexBuffer;
+	ID3D11Buffer* m_instanceBuffer;
+
 	int m_vertexCount;
 	int m_indexCount;
 	UINT m_stride;
-	
-	VertexPositionTexture m_quadVerts[NUM_VERTS];
 };

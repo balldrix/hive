@@ -8,7 +8,6 @@ PixelTexture::PixelTexture()
 
 PixelTexture::~PixelTexture()
 {
-	m_texture->Release();
 }
 
 void PixelTexture::Init(Graphics* graphics)

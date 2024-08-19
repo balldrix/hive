@@ -508,6 +508,7 @@
     <ClInclude Include="Source\D3dInputLayouts.h" />
     <ClInclude Include="Source\ConstantBuffers.h" />
     <ClInclude Include="Source\TextureCoords.h" />
+    <ClInclude Include="Source\InstanceData.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\backgroundTest.png">
@@ -756,6 +757,5 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\pointLight.vs" />
-    <FxCompile Include="Shaders\pointLight.ps" />
   </ItemGroup>
 </Project>

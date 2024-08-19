@@ -10,4 +10,5 @@ namespace GlobalConstants
 	const int GameHeight = 90;
 	const float BackColor[4] = { 0.3f, 0.3f, 0.3f, 1.0f };
 	const int NumLights = 3;
+	const int NumTilesPerScreen = 264;
 }

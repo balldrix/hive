@@ -22,8 +22,11 @@ cbuffer LightPositionBuffer : register(b3)
 
 struct VertextInputType
 {
-	float4 position : POSITION;	// semantics set in the input layout element desc
-	float2 texcoord : TEXCOORD0;
+	float3 position : POSITION;	// semantics set in the input layout element desc
+	float2 texcoord : TEXCOORD;	
+	row_major float4x4 instancePosition : INSTANCE_POSITION;
+	float2 instanceUVOffset : INSTANCE_TEXOFFSET;
+	float2 instanceUVScale : INSTANCE_TEXSCALE;
 };
 
 struct PixelInputType
@@ -36,15 +39,14 @@ struct PixelInputType
 PixelInputType PointLightVertexShader(VertextInputType input)
 {
 	PixelInputType output = (PixelInputType)0;
-	float4 worldPosition;
 	int i;
 	
-	output.position.w = 1.0f;
-	output.position = mul(mul(mul(input.position, worldMatrix), viewMatrix), projectionMatrix);
-	output.texcoord = input.texcoord;
-
-	worldPosition = mul(input.position, worldMatrix);
-
+	float4 instancePosition = mul(float4(input.position, 1.0f), input.instancePosition);
+	output.position = mul(mul(mul(instancePosition, worldMatrix), viewMatrix), projectionMatrix);
+	
+	output.texcoord = input.texcoord * input.instanceUVScale;	
+	output.texcoord += input.instanceUVOffset;
+		
 	for(i = 0; i < NUM_LIGHTS; i++)
 	{
 		output.lightPos[i] = lightPosition[i].xyz;

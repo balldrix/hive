@@ -3,6 +3,10 @@
 #include "Graphics.h"
 #include "Material.h"
 #include "QuadMesh.h"
+#include "InstanceData.h"
+#include "GlobalConstants.h"
+
+using namespace GlobalConstants;
 
 Tile::Tile() :
 	m_mesh(nullptr),
@@ -21,7 +25,7 @@ Tile::~Tile()
 	m_mesh->Release();
 }
 
-void Tile::Init(QuadMesh* mesh, Material* material)
+void Tile::Init(Graphics* graphics, QuadMesh* mesh, Material* material)
 {
 	m_mesh = mesh;
 	m_material = material;
@@ -37,7 +41,19 @@ void Tile::Render(Graphics* graphics)
 {
 	graphics->SetWorldMatrix(m_modelMatrix);
 	m_material->RenderSetup(graphics);
-	m_mesh->Render(graphics, m_texCoords);
+	m_mesh->Render(graphics);
+}
+
+void Tile::RenderInstanced(Graphics* graphics, unsigned int instanceCount)
+{
+	graphics->SetWorldMatrix(m_modelMatrix);
+	m_material->RenderSetup(graphics);
+
+	unsigned int stride[2];
+	stride[0] = sizeof(VertexPositionTexture);
+	stride[1] = sizeof(InstanceType);
+
+	m_mesh->RenderInstanced(graphics, stride, NumTilesPerScreen);
 }
 
 void Tile::SetSize(const Vector2& size)

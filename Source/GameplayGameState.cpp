@@ -54,6 +54,7 @@ GameplayGameState::GameplayGameState() :
 	m_input(nullptr),
 	m_camera(nullptr),
 	m_controlSystem(nullptr),
+	m_quadMesh(nullptr),
 	m_playerTexture(nullptr),
 	m_hitBoxTexture(nullptr),
 	m_standardShadowTexture(nullptr),
@@ -193,7 +194,7 @@ void GameplayGameState::LoadAssets()
 	m_player->SetCamera(m_camera);
 	m_camera->SetTarget(m_player);
 
-	m_pointLightShader->LoadVertexShader(m_graphics, L"Shaders\\pointLight.vs", "PointLightVertexShader", PTInputElementDesc, ARRAYSIZE(PTInputElementDesc));
+	m_pointLightShader->LoadVertexShader(m_graphics, L"Shaders\\pointLight.vs", "PointLightVertexShader", TileInputElementDesc, ARRAYSIZE(TileInputElementDesc));
 	m_pointLightShader->LoadPixelShader(m_graphics, L"Shaders\\pointLight.ps", "PointLightPixelShader");
 
 	m_levelRenderer->Init(m_graphics, m_camera, m_pointLightShader);

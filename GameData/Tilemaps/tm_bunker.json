@@ -82,16 +82,16 @@
  "nextlayerid":4,
  "nextobjectid":1,
  "orientation":"orthogonal",
- "renderorder":"right-down",
- "tiledversion":"1.9.1",
+ "renderorder":"left-up",
+ "tiledversion":"1.11.0",
  "tileheight":8,
  "tilesets":[
         {
          "firstgid":1,
-         "source":"D:\/Google Drive\/Tilemaps\/ts_bunker.tsx"
+         "source":"ts_bunker.tsx"
         }],
  "tilewidth":8,
  "type":"map",
- "version":"1.9",
+ "version":"1.10",
  "width":188
 }

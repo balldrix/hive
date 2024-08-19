@@ -72,7 +72,7 @@ void EnemyIdleState::Execute(Enemy* enemy)
 		double randnum = Randomiser::Instance()->GetRandNum(0.02, 1.8);
 	
 		enemy->Stop();
-		enemy->ResetTimer(randnum);
+		enemy->ResetTimer((float)randnum);
 		enemy->Attack();
 
 		return;

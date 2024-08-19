@@ -52,6 +52,7 @@
     <ClInclude Include="Source\ImpactFX.h" />
     <ClInclude Include="Source\InGameHudConstants.h" />
     <ClInclude Include="Source\D3dInputLayouts.h" />
+    <ClInclude Include="Source\InstanceData.h" />
     <ClInclude Include="Source\LevelRenderer.h" />
     <ClInclude Include="Source\Material.h" />
     <ClInclude Include="Source\MookRunningEnemyGlobalState.h" />
@@ -243,20 +244,9 @@
     <None Include="GameData\SpriteSheetData\vfx.json" />
     <None Include="GameData\Tilemaps\tm_bunker.json" />
     <FxCompile Include="Shaders\pointLight.vs">
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
-      <FileType>Document</FileType>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </FxCompile>
-    <FxCompile Include="Shaders\pointLight.ps">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
       <FileType>Document</FileType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>

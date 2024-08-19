@@ -13,9 +13,12 @@ public:
 	Tile();
 	~Tile();
 
-	void Init(QuadMesh* mesh, Material* material);
+	void Init(Graphics* graphics, QuadMesh* mesh, Material* material);
 	void Update();
 	void Render(Graphics* graphics);
+	void RenderInstanced(Graphics* graphics, unsigned int instanceCount);
+
+	Matrix GetScaleMatrix() const { return m_scaleMatrix; }
 
 	void SetSize(const Vector2& size);
 	void SetTexCoords(const TextureCoords& rect);

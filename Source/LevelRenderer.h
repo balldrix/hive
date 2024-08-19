@@ -1,14 +1,17 @@
 #pragma once
 
 #include "TilemapHandler.h"
+#include "Tile.h"
+#include "InstanceData.h"
+
+#include "pch.h"
 
 class Camera;
 class Graphics;
 class Texture;
-class Material;
 class QuadMesh;
+class Material;
 class Shader;
-class Tile;
 
 class LevelRenderer
 {
@@ -25,8 +28,8 @@ public:
 
 private:
 
-	void RenderLayer(Graphics* graphics, const TilemapLayer& layer);
-	void RenderTile(Graphics* graphics, unsigned int tileId, unsigned int x, unsigned int y);
+	void UpdateInstanceData(Graphics* graphics, const TilemapLayer& layer);
+	InstanceType* GetInstanceData(Graphics* graphics, unsigned int tileId, const unsigned int& posX, const unsigned int& posY, const unsigned int& posZ);
 
 	Camera* m_camera;
 	Shader* m_shader;
@@ -35,10 +38,12 @@ private:
 	Material* m_material;
 	QuadMesh* m_quadMesh;
 	Tile* m_tile;
+	std::vector<InstanceType> m_tileInstances;
 
 	unsigned int m_tileWidth;
 	unsigned int m_tileHeight;
 	unsigned int m_tileSetSpriteWidth;
 	unsigned int m_tileSetSpriteHeight;
 	unsigned int m_tileSetWidth;
+	unsigned int m_numTiles;
 };
