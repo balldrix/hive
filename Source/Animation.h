@@ -20,7 +20,10 @@ namespace
 		a.name = j.at("name").get<std::string>();
 		a.from = j.at("from").get<unsigned int>();
 		a.to = j.at("to").get<unsigned int>();
-		a.loop = j.at("loop").get<bool>();
+		a.loop = true;
+		
+		if (j.contains("repeat"))
+			a.loop = false;
 
  		a.frameCount += a.to - a.from;
 	}
