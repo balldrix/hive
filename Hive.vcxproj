@@ -122,7 +122,6 @@
     <ClInclude Include="Source\GameOverScreenController.h" />
     <ClInclude Include="Source\GameplayOwnedSceneStates.h" />
     <ClInclude Include="Source\GlobalSceneState.h" />
-    <ClInclude Include="Source\json.hpp" />
     <ClInclude Include="Source\KingMook.h" />
     <ClInclude Include="Source\KingMookChargeState.h" />
     <ClInclude Include="Source\NPCFactory.h" />

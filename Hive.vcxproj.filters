@@ -1,502 +1,548 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Source\Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\AABB.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Graphics.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameStateManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Input.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Randomiser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Sprite.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Source\Window.cpp">
+      <Filter>System</Filter>
     </ClCompile>
     <ClCompile Include="Source\Timer.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>System</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameplayGameState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Error.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PlayerIdleState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PlayerRunningState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ControlSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PlayerGlobalState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Spritesheet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Animator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\HitBox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\HitBoxManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PlayerAttackState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Enemy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EnemyHurtState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EnemyKnockbackState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EnemyWalkingState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EnemyRunningState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PlayerDeadState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PlayerHurtState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PlayerKnockbackState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\NPCManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EnemyDataContainer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PlayerData.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\BarController.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\CharacterPortrait.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\InGameHudManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EnemyDeadState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\MookEnemyGlobalState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EnemyAttackState.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Source\Main.cpp">
+      <Filter>System</Filter>
     </ClCompile>
     <ClCompile Include="Source\AudioEngine.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Audio</Filter>
     </ClCompile>
-    <ClCompile Include="Source\EncounterHandler.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Source\Enemy.cpp">
+      <Filter>Game\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Source\EncounterSceneState.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Source\EnemyDataContainer.cpp">
+      <Filter>Game\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Source\EnemyVictoryState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameOverSceneState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameOverScreen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameOverScreenController.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GlobalSceneState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\KingMookEnemyGlobalState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\KingMook.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\KingMookChargeState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\NPCFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\SoundManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Sound.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\SoundSource.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\TravellingHandler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\TravellingSceneState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\TravelPrompt.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PlayerSprintingState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PlayerBlockState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\DamageData.h">
-      <Filter>Header Files</Filter>
+    <ClCompile Include="Source\RunningEnemy.cpp">
+      <Filter>Game\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="Source\EnemyAttackRunState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Game\Enemy\States</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ImpactFx.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Source\EnemyAttackState.cpp">
+      <Filter>Game\Enemy\States</Filter>
     </ClCompile>
-    <ClCompile Include="Source\LevelRenderer.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Source\EnemyDeadState.cpp">
+      <Filter>Game\Enemy\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EnemyHurtState.cpp">
+      <Filter>Game\Enemy\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EnemyIdleState.cpp">
+      <Filter>Game\Enemy\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EnemyKnockbackState.cpp">
+      <Filter>Game\Enemy\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EnemyRunningState.cpp">
+      <Filter>Game\Enemy\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EnemyVictoryState.cpp">
+      <Filter>Game\Enemy\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EnemyWalkingState.cpp">
+      <Filter>Game\Enemy\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\KingMookEnemyGlobalState.cpp">
+      <Filter>Game\Enemy\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MookEnemyGlobalState.cpp">
+      <Filter>Game\Enemy\States</Filter>
     </ClCompile>
     <ClCompile Include="Source\MookRunningEnemyGlobalState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Game\Enemy\States</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ParticleSystem.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Source\RunningEnemyDeadState.cpp">
+      <Filter>Game\Enemy\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameplayGameState.cpp">
+      <Filter>Game\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GlobalSceneState.cpp">
+      <Filter>Game\Scenes\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TravellingSceneState.cpp">
+      <Filter>Game\Scenes\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameOverSceneState.cpp">
+      <Filter>Game\Scenes\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EncounterSceneState.cpp">
+      <Filter>Game\Scenes\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Input.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SoundSource.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Sound.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SoundManager.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerData.h">
+      <Filter>Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Player.cpp">
+      <Filter>Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerAttackState.cpp">
+      <Filter>Game\Player\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerBlockState.cpp">
+      <Filter>Game\Player\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerDeadState.cpp">
+      <Filter>Game\Player\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerGlobalState.cpp">
+      <Filter>Game\Player\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerHurtState.cpp">
+      <Filter>Game\Player\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerIdleState.cpp">
+      <Filter>Game\Player\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerKnockbackState.cpp">
+      <Filter>Game\Player\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerRunningState.cpp">
+      <Filter>Game\Player\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerSprintingState.cpp">
+      <Filter>Game\Player\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BarController.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TravelPrompt.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Texture.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Spritesheet.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Sprite.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Animator.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Camera.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameOverScreen.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CharacterPortrait.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ImpactFx.cpp">
+      <Filter>Graphics\VFX</Filter>
     </ClCompile>
     <ClCompile Include="Source\PixelTexture.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Randomiser.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AABB.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ControlSystem.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\HitBox.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\HitBoxManager.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\InGameHudManager.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameOverScreenController.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Error.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\KingMookChargeState.cpp">
+      <Filter>Game\Enemy\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\KingMook.cpp">
+      <Filter>Game\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TravellingHandler.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EncounterHandler.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\NPCFactory.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\NPCManager.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DamageData.h">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ParticleSystem.cpp">
+      <Filter>Graphics\VFX</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LevelRenderer.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameStateManager.cpp">
+      <Filter>Game\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameState.cpp">
+      <Filter>Game\States</Filter>
     </ClCompile>
     <ClCompile Include="Source\TilemapHandler.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Source\EnemyIdleState.cpp" />
-    <ClCompile Include="Source\RunningEnemy.cpp" />
-    <ClCompile Include="Source\RunningEnemyDeadState.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{9c628d12-de23-440d-af2f-a470855fbde8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{c4f03af4-9746-424f-8eaa-c6867db40142}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Data">
       <UniqueIdentifier>{321e2898-ecdc-48e2-a7aa-84590962e760}</UniqueIdentifier>
     </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{0834f2ca-689d-462c-9e50-6167afd0d8ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{036d56e3-0f00-43b6-98f6-82fbe9248ae3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{b4cbcd8f-81df-47b8-8d6e-2d80c41a86c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Enemy">
+      <UniqueIdentifier>{0b4a85e6-813f-47fb-8a5d-fd18fec84d9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Enemy\States">
+      <UniqueIdentifier>{6df703d3-8b27-4336-925f-d0ce808d6c7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\States">
+      <UniqueIdentifier>{16b3cf1e-e87d-4f63-9986-e04f74dd8ed0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes">
+      <UniqueIdentifier>{9412fef3-e878-4fd7-9cc1-9b63be714e55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes\States">
+      <UniqueIdentifier>{3c89834e-8131-4c21-aaba-8ce7c30d7000}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{84ba73c8-d904-4698-ab16-3cadebf351c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Player">
+      <UniqueIdentifier>{00246f70-5b4d-4194-9c76-20f0af138e81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Player\States">
+      <UniqueIdentifier>{09f06dc3-3617-4118-b92b-170a2ad91ff7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{4db33e1c-495f-4d65-a041-a6f131efa1f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\VFX">
+      <UniqueIdentifier>{a4e5c9fd-0880-4502-9bd3-37470c7480c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collision">
+      <UniqueIdentifier>{af2df959-4857-4e51-a3c0-456cb4f7c65a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Constants">
+      <UniqueIdentifier>{72a839a7-bfc7-4590-9673-7c3d84ca8d88}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\AABB.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameplayConstants.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameStateManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Graphics.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Input.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\pch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Randomiser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Resources.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Sprite.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Source\Window.h">
+      <Filter>System</Filter>
     </ClInclude>
     <ClInclude Include="Source\Timer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\UnitVectors.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Texture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameplayGameState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Error.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\State.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PlayerIdleState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PlayerRunningState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ControlSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PlayerOwnedStates.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PlayerGlobalState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Animation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Animator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Spritesheet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\HitBox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\HitBoxManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\StateMachine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\HitBoxData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SpriteFrameData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PlayerAttackState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Enemy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EnemyWalkingState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EnemyRunningState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EnemyHurtState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EnemyKnockbackState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PlayerKnockbackState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PlayerHurtState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PlayerDeadState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EnemyFightingState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EnemyData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\NPCManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EnemyDataContainer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\BarController.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\CharacterPortrait.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\InGameHudManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EnemyDeadState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\MookEnemyGlobalState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EnemyAttackState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EnemyOwnedStates.h">
-      <Filter>Header Files</Filter>
+      <Filter>System</Filter>
     </ClInclude>
     <ClInclude Include="Source\AudioEngine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GlobalSceneState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameplayOwnedSceneStates.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameOverScreenController.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameOverScreen.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameOverSceneState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EnemyVictoryState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EncounterSceneState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EncounterHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\json.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\KingMook.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\KingMookEnemyGlobalState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\KingMookChargeState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\NPCFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\TravelPrompt.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\TravellingSceneState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\TravellingHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SoundSource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SoundManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Sound.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PlayerSprintingState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PlayerBlockState.h">
-      <Filter>Header Files</Filter>
+      <Filter>Audio</Filter>
     </ClInclude>
     <ClInclude Include="Source\AudioConstants.h">
-      <Filter>Header Files</Filter>
+      <Filter>Constants</Filter>
     </ClInclude>
-    <ClInclude Include="Source\EnemyAttackRunState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\InGameHudConstants.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ImpactFX.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Source\GameplayConstants.h">
+      <Filter>Constants</Filter>
     </ClInclude>
     <ClInclude Include="Source\GlobalConstants.h">
-      <Filter>Header Files</Filter>
+      <Filter>Constants</Filter>
     </ClInclude>
-    <ClInclude Include="Source\LevelRenderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ParticleSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\MookRunningEnemyGlobalState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PixelTexture.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Source\InGameHudConstants.h">
+      <Filter>Constants</Filter>
     </ClInclude>
     <ClInclude Include="Source\PlayerConstants.h">
-      <Filter>Header Files</Filter>
+      <Filter>Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy.h">
+      <Filter>Game\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyData.h">
+      <Filter>Game\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyDataContainer.h">
+      <Filter>Game\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RunningEnemy.h">
+      <Filter>Game\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyAttackRunState.h">
+      <Filter>Game\Enemy\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyAttackState.h">
+      <Filter>Game\Enemy\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyDeadState.h">
+      <Filter>Game\Enemy\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyFightingState.h">
+      <Filter>Game\Enemy\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyHurtState.h">
+      <Filter>Game\Enemy\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyIdleState.h">
+      <Filter>Game\Enemy\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyKnockbackState.h">
+      <Filter>Game\Enemy\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyOwnedStates.h">
+      <Filter>Game\Enemy\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyRunningState.h">
+      <Filter>Game\Enemy\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyVictoryState.h">
+      <Filter>Game\Enemy\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyWalkingState.h">
+      <Filter>Game\Enemy\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\KingMookEnemyGlobalState.h">
+      <Filter>Game\Enemy\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MookEnemyGlobalState.h">
+      <Filter>Game\Enemy\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MookRunningEnemyGlobalState.h">
+      <Filter>Game\Enemy\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RunningEnemyDeadState.h">
+      <Filter>Game\Enemy\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TravellingSceneState.h">
+      <Filter>Game\Scenes\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameplayOwnedSceneStates.h">
+      <Filter>Game\Scenes\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GlobalSceneState.h">
+      <Filter>Game\Scenes\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameOverSceneState.h">
+      <Filter>Game\Scenes\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EncounterSceneState.h">
+      <Filter>Game\Scenes\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Input.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Sound.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SoundManager.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SoundSource.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Player.h">
+      <Filter>Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerAttackState.h">
+      <Filter>Game\Player\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerBlockState.h">
+      <Filter>Game\Player\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerDeadState.h">
+      <Filter>Game\Player\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerGlobalState.h">
+      <Filter>Game\Player\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerHurtState.h">
+      <Filter>Game\Player\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerIdleState.h">
+      <Filter>Game\Player\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerKnockbackState.h">
+      <Filter>Game\Player\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerOwnedStates.h">
+      <Filter>Game\Player\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerRunningState.h">
+      <Filter>Game\Player\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerSprintingState.h">
+      <Filter>Game\Player\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BarController.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TravelPrompt.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AABB.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Animation.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Animator.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Camera.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CharacterPortrait.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ControlSystem.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EncounterHandler.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Error.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\UnitVectors.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\pch.h" />
+    <ClInclude Include="Source\Game.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameOverScreen.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameOverScreenController.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameplayGameState.h">
+      <Filter>Game\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameState.h">
+      <Filter>Game\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\HitBoxManager.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\HitBoxData.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\HitBox.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ImpactFX.h">
+      <Filter>Graphics\VFX</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PixelTexture.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ParticleSystem.h">
+      <Filter>Graphics\VFX</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\InGameHudManager.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\KingMookChargeState.h">
+      <Filter>Game\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\KingMook.h">
+      <Filter>Game\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LevelRenderer.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Randomiser.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resources.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NPCManager.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NPCFactory.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameStateManager.h">
+      <Filter>Game\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\State.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Sprite.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SpriteFrameData.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Spritesheet.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateMachine.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Texture.h">
+      <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Source\TilemapData.h">
-      <Filter>Header Files</Filter>
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TravellingHandler.h">
+      <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Source\TilemapHandler.h">
-      <Filter>Header Files</Filter>
+      <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Source\EnemyIdleState.h" />
-    <ClInclude Include="Source\RunningEnemy.h" />
-    <ClInclude Include="Source\RunningEnemyDeadState.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameData\Sprites\backgroundTest.png">
@@ -568,7 +614,9 @@
     <Image Include="GameData\Sprites\vfx.png">
       <Filter>Data</Filter>
     </Image>
-    <Image Include="GameData\Sprites\mookRunnerSpriteSheet.png" />
+    <Image Include="GameData\Sprites\mookRunnerSpriteSheet.png">
+      <Filter>Data</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameData\HitBoxData\bossHitBoxData.json">
@@ -619,7 +667,9 @@
     <None Include="GameData\SpriteSheetData\vfx.json">
       <Filter>Data</Filter>
     </None>
-    <None Include="GameData\HitBoxData\mookRunnerHitBoxData.json" />
+    <None Include="GameData\HitBoxData\mookRunnerHitBoxData.json">
+      <Filter>Data</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="GameData\EnemyData\Damage\bossDamage.txt">
@@ -646,7 +696,9 @@
     <Text Include="GameData\EnemyData\typeData.txt">
       <Filter>Data</Filter>
     </Text>
-    <Text Include="GameData\EnemyData\Damage\mookRunnerDamage.txt" />
+    <Text Include="GameData\EnemyData\Damage\mookRunnerDamage.txt">
+      <Filter>Data</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <Media Include="GameData\Sounds\boss_entrance_001.wav">
