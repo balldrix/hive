@@ -213,7 +213,6 @@
     <Image Include="GameData\Tilesets\ts_bunker.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="GameData\AnimationData\playerAnimationData.json" />
     <None Include="GameData\HitBoxData\bossHitBoxData.json" />
     <None Include="GameData\HitBoxData\dummyHitBoxData.json" />
     <None Include="GameData\HitBoxData\mookHitBoxData.json" />
@@ -237,7 +236,6 @@
     <Text Include="GameData\EnemyData\Damage\mookDamage.txt" />
     <Text Include="GameData\EnemyData\Damage\mookRunnerDamage.txt" />
     <Text Include="GameData\EnemyData\enemyData.txt" />
-    <Text Include="GameData\EnemyData\Mook\mookDamage.txt" />
     <Text Include="GameData\EnemyData\typeData.txt" />
     <Text Include="GameData\PlayerData\playerDamage.txt" />
     <Text Include="GameData\PlayerData\playerData.txt" />
