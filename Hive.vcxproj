@@ -426,7 +426,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties GameData_4HitBoxData_4playerHitBoxData_1json__JsonSchema="https://turborepo.org/schema.json" />
+      <UserProperties GameData_4HitBoxData_4playerHitBoxData_1json__JsonSchema="https://turborepo.org/schema.json" GameData_4SpriteSheetData_4playerSpritesheetData_1json__JsonSchema="https://codemagic.io/codemagic-schema.json" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
