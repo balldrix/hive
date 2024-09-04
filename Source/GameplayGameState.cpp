@@ -468,6 +468,9 @@ void GameplayGameState::Tick(float deltaTime)
 
 void GameplayGameState::ProcessCollisions()
 {
+	if(m_stopTimer > 0)
+		return;
+
 	std::vector<Enemy*> enemyList = m_NPCManager->GetEnemyList();
 
 	auto isPlayerHitBoxActive = m_player->GetHitBoxManager()->IsHitBoxActive();
