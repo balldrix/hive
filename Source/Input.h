@@ -18,8 +18,9 @@ const UCHAR PLAYER_UP_KEY = VK_UP;
 const UCHAR PLAYER_DOWN_KEY = VK_DOWN;
 const UCHAR PLAYER_LEFT_KEY = VK_LEFT;
 const UCHAR PLAYER_RIGHT_KEY = VK_RIGHT;
-const UCHAR PLAYER_A_KEY = 0x58; // x key
-const UCHAR PLAYER_B_KEY = 0x5A; // z key
+const UCHAR PLAYER_X_KEY = 0x58; // x key
+const UCHAR PLAYER_Z_KEY = 0x5A; // z key
+const UCHAR PLAYER_C_KEY = 0x43; // c key
 
 
  /* ****************************

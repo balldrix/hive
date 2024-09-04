@@ -374,6 +374,7 @@ void GameplayGameState::ProcessInput()
 	if(m_input->WasKeyPressed(PLAYER_RIGHT_KEY))
 	{
 		m_controlSystem->SetControlsPressed(Controls::Right);
+		m_controlSystem->ResetDoubleTap();
 			
 		if(m_controlSystem->GetLastKeyPressed() == Controls::Right &&
 			m_controlSystem->CanRun())
@@ -385,6 +386,7 @@ void GameplayGameState::ProcessInput()
 	if(m_input->WasKeyPressed(PLAYER_LEFT_KEY))
 	{
 		m_controlSystem->SetControlsPressed(Controls::Left);
+		m_controlSystem->ResetDoubleTap();
 
 		if(m_controlSystem->GetLastKeyPressed() == Controls::Left &&
 			m_controlSystem->CanRun())
@@ -393,7 +395,7 @@ void GameplayGameState::ProcessInput()
 		}
 	}
 
-	if(m_input->IsKeyDown(PLAYER_B_KEY))
+	if(m_input->IsKeyDown(PLAYER_Z_KEY))
 	{
 		m_player->Block();
 	}
@@ -402,15 +404,22 @@ void GameplayGameState::ProcessInput()
 		m_player->GetStateMachine()->ChangeState(PlayerIdleState::Instance());
 	}
 
-	if(m_input->IsKeyDown(PLAYER_B_KEY))
+	if(m_input->IsKeyDown(PLAYER_Z_KEY))
 	{
 		return;
 	}
 
-	if(m_input->WasKeyPressed(PLAYER_A_KEY) &&
-		m_controlSystem->CanAttack())
+	if(m_input->WasKeyPressed(PLAYER_X_KEY))
 	{
-		m_player->Attack();
+		m_controlSystem->SetControlsPressed(Controls::NormalAttack);
+		m_controlSystem->ResetComboTimer();
+		return;
+	}
+
+	if(m_input->WasKeyPressed(PLAYER_C_KEY))
+	{
+		m_controlSystem->SetControlsPressed(Controls::StrongAttack);
+		m_controlSystem->ResetComboTimer();
 		return;
 	}
 
@@ -418,8 +427,8 @@ void GameplayGameState::ProcessInput()
 		m_input->IsKeyDown(PLAYER_DOWN_KEY) ||
 		m_input->IsKeyDown(PLAYER_LEFT_KEY) ||
 		m_input->IsKeyDown(PLAYER_RIGHT_KEY) ||
-		m_input->IsKeyDown(PLAYER_A_KEY) ||
-		m_input->IsKeyDown(PLAYER_B_KEY)))
+		m_input->IsKeyDown(PLAYER_X_KEY) ||
+		m_input->IsKeyDown(PLAYER_Z_KEY)))
 	{
 		m_player->Move(Vector2::Zero);
 		m_player->Walk();
@@ -448,6 +457,7 @@ void GameplayGameState::Tick(float deltaTime)
 		return;
 	}
 
+	m_controlSystem->Update(deltaTime);
 	m_camera->Update(deltaTime);
 	m_player->Update(deltaTime);
 	m_NPCManager->Update(deltaTime);

@@ -198,9 +198,6 @@ void Player::Update(float deltaTime)
 	m_stateMachine->Update();
 	GameObject::Update(deltaTime);
 
-	if(!m_stateMachine->IsInState(*PlayerAttackState::Instance()))
-		m_controlSystem->Update(deltaTime);
-
 	if(m_stateMachine->IsInState(*PlayerDeadState::Instance()) && m_health <= 0)
 		m_deathTimer += deltaTime;
 
@@ -217,6 +214,21 @@ void Player::Update(float deltaTime)
 
 	if(m_knockoutTimer > m_playerData.knockoutDuration)
 		m_stateMachine->ChangeState(PlayerIdleState::Instance());
+
+	if(!m_controlSystem->CanAttack())
+		return;
+
+	if(m_controlSystem->GetLastKeyPressed() == Controls::NormalAttack)
+	{
+		Attack("attackNormal_");
+		m_controlSystem->SetControlsPressed(Controls::None);
+	}
+
+	if(m_controlSystem->GetLastKeyPressed() == Controls::StrongAttack)
+	{
+		Attack("attackStrong_");
+		m_controlSystem->SetControlsPressed(Controls::None);
+	}
 }
 
 void Player::Kill()
@@ -339,25 +351,13 @@ void Player::Stop()
 	SetCurrentVelocity(Vector2::Zero);
 }
 
-void Player::Attack()
+void Player::Attack(std::string attackName)
 {
-	// use combo counter to get the correct attack 
-	switch(m_controlSystem->GetComboCounter())
-	{
-		case 0:
-			m_stateMachine->ChangeState(PlayerAttackState::Instance());
-			PlayerAttackState::Instance()->SetAttack("attackNormal_1");
-		case 1:
-			m_stateMachine->ChangeState(PlayerAttackState::Instance());
-			PlayerAttackState::Instance()->SetAttack("attackNormal_2");
-			break;
-		case 2:
-		case 3:
-		default:
-			m_stateMachine->ChangeState(PlayerAttackState::Instance());
-			PlayerAttackState::Instance()->SetAttack("attackNormal_2");
-			break;
-	}
+	auto comboCounter = m_controlSystem->GetComboCounter();
+	attackName.append(std::to_string(comboCounter + 1));
+
+	PlayerAttackState::Instance()->SetAttack(attackName);
+	m_stateMachine->ChangeState(PlayerAttackState::Instance());
 }
 
 void Player::Block()

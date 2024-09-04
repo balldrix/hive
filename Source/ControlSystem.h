@@ -1,8 +1,7 @@
 #pragma once
 
-const unsigned int MaxCombo = 4;
-const float ComboResetTime = 1.5f;
-const float ComboWindowDuration = 0.15f;
+const unsigned int MaxCombo = 5;
+const float ComboResetTime = 0.7f;
 const float DoubleTapWindowDuration = 0.2f;
 
 enum class Controls
@@ -16,7 +15,8 @@ enum class Controls
 	Down,
 	DownLeft,
 	Left,
-	Attack,
+	NormalAttack,
+	StrongAttack,
 	Roll,
 	MaxControls
 };
@@ -31,6 +31,9 @@ public:
 
 	void SetControlsPressed(const Controls& controls);
 	void SetCanAttack(bool canAttack);
+	void ResetInputTimer();
+	void ResetComboTimer();
+	void ResetDoubleTap();
 
 	Controls GetKeyPressed() const { return m_controlsDown; }
 	Controls GetLastKeyPressed() const { return m_lastControlsPressed; }

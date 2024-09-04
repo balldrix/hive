@@ -40,7 +40,7 @@ public:
 	void								Walk();
 	void								Move(const Vector2& direction);
 	void								Stop();
-	void								Attack();
+	void								Attack(std::string attackName);
 	void								Block();
 	void								ApplyDamage(GameObject* source, const int& amount);
 	void								Knockback(const Vector2& direction, const float& force);

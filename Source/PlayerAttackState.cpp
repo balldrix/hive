@@ -36,8 +36,7 @@ void PlayerAttackState::Execute(Player* player)
 	player->SetTargetVelocity(Vector2::Zero);
 	player->SetCurrentVelocity(Vector2::Zero);
 
-	if(player->GetAnimator()->GetCurrentFrame() == player->GetAnimator()->GetAnimation()->frameCount - 1 &&
-		player->GetControlSystem()->CanCombo())
+	if(player->GetAnimator()->GetCurrentFrame() == player->GetAnimator()->GetAnimation()->frameCount - 1)
 	{
 		player->GetControlSystem()->SetCanAttack(true);
 	}
@@ -45,8 +44,6 @@ void PlayerAttackState::Execute(Player* player)
 	if(player->GetAnimator()->IsDone())
 	{
 		player->GetStateMachine()->ChangeState(PlayerIdleState::Instance());
-		player->GetControlSystem()->Reset();
-		player->GetControlSystem()->SetCanAttack(true);
 	}
 }
 

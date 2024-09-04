@@ -1,5 +1,12 @@
 # attack_name damage_value hitstop_duration
 
-attackNormal_1 5 0.06
-attackNormal_2 5 0.06
-attackNormal_3 5 0.06
+attackNormal_1 5 0.1
+attackNormal_2 5 0.1
+attackNormal_3 5 0.1
+attackNormal_4 5 0.1
+attackStrong_1 10 0.4
+attackStrong_2 10 0.4
+attackStrong_3 10 0.4
+attackStrong_4 10 0.4
+attackStrong_5 4 0.1
+special 12 0.2
