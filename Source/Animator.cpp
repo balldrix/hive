@@ -20,10 +20,8 @@ Animator::~Animator()
 
 void Animator::Init(const std::string& fileName, Spritesheet* spriteSheet)
 {
-	// read file
 	std::ifstream file(fileName);
 
-	// parse data from file
 	json data = json::parse(file);
 	json meta = data["meta"];
 	json frameTags = meta["frameTags"];
@@ -66,7 +64,6 @@ void Animator::Update(float deltaTime)
 	}
 }
 
-// set current animation from list using index
 void Animator::SetAnimation(unsigned int index)
 {
 	m_currentAnimation = &m_animationList[index];
@@ -77,7 +74,6 @@ void Animator::SetAnimation(const std::string& name)
 {
 	Animation newAnimation;
 
-	// loop through animation list
 	for(unsigned int i = 0; i < m_animationList.size(); i++)
 	{
 		if(m_animationList[i].name == name)
@@ -87,7 +83,6 @@ void Animator::SetAnimation(const std::string& name)
 		}
 	}
 
-	// unable to find animation with string so call error function
 	std::string error = " Error! No animation with name " + name + " found. Check animation data.";
 	Error::FileLog(error);
 }

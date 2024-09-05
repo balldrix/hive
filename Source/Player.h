@@ -24,6 +24,7 @@ public:
 	void								Render(Graphics* graphics);
 	void								Reset();
 
+	Sprite*								GetShadow() const { return m_shadow; }
 	StateMachine<Player>*				GetStateMachine() const { return m_stateMachine; }
 
 	virtual int							GetMaxHealth() const { return m_playerData.objectData.startingHealth; }

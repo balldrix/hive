@@ -16,7 +16,8 @@ Sprite::Sprite() :
 	m_spriteEffects(SpriteEffects::SpriteEffects_None),
 	m_width(0),
 	m_height(0),
-	m_depth(0.0f)
+	m_depth(0.0f),
+	m_enabled(true)
 {
 }
 
@@ -63,6 +64,9 @@ void Sprite::Init(Texture* texture)
 
 void Sprite::Render(Graphics* graphics)
 {
+	if(!m_enabled)
+		return;
+
 	graphics->GetSpriteBatch()->Draw(m_texture->GetTexture(),
 		m_position,
 		&m_rect,
@@ -76,6 +80,9 @@ void Sprite::Render(Graphics* graphics)
 
 void Sprite::Render(Graphics* graphics, float alpha)
 {
+	if(!m_enabled)
+		return;
+
 	SetAlpha(alpha);
 	Render(graphics);
 }
@@ -83,6 +90,9 @@ void Sprite::Render(Graphics* graphics, float alpha)
 void
 Sprite::Render(Graphics* graphics, const Vector2& position)
 {
+	if(!m_enabled)
+		return;
+
 	// draw sprite
 	graphics->GetSpriteBatch()->Draw(m_texture->GetTexture(),
 		position,
@@ -97,6 +107,9 @@ Sprite::Render(Graphics* graphics, const Vector2& position)
 
 void Sprite::Render(Graphics* graphics, const Vector2& position, const RECT& destination)
 {
+	if(!m_enabled)
+		return;
+
 	// set alpha colour key
 	m_colour.w = m_alpha;
 
@@ -110,6 +123,16 @@ void Sprite::Render(Graphics* graphics, const Vector2& position, const RECT& des
 		m_origin,
 		m_spriteEffects,
 		m_depth);
+}
+
+void Sprite::EnableSprite()
+{
+	m_enabled = true;
+}
+
+void Sprite::DisableSprite()
+{
+	m_enabled = false;
 }
 
 void Sprite::SetPosition(const Vector2& position)

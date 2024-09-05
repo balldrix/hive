@@ -1,6 +1,6 @@
-#include "pch.h"
-
 #pragma once
+
+#include "pch.h"
 
 struct DamageData
 {

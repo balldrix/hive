@@ -116,10 +116,10 @@ protected:
 	Vector2					m_targetVelocity;		
 	float					m_movementSpeed;		
 	float					m_acceleration;			
-	float					m_deceleration;			
+	float					m_deceleration;
 	Vector3					m_facingDirection;
 
-	Spritesheet*			m_spriteSheet;			
+	Spritesheet*			m_spriteSheet;
 	Animator*				m_animator;				
 
 	Sprite*					m_shadow;				

@@ -8,6 +8,7 @@
 #include "ControlSystem.h"
 #include "UnitVectors.h"
 #include "AudioEngine.h"
+#include "Sprite.h"
 
 PlayerAttackState* PlayerAttackState::Instance()
 {
@@ -29,6 +30,14 @@ void PlayerAttackState::OnEnter(Player* player)
 	player->GetControlSystem()->IncrementComboCount();
 
 	player->PlayPunchSound(m_name);
+
+	Animation currentAnimation = *player->GetAnimator()->GetAnimation();
+	int endXPos = currentAnimation.endXPos;
+
+	if(endXPos == 0)
+		return;
+
+	player->GetShadow()->DisableSprite();
 }
 
 void PlayerAttackState::Execute(Player* player)
@@ -49,6 +58,15 @@ void PlayerAttackState::Execute(Player* player)
 
 void PlayerAttackState::OnExit(Player* player)
 {
+	Animation currentAnimation = *player->GetAnimator()->GetAnimation();
+	int endXPos = currentAnimation.endXPos;
+
+	if(endXPos == 0)
+		return;
+	
+	endXPos *= (int)player->GetFacingDirection().x;	
+	player->SetPositionX(player->GetPositionX() + endXPos);
+	player->GetShadow()->EnableSprite();
 }
 
 PlayerAttackState::PlayerAttackState(const std::string &name)
