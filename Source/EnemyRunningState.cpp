@@ -18,7 +18,7 @@ void EnemyRunningState::OnEnter(Enemy* enemy)
 {
 	enemy->GetAnimator()->Reset();
 	enemy->GetAnimator()->SetAnimation(m_name);
-	enemy->GetHitBoxManager()->SetCurrentHitBox(m_name);
+	enemy->GetHitBoxManager()->SetCollidersUsingTag(m_name);
 
 	enemy->SetMovementSpeed(enemy->GetData().objectData.runningSpeed);
 

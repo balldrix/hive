@@ -1,39 +1,96 @@
+#pragma once
+
 #include "pch.h"
 #include "AABB.h"
 
-#pragma once
-
 namespace
 {
-	struct HitBoxData
+	struct Bounds
 	{
-		std::string	name; 
-		AABB movementBox; 
-		AABB hitBox; 
-		AABB hurtBox; 
-		int startupFrames = 0;
-		int activeFrames = 0;
+		unsigned int x;
+		unsigned int y;
+		unsigned int height;
+		unsigned int width;
 	};
 
-	void from_json(const json& j, HitBoxData& a)
+	struct FrameData
 	{
-		a.name = j.at("name").get<std::string>();
-		a.startupFrames = j.at("startup").get<int>();
-		a.activeFrames = j.at("active").get<int>();
+		unsigned int frameIndex;
+		Bounds bounds;
 
-		// movement box data
-		json movement = j["movementBox"];
-		a.movementBox.SetMin(Vector2(movement["minX"], movement["minY"]));
-		a.movementBox.SetMax(Vector2(movement["maxX"], movement["maxY"]));
+		static FrameData GetFrameData(const int frameIndex, std::vector<FrameData>& frameData)
+		{
+			auto it = std::find_if(frameData.begin(), frameData.end(),
+				[&frameIndex](const FrameData& obj) { return obj.frameIndex == frameIndex; });
 
-		// hitbox data
-		json hits = j["hitBox"];
-		a.hitBox.SetMin(Vector2(hits["minX"], hits["minY"]));
-		a.hitBox.SetMax(Vector2(hits["maxX"], hits["maxY"]));
+			if (it != frameData.end())
+				return *it;
+			else
 
-		// hurt box data
-		json hurts = j["hurtBox"];
-		a.hurtBox.SetMin(Vector2(hurts["minX"], hurts["minY"]));
-		a.hurtBox.SetMax(Vector2(hurts["maxX"], hurts["maxY"]));
+				return FrameData();
+		}
+	};
+
+	struct TagData
+	{
+		std::string name;
+		std::vector<FrameData> frameData;
+
+		static TagData GetTagData(const std::string tagName, std::vector<TagData>& tagData)
+		{
+			auto it = std::find_if(tagData.begin(), tagData.end(),
+				[&tagName](const TagData& obj) { return obj.name == tagName; });
+
+			if (it != tagData.end())
+				return *it;
+			else
+
+				return TagData();
+		}
+	};
+
+	struct HitBoxData
+	{
+		std::string name;
+		std::vector<TagData> tagData;
+
+		static HitBoxData GetHitBoxData(const std::string hitBoxName, std::vector<HitBoxData>& hitBoxData)
+		{
+			auto it = std::find_if(hitBoxData.begin(), hitBoxData.end(),
+				[&hitBoxName](const HitBoxData& obj) { return obj.name == hitBoxName; });
+
+			if (it != hitBoxData.end())
+				return *it;
+			else
+
+				return HitBoxData();
+		}
+	};
+
+	void from_json(const json& j, HitBoxData& h)
+	{
+		h.name = j["hitBoxName"];
+
+		for(auto& it : j["tagData"])
+		{
+			TagData tagdata;
+			tagdata.name = it["animationName"];
+
+			for (auto& it : it["frames"])
+			{
+				FrameData frameData;
+				auto bounds = it["bounds"];
+				
+				frameData.frameIndex = it["frameIndex"];
+				frameData.bounds.height = bounds["height"];
+				frameData.bounds.width = bounds["width"];
+				frameData.bounds.x = bounds["x"];
+				frameData.bounds.y = bounds["y"];
+
+				tagdata.frameData.push_back(frameData);
+			}
+
+			h.tagData.push_back(tagdata);
+		}
 	}
 }

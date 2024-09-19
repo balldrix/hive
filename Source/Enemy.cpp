@@ -116,7 +116,6 @@ void Enemy::Init(Graphics* graphics,
 	
 	m_hitBoxManager = new HitBoxManager();
 	m_hitBoxManager->Init(m_hitBoxSprite, "GameData\\HitBoxData\\" + data.sheetName + "HitBoxData.json");
-	m_hitBoxManager->SetCurrentHitBox(0);
 	m_hitBoxManager->SetOwner(this);
 	
 	m_movementSpeed = data.objectData.walkSpeed;
@@ -187,6 +186,8 @@ Enemy::Update(float deltaTime)
 	m_stateMachine->Update();
 	GameObject::Update(deltaTime);
 	m_thinkingTimer -= deltaTime;
+
+	m_hitBoxManager->Update(m_animator->GetCurrentFrame());
 }
 
 void
@@ -217,7 +218,7 @@ Enemy::Render(Graphics* graphics)
 
 	//	 render hitbox
 	if(m_hitBoxManager)
-		m_hitBoxManager->Render(graphics);
+		m_hitBoxManager->Render(graphics, m_camera);
 }
 
 void
@@ -227,7 +228,6 @@ Enemy::Reset()
 	m_position = m_enemyData.objectData.startingPosition;
 	m_grounded = true;
 	m_movementSpeed = m_enemyData.objectData.walkSpeed;
-	m_hitBoxManager->SetCurrentHitBox(0);
 	m_health = m_enemyData.objectData.startingHealth;
 	ResetTimer(Randomiser::Instance()->GetRandNum(0.8f, 2.0f));
 	m_active = false;

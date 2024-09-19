@@ -1,142 +1,1297 @@
-{
-	"hitbox": [
-		{
-			"name": "idle",
-			"startup": 0,
-			"active": 0,
-			"movementBox": {
-				"minX": -8.0,
-				"minY": -2.0,
-				"maxX": 8.0,
-				"maxY": 1.0
-			},
-			"hurtBox": {
-				"minX": -4.0,
-				"minY": -27.0,
-				"maxX": 4.0,
-				"maxY": -2.0
-			},
-			"hitBox": {
-				"minX": 0.0,
-				"minY": 0.0,
-				"maxX": 0.0,
-				"maxY": 0.0
-			}
-		},
-		{
-			"name": "block",
-			"startup": 0,
-			"active": 0,
-			"movementBox": {
-				"minX": 0.0,
-				"minY": -2.0,
-				"maxX": 8.0,
-				"maxY": 1.0
-			},
-			"hurtBox": {
-				"minX": 2.0,
-				"minY": -27.0,
-				"maxX": 9.0,
-				"maxY": -2.0
-			},
-			"hitBox": {
-				"minX": 0.0,
-				"minY": 0.0,
-				"maxX": 0.0,
-				"maxY": 0.0
-			}
-		},
-		{
-			"name": "run",
-			"startup": 0,
-			"active": 0,
-			"movementBox": {
-				"minX": -8.0,
-				"minY": -2.0,
-				"maxX": 8.0,
-				"maxY": 1.0
-			},
-			"hurtBox": {
-				"minX": 0.0,
-				"minY": -27.0,
-				"maxX": 8.0,
-				"maxY": -2.0
-			},
-			"hitBox": {
-				"minX": 0.0,
-				"minY": 0.0,
-				"maxX": 0.0,
-				"maxY": 0.0
-			}
-		},
-		{
-			"name": "sprint",
-			"startup": 0,
-			"active": 0,
-			"movementBox": {
-				"minX": -8.0,
-				"minY": -2.0,
-				"maxX": 8.0,
-				"maxY": 1.0
-			},
-			"hurtBox": {
-				"minX": 0.0,
-				"minY": -27.0,
-				"maxX": 8.0,
-				"maxY": -2.0
-			},
-			"hitBox": {
-				"minX": 0.0,
-				"minY": 0.0,
-				"maxX": 0.0,
-				"maxY": 0.0
-			}
-		},
-		{
-			"name": "attackNormal_1",
-			"startup": 5,
-			"active": 1,
-			"movementBox": {
-				"minX": -8.0,
-				"minY": -2.0,
-				"maxX": 8.0,
-				"maxY": 1.0
-			},
-			"hurtBox": {
-				"minX": 0.0,
-				"minY": -27.0,
-				"maxX": 8.0,
-				"maxY": -2.0
-			},
-			"hitBox": {
-				"minX": 8.0,
-				"minY": -32.0,
-				"maxX": 20.0,
-				"maxY": -3.0
-			}
-		},
-		{
-			"name": "attackNormal_2",
-			"startup": 5,
-			"active": 1,
-			"movementBox": {
-				"minX": -8.0,
-				"minY": -2.0,
-				"maxX": 8.0,
-				"maxY": 1.0
-			},
-			"hurtBox": {
-				"minX": 0.0,
-				"minY": -27.0,
-				"maxX": 8.0,
-				"maxY": -2.0
-			},
-			"hitBox": {
-				"minX": 2.0,
-				"minY": -23.0,
-				"maxX": 24.0,
-				"maxY": -15.0
-			}
-		}
-	]
-}
+[
+  {
+    "hitBoxName": "pushbox",
+    "tagData": [
+      {
+        "animationName": "idle",
+        "frames": [
+          {
+            "bounds": {
+              "height": 4,
+              "x": 48,
+              "y": 43,
+              "width": 17
+            },
+            "frameIndex": 0
+          },
+          {
+            "bounds": {
+              "height": 4,
+              "x": 48,
+              "y": 43,
+              "width": 17
+            },
+            "frameIndex": 1
+          }
+        ]
+      },
+      {
+        "animationName": "hit",
+        "frames": [
+          {
+            "bounds": {
+              "height": 4,
+              "x": 45,
+              "y": 43,
+              "width": 17
+            },
+            "frameIndex": 0
+          }
+        ]
+      },
+      {
+        "animationName": "block",
+        "frames": [
+          {
+            "bounds": {
+              "height": 4,
+              "x": 54,
+              "y": 43,
+              "width": 12
+            },
+            "frameIndex": 0
+          },
+          {
+            "bounds": {
+              "height": 4,
+              "x": 54,
+              "y": 43,
+              "width": 12
+            },
+            "frameIndex": 1
+          },
+          {
+            "bounds": {
+              "height": 4,
+              "x": 54,
+              "y": 43,
+              "width": 12
+            },
+            "frameIndex": 2
+          }
+        ]
+      },
+      {
+        "animationName": "run",
+        "frames": [
+          {
+            "bounds": {
+              "height": 3,
+              "x": 48,
+              "y": 44,
+              "width": 14
+            },
+            "frameIndex": 0
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 48,
+              "y": 44,
+              "width": 14
+            },
+            "frameIndex": 1
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 48,
+              "y": 44,
+              "width": 14
+            },
+            "frameIndex": 2
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 48,
+              "y": 44,
+              "width": 14
+            },
+            "frameIndex": 3
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 48,
+              "y": 44,
+              "width": 14
+            },
+            "frameIndex": 4
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 48,
+              "y": 44,
+              "width": 14
+            },
+            "frameIndex": 5
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 48,
+              "y": 44,
+              "width": 14
+            },
+            "frameIndex": 6
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 48,
+              "y": 44,
+              "width": 14
+            },
+            "frameIndex": 7
+          }
+        ]
+      },
+      {
+        "animationName": "sprint",
+        "frames": [
+          {
+            "bounds": {
+              "height": 3,
+              "x": 48,
+              "y": 44,
+              "width": 14
+            },
+            "frameIndex": 0
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 48,
+              "y": 44,
+              "width": 14
+            },
+            "frameIndex": 1
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 48,
+              "y": 44,
+              "width": 14
+            },
+            "frameIndex": 2
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 48,
+              "y": 44,
+              "width": 14
+            },
+            "frameIndex": 3
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 48,
+              "y": 44,
+              "width": 14
+            },
+            "frameIndex": 4
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 48,
+              "y": 44,
+              "width": 14
+            },
+            "frameIndex": 5
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 48,
+              "y": 44,
+              "width": 14
+            },
+            "frameIndex": 6
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 48,
+              "y": 44,
+              "width": 14
+            },
+            "frameIndex": 7
+          }
+        ]
+      },
+      {
+        "animationName": "attackNormal_1",
+        "frames": [
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 0
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 1
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 2
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 3
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 4
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 5
+          }
+        ]
+      },
+      {
+        "animationName": "attackNormal_2",
+        "frames": [
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 0
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 1
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 2
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 3
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 4
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 5
+          }
+        ]
+      },
+      {
+        "animationName": "attackNormal_3",
+        "frames": [
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 0
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 1
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 2
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 3
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 4
+          }
+        ]
+      },
+      {
+        "animationName": "attackNormal_4",
+        "frames": [
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 0
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 1
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 2
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 3
+          }
+        ]
+      },
+      {
+        "animationName": "attackStrong_1",
+        "frames": [
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 0
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 1
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 2
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 3
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 4
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 5
+          }
+        ]
+      },
+      {
+        "animationName": "attackStrong_2",
+        "frames": [
+          {
+            "bounds": {
+              "height": 3,
+              "x": 53,
+              "y": 44,
+              "width": 14
+            },
+            "frameIndex": 0
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 53,
+              "y": 44,
+              "width": 14
+            },
+            "frameIndex": 1
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 53,
+              "y": 44,
+              "width": 14
+            },
+            "frameIndex": 2
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 55,
+              "y": 44,
+              "width": 14
+            },
+            "frameIndex": 3
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 56,
+              "y": 44,
+              "width": 14
+            },
+            "frameIndex": 4
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 59,
+              "y": 44,
+              "width": 14
+            },
+            "frameIndex": 5
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 59,
+              "y": 44,
+              "width": 14
+            },
+            "frameIndex": 6
+          }
+        ]
+      },
+      {
+        "animationName": "attackStrong_3",
+        "frames": [
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 0
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 1
+          }
+        ]
+      },
+      {
+        "animationName": "attackStrong_4",
+        "frames": [
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 0
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 1
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 70,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 4
+          }
+        ]
+      },
+      {
+        "animationName": "attackStrong_5",
+        "frames": [
+          {
+            "bounds": {
+              "height": 3,
+              "x": 46,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 0
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 96,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 12
+          }
+        ]
+      },
+      {
+        "animationName": "special",
+        "frames": [
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 0
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 1
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 2
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 3
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 4
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 47,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 5
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 77,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 17
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 77,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 18
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 77,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 19
+          },
+          {
+            "bounds": {
+              "height": 3,
+              "x": 77,
+              "y": 44,
+              "width": 19
+            },
+            "frameIndex": 20
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "hitBoxName": "hurtbox",
+    "tagData": [
+      {
+        "animationName": "idle",
+        "frames": [
+          {
+            "bounds": {
+              "height": 27,
+              "x": 51,
+              "y": 18,
+              "width": 11
+            },
+            "frameIndex": 0
+          },
+          {
+            "bounds": {
+              "height": 27,
+              "x": 51,
+              "y": 18,
+              "width": 11
+            },
+            "frameIndex": 1
+          }
+        ]
+      },
+      {
+        "animationName": "block",
+        "frames": [
+          {
+            "bounds": {
+              "height": 27,
+              "x": 59,
+              "y": 18,
+              "width": 7
+            },
+            "frameIndex": 2
+          }
+        ]
+      },
+      {
+        "animationName": "run",
+        "frames": [
+          {
+            "bounds": {
+              "height": 27,
+              "x": 51,
+              "y": 19,
+              "width": 11
+            },
+            "frameIndex": 0
+          },
+          {
+            "bounds": {
+              "height": 27,
+              "x": 51,
+              "y": 19,
+              "width": 11
+            },
+            "frameIndex": 1
+          },
+          {
+            "bounds": {
+              "height": 27,
+              "x": 51,
+              "y": 19,
+              "width": 11
+            },
+            "frameIndex": 2
+          },
+          {
+            "bounds": {
+              "height": 27,
+              "x": 51,
+              "y": 19,
+              "width": 11
+            },
+            "frameIndex": 3
+          },
+          {
+            "bounds": {
+              "height": 27,
+              "x": 51,
+              "y": 19,
+              "width": 11
+            },
+            "frameIndex": 4
+          },
+          {
+            "bounds": {
+              "height": 27,
+              "x": 51,
+              "y": 19,
+              "width": 11
+            },
+            "frameIndex": 5
+          },
+          {
+            "bounds": {
+              "height": 27,
+              "x": 51,
+              "y": 19,
+              "width": 11
+            },
+            "frameIndex": 6
+          },
+          {
+            "bounds": {
+              "height": 27,
+              "x": 51,
+              "y": 19,
+              "width": 11
+            },
+            "frameIndex": 7
+          }
+        ]
+      },
+      {
+        "animationName": "sprint",
+        "frames": [
+          {
+            "bounds": {
+              "height": 27,
+              "x": 53,
+              "y": 19,
+              "width": 11
+            },
+            "frameIndex": 0
+          },
+          {
+            "bounds": {
+              "height": 27,
+              "x": 53,
+              "y": 19,
+              "width": 11
+            },
+            "frameIndex": 1
+          },
+          {
+            "bounds": {
+              "height": 27,
+              "x": 53,
+              "y": 19,
+              "width": 11
+            },
+            "frameIndex": 2
+          },
+          {
+            "bounds": {
+              "height": 27,
+              "x": 53,
+              "y": 19,
+              "width": 11
+            },
+            "frameIndex": 3
+          },
+          {
+            "bounds": {
+              "height": 27,
+              "x": 53,
+              "y": 19,
+              "width": 11
+            },
+            "frameIndex": 4
+          },
+          {
+            "bounds": {
+              "height": 27,
+              "x": 53,
+              "y": 19,
+              "width": 11
+            },
+            "frameIndex": 5
+          },
+          {
+            "bounds": {
+              "height": 27,
+              "x": 53,
+              "y": 19,
+              "width": 11
+            },
+            "frameIndex": 6
+          },
+          {
+            "bounds": {
+              "height": 27,
+              "x": 53,
+              "y": 19,
+              "width": 11
+            },
+            "frameIndex": 7
+          }
+        ]
+      },
+      {
+        "animationName": "attackNormal_1",
+        "frames": [
+          {
+            "bounds": {
+              "height": 27,
+              "x": 53,
+              "y": 19,
+              "width": 11
+            },
+            "frameIndex": 5
+          }
+        ]
+      },
+      {
+        "animationName": "attackStrong_1",
+        "frames": [
+          {
+            "bounds": {
+              "height": 27,
+              "x": 49,
+              "y": 19,
+              "width": 11
+            },
+            "frameIndex": 0
+          },
+          {
+            "bounds": {
+              "height": 27,
+              "x": 49,
+              "y": 19,
+              "width": 11
+            },
+            "frameIndex": 1
+          },
+          {
+            "bounds": {
+              "height": 27,
+              "x": 50,
+              "y": 19,
+              "width": 11
+            },
+            "frameIndex": 5
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "hitBoxName": "hitbox",
+    "tagData": [
+      {
+        "animationName": "attackNormal_1",
+        "frames": [
+          {
+            "bounds": {
+              "height": 32,
+              "x": 66,
+              "y": 11,
+              "width": 15
+            },
+            "frameIndex": 4
+          }
+        ]
+      },
+      {
+        "animationName": "attackNormal_2",
+        "frames": [
+          {
+            "bounds": {
+              "height": 8,
+              "x": 62,
+              "y": 25,
+              "width": 22
+            },
+            "frameIndex": 3
+          },
+          {
+            "bounds": {
+              "height": 8,
+              "x": 62,
+              "y": 25,
+              "width": 22
+            },
+            "frameIndex": 4
+          }
+        ]
+      },
+      {
+        "animationName": "attackNormal_3",
+        "frames": [
+          {
+            "bounds": {
+              "height": 8,
+              "x": 63,
+              "y": 28,
+              "width": 22
+            },
+            "frameIndex": 1
+          },
+          {
+            "bounds": {
+              "height": 8,
+              "x": 63,
+              "y": 28,
+              "width": 22
+            },
+            "frameIndex": 2
+          }
+        ]
+      },
+      {
+        "animationName": "attackNormal_4",
+        "frames": [
+          {
+            "bounds": {
+              "height": 8,
+              "x": 62,
+              "y": 28,
+              "width": 22
+            },
+            "frameIndex": 0
+          },
+          {
+            "bounds": {
+              "height": 8,
+              "x": 62,
+              "y": 28,
+              "width": 22
+            },
+            "frameIndex": 1
+          }
+        ]
+      },
+      {
+        "animationName": "attackStrong_1",
+        "frames": [
+          {
+            "bounds": {
+              "height": 8,
+              "x": 61,
+              "y": 25,
+              "width": 22
+            },
+            "frameIndex": 2
+          },
+          {
+            "bounds": {
+              "height": 8,
+              "x": 61,
+              "y": 25,
+              "width": 22
+            },
+            "frameIndex": 3
+          }
+        ]
+      },
+      {
+        "animationName": "attackStrong_2",
+        "frames": [
+          {
+            "bounds": {
+              "height": 8,
+              "x": 69,
+              "y": 28,
+              "width": 22
+            },
+            "frameIndex": 4
+          },
+          {
+            "bounds": {
+              "height": 8,
+              "x": 69,
+              "y": 28,
+              "width": 22
+            },
+            "frameIndex": 5
+          }
+        ]
+      },
+      {
+        "animationName": "attackStrong_3",
+        "frames": [
+          {
+            "bounds": {
+              "height": 8,
+              "x": 69,
+              "y": 26,
+              "width": 24
+            },
+            "frameIndex": 3
+          },
+          {
+            "bounds": {
+              "height": 8,
+              "x": 69,
+              "y": 26,
+              "width": 24
+            },
+            "frameIndex": 4
+          }
+        ]
+      },
+      {
+        "animationName": "attackStrong_4",
+        "frames": [
+          {
+            "bounds": {
+              "height": 8,
+              "x": 63,
+              "y": 28,
+              "width": 22
+            },
+            "frameIndex": 1
+          },
+          {
+            "bounds": {
+              "height": 8,
+              "x": 35,
+              "y": 28,
+              "width": 22
+            },
+            "frameIndex": 2
+          },
+          {
+            "bounds": {
+              "height": 8,
+              "x": 88,
+              "y": 28,
+              "width": 22
+            },
+            "frameIndex": 3
+          }
+        ]
+      },
+      {
+        "animationName": "attackStrong_5",
+        "frames": [
+          {
+            "bounds": {
+              "height": 8,
+              "x": 72,
+              "y": 26,
+              "width": 22
+            },
+            "frameIndex": 2
+          },
+          {
+            "bounds": {
+              "height": 8,
+              "x": 72,
+              "y": 26,
+              "width": 22
+            },
+            "frameIndex": 3
+          },
+          {
+            "bounds": {
+              "height": 8,
+              "x": 88,
+              "y": 25,
+              "width": 22
+            },
+            "frameIndex": 6
+          },
+          {
+            "bounds": {
+              "height": 8,
+              "x": 88,
+              "y": 25,
+              "width": 22
+            },
+            "frameIndex": 7
+          },
+          {
+            "bounds": {
+              "height": 8,
+              "x": 104,
+              "y": 27,
+              "width": 22
+            },
+            "frameIndex": 10
+          },
+          {
+            "bounds": {
+              "height": 8,
+              "x": 104,
+              "y": 27,
+              "width": 22
+            },
+            "frameIndex": 11
+          }
+        ]
+      },
+      {
+        "animationName": "special",
+        "frames": [
+          {
+            "bounds": {
+              "height": 8,
+              "x": 41,
+              "y": 26,
+              "width": 69
+            },
+            "frameIndex": 6
+          },
+          {
+            "bounds": {
+              "height": 8,
+              "x": 57,
+              "y": 26,
+              "width": 53
+            },
+            "frameIndex": 7
+          },
+          {
+            "bounds": {
+              "height": 8,
+              "x": 79,
+              "y": 25,
+              "width": 22
+            },
+            "frameIndex": 11
+          },
+          {
+            "bounds": {
+              "height": 8,
+              "x": 55,
+              "y": 25,
+              "width": 22
+            },
+            "frameIndex": 12
+          },
+          {
+            "bounds": {
+              "height": 8,
+              "x": 27,
+              "y": 26,
+              "width": 53
+            },
+            "frameIndex": 13
+          },
+          {
+            "bounds": {
+              "height": 8,
+              "x": 67,
+              "y": 25,
+              "width": 48
+            },
+            "frameIndex": 17
+          },
+          {
+            "bounds": {
+              "height": 8,
+              "x": 67,
+              "y": 25,
+              "width": 48
+            },
+            "frameIndex": 18
+          }
+        ]
+      }
+    ]
+  }
+]

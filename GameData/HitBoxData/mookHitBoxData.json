@@ -1,96 +1,771 @@
-{
-	"hitbox": [
-		{
-			"name": "idle",
-			"startup": 0,
-			"active": 0,
-			"movementBox": {
-				"minX": -8.0,
-				"minY": 0.0,
-				"maxX": 10.0,
-				"maxY": 4.0
-			},
-			"hurtBox": {
-				"minX": -10.0,
-				"minY": -19.0,
-				"maxX": 12.0,
-				"maxY": 0.0
-			},
-			"hitBox": {
-				"minX": 0.0,
-				"minY": 0.0,
-				"maxX": 0.0,
-				"maxY": 0.0
-			}
-		},
-		{
-			"name": "walk",
-			"startup": 0,
-			"active": 0,
-			"movementBox": {
-				"minX": -8.0,
-				"minY": 0.0,
-				"maxX": 10.0,
-				"maxY": 4.0
-			},
-			"hurtBox": {
-				"minX": -10.0,
-				"minY": -19.0,
-				"maxX": 12.0,
-				"maxY": 0.0
-			},
-			"hitBox": {
-				"minX": 0.0,
-				"minY": 0.0,
-				"maxX": 0.0,
-				"maxY": 0.0
-			}
-		},
-		{
-			"name": "run",
-			"startup": 0,
-			"active": 0,
-			"movementBox": {
-				"minX": -10.0,
-				"minY": 0.0,
-				"maxX": 17.0,
-				"maxY": 4.0
-			},
-			"hurtBox": {
-				"minX": -10.0,
-				"minY": -16.0,
-				"maxX": 17.0,
-				"maxY": 0.0
-			},
-			"hitBox": {
-				"minX": 0.0,
-				"minY": 0.0,
-				"maxX": 0.0,
-				"maxY": 0.0
-			}
-		},
-		{
-			"name": "attackNormal",
-			"startup": 3,
-			"active": 2,
-			"movementBox": {
-				"minX": -10.0,
-				"minY": 0.0,
-				"maxX": 17.0,
-				"maxY": 4.0
-			},
-			"hurtBox": {
-				"minX": -10.0,
-				"minY": -24.0,
-				"maxX": 17.0,
-				"maxY": -8.0
-			},
-			"hitBox": {
-				"minX": 8.0,
-				"minY": -12.0,
-				"maxX": 16.0,
-				"maxY": -6.0
-			}
-		}
-	]
-}
+[
+  {
+    "tagData": [
+      {
+        "frames": [
+          {
+            "frameIndex": 3,
+            "bounds": {
+              "height": 7,
+              "x": 33,
+              "y": 23,
+              "width": 16
+            }
+          }
+        ],
+        "animationName": "attackNormal"
+      },
+      {
+        "frames": [
+          {
+            "frameIndex": 4,
+            "bounds": {
+              "height": 9,
+              "x": 30,
+              "y": 21,
+              "width": 19
+            }
+          },
+          {
+            "frameIndex": 5,
+            "bounds": {
+              "height": 9,
+              "x": 30,
+              "y": 19,
+              "width": 19
+            }
+          },
+          {
+            "frameIndex": 6,
+            "bounds": {
+              "height": 9,
+              "x": 30,
+              "y": 23,
+              "width": 19
+            }
+          }
+        ],
+        "animationName": "attackRun"
+      }
+    ],
+    "hitBoxName": "hitbox"
+  },
+  {
+    "tagData": [
+      {
+        "frames": [
+          {
+            "frameIndex": 0,
+            "bounds": {
+              "height": 19,
+              "x": 15,
+              "y": 16,
+              "width": 21
+            }
+          },
+          {
+            "frameIndex": 1,
+            "bounds": {
+              "height": 19,
+              "x": 15,
+              "y": 16,
+              "width": 21
+            }
+          },
+          {
+            "frameIndex": 2,
+            "bounds": {
+              "height": 19,
+              "x": 15,
+              "y": 16,
+              "width": 21
+            }
+          },
+          {
+            "frameIndex": 3,
+            "bounds": {
+              "height": 19,
+              "x": 15,
+              "y": 16,
+              "width": 21
+            }
+          },
+          {
+            "frameIndex": 4,
+            "bounds": {
+              "height": 19,
+              "x": 15,
+              "y": 16,
+              "width": 21
+            }
+          },
+          {
+            "frameIndex": 5,
+            "bounds": {
+              "height": 19,
+              "x": 15,
+              "y": 16,
+              "width": 21
+            }
+          }
+        ],
+        "animationName": "idle"
+      },
+      {
+        "frames": [
+          {
+            "frameIndex": 0,
+            "bounds": {
+              "height": 16,
+              "x": 15,
+              "y": 19,
+              "width": 27
+            }
+          },
+          {
+            "frameIndex": 1,
+            "bounds": {
+              "height": 16,
+              "x": 15,
+              "y": 19,
+              "width": 27
+            }
+          },
+          {
+            "frameIndex": 2,
+            "bounds": {
+              "height": 16,
+              "x": 15,
+              "y": 19,
+              "width": 27
+            }
+          },
+          {
+            "frameIndex": 3,
+            "bounds": {
+              "height": 16,
+              "x": 15,
+              "y": 19,
+              "width": 27
+            }
+          },
+          {
+            "frameIndex": 4,
+            "bounds": {
+              "height": 16,
+              "x": 15,
+              "y": 19,
+              "width": 27
+            }
+          },
+          {
+            "frameIndex": 5,
+            "bounds": {
+              "height": 16,
+              "x": 15,
+              "y": 19,
+              "width": 27
+            }
+          },
+          {
+            "frameIndex": 6,
+            "bounds": {
+              "height": 16,
+              "x": 15,
+              "y": 19,
+              "width": 27
+            }
+          },
+          {
+            "frameIndex": 7,
+            "bounds": {
+              "height": 16,
+              "x": 15,
+              "y": 19,
+              "width": 27
+            }
+          }
+        ],
+        "animationName": "run"
+      },
+      {
+        "frames": [
+          {
+            "frameIndex": 0,
+            "bounds": {
+              "height": 19,
+              "x": 15,
+              "y": 16,
+              "width": 21
+            }
+          },
+          {
+            "frameIndex": 1,
+            "bounds": {
+              "height": 19,
+              "x": 15,
+              "y": 16,
+              "width": 21
+            }
+          },
+          {
+            "frameIndex": 2,
+            "bounds": {
+              "height": 19,
+              "x": 15,
+              "y": 16,
+              "width": 21
+            }
+          },
+          {
+            "frameIndex": 3,
+            "bounds": {
+              "height": 19,
+              "x": 15,
+              "y": 16,
+              "width": 21
+            }
+          },
+          {
+            "frameIndex": 4,
+            "bounds": {
+              "height": 19,
+              "x": 15,
+              "y": 16,
+              "width": 21
+            }
+          },
+          {
+            "frameIndex": 5,
+            "bounds": {
+              "height": 19,
+              "x": 15,
+              "y": 16,
+              "width": 21
+            }
+          },
+          {
+            "frameIndex": 6,
+            "bounds": {
+              "height": 19,
+              "x": 15,
+              "y": 16,
+              "width": 21
+            }
+          },
+          {
+            "frameIndex": 7,
+            "bounds": {
+              "height": 19,
+              "x": 15,
+              "y": 16,
+              "width": 21
+            }
+          }
+        ],
+        "animationName": "walk"
+      },
+      {
+        "frames": [
+          {
+            "frameIndex": 0,
+            "bounds": {
+              "height": 19,
+              "x": 15,
+              "y": 16,
+              "width": 21
+            }
+          },
+          {
+            "frameIndex": 1,
+            "bounds": {
+              "height": 19,
+              "x": 15,
+              "y": 16,
+              "width": 21
+            }
+          },
+          {
+            "frameIndex": 2,
+            "bounds": {
+              "height": 19,
+              "x": 15,
+              "y": 16,
+              "width": 21
+            }
+          },
+          {
+            "frameIndex": 3,
+            "bounds": {
+              "height": 19,
+              "x": 15,
+              "y": 16,
+              "width": 21
+            }
+          }
+        ],
+        "animationName": "attackNormal"
+      },
+      {
+        "frames": [
+          {
+            "frameIndex": 0,
+            "bounds": {
+              "height": 16,
+              "x": 15,
+              "y": 19,
+              "width": 27
+            }
+          },
+          {
+            "frameIndex": 1,
+            "bounds": {
+              "height": 16,
+              "x": 16,
+              "y": 19,
+              "width": 27
+            }
+          },
+          {
+            "frameIndex": 2,
+            "bounds": {
+              "height": 16,
+              "x": 16,
+              "y": 17,
+              "width": 27
+            }
+          },
+          {
+            "frameIndex": 3,
+            "bounds": {
+              "height": 16,
+              "x": 16,
+              "y": 15,
+              "width": 27
+            }
+          },
+          {
+            "frameIndex": 4,
+            "bounds": {
+              "height": 16,
+              "x": 15,
+              "y": 13,
+              "width": 27
+            }
+          },
+          {
+            "frameIndex": 5,
+            "bounds": {
+              "height": 16,
+              "x": 15,
+              "y": 11,
+              "width": 27
+            }
+          },
+          {
+            "frameIndex": 6,
+            "bounds": {
+              "height": 16,
+              "x": 15,
+              "y": 13,
+              "width": 27
+            }
+          },
+          {
+            "frameIndex": 7,
+            "bounds": {
+              "height": 16,
+              "x": 15,
+              "y": 13,
+              "width": 27
+            }
+          },
+          {
+            "frameIndex": 8,
+            "bounds": {
+              "height": 16,
+              "x": 15,
+              "y": 16,
+              "width": 27
+            }
+          }
+        ],
+        "animationName": "attackRun"
+      }
+    ],
+    "hitBoxName": "hurtbox"
+  },
+  {
+    "tagData": [
+      {
+        "frames": [
+          {
+            "frameIndex": 0,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 1,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 2,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 3,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 4,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 5,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          }
+        ],
+        "animationName": "idle"
+      },
+      {
+        "frames": [
+          {
+            "frameIndex": 0,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 1,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 2,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 3,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 4,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 5,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 6,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 7,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          }
+        ],
+        "animationName": "run"
+      },
+      {
+        "frames": [
+          {
+            "frameIndex": 0,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 1,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 2,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 3,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 4,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 5,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 6,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 7,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          }
+        ],
+        "animationName": "walk"
+      },
+      {
+        "frames": [
+          {
+            "frameIndex": 0,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          }
+        ],
+        "animationName": "hurt"
+      },
+      {
+        "frames": [
+          {
+            "frameIndex": 0,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 1,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 2,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 3,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          }
+        ],
+        "animationName": "attackNormal"
+      },
+      {
+        "frames": [
+          {
+            "frameIndex": 0,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 1,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 2,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 3,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 4,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 5,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 6,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 7,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          },
+          {
+            "frameIndex": 8,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          }
+        ],
+        "animationName": "attackRun"
+      },
+      {
+        "frames": [
+          {
+            "frameIndex": 0,
+            "bounds": {
+              "height": 4,
+              "x": 17,
+              "y": 35,
+              "width": 18
+            }
+          }
+        ],
+        "animationName": "hurtRun"
+      }
+    ],
+    "hitBoxName": "pushbox"
+  }
+]

@@ -22,7 +22,7 @@ void EnemyIdleState::OnEnter(Enemy* enemy)
 {
 	enemy->GetAnimator()->Reset();
 	enemy->GetAnimator()->SetAnimation(m_name);
-	enemy->GetHitBoxManager()->SetCurrentHitBox(m_name);
+	enemy->GetHitBoxManager()->SetCollidersUsingTag(m_name);
 	enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4f, 1.0f));
 	enemy->SetTargetVelocity(Vector2::Zero);
 }

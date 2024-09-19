@@ -21,7 +21,7 @@ void PlayerBlockState::OnEnter(Player* player)
 	player->GetAnimator()->Reset();
 	player->SetTargetVelocity(Vector2::Zero);
 	player->GetAnimator()->SetAnimation(m_name);
-	player->GetHitBoxManager()->SetCurrentHitBox(m_name);
+	player->GetHitBoxManager()->SetCollidersUsingTag(m_name);
 }
 
 void PlayerBlockState::Execute(Player* player)

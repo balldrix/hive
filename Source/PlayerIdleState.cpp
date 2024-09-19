@@ -22,7 +22,7 @@ void PlayerIdleState::OnEnter(Player* player)
 	player->ResetKnockoutTimer();
 	player->GetAnimator()->Reset();
 	player->GetAnimator()->SetAnimation(m_name);
-	player->GetHitBoxManager()->SetCurrentHitBox(m_name);
+	player->GetHitBoxManager()->SetCollidersUsingTag(m_name);
 	player->GetControlSystem()->SetCanAttack(true);
 }
 

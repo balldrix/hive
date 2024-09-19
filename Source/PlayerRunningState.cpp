@@ -17,7 +17,7 @@ void PlayerRunningState::OnEnter(Player* player)
 {
 	player->GetAnimator()->Reset();
 	player->GetAnimator()->SetAnimation(m_name);
-	player->GetHitBoxManager()->SetCurrentHitBox(m_name);
+	player->GetHitBoxManager()->SetCollidersUsingTag(m_name);
 }
 
 void PlayerRunningState::Execute(Player* player)

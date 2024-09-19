@@ -68,6 +68,7 @@ void Player::Init(Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBo
 	m_animator = animator;
 	m_animator->SetAnimation(0);
 	m_hitBoxManager = hitBoxManager;
+	m_hitBoxManager->SetOwner(this);
 	m_grounded = false;
 
 	m_stateMachine = new StateMachine<Player>(this);
@@ -197,6 +198,8 @@ void Player::Update(float deltaTime)
 
 	m_stateMachine->Update();
 	GameObject::Update(deltaTime);
+	
+	m_hitBoxManager->Update(m_animator->GetCurrentFrame());
 
 	if(m_stateMachine->IsInState(*PlayerDeadState::Instance()) && m_health <= 0)
 		m_deathTimer += deltaTime;
@@ -241,7 +244,6 @@ void Player::Respawn()
 {
 	m_stateMachine->ChangeState((PlayerIdleState::Instance()));
 	m_position = m_camera->GetPosition() + Vector2(GameWidth * 0.5f, RespawnGroundPositionY);
-	m_hitBoxManager->SetCurrentHitBox(0);
 	m_groundPosition = m_position;
 	m_position.y = RespawnAirPositionY;
 	m_deathTimer = 0.0f;
@@ -285,7 +287,7 @@ void Player::Render(Graphics* graphics)
 	// render hitbox
 	if(m_hitBoxManager)
 	{
-		m_hitBoxManager->Render(graphics);
+		m_hitBoxManager->Render(graphics, m_camera);
 	}
 }
 
@@ -296,7 +298,6 @@ void Player::Reset()
 	m_groundPosition = m_position;
 	m_position.y = RespawnAirPositionY;
 	m_grounded = false;
-	m_hitBoxManager->SetCurrentHitBox(0);
 	m_health = m_playerData.objectData.startingHealth;
 	m_deathTimer = 0.0f;
 	m_dead = false;

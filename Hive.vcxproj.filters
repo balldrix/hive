@@ -160,7 +160,7 @@
     <ClCompile Include="Source\ControlSystem.cpp">
       <Filter>System</Filter>
     </ClCompile>
-    <ClCompile Include="Source\HitBox.cpp">
+    <ClCompile Include="Source\Collider.cpp">
       <Filter>Collision</Filter>
     </ClCompile>
     <ClCompile Include="Source\HitBoxManager.cpp">
@@ -507,7 +507,7 @@
     <ClInclude Include="Source\HitBoxData.h">
       <Filter>Collision</Filter>
     </ClInclude>
-    <ClInclude Include="Source\HitBox.h">
+    <ClInclude Include="Source\Collider.h">
       <Filter>Collision</Filter>
     </ClInclude>
     <ClInclude Include="Source\ImpactFX.h">
@@ -674,9 +674,6 @@
       <Filter>Data\Fonts</Filter>
     </None>
     <None Include="GameData\HitBoxData\mookHitBoxData.json">
-      <Filter>Data\Hitboxes</Filter>
-    </None>
-    <None Include="GameData\HitBoxData\mookRunnerHitBoxData.json">
       <Filter>Data\Hitboxes</Filter>
     </None>
     <None Include="GameData\SpriteSheetData\mookSpritesheetData.json">

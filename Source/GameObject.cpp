@@ -127,9 +127,6 @@ void GameObject::Update(float deltaTime)
 
 	if(m_shadow != nullptr)
 		m_shadow->SetPosition(screenGroundPosition);
-
-	if(m_hitBoxManager != nullptr)
-		m_hitBoxManager->Update();
 }
 
 void GameObject::Move(const Vector2 &direction)

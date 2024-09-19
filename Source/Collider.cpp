@@ -1,43 +1,43 @@
 #include "pch.h"
-#include "HitBox.h"
+#include "Collider.h"
 #include "Graphics.h"
 #include "Sprite.h"
 #include "AABB.h"
 
-HitBox::HitBox() :
+Collider::Collider() :
 	m_position(Vector2::Zero),
 	m_colour(Colors::White),
-	m_flipped(false)
+	m_flipped(false),
+	m_sprite(nullptr)
 {
 }
 
-HitBox::~HitBox()
+Collider::~Collider()
 {
 }
 
 // initialise the hit box
-void HitBox::Init(Sprite* sprite, AABB box, Color colour)
+void Collider::Init(Sprite* sprite, Color colour)
 {
 	// init sprite
-	m_spriteSheet = Sprite(*sprite);
-	m_spriteSheet.SetColour(colour);
-	m_spriteSheet.SetAlpha(0.25f);
+	m_sprite = new Sprite(*sprite);
+	m_sprite->SetColour(colour);
+	m_sprite->SetAlpha(0.25f);
 
-	m_colour = colour; // store colour variable
+	m_colour = colour;
 
-	m_boundingBox = box;
-	m_spriteSheet.SetOrigin(Vector2::Zero);
+	m_sprite->SetOrigin(Vector2::Zero);
 }
 
 // update hitbox
-void HitBox::Update(const Vector2& position)
+void Collider::Update(const Vector2& position)
 {
 	// update bounding box and position
 	m_position = position;
 }
 
 // draw hitbox
-void HitBox::Render(Graphics* graphics)
+void Collider::Render(Graphics* graphics, const Vector2& position)
 {
 	AABB box = m_boundingBox;
 
@@ -46,10 +46,7 @@ void HitBox::Render(Graphics* graphics)
 		box = FlipAABB();
 	}
 
-	//m_position.x = round(m_position.x);
-	//m_position.y = round(m_position.y);
-
-	box.OffSetAABB(m_position);
+	box.OffSetAABB(position);
 
 	// set sprite rect
 	RECT rect;
@@ -58,21 +55,21 @@ void HitBox::Render(Graphics* graphics)
 	rect.right = (LONG)box.GetMax().x;
 	rect.bottom = (LONG)box.GetMax().y;
 
-	m_spriteSheet.SetDepth(1.0f);
-	m_spriteSheet.Render(graphics, m_position, rect);
+	m_sprite->SetDepth(1.0f);
+	m_sprite->Render(graphics, m_sprite->GetPosition(), rect);
 }
 
-void HitBox::SetAABB(const AABB& boundingBox)
+void Collider::SetAABB(const AABB& boundingBox)
 {
 	m_boundingBox = boundingBox;
 }
 
-void HitBox::SetFlipped(bool flipped)
+void Collider::SetFlipped(bool flipped)
 {
 	m_flipped = flipped;
 }
 
-AABB HitBox::FlipAABB()
+AABB Collider::FlipAABB()
 {
 	Vector2 newMin = m_boundingBox.GetMin();
 	Vector2 newMax = m_boundingBox.GetMax();
@@ -86,7 +83,7 @@ AABB HitBox::FlipAABB()
 	return newBox;
 }
 
-AABB HitBox::FlipAABB(const AABB& box)
+AABB Collider::FlipAABB(const AABB& box)
 {
 	Vector2 newMin = box.GetMin();
 	Vector2 newMax = box.GetMax();
@@ -101,7 +98,7 @@ AABB HitBox::FlipAABB(const AABB& box)
 }
 
 // return true if collision with other hitbox
-bool HitBox::OnCollision(const HitBox &collider)
+bool Collider::OnCollision(const Collider &collider)
 {
 	AABB box = m_boundingBox;
 	
@@ -131,7 +128,7 @@ bool HitBox::OnCollision(const HitBox &collider)
 }
 
 // return true if collision with position
-bool HitBox::OnCollision(const Vector2 &position)
+bool Collider::OnCollision(const Vector2 &position)
 {
 	AABB box = m_boundingBox;
 
@@ -150,4 +147,10 @@ bool HitBox::OnCollision(const Vector2 &position)
 	{
 		return false;
 	}
+}
+
+void Collider::Delete()
+{
+	delete m_sprite;
+	m_sprite = nullptr;
 }

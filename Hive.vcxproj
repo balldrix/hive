@@ -91,7 +91,7 @@
     <ClCompile Include="Source\GameState.cpp" />
     <ClCompile Include="Source\GameStateManager.cpp" />
     <ClCompile Include="Source\Graphics.cpp" />
-    <ClCompile Include="Source\HitBox.cpp" />
+    <ClCompile Include="Source\Collider.cpp" />
     <ClCompile Include="Source\HitBoxManager.cpp" />
     <ClCompile Include="Source\InGameHudManager.cpp" />
     <ClCompile Include="Source\Input.cpp" />
@@ -157,7 +157,7 @@
     <ClInclude Include="Source\GameStateManager.h" />
     <ClInclude Include="Source\Graphics.h" />
     <ClInclude Include="Source\BarController.h" />
-    <ClInclude Include="Source\HitBox.h" />
+    <ClInclude Include="Source\Collider.h" />
     <ClInclude Include="Source\HitBoxData.h" />
     <ClInclude Include="Source\HitBoxManager.h" />
     <ClInclude Include="Source\InGameHudManager.h" />
@@ -216,7 +216,6 @@
     <None Include="GameData\HitBoxData\bossHitBoxData.json" />
     <None Include="GameData\HitBoxData\dummyHitBoxData.json" />
     <None Include="GameData\HitBoxData\mookHitBoxData.json" />
-    <None Include="GameData\HitBoxData\mookRunnerHitBoxData.json" />
     <None Include="GameData\HitBoxData\playerHitBoxData.json" />
     <None Include="GameData\Sounds\scream.ogg" />
     <None Include="GameData\SpriteFonts\goodbye_despair_12pt.spritefont" />
@@ -427,7 +426,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties GameData_4HitBoxData_4playerHitBoxData_1json__JsonSchema="https://turborepo.org/schema.json" GameData_4SpriteSheetData_4playerSpritesheetData_1json__JsonSchema="https://codemagic.io/codemagic-schema.json" />
+      <UserProperties GameData_4HitBoxData_4mookHitBoxData_1json__JsonSchema="https://cdn.jsdelivr.net/npm/tsup/schema.json" GameData_4HitBoxData_4playerHitBoxData_1json__JsonSchema="https://turborepo.org/schema.json" GameData_4SpriteSheetData_4playerSpritesheetData_1json__JsonSchema="https://codemagic.io/codemagic-schema.json" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
