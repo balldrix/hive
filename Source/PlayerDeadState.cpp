@@ -20,7 +20,7 @@ void PlayerDeadState::OnEnter(Player* player)
 {
 	player->GetAnimator()->Reset();
 	player->GetAnimator()->SetAnimation(m_name);
-	player->GetHitBoxManager()->KillAll();
+	player->GetHitBoxManager()->SetCollidersUsingTag(m_name);
 	player->ResetKnockoutTimer();
 
 	if(player->GetHealth() <= 0)

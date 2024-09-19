@@ -13,7 +13,7 @@ void RunningEnemyDeadState::OnEnter(Enemy* enemy)
 {
     enemy->GetAnimator()->Reset();
     enemy->GetAnimator()->SetAnimation(m_name);
-    enemy->GetHitBoxManager()->KillAll();
+    enemy->GetHitBoxManager()->SetCollidersUsingTag(m_name);
     enemy->SetTargetVelocity(Vector2::Zero);
 }
 

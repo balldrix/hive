@@ -376,7 +376,6 @@ void Player::ApplyDamage(GameObject* source, const int& amount)
 	if (m_stateMachine->IsInState(*PlayerBlockState::Instance()))
 	{
 		m_health -= 1;
-		m_hitBoxManager->KillAll();
 		return;
 	}
 

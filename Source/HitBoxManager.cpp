@@ -42,8 +42,6 @@ void HitBoxManager::Init(Sprite* sprite, GameObject* owner, const std::string &f
 	m_pushBox.Init(sprite, Colors::Blue.v);
 	m_hurtBox.Init(sprite, Colors::Green.v);
 	m_hitBox.Init(sprite, Colors::Red.v);
-
-	KillAll();
 }
 
 // set box positions
@@ -115,6 +113,8 @@ void HitBoxManager::SetCollidersUsingTag(const std::string &name)
 	m_pushBoxTagData = TagData::GetTagData(name, pushBox.tagData);
 	m_hitBoxTagData = TagData::GetTagData(name, hitBox.tagData);
 	m_hurtBoxTagData = TagData::GetTagData(name, hurtBox.tagData);
+
+	Update(0);
 }
 
 void HitBoxManager::SetFlipped(bool flip)
@@ -122,14 +122,6 @@ void HitBoxManager::SetFlipped(bool flip)
 	m_pushBox.SetFlipped(flip);
 	m_hitBox.SetFlipped(flip);
 	m_hurtBox.SetFlipped(flip);
-}
-
-void HitBoxManager::KillAll()
-{
-	AABB empty;
-	m_pushBox.SetAABB(empty);
-	m_hitBox.SetAABB(empty);
-	m_hurtBox.SetAABB(empty);
 }
 
 bool HitBoxManager::IsHitBoxActive()

@@ -14,7 +14,7 @@ void PlayerKnockbackState::OnEnter(Player* player)
 {
 	player->GetAnimator()->Reset();
 	player->SetGrounded(false);
-	player->GetHitBoxManager()->KillAll();
+	player->GetHitBoxManager()->SetCollidersUsingTag(m_name);
 	player->GetAnimator()->SetAnimation(m_name);
 }
 

@@ -4,6 +4,7 @@
 
 // forward declaration
 class Enemy;
+class Player;
 
 class EnemyHurtState : public State<Enemy>
 {
@@ -21,4 +22,6 @@ private:
 	EnemyHurtState(const std::string &name);
 	EnemyHurtState(const EnemyHurtState&);
 	EnemyHurtState& operator=(const EnemyHurtState&);
+	
+	bool IsTargetHitBoxActive(Player* player);
 };

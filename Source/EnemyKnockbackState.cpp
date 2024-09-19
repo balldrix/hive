@@ -17,7 +17,7 @@ void EnemyKnockbackState::OnEnter(Enemy* enemy)
 {
 	enemy->GetAnimator()->Reset();
 	enemy->SetGrounded(false);
-	enemy->GetHitBoxManager()->KillAll();
+	enemy->GetHitBoxManager()->SetCollidersUsingTag(m_name);
 	enemy->GetAnimator()->SetAnimation(m_name);
 }
 

@@ -18,7 +18,7 @@ void EnemyDeadState::OnEnter(Enemy* enemy)
 {
 	enemy->GetAnimator()->Reset();
 	enemy->GetAnimator()->SetAnimation(m_name);
-	enemy->GetHitBoxManager()->KillAll();
+	enemy->GetHitBoxManager()->SetCollidersUsingTag(m_name);
 
 	if(enemy->GetHealth() <= 0)
 		enemy->PlayDeathSound();

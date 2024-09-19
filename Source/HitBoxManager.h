@@ -32,8 +32,6 @@ public:
 	Collider GetHurtBox() const { return m_hurtBox; }
 	Collider GetHitBox() const { return m_hitBox; }
 
-	void KillAll();
-
 	bool IsHitBoxActive();
 
 private:
