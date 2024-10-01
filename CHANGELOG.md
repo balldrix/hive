@@ -10,14 +10,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Block move.
 - Player is faster and more responsive.
 - Tileset and tilemap for background.
-- Blood Particle FX
-- Impact Sprite FX
-- HitStops
+- Blood Particle FX.
+- Impact Sprite FX.
+- HitStops.
+- Running enemy type.
+- 
+- 
 
 ### Changed
-- Player control processed directly in gameplay game state without using control system buffer.
-- Native resolution changed to 160 x 90.
+- Native resolution changed to 240 x 135.
 - Player sprites has new character design.
+- Improved Player attack combos.
+- Improved combo system.
+- Player block state.
+- Basic enemy has better sprite design
 
 ### Removed
 - Input buffer removed.

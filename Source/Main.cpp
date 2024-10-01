@@ -35,7 +35,6 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	game = new Game();
 	game->Init(window, graphics);
 
-
 	MSG msg = {0};
 	while(msg.message != WM_QUIT)
 	{
