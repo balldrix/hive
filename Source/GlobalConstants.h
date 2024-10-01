@@ -6,7 +6,7 @@ namespace GlobalConstants
 	const wchar_t WndClassName[] = L"MyWndClass";
 	const int WindowWidth = 1280;
 	const int WindowHeight = 720;
-	const int GameWidth = 160;
-	const int GameHeight = 90;
-	const float BackColor[4] = { 0.3f, 0.3f, 0.3f, 1.0f };
+	const int GameWidth = 240;
+	const int GameHeight = 135;
+	const float BackColor[4] = { 0.043f, 0.035f, 0.051f, 1.0f };
 }

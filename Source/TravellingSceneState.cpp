@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "InGameHudManager.h"
 #include "TravellingHandler.h"
+#include "LevelRenderer.h"
 #include "GlobalConstants.h"
 #include "InGameHudConstants.h"
 
@@ -22,7 +23,8 @@ void TravellingSceneState::OnEnter(GameplayGameState* game)
 	game->GetCamera()->SetTarget(game->GetPlayer());
 	game->GetCamera()->SetBoundary(game->GetCamera()->GetPosition().x);
 	game->GetTravellingHandler()->SetTravelTimer(0.0f);
-	game->SetPlayerBoundaryX(game->GetCamera()->GetPosition().x, (float)game->GetBackground()->GetWidth());
+	game->SetPlayerBoundaryX(game->GetCamera()->GetPosition().x, 
+		(float)game->GetLevelRenderer()->GetLevelPixelWidth());
 }
 
 void TravellingSceneState::Execute(GameplayGameState* game)

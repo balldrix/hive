@@ -52,11 +52,9 @@ GameplayGameState::GameplayGameState() :
 	m_playerTexture(nullptr),
 	m_hitBoxTexture(nullptr),
 	m_standardShadowTexture(nullptr),
-	m_backgroundTexture(nullptr),
 	m_playerSprite(nullptr),
 	m_playerShadowSprite(nullptr),
 	m_hitBoxSprite(nullptr),
-	m_backgroundSprite(nullptr),
 	m_playerAnimator(nullptr),
 	m_playerHitBoxManager(nullptr),
 	m_NPCManager(nullptr),
@@ -145,12 +143,10 @@ void GameplayGameState::LoadAssets()
 	m_playerTexture = new Texture();
 	m_hitBoxTexture = new Texture();
 	m_standardShadowTexture = new Texture();
-	m_backgroundTexture = new Texture();
 
 	m_playerSprite = new Spritesheet();
 	m_playerShadowSprite = new Sprite();
 	m_hitBoxSprite = new Sprite();
-	m_backgroundSprite = new Sprite();
 
 	m_playerAnimator = new Animator();
 
@@ -168,14 +164,11 @@ void GameplayGameState::LoadAssets()
 	m_playerTexture->LoadTexture(m_graphics, "GameData\\Sprites\\playerSpritesheet.png");
 	m_hitBoxTexture->LoadTexture(m_graphics, "GameData\\Sprites\\hitbox.png");
 	m_standardShadowTexture->LoadTexture(m_graphics, "GameData\\Sprites\\shadow_large.png");
-	m_backgroundTexture->LoadTexture(m_graphics, "GameData\\Sprites\\backgroundTest.png");
-
+	
 	m_playerSprite->Init(m_playerTexture, "GameData\\SpriteSheetData\\playerSpritesheetData.json");
 	m_playerShadowSprite->Init(m_standardShadowTexture);
 	m_playerShadowSprite->SetAlpha(0.7f);
 	m_hitBoxSprite->Init(m_hitBoxTexture);
-	m_backgroundSprite->Init(m_backgroundTexture);
-	m_backgroundSprite->SetOrigin(Vector2::Zero);
 
 	m_playerAnimator->Init("GameData\\SpriteSheetData\\playerSpritesheetData.json", m_playerSprite);
 
@@ -194,7 +187,7 @@ void GameplayGameState::LoadAssets()
 
 	m_NPCManager->Init(m_graphics, m_camera, m_player, m_hudManager, m_standardShadowTexture, m_hitBoxTexture);
 	
-	m_sceneStateMachine->Init(TravellingSceneState::Instance(), nullptr, GlobalSceneState::Instance());
+	m_sceneStateMachine->Init(TravellingSceneState::Instance(), nullptr, nullptr);
 	m_encounterHandler->Init("GameData\\EncounterData\\encounterPositions.txt", m_NPCManager->GetEnemyList());
 
 	m_playerBoundary.SetMin(Vector2(StartingBoundaryMinX, StartingBoundaryMinY));
@@ -281,9 +274,6 @@ void GameplayGameState::DeleteAssets()
 	delete m_playerAnimator;
 	m_playerAnimator = nullptr;
 
-	delete m_backgroundSprite;
-	m_backgroundSprite = nullptr;
-
 	delete m_hitBoxSprite;
 	m_hitBoxSprite = nullptr;
 
@@ -292,9 +282,6 @@ void GameplayGameState::DeleteAssets()
 
 	delete m_playerSprite;
 	m_playerSprite = nullptr;
-
-	delete m_backgroundTexture;
-	m_backgroundTexture = nullptr;
 
 	delete m_standardShadowTexture;
 	m_standardShadowTexture = nullptr;
@@ -439,6 +426,7 @@ void GameplayGameState::Update(float deltaTime)
 {
 	m_deltaTime = deltaTime;
 	m_sceneStateMachine->Update();
+	Tick(deltaTime);
 }
 
 void GameplayGameState::CheckForEncounter()
@@ -642,7 +630,6 @@ void GameplayGameState::Render()
 void GameplayGameState::ReleaseAll()
 {
 	if(m_hudManager != nullptr) { m_hudManager->ReleaseAll(); }
-	if(m_backgroundTexture != nullptr) { m_backgroundTexture->Release(); }
 	if(m_standardShadowTexture != nullptr) { m_standardShadowTexture->Release(); }
 	if(m_hitBoxTexture != nullptr) { m_hitBoxTexture->Release(); }
 	if(m_playerTexture != nullptr) { m_playerTexture->Release(); }
@@ -654,7 +641,6 @@ void GameplayGameState::ResetGame()
 	m_input->ClearAll();
 	m_player->Reset();
 	m_NPCManager->Reset();
-	m_backgroundSprite->SetPosition(Vector2::Zero);
 	m_camera->Reset();
 	m_camera->SetTarget(m_player);
 	m_hudManager->Reset();

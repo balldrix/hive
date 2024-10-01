@@ -64,9 +64,6 @@
     <ClCompile Include="Source\GameplayGameState.cpp">
       <Filter>Game\States</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GlobalSceneState.cpp">
-      <Filter>Game\Scenes\States</Filter>
-    </ClCompile>
     <ClCompile Include="Source\TravellingSceneState.cpp">
       <Filter>Game\Scenes\States</Filter>
     </ClCompile>
@@ -396,9 +393,6 @@
       <Filter>Game\Scenes\States</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameplayOwnedSceneStates.h">
-      <Filter>Game\Scenes\States</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GlobalSceneState.h">
       <Filter>Game\Scenes\States</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameOverSceneState.h">

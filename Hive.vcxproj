@@ -37,7 +37,6 @@
     <ClCompile Include="Source\GameOverSceneState.cpp" />
     <ClCompile Include="Source\GameOverScreen.cpp" />
     <ClCompile Include="Source\GameOverScreenController.cpp" />
-    <ClCompile Include="Source\GlobalSceneState.cpp" />
     <ClCompile Include="Source\KingMook.cpp" />
     <ClCompile Include="Source\KingMookChargeState.cpp" />
     <ClCompile Include="Source\KingMookEnemyGlobalState.cpp" />
@@ -121,7 +120,6 @@
     <ClInclude Include="Source\GameOverScreen.h" />
     <ClInclude Include="Source\GameOverScreenController.h" />
     <ClInclude Include="Source\GameplayOwnedSceneStates.h" />
-    <ClInclude Include="Source\GlobalSceneState.h" />
     <ClInclude Include="Source\KingMook.h" />
     <ClInclude Include="Source\KingMookChargeState.h" />
     <ClInclude Include="Source\NPCFactory.h" />
