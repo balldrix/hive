@@ -352,7 +352,7 @@ MigrationBackup/
 .ionide/
 
 # vcpkg folder
-vendor/
+vcpkg_installed/
 
 # cmake folders
 build/
