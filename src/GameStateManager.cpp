@@ -58,7 +58,7 @@ void GameStateManager::SwitchState(const wchar_t* stateName)
 
 	std::string error = " Error finding game state in SwitchState method GameStateManager.cpp line 60; \n"; // error message
 	Error::FileLog(error);
-	MessageBox(m_graphics->GetHwnd(), L"Error loading GameState. See Logs/Error.txt", L"Error!", MB_OK); // display loading texture error message
+	MessageBox(m_graphics->GetHwnd(), L"Error loading GameState. See Logs/Error.txt", L"Error!", MB_OK);
 	PostQuitMessage(0);
 }
 
