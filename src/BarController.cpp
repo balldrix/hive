@@ -25,13 +25,13 @@ BarController::~BarController()
 void BarController::Init(Graphics* graphics)
 {
 	m_backgroundTexture = new Texture();
-	m_backgroundTexture->LoadTexture(graphics, "GameData//Sprites//UI//player1_hud_healthbar_background.png");
+	m_backgroundTexture->LoadTexture(graphics, "data//Sprites//UI//player1_hud_healthbar_background.png");
 
 	m_fillTexture = new Texture();
-	m_fillTexture->LoadTexture(graphics, "GameData//Sprites//UI//player1_hud_healthbar_fill.png");
+	m_fillTexture->LoadTexture(graphics, "data//Sprites//UI//player1_hud_healthbar_fill.png");
 
 	m_frameTexture = new Texture();
-	m_frameTexture->LoadTexture(graphics, "GameData//Sprites//UI//player1_hud_healthbar_frame.png");
+	m_frameTexture->LoadTexture(graphics, "data//Sprites//UI//player1_hud_healthbar_frame.png");
 
 	m_backgroundSprite = new Sprite();
 	m_backgroundSprite->Init(m_backgroundTexture);

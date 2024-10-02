@@ -1,3 +1,3 @@
 #pragma once
 
-const char XXXX[] = "GameData\\Texture\\XXXX.png";
+const char XXXX[] = "data\\Texture\\XXXX.png";

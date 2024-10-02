@@ -52,16 +52,16 @@ void NPCFactory::Init(Graphics* graphics,
 	m_standardShadowTexture = standardShadowTexture;
 
 	m_mookTexture = new Texture();
-	m_mookTexture->LoadTexture(m_graphics, "GameData\\Sprites\\mookSpritesheet.png");
+	m_mookTexture->LoadTexture(m_graphics, "data\\Sprites\\mookSpritesheet.png");
 
 	m_kingMookTexture = new Texture();
-	m_kingMookTexture->LoadTexture(m_graphics, "GameData\\Sprites\\kingMookSpritesheet.png");
+	m_kingMookTexture->LoadTexture(m_graphics, "data\\Sprites\\kingMookSpritesheet.png");
 
 	m_mookPortraitTexture = new Texture();
-	m_mookPortraitTexture->LoadTexture(m_graphics, "GameData\\Sprites\\UI\\mook_hud_portrait.png");
+	m_mookPortraitTexture->LoadTexture(m_graphics, "data\\Sprites\\UI\\mook_hud_portrait.png");
 
 	m_kingMookPortraitTexture = new Texture();
-	m_kingMookPortraitTexture->LoadTexture(m_graphics, "GameData\\Sprites\\UI\\kingMook_hud_portrait.png");
+	m_kingMookPortraitTexture->LoadTexture(m_graphics, "data\\Sprites\\UI\\kingMook_hud_portrait.png");
 
 	m_mookPortraitSprite = new Sprite();
 	m_mookPortraitSprite->Init(m_mookPortraitTexture);

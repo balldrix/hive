@@ -28,7 +28,7 @@ void GameOverScreen::Init(Graphics* graphics, Animator* animator, const std::str
 	m_texture->LoadTexture(graphics, texturePath);
 
 	m_spriteSheet = new Spritesheet();
-//	m_spriteSheet->Init(m_texture, "GameData\\SpriteSheetData\\gameOverSpritesheetData.json");
+//	m_spriteSheet->Init(m_texture, "data\\SpriteSheetData\\gameOverSpritesheetData.json");
 	m_spriteSheet->SetPosition(Vector2(GameWidth * 0.5f, GameHeight * 0.5f));
 	m_spriteSheet->SetDepth(1.0f);
 }

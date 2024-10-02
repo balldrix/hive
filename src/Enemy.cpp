@@ -101,21 +101,21 @@ void Enemy::Init(Graphics* graphics,
 	m_grounded = true;
 
 	m_spriteSheet = new Spritesheet();
-	m_spriteSheet->Init(spriteTexture, "GameData\\SpriteSheetData\\" + data.sheetName + "SpritesheetData.json");
+	m_spriteSheet->Init(spriteTexture, "data\\SpriteSheetData\\" + data.sheetName + "SpritesheetData.json");
 	
 	m_shadow = new Sprite();
 	m_shadow->Init(shadowTexture);
 	m_shadow->SetAlpha(0.7f);
 	
 	m_animator = new Animator();
-	m_animator->Init("GameData\\SpriteSheetData\\" + data.sheetName + "SpritesheetData.json", m_spriteSheet);
+	m_animator->Init("data\\SpriteSheetData\\" + data.sheetName + "SpritesheetData.json", m_spriteSheet);
 	m_animator->SetAnimation(0);
 
 	m_hitBoxSprite = new Sprite();
 	m_hitBoxSprite->Init(hitBoxTexture);
 	
 	m_hitBoxManager = new HitBoxManager();
-	m_hitBoxManager->Init(m_hitBoxSprite, "GameData\\HitBoxData\\" + data.sheetName + "HitBoxData.json");
+	m_hitBoxManager->Init(m_hitBoxSprite, "data\\HitBoxData\\" + data.sheetName + "HitBoxData.json");
 	m_hitBoxManager->SetOwner(this);
 	
 	m_movementSpeed = data.objectData.walkSpeed;
@@ -145,7 +145,7 @@ void Enemy::Init(Graphics* graphics,
 	unsigned int width = (unsigned int)(m_healthBar->GetWidth() * percentage);
 	m_healthBar->SetWidth(width);
 
-	std::string enemyDataFile = "GameData\\EnemyData\\Damage\\" + data.type + "Damage.txt";
+	std::string enemyDataFile = "data\\EnemyData\\Damage\\" + data.type + "Damage.txt";
 
 	if(!LoadDamageData(enemyDataFile))
 	{

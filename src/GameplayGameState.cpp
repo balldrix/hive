@@ -105,37 +105,37 @@ void GameplayGameState::OnExit()
 
 void GameplayGameState::LoadAssets()
 {
-	//SoundManager::AddSound(L"GameData\\Sounds\\punch_001.wav");
-	//SoundManager::AddSound(L"GameData\\Sounds\\punch_003.wav");
-	//SoundManager::AddSound(L"GameData\\Sounds\\punch_004.wav");
-	//SoundManager::AddSound(L"GameData\\Sounds\\walk_001.wav");
-	//SoundManager::AddSound(L"GameData\\Sounds\\walk_002.wav");
-	//SoundManager::AddSound(L"GameData\\Sounds\\walk_003.wav");
-	//SoundManager::AddSound(L"GameData\\Sounds\\walk_004.wav");
-	//SoundManager::AddSound(L"GameData\\Sounds\\hit_001.wav");
-	//SoundManager::AddSound(L"GameData\\Sounds\\hit_002.wav");
-	//SoundManager::AddSound(L"GameData\\Sounds\\hit_003.wav");
-	//SoundManager::AddSound(L"GameData\\Sounds\\scream.ogg");
-	//SoundManager::AddSound(L"GameData\\Sounds\\mook_entrance_001.wav");
-	//SoundManager::AddSound(L"GameData\\Sounds\\mook_entrance_002.wav");
-	//SoundManager::AddSound(L"GameData\\Sounds\\mook_entrance_003.wav");
-	//SoundManager::AddSound(L"GameData\\Sounds\\mook_entrance_004.wav");
-	//SoundManager::AddSound(L"GameData\\Sounds\\mook_walk.wav");
-	//SoundManager::AddSound(L"GameData\\Sounds\\mook_punch_001.wav");
-	//SoundManager::AddSound(L"GameData\\Sounds\\mook_hit_001.wav");
-	//SoundManager::AddSound(L"GameData\\Sounds\\mook_hit_002.wav");
-	//SoundManager::AddSound(L"GameData\\Sounds\\mook_hit_003.wav");
-	//SoundManager::AddSound(L"GameData\\Sounds\\mook_hit_004.wav");
-	//SoundManager::AddSound(L"GameData\\Sounds\\mook_death.wav");
-	//SoundManager::AddSound(L"GameData\\Sounds\\boss_entrance_001.wav");
-	//SoundManager::AddSound(L"GameData\\Sounds\\boss_walk_001.wav");
-	//SoundManager::AddSound(L"GameData\\Sounds\\boss_walk_002.wav");
-	//SoundManager::AddSound(L"GameData\\Sounds\\boss_walk_003.wav");
-	//SoundManager::AddSound(L"GameData\\Sounds\\boss_punch_001.wav");
-	//SoundManager::AddSound(L"GameData\\Sounds\\boss_punch_002.wav");
-	//SoundManager::AddSound(L"GameData\\Sounds\\boss_punch_003.wav");
-	//SoundManager::AddSound(L"GameData\\Sounds\\boss_punch_004.wav");
-	//SoundManager::AddSound(L"GameData\\Sounds\\travelling_master.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\punch_001.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\punch_003.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\punch_004.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\walk_001.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\walk_002.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\walk_003.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\walk_004.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\hit_001.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\hit_002.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\hit_003.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\scream.ogg");
+	//SoundManager::AddSound(L"data\\Sounds\\mook_entrance_001.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\mook_entrance_002.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\mook_entrance_003.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\mook_entrance_004.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\mook_walk.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\mook_punch_001.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\mook_hit_001.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\mook_hit_002.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\mook_hit_003.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\mook_hit_004.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\mook_death.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\boss_entrance_001.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\boss_walk_001.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\boss_walk_002.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\boss_walk_003.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\boss_punch_001.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\boss_punch_002.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\boss_punch_003.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\boss_punch_004.wav");
+	//SoundManager::AddSound(L"data\\Sounds\\travelling_master.wav");
 
 	m_camera = new Camera();
 	m_controlSystem = new ControlSystem();
@@ -161,20 +161,20 @@ void GameplayGameState::LoadAssets()
 	m_encounterHandler = new EncounterHandler();
 	m_travellingHandler = new TravellingHandler();
 
-	m_playerTexture->LoadTexture(m_graphics, "GameData\\Sprites\\playerSpritesheet.png");
-	m_hitBoxTexture->LoadTexture(m_graphics, "GameData\\Sprites\\hitbox.png");
-	m_standardShadowTexture->LoadTexture(m_graphics, "GameData\\Sprites\\shadow_large.png");
+	m_playerTexture->LoadTexture(m_graphics, "data\\Sprites\\playerSpritesheet.png");
+	m_hitBoxTexture->LoadTexture(m_graphics, "data\\Sprites\\hitbox.png");
+	m_standardShadowTexture->LoadTexture(m_graphics, "data\\Sprites\\shadow_large.png");
 	
-	m_playerSprite->Init(m_playerTexture, "GameData\\SpriteSheetData\\playerSpritesheetData.json");
+	m_playerSprite->Init(m_playerTexture, "data\\SpriteSheetData\\playerSpritesheetData.json");
 	m_playerShadowSprite->Init(m_standardShadowTexture);
 	m_playerShadowSprite->SetAlpha(0.7f);
 	m_hitBoxSprite->Init(m_hitBoxTexture);
 
-	m_playerAnimator->Init("GameData\\SpriteSheetData\\playerSpritesheetData.json", m_playerSprite);
+	m_playerAnimator->Init("data\\SpriteSheetData\\playerSpritesheetData.json", m_playerSprite);
 
-	m_playerHitBoxManager->Init(m_hitBoxSprite, m_player, "GameData\\HitBoxData\\playerHitBoxData.json");
+	m_playerHitBoxManager->Init(m_hitBoxSprite, m_player, "data\\HitBoxData\\playerHitBoxData.json");
 
-	m_player->LoadData("GameData\\PlayerData\\playerData.txt", "GameData\\PlayerData\\playerDamage.txt");
+	m_player->LoadData("data\\PlayerData\\playerData.txt", "data\\PlayerData\\playerDamage.txt");
 	m_player->Init(m_playerSprite, m_playerShadowSprite, m_playerAnimator, m_playerHitBoxManager, m_controlSystem);
 	m_player->SetCamera(m_camera);
 	m_camera->SetTarget(m_player);
@@ -188,7 +188,7 @@ void GameplayGameState::LoadAssets()
 	m_NPCManager->Init(m_graphics, m_camera, m_player, m_hudManager, m_standardShadowTexture, m_hitBoxTexture);
 	
 	m_sceneStateMachine->Init(TravellingSceneState::Instance(), nullptr, nullptr);
-	m_encounterHandler->Init("GameData\\EncounterData\\encounterPositions.txt", m_NPCManager->GetEnemyList());
+	m_encounterHandler->Init("data\\EncounterData\\encounterPositions.txt", m_NPCManager->GetEnemyList());
 
 	m_playerBoundary.SetMin(Vector2(StartingBoundaryMinX, StartingBoundaryMinY));
 	m_playerBoundary.SetMax(Vector2((float)m_levelRenderer->GetLevelPixelWidth() - 1.0f, (float)m_graphics->GetHeight() - 1.0f));
@@ -204,13 +204,13 @@ void GameplayGameState::LoadAssets()
 	m_musicSoundSource->SetRelative(true);
 
 	m_impactFxTexture = new Texture();
-	m_impactFxTexture->LoadTexture(m_graphics, "GameData\\Sprites\\vfx.png");
+	m_impactFxTexture->LoadTexture(m_graphics, "data\\Sprites\\vfx.png");
 
 	m_impactFxSpritesheet = new Spritesheet();
-	m_impactFxSpritesheet->Init(m_impactFxTexture, "GameData\\SpriteSheetData\\vfx.json");
+	m_impactFxSpritesheet->Init(m_impactFxTexture, "data\\SpriteSheetData\\vfx.json");
 
 	m_impactFxAnimator = new Animator();
-	m_impactFxAnimator->Init("GameData\\SpriteSheetData\\vfx.json", m_impactFxSpritesheet);
+	m_impactFxAnimator->Init("data\\SpriteSheetData\\vfx.json", m_impactFxSpritesheet);
 
 	m_impactFx = new ImpactFx();
 	m_impactFx->Init(m_impactFxSpritesheet, m_impactFxAnimator);

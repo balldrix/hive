@@ -16,14 +16,14 @@ TravelPrompt::~TravelPrompt() {}
 void TravelPrompt::Init(Graphics* graphics)
 {
 	m_texture = new Texture();
-	m_texture->LoadTexture(graphics, "GameData//Sprites//UI//go_sign.png");
+	m_texture->LoadTexture(graphics, "data//Sprites//UI//go_sign.png");
 
 	m_spritesheet = new Spritesheet();
-//	m_spritesheet->Init(m_texture, "GameData//SpriteSheetData//travellingPromptSpritesheetData.json");
+//	m_spritesheet->Init(m_texture, "data//SpriteSheetData//travellingPromptSpritesheetData.json");
 	m_spritesheet->SetPosition(Vector2(TravelPromptPositionX, TravelPromptPositionY));
 
 	m_animator = new Animator();
-	//m_animator->Init("GameData//AnimationData//travelPromptAnimationData.json");
+	//m_animator->Init("data//AnimationData//travelPromptAnimationData.json");
 	m_animator->SetAnimation("Active");
 
 	GameObject::m_animator = m_animator;

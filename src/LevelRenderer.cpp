@@ -32,8 +32,8 @@ void LevelRenderer::Init(Graphics* graphics, Camera* camera)
 	m_tileSetTexture = new Texture();
 	m_tileSetSprite = new Sprite();
 
-	m_tilemapHandler->LoadTilemap("GameData\\Tilemaps\\tm_bunker.json");
-	m_tileSetTexture->LoadTexture(graphics, "GameData\\Tilesets\\ts_bunker.png");
+	m_tilemapHandler->LoadTilemap("data\\Tilemaps\\tm_bunker.json");
+	m_tileSetTexture->LoadTexture(graphics, "data\\Tilesets\\ts_bunker.png");
 	m_tileSetSprite->Init(m_tileSetTexture);
 	m_tileSetSprite->SetOrigin(Vector2(0, 0));
 

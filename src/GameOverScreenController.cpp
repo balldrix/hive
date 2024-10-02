@@ -18,13 +18,13 @@ GameOverScreenController::~GameOverScreenController()
 void GameOverScreenController::Init(Graphics* graphics)
 {
 	m_animator = new Animator();
-	//m_animator->Init("GameData\\AnimationData\\gameOverAnimationData.json");
+	//m_animator->Init("data\\AnimationData\\gameOverAnimationData.json");
 
 	m_playerLostScreen = new GameOverScreen();
-	m_playerLostScreen->Init(graphics, m_animator, "GameData\\Sprites\\UI\\player_won_screen.png");
+	m_playerLostScreen->Init(graphics, m_animator, "data\\Sprites\\UI\\player_won_screen.png");
 
 	m_playerWonScreen = new GameOverScreen();
-	m_playerWonScreen->Init(graphics, m_animator, "GameData\\Sprites\\UI\\player_won_screen.png");
+	m_playerWonScreen->Init(graphics, m_animator, "data\\Sprites\\UI\\player_won_screen.png");
 }
 
 void GameOverScreenController::Update(float deltaTime)
