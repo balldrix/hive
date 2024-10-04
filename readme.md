@@ -5,8 +5,11 @@ This project uses VCPKG to maintain dependencies. Download and install cmake and
 
 ## Gameplay
 Arrow keys - Character movement
+
 Z - Block
+
 X - Normal Attack
+
 C - Strong Attack
 
 Normal Attacks can be chained together and finished with a strong attack.
