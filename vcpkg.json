@@ -1,0 +1,8 @@
+{
+  "dependencies": [
+    "directxtk",
+    "nlohmann-json",
+    "openal-soft",
+    "libsndfile"
+  ]
+}
