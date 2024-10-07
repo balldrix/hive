@@ -492,6 +492,8 @@ void GameplayGameState::ProcessCollisions()
 				auto groundPosition = enemy->GetGroundPosition();
 				auto frameData = enemy->GetSprite()->GetFrameData(enemy->GetAnimator()->GetCurrentFrame());
 				auto spriteHeight = frameData.spriteSourceSize.bottom;
+				auto normalDirection = Vector2(enemy->GetGroundPosition() - m_player->GetGroundPosition());
+				normalDirection.Normalize();
 
 				enemy->ApplyDamage(m_player, damageData.amount);
 				enemy->ShowEnemyHud();
@@ -499,7 +501,7 @@ void GameplayGameState::ProcessCollisions()
 				m_stopTimer = damageData.hitStopDuration;				
 				m_impactFx->DisplayFx(Vector2(groundPosition.x, groundPosition.y - spriteHeight * 0.5f));
 
-				SpawnParticles(m_impactFx->Position(), m_player->GetCurrentVelocity(), (Color)Colors::Green, (Color)Colors::DarkGreen, 1.0f, 200);
+				SpawnParticles(m_impactFx->Position(), normalDirection, (Color)Colors::Green, (Color)Colors::DarkGreen, 1.0f, 200);
 
 				return;
 			}
@@ -516,6 +518,8 @@ void GameplayGameState::ProcessCollisions()
 				auto damageData = enemy->GetDamageData();
 				auto enemyVelocity = enemy->GetCurrentVelocity();
 				enemyVelocity.Normalize();
+				auto normalDirection = m_player->GetGroundPosition() - enemy->GetGroundPosition();
+				normalDirection.Normalize();
 
 				auto frameData = m_player->GetSprite()->GetFrameData(m_player->GetAnimator()->GetCurrentFrame());
 				auto spriteHeight = frameData.spriteSourceSize.bottom;
@@ -532,13 +536,11 @@ void GameplayGameState::ProcessCollisions()
 
 				if(m_player->GetStateMachine()->IsInState(*PlayerBlockState::Instance()))
 				{
-					Vector2 normalDirection = m_player->GetGroundPosition() - enemy->GetGroundPosition();
-					normalDirection.Normalize();
 					m_player->SetPositionX((m_player->GetGroundPosition() + Vector2(normalDirection * 2.0f)).x);
 				}
 				else 
 				{
-					SpawnParticles(m_impactFx->Position(), enemy->GetCurrentVelocity(), (Color)Colors::Red, (Color)Colors::DarkRed, 1.0f, 200);
+					SpawnParticles(m_impactFx->Position(), normalDirection, (Color)Colors::Red, (Color)Colors::DarkRed, 1.0f, 200);
 				}
 				
 				return;
