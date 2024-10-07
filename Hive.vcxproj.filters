@@ -220,6 +220,9 @@
     <ClCompile Include="src\Spritesheet.cpp">
       <Filter>Graphics\Sprites</Filter>
     </ClCompile>
+    <ClCompile Include="src\Logger.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Data">
@@ -572,6 +575,9 @@
     </ClInclude>
     <ClInclude Include="src\SpriteFrameData.h">
       <Filter>Graphics\Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Logger.h">
+      <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,7 @@
     "directxtk",
     "nlohmann-json",
     "openal-soft",
-    "libsndfile"
+    "libsndfile",
+    "spdlog"
   ]
 }

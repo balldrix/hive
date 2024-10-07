@@ -46,6 +46,7 @@
 #include <stdexcept>
 
 #include <nlohmann/json.hpp>
+#include "Logger.h"
 
 using namespace DirectX;
 using namespace DirectX::DX11;

@@ -14,6 +14,9 @@ LRESULT CALLBACK WndProc(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam);
 
 int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, _In_ int nCmdShow)
 {
+	Logger::Init();
+	Logger::LogInfo("Initialised Logger");
+
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
@@ -35,6 +38,8 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	game = new Game();
 	game->Init(window, graphics);
 
+	Logger::LogInfo("Initialised Game");
+
 	MSG msg = {0};
 	while(msg.message != WM_QUIT)
 	{
@@ -46,6 +51,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 		else
 		{
 			game->Run();
+			spdlog::info("Hello, {}!", "World");
 		}
 	}
 

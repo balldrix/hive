@@ -12,6 +12,7 @@ find_package(directxtk CONFIG REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
 find_package(OpenAL CONFIG REQUIRED)
 find_package(SndFile CONFIG REQUIRED)
+find_package(spdlog CONFIG REQUIRED)
 
 add_executable(${PROJECT_NAME} src/main.cpp src/AABB.cpp src/Animator.cpp src/AudioEngine.cpp src/BarController.cpp src/Camera.cpp src/CharacterPortrait.cpp 
 								src/Collider.cpp src/ControlSystem.cpp src/EncounterHandler.cpp src/EncounterSceneState.cpp src/Enemy.cpp src/EnemyAttackRunState.cpp 
@@ -31,9 +32,10 @@ add_executable(${PROJECT_NAME} src/main.cpp src/AABB.cpp src/Animator.cpp src/Au
 								src/MookEnemyGlobalState.h src/MookRunningEnemyGlobalState.h src/NPCFactory.h src/NPCManager.h src/ParticleSystem.h src/PixelTexture.h src/Player.h src/PlayerAttackState.h src/PlayerBlockState.h src/PlayerConstants.h
 								src/PlayerData.h src/PlayerDeadState.h src/PlayerGlobalState.h src/PlayerHurtState.h src/PlayerIdleState.h src/PlayerKnockbackState.h src/PlayerOwnedStates.h src/PlayerRunningState.h src/PlayerSprintingState.h
 								src/Randomiser.h src/Resources.h src/RunningEnemy.h src/RunningEnemyDeadState.h src/Sound.h src/SoundManager.h src/SoundSource.h src/Sprite.h src/SpriteFrameData.h src/SpriteSheet.h src/State.h src/StateMachine.h
-								src/Texture.h src/TilemapData.h src/TilemapHandler.h src/Timer.h src/TravelPrompt.h src/TravellingHandler.h src/TravellingSceneState.h src/UnitVectors.h src/Window.h src/pch.h)
+								src/Texture.h src/TilemapData.h src/TilemapHandler.h src/Timer.h src/TravelPrompt.h src/TravellingHandler.h src/TravellingSceneState.h src/UnitVectors.h src/Window.h src/pch.h src/Logger.cpp src/Logger.h)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Microsoft::DirectXTK)
 target_link_libraries(${PROJECT_NAME} PRIVATE nlohmann_json::nlohmann_json)
 target_link_libraries(${PROJECT_NAME} PRIVATE OpenAL::OpenAL)
 target_link_libraries(${PROJECT_NAME} PRIVATE SndFile::sndfile)
+target_link_libraries(main PRIVATE spdlog::spdlog_header_only)
