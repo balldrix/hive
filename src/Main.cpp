@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "AudioEngine.h"
 #include "SoundManager.h"
+#include "AssetLoader.h"
 
 Graphics* graphics = nullptr;
 Window* window	= nullptr;
@@ -32,8 +33,9 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 
 	graphics = new Graphics();
 	graphics->Init(window->GetHwnd(), hInstance);
-
+	
 	AudioEngine::Init();
+	AssetLoader::Init("data\\assets.json");
 
 	game = new Game();
 	game->Init(window, graphics);
