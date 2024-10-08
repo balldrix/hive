@@ -356,3 +356,6 @@ vcpkg_installed/
 
 # cmake folders
 build/
+
+# logs folder
+logs/

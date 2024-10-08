@@ -1,7 +1,6 @@
 #include "Texture.h"
 
 #include "Graphics.h"
-#include "Error.h"
 #include <DirectXTK/WICTextureLoader.h>
 
 Texture::Texture() :
@@ -27,7 +26,7 @@ Texture::LoadTexture(Graphics* graphics, const std::string &filename)
 	if(result != S_OK)
 	{
 		std::string error = " Error Loading texture file " + filename + " in Texture.cpp line 21; \n"; // error message
-		Error::FileLog(error);
+		Logger::LogError(error);
 		MessageBox(graphics->GetHwnd(), L"Error loading Texture. See Logs/Error.txt", L"Error!", MB_OK); // display loading texture error message
 		PostQuitMessage(0); // quit game
 	}

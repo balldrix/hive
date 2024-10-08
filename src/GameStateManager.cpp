@@ -1,7 +1,6 @@
 #include "GameStateManager.h"
 #include "GameState.h"
 #include "Graphics.h"
-#include "Error.h"
 
 GameStateManager::GameStateManager() :
 	m_currentState(nullptr),
@@ -42,7 +41,7 @@ void GameStateManager::SwitchState(std::string stateName)
 {
 	std::string currentStateName = "none";
 	if (m_currentState != nullptr) currentStateName = m_currentState->GetStateName();
-	std::string message = fmt::format("Switching State from {0} to {1} game state", currentStateName, stateName);
+	std::string message = fmt::format("Switching State from {0} to {1} game state.", currentStateName, stateName);
 	Logger::LogInfo(message);
 
 	if(m_currentState != nullptr)
@@ -62,8 +61,8 @@ void GameStateManager::SwitchState(std::string stateName)
 	}
 
 	std::string error = " Error finding game state in SwitchState method GameStateManager.cpp line 60; \n"; // error message
-	Error::FileLog(error);
-	MessageBox(m_graphics->GetHwnd(), L"Error loading GameState. See Logs/Error.txt", L"Error!", MB_OK);
+	Logger::LogError(error);
+	MessageBox(m_graphics->GetHwnd(), L"Error loading GameState. See Logs/Log.txt", L"Error!", MB_OK);
 	PostQuitMessage(0);
 }
 

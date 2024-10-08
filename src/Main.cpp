@@ -15,7 +15,7 @@ LRESULT CALLBACK WndProc(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam);
 int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, _In_ int nCmdShow)
 {
 	Logger::Init();
-	Logger::LogInfo("Initialised Logger");
+	Logger::LogInfo("Initialised Logger.");
 
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
@@ -74,7 +74,7 @@ void ShutDown()
 	SoundManager::DeleteSounds();
 	AudioEngine::Destroy();
 
-	Logger::LogInfo("Shutdown Game");
+	Logger::LogInfo("Shutdown Game.");
 }
 
 LRESULT CALLBACK WndProc(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam)

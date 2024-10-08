@@ -6,7 +6,6 @@
 #include <cinttypes>
 
 #include "SoundManager.h"
-#include "Error.h"
 
 std::map<std::wstring, Sound*> SoundManager::s_sounds;
 

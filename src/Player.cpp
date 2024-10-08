@@ -12,7 +12,6 @@
 #include "PlayerOwnedStates.h"
 #include "UnitVectors.h"
 #include "Camera.h"
-#include "Error.h"
 #include "PlayerConstants.h"
 #include "GlobalConstants.h"
 #include "AudioEngine.h"
@@ -119,14 +118,14 @@ void Player::LoadData(const std::string &playerDataFile, const std::string &dama
 	{
 		// unable to load player data file
 		std::string error = " Error! No player data file " + playerDataFile + " found.";
-		Error::FileLog(error);
+		Logger::LogError(error);
 	}
 
 	if(!LoadDamageData(damageDataFile))
 	{
 		// unable to load player data file
 		std::string error = " Error! No player damage data file " + damageDataFile + " found.";
-		Error::FileLog(error);
+		Logger::LogError(error);
 	}
 }
 

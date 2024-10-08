@@ -1,7 +1,6 @@
 #include "NPCManager.h"
 
 #include "Enemy.h"
-#include "Error.h"
 #include "NPCFactory.h"
 
 NPCManager::NPCManager() :
@@ -28,7 +27,7 @@ void NPCManager::Init(Graphics* graphics, Camera* camera, Player* player, InGame
 
 	if(result == false)
 	{
-		Error::FileLog(" Error initialising enemy type data. EnemyManager.cpp line 17");
+		Logger::LogError("Error initialising enemy type data. NPCManager.cpp line 26.");
 		PostQuitMessage(0); // quit game
 	}
 
@@ -36,7 +35,7 @@ void NPCManager::Init(Graphics* graphics, Camera* camera, Player* player, InGame
 
 	if(result == false)
 	{
-		Error::FileLog(" Error initialising enemy list. EnemyManager.cpp line 24");
+		Logger::LogError(" Error initialising enemy list. NPCManager.cpp line 34.");
 		PostQuitMessage(0); // quit game
 	}
 }

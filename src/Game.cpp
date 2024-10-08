@@ -52,7 +52,7 @@ void Game::Init(Window* window, Graphics* graphics)
 	m_currentTime = m_timer.GetTicks();
 	m_paused = false;
 
-	Logger::LogInfo("Initialised Game");
+	Logger::LogInfo("Initialised Game.");
 }
 
 void Game::Run()

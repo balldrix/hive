@@ -15,7 +15,6 @@
 #include "Player.h"
 #include "EnemyOwnedStates.h"
 #include "StateMachine.h"
-#include "Error.h"
 #include "AudioEngine.h"
 #include "SoundSource.h"
 #include "SoundManager.h"
@@ -150,7 +149,7 @@ void Enemy::Init(Graphics* graphics,
 	if(!LoadDamageData(enemyDataFile))
 	{
 		std::string error = "Error! Enemy damage data " + enemyDataFile + " not found.";
-		Error::FileLog(error);
+		Logger::LogError(error);
 	}
 
 	m_vocalSoundSource = new SoundSource();

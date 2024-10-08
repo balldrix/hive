@@ -30,7 +30,7 @@ public:
 		if(s_instance == nullptr)
 			s_instance = new AudioEngine(channels);
 
-		Logger::LogInfo("Initialised Audio Engine");
+		Logger::LogInfo("Initialised Audio Engine.");
 	}
 
 	static void Destroy() { delete s_instance; }

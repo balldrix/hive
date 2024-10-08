@@ -1,6 +1,5 @@
 #include "Animator.h"
 #include "SpriteSheet.h"
-#include "Error.h"
 
 Animator::Animator() :
 	m_currentAnimation(nullptr),
@@ -84,7 +83,7 @@ void Animator::SetAnimation(const std::string& name)
 	}
 
 	std::string error = " Error! No animation with name " + name + " found. Check animation data.";
-	Error::FileLog(error);
+	Logger::LogError(error);
 }
 
 void Animator::Reset()

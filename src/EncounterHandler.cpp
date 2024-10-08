@@ -1,7 +1,6 @@
 #include "EncounterHandler.h"
 
 #include "Enemy.h"
-#include "Error.h"
 
 EncounterHandler::EncounterHandler()
 	: m_encounterIndex(0)
@@ -22,7 +21,7 @@ void EncounterHandler::Init(const std::string &encounterDataFile, std::vector<En
 		return;
 
 	std::string error = " Error! No encounter data file " + encounterDataFile + " found.";
-	Error::FileLog(error);
+	Logger::LogError(error);
 }
 
 void EncounterHandler::SpawnEncounter()

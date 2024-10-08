@@ -18,7 +18,6 @@
 #include "HitBoxManager.h"
 #include "NPCManager.h"
 #include "Enemy.h"
-#include "Error.h"
 #include "StateMachine.h"
 #include "GameplayOwnedSceneStates.h"
 #include "EncounterHandler.h"

@@ -169,9 +169,6 @@
     <ClCompile Include="src\GameOverScreenController.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="src\Error.cpp">
-      <Filter>System</Filter>
-    </ClCompile>
     <ClCompile Include="src\KingMookChargeState.cpp">
       <Filter>Game\Enemy\States</Filter>
     </ClCompile>
@@ -472,9 +469,6 @@
     </ClInclude>
     <ClInclude Include="src\EncounterHandler.h">
       <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Error.h">
-      <Filter>System</Filter>
     </ClInclude>
     <ClInclude Include="src\UnitVectors.h">
       <Filter>Game</Filter>
