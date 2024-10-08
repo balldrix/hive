@@ -230,7 +230,7 @@ LRESULT Game::MessageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lPara
 		break;
 	case WM_KEYDOWN: case WM_SYSKEYDOWN:
 		
-		if(lParam & (1 << 30))
+		if (lParam & (static_cast<long long>(1) << 30))
 			return 0;
 			
 		m_input->SetKeyDown(wParam);	

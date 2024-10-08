@@ -49,7 +49,6 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 		else
 		{
 			game->Run();
-			spdlog::info("Hello, {}!", "World");
 		}
 	}
 

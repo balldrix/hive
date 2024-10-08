@@ -268,28 +268,14 @@ void Graphics::SetHeight(int height)
 
 void Graphics::TurnOnAlphaBlending()
 {
-	float blendFactor[4];
+	float blendFactor[4] = { 0 };
 
-	// Setup the blend factor.
-	blendFactor[0] = 0.0f;
-	blendFactor[1] = 0.0f;
-	blendFactor[2] = 0.0f;
-	blendFactor[3] = 0.0f;
-
-	// Turn on the alpha blending.
 	m_d3dDeviceContext->OMSetBlendState(m_alphaEnabledBlendState.Get(), blendFactor, 0xffffffff);
 }
 
 void Graphics::TurnOffAlphaBlending()
 {
-	float blendFactor[4];
+	float blendFactor[4] = { 0 };
 
-	// Setup the blend factor.
-	blendFactor[0] = 0.0f;
-	blendFactor[1] = 0.0f;
-	blendFactor[2] = 0.0f;
-	blendFactor[3] = 0.0f;
-
-	// Turn on the alpha blending.
 	m_d3dDeviceContext->OMSetBlendState(m_alphaDisabledBlendState.Get(), blendFactor, 0xffffffff);
 }
