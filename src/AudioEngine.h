@@ -33,12 +33,16 @@ public:
 		Logger::LogInfo("Initialised Audio Engine.");
 	}
 
-	static void Destroy() { delete s_instance; }
+	static void Destroy() 
+	{ 
+		delete s_instance; 
+		s_instance = nullptr;
+	}
 
 	void SetListener(GameObject* object) { m_listener = object; }
 	void SetMasterVolume(float volume);
 
-	Vector3 GetListenerPosition() { return m_listenerPosition; }
+	Vector3 GetListenerPosition() const { return m_listenerPosition; }
 
 	void AddSoundSource(SoundSource* soundSource) { m_soundEmitters.push_back(soundSource); }
 	void RemoveSoundSource(SoundSource* soundSource);

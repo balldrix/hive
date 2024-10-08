@@ -75,7 +75,7 @@ void AudioEngine::UpdateListener()
 	alListenerfv(AL_POSITION, (float*) &m_listenerPosition);
 
 	Vector3 facingDirection = m_listener->GetFacingDirection();
-	float orientation[6];
+	float orientation[6] = {};
 	orientation[0] = facingDirection.x;
 	orientation[1] = facingDirection.y;
 	orientation[2] = facingDirection.z;
