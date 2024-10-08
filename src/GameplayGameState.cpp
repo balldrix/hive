@@ -77,7 +77,7 @@ GameplayGameState::GameplayGameState() :
 	m_impactFxAnimator(nullptr),
 	m_impactFx(nullptr),
 	m_particleSystem(nullptr),
-	GameState(L"GAMEPLAY")
+	GameState("Gameplay")
 {}
 
 GameplayGameState::GameplayGameState(GameStateManager* gameStateManager) : GameplayGameState()

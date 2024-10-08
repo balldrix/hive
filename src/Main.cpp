@@ -38,8 +38,6 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	game = new Game();
 	game->Init(window, graphics);
 
-	Logger::LogInfo("Initialised Game");
-
 	MSG msg = {0};
 	while(msg.message != WM_QUIT)
 	{
@@ -75,6 +73,8 @@ void ShutDown()
 	
 	SoundManager::DeleteSounds();
 	AudioEngine::Destroy();
+
+	Logger::LogInfo("Shutdown Game");
 }
 
 LRESULT CALLBACK WndProc(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam)

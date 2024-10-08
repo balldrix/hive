@@ -46,11 +46,13 @@ void Game::Init(Window* window, Graphics* graphics)
 							 m_input);
 
 	m_gameStateManager->AddState(new GameplayGameState(m_gameStateManager));
-	m_gameStateManager->SwitchState(L"GAMEPLAY");
+	m_gameStateManager->SwitchState("Gameplay");
 
 	m_timerFreq = m_timer.GetFrequency();
 	m_currentTime = m_timer.GetTicks();
 	m_paused = false;
+
+	Logger::LogInfo("Initialised Game");
 }
 
 void Game::Run()

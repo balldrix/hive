@@ -1,20 +1,21 @@
 #include "GameState.h"
+#include "string.h"
 
 GameState::GameState() :
-	m_stateName(L""),
+	m_stateName(""),
 	m_inputTimer(0.0f),
 	m_inputReady(false)
 {
 }
 
-GameState::GameState(const wchar_t* stateName) :
+GameState::GameState(std::string stateName) :
 	m_inputTimer(0.0f),
 	m_inputReady(false)
 {
 	m_stateName = stateName;
 }
 
-const wchar_t* GameState::GetStateName() const
+std::string GameState::GetStateName() const
 {
 	return m_stateName;
 }

@@ -56,6 +56,8 @@ int Window::Init(HINSTANCE hInstance, INT cmdShow, WNDPROC wndProc)
 
     GetClientRect(m_hWindow, &rc);
 
+    Logger::LogInfo("Initialised Window");
+
     return 0;
 }
 

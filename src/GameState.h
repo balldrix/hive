@@ -1,10 +1,12 @@
 #pragma once
 
+#include <string>
+
 class GameState
 {
 public:
 	GameState();
-	GameState(const wchar_t* stateName);
+	GameState(std::string stateName);
 	virtual ~GameState(void) {};
 
 	virtual void	OnEntry() {};				
@@ -18,10 +20,10 @@ public:
 
 	virtual void	ReleaseAll() {};			
 
-	virtual const wchar_t*	GetStateName() const; 
+	virtual std::string	GetStateName() const;
 
 protected:
-	const wchar_t*	m_stateName; 
+	std::string	m_stateName;
 	float			m_inputTimer; 
 	bool			m_inputReady; 
 };

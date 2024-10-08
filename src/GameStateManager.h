@@ -15,9 +15,9 @@ public:
 	void							Init(Graphics* graphics, Input* input);		
 
 	void							AddState(GameState* state);					
-	void							SwitchState(const wchar_t* stateName);		
+	void							SwitchState(std::string stateName);		
 	GameState*						GetCurrentState() const;					
-	const wchar_t*					GetCurrentStateName() const;				
+	std::string						GetCurrentStateName() const;				
 
 	void							ProcessInput();								
 	void							Update(float deltaTime);					

@@ -38,8 +38,13 @@ void GameStateManager::AddState(GameState* state)
 	m_stateList.push_back(state);
 }
 
-void GameStateManager::SwitchState(const wchar_t* stateName)
+void GameStateManager::SwitchState(std::string stateName)
 {
+	std::string currentStateName = "none";
+	if (m_currentState != nullptr) currentStateName = m_currentState->GetStateName();
+	std::string message = fmt::format("Switching State from {0} to {1} game state", currentStateName, stateName);
+	Logger::LogInfo(message);
+
 	if(m_currentState != nullptr)
 	{
 		m_currentState->OnExit();
@@ -67,13 +72,13 @@ GameState* GameStateManager::GetCurrentState() const
 	return m_currentState;
 }
 
-const wchar_t* GameStateManager::GetCurrentStateName() const
+std::string GameStateManager::GetCurrentStateName() const
 {
 	if(m_currentState != nullptr)
 	{
 		return m_currentState->GetStateName();
 	}
-	return L"";
+	return "";
 }
 
 void GameStateManager::ProcessInput()
