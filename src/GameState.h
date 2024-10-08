@@ -16,7 +16,6 @@ public:
 	virtual void	Update(float deltaTime) {}; 
 	virtual void	ProcessCollisions() {};		
 	virtual void	Render() {};				
-	virtual void	Render3D() {};				
 
 	virtual void	ReleaseAll() {};			
 

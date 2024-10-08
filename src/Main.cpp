@@ -64,15 +64,14 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 void ShutDown()
 {
 	delete game;
+	SoundManager::DeleteSounds();
+	AudioEngine::Destroy();
 	delete graphics;
 	delete window;
 	
 	game = nullptr;
 	graphics = nullptr;
-	window = nullptr;
-	
-	SoundManager::DeleteSounds();
-	AudioEngine::Destroy();
+	window = nullptr;	
 
 	Logger::LogInfo("Shutdown Game.");
 }

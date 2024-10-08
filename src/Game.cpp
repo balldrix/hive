@@ -11,6 +11,7 @@
 #include "GameState.h"
 
 #include "GameplayGameState.h"
+#include "InitialLoadGameState.h"
 #include "GlobalConstants.h"
 
 using namespace GlobalConstants;
@@ -46,7 +47,8 @@ void Game::Init(Window* window, Graphics* graphics)
 							 m_input);
 
 	m_gameStateManager->AddState(new GameplayGameState(m_gameStateManager));
-	m_gameStateManager->SwitchState("Gameplay");
+	m_gameStateManager->AddState(new InitialLoadGameState(m_gameStateManager));
+	m_gameStateManager->SwitchState("InitialLoad");
 
 	m_timerFreq = m_timer.GetFrequency();
 	m_currentTime = m_timer.GetTicks();
