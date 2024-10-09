@@ -19,10 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\AssetLoader.cpp" />
+    <ClCompile Include="src\AssetType.cpp" />
     <ClCompile Include="src\DamageData.h" />
     <ClCompile Include="src\EnemyAttackRunState.cpp" />
     <ClCompile Include="src\EnemyIdleState.cpp" />
     <ClCompile Include="src\ImpactFx.cpp" />
+    <ClCompile Include="src\InitialLoadGameState.cpp" />
     <ClCompile Include="src\LevelRenderer.cpp" />
     <ClCompile Include="src\Logger.cpp" />
     <ClCompile Include="src\MookRunningEnemyGlobalState.cpp" />
@@ -41,6 +44,10 @@
     <ClCompile Include="src\KingMook.cpp" />
     <ClCompile Include="src\KingMookChargeState.cpp" />
     <ClCompile Include="src\KingMookEnemyGlobalState.cpp" />
+    <ClInclude Include="src\AssetData.h" />
+    <ClInclude Include="src\AssetLoader.h" />
+    <ClInclude Include="src\AssetType.h" />
+    <ClInclude Include="src\InitialLoadGameState.h" />
     <ClInclude Include="src\AudioConstants.h" />
     <ClInclude Include="src\EnemyAttackRunState.h" />
     <ClInclude Include="src\EnemyIdleState.h" />
@@ -185,10 +192,8 @@
     <ClInclude Include="src\Window.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="data\Sprites\backgroundTest.png" />
     <Image Include="data\Sprites\hitbox.png" />
     <Image Include="data\Sprites\kingMookSpritesheet.png" />
-    <Image Include="GameData\Sprites\mookRunnerSpriteSheet.png" />
     <Image Include="data\Sprites\mookSpriteSheet.png" />
     <Image Include="data\Sprites\playerSpritesheet.png" />
     <Image Include="data\Sprites\shadow.png" />
@@ -201,6 +206,7 @@
     <Image Include="data\Sprites\UI\lives_x3.png" />
     <Image Include="data\Sprites\UI\lives_x4.png" />
     <Image Include="data\Sprites\UI\lives_x5.png" />
+    <Image Include="data\Sprites\UI\loadingScreen_bg.png" />
     <Image Include="data\Sprites\UI\mook_hud_portrait.png" />
     <Image Include="data\Sprites\UI\player1_hud_healthbar_background.png" />
     <Image Include="data\Sprites\UI\player1_hud_healthbar_fill.png" />
@@ -211,6 +217,7 @@
     <Image Include="data\Tilesets\ts_bunker.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="data\assets.json" />
     <None Include="data\HitBoxData\bossHitBoxData.json" />
     <None Include="data\HitBoxData\dummyHitBoxData.json" />
     <None Include="data\HitBoxData\mookHitBoxData.json" />

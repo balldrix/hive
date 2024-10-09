@@ -220,6 +220,15 @@
     <ClCompile Include="src\Logger.cpp">
       <Filter>System</Filter>
     </ClCompile>
+    <ClCompile Include="src\InitialLoadGameState.cpp">
+      <Filter>Game\States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AssetLoader.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AssetType.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Data">
@@ -573,11 +582,20 @@
     <ClInclude Include="src\Logger.h">
       <Filter>System</Filter>
     </ClInclude>
+    <ClInclude Include="src\InitialLoadGameState.h">
+      <Filter>Game\States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AssetLoader.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AssetData.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AssetType.h">
+      <Filter>System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="data\Sprites\backgroundTest.png">
-      <Filter>Data\Textures</Filter>
-    </Image>
     <Image Include="data\Sprites\UI\go_sign.png">
       <Filter>Data\Textures</Filter>
     </Image>
@@ -611,9 +629,6 @@
     <Image Include="data\Sprites\UI\mook_hud_portrait.png">
       <Filter>Data\Textures</Filter>
     </Image>
-    <Image Include="GameData\Sprites\mookRunnerSpriteSheet.png">
-      <Filter>Data\Textures</Filter>
-    </Image>
     <Image Include="data\Sprites\mookSpriteSheet.png">
       <Filter>Data\Textures</Filter>
     </Image>
@@ -645,6 +660,9 @@
       <Filter>Data\Textures</Filter>
     </Image>
     <Image Include="data\Sprites\vfx.png">
+      <Filter>Data\Textures</Filter>
+    </Image>
+    <Image Include="data\Sprites\UI\loadingScreen_bg.png">
       <Filter>Data\Textures</Filter>
     </Image>
   </ItemGroup>
@@ -693,6 +711,9 @@
     </None>
     <None Include="data\SpriteSheetData\vfx.json">
       <Filter>Data\SpriteSheetData</Filter>
+    </None>
+    <None Include="data\assets.json">
+      <Filter>Data</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

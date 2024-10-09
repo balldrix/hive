@@ -43,7 +43,6 @@ using namespace GameplayConstants;
 using namespace InGameHudConstants;
 
 GameplayGameState::GameplayGameState() :
-	m_gameStateManager(nullptr),
 	m_graphics(nullptr),
 	m_input(nullptr),
 	m_camera(nullptr),

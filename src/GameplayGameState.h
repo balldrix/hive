@@ -67,7 +67,6 @@ private:
 	void DeleteAssets();
 	void Tick(float deltaTime);
 
-	GameStateManager* m_gameStateManager;
 	Graphics* m_graphics;
 	Input* m_input;
 

@@ -2,6 +2,8 @@
 
 #include <string>
 
+class GameStateManager;
+
 class GameState
 {
 public:
@@ -22,7 +24,9 @@ public:
 	virtual std::string	GetStateName() const;
 
 protected:
+	GameStateManager* m_gameStateManager;
+
 	std::string	m_stateName;
-	float			m_inputTimer; 
-	bool			m_inputReady; 
+	float m_inputTimer; 
+	bool m_inputReady; 
 };

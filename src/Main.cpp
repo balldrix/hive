@@ -35,7 +35,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	graphics->Init(window->GetHwnd(), hInstance);
 	
 	AudioEngine::Init();
-	AssetLoader::Init("data\\assets.json");
+	AssetLoader::Init(graphics, "data\\assets.json");
 
 	game = new Game();
 	game->Init(window, graphics);
