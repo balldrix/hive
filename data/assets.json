@@ -1,7 +1,9 @@
 [
   {
     "id": 1,
-    "path": "loadingScreen_bg.png",
+    "name":  "loadingScreen_bg",
+    "path": "data\\textures\\ui\\loadingScreen_bg.png",
+    "type":  "texture",
     "tag": "initial_loading_assets"
   }
 ]
