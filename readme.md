@@ -1,3 +1,5 @@
+### Warning, game is in development so some states are WIP. Currently working on UI Manager and loading states so game does not reach the gameplay state like it did before.
+
 # Hive
 
 ## Requirements
