@@ -52,10 +52,22 @@ void AssetLoader::LoadAllPrewarmedAssets()
 {
 	AssetData asset = s_assetLoader->m_assetsToLoad.front();
 
-	if (asset.type == AssetType::Type::TextureAsset)
+	if(asset.type == AssetType::Type::TextureAsset)
 		s_assetLoader->LoadTexture(asset);
 
 	s_assetLoader->m_assetsToLoad.pop_front();
+}
+
+Texture* AssetLoader::GetTexture(std::string name)
+{
+	for(auto it = s_assetLoader->m_textureAssets.begin(); it != s_assetLoader->m_textureAssets.end(); ++it)
+	{
+		if ((*it).first == name)
+			return &(*it).second;
+	}
+
+	Logger::LogWarning(fmt::format("No texture found in AssetLoader with name {}", name));
+	return nullptr;
 }
 
 void AssetLoader::AddToLoadList(const AssetData& data)

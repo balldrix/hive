@@ -60,10 +60,21 @@ void GameStateManager::SwitchState(std::string stateName)
 		}
 	}
 
-	std::string error = " Error finding game state in SwitchState method GameStateManager.cpp line 60; \n"; // error message
+	std::string error = fmt::format("Error finding game state {} in SwitchState method GameStateManager.cpp line 60.", stateName);
 	Logger::LogError(error);
 	MessageBox(m_graphics->GetHwnd(), L"Error loading GameState. See Logs/Log.txt", L"Error!", MB_OK);
 	PostQuitMessage(0);
+}
+
+GameState* GameStateManager::GetState(std::string stateName) const
+{
+	for(auto it = m_stateList.begin(); it != m_stateList.end(); ++it)
+	{
+		if ((*it)->GetStateName() == stateName)
+			return *it;
+	}
+
+	return nullptr;
 }
 
 GameState* GameStateManager::GetCurrentState() const

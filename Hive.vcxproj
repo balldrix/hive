@@ -27,6 +27,7 @@
     <ClCompile Include="src\ImpactFx.cpp" />
     <ClCompile Include="src\InitialLoadGameState.cpp" />
     <ClCompile Include="src\LevelRenderer.cpp" />
+    <ClCompile Include="src\LoadingGameState.cpp" />
     <ClCompile Include="src\Logger.cpp" />
     <ClCompile Include="src\MookRunningEnemyGlobalState.cpp" />
     <ClCompile Include="src\ParticleSystem.cpp" />
@@ -55,6 +56,7 @@
     <ClInclude Include="src\ImpactFX.h" />
     <ClInclude Include="src\InGameHudConstants.h" />
     <ClInclude Include="src\LevelRenderer.h" />
+    <ClInclude Include="src\LoadingGameState.h" />
     <ClInclude Include="src\Logger.h" />
     <ClInclude Include="src\MookRunningEnemyGlobalState.h" />
     <ClInclude Include="src\ParticleSystem.h" />
@@ -119,6 +121,7 @@
     <ClCompile Include="src\Texture.cpp" />
     <ClCompile Include="src\Timer.cpp" />
     <ClCompile Include="src\TravelPrompt.cpp" />
+    <ClCompile Include="src\UIManager.cpp" />
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -188,6 +191,7 @@
     <ClInclude Include="src\Texture.h" />
     <ClInclude Include="src\Timer.h" />
     <ClInclude Include="src\TravelPrompt.h" />
+    <ClInclude Include="src\UIManager.h" />
     <ClInclude Include="src\UnitVectors.h" />
     <ClInclude Include="src\Window.h" />
   </ItemGroup>

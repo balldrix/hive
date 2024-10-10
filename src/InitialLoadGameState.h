@@ -15,11 +15,10 @@ public:
 	void OnExit();
 
 	void Update(float deltaTime);
-	void Render();
-
+	
 	void ReleaseAll();
 
 private:
 	void LoadAssets();
-	void DeleteAssets();
+	void ProceedToFrontEnd();
 };

@@ -2,6 +2,8 @@
 #include "AssetLoader.h"
 #include "Logger.h"
 #include "GameStateManager.h"
+#include "LoadingGameState.h"
+#include "UIManager.h"
 
 InitialLoadGameState::InitialLoadGameState() : 
 	GameState("InitialLoad")
@@ -28,15 +30,14 @@ void InitialLoadGameState::OnExit()
 
 void InitialLoadGameState::Update(float deltaTime)
 {
-	//AssetLoader::LoadAllPrewarmedAssets();
-
-	//if (AssetLoader::IsLoadingDone())
-		//LoadingState::TargetState = TitleScreenState.Instance;
-		//m_gameStateManager->SwitchState("LoadingState");
-}
-
-void InitialLoadGameState::Render()
-{
+	if(!AssetLoader::IsLoadingDone())
+	{
+		AssetLoader::LoadAllPrewarmedAssets();
+	}
+	else 
+	{
+		ProceedToFrontEnd();
+	}
 }
 
 void InitialLoadGameState::ReleaseAll()
@@ -49,6 +50,9 @@ void InitialLoadGameState::LoadAssets()
 	AssetLoader::PreWarmAssetsWithTag("initial_loading_assets");
 }
 
-void InitialLoadGameState::DeleteAssets()
+void InitialLoadGameState::ProceedToFrontEnd()
 {
+	UIManager::CreateSystemUI();
+	LoadingGameState::s_targetGameState = m_gameStateManager->GetState("TitleScreen");
+	m_gameStateManager->SwitchState("Loading");
 }

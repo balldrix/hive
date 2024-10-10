@@ -18,6 +18,8 @@ public:
 	static void LoadAllPrewarmedAssets();
 	static bool IsLoadingDone() { return s_assetLoader->m_assetsToLoad.empty(); }
 
+	static Texture* GetTexture(std::string name);
+
 private:
 	void AddToLoadList(const AssetData& data);
 	void LoadTexture(AssetData asset);

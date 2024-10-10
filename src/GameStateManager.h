@@ -16,6 +16,8 @@ public:
 
 	void							AddState(GameState* state);					
 	void							SwitchState(std::string stateName);		
+	
+	GameState*						GetState(std::string stateName) const;
 	GameState*						GetCurrentState() const;					
 	std::string						GetCurrentStateName() const;				
 
