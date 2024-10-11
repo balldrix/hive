@@ -36,7 +36,7 @@ void AssetLoader::Init(Graphics* graphics, std::string fileName)
 
 void AssetLoader::PreWarmAssetsWithTag(std::string tag)
 {
-	Logger::LogInfo(fmt::format("Prewarming Loading of assets with tag: {}", tag));
+	Logger::LogInfo(fmt::format("Prewarming Loading of assets with tag: {}.", tag));
 
 	std::vector<AssetData> data = s_assetLoader->m_assetData;
 	for(auto it = data.begin(); it != data.end(); ++it)
@@ -77,7 +77,7 @@ void AssetLoader::AddToLoadList(const AssetData& data)
 
 void AssetLoader::LoadTexture(AssetData asset)
 {
-	Logger::LogInfo(fmt::format("Loading Texture: {}", asset.name));
+	Logger::LogInfo(fmt::format("Loading Texture: {}.", asset.name));
 
 	Texture texture;
 	texture.LoadTexture(m_graphics, asset.path);

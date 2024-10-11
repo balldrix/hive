@@ -121,7 +121,11 @@
     <ClCompile Include="src\Texture.cpp" />
     <ClCompile Include="src\Timer.cpp" />
     <ClCompile Include="src\TravelPrompt.cpp" />
+    <ClCompile Include="src\UIFadeOverlayView.cpp" />
+    <ClCompile Include="src\UIImageView.cpp" />
     <ClCompile Include="src\UIManager.cpp" />
+    <ClCompile Include="src\UISystemView.cpp" />
+    <ClCompile Include="src\UIView.cpp" />
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -191,7 +195,11 @@
     <ClInclude Include="src\Texture.h" />
     <ClInclude Include="src\Timer.h" />
     <ClInclude Include="src\TravelPrompt.h" />
+    <ClInclude Include="src\UIFadeOverlayView.h" />
+    <ClInclude Include="src\UIImageView.h" />
     <ClInclude Include="src\UIManager.h" />
+    <ClInclude Include="src\UISystemView.h" />
+    <ClInclude Include="src\UIView.h" />
     <ClInclude Include="src\UnitVectors.h" />
     <ClInclude Include="src\Window.h" />
   </ItemGroup>

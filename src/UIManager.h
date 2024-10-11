@@ -2,6 +2,7 @@
 
 class Graphics;
 class Sprite;
+class UISystemView;
 
 class UIManager
 {
@@ -10,17 +11,15 @@ public:
 	~UIManager();
 
 	static void Init();
+	static void Update(float deltaTime);
+	static void Render(Graphics* graphics);
+	static void CreateUISystemView();
 	static void Destroy();
-	static void RenderUI(Graphics* graphics);
-	static void CreateSystemUI();
 
 private:
-
 	static UIManager* s_instance;
-
-	void Render(Graphics* graphics);
+	
 	void Shutdown();
 
-	Sprite* m_uiFadeScreen;
-
+	UISystemView* m_uiSystemView;
 };

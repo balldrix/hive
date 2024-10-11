@@ -22,7 +22,12 @@ LoadingGameState::~LoadingGameState()
 	OnExit();
 }
 
+void LoadingGameState::Update(float deltaTime)
+{
+	UIManager::Update(deltaTime);
+}
+
 void LoadingGameState::Render()
 {
-	UIManager::RenderUI(m_graphics);
+	UIManager::Render(m_graphics);
 }

@@ -9,14 +9,10 @@ class InitialLoadGameState : public GameState
 public:
 	InitialLoadGameState();
 	InitialLoadGameState(GameStateManager* gameStateManager);
-	virtual ~InitialLoadGameState();
+	virtual ~InitialLoadGameState() {};
 
 	void OnEntry();
-	void OnExit();
-
 	void Update(float deltaTime);
-	
-	void ReleaseAll();
 
 private:
 	void LoadAssets();

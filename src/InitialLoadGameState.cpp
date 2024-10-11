@@ -15,17 +15,9 @@ InitialLoadGameState::InitialLoadGameState(GameStateManager* gameStateManager) :
 	m_gameStateManager = gameStateManager;
 }
 
-InitialLoadGameState::~InitialLoadGameState()
-{
-}
-
 void InitialLoadGameState::OnEntry()
 {
 	LoadAssets();
-}
-
-void InitialLoadGameState::OnExit()
-{
 }
 
 void InitialLoadGameState::Update(float deltaTime)
@@ -40,19 +32,15 @@ void InitialLoadGameState::Update(float deltaTime)
 	}
 }
 
-void InitialLoadGameState::ReleaseAll()
-{
-}
-
 void InitialLoadGameState::LoadAssets()
 {
-	Logger::LogInfo("Loading Initial Game Assets");
+	Logger::LogInfo("Loading Initial Game Assets.");
 	AssetLoader::PreWarmAssetsWithTag("initial_loading_assets");
 }
 
 void InitialLoadGameState::ProceedToFrontEnd()
 {
-	UIManager::CreateSystemUI();
+	UIManager::CreateUISystemView();
 	LoadingGameState::s_targetGameState = m_gameStateManager->GetState("TitleScreen");
 	m_gameStateManager->SwitchState("Loading");
 }

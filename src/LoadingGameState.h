@@ -12,6 +12,10 @@ public:
 	LoadingGameState(GameStateManager* gameStateManager);
 	virtual ~LoadingGameState();
 
+	virtual void OnEntry() {};				
+	virtual void OnExit() {};
+
+	void Update(float deltaTime);
 	void Render();
 
 	static GameState* s_targetGameState;

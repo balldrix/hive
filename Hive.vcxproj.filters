@@ -235,6 +235,18 @@
     <ClCompile Include="src\UIManager.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="src\UIFadeOverlayView.cpp">
+      <Filter>UI\SystemView</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UISystemView.cpp">
+      <Filter>UI\SystemView</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIView.cpp">
+      <Filter>UI\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIImageView.cpp">
+      <Filter>UI\Shared</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Data">
@@ -320,6 +332,12 @@
     </Filter>
     <Filter Include="Data\Tilemaps">
       <UniqueIdentifier>{07eb4a0e-b20d-47d2-8342-1dd86063cb2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\SystemView">
+      <UniqueIdentifier>{d1aad49f-fe68-4b30-9baa-fadfa12941ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Shared">
+      <UniqueIdentifier>{f03b5a82-5dc5-4dc5-9787-00a008d927bc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -605,6 +623,18 @@
     </ClInclude>
     <ClInclude Include="src\UIManager.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIFadeOverlayView.h">
+      <Filter>UI\SystemView</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIView.h">
+      <Filter>UI\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIImageView.h">
+      <Filter>UI\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UISystemView.h">
+      <Filter>UI\SystemView</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

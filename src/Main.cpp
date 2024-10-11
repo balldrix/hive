@@ -10,7 +10,7 @@ Graphics* graphics = nullptr;
 Window* window	= nullptr;
 Game* game = nullptr;
 
-void ShutDown();
+void Shutdown();
 
 LRESULT CALLBACK WndProc(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam);
 
@@ -57,14 +57,14 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	}
 
 	game->ReleaseAll(); 
-	ShutDown();
+	Shutdown();
 	
 	CoUninitialize();
 
 	return static_cast<int>(msg.wParam);
 }
 
-void ShutDown()
+void Shutdown()
 {
 	delete game;
 	UIManager::Destroy();

@@ -27,7 +27,7 @@ void Graphics::Init(HWND hWnd, HINSTANCE hInstance)
 	CreateDevice();
 	CreateResources();
 
-	Logger::LogInfo("Initialised Graphics");
+	Logger::LogInfo("Initialised Graphics.");
 }
 
 void Graphics::CreateDevice()

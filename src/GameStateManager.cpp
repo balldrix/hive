@@ -41,7 +41,7 @@ void GameStateManager::SwitchState(std::string stateName)
 {
 	std::string currentStateName = "none";
 	if (m_currentState != nullptr) currentStateName = m_currentState->GetStateName();
-	std::string message = fmt::format("Switching State from {0} to {1} game state.", currentStateName, stateName);
+	std::string message = fmt::format("Switching State from {0} state to {1} state.", currentStateName, stateName);
 	Logger::LogInfo(message);
 
 	if(m_currentState != nullptr)
