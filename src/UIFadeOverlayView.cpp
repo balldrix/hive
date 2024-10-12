@@ -1,5 +1,6 @@
 #include "UIFadeOverlayView.h"
 
+#include "Sprite.h"
 #include "AssetLoader.h"
 #include "GlobalConstants.h"
 
@@ -104,7 +105,4 @@ void UIFadeOverlayView::TransitionOut(bool isAnimating)
 void UIFadeOverlayView::Shutdown()
 {
 	Logger::LogInfo("Shutting down UI Fade Overlay.");
-
-	delete m_sprite;
-	m_sprite = nullptr;
 }

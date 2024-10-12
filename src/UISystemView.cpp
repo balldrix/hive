@@ -2,6 +2,7 @@
 
 #include "UIFadeOverlayView.h"
 #include "UILoadingView.h"
+#include "Logger.h"
 
 UISystemView::UISystemView() :
 	m_fadeOverlayView(nullptr),
@@ -24,7 +25,7 @@ void UISystemView::Init()
 
 	m_loadingView = new UILoadingView();
 	m_loadingView->Init();
-	//m_loadingView->TransitionOut(false);
+	m_loadingView->TransitionOut(false);
 
 	m_isActive = true;
 }

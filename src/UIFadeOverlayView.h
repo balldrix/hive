@@ -1,6 +1,7 @@
 #pragma once
 
 #include "UIImageView.h"
+#include "pch.h"
 
 static const float FADE_DURATION = 0.4f;
 static const Color OPAQUE_COLOR = Colors::Black.v;
