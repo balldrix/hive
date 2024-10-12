@@ -1,8 +1,10 @@
 #pragma once
 
-#include "UIFadeOverlayView.h"
+#include "UIView.h"
 
 class Graphics;
+class UIFadeOverlayView;
+class UILoadingView;
 
 class UISystemView : UIView
 {
@@ -13,9 +15,15 @@ public:
 	void Init();
 	void Render(Graphics* graphics);
 	void Update(float deltaTime);
+		
+	void FadeOut();
+	void FadeIn();
+
+	bool IsFading();
 
 	virtual void Shutdown();
 
 private:
 	UIFadeOverlayView* m_fadeOverlayView;
+	UILoadingView* m_loadingView;
 };

@@ -40,6 +40,21 @@ void UIManager::CreateUISystemView()
 	s_instance->m_uiSystemView->Init();
 }
 
+void UIManager::FadeOut()
+{
+	s_instance->m_uiSystemView->FadeOut();
+}
+
+void UIManager::FadeIn()
+{
+	s_instance->m_uiSystemView->FadeIn();
+}
+
+bool UIManager::IsFading()
+{
+	return s_instance->m_uiSystemView->IsFading();
+}
+
 void UIManager::Destroy()
 {
 	delete s_instance;

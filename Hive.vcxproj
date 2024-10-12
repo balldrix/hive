@@ -123,6 +123,7 @@
     <ClCompile Include="src\TravelPrompt.cpp" />
     <ClCompile Include="src\UIFadeOverlayView.cpp" />
     <ClCompile Include="src\UIImageView.cpp" />
+    <ClCompile Include="src\UILoadingView.cpp" />
     <ClCompile Include="src\UIManager.cpp" />
     <ClCompile Include="src\UISystemView.cpp" />
     <ClCompile Include="src\UIView.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="src\TravelPrompt.h" />
     <ClInclude Include="src\UIFadeOverlayView.h" />
     <ClInclude Include="src\UIImageView.h" />
+    <ClInclude Include="src\UILoadingView.h" />
     <ClInclude Include="src\UIManager.h" />
     <ClInclude Include="src\UISystemView.h" />
     <ClInclude Include="src\UIView.h" />

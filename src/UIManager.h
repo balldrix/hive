@@ -14,6 +14,9 @@ public:
 	static void Update(float deltaTime);
 	static void Render(Graphics* graphics);
 	static void CreateUISystemView();
+	static void FadeOut();
+	static void FadeIn();
+	static bool IsFading();
 	static void Destroy();
 
 private:

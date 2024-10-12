@@ -247,6 +247,9 @@
     <ClCompile Include="src\UIImageView.cpp">
       <Filter>UI\Shared</Filter>
     </ClCompile>
+    <ClCompile Include="src\UILoadingView.cpp">
+      <Filter>UI\SystemView</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Data">
@@ -634,6 +637,9 @@
       <Filter>UI\Shared</Filter>
     </ClInclude>
     <ClInclude Include="src\UISystemView.h">
+      <Filter>UI\SystemView</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UILoadingView.h">
       <Filter>UI\SystemView</Filter>
     </ClInclude>
   </ItemGroup>
