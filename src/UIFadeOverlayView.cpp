@@ -16,8 +16,10 @@ UIFadeOverlayView::~UIFadeOverlayView()
 	Shutdown();
 }
 
-void UIFadeOverlayView::Init()
+void UIFadeOverlayView::Init(std::string name)
 {
+	m_name = name;
+
 	Logger::LogInfo("Initialising UI Fade Overlay.");
 
 	m_sprite = new Sprite();

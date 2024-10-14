@@ -22,6 +22,10 @@ LoadingGameState::~LoadingGameState()
 	OnExit();
 }
 
+void LoadingGameState::OnEntry()
+{
+}
+
 void LoadingGameState::Update(float deltaTime)
 {
 	UIManager::Update(deltaTime);

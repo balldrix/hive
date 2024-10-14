@@ -10,7 +10,7 @@ class UIImageView : public UIView
 public:
 	UIImageView();
 	virtual ~UIImageView();
-	void Init();
+	void Init(std::string name);
 	void Render(Graphics* graphics);
 
 	Sprite* GetSprite() const { return m_sprite; }

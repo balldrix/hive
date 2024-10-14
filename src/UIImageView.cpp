@@ -13,8 +13,9 @@ UIImageView::~UIImageView()
 	Shutdown();
 }
 
-void UIImageView::Init()
+void UIImageView::Init(std::string name)
 {
+	m_name = name;
 	m_sprite = new Sprite();
 }
 

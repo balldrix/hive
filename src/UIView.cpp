@@ -4,7 +4,8 @@ UIView::UIView() :
 	m_assignedStates(0),
 	m_isAnimating(false),
 	m_transitionTimer(0.0f),
-	m_isActive(false)
+	m_isActive(false),
+	m_currentViewState(ViewState::NotVisible)
 {
 }
 

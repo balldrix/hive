@@ -12,7 +12,7 @@ public:
 	UIFadeOverlayView();
 	virtual ~UIFadeOverlayView();
 
-	void Init();
+	void Init(std::string name);
 	void Update(float deltaTime);
 	void Render(Graphics* graphics);
 

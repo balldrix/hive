@@ -8,7 +8,7 @@ public:
 	UILoadingView();
 	~UILoadingView();
 
-	void Init();
+	void Init(std::string name);
 	void Render(Graphics* graphics);
 
 	void TransitionIn(bool isAnimating);

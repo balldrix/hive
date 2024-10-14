@@ -15,16 +15,18 @@ UISystemView::~UISystemView()
 	Shutdown();
 }
 
-void UISystemView::Init()
+void UISystemView::Init(std::string name)
 {
+	m_name = name;
+
 	Logger::LogInfo("Initialising UI System View.");
 
 	m_fadeOverlayView = new UIFadeOverlayView();
-	m_fadeOverlayView->Init();
+	m_fadeOverlayView->Init("UI Fade Overlay View");
 	m_fadeOverlayView->TransitionOut(false);
 
 	m_loadingView = new UILoadingView();
-	m_loadingView->Init();
+	m_loadingView->Init("UI Loading View");
 	m_loadingView->TransitionOut(false);
 
 	m_isActive = true;

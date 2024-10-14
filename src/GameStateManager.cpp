@@ -1,6 +1,8 @@
 #include "GameStateManager.h"
+
 #include "GameState.h"
 #include "Graphics.h"
+#include "UIManager.h"
 
 GameStateManager::GameStateManager() :
 	m_currentState(nullptr),
@@ -56,6 +58,7 @@ void GameStateManager::SwitchState(std::string stateName)
 		{
 			m_currentState = m_stateList[i];
 			m_currentState->OnEntry();
+			UIManager::OnGameStateChange(stateName);
 			return;
 		}
 	}
