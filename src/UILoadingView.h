@@ -11,6 +11,7 @@ public:
 	void Init(std::string name);
 	void Render(Graphics* graphics);
 
+	void Update(float deltaTime);
 	void TransitionIn(bool isAnimating);
 	void TransitionOut(bool isAnimating);
 

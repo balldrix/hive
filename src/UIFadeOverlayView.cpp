@@ -7,6 +7,7 @@
 using namespace GlobalConstants;
 
 UIFadeOverlayView::UIFadeOverlayView() :
+	m_startingAlpha(0),
 	m_targetAlpha(0)
 {
 }
@@ -58,6 +59,7 @@ void UIFadeOverlayView::Update(float deltaTime)
 	float lerp = std::lerp(a, b, 1 - t);
 
 	m_sprite->SetAlpha(lerp);
+	m_sprite->SetDepth(1.0f);
 
 	if(m_sprite->GetAlpha() == 0.0f)
 		m_isActive = false;

@@ -24,6 +24,8 @@
     <ClCompile Include="src\DamageData.h" />
     <ClCompile Include="src\EnemyAttackRunState.cpp" />
     <ClCompile Include="src\EnemyIdleState.cpp" />
+    <ClCompile Include="src\FadeInGameState.cpp" />
+    <ClCompile Include="src\FadeOutGameState.cpp" />
     <ClCompile Include="src\ImpactFx.cpp" />
     <ClCompile Include="src\InitialLoadGameState.cpp" />
     <ClCompile Include="src\LevelRenderer.cpp" />
@@ -48,6 +50,8 @@
     <ClInclude Include="src\AssetData.h" />
     <ClInclude Include="src\AssetLoader.h" />
     <ClInclude Include="src\AssetType.h" />
+    <ClInclude Include="src\FadeInGameState.h" />
+    <ClInclude Include="src\FadeOutGameState.h" />
     <ClInclude Include="src\InitialLoadGameState.h" />
     <ClInclude Include="src\AudioConstants.h" />
     <ClInclude Include="src\EnemyAttackRunState.h" />

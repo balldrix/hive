@@ -7,6 +7,7 @@
 GameState* LoadingGameState::s_targetGameState;
 
 LoadingGameState::LoadingGameState() :
+	m_graphics(nullptr),
 	GameState("Loading")
 {
 }
@@ -22,12 +23,14 @@ LoadingGameState::~LoadingGameState()
 	OnExit();
 }
 
-void LoadingGameState::OnEntry()
-{
-}
-
 void LoadingGameState::Update(float deltaTime)
 {
+	static float timer = 3.0f;
+	timer -= deltaTime;
+
+	if (timer <= 0.0f)
+		m_gameStateManager->SwitchState("FadeOut");
+
 	UIManager::Update(deltaTime);
 }
 

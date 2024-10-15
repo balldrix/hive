@@ -250,6 +250,8 @@
     <ClCompile Include="src\UILoadingView.cpp">
       <Filter>UI\SystemView</Filter>
     </ClCompile>
+    <ClCompile Include="src\FadeInGameState.cpp" />
+    <ClCompile Include="src\FadeOutGameState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Data">
@@ -641,6 +643,12 @@
     </ClInclude>
     <ClInclude Include="src\UILoadingView.h">
       <Filter>UI\SystemView</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FadeOutGameState.h">
+      <Filter>Game\States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FadeInGameState.h">
+      <Filter>Game\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

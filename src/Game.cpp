@@ -13,6 +13,8 @@
 #include "GameplayGameState.h"
 #include "InitialLoadGameState.h"
 #include "LoadingGameState.h"
+#include "FadeOutGameState.h"
+#include "FadeInGameState.h"
 #include "GlobalConstants.h"
 
 using namespace GlobalConstants;
@@ -48,6 +50,8 @@ void Game::Init(Window* window, Graphics* graphics)
 
 	m_gameStateManager->AddState(new InitialLoadGameState(m_gameStateManager));
 	m_gameStateManager->AddState(new LoadingGameState(m_gameStateManager));
+	//m_gameStateManager->AddState(new FadeInGameState(m_gameStateManager));
+	m_gameStateManager->AddState(new FadeOutGameState(m_gameStateManager));
 	m_gameStateManager->AddState(new GameplayGameState(m_gameStateManager));
 	m_gameStateManager->SwitchState("InitialLoad");
 
