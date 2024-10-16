@@ -21,7 +21,7 @@ void UIImageView::Init(std::string name)
 
 void UIImageView::Render(Graphics* graphics)
 {
-	m_sprite->Render(graphics);
+	if(m_isActive) m_sprite->Render(graphics);
 }
 
 void UIImageView::Shutdown()

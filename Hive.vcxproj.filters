@@ -250,8 +250,15 @@
     <ClCompile Include="src\UILoadingView.cpp">
       <Filter>UI\SystemView</Filter>
     </ClCompile>
-    <ClCompile Include="src\FadeInGameState.cpp" />
-    <ClCompile Include="src\FadeOutGameState.cpp" />
+    <ClCompile Include="src\TitleScreenGameState.cpp">
+      <Filter>Game\States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FadeTransitionGameState.cpp">
+      <Filter>Game\States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIFrontEndView.cpp">
+      <Filter>UI\FrontEnd</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Data">
@@ -343,6 +350,9 @@
     </Filter>
     <Filter Include="UI\Shared">
       <UniqueIdentifier>{f03b5a82-5dc5-4dc5-9787-00a008d927bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\FrontEnd">
+      <UniqueIdentifier>{525aedaf-9ccb-4c7d-bde9-eb984ed04c13}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -644,10 +654,16 @@
     <ClInclude Include="src\UILoadingView.h">
       <Filter>UI\SystemView</Filter>
     </ClInclude>
-    <ClInclude Include="src\FadeOutGameState.h">
+    <ClInclude Include="src\FadeTransitionGameState.h">
       <Filter>Game\States</Filter>
     </ClInclude>
-    <ClInclude Include="src\FadeInGameState.h">
+    <ClInclude Include="src\TitleScreenGameState.h">
+      <Filter>Game\States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIFrontEndView.h">
+      <Filter>UI\FrontEnd</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameStates.h">
       <Filter>Game\States</Filter>
     </ClInclude>
   </ItemGroup>

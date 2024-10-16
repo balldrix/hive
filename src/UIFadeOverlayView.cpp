@@ -35,6 +35,7 @@ void UIFadeOverlayView::Init(std::string name)
 
 	m_sprite->SetSourceRect(rect);
 	m_sprite->SetOrigin(Vector2::Zero);
+	m_sprite->SetDepth(1.0f);
 }
 
 void UIFadeOverlayView::Update(float deltaTime)
@@ -59,9 +60,8 @@ void UIFadeOverlayView::Update(float deltaTime)
 	float lerp = std::lerp(a, b, 1 - t);
 
 	m_sprite->SetAlpha(lerp);
-	m_sprite->SetDepth(1.0f);
 
-	if(m_sprite->GetAlpha() == 0.0f)
+	if(m_sprite->GetAlpha() == 0.0f && !m_isAnimating)
 		m_isActive = false;
 }
 
@@ -85,6 +85,7 @@ void UIFadeOverlayView::TransitionIn(bool isAnimating)
 		return;
 	}
 
+	m_sprite->SetAlpha(m_startingAlpha);
 	m_transitionTimer = FADE_DURATION;
 }
 
@@ -103,6 +104,7 @@ void UIFadeOverlayView::TransitionOut(bool isAnimating)
 		return;
 	}
 
+	m_sprite->SetAlpha(m_startingAlpha);
 	m_transitionTimer = FADE_DURATION;
 }
 

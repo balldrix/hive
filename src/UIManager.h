@@ -8,6 +8,7 @@
 class Graphics;
 class Sprite;
 class UISystemView;
+class UIFrontEndView;
 
 class UIManager
 {
@@ -20,6 +21,9 @@ public:
 	static void Render(Graphics* graphics);
 	
 	static void CreateUISystemView();
+
+	static void CreateUIFrontEndView();
+	static void DestroyUIFrontEndView();
 	
 	static void RegisterUIView(UIView* uiView);
 	static void UnregisterUIView(UIView* uiView);
@@ -41,6 +45,7 @@ private:
 	void Shutdown();
 
 	UISystemView* m_uiSystemView;
+	UIFrontEndView* m_uiFrontEndView;
 	std::vector<UIView*> m_viewList;
 	UIView::ViewState m_currentViewState = UIView::ViewState::NotVisible;
 	UIView::ViewState m_targetViewState = UIView::ViewState::NotVisible;

@@ -50,8 +50,9 @@ add_executable(${PROJECT_NAME} src/main.cpp src/AABB.cpp src/Animator.cpp src/Au
 								src/AssetLoader.h src/AssetLoader.cpp src/InitialLoadGameState.h src/InitialLoadGameState.cpp src/AssetData.h 
 								src/AssetType.h src/AssetType.cpp src/LoadingGameState.h src/LoadingGameState.cpp src/UIManager.h src/UIManager.cpp
 								src/UISystemView.h src/UISystemView.cpp src/UIFadeOverlayView.h src/UIFadeOverlayView.cpp src/UIView.h src/UIView.cpp 
-								src/UIImageView.h src/UIImageView.cpp src/UILoadingView.h src/UILoadingView.cpp src/FadeOutGameState.h src FadeInGameState.cpp
-								src/FadeInGameState.h src/FadeInGameState.cpp)
+								src/UIImageView.h src/UIImageView.cpp src/UILoadingView.h src/UILoadingView.cpp src/FadeTransitionGameState.h src/FadeTransitionGameState.cpp 
+								src/TitleScreenGameState.h src/TitleScreenGameState.cpp src/UIFrontEndView.h src/UIFrontEndView.cpp src/GameStates.h 
+								src/TitleScreenGameState.h src/TitleScreenGameState.cpp)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Microsoft::DirectXTK)
 target_link_libraries(${PROJECT_NAME} PRIVATE nlohmann_json::nlohmann_json)

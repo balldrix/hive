@@ -44,8 +44,6 @@ void UILoadingView::Update(float deltaTime)
 	switch (m_currentViewState)
 	{
 	case UIView::ViewState::NotVisible:
-		m_isActive = false;
-		m_loadingBackground->SetActive(false);
 		break;
 	case UIView::ViewState::AnimatingIn:
 		m_currentViewState = ViewState::Visible;
@@ -54,6 +52,8 @@ void UILoadingView::Update(float deltaTime)
 		break;
 	case UIView::ViewState::AnimatingOut:
 		m_currentViewState = ViewState::NotVisible;
+		m_loadingBackground->SetActive(false);
+		m_isActive = false;
 		break;
 	default:
 		break;
@@ -62,8 +62,9 @@ void UILoadingView::Update(float deltaTime)
 
 void UILoadingView::TransitionIn(bool isAnimating)
 {
-	m_isActive = true;
+	m_loadingBackground->TransitionIn(isAnimating);
 	m_loadingBackground->SetActive(true);
+	m_isActive = true;
 
 	if(isAnimating)
 	{
@@ -75,7 +76,7 @@ void UILoadingView::TransitionIn(bool isAnimating)
 
 void UILoadingView::TransitionOut(bool isAnimating)
 {
-	if (isAnimating)
+	if(isAnimating)
 	{
 		m_currentViewState = UIView::ViewState::AnimatingOut;
 		return;

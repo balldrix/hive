@@ -41,6 +41,6 @@ void InitialLoadGameState::LoadAssets()
 void InitialLoadGameState::ProceedToFrontEnd()
 {
 	UIManager::CreateUISystemView();
-	LoadingGameState::s_targetGameState = m_gameStateManager->GetState("TitleScreen");
+	LoadingGameState::SetTargetGameState(m_gameStateManager->GetState("TitleScreen"));
 	m_gameStateManager->SwitchState("Loading");
 }

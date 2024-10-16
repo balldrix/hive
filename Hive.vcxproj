@@ -24,8 +24,7 @@
     <ClCompile Include="src\DamageData.h" />
     <ClCompile Include="src\EnemyAttackRunState.cpp" />
     <ClCompile Include="src\EnemyIdleState.cpp" />
-    <ClCompile Include="src\FadeInGameState.cpp" />
-    <ClCompile Include="src\FadeOutGameState.cpp" />
+    <ClCompile Include="src\FadeTransitionGameState.cpp" />
     <ClCompile Include="src\ImpactFx.cpp" />
     <ClCompile Include="src\InitialLoadGameState.cpp" />
     <ClCompile Include="src\LevelRenderer.cpp" />
@@ -50,8 +49,8 @@
     <ClInclude Include="src\AssetData.h" />
     <ClInclude Include="src\AssetLoader.h" />
     <ClInclude Include="src\AssetType.h" />
-    <ClInclude Include="src\FadeInGameState.h" />
-    <ClInclude Include="src\FadeOutGameState.h" />
+    <ClInclude Include="src\FadeTransitionGameState.h" />
+    <ClInclude Include="src\GameStates.h" />
     <ClInclude Include="src\InitialLoadGameState.h" />
     <ClInclude Include="src\AudioConstants.h" />
     <ClInclude Include="src\EnemyAttackRunState.h" />
@@ -80,6 +79,7 @@
     <ClCompile Include="src\SoundSource.cpp" />
     <ClCompile Include="src\SoundManager.cpp" />
     <ClCompile Include="src\TilemapHandler.cpp" />
+    <ClCompile Include="src\TitleScreenGameState.cpp" />
     <ClCompile Include="src\TravellingHandler.cpp" />
     <ClCompile Include="src\TravellingSceneState.cpp" />
     <ClCompile Include="src\AABB.cpp" />
@@ -126,6 +126,7 @@
     <ClCompile Include="src\Timer.cpp" />
     <ClCompile Include="src\TravelPrompt.cpp" />
     <ClCompile Include="src\UIFadeOverlayView.cpp" />
+    <ClCompile Include="src\UIFrontEndView.cpp" />
     <ClCompile Include="src\UIImageView.cpp" />
     <ClCompile Include="src\UILoadingView.cpp" />
     <ClCompile Include="src\UIManager.cpp" />
@@ -145,6 +146,7 @@
     <ClInclude Include="src\NPCFactory.h" />
     <ClInclude Include="src\TilemapData.h" />
     <ClInclude Include="src\TilemapHandler.h" />
+    <ClInclude Include="src\TitleScreenGameState.h" />
     <ClInclude Include="src\TravellingHandler.h" />
     <ClInclude Include="src\TravellingSceneState.h" />
     <ClInclude Include="src\AABB.h" />
@@ -201,6 +203,7 @@
     <ClInclude Include="src\Timer.h" />
     <ClInclude Include="src\TravelPrompt.h" />
     <ClInclude Include="src\UIFadeOverlayView.h" />
+    <ClInclude Include="src\UIFrontEndView.h" />
     <ClInclude Include="src\UIImageView.h" />
     <ClInclude Include="src\UILoadingView.h" />
     <ClInclude Include="src\UIManager.h" />

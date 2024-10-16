@@ -23,8 +23,8 @@ public:
 	virtual void Update(float deltaTime) {};
 	virtual void Render(Graphics* graphics) = 0;
 	
-	virtual void TransitionIn(bool isAnimated) {};
-	virtual void TransitionOut(bool isAnimated) {};
+	virtual void TransitionIn(bool isAnimated) { m_isActive = true; };
+	virtual void TransitionOut(bool isAnimated) { m_isActive = false; };
 
 	void SetActive(bool isActive);
 
@@ -32,7 +32,7 @@ public:
 	bool IsActive() const { return m_isActive; }
 	bool IsAnimating() const { return m_isAnimating; }
 	std::string GetName() const { return m_name; }
-	ViewState GetCurrentState() const {	return m_currentViewState;	}
+	ViewState GetCurrentUIViewState() const {	return m_currentViewState;	}
 
 	std::vector<std::string> GetAssignedStates() const { return m_assignedStates; }
 

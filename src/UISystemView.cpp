@@ -1,5 +1,6 @@
 #include "UISystemView.h"
 
+#include "UIManager.h"
 #include "UIFadeOverlayView.h"
 #include "UILoadingView.h"
 #include "Logger.h"

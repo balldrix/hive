@@ -4,12 +4,12 @@
 
 class Graphics;
 
-class FadeOutGameState : public GameState
+class FadeTransitionGameState : public GameState
 {
 public:
-	FadeOutGameState();
-	FadeOutGameState(GameStateManager* gameStateManager);
-	virtual ~FadeOutGameState();
+	FadeTransitionGameState();
+	FadeTransitionGameState(GameStateManager* gameStateManager);
+	virtual ~FadeTransitionGameState() {};
 
 	void OnEntry();
 	void Update(float deltaTime);

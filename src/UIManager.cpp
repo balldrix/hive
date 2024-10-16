@@ -1,8 +1,9 @@
 #include "UIManager.h"
 
 #include "Logger.h"
-#include "UISystemView.h"
 #include "UIView.h"
+#include "UISystemView.h"
+#include "UIFrontEndView.h"
 #include "GlobalConstants.h"
 
 using namespace GlobalConstants;
@@ -11,6 +12,7 @@ UIManager* UIManager::s_instance = nullptr;
 
 UIManager::UIManager() :
 	m_uiSystemView(nullptr),
+	m_uiFrontEndView(nullptr),
 	m_viewList(0)
 {
 }
@@ -40,7 +42,7 @@ bool UIManager::AnyViewsInState(UIView::ViewState state)
 {
 	for(auto it = s_instance->m_viewList.begin(); it != s_instance->m_viewList.end(); ++it)
 	{
-		if((*it)->GetCurrentState() == state) return true;
+		if((*it)->GetCurrentUIViewState() == state) return true;
 	}
 
 	return false;
@@ -50,8 +52,7 @@ void UIManager::UpdateUIViews(float deltaTime)
 {
 	for(auto it = s_instance->m_viewList.begin(); it != s_instance->m_viewList.end(); ++it)
 	{
-		if((*it)->GetCurrentState() == s_instance->m_currentViewState)
-			(*it)->Update(deltaTime);
+		(*it)->Update(deltaTime);
 	}
 }
 
@@ -76,6 +77,18 @@ void UIManager::CreateUISystemView()
 {
 	s_instance->m_uiSystemView = new UISystemView();
 	s_instance->m_uiSystemView->Init("UI System View");
+}
+
+void UIManager::CreateUIFrontEndView()
+{
+	s_instance->m_uiFrontEndView = new UIFrontEndView();
+	s_instance->m_uiFrontEndView->Init("UI Front End View");
+}
+
+void UIManager::DestroyUIFrontEndView()
+{
+	delete s_instance->m_uiFrontEndView;
+	s_instance->m_uiFrontEndView = nullptr;
 }
 
 void UIManager::RegisterUIView(UIView* uiView)
@@ -169,6 +182,8 @@ void UIManager::Destroy()
 void UIManager::Shutdown()
 {
 	Logger::LogInfo("Shutting down UI Manager.");
+
+	DestroyUIFrontEndView();
 
 	delete m_uiSystemView;
 	m_uiSystemView = nullptr;

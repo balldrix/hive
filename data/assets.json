@@ -1,16 +1,23 @@
 [
- {
-   "id": 1,
-   "name": "loadingScreen_bg",
-   "path": "data\\\\textures\\\\ui\\\\loadingScreen_bg.png",
-   "type": "texture",
-   "tag": "initial_loading_assets"
- },
- {
-   "id": 2,
-   "name": "pixel",
-   "path": "data\\\\textures\\\\pixel.png",
-   "type": "texture",
-   "tag": "initial_loading_assets"
- }
+  {
+    "id": 1,
+    "name": "loadingScreen_bg",
+    "path": "data\\\\textures\\\\ui\\\\loadingScreen_bg.png",
+    "type": "texture",
+    "tag": "initial_loading_assets"
+  },
+  {
+    "id": 2,
+    "name": "pixel",
+    "path": "data\\\\textures\\\\pixel.png",
+    "type": "texture",
+    "tag": "initial_loading_assets"
+  },
+  {
+    "id": 3,
+    "name": "titleScreen_bg",
+    "path": "data\\\\textures\\\\ui\\\\titleScreen_bg.png",
+    "type": "texture",
+    "tag": "front_end_assets"
+  }
 ]
