@@ -12,9 +12,9 @@ public:
 	UIFadeOverlayView();
 	virtual ~UIFadeOverlayView();
 
-	void Init(std::string name);
+	void Init(std::string name) override;
 	void Update(float deltaTime);
-	void Render(Graphics* graphics);
+	void Render(Graphics* graphics) override;
 
 	void TransitionIn(bool isAnimating);
 	void TransitionOut(bool isAnimating);

@@ -1,13 +1,15 @@
 #include "UIFrontEndView.h"
 
 #include "UIImageView.h"
+#include "UITitleScreenView.h"
 #include "UIManager.h"
 #include "Sprite.h"
 #include "AssetLoader.h"
 #include "Logger.h"
 
 UIFrontEndView::UIFrontEndView() :
-	m_background(nullptr)
+	m_background(nullptr),
+	m_titleScreenView(nullptr)
 {
 }
 
@@ -27,11 +29,17 @@ void UIFrontEndView::Init(std::string name)
 	m_background->TransitionOut(false);
 
 	auto sprite = m_background->GetSprite();
-	sprite->Init(AssetLoader::GetTexture("titleScreen_bg"));
+	sprite->Init(AssetLoader::GetTexture("t_titleScreen_bg"));
 	sprite->SetOrigin(Vector2::Zero);
 	sprite->SetDepth(0.0f);
 
+	m_titleScreenView = new UITitleScreenView();
+	m_titleScreenView->Init("Title Screen View");
+	m_titleScreenView->TransitionOut(false);
+	m_titleScreenView->AssignState("TitleScreen");
+
 	AssignState("TitleScreen");
+
 	UIManager::RegisterUIView(this);
 	m_isActive = false;
 }
@@ -42,16 +50,16 @@ void UIFrontEndView::Update(float deltaTime)
 
 	switch (m_currentViewState)
 	{
-	case UIView::ViewState::NotVisible:
+	case UIView::ViewStates::NotVisible:
 		break;
-	case UIView::ViewState::AnimatingIn:
-		m_currentViewState = ViewState::Visible;
+	case UIView::ViewStates::AnimatingIn:
+		m_currentViewState = ViewStates::Visible;
 		m_background->SetActive(true);
 		break;
-	case UIView::ViewState::Visible:
+	case UIView::ViewStates::Visible:
 		break;
-	case UIView::ViewState::AnimatingOut:
-		m_currentViewState = ViewState::NotVisible;
+	case UIView::ViewStates::AnimatingOut:
+		m_currentViewState = ViewStates::NotVisible;
 		m_background->SetActive(false);
 		m_isActive = false;
 		break;
@@ -72,17 +80,20 @@ void UIFrontEndView::Shutdown()
 	
 	UIManager::UnregisterUIView(this);
 
+	delete m_titleScreenView;
+	m_titleScreenView = nullptr;
+
 	delete m_background;
 	m_background = nullptr;
 }
 
 void UIFrontEndView::TransitionIn(bool isAnimating)
 {
-	m_currentViewState = UIView::ViewState::AnimatingIn;
+	m_currentViewState = UIView::ViewStates::AnimatingIn;
 	m_isActive = true;
 }
 
 void UIFrontEndView::TransitionOut(bool isAnimating)
 {
-	m_currentViewState = UIView::ViewState::AnimatingOut;
+	m_currentViewState = UIView::ViewStates::AnimatingOut;
 }

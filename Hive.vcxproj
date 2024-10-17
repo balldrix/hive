@@ -46,6 +46,8 @@
     <ClCompile Include="src\KingMook.cpp" />
     <ClCompile Include="src\KingMookChargeState.cpp" />
     <ClCompile Include="src\KingMookEnemyGlobalState.cpp" />
+    <ClCompile Include="src\UIConfig.cpp" />
+    <ClCompile Include="src\UISpriteText.cpp" />
     <ClInclude Include="src\AssetData.h" />
     <ClInclude Include="src\AssetLoader.h" />
     <ClInclude Include="src\AssetType.h" />
@@ -79,6 +81,8 @@
     <ClCompile Include="src\SoundSource.cpp" />
     <ClCompile Include="src\SoundManager.cpp" />
     <ClCompile Include="src\TilemapHandler.cpp" />
+    <ClCompile Include="src\UIStackingView.cpp" />
+    <ClCompile Include="src\UITitleScreenView.cpp" />
     <ClCompile Include="src\TitleScreenGameState.cpp" />
     <ClCompile Include="src\TravellingHandler.cpp" />
     <ClCompile Include="src\TravellingSceneState.cpp" />
@@ -133,6 +137,8 @@
     <ClCompile Include="src\UISystemView.cpp" />
     <ClCompile Include="src\UIView.cpp" />
     <ClCompile Include="src\Window.cpp" />
+    <ClInclude Include="src\UIConfig.h" />
+    <ClInclude Include="src\UISpriteText.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\EncounterHandler.h" />
@@ -146,6 +152,8 @@
     <ClInclude Include="src\NPCFactory.h" />
     <ClInclude Include="src\TilemapData.h" />
     <ClInclude Include="src\TilemapHandler.h" />
+    <ClInclude Include="src\UIStackingView.h" />
+    <ClInclude Include="src\UITitleScreenView.h" />
     <ClInclude Include="src\TitleScreenGameState.h" />
     <ClInclude Include="src\TravellingHandler.h" />
     <ClInclude Include="src\TravellingSceneState.h" />
@@ -244,7 +252,7 @@
     <None Include="data\HitBoxData\mookHitBoxData.json" />
     <None Include="data\HitBoxData\playerHitBoxData.json" />
     <None Include="data\Sounds\scream.ogg" />
-    <None Include="data\SpriteFonts\goodbye_despair_12pt.spritefont" />
+    <None Include="data\fonts\goodbye_despair_12pt.spritefont" />
     <None Include="GameData\SpriteFonts\silkscreen_8pt.spritefont" />
     <None Include="data\SpriteSheetData\bossSpriteSheetData.json" />
     <None Include="data\SpriteSheetData\dummySpriteSheetData.json" />

@@ -68,6 +68,7 @@ void Shutdown()
 {
 	delete game;
 	UIManager::Destroy();
+	AssetLoader::Shutdown();
 	SoundManager::DeleteSounds();
 	AudioEngine::Destroy();
 	delete graphics;

@@ -9,6 +9,7 @@ public:
 	enum class Type
 	{
 		TextureAsset = 0,
+		SpriteFontAsset,
 		None
 	};
 

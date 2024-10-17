@@ -4,6 +4,7 @@
 #include "GameStateManager.h"
 #include "LoadingGameState.h"
 #include "UIManager.h"
+#include "UIConfig.h"
 
 InitialLoadGameState::InitialLoadGameState() : 
 	GameState("InitialLoad")
@@ -40,6 +41,7 @@ void InitialLoadGameState::LoadAssets()
 
 void InitialLoadGameState::ProceedToFrontEnd()
 {
+	UIConfig::Init();
 	UIManager::CreateUISystemView();
 	LoadingGameState::SetTargetGameState(m_gameStateManager->GetState("TitleScreen"));
 	m_gameStateManager->SwitchState("Loading");

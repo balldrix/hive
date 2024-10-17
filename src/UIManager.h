@@ -40,13 +40,13 @@ private:
 	static UIManager* s_instance;
 	
 	void SwitchState();
-	bool AnyViewsInState(UIView::ViewState state);
+	bool AnyViewsInState(UIView::ViewStates state);
 	void UpdateUIViews(float deltaTime);
 	void Shutdown();
 
 	UISystemView* m_uiSystemView;
 	UIFrontEndView* m_uiFrontEndView;
 	std::vector<UIView*> m_viewList;
-	UIView::ViewState m_currentViewState = UIView::ViewState::NotVisible;
-	UIView::ViewState m_targetViewState = UIView::ViewState::NotVisible;
+	UIView::ViewStates m_currentViewState = UIView::ViewStates::NotVisible;
+	UIView::ViewStates m_targetViewState = UIView::ViewStates::NotVisible;
 };

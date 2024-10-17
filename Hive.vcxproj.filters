@@ -232,23 +232,8 @@
     <ClCompile Include="src\LoadingGameState.cpp">
       <Filter>Game\States</Filter>
     </ClCompile>
-    <ClCompile Include="src\UIManager.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UIFadeOverlayView.cpp">
-      <Filter>UI\SystemView</Filter>
-    </ClCompile>
     <ClCompile Include="src\UISystemView.cpp">
-      <Filter>UI\SystemView</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UIView.cpp">
-      <Filter>UI\Shared</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UIImageView.cpp">
-      <Filter>UI\Shared</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UILoadingView.cpp">
-      <Filter>UI\SystemView</Filter>
+      <Filter>UI\System</Filter>
     </ClCompile>
     <ClCompile Include="src\TitleScreenGameState.cpp">
       <Filter>Game\States</Filter>
@@ -258,6 +243,33 @@
     </ClCompile>
     <ClCompile Include="src\UIFrontEndView.cpp">
       <Filter>UI\FrontEnd</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIImageView.cpp">
+      <Filter>UI\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIView.cpp">
+      <Filter>UI\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIFadeOverlayView.cpp">
+      <Filter>UI\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UILoadingView.cpp">
+      <Filter>UI\System\Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIManager.cpp">
+      <Filter>UI\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UITitleScreenView.cpp">
+      <Filter>UI\FrontEnd\TitleScreen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIStackingView.cpp">
+      <Filter>UI\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UISpriteText.cpp">
+      <Filter>UI\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIConfig.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -345,14 +357,23 @@
     <Filter Include="Data\Tilemaps">
       <UniqueIdentifier>{07eb4a0e-b20d-47d2-8342-1dd86063cb2b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\SystemView">
-      <UniqueIdentifier>{d1aad49f-fe68-4b30-9baa-fadfa12941ce}</UniqueIdentifier>
-    </Filter>
     <Filter Include="UI\Shared">
       <UniqueIdentifier>{f03b5a82-5dc5-4dc5-9787-00a008d927bc}</UniqueIdentifier>
     </Filter>
     <Filter Include="UI\FrontEnd">
       <UniqueIdentifier>{525aedaf-9ccb-4c7d-bde9-eb984ed04c13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Core">
+      <UniqueIdentifier>{a743d8b5-92e4-4c6b-bc26-6b9745d5fab9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\FrontEnd\TitleScreen">
+      <UniqueIdentifier>{9494f26e-e5d5-4c34-bad4-1098b7ddaf37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\System">
+      <UniqueIdentifier>{d1aad49f-fe68-4b30-9baa-fadfa12941ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\System\Loading">
+      <UniqueIdentifier>{da6c0928-3a65-4eba-8e92-8d0339b6caea}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -636,23 +657,8 @@
     <ClInclude Include="src\LoadingGameState.h">
       <Filter>Game\States</Filter>
     </ClInclude>
-    <ClInclude Include="src\UIManager.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\UIFadeOverlayView.h">
-      <Filter>UI\SystemView</Filter>
-    </ClInclude>
-    <ClInclude Include="src\UIView.h">
-      <Filter>UI\Shared</Filter>
-    </ClInclude>
-    <ClInclude Include="src\UIImageView.h">
-      <Filter>UI\Shared</Filter>
-    </ClInclude>
     <ClInclude Include="src\UISystemView.h">
-      <Filter>UI\SystemView</Filter>
-    </ClInclude>
-    <ClInclude Include="src\UILoadingView.h">
-      <Filter>UI\SystemView</Filter>
+      <Filter>UI\System</Filter>
     </ClInclude>
     <ClInclude Include="src\FadeTransitionGameState.h">
       <Filter>Game\States</Filter>
@@ -665,6 +671,33 @@
     </ClInclude>
     <ClInclude Include="src\GameStates.h">
       <Filter>Game\States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIImageView.h">
+      <Filter>UI\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIView.h">
+      <Filter>UI\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UITitleScreenView.h">
+      <Filter>UI\FrontEnd\TitleScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIFadeOverlayView.h">
+      <Filter>UI\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UILoadingView.h">
+      <Filter>UI\System\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIManager.h">
+      <Filter>UI\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIStackingView.h">
+      <Filter>UI\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UISpriteText.h">
+      <Filter>UI\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIConfig.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -754,7 +787,7 @@
     <None Include="data\SpriteSheetData\gameOverSpritesheetData.json">
       <Filter>Data\SpriteSheetData</Filter>
     </None>
-    <None Include="data\SpriteFonts\goodbye_despair_12pt.spritefont">
+    <None Include="data\fonts\goodbye_despair_12pt.spritefont">
       <Filter>Data\Fonts</Filter>
     </None>
     <None Include="data\HitBoxData\mookHitBoxData.json">

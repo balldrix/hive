@@ -38,7 +38,7 @@ void UIManager::Update(float deltaTime)
 	s_instance->SwitchState();
 }
 
-bool UIManager::AnyViewsInState(UIView::ViewState state)
+bool UIManager::AnyViewsInState(UIView::ViewStates state)
 {
 	for(auto it = s_instance->m_viewList.begin(); it != s_instance->m_viewList.end(); ++it)
 	{
@@ -134,22 +134,22 @@ void UIManager::OnGameStateChange(std::string nextState)
 		if(result == assignedStates.end())
 		{
 			if((*it)->IsActive()) (*it)->TransitionOut(true);
-			s_instance->m_currentViewState = UIView::ViewState::AnimatingOut;
+			s_instance->m_currentViewState = UIView::ViewStates::AnimatingOut;
 			currentViewState = "Animating Out";
 			continue;
 		}
 
 		(*it)->TransitionIn(true);
 
-		if(s_instance->m_currentViewState == UIView::ViewState::AnimatingOut)
+		if(s_instance->m_currentViewState == UIView::ViewStates::AnimatingOut)
 		{
-			s_instance->m_targetViewState = UIView::ViewState::AnimatingIn;
+			s_instance->m_targetViewState = UIView::ViewStates::AnimatingIn;
 			targetViewState = "Animating Out";
 		}
 		else
 		{
-			s_instance->m_currentViewState = UIView::ViewState::AnimatingIn;
-			s_instance->m_targetViewState = UIView::ViewState::Visible;
+			s_instance->m_currentViewState = UIView::ViewStates::AnimatingIn;
+			s_instance->m_targetViewState = UIView::ViewStates::Visible;
 			currentViewState = "Animating In";
 		}
 	}

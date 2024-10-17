@@ -24,7 +24,7 @@ void UIFadeOverlayView::Init(std::string name)
 	Logger::LogInfo("Initialising UI Fade Overlay.");
 
 	m_sprite = new Sprite();
-	m_sprite->Init(AssetLoader::GetTexture("pixel"));
+	m_sprite->Init(AssetLoader::GetTexture("t_pixel"));
 	m_sprite->SetColour(OPAQUE_COLOR);
 
 	RECT rect;

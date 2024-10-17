@@ -8,7 +8,7 @@ class Graphics;
 class UIView
 {
 public:
-	enum class ViewState
+	enum class ViewStates
 	{
 		NotVisible,
 		AnimatingIn,
@@ -32,7 +32,7 @@ public:
 	bool IsActive() const { return m_isActive; }
 	bool IsAnimating() const { return m_isAnimating; }
 	std::string GetName() const { return m_name; }
-	ViewState GetCurrentUIViewState() const {	return m_currentViewState;	}
+	ViewStates GetCurrentUIViewState() const {	return m_currentViewState;	}
 
 	std::vector<std::string> GetAssignedStates() const { return m_assignedStates; }
 
@@ -44,5 +44,5 @@ protected:
 	bool m_isAnimating;
 	bool m_isActive;
 	float m_transitionTimer;
-	ViewState m_currentViewState;
+	ViewStates m_currentViewState;
 };

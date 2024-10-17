@@ -8,8 +8,8 @@ public:
 	UILoadingView();
 	~UILoadingView();
 
-	void Init(std::string name);
-	void Render(Graphics* graphics);
+	void Init(std::string name) override;
+	void Render(Graphics* graphics) override;
 
 	void Update(float deltaTime);
 	void TransitionIn(bool isAnimating);

@@ -1,7 +1,10 @@
 #include "AssetType.h"
 #include "pch.h"
 
-AssetType::AssetTypeMap AssetType::s_assetTypeMap = { { "texture", Type::TextureAsset } };
+AssetType::AssetTypeMap AssetType::s_assetTypeMap = { 
+	{ "texture", Type::TextureAsset },
+	{ "spritefont", Type::SpriteFontAsset }
+};
 
 AssetType::Type AssetType::GetMappedType(std::string key)
 {

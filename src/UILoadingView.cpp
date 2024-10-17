@@ -24,7 +24,7 @@ void UILoadingView::Init(std::string name)
 
 	m_loadingBackground = new UIImageView();
 	m_loadingBackground->Init("Background Image");
-	m_loadingBackground->GetSprite()->Init(AssetLoader::GetTexture("loadingScreen_bg"));
+	m_loadingBackground->GetSprite()->Init(AssetLoader::GetTexture("t_loadingScreen_bg"));
 	m_loadingBackground->GetSprite()->SetOrigin(Vector2::Zero);
 	m_loadingBackground->GetSprite()->SetDepth(0.0f);
 
@@ -43,15 +43,15 @@ void UILoadingView::Update(float deltaTime)
 {
 	switch (m_currentViewState)
 	{
-	case UIView::ViewState::NotVisible:
+	case UIView::ViewStates::NotVisible:
 		break;
-	case UIView::ViewState::AnimatingIn:
-		m_currentViewState = ViewState::Visible;
+	case UIView::ViewStates::AnimatingIn:
+		m_currentViewState = ViewStates::Visible;
 		break;
-	case UIView::ViewState::Visible:
+	case UIView::ViewStates::Visible:
 		break;
-	case UIView::ViewState::AnimatingOut:
-		m_currentViewState = ViewState::NotVisible;
+	case UIView::ViewStates::AnimatingOut:
+		m_currentViewState = ViewStates::NotVisible;
 		m_loadingBackground->SetActive(false);
 		m_isActive = false;
 		break;
@@ -68,21 +68,21 @@ void UILoadingView::TransitionIn(bool isAnimating)
 
 	if(isAnimating)
 	{
-		m_currentViewState = UIView::ViewState::AnimatingIn;
+		m_currentViewState = UIView::ViewStates::AnimatingIn;
 	}
 
-	m_currentViewState = UIView::ViewState::Visible;
+	m_currentViewState = UIView::ViewStates::Visible;
 }
 
 void UILoadingView::TransitionOut(bool isAnimating)
 {
 	if(isAnimating)
 	{
-		m_currentViewState = UIView::ViewState::AnimatingOut;
+		m_currentViewState = UIView::ViewStates::AnimatingOut;
 		return;
 	}
 
-	m_currentViewState = UIView::ViewState::NotVisible;
+	m_currentViewState = UIView::ViewStates::NotVisible;
 	m_loadingBackground->SetActive(false);
 	m_isActive = false;
 }
