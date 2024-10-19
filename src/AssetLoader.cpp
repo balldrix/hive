@@ -7,6 +7,7 @@
 std::shared_ptr<AssetLoader> AssetLoader::s_assetLoader;
 
 AssetLoader::AssetLoader() :
+	m_graphics(nullptr),
 	m_assetData(0)
 {
 }

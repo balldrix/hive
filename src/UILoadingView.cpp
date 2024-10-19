@@ -62,6 +62,8 @@ void UILoadingView::Update(float deltaTime)
 
 void UILoadingView::TransitionIn(bool isAnimating)
 {
+	Logger::LogInfo(fmt::format("Transition In: UI Loading View {} animation.", isAnimating ? "with" : "without"));
+
 	m_loadingBackground->TransitionIn(isAnimating);
 	m_loadingBackground->SetActive(true);
 	m_isActive = true;
@@ -69,6 +71,7 @@ void UILoadingView::TransitionIn(bool isAnimating)
 	if(isAnimating)
 	{
 		m_currentViewState = UIView::ViewStates::AnimatingIn;
+		return;
 	}
 
 	m_currentViewState = UIView::ViewStates::Visible;
@@ -76,6 +79,8 @@ void UILoadingView::TransitionIn(bool isAnimating)
 
 void UILoadingView::TransitionOut(bool isAnimating)
 {
+	Logger::LogInfo(fmt::format("Transition Out: UI Loading View {} animation.", isAnimating ? "with" : "without"));
+
 	if(isAnimating)
 	{
 		m_currentViewState = UIView::ViewStates::AnimatingOut;

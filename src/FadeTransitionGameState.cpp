@@ -7,7 +7,7 @@
 
 FadeTransitionGameState::FadeTransitionGameState() :
 	m_graphics(nullptr),
-	GameState("FadeOut")
+	GameState("FadeTransition")
 {
 }
 

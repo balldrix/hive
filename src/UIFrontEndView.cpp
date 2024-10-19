@@ -33,6 +33,8 @@ void UIFrontEndView::Init(std::string name)
 	sprite->SetOrigin(Vector2::Zero);
 	sprite->SetDepth(0.0f);
 
+	UIManager::RegisterUIView(this);
+
 	m_titleScreenView = new UITitleScreenView();
 	m_titleScreenView->Init("Title Screen View");
 	m_titleScreenView->TransitionOut(false);
@@ -40,7 +42,6 @@ void UIFrontEndView::Init(std::string name)
 
 	AssignState("TitleScreen");
 
-	UIManager::RegisterUIView(this);
 	m_isActive = false;
 }
 
@@ -71,7 +72,7 @@ void UIFrontEndView::Update(float deltaTime)
 void UIFrontEndView::Render(Graphics* graphics)
 {
 	if(m_isActive == false) return;
-	m_background->Render(graphics);
+		m_background->Render(graphics);
 }
 
 void UIFrontEndView::Shutdown()
@@ -89,11 +90,15 @@ void UIFrontEndView::Shutdown()
 
 void UIFrontEndView::TransitionIn(bool isAnimating)
 {
+	Logger::LogInfo(fmt::format("Transition In: UI Frond End View {} animation.", isAnimating ? "with" : "without"));
+
 	m_currentViewState = UIView::ViewStates::AnimatingIn;
 	m_isActive = true;
 }
 
 void UIFrontEndView::TransitionOut(bool isAnimating)
 {
+	Logger::LogInfo(fmt::format("Transition Out: UI Frond End View {} animation.", isAnimating ? "with" : "without"));
+
 	m_currentViewState = UIView::ViewStates::AnimatingOut;
 }

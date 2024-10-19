@@ -47,7 +47,7 @@ void LoadingGameState::Update(float deltaTime)
 	timer -= deltaTime;
 
 	if(timer <= 0.0f)
-		m_gameStateManager->SwitchState("FadeOut");
+		m_gameStateManager->SwitchState("FadeTransition");
 }
 
 void LoadingGameState::Render()
