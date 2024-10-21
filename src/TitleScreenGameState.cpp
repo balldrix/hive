@@ -2,6 +2,7 @@
 
 #include "GameStateManager.h"
 #include "UIManager.h"
+#include "Input.h"
 
 TitleScreenGameState::TitleScreenGameState() :
 	m_graphics(nullptr),
@@ -22,6 +23,16 @@ TitleScreenGameState::~TitleScreenGameState()
 void TitleScreenGameState::Update(float deltaTime)
 {
 	UIManager::Update(deltaTime);
+
+	if(m_gameStateManager->GetInput()->WasKeyPressed(ESC_KEY))
+	{
+		PostQuitMessage(0);
+	}
+
+	if(m_gameStateManager->GetInput()->WasKeyPressed(ENTER_KEY))
+	{
+		m_gameStateManager->SwitchState("MainMenu");
+	}
 }
 
 void TitleScreenGameState::Render()
