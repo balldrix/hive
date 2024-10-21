@@ -5,7 +5,6 @@ Input::Input() :
 	m_mouseY(0),
 	m_mouseClicked(false)
 {
-	// clear all keys
 	ClearAll();
 }
 

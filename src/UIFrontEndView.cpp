@@ -72,7 +72,8 @@ void UIFrontEndView::Update(float deltaTime)
 void UIFrontEndView::Render(Graphics* graphics)
 {
 	if(m_isActive == false) return;
-		m_background->Render(graphics);
+		
+	m_background->Render(graphics);
 }
 
 void UIFrontEndView::Shutdown()

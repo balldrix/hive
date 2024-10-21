@@ -3,6 +3,7 @@
 #include "UIView.h"
 
 class UISpriteText;
+class UIImageView;
 
 class UITitleScreenView : public UIView
 {
@@ -20,4 +21,5 @@ public:
 	void Shutdown() override;
 private:
 	UISpriteText* m_startGameText;
+	UIImageView* m_logoImage;
 };

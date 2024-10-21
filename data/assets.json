@@ -33,5 +33,12 @@
     "path": "data\\textures\\ui\\titleScreen_bg.png",
     "type": "texture",
     "tag": "front_end_assets"
+  },
+  {
+    "id": 6,
+    "name": "t_title_logo",
+    "path": "data\\textures\\ui\\title_logo.png",
+    "type": "texture",
+    "tag": "front_end_assets"
   }
 ]

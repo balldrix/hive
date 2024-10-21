@@ -2,6 +2,7 @@
 
 #include "Graphics.h"
 #include "Sprite.h"
+#include "pch.h"
 
 UIImageView::UIImageView() :
 	m_sprite(nullptr)
@@ -22,6 +23,21 @@ void UIImageView::Init(std::string name)
 void UIImageView::Render(Graphics* graphics)
 {
 	if(m_isActive) m_sprite->Render(graphics);
+}
+
+void UIImageView::SetPosition(Vector2 position)
+{
+	m_sprite->SetPosition(position);
+}
+
+void UIImageView::SetOrigin(Vector2 origin)
+{
+	m_sprite->SetOrigin(origin);
+}
+
+void UIImageView::SetDepth(float depth)
+{
+	m_sprite->SetDepth(depth);
 }
 
 void UIImageView::Shutdown()
