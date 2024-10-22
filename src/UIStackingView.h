@@ -1,6 +1,7 @@
 #pragma once
 
 #include "UIView.h"
+#include "Frame.h"
 
 class UIStackingView : public UIView
 {
@@ -19,6 +20,14 @@ public:
 
 	void SetHeight(int height);
 	void SetWidth(int width);
+	void SetOrientation(Orientations orientation);
+	void SetSpacing(int spacing);
+
+	void UpdateLayout(Frame frame);
+
+	void AddView(UIView* uiView);
+
+	std::vector<UIView*> GetViews() const { return m_childViews; }
 
 protected:
 	virtual void Shutdown();

@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\UIMainMenuView.cpp" />
+    <ClCompile Include="src\MainMenuGameState.cpp" />
     <ClCompile Include="src\AssetLoader.cpp" />
     <ClCompile Include="src\AssetType.cpp" />
     <ClCompile Include="src\DamageData.h" />
@@ -48,6 +50,11 @@
     <ClCompile Include="src\KingMookEnemyGlobalState.cpp" />
     <ClCompile Include="src\UIConfig.cpp" />
     <ClCompile Include="src\UISpriteText.cpp" />
+    <ClCompile Include="src\UIMenuItemView.cpp" />
+    <ClCompile Include="src\UITextMenuItemView.cpp" />
+    <ClInclude Include="src\Frame.h" />
+    <ClInclude Include="src\UIMainMenuView.h" />
+    <ClInclude Include="src\MainMenuGameState.h" />
     <ClInclude Include="src\AssetData.h" />
     <ClInclude Include="src\AssetLoader.h" />
     <ClInclude Include="src\AssetType.h" />
@@ -139,6 +146,8 @@
     <ClCompile Include="src\Window.cpp" />
     <ClInclude Include="src\UIConfig.h" />
     <ClInclude Include="src\UISpriteText.h" />
+    <ClInclude Include="src\UIMenuItemView.h" />
+    <ClInclude Include="src\UITextMenuItemView.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\EncounterHandler.h" />
@@ -246,13 +255,19 @@
     <Image Include="data\Tilesets\ts_bunker.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="data\assets.json" />
+    <None Include="data\assets.json">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
     <None Include="data\HitBoxData\bossHitBoxData.json" />
     <None Include="data\HitBoxData\dummyHitBoxData.json" />
     <None Include="data\HitBoxData\mookHitBoxData.json" />
     <None Include="data\HitBoxData\playerHitBoxData.json" />
     <None Include="data\Sounds\scream.ogg" />
-    <None Include="data\fonts\goodbye_despair_12pt.spritefont" />
+    <None Include="data\fonts\goodbye_despair_12pt.spritefont">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
     <None Include="GameData\SpriteFonts\silkscreen_8pt.spritefont" />
     <None Include="data\SpriteSheetData\bossSpriteSheetData.json" />
     <None Include="data\SpriteSheetData\dummySpriteSheetData.json" />

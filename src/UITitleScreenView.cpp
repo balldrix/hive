@@ -31,14 +31,14 @@ void UITitleScreenView::Init(std::string name)
 
 	// TODO check inputs for controller 
 	m_startGameText->SetText("Press Enter To Start");
-	m_startGameText->SetPosition(Vector2(GameWidth / 2.0f, GameHeight - 10.0f));
+	m_startGameText->SetPosition(StartGameTextStartPosition);
 	m_startGameText->SetActive(true);
 	m_startGameText->SetAlignment(UISpriteText::Alignments::Centre);
 
 	m_logoImage = new UIImageView();
 	m_logoImage->Init("Title Logo");
 	m_logoImage->GetSprite()->Init(AssetLoader::GetTexture("t_title_logo"));
-	m_logoImage->SetPosition(Vector2(GameWidth - 20.0f, 40.0f));
+	m_logoImage->SetPosition(LogoImageStartPosition);
 	m_logoImage->SetOrigin(Vector2((float)m_logoImage->GetSprite()->GetWidth(), 0.0f));
 	m_logoImage->SetDepth(0.9f);
 	m_logoImage->TransitionOut(false);
@@ -61,6 +61,10 @@ void UITitleScreenView::Update(float deltaTime)
 	switch (m_currentViewState)
 	{
 	case UIView::ViewStates::NotVisible:
+		m_startGameText->SetActive(false);
+		m_logoImage->SetActive(false);
+		m_isActive = false;
+		m_isAnimating = false;
 		break;
 	case UIView::ViewStates::AnimatingIn:
 		m_currentViewState = ViewStates::Visible;
@@ -70,19 +74,37 @@ void UITitleScreenView::Update(float deltaTime)
 	case UIView::ViewStates::Visible:
 		break;
 	case UIView::ViewStates::AnimatingOut:
-		m_currentViewState = ViewStates::NotVisible;
-		m_startGameText->SetActive(false);
-		m_isActive = false;
+		DoTransition(deltaTime);
 		break;
 	default:
 		break;
 	}
 }
 
+void UITitleScreenView::DoTransition(float deltaTime)
+{
+	if(m_transitionTimer > 0)
+	{
+		float t = m_transitionTimer / TransitionDuration;
+		float logoImageXPos = (float)(std::lerp(LogoImageStartPosition.x, GameWidth + m_logoImage->GetSprite()->GetWidth(), 1 - t));
+		float lerpedAlpha = std::lerp(1.0f, 0.0f, 1 - t);
+		Color colour = m_startGameText->GetColour();
+		colour.A(lerpedAlpha);		
+
+		m_logoImage->SetPosition(Vector2(logoImageXPos, LogoImageStartPosition.y));
+		m_startGameText->SetColour(colour);
+		m_transitionTimer -= deltaTime;
+		return;
+	}
+
+	m_currentViewState = ViewStates::NotVisible;
+}
+
 void UITitleScreenView::TransitionIn(bool isAnimating)
 {
 	Logger::LogInfo(fmt::format("Transition In: UI Title Screen View {} animation.", isAnimating ? "with" : "without"));
 
+	m_isAnimating = isAnimating;
 	m_isActive = true;
 
 	if(isAnimating)
@@ -100,6 +122,7 @@ void UITitleScreenView::TransitionOut(bool isAnimating)
 
 	if (isAnimating)
 	{
+		m_transitionTimer = TransitionDuration;
 		m_currentViewState = UIView::ViewStates::AnimatingOut;
 		return;
 	}

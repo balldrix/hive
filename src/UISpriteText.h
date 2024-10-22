@@ -28,6 +28,10 @@ public:
 	void SetColour(const Color& colour);
 	void SetAlignment(Alignments alignment);
 
+	Color GetColour() const { return m_colour; }
+	int GetHeight() const;
+	int GetWidth() const;
+
 private:
 	bool m_isActive;
 	SpriteFont* m_spriteFont;

@@ -25,7 +25,7 @@ void UIFadeOverlayView::Init(std::string name)
 
 	m_sprite = new Sprite();
 	m_sprite->Init(AssetLoader::GetTexture("t_pixel"));
-	m_sprite->SetColour(OPAQUE_COLOR);
+	m_sprite->SetColour(OpaqueColour);
 
 	RECT rect;
 	rect.left = 0;
@@ -54,7 +54,7 @@ void UIFadeOverlayView::Update(float deltaTime)
 		m_transitionTimer = 0.0f;
 	}
 
-	float t = m_transitionTimer / FADE_DURATION;
+	float t = m_transitionTimer / FadeDuration;
 	float a = m_startingAlpha;
 	float b = m_targetAlpha;
 	float lerp = std::lerp(a, b, 1 - t);
@@ -86,7 +86,7 @@ void UIFadeOverlayView::TransitionIn(bool isAnimating)
 	}
 
 	m_sprite->SetAlpha(m_startingAlpha);
-	m_transitionTimer = FADE_DURATION;
+	m_transitionTimer = FadeDuration;
 }
 
 void UIFadeOverlayView::TransitionOut(bool isAnimating)
@@ -105,7 +105,7 @@ void UIFadeOverlayView::TransitionOut(bool isAnimating)
 	}
 
 	m_sprite->SetAlpha(m_startingAlpha);
-	m_transitionTimer = FADE_DURATION;
+	m_transitionTimer = FadeDuration;
 }
 
 void UIFadeOverlayView::Shutdown()

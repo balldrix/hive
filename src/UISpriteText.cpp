@@ -5,7 +5,7 @@
 UISpriteText::UISpriteText() :
 	m_isActive(false),
 	m_spriteFont(nullptr),
-	m_text("hello, world"),
+	m_text(""),
 	m_position(Vector2::Zero),
 	m_colour(Colors::White.v),
 	m_depth(0.0f),
@@ -80,4 +80,16 @@ void UISpriteText::SetAlignment(Alignments alignment)
 	default:
 		break;
 	}
+}
+
+int UISpriteText::GetHeight() const
+{
+	XMVECTOR measure = m_spriteFont->MeasureString(m_text.c_str());
+	return XMVectorGetY(measure);
+}
+
+int UISpriteText::GetWidth() const
+{
+	XMVECTOR measure = m_spriteFont->MeasureString(m_text.c_str());
+	return XMVectorGetX(measure);
 }

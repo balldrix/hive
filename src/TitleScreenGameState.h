@@ -10,7 +10,7 @@ class TitleScreenGameState : public GameState
 public:
 	TitleScreenGameState();
 	TitleScreenGameState(GameStateManager* gameStateManager);
-	virtual	~TitleScreenGameState();
+	~TitleScreenGameState();
 
 	void Update(float deltaTime);
 	void Render();

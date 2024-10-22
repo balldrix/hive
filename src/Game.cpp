@@ -48,6 +48,7 @@ void Game::Init(Window* window, Graphics* graphics)
 	m_gameStateManager->AddState(new LoadingGameState(m_gameStateManager));
 	m_gameStateManager->AddState(new FadeTransitionGameState(m_gameStateManager));
 	m_gameStateManager->AddState(new TitleScreenGameState(m_gameStateManager));
+	m_gameStateManager->AddState(new MainMenuGameState(m_gameStateManager));
 	m_gameStateManager->AddState(new GameplayGameState(m_gameStateManager));
 	m_gameStateManager->SwitchState("InitialLoad");
 

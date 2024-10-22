@@ -41,6 +41,7 @@ void UIFrontEndView::Init(std::string name)
 	m_titleScreenView->AssignState("TitleScreen");
 
 	AssignState("TitleScreen");
+	AssignState("MainMenu");
 
 	m_isActive = false;
 }
