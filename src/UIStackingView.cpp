@@ -4,9 +4,7 @@
 UIStackingView::UIStackingView() :
 	m_childViews(0),
 	m_orientation(UIStackingView::Orientations::Horizontal),
-	m_spacing(0),
-	m_stackedViewsHeight(0),
-	m_stackedViewsWidth(0)
+	m_spacing(0)
 {
 }
 
@@ -18,7 +16,8 @@ UIStackingView::~UIStackingView()
 void UIStackingView::Init(std::string name)
 {
 	m_name = name;
-	m_spacing = 20;
+	m_spacing = 5;
+	m_isActive = false;
 }
 
 void UIStackingView::Render(Graphics* graphics)
@@ -29,14 +28,14 @@ void UIStackingView::Render(Graphics* graphics)
 	}
 }
 
-void UIStackingView::SetHeight(int height)
+void UIStackingView::SetActive(bool isActive)
 {
-	m_stackedViewsHeight = height;
-}
+	m_isActive = isActive;
 
-void UIStackingView::SetWidth(int width)
-{
-	m_stackedViewsWidth = width;
+	for (UIView* i : m_childViews)
+	{
+		i->SetActive(isActive);
+	}
 }
 
 void UIStackingView::SetOrientation(Orientations orientation)
@@ -58,8 +57,8 @@ void UIStackingView::UpdateLayout(Frame frame)
 		int childHeight = view->GetHeight();
 		int childWidth = view->GetWidth();
 
-		float x = m_orientation == Orientations::Horizontal ? (float)frame.x : running;
-		float y = m_orientation == Orientations::Horizontal ? running : (float)frame.y;
+		float x = m_orientation == Orientations::Vertical ? (float)frame.x : running;
+		float y = m_orientation == Orientations::Vertical ? running : (float)frame.y;
 
 		view->SetPosition(Vector2(x, y));
 
@@ -76,7 +75,7 @@ void UIStackingView::UpdateLayout(Frame frame)
 
 void UIStackingView::AddView(UIView* uiView)
 {
-	m_childViews.push_back(uiView);
+ 	m_childViews.push_back(uiView);
 }
 
 void UIStackingView::Shutdown()

@@ -5,6 +5,7 @@
 
 class UIImageView;
 class UITitleScreenView;
+class UIMainMenuView;
 
 class UIFrontEndView : UIView
 {
@@ -23,5 +24,5 @@ public:
 private:
 	UIImageView* m_background;
 	UITitleScreenView* m_titleScreenView;
-	std::vector<UIView*> m_subViews;
+	UIMainMenuView* m_mainMenuView;
 };

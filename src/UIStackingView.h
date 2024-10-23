@@ -17,9 +17,8 @@ public:
 
 	void Init(std::string name) override;
 	void Render(Graphics* graphics) override;
+	void SetActive(bool isActive) override;
 
-	void SetHeight(int height);
-	void SetWidth(int width);
 	void SetOrientation(Orientations orientation);
 	void SetSpacing(int spacing);
 
@@ -34,7 +33,5 @@ protected:
 
 	Orientations m_orientation;
 	int m_spacing;
-	int m_stackedViewsHeight;
-	int m_stackedViewsWidth;
 	std::vector<UIView*> m_childViews;
 };

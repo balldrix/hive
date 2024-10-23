@@ -3,11 +3,11 @@
 #include "UIView.h"
 #include "UIStackingView.h"
 
-class UIIMainMenuView : public UIView
+class UIMainMenuView : public UIView
 {
 public:
-	UIIMainMenuView() {};
-	virtual ~UIIMainMenuView();
+	UIMainMenuView();
+	virtual ~UIMainMenuView();
 
 	void Init(std::string name) override;
 	void Update(float deltaTime) override;
@@ -22,7 +22,7 @@ protected:
 
 private:
 
-	std::string m_menuItems[4] =
+	std::string m_menuItems[3] =
 	{
 		"Start",
 		"Options",
@@ -30,4 +30,6 @@ private:
 	};
 
 	UIStackingView m_uiStackingView;
+	float m_startingAlpha;
+	float m_targetAlpha;
 };

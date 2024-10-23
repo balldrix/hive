@@ -17,8 +17,10 @@ public:
 	void Render(Graphics* graphics) override;
 	void Shutdown() override;
 
-	int GetHeight() const { return m_uiSpriteText->GetHeight(); }
-	int GetWidth() const { return m_uiSpriteText->GetWidth(); }
+	void SetActive(bool isActive) override;
+
+	int GetHeight() const override { return m_uiSpriteText->GetHeight(); }
+	int GetWidth() const override { return m_uiSpriteText->GetWidth(); }
 	Color GetColour() const { return m_uiSpriteText->GetColour(); }
 
 	void SetText(std::string text);

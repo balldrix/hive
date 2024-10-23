@@ -6,23 +6,31 @@
 #include "GlobalConstants.h"
 #include "Frame.h"
 #include "UIStackingView.h"
+#include "UIManager.h"
 
 using namespace GlobalConstants;
 
 static const float TransitionDuration = 1.2f;
 
-UIIMainMenuView::~UIIMainMenuView()
+UIMainMenuView::UIMainMenuView() :
+	m_startingAlpha(0.0f),
+	m_targetAlpha(0.0f)
+{
+}
+
+UIMainMenuView::~UIMainMenuView()
 {
 	Shutdown();
 }
 
-void UIIMainMenuView::Init(std::string name)
+void UIMainMenuView::Init(std::string name)
 {
 	m_uiStackingView.Init("Main Menu Stacking View");
-	m_uiStackingView.SetHeight(20);
-	m_uiStackingView.SetWidth((int)(GameWidth / 2.0f));
+	m_uiStackingView.SetOrientation(UIStackingView::Orientations::Vertical);
 
-	for (size_t i = 0; i < m_menuItems->length(); i++)
+	int size = sizeof(m_menuItems) / sizeof(std::string);
+
+	for (size_t i = 0; i < size; i++)
 	{
 		UITextMenuItemView* item = new UITextMenuItemView();
 		item->Init(m_menuItems[i]);
@@ -31,16 +39,18 @@ void UIIMainMenuView::Init(std::string name)
 		m_uiStackingView.AddView(item);
 	}
 
-	Frame frame;
-	frame.x = 10;
+	Frame frame{};
+	frame.x = 20;
 	frame.y = 40;
 	frame.width = (int)(GameWidth / 2.0f);
 	frame.height = GameHeight;
 
 	m_uiStackingView.UpdateLayout(frame);
+
+	UIManager::RegisterUIView(this);
 }
 
-void UIIMainMenuView::Update(float deltaTime)
+void UIMainMenuView::Update(float deltaTime)
 {
 	if (!m_isActive) return;
 
@@ -65,35 +75,42 @@ void UIIMainMenuView::Update(float deltaTime)
 	}
 }
 
-void UIIMainMenuView::Render(Graphics* graphics)
+void UIMainMenuView::Render(Graphics* graphics)
 {
 	if(!m_isActive) return;
 
 	m_uiStackingView.Render(graphics);
 }
 
-void UIIMainMenuView::Shutdown()
+void UIMainMenuView::Shutdown()
 {
 	Logger::LogInfo("Shutting down UI Main Menu View");
 }
 
-void UIIMainMenuView::TransitionIn(bool isAnimated)
+void UIMainMenuView::TransitionIn(bool isAnimated)
 {
 	m_isActive = true;
+	m_uiStackingView.SetActive(true);
 	m_currentViewState = ViewStates::AnimatingIn;
+	m_transitionTimer = TransitionDuration;
+	m_startingAlpha = 0.0f;
+	m_targetAlpha = 1.0f;
 }
 
-void UIIMainMenuView::TransitionOut(bool isAnimated)
+void UIMainMenuView::TransitionOut(bool isAnimated)
 {
 	m_currentViewState = ViewStates::AnimatingOut;
+	m_transitionTimer = TransitionDuration;
+	m_startingAlpha = 0.0f;
+	m_targetAlpha = 1.0f;
 }
 
-void UIIMainMenuView::DoTransition(float deltaTime)
+void UIMainMenuView::DoTransition(float deltaTime)
 {
 	if (m_transitionTimer > 0)
 	{
 		float t = m_transitionTimer / TransitionDuration;
-		float lerpedAlpha = std::lerp(1.0f, 0.0f, 1 - t);
+		float lerpedAlpha = std::lerp(m_startingAlpha, m_targetAlpha, 1 - t);
 		
 		for(UIView* uiView : m_uiStackingView.GetViews())
 		{

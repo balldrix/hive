@@ -22,6 +22,7 @@ void UITextMenuItemView::Init(std::string name)
 	m_uiSpriteText->SetActive(false);
 	m_uiSpriteText->SetColour(m_unselectedTextColour);
 	m_currentSelectedState = SelectedStates::NotSelected;
+	m_isActive = false;
 }
 
 void UITextMenuItemView::Render(Graphics* graphics)
@@ -35,6 +36,12 @@ void UITextMenuItemView::Shutdown()
 {
 	delete m_uiSpriteText;
 	m_uiSpriteText = nullptr;
+}
+
+void UITextMenuItemView::SetActive(bool isActive)
+{
+	m_isActive = isActive;
+	m_uiSpriteText->SetActive(isActive);
 }
 
 void UITextMenuItemView::SetText(std::string text)

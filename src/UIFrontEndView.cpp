@@ -1,15 +1,17 @@
 #include "UIFrontEndView.h"
 
+#include "Logger.h"
+#include "UIManager.h"
+#include "AssetLoader.h"
+#include "Sprite.h"
 #include "UIImageView.h"
 #include "UITitleScreenView.h"
-#include "UIManager.h"
-#include "Sprite.h"
-#include "AssetLoader.h"
-#include "Logger.h"
+#include "UIMainMenuView.h"
 
 UIFrontEndView::UIFrontEndView() :
 	m_background(nullptr),
-	m_titleScreenView(nullptr)
+	m_titleScreenView(nullptr),
+	m_mainMenuView(nullptr)
 {
 }
 
@@ -39,6 +41,11 @@ void UIFrontEndView::Init(std::string name)
 	m_titleScreenView->Init("Title Screen View");
 	m_titleScreenView->TransitionOut(false);
 	m_titleScreenView->AssignState("TitleScreen");
+
+	m_mainMenuView = new UIMainMenuView();
+	m_mainMenuView->Init("Main Menu View");
+	m_mainMenuView->TransitionOut(false);
+	m_mainMenuView->AssignState("MainMenu");
 
 	AssignState("TitleScreen");
 	AssignState("MainMenu");
@@ -82,6 +89,9 @@ void UIFrontEndView::Shutdown()
 	Logger::LogInfo("Shutting down UI Front End View.");
 	
 	UIManager::UnregisterUIView(this);
+
+	delete m_mainMenuView;
+	m_mainMenuView = nullptr;
 
 	delete m_titleScreenView;
 	m_titleScreenView = nullptr;

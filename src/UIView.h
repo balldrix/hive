@@ -25,7 +25,7 @@ public:
 	virtual void TransitionIn(bool isAnimated) { m_isActive = true; };
 	virtual void TransitionOut(bool isAnimated) { m_isActive = false; };
 
-	void SetActive(bool isActive);
+	virtual void SetActive(bool isActive);
 	virtual void SetPosition(const Vector2& position) {};
 	virtual void SetColour(Color colour) {};
 
@@ -36,8 +36,8 @@ public:
 	std::string GetName() const { return m_name; }
 	ViewStates GetCurrentUIViewState() const {	return m_currentViewState;	}
 	std::vector<std::string> GetAssignedStates() const { return m_assignedStates; }
-	virtual int GetHeight() { return 0; };
-	virtual int GetWidth() { return 0; };
+	virtual int GetHeight() const { return 0; };
+	virtual int GetWidth() const { return 0; };
 	virtual Color GetColour() { return Colors::White.v; }
 	virtual void Shutdown() = 0;	
 
