@@ -2,6 +2,7 @@
 
 #include "UIManager.h"
 #include "GameStateManager.h"
+#include "MenuSystem.h"
 
 #include "Input.h"
 
@@ -22,6 +23,7 @@ MainMenuGameState::~MainMenuGameState()
 void MainMenuGameState::Update(float deltaTime)
 {
 	UIManager::Update(deltaTime);
+	MenuSystem::Update(m_gameStateManager->GetInput());
 
 	if(m_gameStateManager->GetInput()->WasKeyPressed(ESC_KEY))
 		PostQuitMessage(0);

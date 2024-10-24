@@ -3,6 +3,8 @@
 #include "UIView.h"
 #include "UIStackingView.h"
 
+const int MaxOptions = 3;
+
 class UIMainMenuView : public UIView
 {
 public:
@@ -15,18 +17,29 @@ public:
 	void Shutdown() override;
 
 	void TransitionIn(bool isAnimated) override;
-	void TransitionOut(bool isAnimated) override;
+	void TransitionOut(bool isAnimated) override;	
+
+	void OnConfirmPressed(int selectedIndex) override;
 
 protected:
 	void DoTransition(float deltaTime) override;
 
 private:
-
-	std::string m_menuItems[3] =
+	struct MenuOption
 	{
-		"Start",
-		"Options",
-		"Quit"
+		std::string name;
+		void(UIMainMenuView::*function)();
+	};
+
+	void StartGame();
+	void ProceedToOptions();
+	void QuitGame();
+
+	MenuOption m_menuOptions[MaxOptions] =
+	{
+		{ "Start", &UIMainMenuView::StartGame },
+		{ "Options", &UIMainMenuView::ProceedToOptions },
+		{ "Quit", &UIMainMenuView::QuitGame }
 	};
 
 	UIStackingView m_uiStackingView;

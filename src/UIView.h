@@ -41,6 +41,8 @@ public:
 	virtual Color GetColour() { return Colors::White.v; }
 	virtual void Shutdown() = 0;	
 
+	virtual void OnConfirmPressed(int selectedIndex) {};
+
 protected:
 	virtual void DoTransition(float deltaTime) {};
 

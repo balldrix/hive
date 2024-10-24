@@ -3,6 +3,8 @@
 #include "UIView.h"
 #include "Frame.h"
 
+class UIMenuItemView;
+
 class UIStackingView : public UIView
 {
 public:
@@ -24,14 +26,14 @@ public:
 
 	void UpdateLayout(Frame frame);
 
-	void AddView(UIView* uiView);
+	void AddView(UIMenuItemView* uiView);
 
-	std::vector<UIView*> GetViews() const { return m_childViews; }
+	std::vector<UIMenuItemView*> GetMenuItems() const { return m_childViews; }
 
 protected:
 	virtual void Shutdown();
 
 	Orientations m_orientation;
 	int m_spacing;
-	std::vector<UIView*> m_childViews;
+	std::vector<UIMenuItemView*> m_childViews;
 };

@@ -9,7 +9,7 @@ public:
 	MainMenuGameState(GameStateManager* gameStateManager);
 	~MainMenuGameState();
 
-	void Update(float deltaTime);
-	void Render();
+	void Update(float deltaTime) override;
+	void Render() override;
 };
 

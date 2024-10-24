@@ -1,5 +1,5 @@
 #include "UIStackingView.h"
-#include "UIMainMenuView.h"
+#include "UIMenuItemView.h"
 
 UIStackingView::UIStackingView() :
 	m_childViews(0),
@@ -22,7 +22,7 @@ void UIStackingView::Init(std::string name)
 
 void UIStackingView::Render(Graphics* graphics)
 {
-	for(UIView* i : m_childViews)
+	for(UIMenuItemView* i : m_childViews)
 	{
 		i->Render(graphics);
 	}
@@ -32,7 +32,7 @@ void UIStackingView::SetActive(bool isActive)
 {
 	m_isActive = isActive;
 
-	for (UIView* i : m_childViews)
+	for (UIMenuItemView* i : m_childViews)
 	{
 		i->SetActive(isActive);
 	}
@@ -52,7 +52,7 @@ void UIStackingView::UpdateLayout(Frame frame)
 {
 	float running = m_orientation == Orientations::Horizontal ? (float)frame.x : (float)frame.y;
 	
-	for(UIView* view : m_childViews)
+	for(UIMenuItemView* view : m_childViews)
 	{
 		int childHeight = view->GetHeight();
 		int childWidth = view->GetWidth();
@@ -73,14 +73,14 @@ void UIStackingView::UpdateLayout(Frame frame)
 	}
 }
 
-void UIStackingView::AddView(UIView* uiView)
+void UIStackingView::AddView(UIMenuItemView* uiView)
 {
  	m_childViews.push_back(uiView);
 }
 
 void UIStackingView::Shutdown()
 {
-	for(UIView* i : m_childViews)
+	for(UIMenuItemView* i : m_childViews)
 	{
 		delete i;
 		i = nullptr;

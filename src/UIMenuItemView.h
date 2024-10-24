@@ -14,14 +14,10 @@ public:
 	};
 
 	UIMenuItemView();
-	virtual ~UIMenuItemView();
-
+	virtual ~UIMenuItemView() {};
+	virtual void OnConfirmPressed() {};
 	virtual void OnChangeSelection(SelectedStates selectedState) {};
-	void AddOnSelectedListener(void(*onSelected)());
-	void OnSelect();
+	virtual void OnSelect() {};
 protected:
 	SelectedStates m_currentSelectedState;
-
-private:
-	void (*onSelected)();
 };

@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\MenuSystem.cpp" />
     <ClCompile Include="src\UIMainMenuView.cpp" />
     <ClCompile Include="src\MainMenuGameState.cpp" />
     <ClCompile Include="src\AssetLoader.cpp" />
@@ -52,6 +53,7 @@
     <ClCompile Include="src\UISpriteText.cpp" />
     <ClCompile Include="src\UIMenuItemView.cpp" />
     <ClCompile Include="src\UITextMenuItemView.cpp" />
+    <ClInclude Include="src\MenuSystem.h" />
     <ClInclude Include="src\Frame.h" />
     <ClInclude Include="src\UIMainMenuView.h" />
     <ClInclude Include="src\MainMenuGameState.h" />

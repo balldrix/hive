@@ -33,4 +33,7 @@ private:
 	Color m_selectedTextColour;
 	Color m_unselectedTextColour;
 	Color m_disabledTextColour;
+
+	typedef std::map<UIMenuItemView::SelectedStates, Color> SelectedStateColours;
+	SelectedStateColours m_selectedStateColours;
 };

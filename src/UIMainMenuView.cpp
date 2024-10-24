@@ -7,6 +7,7 @@
 #include "Frame.h"
 #include "UIStackingView.h"
 #include "UIManager.h"
+#include "MenuSystem.h"
 
 using namespace GlobalConstants;
 
@@ -28,13 +29,12 @@ void UIMainMenuView::Init(std::string name)
 	m_uiStackingView.Init("Main Menu Stacking View");
 	m_uiStackingView.SetOrientation(UIStackingView::Orientations::Vertical);
 
-	int size = sizeof(m_menuItems) / sizeof(std::string);
-
-	for (size_t i = 0; i < size; i++)
+	for(const auto& option : m_menuOptions)
 	{
+		std::string name = option.name;
 		UITextMenuItemView* item = new UITextMenuItemView();
-		item->Init(m_menuItems[i]);
-		item->SetText(m_menuItems[i]);
+		item->Init(name);
+		item->SetText(name);
 		item->SetSelectedStateColours(Colors::Red.v, Colors::White.v, Colors::Black.v);
 		m_uiStackingView.AddView(item);
 	}
@@ -52,7 +52,7 @@ void UIMainMenuView::Init(std::string name)
 
 void UIMainMenuView::Update(float deltaTime)
 {
-	if (!m_isActive) return;
+	if(!m_isActive) return;
 
 	switch (m_currentViewState)
 	{
@@ -105,14 +105,27 @@ void UIMainMenuView::TransitionOut(bool isAnimated)
 	m_targetAlpha = 1.0f;
 }
 
+void UIMainMenuView::OnConfirmPressed(int selectedIndex)
+{
+	if(selectedIndex >= 0 && selectedIndex < MaxOptions)
+	{
+		Logger::LogInfo(fmt::format("Calling OnConfirmPressed on {} functon", m_menuOptions[selectedIndex].name));
+
+		(this->*m_menuOptions[selectedIndex].function)();
+		return;
+	}
+
+	Logger::LogError(fmt::format("Calling OnConfirmPressed has no menu entry with index {}", selectedIndex));
+}
+
 void UIMainMenuView::DoTransition(float deltaTime)
 {
-	if (m_transitionTimer > 0)
+	if(m_transitionTimer > 0)
 	{
 		float t = m_transitionTimer / TransitionDuration;
 		float lerpedAlpha = std::lerp(m_startingAlpha, m_targetAlpha, 1 - t);
 		
-		for(UIView* uiView : m_uiStackingView.GetViews())
+		for(UIView* uiView : m_uiStackingView.GetMenuItems())
 		{
 			Color colour = uiView->GetColour();
 			colour.A(lerpedAlpha);
@@ -129,6 +142,8 @@ void UIMainMenuView::DoTransition(float deltaTime)
 		break;
 	case UIView::ViewStates::AnimatingIn:
 		m_currentViewState = ViewStates::Visible;
+		MenuSystem::SetMenuItems(this, m_uiStackingView.GetMenuItems());
+		MenuSystem::EnableInput();
 		break;
 	case UIView::ViewStates::Visible:
 		break;
@@ -138,4 +153,17 @@ void UIMainMenuView::DoTransition(float deltaTime)
 	default:
 		break;
 	}
+}
+
+void UIMainMenuView::StartGame()
+{
+	Logger::LogInfo("Start Game");
+}
+
+void UIMainMenuView::ProceedToOptions()
+{
+}
+
+void UIMainMenuView::QuitGame()
+{
 }

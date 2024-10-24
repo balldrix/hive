@@ -5,6 +5,7 @@
 #include "SoundManager.h"
 #include "AssetLoader.h"
 #include "UIManager.h"
+#include "MenuSystem.h"
 
 Graphics* graphics = nullptr;
 Window* window	= nullptr;
@@ -38,6 +39,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	AudioEngine::Init();
 	AssetLoader::Init(graphics, "data\\assets.json");
 	UIManager::Init();
+	MenuSystem::Init();
 
 	game = new Game();
 	game->Init(window, graphics);
@@ -67,6 +69,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 void Shutdown()
 {
 	delete game;
+	MenuSystem::Destroy();
 	UIManager::Destroy();
 	AssetLoader::Shutdown();
 	SoundManager::DeleteSounds();

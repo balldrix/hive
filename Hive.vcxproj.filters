@@ -283,6 +283,9 @@
     <ClCompile Include="src\UITextMenuItemView.cpp">
       <Filter>UI\Shared</Filter>
     </ClCompile>
+    <ClCompile Include="src\MenuSystem.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Data">
@@ -728,6 +731,9 @@
     </ClInclude>
     <ClInclude Include="src\UITextMenuItemView.h">
       <Filter>UI\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MenuSystem.h">
+      <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
