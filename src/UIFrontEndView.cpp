@@ -102,7 +102,7 @@ void UIFrontEndView::Shutdown()
 
 void UIFrontEndView::TransitionIn(bool isAnimating)
 {
-	Logger::LogInfo(fmt::format("Transition In: UI Frond End View {} animation.", isAnimating ? "with" : "without"));
+	Logger::LogInfo(fmt::format("Transition In: UI Front End View {} animation.", isAnimating ? "with" : "without"));
 
 	m_currentViewState = UIView::ViewStates::AnimatingIn;
 	m_isActive = true;
@@ -110,7 +110,7 @@ void UIFrontEndView::TransitionIn(bool isAnimating)
 
 void UIFrontEndView::TransitionOut(bool isAnimating)
 {
-	Logger::LogInfo(fmt::format("Transition Out: UI Frond End View {} animation.", isAnimating ? "with" : "without"));
+	Logger::LogInfo(fmt::format("Transition Out: UI Front End View {} animation.", isAnimating ? "with" : "without"));
 
 	m_currentViewState = UIView::ViewStates::AnimatingOut;
 }

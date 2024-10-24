@@ -35,7 +35,7 @@ void UIMainMenuView::Init(std::string name)
 		UITextMenuItemView* item = new UITextMenuItemView();
 		item->Init(name);
 		item->SetText(name);
-		item->SetSelectedStateColours(Colors::Red.v, Colors::White.v, Colors::Black.v);
+		item->SetSelectedStateColours(Colors::White.v, Colors::SlateGray.v, Colors::Black.v);
 		m_uiStackingView.AddView(item);
 	}
 
@@ -47,6 +47,7 @@ void UIMainMenuView::Init(std::string name)
 
 	m_uiStackingView.UpdateLayout(frame);
 
+	MenuSystem::SetMenuItems(this, m_uiStackingView.GetMenuItems());
 	UIManager::RegisterUIView(this);
 }
 
@@ -142,7 +143,6 @@ void UIMainMenuView::DoTransition(float deltaTime)
 		break;
 	case UIView::ViewStates::AnimatingIn:
 		m_currentViewState = ViewStates::Visible;
-		MenuSystem::SetMenuItems(this, m_uiStackingView.GetMenuItems());
 		MenuSystem::EnableInput();
 		break;
 	case UIView::ViewStates::Visible:

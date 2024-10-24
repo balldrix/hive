@@ -16,6 +16,8 @@ public:
 	void Init(std::string name) override;
 	void Render(Graphics* graphics) override;
 	void Shutdown() override;
+	void ChangeSelectionState(SelectionStates selectedState) override;
+	void HandleSelectionStateChanged(SelectionStates previousSelectionState, SelectionStates newSelectionState) override;
 
 	void SetActive(bool isActive) override;
 
@@ -30,10 +32,11 @@ public:
 
 private:
 	UISpriteText* m_uiSpriteText;
+		
 	Color m_selectedTextColour;
 	Color m_unselectedTextColour;
 	Color m_disabledTextColour;
 
-	typedef std::map<UIMenuItemView::SelectedStates, Color> SelectedStateColours;
-	SelectedStateColours m_selectedStateColours;
+	typedef std::map<UIMenuItemView::SelectionStates, Color> SelectedStateColours;
+	SelectedStateColours m_selectionStateColours;
 };

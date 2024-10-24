@@ -6,9 +6,9 @@ class UIMenuItemView : public UIView
 {
 public:
 
-	enum class SelectedStates
+	enum class SelectionStates
 	{
-		NotSelected,
+		UnSelected,
 		Selected,
 		Disabled
 	};
@@ -16,8 +16,9 @@ public:
 	UIMenuItemView();
 	virtual ~UIMenuItemView() {};
 	virtual void OnConfirmPressed() {};
-	virtual void OnChangeSelection(SelectedStates selectedState) {};
+	virtual void ChangeSelectionState(SelectionStates selectedState) {};
+	virtual void HandleSelectionStateChanged(SelectionStates previousSelectionState, SelectionStates newSelectionState) {}
 	virtual void OnSelect() {};
 protected:
-	SelectedStates m_currentSelectedState;
+	SelectionStates m_selectionState;
 };

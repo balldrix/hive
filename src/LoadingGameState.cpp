@@ -43,7 +43,7 @@ void LoadingGameState::Update(float deltaTime)
 	
 	UIManager::Update(deltaTime);
 
-	static float timer = 3.0f;
+	static float timer = 1.0f; // fake loading time
 	timer -= deltaTime;
 
 	if(timer <= 0.0f)

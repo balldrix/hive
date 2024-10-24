@@ -1,6 +1,6 @@
 #include "UIMenuItemView.h"
 
 UIMenuItemView::UIMenuItemView() :
-	m_currentSelectedState(SelectedStates::Disabled)
+	m_selectionState(SelectionStates::Disabled)
 {
 }

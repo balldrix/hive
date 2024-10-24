@@ -47,6 +47,8 @@ void MenuSystem::SetMenuItems(UIView* currentView, std::vector<UIMenuItemView*> 
 	s_menuItems = menuItems;
 	s_selectedItemIndex = 0;
 	s_currentView = currentView;
+
+	s_menuItems[s_selectedItemIndex]->ChangeSelectionState(UIMenuItemView::SelectionStates::Selected);
 }
 
 void MenuSystem::EnableInput()
