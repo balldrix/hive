@@ -5,6 +5,7 @@
 #include "UIMenuItemView.h"
 
 class Input;
+class IMenuSystemInteraction;
 
 class MenuSystem
 {
@@ -15,7 +16,7 @@ public:
 	static void Init();
 	static void Update(Input* input);
 	static void Destroy();
-	static void SetMenuItems(UIView* currentView, std::vector<UIMenuItemView*> menuItems);
+	static void SetMenuItems(IMenuSystemInteraction* currentMenu, std::vector<UIMenuItemView*> menuItems);
 	static void EnableInput();
 	static void DisableInput();
 	static bool IsInputAllowed() { return s_isInputAllowed; }
@@ -27,6 +28,6 @@ private:
 	static std::vector<UIMenuItemView*> s_menuItems;
 	static bool s_isInputAllowed;
 	static int s_selectedItemIndex;
-	static UIView* s_currentView;
+	static IMenuSystemInteraction* s_currentMenu;
 };
 

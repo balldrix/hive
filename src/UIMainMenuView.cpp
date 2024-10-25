@@ -155,6 +155,18 @@ void UIMainMenuView::DoTransition(float deltaTime)
 	}
 }
 
+void UIMainMenuView::OnCancelPressed()
+{
+}
+
+void UIMainMenuView::AllowMenuItemSelection(Vector2 direction, int index)
+{
+}
+
+void UIMainMenuView::HandleMenuItemSelection(int index)
+{
+}
+
 void UIMainMenuView::StartGame()
 {
 	Logger::LogInfo("Start Game");

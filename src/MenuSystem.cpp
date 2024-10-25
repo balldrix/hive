@@ -2,12 +2,13 @@
 
 #include "Logger.h"
 #include "Input.h"
+#include "IMenuSystemInteraction.h"
 
 MenuSystem* MenuSystem::s_instance = nullptr;
 std::vector<UIMenuItemView*> MenuSystem::s_menuItems = {};
 bool MenuSystem::s_isInputAllowed = false;
 int MenuSystem::s_selectedItemIndex = 0;
-UIView* MenuSystem::s_currentView = nullptr;
+IMenuSystemInteraction* MenuSystem::s_currentMenu = nullptr;
 
 MenuSystem::~MenuSystem()
 {
@@ -30,7 +31,7 @@ void MenuSystem::Update(Input* input)
 	if(input->WasKeyPressed(ENTER_KEY))
 	{
 		currentSelectedItem->OnConfirmPressed();
-		s_currentView->OnConfirmPressed(s_selectedItemIndex);
+		s_currentMenu->OnConfirmPressed(s_selectedItemIndex);
 	}
 }
 
@@ -42,12 +43,11 @@ void MenuSystem::Destroy()
 	s_instance = nullptr;
 }
 
-void MenuSystem::SetMenuItems(UIView* currentView, std::vector<UIMenuItemView*> menuItems)
+void MenuSystem::SetMenuItems(IMenuSystemInteraction* currentMenu, std::vector<UIMenuItemView*> menuItems)
 {
 	s_menuItems = menuItems;
 	s_selectedItemIndex = 0;
-	s_currentView = currentView;
-
+	s_currentMenu = currentMenu;
 	s_menuItems[s_selectedItemIndex]->ChangeSelectionState(UIMenuItemView::SelectionStates::Selected);
 }
 

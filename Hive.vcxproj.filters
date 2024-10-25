@@ -735,6 +735,9 @@
     <ClInclude Include="src\MenuSystem.h">
       <Filter>System</Filter>
     </ClInclude>
+    <ClInclude Include="src\IMenuSystemInteraction.h">
+      <Filter>UI\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="data\Sprites\UI\go_sign.png">

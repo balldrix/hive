@@ -1,11 +1,12 @@
 #pragma once
 
 #include "UIView.h"
+#include "IMenuSystemInteraction.h"
 #include "UIStackingView.h"
 
 const int MaxOptions = 3;
 
-class UIMainMenuView : public UIView
+class UIMainMenuView : public UIView, IMenuSystemInteraction
 {
 public:
 	UIMainMenuView();
@@ -20,6 +21,9 @@ public:
 	void TransitionOut(bool isAnimated) override;	
 
 	void OnConfirmPressed(int selectedIndex) override;
+	void OnCancelPressed() override;
+	void AllowMenuItemSelection(Vector2 direction, int index) override;
+	void HandleMenuItemSelection(int index) override;
 
 protected:
 	void DoTransition(float deltaTime) override;
