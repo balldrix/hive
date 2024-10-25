@@ -22,7 +22,7 @@ public:
 
 	void OnConfirmPressed(int selectedIndex) override;
 	void OnCancelPressed() override;
-	void AllowMenuItemSelection(Vector2 direction, int index) override;
+	bool IsMenuItemSelectionAllowed(Vector2 direction, int index) override;
 	void HandleMenuItemSelection(int index) override;
 
 protected:

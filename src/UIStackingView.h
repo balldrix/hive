@@ -2,8 +2,7 @@
 
 #include "UIView.h"
 #include "Frame.h"
-
-class UIMenuItemView;
+#include "UIMenuItemView.h"
 
 class UIStackingView : public UIView
 {
@@ -21,14 +20,14 @@ public:
 	void Render(Graphics* graphics) override;
 	void SetActive(bool isActive) override;
 
+	std::vector<UIMenuItemView*> GetMenuItems() const { return m_childViews; }
+	UIMenuItemView::SelectionStates GetSelectionState(int index) const;
+
 	void SetOrientation(Orientations orientation);
 	void SetSpacing(int spacing);
 
 	void UpdateLayout(Frame frame);
-
 	void AddView(UIMenuItemView* uiView);
-
-	std::vector<UIMenuItemView*> GetMenuItems() const { return m_childViews; }
 
 protected:
 	virtual void Shutdown();

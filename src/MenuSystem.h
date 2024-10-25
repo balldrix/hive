@@ -22,6 +22,9 @@ public:
 	static bool IsInputAllowed() { return s_isInputAllowed; }
 
 private:
+	static void SelectIndex(int index);
+	static void SelectNextPossibleIndex(int index, Vector2 direction, int counter = 0);
+
 	void Shutdown();
 	
 	static MenuSystem* s_instance;

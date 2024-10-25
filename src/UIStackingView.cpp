@@ -32,10 +32,18 @@ void UIStackingView::SetActive(bool isActive)
 {
 	m_isActive = isActive;
 
-	for (UIMenuItemView* i : m_childViews)
+	for(UIMenuItemView* i : m_childViews)
 	{
 		i->SetActive(isActive);
 	}
+}
+
+UIMenuItemView::SelectionStates UIStackingView::GetSelectionState(int index) const
+{
+	if(m_childViews.size() == 0 || index < 0 || index >= m_childViews.size()) 
+		return UIMenuItemView::SelectionStates::Disabled;
+	
+	return m_childViews[index]->GetSelectionState();
 }
 
 void UIStackingView::SetOrientation(Orientations orientation)

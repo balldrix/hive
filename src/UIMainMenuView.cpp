@@ -39,6 +39,27 @@ void UIMainMenuView::Init(std::string name)
 		m_uiStackingView.AddView(item);
 	}
 
+	auto options = m_uiStackingView.GetMenuItems();
+
+	for (int i = 0; i < options.size(); i++)
+	{
+		int up = i == 0 ? -1 : i - 1;
+		int down = i + 1;
+
+		if (i == options.size() - 1)
+		{
+			down = -1;
+		}
+
+		UIMenuItemView::Navigation nav;
+		nav.up = up;
+		nav.down = down;
+		nav.left = -1;
+		nav.right = -1;
+
+		options[i]->SetNavigation(nav);
+	}
+
 	Frame frame{};
 	frame.x = 20;
 	frame.y = 40;
@@ -159,8 +180,9 @@ void UIMainMenuView::OnCancelPressed()
 {
 }
 
-void UIMainMenuView::AllowMenuItemSelection(Vector2 direction, int index)
+bool UIMainMenuView::IsMenuItemSelectionAllowed(Vector2 direction, int index)
 {
+	return m_uiStackingView.GetSelectionState(index) != UIMenuItemView::SelectionStates::Disabled;
 }
 
 void UIMainMenuView::HandleMenuItemSelection(int index)
@@ -178,4 +200,5 @@ void UIMainMenuView::ProceedToOptions()
 
 void UIMainMenuView::QuitGame()
 {
+	PostQuitMessage(0);
 }

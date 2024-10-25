@@ -24,9 +24,6 @@ void MainMenuGameState::Update(float deltaTime)
 {
 	UIManager::Update(deltaTime);
 	MenuSystem::Update(m_gameStateManager->GetInput());
-
-	if(m_gameStateManager->GetInput()->WasKeyPressed(ESC_KEY))
-		PostQuitMessage(0);
 }
 
 void MainMenuGameState::Render()

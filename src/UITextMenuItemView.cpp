@@ -30,8 +30,6 @@ void UITextMenuItemView::Render(Graphics* graphics)
 	if(!m_isActive) return;
 
 	auto it = m_selectionStateColours.find(m_selectionState);
-
-	if(it != m_selectionStateColours.end() && m_uiSpriteText->GetColour() != m_selectionStateColours[m_selectionState])
 	{
 		m_uiSpriteText->SetColour(m_selectionStateColours[m_selectionState]);
 	}
