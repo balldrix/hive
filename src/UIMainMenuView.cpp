@@ -8,6 +8,7 @@
 #include "UIStackingView.h"
 #include "UIManager.h"
 #include "MenuSystem.h"
+#include "LoadingGameState.h"
 
 using namespace GlobalConstants;
 
@@ -191,7 +192,9 @@ void UIMainMenuView::HandleMenuItemSelection(int index)
 
 void UIMainMenuView::StartGame()
 {
-	Logger::LogInfo("Start Game");
+	Logger::LogInfo("Starting Game");
+
+	LoadingGameState::ProceedToGameplay();
 }
 
 void UIMainMenuView::ProceedToOptions()

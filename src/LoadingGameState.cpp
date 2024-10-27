@@ -4,7 +4,10 @@
 #include "Graphics.h"
 #include "UIManager.h"
 #include "AssetLoader.h"
+#include "UIConfig.h"
+#include "GameplayGameState.h"
 
+LoadingGameState* LoadingGameState::s_instance = nullptr;
 GameState* LoadingGameState::s_targetGameState = nullptr;
 bool LoadingGameState::s_isLoadingToMainGameplay = false;
 
@@ -12,6 +15,7 @@ LoadingGameState::LoadingGameState() :
 	m_graphics(nullptr),
 	GameState("Loading")
 {
+	s_instance = this;
 }
 
 LoadingGameState::LoadingGameState(GameStateManager* gameStateManager) : LoadingGameState()
@@ -22,7 +26,7 @@ LoadingGameState::LoadingGameState(GameStateManager* gameStateManager) : Loading
 
 LoadingGameState::~LoadingGameState()
 {
-	OnExit();
+	s_instance = nullptr;
 }
 
 void LoadingGameState::OnEntry()
@@ -30,6 +34,10 @@ void LoadingGameState::OnEntry()
 	if(!s_isLoadingToMainGameplay)
 	{
 		AssetLoader::PreWarmAssetsWithTag("front_end_assets");
+	}
+	else
+	{
+		//m_gameStateManager->SwitchState("Gameplay");
 	}
 }
 
@@ -68,7 +76,18 @@ void LoadingGameState::SetTargetGameState(GameState* gamestate)
 	s_targetGameState = gamestate;
 }
 
-void LoadingGameState::SetLoadingToMainGameplay(bool isLoadingToMainGameplay)
+void LoadingGameState::ProceedToFrontEnd()
 {
-	s_isLoadingToMainGameplay = isLoadingToMainGameplay;
+	UIConfig::Init();
+	UIManager::CreateUISystemView();
+	s_isLoadingToMainGameplay = false;
+	LoadingGameState::SetTargetGameState(s_instance->m_gameStateManager->GetState("TitleScreen"));
+	s_instance->m_gameStateManager->SwitchState("Loading");
+}
+
+void LoadingGameState::ProceedToGameplay()
+{
+	UIManager::FadeOut();
+	LoadingGameState::SetTargetGameState(s_instance->m_gameStateManager->GetState("Gameplay"));
+	s_instance->m_gameStateManager->SwitchState("Loading");
 }

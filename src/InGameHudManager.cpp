@@ -7,6 +7,7 @@
 #include "Sprite.h"
 #include "SpriteSheet.h"
 #include "TravelPrompt.h"
+#include "UIConfig.h"
 
 using namespace InGameHudConstants;
 
@@ -39,16 +40,15 @@ void InGameHudManager::Init(Graphics* graphics)
 	m_playerHealthBar->SetPosition(Vector2(HealthBarPositionX, HealthBarPositionY));
 
 	m_playerPortrait = new CharacterPortrait();
-	m_playerPortrait->Init(graphics, "data//Sprites//UI//player1_hud_portrait.png");
+	m_playerPortrait->Init(graphics, "data//textures//UI//player1_hud_portrait.png");
 
-	m_despairFont12 = new SpriteFont(graphics->GetDevice().Get(), L"data//SpriteFonts//goodbye_despair_12pt.spritefont");
-
+	m_despairFont12 = UIConfig::DespairFont12;
 	m_playerLivesLeft = MaxLives;
 
 	for(size_t i = 0; i <= MaxLives; i++)
 	{
 		Texture* texture = new Texture();
-		std::string filePath = "data//Sprites//UI//lives_x" + std::to_string(i) + ".png";
+		std::string filePath = "data//textures//UI//lives_x" + std::to_string(i) + ".png";
 		texture->LoadTexture(graphics, filePath);
 		m_livesLeftTextures.push_back(texture);
 	}

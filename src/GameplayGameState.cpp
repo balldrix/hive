@@ -159,9 +159,9 @@ void GameplayGameState::LoadAssets()
 	m_encounterHandler = new EncounterHandler();
 	m_travellingHandler = new TravellingHandler();
 
-	m_playerTexture->LoadTexture(m_graphics, "data\\Sprites\\playerSpritesheet.png");
-	m_hitBoxTexture->LoadTexture(m_graphics, "data\\Sprites\\hitbox.png");
-	m_standardShadowTexture->LoadTexture(m_graphics, "data\\Sprites\\shadow_large.png");
+	m_playerTexture->LoadTexture(m_graphics, "data\\textures\\playerSpritesheet.png");
+	m_hitBoxTexture->LoadTexture(m_graphics, "data\\textures\\pixel.png");
+	m_standardShadowTexture->LoadTexture(m_graphics, "data\\textures\\shadow_large.png");
 	
 	m_playerSprite->Init(m_playerTexture, "data\\SpriteSheetData\\playerSpritesheetData.json");
 	m_playerShadowSprite->Init(m_standardShadowTexture);
@@ -202,7 +202,7 @@ void GameplayGameState::LoadAssets()
 	m_musicSoundSource->SetRelative(true);
 
 	m_impactFxTexture = new Texture();
-	m_impactFxTexture->LoadTexture(m_graphics, "data\\Sprites\\vfx.png");
+	m_impactFxTexture->LoadTexture(m_graphics, "data\\textures\\vfx.png");
 
 	m_impactFxSpritesheet = new Spritesheet();
 	m_impactFxSpritesheet->Init(m_impactFxTexture, "data\\SpriteSheetData\\vfx.json");

@@ -29,7 +29,7 @@ void InitialLoadGameState::Update(float deltaTime)
 	}
 	else 
 	{
-		ProceedToFrontEnd();
+		LoadingGameState::ProceedToFrontEnd();
 	}
 }
 
@@ -37,12 +37,4 @@ void InitialLoadGameState::LoadAssets()
 {
 	Logger::LogInfo("Loading Initial Game Assets.");
 	AssetLoader::PreWarmAssetsWithTag("initial_loading_assets");
-}
-
-void InitialLoadGameState::ProceedToFrontEnd()
-{
-	UIConfig::Init();
-	UIManager::CreateUISystemView();
-	LoadingGameState::SetTargetGameState(m_gameStateManager->GetState("TitleScreen"));
-	m_gameStateManager->SwitchState("Loading");
 }

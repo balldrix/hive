@@ -85,11 +85,11 @@ void UISpriteText::SetAlignment(Alignments alignment)
 int UISpriteText::GetHeight() const
 {
 	XMVECTOR measure = m_spriteFont->MeasureString(m_text.c_str());
-	return XMVectorGetY(measure);
+	return (int)XMVectorGetY(measure);
 }
 
 int UISpriteText::GetWidth() const
 {
 	XMVECTOR measure = m_spriteFont->MeasureString(m_text.c_str());
-	return XMVectorGetX(measure);
+	return (int)XMVectorGetX(measure);
 }

@@ -60,7 +60,7 @@ void Player::Init(Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBo
 	m_shadow = shadow;
 	m_position.x = m_playerData.objectData.startingPosition.x;
 	m_position.y = RespawnAirPositionY;
-	m_groundPosition.y = m_playerData.objectData.startingPosition.y;
+	m_groundPosition = m_playerData.objectData.startingPosition;
 	m_acceleration = m_playerData.objectData.acceleration;
 	m_deceleration = m_playerData.objectData.deceleration;
 	m_movementSpeed = m_playerData.objectData.walkSpeed;

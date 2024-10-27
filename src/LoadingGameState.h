@@ -20,12 +20,13 @@ public:
 	static void SetTargetGameState(GameState* gamestate);
 	static GameState* GetTargetGameState() { return s_targetGameState; }
 
-	static void SetLoadingToMainGameplay(bool isLoadingToMainGameplay);
-	static bool IsLoadingToMainGameplay() { return s_isLoadingToMainGameplay; }
+	static void ProceedToFrontEnd();
+	static void ProceedToGameplay();
 
 private:
-	Graphics* m_graphics;
-	
+	static LoadingGameState* s_instance;
 	static GameState* s_targetGameState;
 	static bool s_isLoadingToMainGameplay;
+	
+	Graphics* m_graphics;
 };

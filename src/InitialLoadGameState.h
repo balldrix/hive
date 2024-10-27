@@ -16,5 +16,4 @@ public:
 
 private:
 	void LoadAssets();
-	void ProceedToFrontEnd();
 };

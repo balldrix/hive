@@ -82,7 +82,7 @@ void Animator::SetAnimation(const std::string& name)
 		}
 	}
 
-	std::string error = " Error! No animation with name " + name + " found. Check animation data.";
+	std::string error = "[Animator.cpp] Error! No animation with name " + name + " found. Check animation data.";
 	Logger::LogError(error);
 }
 
