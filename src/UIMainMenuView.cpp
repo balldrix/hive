@@ -12,7 +12,8 @@
 
 using namespace GlobalConstants;
 
-static const float TransitionDuration = 1.2f;
+static const float TransitionInDuration = 0.6f;
+static const float TransitionOutDuration = 0.8f;
 
 UIMainMenuView::UIMainMenuView() :
 	m_startingAlpha(0.0f),
@@ -115,7 +116,7 @@ void UIMainMenuView::TransitionIn(bool isAnimated)
 	m_isActive = true;
 	m_uiStackingView.SetActive(true);
 	m_currentViewState = ViewStates::AnimatingIn;
-	m_transitionTimer = TransitionDuration;
+	m_transitionTimer = TransitionInDuration;
 	m_startingAlpha = 0.0f;
 	m_targetAlpha = 1.0f;
 }
@@ -123,7 +124,7 @@ void UIMainMenuView::TransitionIn(bool isAnimated)
 void UIMainMenuView::TransitionOut(bool isAnimated)
 {
 	m_currentViewState = ViewStates::AnimatingOut;
-	m_transitionTimer = TransitionDuration;
+	m_transitionTimer = TransitionOutDuration;
 	m_startingAlpha = 0.0f;
 	m_targetAlpha = 1.0f;
 }
@@ -145,7 +146,7 @@ void UIMainMenuView::DoTransition(float deltaTime)
 {
 	if(m_transitionTimer > 0)
 	{
-		float t = m_transitionTimer / TransitionDuration;
+		float t = m_transitionTimer / TransitionInDuration;
 		float lerpedAlpha = std::lerp(m_startingAlpha, m_targetAlpha, 1 - t);
 		
 		for(UIView* uiView : m_uiStackingView.GetMenuItems())

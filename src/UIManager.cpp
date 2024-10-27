@@ -65,12 +65,12 @@ void UIManager::SwitchState()
 
 void UIManager::Render(Graphics* graphics)
 {
-	s_instance->m_uiSystemView->Render(graphics);
-
 	for(auto it = s_instance->m_viewList.begin(); it != s_instance->m_viewList.end(); ++it)
 	{
 		(*it)->Render(graphics);
 	}
+
+	s_instance->m_uiSystemView->Render(graphics);
 }
 
 void UIManager::CreateUISystemView()

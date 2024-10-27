@@ -57,9 +57,9 @@ void KingMookEnemyGlobalState::Execute(Enemy* enemy)
 	   toPlayerTarget.Length() < enemy->GetData().chargeRange)
 	{
 		int randNum = Randomiser::Instance()->GetRandNum(0, 1);
-		float timer = enemy->GetTimer();
+		float m_timer = enemy->GetTimer();
 		float thinkingTime = enemy->GetData().thinkingTime * Randomiser::Instance()->GetRandNum(0.5f, 1.0f);
-		if(randNum > 0 && timer > thinkingTime)
+		if(randNum > 0 && m_timer > thinkingTime)
 		{
 			enemy->GetStateMachine()->ChangeState(KingMookChargeState::Instance());
 			enemy->ResetTimer(0);

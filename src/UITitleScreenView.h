@@ -13,7 +13,7 @@ using namespace SimpleMath;
 class UISpriteText;
 class UIImageView;
 
-static const float TransitionDuration = 0.6f;
+static const float TransitionDuration = 0.4f;
 static const Vector2 LogoImageStartPosition = Vector2(GameWidth - 20.0f, 40.0f);
 static const Vector2 StartGameTextStartPosition = Vector2(GameWidth / 2.0f, GameHeight - 10.0f);
 

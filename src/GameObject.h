@@ -45,7 +45,7 @@ public:
 	virtual void		Move(const Vector2& direction);
 	virtual void		Stop();
 
-	float				GetLerpAmount(float num);
+	float				GetLerpAmount(const float& num);
 	float				Lerp(float target, float current, float amount);
 	bool				LoadDamageData(const std::string &damageDataFile);
 

@@ -138,7 +138,7 @@ void GameObject::Stop()
 	SetVelocity(Vector2::Zero);
 }
 
-float GameObject::GetLerpAmount(float num)
+float GameObject::GetLerpAmount(const float& num)
 {
 	if(num == 0.0f)
 	{

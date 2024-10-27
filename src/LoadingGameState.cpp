@@ -31,13 +31,15 @@ LoadingGameState::~LoadingGameState()
 
 void LoadingGameState::OnEntry()
 {
+	m_timer = 1.0f; // fake loading time
+	
 	if(!s_isLoadingToMainGameplay)
 	{
 		AssetLoader::PreWarmAssetsWithTag("front_end_assets");
 	}
 	else
 	{
-		//m_gameStateManager->SwitchState("Gameplay");
+		s_targetGameState = m_gameStateManager->GetState("Gameplay");
 	}
 }
 
@@ -51,10 +53,9 @@ void LoadingGameState::Update(float deltaTime)
 	
 	UIManager::Update(deltaTime);
 
-	static float timer = 1.0f; // fake loading time
-	timer -= deltaTime;
+	m_timer -= deltaTime;
 
-	if(timer <= 0.0f)
+	if(m_timer <= 0.0f)
 		m_gameStateManager->SwitchState("FadeTransition");
 }
 
@@ -87,7 +88,7 @@ void LoadingGameState::ProceedToFrontEnd()
 
 void LoadingGameState::ProceedToGameplay()
 {
-	UIManager::FadeOut();
-	LoadingGameState::SetTargetGameState(s_instance->m_gameStateManager->GetState("Gameplay"));
-	s_instance->m_gameStateManager->SwitchState("Loading");
+	s_isLoadingToMainGameplay = true;
+	LoadingGameState::SetTargetGameState(s_instance->m_gameStateManager->GetState("Loading"));
+	s_instance->m_gameStateManager->SwitchState("FadeTransition");
 }
