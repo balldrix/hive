@@ -32,7 +32,9 @@ public:
 
 	static void FadeOut();
 	static void FadeIn();
+	
 	static bool IsFading();
+	static bool AnyViewsInState(UIView::ViewStates state);
 
 	static void Destroy();
 
@@ -40,7 +42,6 @@ private:
 	static UIManager* s_instance;
 	
 	void SwitchState();
-	bool AnyViewsInState(UIView::ViewStates state);
 	void UpdateUIViews(float deltaTime);
 	void Shutdown();
 

@@ -37,6 +37,8 @@
 #include "Randomiser.h"
 #include "PlayerBlockState.h"
 #include "PlayerIdleState.h"
+#include "Timer.h"
+#include "UIManager.h"
 
 using namespace GlobalConstants;
 using namespace GameplayConstants;
@@ -103,6 +105,9 @@ void GameplayGameState::OnExit()
 
 void GameplayGameState::LoadAssets()
 {
+	Timer timer;
+	static float startTime = timer.GetTicks();
+
 	//SoundManager::AddSound(L"data\\Sounds\\punch_001.wav");
 	//SoundManager::AddSound(L"data\\Sounds\\punch_003.wav");
 	//SoundManager::AddSound(L"data\\Sounds\\punch_004.wav");
@@ -222,6 +227,11 @@ void GameplayGameState::LoadAssets()
 	m_musicSoundSource->SetSound(SoundManager::GetSound(musicTitle));*/
 
 	m_running = true;
+
+	static float loadingTime = timer.GetTicks();
+	static float loadingDuration = (loadingTime - startTime) * timer.GetFrequency();
+
+	Logger::LogInfo(fmt::format("Gameplay Loading took {}s", loadingDuration));
 }
 
 void GameplayGameState::DeleteAssets()
@@ -422,6 +432,10 @@ void GameplayGameState::ProcessInput()
 
 void GameplayGameState::Update(float deltaTime)
 {
+	UIManager::Update(deltaTime);
+
+	if(UIManager::IsFading()) return;
+
 	m_deltaTime = deltaTime;
 	m_sceneStateMachine->Update();
 	Tick(deltaTime);
@@ -625,6 +639,7 @@ void GameplayGameState::Render()
 	m_gameOverScreenController->Render(m_graphics);
 	m_particleSystem->Render(m_graphics); 
 	m_impactFx->Render(m_graphics);
+	UIManager::Render(m_graphics);
 }
 
 void GameplayGameState::ReleaseAll()

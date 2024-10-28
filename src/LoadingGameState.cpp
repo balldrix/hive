@@ -66,9 +66,14 @@ void LoadingGameState::Render()
 
 void LoadingGameState::OnExit()
 {
-	if (!s_isLoadingToMainGameplay)
+	if(!s_isLoadingToMainGameplay)
 	{
 		UIManager::CreateUIFrontEndView();
+	}
+	else
+	{
+		AssetLoader::CleanupAssetsWithTag("front_end_assets");
+		UIManager::DestroyUIFrontEndView();
 	}
 }
 

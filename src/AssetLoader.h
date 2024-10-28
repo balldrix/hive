@@ -15,6 +15,7 @@ public:
 
 	static void Init(Graphics* graphics, std::string filename);
 	static void PreWarmAssetsWithTag(std::string tag);
+	static void CleanupAssetsWithTag(std::string tag);
 	static void LoadAllPrewarmedAssets();
 	static bool IsLoadingDone() { return s_assetLoader->m_assetsToLoad.empty(); }
 
@@ -28,6 +29,7 @@ private:
 	void LoadTexture(AssetData asset);
 	void LoadSpriteFont(AssetData asset);
 	void DeleteTextures();
+	void DeleteTextures(std::string tag);
 	void DeleteSpriteFonts();
 
 	typedef std::map<std::string, Texture*> TextureAssets;

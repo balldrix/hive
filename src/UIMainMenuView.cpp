@@ -109,10 +109,15 @@ void UIMainMenuView::Render(Graphics* graphics)
 void UIMainMenuView::Shutdown()
 {
 	Logger::LogInfo("Shutting down UI Main Menu View");
+
+	UIManager::UnregisterUIView(this);
 }
 
 void UIMainMenuView::TransitionIn(bool isAnimated)
 {
+	if(m_currentViewState == ViewStates::AnimatingIn || 
+		m_currentViewState == ViewStates::Visible) return;
+
 	m_isActive = true;
 	m_uiStackingView.SetActive(true);
 	m_currentViewState = ViewStates::AnimatingIn;
@@ -123,10 +128,13 @@ void UIMainMenuView::TransitionIn(bool isAnimated)
 
 void UIMainMenuView::TransitionOut(bool isAnimated)
 {
+	if(m_currentViewState == ViewStates::AnimatingOut || 
+		m_currentViewState == ViewStates::NotVisible) return;
+
 	m_currentViewState = ViewStates::AnimatingOut;
 	m_transitionTimer = TransitionOutDuration;
-	m_startingAlpha = 0.0f;
-	m_targetAlpha = 1.0f;
+	m_startingAlpha = 1.0f;
+	m_targetAlpha = 0.0f;
 }
 
 void UIMainMenuView::OnConfirmPressed(int selectedIndex)
@@ -146,7 +154,8 @@ void UIMainMenuView::DoTransition(float deltaTime)
 {
 	if(m_transitionTimer > 0)
 	{
-		float t = m_transitionTimer / TransitionInDuration;
+		float duration = m_currentViewState == ViewStates::AnimatingIn ? TransitionInDuration : TransitionOutDuration;
+		float t = m_transitionTimer / duration;
 		float lerpedAlpha = std::lerp(m_startingAlpha, m_targetAlpha, 1 - t);
 		
 		for(UIView* uiView : m_uiStackingView.GetMenuItems())
@@ -172,6 +181,7 @@ void UIMainMenuView::DoTransition(float deltaTime)
 		break;
 	case UIView::ViewStates::AnimatingOut:
 		m_currentViewState = ViewStates::NotVisible;
+		m_isActive = false;
 		break;
 	default:
 		break;

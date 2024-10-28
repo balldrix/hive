@@ -37,17 +37,17 @@ public:
 	void CheckForEncounter();
 	float GetDeltaTime() const { return m_deltaTime; }
 
-	void OnEntry();
-	void OnExit();
+	void OnEntry() override;
+	void OnExit() override;
 
-	void ProcessInput();
-	void Update(float deltaTime);
-	void ProcessCollisions();
-	void SpawnParticles(const Vector2& position, const Vector2& velocity, Color startColour, Color endColour, float lifeTime, unsigned int number);
-	void Render();
+	void LoadAssets() override;
+	void DeleteAssets() override;
+	void ProcessInput() override;
+	void Update(float deltaTime) override;
+	void ProcessCollisions() override;
+	void Render() override;
 
-	void ReleaseAll();
-	void ResetGame();
+	void ReleaseAll() override;
 
 	void SetPlayerBoundaryX(float minX, float maxX);
 	void ToggleHitBoxes();
@@ -63,9 +63,9 @@ public:
 	LevelRenderer* GetLevelRenderer() const { return m_levelRenderer; }
 
 private:
-	void LoadAssets();
-	void DeleteAssets();
+	void SpawnParticles(const Vector2& position, const Vector2& velocity, Color startColour, Color endColour, float lifeTime, unsigned int number);
 	void Tick(float deltaTime);
+	void ResetGame();
 
 	Graphics* m_graphics;
 	Input* m_input;

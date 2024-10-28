@@ -14,6 +14,8 @@ public:
 	virtual void	OnEntry() {};				
 	virtual void	OnExit() {};				
 
+	virtual void	LoadAssets() {};
+	virtual void	DeleteAssets() {};
 	virtual void	ProcessInput() {};			
 	virtual void	Update(float deltaTime) {}; 
 	virtual void	ProcessCollisions() {};		

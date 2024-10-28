@@ -49,6 +49,13 @@ void AssetLoader::PreWarmAssetsWithTag(std::string tag)
 	}
 }
 
+void AssetLoader::CleanupAssetsWithTag(std::string tag)
+{
+	Logger::LogInfo(fmt::format("Cleaning up assets with tag: {}.", tag));
+
+	s_assetLoader->DeleteTextures(tag);
+}
+
 void AssetLoader::LoadAllPrewarmedAssets()
 {
 	AssetData asset = s_assetLoader->m_assetsToLoad.front();
@@ -136,7 +143,7 @@ void AssetLoader::Shutdown()
 
 void AssetLoader::DeleteTextures()
 {
-	for (std::pair<std::string, Texture*> pair : m_textureAssets)
+	for(std::pair<std::string, Texture*> pair : m_textureAssets)
 	{
 		pair.second->Release();
 		delete pair.second;
@@ -146,9 +153,24 @@ void AssetLoader::DeleteTextures()
 	m_textureAssets.clear();
 }
 
+void AssetLoader::DeleteTextures(std::string tag)
+{
+	for(AssetData asset : m_assetData)
+	{
+		if(asset.tag != tag) continue;
+
+		auto texture = m_textureAssets.find(asset.name);
+
+		if(texture == m_textureAssets.end()) continue;
+
+		delete texture->second;
+		m_textureAssets.erase(texture->first);
+	}
+}
+
 void AssetLoader::DeleteSpriteFonts()
 {
-	for (std::pair<std::string, Texture*> pair : m_textureAssets)
+	for(std::pair<std::string, Texture*> pair : m_textureAssets)
 	{
 		pair.second->Release();
 		delete pair.second;

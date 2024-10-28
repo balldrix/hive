@@ -26,7 +26,7 @@ void FadeTransitionGameState::Update(float deltaTime)
 {
 	UIManager::Update(deltaTime);
 
-	if(UIManager::IsFading()) return;
+	if(UIManager::IsFading() || UIManager::AnyViewsInState(UIView::ViewStates::AnimatingOut)) return;
 
 	m_gameStateManager->SwitchState(LoadingGameState::GetTargetGameState()->GetStateName());
 }

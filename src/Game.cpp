@@ -63,6 +63,7 @@ void Game::Run()
 {
 	float newTime = m_timer.GetTicks();
 	float deltaTime = (newTime - m_currentTime) * m_timerFreq;
+	if(deltaTime > 0.033f) deltaTime = 0.033f;
 
 	m_currentTime = newTime;
 
