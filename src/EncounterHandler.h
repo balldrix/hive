@@ -11,7 +11,7 @@ public:
 	EncounterHandler();
 	~EncounterHandler();
 
-	void	Init(const std::string &encounterDataFile, std::vector<Enemy*> enemyList);
+	void	Init(std::vector<Enemy*> enemyList);
 	void	SpawnEncounter();
 
 	void	SetEncounterIndex(const int& index);

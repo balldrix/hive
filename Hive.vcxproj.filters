@@ -133,9 +133,6 @@
     <ClCompile Include="src\Camera.cpp">
       <Filter>System</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameOverScreen.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
     <ClCompile Include="src\CharacterPortrait.cpp">
       <Filter>UI</Filter>
     </ClCompile>
@@ -164,9 +161,6 @@
       <Filter>Collision</Filter>
     </ClCompile>
     <ClCompile Include="src\InGameHudManager.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameOverScreenController.cpp">
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="src\KingMookChargeState.cpp">
@@ -205,9 +199,6 @@
     <ClCompile Include="src\GameState.cpp">
       <Filter>Game\States</Filter>
     </ClCompile>
-    <ClCompile Include="src\TilemapHandler.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="src\Animator.cpp">
       <Filter>Graphics\Sprites\Animation</Filter>
     </ClCompile>
@@ -222,12 +213,6 @@
     </ClCompile>
     <ClCompile Include="src\InitialLoadGameState.cpp">
       <Filter>Game\States</Filter>
-    </ClCompile>
-    <ClCompile Include="src\AssetLoader.cpp">
-      <Filter>System</Filter>
-    </ClCompile>
-    <ClCompile Include="src\AssetType.cpp">
-      <Filter>System</Filter>
     </ClCompile>
     <ClCompile Include="src\LoadingGameState.cpp">
       <Filter>Game\States</Filter>
@@ -285,6 +270,15 @@
     </ClCompile>
     <ClCompile Include="src\MenuSystem.cpp">
       <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AssetLoader.cpp">
+      <Filter>System\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AssetType.cpp">
+      <Filter>System\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameDataManager.cpp">
+      <Filter>System\Data</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -351,9 +345,6 @@
     <Filter Include="Data\Damage">
       <UniqueIdentifier>{92cc0ac4-0494-4b44-a24d-41442efb1096}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Data\SpriteSheetData">
-      <UniqueIdentifier>{353fe369-9005-4ef5-9036-293713940adf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Data\Hitboxes">
       <UniqueIdentifier>{23816605-1b42-4655-936e-b6c16c765b39}</UniqueIdentifier>
     </Filter>
@@ -392,6 +383,15 @@
     </Filter>
     <Filter Include="UI\FrontEnd\MainMenu">
       <UniqueIdentifier>{0f43ca10-ec66-43a5-9ede-1ba939bc8d5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Tilemaps">
+      <UniqueIdentifier>{7b381dd5-60c1-4fb0-a75e-cba1126fa59a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\SpritesheetData">
+      <UniqueIdentifier>{353fe369-9005-4ef5-9036-293713940adf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Data">
+      <UniqueIdentifier>{088bc27f-fcb8-47cf-b5af-72b28449102f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -440,9 +440,6 @@
     <ClInclude Include="src\EnemyDeadState.h">
       <Filter>Game\Enemy\States</Filter>
     </ClInclude>
-    <ClInclude Include="Source\EnemyFightingState.h">
-      <Filter>Game\Enemy\States</Filter>
-    </ClInclude>
     <ClInclude Include="src\EnemyHurtState.h">
       <Filter>Game\Enemy\States</Filter>
     </ClInclude>
@@ -450,9 +447,6 @@
       <Filter>Game\Enemy\States</Filter>
     </ClInclude>
     <ClInclude Include="src\EnemyKnockbackState.h">
-      <Filter>Game\Enemy\States</Filter>
-    </ClInclude>
-    <ClInclude Include="src\EnemyOwnedStates.h">
       <Filter>Game\Enemy\States</Filter>
     </ClInclude>
     <ClInclude Include="src\EnemyRunningState.h">
@@ -477,9 +471,6 @@
       <Filter>Game\Enemy\States</Filter>
     </ClInclude>
     <ClInclude Include="src\TravellingSceneState.h">
-      <Filter>Game\Scenes\States</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameplayOwnedSceneStates.h">
       <Filter>Game\Scenes\States</Filter>
     </ClInclude>
     <ClInclude Include="src\GameOverSceneState.h">
@@ -527,9 +518,6 @@
     <ClInclude Include="src\PlayerKnockbackState.h">
       <Filter>Game\Player\States</Filter>
     </ClInclude>
-    <ClInclude Include="src\PlayerOwnedStates.h">
-      <Filter>Game\Player\States</Filter>
-    </ClInclude>
     <ClInclude Include="src\PlayerRunningState.h">
       <Filter>Game\Player\States</Filter>
     </ClInclude>
@@ -560,18 +548,11 @@
     <ClInclude Include="src\UnitVectors.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\Game.h">
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="src\GameObject.h">
       <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameOverScreen.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameOverScreenController.h">
-      <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="src\GameplayGameState.h">
       <Filter>Game\States</Filter>
@@ -599,9 +580,6 @@
     </ClInclude>
     <ClInclude Include="src\InGameHudManager.h">
       <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\KingMookChargeState.h">
-      <Filter>Game\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="src\KingMook.h">
       <Filter>Game\Enemy</Filter>
@@ -633,16 +611,10 @@
     <ClInclude Include="src\Texture.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="src\TilemapData.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="src\TravellingHandler.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="src\TilemapHandler.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Animation.h">
+    <ClInclude Include="src\AnimationData.h">
       <Filter>Graphics\Sprites\Animation</Filter>
     </ClInclude>
     <ClInclude Include="src\Animator.h">
@@ -662,15 +634,6 @@
     </ClInclude>
     <ClInclude Include="src\InitialLoadGameState.h">
       <Filter>Game\States</Filter>
-    </ClInclude>
-    <ClInclude Include="src\AssetLoader.h">
-      <Filter>System</Filter>
-    </ClInclude>
-    <ClInclude Include="src\AssetData.h">
-      <Filter>System</Filter>
-    </ClInclude>
-    <ClInclude Include="src\AssetType.h">
-      <Filter>System</Filter>
     </ClInclude>
     <ClInclude Include="src\LoadingGameState.h">
       <Filter>Game\States</Filter>
@@ -738,6 +701,27 @@
     <ClInclude Include="src\IMenuSystemInteraction.h">
       <Filter>UI\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\TilemapData.h">
+      <Filter>Graphics\Tilemaps</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AnimatedSpriteData.h">
+      <Filter>Graphics\Sprites\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\KingMookChargeState.h">
+      <Filter>Game\Enemy\States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AssetType.h">
+      <Filter>System\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AssetData.h">
+      <Filter>System\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AssetLoader.h">
+      <Filter>System\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameDataManager.h">
+      <Filter>System\Data</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="data\Sprites\UI\go_sign.png">
@@ -747,9 +731,6 @@
       <Filter>Data\Textures</Filter>
     </Image>
     <Image Include="data\Sprites\UI\kingMook_hud_portrait.png">
-      <Filter>Data\Textures</Filter>
-    </Image>
-    <Image Include="data\Sprites\kingMookSpritesheet.png">
       <Filter>Data\Textures</Filter>
     </Image>
     <Image Include="data\Sprites\UI\lives_x0.png">
@@ -773,7 +754,7 @@
     <Image Include="data\Sprites\UI\mook_hud_portrait.png">
       <Filter>Data\Textures</Filter>
     </Image>
-    <Image Include="data\Sprites\mookSpriteSheet.png">
+    <Image Include="data\Sprites\mooks_spritesheet.png">
       <Filter>Data\Textures</Filter>
     </Image>
     <Image Include="data\Sprites\UI\player_won_screen.png">
@@ -791,7 +772,7 @@
     <Image Include="data\Sprites\UI\player1_hud_portrait.png">
       <Filter>Data\Textures</Filter>
     </Image>
-    <Image Include="data\Sprites\playerSpritesheet.png">
+    <Image Include="data\Sprites\player_spritesheet.png">
       <Filter>Data\Textures</Filter>
     </Image>
     <Image Include="data\Tilesets\ts_bunker.png">
@@ -811,80 +792,36 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="data\HitBoxData\bossHitBoxData.json">
-      <Filter>Data\Hitboxes</Filter>
-    </None>
-    <None Include="data\SpriteSheetData\bossSpriteSheetData.json">
-      <Filter>Data\SpriteSheetData</Filter>
-    </None>
-    <None Include="data\HitBoxData\dummyHitBoxData.json">
-      <Filter>Data\Hitboxes</Filter>
-    </None>
-    <None Include="data\SpriteSheetData\dummySpriteSheetData.json">
-      <Filter>Data\SpriteSheetData</Filter>
-    </None>
-    <None Include="data\SpriteSheetData\gameOverSpritesheetData.json">
-      <Filter>Data\SpriteSheetData</Filter>
-    </None>
     <None Include="data\fonts\goodbye_despair_12pt.spritefont">
       <Filter>Data\Fonts</Filter>
-    </None>
-    <None Include="data\HitBoxData\mookHitBoxData.json">
-      <Filter>Data\Hitboxes</Filter>
-    </None>
-    <None Include="data\SpriteSheetData\mookSpritesheetData.json">
-      <Filter>Data\SpriteSheetData</Filter>
     </None>
     <None Include="data\Sounds\scream.ogg">
       <Filter>Data\Sounds</Filter>
     </None>
-    <None Include="data\HitBoxData\playerHitBoxData.json">
-      <Filter>Data\Hitboxes</Filter>
-    </None>
-    <None Include="data\SpriteSheetData\playerSpritesheetData.json">
-      <Filter>Data\SpriteSheetData</Filter>
-    </None>
     <None Include="GameData\SpriteFonts\silkscreen_8pt.spritefont">
       <Filter>Data\Fonts</Filter>
-    </None>
-    <None Include="data\SpriteSheetData\travellingpromptSpritesheetData.json">
-      <Filter>Data\SpriteSheetData</Filter>
     </None>
     <None Include="data\Tilemaps\tm_bunker.json">
       <Filter>Data\Tilemaps</Filter>
     </None>
-    <None Include="data\SpriteSheetData\vfx.json">
-      <Filter>Data\SpriteSheetData</Filter>
-    </None>
     <None Include="data\assets.json">
       <Filter>Data</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="data\EnemyData\Damage\bossDamage.txt">
-      <Filter>Data\Damage</Filter>
-    </Text>
-    <Text Include="data\EncounterData\encounterPositions.txt">
-      <Filter>Data\Encounters</Filter>
-    </Text>
-    <Text Include="data\EnemyData\enemyData.txt">
-      <Filter>Data\Enemies</Filter>
-    </Text>
-    <Text Include="data\EnemyData\Damage\mookDamage.txt">
-      <Filter>Data\Damage</Filter>
-    </Text>
-    <Text Include="data\EnemyData\Damage\mookRunnerDamage.txt">
-      <Filter>Data\Damage</Filter>
-    </Text>
-    <Text Include="data\PlayerData\playerDamage.txt">
-      <Filter>Data\Damage</Filter>
-    </Text>
-    <Text Include="data\PlayerData\playerData.txt">
-      <Filter>Data\Player</Filter>
-    </Text>
-    <Text Include="data\EnemyData\typeData.txt">
-      <Filter>Data\Enemies</Filter>
-    </Text>
+    <None Include="data\hitbox_data\mook_hitbox_data.json">
+      <Filter>Data\Hitboxes</Filter>
+    </None>
+    <None Include="data\hitbox_data\player_hitbox_data.json">
+      <Filter>Data\Hitboxes</Filter>
+    </None>
+    <None Include="data\spritesheet_data\mook_spritesheet_data.json">
+      <Filter>Data\SpritesheetData</Filter>
+    </None>
+    <None Include="data\spritesheet_data\player_spritesheet_data.json">
+      <Filter>Data\SpritesheetData</Filter>
+    </None>
+    <None Include="data\spritesheet_data\impactfx_spritesheet_data.json">
+      <Filter>Data\SpritesheetData</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Media Include="data\Sounds\boss_entrance_001.wav">
@@ -980,5 +917,31 @@
     <Media Include="data\Sounds\travelling_master.wav">
       <Filter>Data\Sounds</Filter>
     </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="data\encounter_data\encounter_positions.txt">
+      <Filter>Data\Encounters</Filter>
+    </Text>
+    <Text Include="data\enemy_data\enemy_data.txt">
+      <Filter>Data\Enemies</Filter>
+    </Text>
+    <Text Include="data\enemy_data\type_data.txt">
+      <Filter>Data\Enemies</Filter>
+    </Text>
+    <Text Include="data\enemy_data\damage\boss_damage.txt">
+      <Filter>Data\Damage</Filter>
+    </Text>
+    <Text Include="data\enemy_data\damage\mook_damage.txt">
+      <Filter>Data\Damage</Filter>
+    </Text>
+    <Text Include="data\enemy_data\damage\mook_runner_damage.txt">
+      <Filter>Data\Damage</Filter>
+    </Text>
+    <Text Include="data\player_data\player_data.txt">
+      <Filter>Data\Player</Filter>
+    </Text>
+    <Text Include="data\player_data\player_damage.txt">
+      <Filter>Data\Player</Filter>
+    </Text>
   </ItemGroup>
 </Project>

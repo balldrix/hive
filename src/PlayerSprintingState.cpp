@@ -1,6 +1,8 @@
-#include "PlayerOwnedStates.h"
-#include "Player.h"
+#include "PlayerSprintingState.h"
+
 #include "Animator.h"
+#include "Player.h"
+#include "PlayerIdleState.h"
 #include "StateMachine.h"
 
 PlayerSprintingState* PlayerSprintingState::Instance()

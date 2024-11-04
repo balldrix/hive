@@ -1,10 +1,18 @@
 #include "GameObject.h"
-#include "SpriteSheet.h"
-#include "HitBoxManager.h"
+
 #include "Animator.h"
-#include "ControlSystem.h"
 #include "Camera.h"
+#include "DamageData.h"
 #include "GameplayConstants.h"
+#include "HitBoxManager.h"
+#include "SpriteSheet.h"
+
+#include <directxtk/SimpleMath.h>
+#include <fstream>
+#include <iosfwd>
+#include <string>
+
+using namespace DirectX::SimpleMath;
 
 using namespace GameplayConstants;
 
@@ -19,7 +27,7 @@ GameObject::GameObject() :
 	m_acceleration(0.0f),
 	m_deceleration(0.0f),
 	m_facingDirection(Vector3::Right),
-	m_spriteSheet(nullptr),
+	m_spritesheet(nullptr),
 	m_animator(nullptr),
 	m_shadow(nullptr),
 	m_hitBoxManager(nullptr),
@@ -40,30 +48,6 @@ GameObject::~GameObject()
 		delete m_hitBoxManager;
 		m_hitBoxManager = nullptr;
 	}
-}
-
-void GameObject::Init(const Vector2& position, Sprite* sprite)
-{
-}
-
-void GameObject::Init(const Vector2& position, Sprite* sprite, Sprite* shadow)
-{
-}
-
-void GameObject::Init(const Vector2& position, Spritesheet* sprite, Animator* animator, HitBoxManager* hitBoxManager)
-{
-}
-
-void GameObject::Init(const Vector2& position, Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager)
-{
-}
-
-void GameObject::Init(const Vector2& position, Spritesheet* sprite, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem)
-{
-}
-
-void GameObject::Init(const Vector2& position, Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem)
-{
 }
 
 void GameObject::SetCamera(Camera* cam)
@@ -122,8 +106,8 @@ void GameObject::Update(float deltaTime)
 	if(m_camera != nullptr)
 		screenGroundPosition.x -= m_camera->GetPosition().x;
 
-	if(m_spriteSheet != nullptr)
-		m_spriteSheet->SetPosition(screenPosition);
+	if(m_spritesheet != nullptr)
+		m_spritesheet->SetPosition(screenPosition);
 
 	if(m_shadow != nullptr)
 		m_shadow->SetPosition(screenGroundPosition);
@@ -167,7 +151,7 @@ float GameObject::Lerp(float target, float current, float amount)
 	return target;
 }
 
-bool GameObject::LoadDamageData(const std::string &filename)
+bool GameObject::LoadDamageData(const std::string& filename)
 {
 	std::ifstream file;
 	file.open(filename);
@@ -219,7 +203,7 @@ void GameObject::FlipHorizontally(bool flip)
 	}	
 
 	m_facingDirection = facingDirection;
-	m_spriteSheet->SetFlipEffect(spriteSheetEffects);
+	m_spritesheet->SetFlipEffect(spriteSheetEffects);
 	m_hitBoxManager->SetFlipped(flip);
 
 	if(m_shadow != nullptr)

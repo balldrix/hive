@@ -1,9 +1,15 @@
 #pragma once
 
-#include "pch.h"
 #include "AssetData.h"
-#include "AssetType.h"
 #include "Texture.h"
+
+#include <directxtk/SpriteFont.h>
+#include <list>
+#include <map>
+#include <string>
+#include <vector>
+
+using namespace DirectX;
 
 class Graphics;
 
@@ -28,6 +34,7 @@ private:
 	void AddToLoadList(const AssetData& data);
 	void LoadTexture(AssetData asset);
 	void LoadSpriteFont(AssetData asset);
+
 	void DeleteTextures();
 	void DeleteTextures(std::string tag);
 	void DeleteSpriteFonts();
@@ -37,9 +44,9 @@ private:
 
 	static std::shared_ptr<AssetLoader> s_assetLoader;
 
+	Graphics* m_graphics;
 	std::vector<AssetData> m_assetData;
 	std::list<AssetData> m_assetsToLoad;
 	TextureAssets m_textureAssets;
 	SpriteFontAssets m_spriteFontAssets;
-	Graphics* m_graphics;
 };

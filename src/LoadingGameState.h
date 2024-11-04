@@ -27,6 +27,7 @@ private:
 	static LoadingGameState* s_instance;
 	static GameState* s_targetGameState;
 	static bool s_isLoadingToMainGameplay;
+	static bool isloadingFromMainGameplayToFrontend;
 	Graphics* m_graphics;
 	float m_timer;
 };

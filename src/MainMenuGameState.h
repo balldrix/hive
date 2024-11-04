@@ -2,6 +2,8 @@
 
 #include "GameState.h"
 
+class GameStateManager;
+
 class MainMenuGameState : public GameState
 {
 public:

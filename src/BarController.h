@@ -1,10 +1,12 @@
 #pragma once
 
-#include "pch.h"
+#include <directxtk/SimpleMath.h>
+
+using namespace DirectX::SimpleMath;
 
 class Graphics;
-class Sprite;
 class Texture;
+class Sprite;
 
 class BarController
 {
@@ -12,7 +14,7 @@ public:
 	BarController();
 	~BarController();
 
-	void Init(Graphics* graphics);
+	void Init(Graphics* graphics, Texture* backgroundTexture, Texture* fillTexture, Texture* frameTexture);
 	void Render(Graphics* graphics);
 	void DeleteAll();
 
@@ -23,15 +25,9 @@ public:
 
 	unsigned int GetWidth() const { return m_width; }
 
-	void ReleaseAll();
-
 private:
 	int		m_currentValue;
 	int		m_maxValue;
-
-	Texture* m_backgroundTexture;
-	Texture* m_fillTexture;
-	Texture* m_frameTexture;
 
 	Sprite* m_backgroundSprite;
 	Sprite* m_fillSprite;

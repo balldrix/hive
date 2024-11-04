@@ -1,7 +1,12 @@
 #pragma once
 
 #include "UIImageView.h"
-#include "pch.h"
+
+#include <DirectXColors.h>
+#include <directxtk/SimpleMath.h>
+#include <string>
+
+class Graphics;
 
 static const float FadeDuration = 0.4f;
 static const Color OpaqueColour = Colors::Black.v;

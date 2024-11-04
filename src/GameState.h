@@ -21,8 +21,6 @@ public:
 	virtual void	ProcessCollisions() {};		
 	virtual void	Render() {};				
 
-	virtual void	ReleaseAll() {};			
-
 	virtual std::string	GetStateName() const;
 
 protected:

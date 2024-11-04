@@ -2,7 +2,6 @@
 
 #include "Graphics.h"
 #include "Texture.h"
-#include "Sprite.h"
 
 Sprite::Sprite() :
 	m_texture(nullptr),
@@ -27,15 +26,11 @@ Sprite::~Sprite()
 
 void Sprite::Init(Texture* texture)
 {
-	// initialise texture
 	m_texture = texture;
 
-	// copy D3D11 resource to a Texture2D struct
 	ID3D11Texture2D* tex2D;
 	tex2D = (ID3D11Texture2D*)m_texture->GetResource();
 
-	// create a texture 2D description
-	// and get data from the Texture2D resource
 	D3D11_TEXTURE2D_DESC desc;
 	tex2D->GetDesc(&desc);
 	
@@ -43,21 +38,17 @@ void Sprite::Init(Texture* texture)
 	tex2D->Release();
 #endif
 
-	// set dimensions
 	m_width = desc.Width;
 	m_height = desc.Height;
 
-	// set source rect
 	m_rect.top = (LONG)0.0f;
 	m_rect.left = (LONG)0.0f;
 	m_rect.right = (LONG)m_width;
 	m_rect.bottom = (LONG)m_height;
 
-	// set origin
 	m_origin.x = m_width / 2.0f;
 	m_origin.y = m_height / 2.0f;
 
-	// set standard scale and alpha
 	m_scale = 1.0f;
 	m_alpha = 1.0f;
 }

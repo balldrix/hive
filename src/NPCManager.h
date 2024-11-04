@@ -1,7 +1,9 @@
 #pragma once
 
-#include "pch.h"
 #include "EnemyDataContainer.h"
+
+#include <string>
+#include <vector>
 
 class Camera;
 class Enemy;
@@ -16,11 +18,9 @@ public:
 	~NPCManager();
 	NPCManager();
 
-	void	Init(Graphics* graphics, Camera* camera, Player* player, InGameHudManager* hudManager, Texture* standardShadowTexture,
-				 Texture* hitBoxTexture);
+	void	Init(Graphics* graphics, Camera* camera, Player* player);
 	bool	InitTypes(const std::string &fileName);
-	bool	InitNPCs(Graphics* graphics, Camera* camera, Player* player, InGameHudManager* hudManager, Texture* standardShadowTexture,
-					 Texture* hitBoxTexture, const std::string &enemyDataFile);
+	bool	InitNPCs(Graphics* graphics, Camera* camera, Player* player, const std::string &enemyDataFile);
 
 	void	Render(Graphics* graphics);
 	void	Update(float deltaTime);

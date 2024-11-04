@@ -1,8 +1,7 @@
 #include "Graphics.h"
 
-#include "pch.h"
-#include "Window.h"
 #include "GlobalConstants.h"
+#include "Logger.h"
 
 using namespace GlobalConstants;
 using namespace DirectX;

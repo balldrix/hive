@@ -1,7 +1,10 @@
 #pragma once
 
-#include "pch.h"
 #include "AssetType.h"
+
+#include <nlohmann/json.hpp>
+
+using json = nlohmann::json;
 
 namespace
 {

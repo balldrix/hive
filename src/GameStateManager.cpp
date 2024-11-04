@@ -2,6 +2,7 @@
 
 #include "GameState.h"
 #include "Graphics.h"
+#include "Logger.h"
 #include "UIManager.h"
 
 GameStateManager::GameStateManager() :
@@ -123,13 +124,5 @@ void GameStateManager::Render()
 	if(m_currentState != nullptr)
 	{
 		m_currentState->Render();
-	}
-}
-
-void GameStateManager::ReleaseAll()
-{
-	if(m_currentState != nullptr)
-	{
-		m_currentState->ReleaseAll();
 	}
 }

@@ -1,31 +1,28 @@
 #include "Timer.h"
 
-Timer::Timer()
-{
-}
+#include <Windows.h>
+#include <mmsystem.h>
 
-Timer::~Timer()
-{
-}
+#pragma comment(lib, "winmm.lib")
 
 float Timer::GetTicks()
 {
 	LARGE_INTEGER ticks;
 
-	if (!QueryPerformanceCounter(&ticks)) // query cpu time
+	if (!QueryPerformanceCounter(&ticks))
 	{
-		ticks.QuadPart = timeGetTime(); // if Query fails set to standard clock time
+		ticks.QuadPart = timeGetTime();
 	}
-	return (float)ticks.QuadPart; // return time
+	return (float)ticks.QuadPart;
 }
 
 float Timer::GetFrequency()
 {
 	LARGE_INTEGER frequency;
 
-	if (!QueryPerformanceFrequency(&frequency)) // query cpu ticks per second
+	if (!QueryPerformanceFrequency(&frequency))
 	{
-		frequency.QuadPart = 1000; // if query fails set to 1000 ticks
+		frequency.QuadPart = 1000;
 	}
-	return 1 / (float)frequency.QuadPart; // return ticks as a fraction of a second
+	return 1 / (float)frequency.QuadPart;
 }

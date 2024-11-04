@@ -1,6 +1,7 @@
 #pragma once
 
-#include "pch.h"
+#include <string>
+#include <vector>
 
 class Graphics;
 class Input;
@@ -25,8 +26,6 @@ public:
 	void							Update(float deltaTime);					
 	void							ProcessCollisions();						
 	void							Render();									
-
-	void							ReleaseAll();								
 
 	Graphics*						GetGraphics() const { return m_graphics; }	
 	Input*							GetInput() const { return m_input; }	

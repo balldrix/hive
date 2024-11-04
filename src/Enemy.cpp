@@ -1,27 +1,40 @@
 #include "Enemy.h"
 
-#include "pch.h"
+#include "AnimatedSpriteData.h"
+#include "Animator.h"
+#include "AssetLoader.h"
+#include "AudioEngine.h"
+#include "BarController.h"
+#include "DamageData.h"
+#include "EnemyAttackState.h"
+#include "EnemyData.h"
+#include "EnemyHurtState.h"
+#include "EnemyIdleState.h"
+#include "EnemyKnockbackState.h"
+#include "GameDataManager.h"
+#include "GameObject.h"
 #include "Graphics.h"
+#include "HitBoxData.h"
+#include "HitBoxManager.h"
+#include "InGameHudManager.h"
+#include "Logger.h"
+#include "Player.h"
+#include "Randomiser.h"
+#include "Sound.h"
+#include "SoundManager.h"
+#include "SoundSource.h"
 #include "Sprite.h"
 #include "SpriteSheet.h"
-#include "Animator.h"
-#include "HitBoxManager.h"
-#include "Resources.h"
-#include "ControlSystem.h"
-#include "UnitVectors.h"
-#include "Randomiser.h"
-#include "InGameHudManager.h"
-#include "BarController.h"
-#include "Player.h"
-#include "EnemyOwnedStates.h"
+#include "State.h"
 #include "StateMachine.h"
-#include "AudioEngine.h"
-#include "SoundSource.h"
-#include "SoundManager.h"
-#include "InGameHudConstants.h"
-#include "DamageData.h"
+#include "Texture.h"
+#include "UnitVectors.h"
 
-using namespace InGameHudConstants;
+#include <cstdint>
+#include <directxtk/SimpleMath.h>
+#include <fmt/core.h>
+#include <string>
+#include <vector>
 
 Enemy::Enemy() :
 	m_playerTarget(nullptr),
@@ -41,13 +54,7 @@ Enemy::Enemy() :
 
 Enemy::~Enemy()
 {
-	ReleaseAll();
 	DeleteAll();
-}
-
-void Enemy::ReleaseAll()
-{
-	m_healthBar->ReleaseAll();
 }
 
 void Enemy::DeleteAll()
@@ -65,7 +72,7 @@ void Enemy::DeleteAll()
 	delete m_hitBoxSprite;
 	delete m_animator;
 	delete m_shadow;
-	delete m_spriteSheet;
+	delete m_spritesheet;
 
 	m_startingState = nullptr;
 	m_punchSoundSource = nullptr;
@@ -77,20 +84,16 @@ void Enemy::DeleteAll()
 	m_hitBoxSprite = nullptr;
 	m_animator = nullptr;
 	m_shadow = nullptr;
-	m_spriteSheet = nullptr;
+	m_spritesheet = nullptr;
 }
 
 void Enemy::Init(Graphics* graphics,
-				 Camera* camera,
-				 Player* player,
-				 const EnemyData& data, 
-				 Texture* spriteTexture, 
-				 Texture* shadowTexture, 
-				 Texture* hitBoxTexture, 
-				 InGameHudManager* inGameUiManager, 
-				 Sprite* portraitSprite,
-				 State<Enemy>* globalEnemyState,
-				 State<Enemy>* startingState)
+				Camera* camera,
+				Player* player,
+				const EnemyData& data, 
+				Texture* shadowTexture,
+				State<Enemy>* globalEnemyState,
+				State<Enemy>* startingState)
 {
 	m_camera = camera;
 	m_playerTarget = player;
@@ -99,23 +102,29 @@ void Enemy::Init(Graphics* graphics,
 	m_groundPosition = data.objectData.startingPosition;
 	m_grounded = true;
 
-	m_spriteSheet = new Spritesheet();
-	m_spriteSheet->Init(spriteTexture, "data\\SpriteSheetData\\" + data.sheetName + "SpritesheetData.json");
-	
+	std::string spritesheetDataPath = "data\\spritesheet_data\\";
+	std::string suffix = "_spritesheet_data.json";
+
+	AnimatedSpriteData animatedSpriteData;
+	animatedSpriteData = GameDataManager::LoadAnimatedSpriteData(fmt::format("{0}{1}{2}", spritesheetDataPath, data.name, suffix));
+
+	m_spritesheet = new Spritesheet();
+	m_spritesheet->Init(AssetLoader::GetTexture(fmt::format("t_{}", data.name)), animatedSpriteData.spriteFrameData);
+	m_spritesheet->SetOrigin(animatedSpriteData.origin);
+
 	m_shadow = new Sprite();
 	m_shadow->Init(shadowTexture);
 	m_shadow->SetAlpha(0.7f);
-	
-	m_animator = new Animator();
-	m_animator->Init("data\\SpriteSheetData\\" + data.sheetName + "SpritesheetData.json", m_spriteSheet);
-	m_animator->SetAnimation(0);
 
-	m_hitBoxSprite = new Sprite();
-	m_hitBoxSprite->Init(hitBoxTexture);
+	m_animator = new Animator();
+	m_animator->Init(animatedSpriteData);
+	m_animator->SetAnimation(0);
 	
+	std::vector<HitBoxData> hitboxData;
+	hitboxData = GameDataManager::LoadHitboxData(fmt::format("data\\hitbox_data\\{}_hitbox_data.json", data.name));
+
 	m_hitBoxManager = new HitBoxManager();
-	m_hitBoxManager->Init(m_hitBoxSprite, "data\\HitBoxData\\" + data.sheetName + "HitBoxData.json");
-	m_hitBoxManager->SetOwner(this);
+	m_hitBoxManager->Init(this, hitboxData);
 	
 	m_movementSpeed = data.objectData.walkSpeed;
 	m_acceleration = data.objectData.acceleration;
@@ -129,12 +138,10 @@ void Enemy::Init(Graphics* graphics,
 	m_id = m_enemyData.objectData.id;
 	m_health = m_enemyData.objectData.startingHealth;
 
-	m_hudManager = inGameUiManager;
-	m_portraitSprite = portraitSprite;
-
-	m_health = data.objectData.startingHealth;
-
-	m_healthBar = new BarController();
+	// TODO: move to UI manager
+	/*m_healthBar = new BarController();
+	m_portraitSprite = new Sprite();
+	m_portraitSprite->Init(AssetLoader::GetTexture(fmt::format("t_{}_portrait", data.name)));
 	m_healthBar->Init(graphics);
 	m_healthBar->SetMaxValue(m_health);
 	m_healthBar->SetCurrentValue(m_health);
@@ -142,9 +149,11 @@ void Enemy::Init(Graphics* graphics,
 
 	float percentage = (float)m_health / (float)m_playerTarget->GetMaxHealth();
 	unsigned int width = (unsigned int)(m_healthBar->GetWidth() * percentage);
-	m_healthBar->SetWidth(width);
+	m_healthBar->SetWidth(width);*/
 
-	std::string enemyDataFile = "data\\EnemyData\\Damage\\" + data.type + "Damage.txt";
+
+	// TOOD move to GameDataManager
+	std::string enemyDataFile = "data\\enemy_data\\damage\\" + data.type + "_damage.txt";
 
 	if(!LoadDamageData(enemyDataFile))
 	{
@@ -201,17 +210,17 @@ Enemy::Render(Graphics* graphics)
 		m_shadow->Render(graphics);
 	}
 
-	if(m_spriteSheet)
+	if(m_spritesheet)
 	{
-		m_spriteSheet->SetDepth(m_groundPosition.y / graphics->GetHeight());
+		m_spritesheet->SetDepth(m_groundPosition.y / graphics->GetHeight());
 
 		if(m_animator)
 		{
-			m_spriteSheet->Render(graphics, m_animator->GetCurrentFrame() + m_animator->GetAnimation()->from);
+			m_spritesheet->Render(graphics, m_animator->GetCurrentFrame() + m_animator->GetAnimation().from);
 		}
 		else
 		{
-			m_spriteSheet->Render(graphics, 0);
+			m_spritesheet->Render(graphics, 0);
 		}
 	}
 
@@ -331,8 +340,9 @@ void Enemy::Kill()
 
 void Enemy::ShowEnemyHud()
 {
-	m_healthBar->SetCurrentValue(m_health);
-	m_hudManager->ShowEnemyHud(m_id, m_portraitSprite, m_healthBar);
+	// TODO move to ui manager
+	/*m_healthBar->SetCurrentValue(m_health);
+	m_hudManager->ShowEnemyHud(m_id, m_portraitSprite, m_healthBar);*/
 }
 
 void Enemy::PlayEntranceSound()

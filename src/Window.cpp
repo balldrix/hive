@@ -1,5 +1,7 @@
 #include "Window.h"
+
 #include "GlobalConstants.h"
+#include "Logger.h"
 
 using namespace GlobalConstants;
 

@@ -1,13 +1,19 @@
 #include "KingMookEnemyGlobalState.h"
 
 #include "Enemy.h"
-#include "EnemyOwnedStates.h"
-#include "KingMook.h"
+#include "EnemyDeadState.h"
+#include "EnemyIdleState.h"
+#include "EnemyKnockbackState.h"
+#include "EnemyRunningState.h"
+#include "EnemyWalkingState.h"
 #include "KingMookChargeState.h"
-#include "StateMachine.h"
 #include "Player.h"
+#include "PlayerDeadState.h"
+#include "PlayerIdleState.h"
 #include "Randomiser.h"
-#include "PlayerOwnedStates.h"
+#include "StateMachine.h"
+
+#include <directxtk/SimpleMath.h>
 
 KingMookEnemyGlobalState* KingMookEnemyGlobalState::Instance()
 {

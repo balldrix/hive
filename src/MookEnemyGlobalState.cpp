@@ -1,14 +1,11 @@
 #include "MookEnemyGlobalState.h"
 
-#include "StateMachine.h"
 #include "Enemy.h"
-#include "EnemyOwnedStates.h"
 #include "Player.h"
-#include "UnitVectors.h"
-#include "SpriteSheet.h"
-#include "Animator.h"
-#include "Randomiser.h"
-#include "EnemyAttackRunState.h"
+#include "StateMachine.h"
+#include "EnemyIdleState.h"
+#include "EnemyKnockbackState.h"
+#include "EnemyDeadState.h"
 
 MookEnemyGlobalState* MookEnemyGlobalState::Instance()
 {

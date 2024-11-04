@@ -1,8 +1,9 @@
 #include "TitleScreenGameState.h"
 
+#include "GameState.h"
 #include "GameStateManager.h"
-#include "UIManager.h"
 #include "Input.h"
+#include "UIManager.h"
 
 TitleScreenGameState::TitleScreenGameState() :
 	m_graphics(nullptr),

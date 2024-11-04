@@ -1,6 +1,25 @@
 #pragma once
 
-#include "pch.h"
+#include <d3d11_1.h>
+#include <d3dcommon.h>
+#include <directxtk/SpriteBatch.h>
+#include <directxtk/VertexTypes.h>
+#include <dxgi1_2.h>
+#include <memory>
+#include <wrl/client.h>
+
+namespace DX
+{
+	inline void ThrowIfFailed(HRESULT hr)
+	{
+		if(FAILED(hr))
+		{
+			throw std::exception();
+		}
+	}
+}
+
+using namespace DirectX;
 
 using VertexType = DirectX::VertexPositionColor;
 

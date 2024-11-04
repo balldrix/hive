@@ -28,24 +28,24 @@ add_executable(${PROJECT_NAME} src/main.cpp src/AABB.cpp src/Animator.cpp src/Au
 								src/PlayerDeadState.cpp src/PlayerGlobalState.cpp src/PlayerHurtState.cpp src/PlayerIdleState.cpp 
 								src/PlayerKnockbackState.cpp src/PlayerRunningState.cpp src/PlayerSprintingState.cpp src/Randomiser.cpp 
 								src/RunningEnemy.cpp src/RunningEnemyDeadState.cpp src/Sound.cpp src/SoundManager.cpp src/SoundSource.cpp
-								src/Sprite.cpp src/SpriteSheet.cpp src/Texture.cpp src/TilemapHandler.cpp src/Timer.cpp src/TravelPrompt.cpp 
-								src/TravellingHandler.cpp src/TravellingSceneState.cpp src/Window.cpp src/AABB.h src/Animation.h src/Animator.h 
-								src/AudioConstants.h src/AudioEngine.h src/BarController.h src/Camera.h src/CharacterPortrait.h src/Collider.h 
-								src/ControlSystem.h src/DamageData.h src/EncounterHandler.h src/EncounterSceneState.h src/Enemy.h 
+								src/Sprite.cpp src/Spritesheet.cpp src/Texture.cpp src/Timer.cpp src/TravelPrompt.cpp 
+								src/TravellingHandler.cpp src/TravellingSceneState.cpp src/Window.cpp src/AABB.h src/AnimationData.h src/Animator.h 
+								src/AnimatedSpriteData.h src/AudioConstants.h src/AudioEngine.h src/BarController.h src/Camera.h src/CharacterPortrait.h 
+								src/Collider.h src/ControlSystem.h src/DamageData.h src/EncounterHandler.h src/EncounterSceneState.h src/Enemy.h 
 								src/EnemyAttackRunState.h src/EnemyAttackState.h src/EnemyData.h src/EnemyDataContainer.h src/EnemyDeadState.h 
-								src/EnemyHurtState.h src/EnemyIdleState.h src/EnemyKnockbackState.h src/EnemyOwnedStates.h src/EnemyRunningState.h 
+								src/EnemyHurtState.h src/EnemyIdleState.h src/EnemyKnockbackState.h src/EnemyRunningState.h 
 								src/EnemyVictoryState.h src/EnemyWalkingState.h src/Game.h src/GameObject.h src/GameOverSceneState.h 
 								src/GameOverScreen.h src/GameOverScreenController.h src/GameState.h src/GameStateManager.h src/GameplayConstants.h 
-								src/GameplayGameState.h src/GameplayOwnedSceneStates.h src/GlobalConstants.h src/Graphics.h
+								src/GameplayGameState.h src/GlobalConstants.h src/Graphics.h
 								src/HitBoxData.h src/HitBoxManager.h src/ImpactFX.h src/InGameHudConstants.h src/InGameHudManager.h 
 								src/Input.h src/KingMook.h src/KingMookChargeState.h src/KingMookEnemyGlobalState.h src/LevelRenderer.h
 								src/MookEnemyGlobalState.h src/MookRunningEnemyGlobalState.h src/NPCFactory.h src/NPCManager.h src/ParticleSystem.h 
 								src/PixelTexture.h src/Player.h src/PlayerAttackState.h src/PlayerBlockState.h src/PlayerConstants.h
 								src/PlayerData.h src/PlayerDeadState.h src/PlayerGlobalState.h src/PlayerHurtState.h src/PlayerIdleState.h 
-								src/PlayerKnockbackState.h src/PlayerOwnedStates.h src/PlayerRunningState.h src/PlayerSprintingState.h
+								src/PlayerKnockbackState.h src/PlayerRunningState.h src/PlayerSprintingState.h
 								src/Randomiser.h src/Resources.h src/RunningEnemy.h src/RunningEnemyDeadState.h src/Sound.h src/SoundManager.h 
-								src/SoundSource.h src/Sprite.h src/SpriteFrameData.h src/SpriteSheet.h src/State.h src/StateMachine.h
-								src/Texture.h src/TilemapData.h src/TilemapHandler.h src/Timer.h src/TravelPrompt.h src/TravellingHandler.h 
+								src/SoundSource.h src/Sprite.h src/SpriteFrameData.h src/Spritesheet.h src/State.h src/StateMachine.h
+								src/Texture.h src/TilemapData.h src/Timer.h src/TravelPrompt.h src/TravellingHandler.h 
 								src/TravellingSceneState.h src/UnitVectors.h src/Window.h src/pch.h src/Logger.cpp src/Logger.h 
 								src/AssetLoader.h src/AssetLoader.cpp src/InitialLoadGameState.h src/InitialLoadGameState.cpp src/AssetData.h 
 								src/AssetType.h src/AssetType.cpp src/LoadingGameState.h src/LoadingGameState.cpp src/UIManager.h src/UIManager.cpp
@@ -55,7 +55,8 @@ add_executable(${PROJECT_NAME} src/main.cpp src/AABB.cpp src/Animator.cpp src/Au
 								src/TitleScreenGameState.h src/TitleScreenGameState.cpp src/UITitleScreenView.h src/UITitleScreenView.cpp src/UIStackingView.h
 								src/UIStackingView.cpp src/UISpriteText.h src/UISpriteText.cpp src/UIConfig.h src/UIConfig.cpp src/MainMenuGameState.h
 								src/MainMenuGameState.cpp src/UIMainMenuView.h src/UIMainMenuView.cpp scr/UIMenuItemView.h src/UIMenuItemView.cpp
-								src/UITextMenuItemView.h src/UITextMenuItemView.cpp src/Frame.h src/MenuSystem.h src/MenuSystem.cpp src/IMenuSystemInteraction.h)
+								src/UITextMenuItemView.h src/UITextMenuItemView.cpp src/Frame.h src/MenuSystem.h src/MenuSystem.cpp src/IMenuSystemInteraction.h
+								src/GameDataManager.h src/GameDataManager.cpp)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Microsoft::DirectXTK)
 target_link_libraries(${PROJECT_NAME} PRIVATE nlohmann_json::nlohmann_json)

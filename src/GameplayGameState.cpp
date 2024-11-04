@@ -1,70 +1,59 @@
 #include "GameplayGameState.h"
 
-#include "pch.h"
-
-#include "GameStateManager.h"
-#include "Graphics.h"
-#include "Input.h"
+#include "AABB.h"
+#include "Animator.h"
+#include "AudioEngine.h"
 #include "Camera.h"
 #include "ControlSystem.h"
-#include "Texture.h"
-#include "SpriteSheet.h"
-#include "Sprite.h"
-#include "Animator.h"
-#include "Player.h"
-#include "InGameHudManager.h"
-#include "Resources.h"
-#include "UnitVectors.h"
-#include "HitBoxManager.h"
-#include "NPCManager.h"
-#include "Enemy.h"
-#include "StateMachine.h"
-#include "GameplayOwnedSceneStates.h"
 #include "EncounterHandler.h"
-#include "TravellingHandler.h"
-#include "LevelRenderer.h"
-#include "TravelPrompt.h"
-#include "GameOverScreenController.h"
-#include "SoundManager.h"
-#include "Sound.h"
-#include "AudioEngine.h"
-#include "SoundSource.h"
-#include "GlobalConstants.h"
+#include "EncounterSceneState.h"
+#include "Enemy.h"
 #include "GameplayConstants.h"
-#include "InGameHudConstants.h"
+#include "GameState.h"
+#include "GameStateManager.h"
+#include "GlobalConstants.h"
+#include "Graphics.h"
+#include "HitBoxManager.h"
 #include "ImpactFx.h"
+#include "Input.h"
+#include "LevelRenderer.h"
+#include "Logger.h"
+#include "NPCManager.h"
 #include "ParticleSystem.h"
-#include "Randomiser.h"
+#include "Player.h"
 #include "PlayerBlockState.h"
 #include "PlayerIdleState.h"
+#include "Randomiser.h"
+#include "SoundSource.h"
+#include "SpriteSheet.h"
+#include "StateMachine.h"
 #include "Timer.h"
+#include "TravellingHandler.h"
+#include "TravellingSceneState.h"
 #include "UIManager.h"
+#include "UnitVectors.h"
+
+#include <cmath>
+#include <DirectXColors.h>
+#include <directxtk/SimpleMath.h>
+#include <fmt/core.h>
+#include <vector>
+#include <WinUser.h>
 
 using namespace GlobalConstants;
 using namespace GameplayConstants;
-using namespace InGameHudConstants;
 
 GameplayGameState::GameplayGameState() :
 	m_graphics(nullptr),
 	m_input(nullptr),
 	m_camera(nullptr),
 	m_controlSystem(nullptr),
-	m_playerTexture(nullptr),
-	m_hitBoxTexture(nullptr),
-	m_standardShadowTexture(nullptr),
-	m_playerSprite(nullptr),
-	m_playerShadowSprite(nullptr),
-	m_hitBoxSprite(nullptr),
-	m_playerAnimator(nullptr),
-	m_playerHitBoxManager(nullptr),
 	m_NPCManager(nullptr),
 	m_player(nullptr),
 	m_levelRenderer(nullptr),
-	m_hudManager(nullptr),
 	m_sceneStateMachine(nullptr),
 	m_encounterHandler(nullptr),
 	m_travellingHandler(nullptr),
-	m_gameOverScreenController(nullptr),
 	m_musicSoundSource(nullptr),
 	m_canAttack(true),
 	m_running(false),
@@ -73,7 +62,6 @@ GameplayGameState::GameplayGameState() :
 	m_stopTimer(0.0f),
 	m_displayHitBoxes(false),
 	m_impactFxSpritesheet(nullptr),
-	m_impactFxTexture(nullptr),
 	m_impactFxAnimator(nullptr),
 	m_impactFx(nullptr),
 	m_particleSystem(nullptr),
@@ -89,7 +77,7 @@ GameplayGameState::GameplayGameState(GameStateManager* gameStateManager) : Gamep
 
 GameplayGameState::~GameplayGameState()
 {
-	OnExit();
+	DeleteAssets();
 }
 
 void GameplayGameState::OnEntry()
@@ -99,8 +87,6 @@ void GameplayGameState::OnEntry()
 
 void GameplayGameState::OnExit()
 {
-	ReleaseAll();
-	DeleteAssets();
 }
 
 void GameplayGameState::LoadAssets()
@@ -142,81 +128,35 @@ void GameplayGameState::LoadAssets()
 
 	m_camera = new Camera();
 	m_controlSystem = new ControlSystem();
-
-	m_playerTexture = new Texture();
-	m_hitBoxTexture = new Texture();
-	m_standardShadowTexture = new Texture();
-
-	m_playerSprite = new Spritesheet();
-	m_playerShadowSprite = new Sprite();
-	m_hitBoxSprite = new Sprite();
-
-	m_playerAnimator = new Animator();
-
-	m_playerHitBoxManager = new HitBoxManager();
-
 	m_NPCManager = new NPCManager();
-
 	m_player = new Player();
 	m_levelRenderer = new LevelRenderer();
-	m_hudManager = new InGameHudManager();
 	m_sceneStateMachine = new StateMachine<GameplayGameState>(this);
 	m_encounterHandler = new EncounterHandler();
 	m_travellingHandler = new TravellingHandler();
 
-	m_playerTexture->LoadTexture(m_graphics, "data\\textures\\playerSpritesheet.png");
-	m_hitBoxTexture->LoadTexture(m_graphics, "data\\textures\\pixel.png");
-	m_standardShadowTexture->LoadTexture(m_graphics, "data\\textures\\shadow_large.png");
-	
-	m_playerSprite->Init(m_playerTexture, "data\\SpriteSheetData\\playerSpritesheetData.json");
-	m_playerShadowSprite->Init(m_standardShadowTexture);
-	m_playerShadowSprite->SetAlpha(0.7f);
-	m_hitBoxSprite->Init(m_hitBoxTexture);
-
-	m_playerAnimator->Init("data\\SpriteSheetData\\playerSpritesheetData.json", m_playerSprite);
-
-	m_playerHitBoxManager->Init(m_hitBoxSprite, m_player, "data\\HitBoxData\\playerHitBoxData.json");
-
-	m_player->LoadData("data\\PlayerData\\playerData.txt", "data\\PlayerData\\playerDamage.txt");
-	m_player->Init(m_playerSprite, m_playerShadowSprite, m_playerAnimator, m_playerHitBoxManager, m_controlSystem);
+	m_player->Init(m_controlSystem);
 	m_player->SetCamera(m_camera);
 	m_camera->SetTarget(m_player);
 
 	m_levelRenderer->Init(m_graphics, m_camera);
-
-	m_hudManager->Init(m_graphics);
-	m_hudManager->SetMaxPlayerHealth(m_player->GetMaxHealth());
-	m_hudManager->SetCurrentPlayerHealth(m_player->GetHealth());
-
-	m_NPCManager->Init(m_graphics, m_camera, m_player, m_hudManager, m_standardShadowTexture, m_hitBoxTexture);
+	m_NPCManager->Init(m_graphics, m_camera, m_player);
 	
 	m_sceneStateMachine->Init(TravellingSceneState::Instance(), nullptr, nullptr);
-	m_encounterHandler->Init("data\\EncounterData\\encounterPositions.txt", m_NPCManager->GetEnemyList());
+	m_encounterHandler->Init(m_NPCManager->GetEnemyList());
 
 	m_playerBoundary.SetMin(Vector2(StartingBoundaryMinX, StartingBoundaryMinY));
 	m_playerBoundary.SetMax(Vector2((float)m_levelRenderer->GetLevelPixelWidth() - 1.0f, (float)m_graphics->GetHeight() - 1.0f));
 	
 	m_camera->Init(GameWidth);
 	
-	m_gameOverScreenController = new GameOverScreenController();
-	m_gameOverScreenController->Init(m_graphics);	
-
 	m_musicSoundSource = new SoundSource();
 	m_musicSoundSource->SetTarget(m_player);
 	m_musicSoundSource->SetLooping(true);
 	m_musicSoundSource->SetRelative(true);
 
-	m_impactFxTexture = new Texture();
-	m_impactFxTexture->LoadTexture(m_graphics, "data\\textures\\vfx.png");
-
-	m_impactFxSpritesheet = new Spritesheet();
-	m_impactFxSpritesheet->Init(m_impactFxTexture, "data\\SpriteSheetData\\vfx.json");
-
-	m_impactFxAnimator = new Animator();
-	m_impactFxAnimator->Init("data\\SpriteSheetData\\vfx.json", m_impactFxSpritesheet);
-
 	m_impactFx = new ImpactFx();
-	m_impactFx->Init(m_impactFxSpritesheet, m_impactFxAnimator);
+	m_impactFx->Init();
 
 	m_particleSystem = new ParticleSystem();
 	m_particleSystem->Init(m_graphics);
@@ -247,28 +187,20 @@ void GameplayGameState::DeleteAssets()
 
 	delete m_impactFxSpritesheet;
 	m_impactFxSpritesheet = nullptr;
-	
-	delete m_impactFxTexture;
-	m_impactFxTexture = nullptr;
 
 	AudioEngine::Instance()->RemoveSoundSource(m_musicSoundSource);
 
 	delete m_musicSoundSource;
 	m_musicSoundSource = nullptr;
 
-	delete m_gameOverScreenController;
-	m_gameOverScreenController = nullptr;
-
 	delete m_travellingHandler;
 	m_travellingHandler = nullptr;
 
 	delete m_encounterHandler;
 	m_encounterHandler = nullptr;
+
 	delete m_sceneStateMachine;
 	m_sceneStateMachine = nullptr;
-
-	delete m_hudManager;
-	m_hudManager = nullptr;
 
 	delete m_levelRenderer;
 	m_levelRenderer = nullptr;
@@ -278,27 +210,6 @@ void GameplayGameState::DeleteAssets()
 
 	delete m_NPCManager;
 	m_NPCManager = nullptr;
-
-	delete m_playerAnimator;
-	m_playerAnimator = nullptr;
-
-	delete m_hitBoxSprite;
-	m_hitBoxSprite = nullptr;
-
-	delete m_playerShadowSprite;
-	m_playerShadowSprite = nullptr;
-
-	delete m_playerSprite;
-	m_playerSprite = nullptr;
-
-	delete m_standardShadowTexture;
-	m_standardShadowTexture = nullptr;
-
-	delete m_hitBoxTexture;
-	m_hitBoxTexture = nullptr;
-
-	delete m_playerTexture;
-	m_playerTexture = nullptr;
 
 	delete m_controlSystem;
 	m_controlSystem = nullptr;
@@ -461,13 +372,6 @@ void GameplayGameState::Tick(float deltaTime)
 	m_camera->Update(deltaTime);
 	m_player->Update(deltaTime);
 	m_NPCManager->Update(deltaTime);
-	m_hudManager->SetMaxPlayerHealth(m_player->GetMaxHealth());
-	m_hudManager->SetCurrentPlayerHealth(m_player->GetHealth());
-	m_hudManager->UpdatePlayerLives(m_player->GetLives());
-//	m_hudManager->GetTravelPrompt()->Update(deltaTime);
-	
-	// TODO move to new game state
-	m_gameOverScreenController->Update(deltaTime);
 
 	if(m_player->IsDead() && m_player->GetLives() > 0)
 		m_player->Respawn();
@@ -635,20 +539,9 @@ void GameplayGameState::Render()
 	m_levelRenderer->Render(m_graphics);
 	m_player->Render(m_graphics);
 	m_NPCManager->Render(m_graphics);
-	m_hudManager->Render(m_graphics);
-	m_gameOverScreenController->Render(m_graphics);
 	m_particleSystem->Render(m_graphics); 
 	m_impactFx->Render(m_graphics);
 	UIManager::Render(m_graphics);
-}
-
-void GameplayGameState::ReleaseAll()
-{
-	if(m_hudManager != nullptr) { m_hudManager->ReleaseAll(); }
-	if(m_standardShadowTexture != nullptr) { m_standardShadowTexture->Release(); }
-	if(m_hitBoxTexture != nullptr) { m_hitBoxTexture->Release(); }
-	if(m_playerTexture != nullptr) { m_playerTexture->Release(); }
-	if(m_gameOverScreenController != nullptr) { m_gameOverScreenController->ReleaseAll(); }
 }
 
 void GameplayGameState::ResetGame()
@@ -658,11 +551,9 @@ void GameplayGameState::ResetGame()
 	m_NPCManager->Reset();
 	m_camera->Reset();
 	m_camera->SetTarget(m_player);
-	m_hudManager->Reset();
 	m_sceneStateMachine->ChangeState(TravellingSceneState::Instance());
 	m_encounterHandler->SetEncounterIndex(0);
 	SetPlayerBoundaryX(StartingBoundaryMinX, (float)m_levelRenderer->GetLevelPixelWidth());
-	m_gameOverScreenController->Reset();
 }
 
 void GameplayGameState::SetPlayerBoundaryX(float minX, float maxX)

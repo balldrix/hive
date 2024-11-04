@@ -1,9 +1,7 @@
 #pragma once
 
-#include "spdlog/spdlog.h"
-#include "spdlog/sinks/basic_file_sink.h"
-#include "spdlog/sinks/msvc_sink.h"
-#include "spdlog/common.h"
+#include <memory>
+#include <spdlog/logger.h>
 
 class Logger
 {

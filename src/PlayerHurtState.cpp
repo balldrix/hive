@@ -1,9 +1,7 @@
-#include "PlayerOwnedStates.h"
-#include "StateMachine.h"
+#include "PlayerHurtState.h"
+
 #include "Player.h"
-#include "Player.h"
-#include "Animator.h"
-#include "HitBoxManager.h"
+#include "PlayerIdleState.h"
 
 PlayerHurtState* PlayerHurtState::Instance()
 {

@@ -1,5 +1,14 @@
 #include "Logger.h"
 
+#include "spdlog/common.h"
+#include "spdlog/sinks/basic_file_sink.h"
+#include "spdlog/sinks/msvc_sink.h"
+
+#include <iosfwd>
+#include <memory>
+#include <spdlog/logger.h>
+#include <string>
+
 std::ostringstream oss;
 std::shared_ptr<spdlog::logger> Logger::s_outputLogger;
 std::shared_ptr<spdlog::logger> Logger::s_fileLogger;

@@ -1,6 +1,11 @@
 #pragma once
 
-#include "pch.h"
+#include <directxtk/SimpleMath.h>
+#include <directxtk/SpriteFont.h>
+#include <string>
+
+using namespace DirectX;
+using namespace DirectX::SimpleMath;
 
 class Graphics;
 

@@ -1,13 +1,9 @@
-#include "PlayerOwnedStates.h"
+#include "PlayerBlockState.h"
 
 #include "Player.h"
-#include "Animator.h"
-#include "HitBoxManager.h"
-#include "PlayerConstants.h"
-#include "StateMachine.h"
-#include "PlayerIdleState.h"
 
-using namespace PlayerConstants;
+#include <directxtk/SimpleMath.h>
+
 using namespace DirectX::SimpleMath;
 
 PlayerBlockState* PlayerBlockState::Instance()

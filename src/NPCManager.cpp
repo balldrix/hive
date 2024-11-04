@@ -1,7 +1,13 @@
 #include "NPCManager.h"
 
 #include "Enemy.h"
+#include "EnemyData.h"
+#include "EnemyDataContainer.h"
+#include "HitBoxManager.h"
+#include "Logger.h"
 #include "NPCFactory.h"
+
+#include <fstream>
 
 NPCManager::NPCManager() :
 	m_enemyDataContainer(nullptr),
@@ -15,36 +21,36 @@ NPCManager::~NPCManager()
 	DeleteAll();
 }
 
-void NPCManager::Init(Graphics* graphics, Camera* camera, Player* player, InGameHudManager* hudManager, Texture* standardShadowTexture,
-					  Texture* hitBoxTexture)
+void NPCManager::Init(Graphics* graphics, Camera* camera, Player* player)
 {
 	bool result = false;
 
 	m_enemyDataContainer = new EnemyDataContainer();
 	m_NPCFactory = new NPCFactory();
 
-	result = InitTypes("data\\EnemyData\\typeData.txt");
+	result = InitTypes("data\\enemy_data\\type_data.txt");
 
 	if(result == false)
 	{
-		Logger::LogError("Error initialising enemy type data. NPCManager.cpp line 26.");
+		Logger::LogError("Error initialising enemy type data. NPCManager.cpp line 31.");
 		PostQuitMessage(0); // quit game
 	}
 
-	result = InitNPCs(graphics, camera, player, hudManager, standardShadowTexture, hitBoxTexture, "data\\EnemyData\\enemyData.txt");
+	result = InitNPCs(graphics, camera, player, "data\\enemy_data\\enemy_data.txt");
 
 	if(result == false)
 	{
-		Logger::LogError(" Error initialising enemy list. NPCManager.cpp line 34.");
+		Logger::LogError(" Error initialising enemy list. NPCManager.cpp line 39.");
 		PostQuitMessage(0); // quit game
 	}
 }
 
 bool NPCManager::InitTypes(const std::string &fileName)
 {
-	std::ifstream file; // ifstream file buffer
-	file.open(fileName); // opens file and reads to buffer
-	if(file) // if file is open
+	std::ifstream file;
+	file.open(fileName);
+	
+	if(file)
 	{
 		EnemyData data;
 		std::string line;
@@ -105,16 +111,13 @@ bool NPCManager::InitTypes(const std::string &fileName)
 	return true;
 }
 
-bool NPCManager::InitNPCs(Graphics* graphics, Camera* camera, Player* player, InGameHudManager* hudManager, Texture* standardShadowTexture,
-						  Texture* hitBoxTexture, const std::string &fileName)
+bool NPCManager::InitNPCs(Graphics* graphics, Camera* camera, Player* player, const std::string &fileName)
 {
-	std::ifstream file; // ifstream file buffer
-	file.open(fileName); // opens file and reads to buffer
-	if(file) // if file is open
+	std::ifstream file;
+	file.open(fileName);
+	if(file) 
 	{
-		m_NPCFactory->Init(graphics, camera, player, 
-						   hudManager, standardShadowTexture,
-						   hitBoxTexture);
+		m_NPCFactory->Init(graphics, camera, player);
 
 		EnemyData data;
 		std::string result;
@@ -135,15 +138,15 @@ bool NPCManager::InitNPCs(Graphics* graphics, Camera* camera, Player* player, In
 				continue;
 			}
 
-			// Type
+			// enemy Type
 			file >> result;
 			data = m_enemyDataContainer->GetData(result);
 			
 			data.objectData.id = id;
 
-			// sheet name
+			// data name
 			file >> result;
-			data.sheetName = result;
+			data.name = result;
 
 			// start position X
 			file >> result;

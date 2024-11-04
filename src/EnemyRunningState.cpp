@@ -1,12 +1,15 @@
 #include "EnemyRunningState.h"
 
-#include "Enemy.h"
-#include "Player.h"
-#include "HitBoxManager.h"
 #include "Animator.h"
-#include "UnitVectors.h"
-#include "StateMachine.h"
+#include "Enemy.h"
 #include "EnemyAttackRunState.h"
+#include "HitBoxManager.h"
+#include "StateMachine.h"
+#include "UnitVectors.h"
+
+#include <directxtk/SimpleMath.h>
+
+using namespace DirectX::SimpleMath;
 
 EnemyRunningState* EnemyRunningState::Instance()
 {

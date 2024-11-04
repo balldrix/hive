@@ -17,5 +17,4 @@ private:
 	PlayerGlobalState() {}
 	~PlayerGlobalState() {}
 	PlayerGlobalState(const PlayerGlobalState&);
-	PlayerGlobalState& operator=(const PlayerGlobalState&);
 };

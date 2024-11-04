@@ -1,0 +1,12 @@
+# id type dataName x_position y_position encounter_index
+enemy01 mook mook 160 95 0;
+#enemy02 mook_runner mook 170 99 0;
+#enemy03 mook mook 370 62 0;
+#enemy04 mook mook 595 64 1;
+#enemy05 mook mook 732 70 1;
+#enemy06 mook mook 730 79 1;
+#enemy07 mook mook 1140 64 2;
+#enemy08 mook mook 1145 70 2;
+#enemy09 mook mook 1000 79 2;
+#enemy10 mook mook 1005 66 2;
+#enemy11 boss boss 1435 73 3;

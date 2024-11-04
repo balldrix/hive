@@ -1,6 +1,12 @@
 #include "SpriteSheet.h"
-#include "Texture.h"
+
 #include "Graphics.h"
+#include "Sprite.h"
+#include "SpriteFrameData.h"
+#include "Texture.h"
+
+#include <directxtk/SpriteBatch.h>
+#include <vector>
 
 Spritesheet::Spritesheet()
 {
@@ -12,23 +18,11 @@ Spritesheet::~Spritesheet()
 	m_frames.clear();
 }
 
-void Spritesheet::Init(Texture* texture, const std::string &fileName)
+void Spritesheet::Init(Texture* texture, std::vector<SpriteFrameData> spriteFrameData)
 {
-	// init sprite sheet as one big sprite
 	Sprite::Init(texture);
 
-	// read file
-	std::ifstream file(fileName);
-
-	// parse data from file
-	json data = json::parse(file);
-
-	// get frames data
-	json frames = data["frames"];
-
-	m_frames = frames.get<std::vector<SpriteFrameData>>();
-	m_origin.x = data.at("meta").at("origin").at("x");
-	m_origin.y = data.at("meta").at("origin").at("y");
+	m_frames = spriteFrameData;
 }
 
 void Spritesheet::Render(Graphics* graphics, int frameNum)

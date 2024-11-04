@@ -1,11 +1,13 @@
-#include "PlayerOwnedStates.h"
+#include "playerRunningState.h"
 
-#include "StateMachine.h"
 #include "Player.h"
-#include "HitBoxManager.h"
-#include "Animator.h"
-#include "ControlSystem.h"
-#include "UnitVectors.h"
+#include "PlayerIdleState.h"
+#include "PlayerSprintingState.h"
+
+#include <directxtk/SimpleMath.h>
+#include <string>
+
+using namespace DirectX::SimpleMath;
 
 PlayerRunningState* PlayerRunningState::Instance()
 {

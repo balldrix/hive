@@ -1,13 +1,11 @@
 #pragma once
 
-#include "pch.h"
-
 class Timer
 {
 public:
-	Timer();
-	~Timer();
+	Timer() {};
+	~Timer() {};
 
-	float	GetTicks();
-	float	GetFrequency();
+	static float GetTicks();
+	static float GetFrequency();
 };

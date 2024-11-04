@@ -1,9 +1,11 @@
 #include "EnemyAttackRunState.h"
 
-#include "Enemy.h"
 #include "Animator.h"
+#include "Enemy.h"
 #include "EnemyRunningState.h"
 #include "StateMachine.h"
+
+#include <string>
 
 EnemyAttackRunState* EnemyAttackRunState::Instance()
 {

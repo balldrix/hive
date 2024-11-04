@@ -3,9 +3,9 @@
 #include "UIView.h"
 
 #include <DirectXTK/SimpleMath.h>
+#include <string>
 
-using namespace DirectX;
-using namespace SimpleMath;
+using namespace DirectX::SimpleMath;
 
 class Graphics;
 class Sprite;

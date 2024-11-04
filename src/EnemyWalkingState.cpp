@@ -1,12 +1,13 @@
 #include "EnemyWalkingState.h"
 
-#include "StateMachine.h"
-#include "Enemy.h"
-#include "EnemyOwnedStates.h"
-#include "Player.h"
-#include "HitBoxManager.h"
 #include "Animator.h"
-#include "UnitVectors.h"
+#include "Enemy.h"
+#include "EnemyIdleState.h"
+#include "HitBoxManager.h"
+#include "StateMachine.h"
+
+#include <directxtk/SimpleMath.h>
+#include <string>
 
 EnemyWalkingState* EnemyWalkingState::Instance()
 {

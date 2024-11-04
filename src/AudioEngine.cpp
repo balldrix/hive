@@ -1,12 +1,19 @@
+#define NOMINMAX
+
 #include "AudioEngine.h"
+
+#include "GameObject.h"
+#include "SoundSource.h"
 
 #include <AL/al.h>
 #include <AL/alc.h>
-#include <stdexcept>
 #include <algorithm>
+#include <utility>
 
-#include "SoundSource.h"
-#include "GameObject.h"
+using namespace DirectX;
+using namespace DirectX::DX11;
+using namespace SimpleMath;
+using json = nlohmann::json;
 
 AudioEngine* AudioEngine::s_instance = nullptr;
 

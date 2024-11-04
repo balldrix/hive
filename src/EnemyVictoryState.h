@@ -2,6 +2,8 @@
 
 #include "State.h"
 
+#include <string>
+
 class Enemy;
 
 class EnemyVictoryState : public State<Enemy>
@@ -18,5 +20,4 @@ private:
 	~EnemyVictoryState() {}
 	EnemyVictoryState(const std::string &name);
 	EnemyVictoryState(const EnemyVictoryState&);
-	EnemyVictoryState& operator=(const EnemyVictoryState&);
 };

@@ -1,17 +1,24 @@
 #include "HitBoxManager.h"
-#include "Graphics.h"
-#include "GameObject.h"
-#include "SpriteSheet.h"
-#include "Animator.h"
-#include "Animation.h"
+
+#include "AABB.h"
+#include "Collider.h"
+#include "AssetLoader.h"
 #include "Camera.h"
+#include "GameObject.h"
 #include "GameplayConstants.h"
+#include "Graphics.h"
+#include "Sprite.h"
+#include "Spritesheet.h"
+#include "HitBoxData.h"
+
+#include <directxtk/SimpleMath.h>
+#include <vector>
 
 using namespace GameplayConstants;
 
 HitBoxManager::HitBoxManager() :
 	m_owner(nullptr),
-	m_spriteSheet(nullptr),
+	m_sprite(nullptr),
 	m_hitBoxDataList(0),
 	m_isVisible(false)
 {
@@ -20,28 +27,26 @@ HitBoxManager::HitBoxManager() :
 
 HitBoxManager::~HitBoxManager()
 {
+	delete m_sprite;
+	m_sprite = nullptr;
+
 	m_hitBoxDataList.clear();
 	m_pushBox.Delete();
 	m_hitBox.Delete();
 	m_hurtBox.Delete();
 }
 
-void HitBoxManager::Init(Sprite* sprite, const std::string &fileName)
+void HitBoxManager::Init(GameObject* owner, std::vector<HitBoxData> hitBoxData)
 {
-	Init(sprite, nullptr, fileName);
-}
-
-void HitBoxManager::Init(Sprite* sprite, GameObject* owner, const std::string &fileName)
-{
-	m_spriteSheet = sprite;
+	m_sprite = new Sprite();
+	m_sprite->Init(AssetLoader::GetTexture("t_pixel"));
 	m_owner = owner;
 
-	LoadData(fileName);
+	m_hitBoxDataList = hitBoxData;
 
-	// initialise hitboxes
-	m_pushBox.Init(sprite, Colors::Blue.v);
-	m_hurtBox.Init(sprite, Colors::Green.v);
-	m_hitBox.Init(sprite, Colors::Red.v);
+	m_pushBox.Init(m_sprite, Colors::Blue.v);
+	m_hurtBox.Init(m_sprite, Colors::Green.v);
+	m_hitBox.Init(m_sprite, Colors::Red.v);
 }
 
 // set box positions
@@ -106,9 +111,9 @@ void HitBoxManager::SetCollidersUsingTag(const std::string &name)
 	HitBoxData hitBox;
 	HitBoxData hurtBox;
 
-	pushBox = HitBoxData::GetHitBoxData(PushBoxName, m_hitBoxDataList);
-	hitBox = HitBoxData::GetHitBoxData(HitBoxName, m_hitBoxDataList);
-	hurtBox = HitBoxData::GetHitBoxData(HurtBoxName, m_hitBoxDataList);
+	pushBox = HitBoxData::GetHitboxData(PushBoxName, m_hitBoxDataList);
+	hitBox = HitBoxData::GetHitboxData(HitBoxName, m_hitBoxDataList);
+	hurtBox = HitBoxData::GetHitboxData(HurtBoxName, m_hitBoxDataList);
 
 	m_pushBoxTagData = TagData::GetTagData(name, pushBox.tagData);
 	m_hitBoxTagData = TagData::GetTagData(name, hitBox.tagData);
@@ -128,15 +133,4 @@ bool HitBoxManager::IsHitBoxActive()
 {
 	return m_hitBox.GetAABB().GetMin().x != m_hitBox.GetAABB().GetMax().x &&
 		m_hitBox.GetAABB().GetMin().y != m_hitBox.GetAABB().GetMax().y;
-}
-
-void HitBoxManager::LoadData(const std::string &fileName)
-{
-	// read file
-	std::ifstream file(fileName);
-
-	// parse data from file
-	json data = json::parse(file);
-	
-	m_hitBoxDataList = data.get<std::vector<HitBoxData>>();
 }

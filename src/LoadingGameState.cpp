@@ -1,18 +1,19 @@
 #include "LoadingGameState.h"
 
-#include "GameStateManager.h"
-#include "Graphics.h"
-#include "UIManager.h"
 #include "AssetLoader.h"
+#include "GameState.h"
+#include "GameStateManager.h"
 #include "UIConfig.h"
-#include "GameplayGameState.h"
+#include "UIManager.h"
 
 LoadingGameState* LoadingGameState::s_instance = nullptr;
 GameState* LoadingGameState::s_targetGameState = nullptr;
+bool LoadingGameState::isloadingFromMainGameplayToFrontend = false;
 bool LoadingGameState::s_isLoadingToMainGameplay = false;
 
 LoadingGameState::LoadingGameState() :
 	m_graphics(nullptr),
+	m_timer(0.0f),
 	GameState("Loading")
 {
 	s_instance = this;
@@ -33,13 +34,24 @@ void LoadingGameState::OnEntry()
 {
 	m_timer = 1.0f; // fake loading time
 	
+
 	if(!s_isLoadingToMainGameplay)
 	{
+		if(isloadingFromMainGameplayToFrontend)
+		{
+			AssetLoader::CleanupAssetsWithTag("ui_assets");
+			AssetLoader::CleanupAssetsWithTag("gameplay_assets");
+		}
+
 		AssetLoader::PreWarmAssetsWithTag("front_end_assets");
 	}
 	else
 	{
 		s_targetGameState = m_gameStateManager->GetState("Gameplay");
+
+		AssetLoader::CleanupAssetsWithTag("front_end_assets");
+		AssetLoader::PreWarmAssetsWithTag("gameplay_assets");
+		AssetLoader::PreWarmAssetsWithTag("ui_assets");
 	}
 }
 
@@ -72,8 +84,9 @@ void LoadingGameState::OnExit()
 	}
 	else
 	{
-		AssetLoader::CleanupAssetsWithTag("front_end_assets");
 		UIManager::DestroyUIFrontEndView();
+		
+		// TODO load gameplay data assets
 	}
 }
 

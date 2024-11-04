@@ -1,14 +1,13 @@
 #include "PlayerAttackState.h"
 
-#include "PlayerOwnedStates.h"
-#include "StateMachine.h"
-#include "Player.h"
-#include "HitBoxManager.h"
 #include "Animator.h"
 #include "ControlSystem.h"
-#include "UnitVectors.h"
-#include "AudioEngine.h"
+#include "GameObject.h"
+#include "HitBoxManager.h"
+#include "Player.h"
+#include "PlayerIdleState.h"
 #include "Sprite.h"
+#include "StateMachine.h"
 
 PlayerAttackState* PlayerAttackState::Instance()
 {
@@ -31,7 +30,7 @@ void PlayerAttackState::OnEnter(Player* player)
 
 	player->PlayPunchSound(m_name);
 
-	Animation currentAnimation = *player->GetAnimator()->GetAnimation();
+	AnimationData currentAnimation = player->GetAnimator()->GetAnimation();
 	int endXPos = currentAnimation.endXPos;
 
 	if(endXPos == 0)
@@ -45,7 +44,7 @@ void PlayerAttackState::Execute(Player* player)
 	player->SetTargetVelocity(Vector2::Zero);
 	player->SetCurrentVelocity(Vector2::Zero);
 
-	if(player->GetAnimator()->GetCurrentFrame() == player->GetAnimator()->GetAnimation()->frameCount - 1)
+	if(player->GetAnimator()->GetCurrentFrame() == player->GetAnimator()->GetAnimation().frameCount - 1)
 	{
 		player->GetControlSystem()->SetCanAttack(true);
 	}
@@ -58,7 +57,7 @@ void PlayerAttackState::Execute(Player* player)
 
 void PlayerAttackState::OnExit(Player* player)
 {
-	Animation currentAnimation = *player->GetAnimator()->GetAnimation();
+	AnimationData currentAnimation = player->GetAnimator()->GetAnimation();
 	int endXPos = currentAnimation.endXPos;
 
 	if(endXPos == 0)

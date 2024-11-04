@@ -1,16 +1,19 @@
 #pragma once
 
-#include "pch.h"
-#include "HitBoxManager.h"
+#include "Animator.h"
 #include "DamageData.h"
+#include "HitBoxManager.h"
 
-using std::string;
-using std::map;
+#include <map>
+#include <string>
+
+#include <directxtk/SimpleMath.h>
+
+using namespace DirectX::SimpleMath;
 
 class Graphics;
 class Sprite;
 class Spritesheet;
-class Animator;
 class ControlSystem;
 class Camera;
 
@@ -32,33 +35,28 @@ public:
 	GameObject();
 	virtual ~GameObject();
 
-	virtual void		Init(const Vector2& position, Sprite* sprite);
-	virtual void		Init(const Vector2& position, Sprite* sprite, Sprite* shadow);
-	virtual void		Init(const Vector2& position, Spritesheet* sprite, Animator* animator, HitBoxManager* hitBoxManager);
-	virtual void		Init(const Vector2& position, Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager);
-	virtual void		Init(const Vector2& position, Spritesheet* sprite, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem);
-	virtual void		Init(const Vector2& position, Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem);
+	virtual void		Init() {};
 
-	virtual void		Update(float deltaTime);	
-	virtual void 		Render(Graphics* graphics) = 0;	
+	virtual void		Update(float deltaTime);
+	virtual void 		Render(Graphics* graphics) = 0;
 
 	virtual void		Move(const Vector2& direction);
 	virtual void		Stop();
 
 	float				GetLerpAmount(const float& num);
 	float				Lerp(float target, float current, float amount);
-	bool				LoadDamageData(const std::string &damageDataFile);
+	bool				LoadDamageData(const std::string& damageDataFile);
 
 	// flip sprite and hitboxes
 	void				FlipHorizontally(bool flip);
 
 	// Setters
 	void				SetCamera(Camera* cam);
-	void				SetID(const std::string &id);			
+	void				SetID(const std::string& id);
 	void				SetPositionX(float x);
 	void				SetPositionY(float y);
 	void				SetPosition(float x, float y);
-	void				SetPosition(const Vector2& position);			
+	void				SetPosition(const Vector2& position);
 	void				SetMovementSpeed(float speed);
 	void				SetAcceleration(float accel);
 	void				SetDeceleration(float decel);
@@ -73,10 +71,10 @@ public:
 	void				SetHealth(int health);
 	void				SetKnockbackCount(int count);
 	void				SetGrounded(bool grounded);
-	void				SetActive(bool active);					
+	void				SetActive(bool active);
 
 	// getters
-	std::string			GetID() const { return m_id; }					
+	std::string			GetID() const { return m_id; }
 	float				GetPositionX() const { return m_position.x; }
 	float				GetPositionY() const { return m_position.y; }
 	Vector2				GetPosition() const { return m_position; }
@@ -88,10 +86,10 @@ public:
 	Vector3				GetFacingDirection() const { return m_facingDirection; };
 
 	// pointers for important objects
-	ControlSystem*		GetControlSystem() const { return m_controlSystem; }
-	Spritesheet*		GetSprite() const { return m_spriteSheet; }
-	Animator*			GetAnimator() const { return m_animator; }
-	HitBoxManager*		GetHitBoxManager() const { return m_hitBoxManager; }
+	ControlSystem* GetControlSystem() const { return m_controlSystem; }
+	Spritesheet* GetSprite() const { return m_spritesheet; }
+	Animator* GetAnimator() const { return m_animator; }
+	HitBoxManager* GetHitBoxManager() const { return m_hitBoxManager; }
 
 	int					GetHealth() const { return m_health; }
 	virtual int			GetMaxHealth() const;
@@ -103,37 +101,37 @@ public:
 
 	bool				IsGrounded() const { return m_grounded; }
 	bool				IsDead() const { return m_dead; }
-	bool				IsActive() const { return m_active; }		
-	
+	bool				IsActive() const { return m_active; }
+
 	virtual void		Reset() = 0;
 
 protected:
- 	std::string				m_id;					
-	Camera*					m_camera;				
-	Vector2					m_position;				
-	Vector2					m_groundPosition;		
-	Vector2					m_currentVelocity;		
-	Vector2					m_targetVelocity;		
-	float					m_movementSpeed;		
-	float					m_acceleration;			
+	std::string				m_id;
+	Camera* m_camera;
+	Vector2					m_position;
+	Vector2					m_groundPosition;
+	Vector2					m_currentVelocity;
+	Vector2					m_targetVelocity;
+	float					m_movementSpeed;
+	float					m_acceleration;
 	float					m_deceleration;
 	Vector3					m_facingDirection;
 
-	Spritesheet*			m_spriteSheet;
-	Animator*				m_animator;				
+	Spritesheet* m_spritesheet;
+	Animator* m_animator;
 
-	Sprite*					m_shadow;				
+	Sprite* m_shadow;
 
-	HitBoxManager*			m_hitBoxManager;		
-	ControlSystem*			m_controlSystem;		
+	HitBoxManager* m_hitBoxManager;
+	ControlSystem* m_controlSystem;
 
-	int						m_health;				
-	int						m_knockbackCount;		
+	int						m_health;
+	int						m_knockbackCount;
 
-	float					m_deathTimer;			
+	float					m_deathTimer;
 
-	bool					m_grounded;				
-	bool					m_dead;					
-	bool					m_active;				
-	map<string, DamageData>	m_damageData;			
+	bool					m_grounded;
+	bool					m_dead;
+	bool					m_active;
+	std::map<std::string, DamageData>	m_damageData;
 };

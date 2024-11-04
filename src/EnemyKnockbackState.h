@@ -2,13 +2,13 @@
 
 #include "State.h"
 
-// forward declaration
+#include <string>
+
 class Enemy;
 
 class EnemyKnockbackState : public State<Enemy>
 {
 public:
-	// static instance call
 	static EnemyKnockbackState* Instance();
 
 	virtual void OnEnter(Enemy* enemy);
@@ -18,8 +18,6 @@ public:
 private:
 	EnemyKnockbackState() {}
 	~EnemyKnockbackState() {}
-	EnemyKnockbackState(const std::string &name);
+	EnemyKnockbackState(const std::string& name);
 	EnemyKnockbackState(const EnemyKnockbackState&);
-	EnemyKnockbackState& operator=(const EnemyKnockbackState&);
 };
-

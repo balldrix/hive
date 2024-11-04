@@ -1,6 +1,12 @@
 #pragma once
 
-#include "pch.h"
+#include <DirectXColors.h>
+#include <directxtk/SimpleMath.h>
+#include <string>
+#include <vector>
+
+using namespace DirectX;
+using namespace SimpleMath;
 
 class Graphics;
 

@@ -1,7 +1,6 @@
 #include "GameOverSceneState.h"
 
 #include "GameplayGameState.h"
-#include "GameOverScreenController.h"
 
 GameOverSceneState* GameOverSceneState::Instance()
 {
@@ -11,7 +10,6 @@ GameOverSceneState* GameOverSceneState::Instance()
 
 void GameOverSceneState::OnEnter(GameplayGameState* game)
 {
-    game->GetGameOverScreenController()->EnableWinScreen();
 }
 
 void GameOverSceneState::Execute(GameplayGameState* game)

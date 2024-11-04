@@ -2,7 +2,9 @@
 
 #include "UIMenuItemView.h"
 #include "UISpriteText.h"
+
 #include <directxtk/SimpleMath.h>
+#include <map>
 
 using namespace DirectX;
 using namespace SimpleMath;

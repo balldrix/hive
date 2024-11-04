@@ -1,9 +1,7 @@
 #include "KingMookChargeState.h"
 
 #include "Enemy.h"
-#include "EnemyOwnedStates.h"
-#include "Player.h"
-#include "Animator.h"
+#include "EnemyIdleState.h"
 #include "StateMachine.h"
 
 KingMookChargeState* KingMookChargeState::Instance()

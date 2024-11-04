@@ -1,15 +1,12 @@
 #include "BarController.h"
+
 #include "Graphics.h"
 #include "Sprite.h"
 #include "Texture.h"
-#include "pch.h"
 
 BarController::BarController() :
 	m_currentValue(0),
 	m_maxValue(0),
-	m_backgroundTexture(nullptr),
-	m_fillTexture(nullptr),
-	m_frameTexture(nullptr),
 	m_backgroundSprite(nullptr),
 	m_fillSprite(nullptr),
 	m_frameSprite(nullptr),
@@ -22,31 +19,28 @@ BarController::~BarController()
 	DeleteAll();
 }
 
-void BarController::Init(Graphics* graphics)
+void BarController::Init(Graphics* graphics, Texture* backgroundTexture, Texture* fillTexture, Texture* frameTexture)
 {
-	m_backgroundTexture = new Texture();
-	m_backgroundTexture->LoadTexture(graphics, "data//textures//UI//player1_hud_healthbar_background.png");
+	//m_backgroundTexture->LoadTexture(graphics, "data//textures//UI//player1_hud_healthbar_background.png");
 
-	m_fillTexture = new Texture();
-	m_fillTexture->LoadTexture(graphics, "data//textures//UI//player1_hud_healthbar_fill.png");
+	//m_fillTexture->LoadTexture(graphics, "data//textures//UI//player1_hud_healthbar_fill.png");
 
-	m_frameTexture = new Texture();
-	m_frameTexture->LoadTexture(graphics, "data//textures//UI//player1_hud_healthbar_frame.png");
+	//m_frameTexture->LoadTexture(graphics, "data//textures//UI//player1_hud_healthbar_frame.png");
 
-	m_backgroundSprite = new Sprite();
-	m_backgroundSprite->Init(m_backgroundTexture);
-	m_backgroundSprite->SetOrigin(Vector2::Zero);
-	m_backgroundSprite->SetDepth(0.8f);
+	//m_backgroundSprite = new Sprite();
+	//m_backgroundSprite->Init(m_backgroundTexture);
+	//m_backgroundSprite->SetOrigin(Vector2::Zero);
+	//m_backgroundSprite->SetDepth(0.8f);
 
-	m_fillSprite = new Sprite();
-	m_fillSprite->Init(m_fillTexture);
-	m_fillSprite->SetOrigin(Vector2::Zero);
-	m_fillSprite->SetDepth(0.9f);
+	//m_fillSprite = new Sprite();
+	//m_fillSprite->Init(m_fillTexture);
+	//m_fillSprite->SetOrigin(Vector2::Zero);
+	//m_fillSprite->SetDepth(0.9f);
 
-	m_frameSprite = new Sprite();
-	m_frameSprite->Init(m_frameTexture);
-	m_frameSprite->SetOrigin(Vector2::Zero);
-	m_frameSprite->SetDepth(1.0f);
+	//m_frameSprite = new Sprite();
+	//m_frameSprite->Init(m_frameTexture);
+	//m_frameSprite->SetOrigin(Vector2::Zero);
+	//m_frameSprite->SetDepth(1.0f);
 
 	m_width = m_frameSprite->GetWidth();
 }
@@ -86,24 +80,6 @@ void BarController::DeleteAll()
 		delete m_backgroundSprite;
 		m_backgroundSprite = nullptr;
 	}
-
-	if(m_frameTexture != nullptr)
-	{
-		delete m_frameTexture;
-		m_frameTexture = nullptr;
-	}
-
-	if(m_fillTexture != nullptr)
-	{
-		delete m_fillTexture;
-		m_fillTexture = nullptr;
-	}
-
-	if(m_backgroundTexture != nullptr)
-	{
-		delete m_backgroundTexture;
-		m_backgroundTexture = nullptr;
-	}
 }
 
 void BarController::SetCurrentValue(const int& value)
@@ -135,11 +111,4 @@ void BarController::SetWidth(const unsigned int& width)
 
 	m_backgroundSprite->SetSourceRect(rect);
 	m_frameSprite->SetSourceRect(rect);
-}
-
-void BarController::ReleaseAll()
-{
-	m_backgroundTexture->Release();
-	m_fillTexture->Release();
-	m_frameTexture->Release();
 }

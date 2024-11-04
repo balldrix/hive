@@ -1,10 +1,9 @@
 #pragma once
 
-#include "TilemapHandler.h"
+#include "TilemapData.h"
 
 class Camera;
 class Graphics;
-class Texture;
 class Sprite;
 
 class LevelRenderer
@@ -18,16 +17,15 @@ public:
 
 	void DeleteAll();
 
-	unsigned int GetLevelPixelWidth() const { return m_tilemapHandler->GetTilemapData().width * m_tileWidth; }
+	unsigned int GetLevelPixelWidth() const { return m_tilemapData.width * m_tileWidth; }
 
 private:
-
+	TilemapData LoadTilemap(std::string path);
 	void RenderLayer(Graphics* graphics, const TilemapLayer& layer);
 	void RenderTile(Graphics* graphics, unsigned int tileId, unsigned int x, unsigned int y);
 
 	Camera* m_camera;
-	TilemapHandler* m_tilemapHandler;
-	Texture* m_tileSetTexture;
+	TilemapData m_tilemapData;
 	Sprite* m_tileSetSprite;
 	unsigned int m_tileWidth;
 	unsigned int m_tileHeight;

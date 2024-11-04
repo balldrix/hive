@@ -1,6 +1,6 @@
 #include "Randomiser.h"
-#include "Time.h"
-#include "pch.h"
+
+#include <ctime>
 
 Randomiser::Randomiser()
 {

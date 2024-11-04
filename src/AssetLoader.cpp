@@ -1,14 +1,27 @@
 #include "AssetLoader.h"
 
+#include "AssetData.h"
 #include "AssetType.h"
 #include "Graphics.h"
-#include "pch.h"
+#include "Logger.h"
+#include "PixelTexture.h"
+#include "Texture.h"
+
+#include <directxtk/SpriteFont.h>
+#include <fstream>
+#include <memory>
+#include <string>
+#include <system_error>
+#include <vector>
 
 std::shared_ptr<AssetLoader> AssetLoader::s_assetLoader;
 
 AssetLoader::AssetLoader() :
 	m_graphics(nullptr),
-	m_assetData(0)
+	m_assetData(0),
+	m_assetsToLoad(0),
+	m_textureAssets(),
+	m_spriteFontAssets()
 {
 }
 
@@ -33,6 +46,11 @@ void AssetLoader::Init(Graphics* graphics, std::string fileName)
 
 	json data = json::parse(file);
 	s_assetLoader->m_assetData = data.get<std::vector<AssetData>>();
+
+	PixelTexture* pixelTexture = new PixelTexture();
+	pixelTexture->Init(graphics);	
+
+	s_assetLoader->m_textureAssets.insert({ "t_pixel", pixelTexture });
 }
 
 void AssetLoader::PreWarmAssetsWithTag(std::string tag)
@@ -66,7 +84,7 @@ void AssetLoader::LoadAllPrewarmedAssets()
 		s_assetLoader->LoadTexture(asset);
 		s_assetLoader->m_assetsToLoad.pop_front();
 			break;
-	case AssetType::Type::SpriteFontAsset:
+	case AssetType::Type::SpriteFontAsset :
 		s_assetLoader->LoadSpriteFont(asset);
 		s_assetLoader->m_assetsToLoad.pop_front();
 		break;
@@ -146,6 +164,7 @@ void AssetLoader::DeleteTextures()
 	for(std::pair<std::string, Texture*> pair : m_textureAssets)
 	{
 		pair.second->Release();
+		
 		delete pair.second;
 		pair.second = nullptr;
 	}
@@ -163,7 +182,11 @@ void AssetLoader::DeleteTextures(std::string tag)
 
 		if(texture == m_textureAssets.end()) continue;
 
+		texture->second->Release();
+		
 		delete texture->second;
+		texture->second = nullptr;
+
 		m_textureAssets.erase(texture->first);
 	}
 }
@@ -173,6 +196,7 @@ void AssetLoader::DeleteSpriteFonts()
 	for(std::pair<std::string, Texture*> pair : m_textureAssets)
 	{
 		pair.second->Release();
+
 		delete pair.second;
 		pair.second = nullptr;
 	}

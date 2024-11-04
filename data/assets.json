@@ -1,44 +1,79 @@
 [
   {
     "id": 1,
-    "name": "t_loadingScreen_bg",
-    "path": "data\\textures\\ui\\loadingScreen_bg.png",
-    "type": "texture",
-    "tag": "initial_loading_assets"
-  },
-  {
-    "id": 2,
-    "name": "t_pixel",
-    "path": "data\\textures\\pixel.png",
-    "type": "texture",
-    "tag": "initial_loading_assets"
-  },
-  {
-    "id": 3,
     "name": "f_despair_12",
     "path": "data\\fonts\\goodbye_despair_12pt.spritefont",
     "type": "spritefont",
     "tag": "initial_loading_assets"
   },
   {
-    "id": 4,
+    "id": 2,
     "name": "f_despair_8",
     "path": "data\\fonts\\goodbye_despair_8pt.spritefont",
     "type": "spritefont",
     "tag": "initial_loading_assets"
   },
   {
+    "id": 3,
+    "name": "t_loadingScreen_bg",
+    "path": "data\\textures\\ui\\loading_screen_bg.png",
+    "type": "texture",
+    "tag": "initial_loading_assets"
+  },
+  {
+    "id": 4,
+    "name": "t_title_logo",
+    "path": "data\\textures\\ui\\title_logo.png",
+    "type": "texture",
+    "tag": "front_end_assets"
+  },
+  {
     "id": 5,
     "name": "t_titleScreen_bg",
-    "path": "data\\textures\\ui\\titleScreen_bg.png",
+    "path": "data\\textures\\ui\\title_screen_bg.png",
     "type": "texture",
     "tag": "front_end_assets"
   },
   {
     "id": 6,
-    "name": "t_title_logo",
-    "path": "data\\textures\\ui\\title_logo.png",
+    "name": "t_player",
+    "path": "data\\textures\\player_spritesheet.png",
     "type": "texture",
-    "tag": "front_end_assets"
+    "tag": "gameplay_assets"
+  },
+  {
+    "id": 7,
+    "name": "t_shadow",
+    "path": "data\\textures\\shadow_large.png",
+    "type": "texture",
+    "tag": "gameplay_assets"
+  },
+  {
+    "id": 8,
+    "name": "t_impact",
+    "path": "data\\textures\\vfx.png",
+    "type": "texture",
+    "tag": "gameplay_assets"
+  },
+  {
+    "id": 9,
+    "name": "ts_bunker",
+    "path": "data\\Tilesets\\ts_bunker.png",
+    "type": "texture",
+    "tag": "gameplay_assets"
+  },
+  {
+    "id": 10,
+    "name": "t_mook",
+    "path": "data\\textures\\mook_spritesheet.png",
+    "type": "texture",
+    "tag": "gameplay_assets"
+  },
+  {
+    "id": 11,
+    "name": "t_mook_portrait",
+    "path": "data\\textures\\ui\\mook_hud_portrait.png",
+    "type": "texture",
+    "tag": "ui_assets"
   }
 ]

@@ -2,6 +2,9 @@
 
 #include "Graphics.h"
 
+#include <DirectXColors.h>
+#include <directxtk/SpriteFont.h>
+
 UISpriteText::UISpriteText() :
 	m_isActive(false),
 	m_spriteFont(nullptr),

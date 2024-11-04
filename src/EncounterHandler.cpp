@@ -1,6 +1,10 @@
 #include "EncounterHandler.h"
 
 #include "Enemy.h"
+#include "Logger.h"
+
+#include <fstream>
+#include <string>
 
 EncounterHandler::EncounterHandler()
 	: m_encounterIndex(0)
@@ -13,14 +17,16 @@ EncounterHandler::~EncounterHandler()
 {
 }
 
-void EncounterHandler::Init(const std::string &encounterDataFile, std::vector<Enemy*> enemyList)
+void EncounterHandler::Init(std::vector<Enemy*> enemyList)
 {
 	m_enemyList = enemyList;
+	std::string path;
+	path = "data\\encounter_data\\encounter_positions.txt";
 
-	if(LoadData(encounterDataFile) == true)
+	if(LoadData(path) == true)
 		return;
 
-	std::string error = " Error! No encounter data file " + encounterDataFile + " found.";
+	std::string error = " Error! No encounter data file " + path + " found.";
 	Logger::LogError(error);
 }
 

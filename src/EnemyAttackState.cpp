@@ -1,11 +1,9 @@
 #include "EnemyAttackState.h"
 
-#include "Enemy.h"
-#include "EnemyOwnedStates.h"
-#include "HitBoxManager.h"
 #include "Animator.h"
-#include "ControlSystem.h"
-#include "UnitVectors.h"
+#include "Enemy.h"
+#include "EnemyIdleState.h"
+#include "HitBoxManager.h"
 #include "StateMachine.h"
 
 EnemyAttackState* EnemyAttackState::Instance()

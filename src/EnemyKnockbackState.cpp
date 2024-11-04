@@ -1,11 +1,10 @@
 #include "EnemyKnockbackState.h"
 
-#include "StateMachine.h"
-#include "Enemy.h"
-#include "EnemyOwnedStates.h"
-#include "HitBoxManager.h"
 #include "Animator.h"
-#include "InGameHudManager.h"
+#include "Enemy.h"
+#include "EnemyDeadState.h"
+#include "HitBoxManager.h"
+#include "StateMachine.h"
 
 EnemyKnockbackState* EnemyKnockbackState::Instance()
 {
@@ -23,14 +22,11 @@ void EnemyKnockbackState::OnEnter(Enemy* enemy)
 
 void EnemyKnockbackState::Execute(Enemy* enemy)
 {
-	// true if moving to the left
 	if(enemy->GetCurrentVelocity().x < 0)
 	{
 		enemy->FlipHorizontally(false);
-	}
-
-	// true if moving to the right
-	if(enemy->GetCurrentVelocity().x > 0)
+	} 
+	else if(enemy->GetCurrentVelocity().x > 0)
 	{
 		enemy->FlipHorizontally(true);
 	}

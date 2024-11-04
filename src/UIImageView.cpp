@@ -2,7 +2,6 @@
 
 #include "Graphics.h"
 #include "Sprite.h"
-#include "pch.h"
 
 UIImageView::UIImageView() :
 	m_sprite(nullptr)

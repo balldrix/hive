@@ -1,7 +1,6 @@
 #include "Camera.h"
 
 #include "GameObject.h"
-#include "AudioEngine.h"
 
 const float CameraThresholdMod = 3.0f;
 const float CameraSpeedMod = 0.2f;

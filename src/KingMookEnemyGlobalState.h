@@ -16,4 +16,5 @@ public:
 private:
 	KingMookEnemyGlobalState() {}
 	~KingMookEnemyGlobalState() {}
+	KingMookEnemyGlobalState(const KingMookEnemyGlobalState&) {}
 };

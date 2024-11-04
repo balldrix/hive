@@ -1,16 +1,9 @@
 #include "TravellingSceneState.h"
 
-#include "GameplayGameState.h"
 #include "Camera.h"
-#include "Player.h"
-#include "InGameHudManager.h"
-#include "TravellingHandler.h"
+#include "GameplayGameState.h"
 #include "LevelRenderer.h"
-#include "GlobalConstants.h"
-#include "InGameHudConstants.h"
-
-using namespace InGameHudConstants;
-using namespace GlobalConstants;
+#include "TravellingHandler.h"
 
 TravellingSceneState* TravellingSceneState::Instance()
 {
@@ -32,12 +25,12 @@ void TravellingSceneState::Execute(GameplayGameState* game)
 	game->CheckForEncounter();
 	game->GetTravellingHandler()->Update(game->GetDeltaTime());
 
-	if(game->GetTravellingHandler()->GetTravelTimer() > TravelPromptTime)
-		game->GetHudManager()->EnableTravelPrompt();
+	// TODO move to UIManager
+	//if(game->GetTravellingHandler()->GetTravelTimer() > TravelPromptTime)
+	//	game->GetHudManager()->EnableTravelPrompt();
 }
 
 void TravellingSceneState::OnExit(GameplayGameState* game)
 {
 	game->GetTravellingHandler()->SetTravelTimer(0.0f);
-	game->GetHudManager()->DisableTravelPrompt();
 }

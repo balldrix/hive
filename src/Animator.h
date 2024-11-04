@@ -1,39 +1,37 @@
 #pragma once
 
-#include "pch.h"
-#include "Animation.h"
+#include "AnimatedSpriteData.h"
 
-class Spritesheet;
+#include <string>
 
 class Animator
 {
 public:
 	Animator();
-	~Animator();
-	
-	void Init(const std::string &fileName, Spritesheet* spriteSheet); // init animator
-	void Update(float deltaTime);				// update animation sourceRect
+	~Animator() {};
 
-	void SetAnimation(unsigned int index);		// set current animation to play using index
-	void SetAnimation(const std::string &name);	// set current animation to play using string
+	void Init(AnimatedSpriteData animatedSpriteData);
+	void Update(float deltaTime);
 
-	Animation* GetAnimation() const { return m_currentAnimation; }	// return pointer to current animation playing
-	int GetCurrentFrame() const { return m_currentFrame; }			// return current sourceRect in animation
+	void SetAnimation(unsigned int index);
+	void SetAnimation(const std::string& name);
 
-	void AddSoundSource() { m_paused = false; }	// play animation
-	void Pause() { m_paused = true; }			// pause animation
-	bool IsPaused() const { return m_paused; }	// check if paused
-	bool IsDone() const { return m_animDone; }	//
+	AnimationData GetAnimation() const { return m_currentAnimation; }
+	int GetCurrentFrame() const { return m_currentFrame; }
 
-	void Reset();								// reset animation
+	void AddSoundSource() { m_paused = false; }
+	void Pause() { m_paused = true; }
+	bool IsPaused() const { return m_paused; }
+	bool IsDone() const { return m_animDone; }
+
+	void Reset();
 
 private:
-	Animation* m_currentAnimation;				// pointer to current animation to play
-	std::vector<Animation>	m_animationList;	// list of animations to play
+	AnimationData m_currentAnimation;
+	AnimatedSpriteData m_animatedSpriteData;
 
-	Spritesheet* m_spriteSheet;						// spritesheet data
-	bool m_paused;									// is animation paused
-	unsigned int m_currentFrame;					// current animation sourceRect to draw
-	bool m_animDone;								// has non looping anination finished
-	float m_animationTimer;							// timer
+	bool m_paused;
+	unsigned int m_currentFrame;
+	bool m_animDone;
+	float m_animationTimer;
 };

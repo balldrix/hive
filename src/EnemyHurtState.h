@@ -2,14 +2,13 @@
 
 #include "State.h"
 
-// forward declaration
+#include <string>
+
 class Enemy;
-class Player;
 
 class EnemyHurtState : public State<Enemy>
 {
 public:
-	// static instance call
 	static EnemyHurtState* Instance();
 
 	virtual void OnEnter(Enemy* enemy);
@@ -19,9 +18,6 @@ public:
 private:
 	EnemyHurtState() {}
 	~EnemyHurtState() {}
-	EnemyHurtState(const std::string &name);
+	EnemyHurtState(const std::string& name);
 	EnemyHurtState(const EnemyHurtState&);
-	EnemyHurtState& operator=(const EnemyHurtState&);
-	
-	bool IsTargetHitBoxActive(Player* player);
 };

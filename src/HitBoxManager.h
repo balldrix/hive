@@ -1,12 +1,15 @@
 #pragma once
 
-#include "pch.h"
 #include "Collider.h"
 #include "HitBoxData.h"
+
+#include <string>
+#include <vector>
 
 class Graphics;
 class Camera;
 class GameObject;
+class Texture;
 class Sprite;
 
 class HitBoxManager
@@ -15,15 +18,14 @@ public:
 	HitBoxManager();
 	~HitBoxManager();
 
-	void Init(Sprite* sprite, const std::string &fileName);
-	void Init(Sprite* sprite, GameObject* owner, const std::string& fileName);
+	void Init(GameObject* owner, std::vector<HitBoxData> hitBoxData);
 	void Update();
 	void Update(const unsigned int& frameNumber);
 	void UpdateCollider(const unsigned int& frameNumber, TagData& tagData, Collider& collider);
 	void Render(Graphics* graphics, Camera* camera);
 
 	void SetOwner(GameObject* owner);
-	void SetCollidersUsingTag(const std::string &tagName);
+	void SetCollidersUsingTag(const std::string& tagName);
 
 	void SetFlipped(bool flip);
 	void SetVisible(bool isVisible) { m_isVisible = isVisible; }
@@ -36,9 +38,9 @@ public:
 
 private:
 	GameObject* m_owner;
-	Sprite* m_spriteSheet;
+	Sprite* m_sprite;
 	std::vector<HitBoxData> m_hitBoxDataList;
-	
+
 	Collider m_pushBox;
 	Collider m_hurtBox;
 	Collider m_hitBox;
@@ -48,6 +50,4 @@ private:
 	TagData m_hurtBoxTagData;
 
 	bool m_isVisible;
-
-	void LoadData(const std::string& fileName);
 };

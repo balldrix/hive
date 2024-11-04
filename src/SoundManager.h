@@ -7,8 +7,8 @@
 class SoundManager
 {
 public:
-	static void AddSound(const std::wstring &filename);
-	static Sound* GetSound(const std::wstring &name);
+	static void AddSound(const std::wstring& filename);
+	static Sound* GetSound(const std::wstring& name);
 
 	static void DeleteSounds();
 protected:

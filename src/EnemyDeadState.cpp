@@ -1,12 +1,11 @@
 #include "EnemyDeadState.h"
 
-#include "StateMachine.h"
-#include "Enemy.h"
-#include "EnemyOwnedStates.h"
 #include "Animator.h"
+#include "Enemy.h"
+#include "EnemyKnockbackState.h"
 #include "HitBoxManager.h"
+#include "StateMachine.h"
 #include "UnitVectors.h"
-#include "InGameHudManager.h"
 
 EnemyDeadState* EnemyDeadState::Instance()
 {

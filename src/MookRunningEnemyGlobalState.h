@@ -7,7 +7,6 @@ class Enemy;
 class MookRunningEnemyGlobalState : public State<Enemy>
 {
 public:
-	// static instance call
 	static MookRunningEnemyGlobalState* Instance();
 
 	virtual void OnEnter(Enemy* enemy);
@@ -18,5 +17,4 @@ private:
 	MookRunningEnemyGlobalState() {}
 	~MookRunningEnemyGlobalState() {}
 	MookRunningEnemyGlobalState(const MookRunningEnemyGlobalState&);
-	MookRunningEnemyGlobalState& operator=(const MookRunningEnemyGlobalState&);
 };

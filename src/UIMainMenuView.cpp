@@ -1,14 +1,16 @@
 #include "UIMainMenuView.h"
 
-#include "Logger.h"
-#include "UITextMenuItemView.h"
-#include <DirectXColors.h>
-#include "GlobalConstants.h"
 #include "Frame.h"
-#include "UIStackingView.h"
-#include "UIManager.h"
-#include "MenuSystem.h"
+#include "GlobalConstants.h"
 #include "LoadingGameState.h"
+#include "Logger.h"
+#include "MenuSystem.h"
+#include "UIManager.h"
+#include "UIStackingView.h"
+#include "UITextMenuItemView.h"
+
+#include <DirectXColors.h>
+#include <string>
 
 using namespace GlobalConstants;
 

@@ -1,11 +1,14 @@
 #pragma once
 
-#include "pch.h"
 #include "GameObject.h"
-#include <AL/al.h>
+#include "Logger.h"
 
-class ALCdevice;
-class ALCcontext;
+#include <AL/al.h>
+#include <DirectXTK/SimpleMath.h>
+#include <vector>
+
+struct ALCdevice;
+struct ALCcontext;
 
 class SoundSource;
 
@@ -33,9 +36,9 @@ public:
 		Logger::LogInfo("Initialised Audio Engine.");
 	}
 
-	static void Destroy() 
-	{ 
-		delete s_instance; 
+	static void Destroy()
+	{
+		delete s_instance;
 		s_instance = nullptr;
 	}
 

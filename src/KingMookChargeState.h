@@ -18,5 +18,4 @@ private:
 	~KingMookChargeState() {}
 	KingMookChargeState(const std::string &name);
 	KingMookChargeState(const KingMookChargeState&);
-	KingMookChargeState& operator=(const KingMookChargeState&);
 };

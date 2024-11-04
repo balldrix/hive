@@ -1,8 +1,11 @@
-#include "pch.h"
 #include "Collider.h"
+
+#include "AABB.h"
 #include "Graphics.h"
 #include "Sprite.h"
-#include "AABB.h"
+
+#include <DirectXColors.h>
+#include <directxtk/SimpleMath.h>
 
 Collider::Collider() :
 	m_position(Vector2::Zero),

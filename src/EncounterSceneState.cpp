@@ -1,12 +1,11 @@
 #include "EncounterSceneState.h"
 
 #include "GameplayGameState.h"
-#include "InGameHudManager.h"
 #include "Camera.h"
 #include "EncounterHandler.h"
-#include "NPCManager.h"
 #include "StateMachine.h"
-#include "GameplayOwnedSceneStates.h"
+#include "TravellingSceneState.h"
+#include "GameOverSceneState.h"
 
 EncounterSceneState* EncounterSceneState::Instance()
 {

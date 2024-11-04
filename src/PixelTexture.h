@@ -1,19 +1,15 @@
 #pragma once
 
-#include "pch.h"
+#include "Texture.h"
 
 class Graphics;
 
-class PixelTexture
+class PixelTexture : public Texture
 {
 public:
-	PixelTexture();
-	~PixelTexture();
+	PixelTexture() {};
+	~PixelTexture() {};
 
 	void Init(Graphics* graphics);
-	ID3D11ShaderResourceView* GetTexture() { return m_texture.Get(); }
-
-private:
-
-	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_texture;
+	void Release() override;
 };

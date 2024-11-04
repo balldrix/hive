@@ -2,6 +2,8 @@
 
 #include "State.h"
 
+#include <string>
+
 class Enemy;
 
 class EnemyWalkingState : public State<Enemy>

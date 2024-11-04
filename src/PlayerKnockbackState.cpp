@@ -1,8 +1,10 @@
-#include "PlayerOwnedStates.h"
-#include "StateMachine.h"
-#include "Player.h"
-#include "HitBoxManager.h"
+#include "PlayerKnockbackState.h"
+
 #include "Animator.h"
+#include "HitBoxManager.h"
+#include "Player.h"
+#include "PlayerDeadState.h"
+#include "StateMachine.h"
 
 PlayerKnockbackState* PlayerKnockbackState::Instance()
 {

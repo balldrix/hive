@@ -1,6 +1,7 @@
 #pragma once
 
-#include "pch.h"
+#include <d3d11.h>
+#include <string>
 
 class Graphics;
 
@@ -12,9 +13,9 @@ public:
 	void LoadTexture(Graphics* graphics, const std::string& filename);
 	ID3D11ShaderResourceView*	GetTexture() { return m_texture; }
 	ID3D11Resource* GetResource() { return m_resource; }
-	void Release();
+	virtual void Release();
 
-private:
+protected:
 	ID3D11ShaderResourceView*	m_texture;
 	ID3D11Resource*				m_resource;
 };

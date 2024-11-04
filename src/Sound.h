@@ -4,23 +4,23 @@
 
 class Sound
 {
-friend class SoundManager;
+	friend class SoundManager;
 public:
 
-	float GetLength() { return m_length; }
-	int GetBitrate() { return m_bitrate; }
-	int GetSampleRate() { return m_samplerate; }
-	int GetSize() { return m_size; }
-	int GetChannels() { return m_channels; }
+	float GetLength() const { return m_length; }
+	int GetBitrate() const { return m_bitrate; }
+	int GetSampleRate() const { return m_samplerate; }
+	int GetSize() const { return m_size; }
+	int GetChannels() const { return m_channels; }
 
-	ALuint GetBuffer() { return m_buffer; }
+	ALuint GetBuffer() const { return m_buffer; }
 
 protected:
 	Sound();
 	~Sound();
-	
+
 	void LoadFromWav(const char* filename);
-	
+
 	float m_length;
 	int m_bitrate;
 	int m_samplerate;

@@ -1,12 +1,13 @@
 #pragma once
 
-#include "GameObject.h"
-#include "EnemyData.h"
 #include "DamageData.h"
+#include "EnemyData.h"
+#include "GameObject.h"
+#include "Player.h"
 #include "State.h"
 
 class Graphics;
-class Player;
+class Texture;
 class BarController;
 class InGameHudManager;
 template<class T> class StateMachine;
@@ -18,18 +19,8 @@ public:
 							Enemy();
 	virtual					~Enemy();
 
-	void					Init(Graphics* graphics,
-								Camera* camera,
-								Player* player,
-								const EnemyData& data,
-								Texture* spriteTexture,
-								Texture* shadowTexture,
-								Texture* hitBoxTexture,
-								InGameHudManager* inGameUiManager,
-								Sprite* portraitSprite,
-								State<Enemy>* globalEnemyState,
-								State<Enemy>* startingState);
 
+	void Init(Graphics* graphics, Camera* camera, Player* player, const EnemyData& data, Texture* shadowTexture, State<Enemy>* globalEnemyState, State<Enemy>* startingState);
 	void					Update(float deltaTime);
 	void					Render(Graphics* graphics);
 	virtual void			Reset();
@@ -55,8 +46,8 @@ public:
 	void					Kill();
 
 	void					ShowEnemyHud();
-	void					ReleaseAll();
 	void					DeleteAll();
+
 
 	virtual void			PlayEntranceSound();
 	virtual void			PlayWalkingSound();

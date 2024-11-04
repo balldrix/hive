@@ -1,8 +1,13 @@
 #include "ImpactFx.h"
 
-#include "Spritesheet.h"
 #include "Animator.h"
+#include "AssetLoader.h"
+#include "GameDataManager.h"
 #include "Graphics.h"
+#include "Spritesheet.h"
+#include "Texture.h"
+#include "SpriteFrameData.h"
+#include "AnimatedSpriteData.h"
 
 ImpactFx::ImpactFx() : 
 	m_spritesheet(nullptr),
@@ -16,10 +21,17 @@ ImpactFx::~ImpactFx()
 {
 }
 
-void ImpactFx::Init(Spritesheet* spritesheet, Animator* animator)
+void ImpactFx::Init()
 {
-	m_spritesheet = spritesheet;
-	m_animator = animator;
+	AnimatedSpriteData animatedSpriteData;
+	animatedSpriteData = GameDataManager::LoadAnimatedSpriteData("data\\spritesheet_data\\impactfx_spritesheet_data.json");
+
+	m_spritesheet = new Spritesheet();
+	m_spritesheet->Init(AssetLoader::GetTexture("t_impact"), animatedSpriteData.spriteFrameData);
+	m_spritesheet->SetOrigin(animatedSpriteData.origin);
+
+	m_animator = new Animator();
+	m_animator->Init(animatedSpriteData);
 }
 
 void ImpactFx::Render(Graphics* graphics)

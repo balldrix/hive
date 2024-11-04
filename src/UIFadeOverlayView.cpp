@@ -1,8 +1,9 @@
 #include "UIFadeOverlayView.h"
 
-#include "Sprite.h"
 #include "AssetLoader.h"
 #include "GlobalConstants.h"
+#include "Logger.h"
+#include "Sprite.h"
 
 using namespace GlobalConstants;
 

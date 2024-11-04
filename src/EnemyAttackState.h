@@ -2,14 +2,16 @@
 
 #include "State.h"
 
+#include <string>
+
 class Enemy;
 
 class EnemyAttackState : public State<Enemy>
 {
 public:
-	// static instance call
 	static EnemyAttackState* Instance();
-	void SetAttack(const std::string &name);
+
+	void SetAttack(const std::string& name);
 
 	virtual void OnEnter(Enemy* enemy);
 	virtual void Execute(Enemy* enemy);
@@ -18,7 +20,6 @@ public:
 private:
 	EnemyAttackState() {}
 	~EnemyAttackState() {}
-	EnemyAttackState(const std::string &name);
+	EnemyAttackState(const std::string& name);
 	EnemyAttackState(const EnemyAttackState&);
-	EnemyAttackState& operator=(const EnemyAttackState&);
 };

@@ -2,6 +2,8 @@
 
 #include "State.h"
 
+#include <string>
+
 class Player;
 
 class PlayerRunningState : public State<Player>
@@ -18,5 +20,4 @@ private:
 	~PlayerRunningState() {}
 	PlayerRunningState(const std::string& name);
 	PlayerRunningState(const PlayerRunningState&);
-	PlayerRunningState& operator=(const PlayerRunningState&);
 };

@@ -1,6 +1,9 @@
 #pragma once
 
-#include "pch.h"
+#include <directxtk/SimpleMath.h>
+#include <vector>
+
+using namespace DirectX::SimpleMath;
 
 class Graphics;
 class PixelTexture;

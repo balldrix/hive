@@ -1,10 +1,15 @@
 #pragma once
 
-#include "pch.h"
-#include "GameObject.h"
-#include "State.h"
-#include "PlayerData.h"
 #include "DamageData.h"
+#include "GameObject.h"
+#include "Graphics.h"
+#include "PlayerData.h"
+#include "Sprite.h"
+#include "StateMachine.h"
+
+#include <directxtk/SimpleMath.h>
+#include <map>
+#include <string>
 
 class ControlSystem;
 template<class T> class StateMachine;
@@ -16,8 +21,7 @@ public:
 	Player();
 	virtual								~Player();
 
-	void								Init(Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem);
-
+	void								Init(ControlSystem* controlSystem);
 	void								LoadData(const std::string &playerDataFile, const std::string &attackDataFile);
 	bool								LoadPlayerData(const std::string &filename);
 	void								Update(float deltaTime);
@@ -55,6 +59,7 @@ public:
 	void								PlayDeathSound();
 
 private:
+
 	PlayerData							m_playerData;
 	StateMachine<Player>*				m_stateMachine;
 	SoundSource*						m_punchSoundSource;

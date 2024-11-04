@@ -1,6 +1,14 @@
+#define NOMINMAX
+
 #include "SoundSource.h"
 
 #include "AudioEngine.h"
+#include "GameObject.h"
+#include "Sound.h"
+
+#include <AL/al.h>
+#include <directxtk/SimpleMath.h>
+#include <utility>
 
 SoundSource::SoundSource()
 {
@@ -105,3 +113,37 @@ void SoundSource::SetSound(Sound* sound)
 		m_timeLeft = sound->GetLength();
 }
 
+void SoundSource::SetVolume(float volume)
+{
+	m_volume = std::min(1.0f, std::max(0.0f, volume));
+}
+
+void SoundSource::SetPriority(SoundPriority priority) 
+{ 
+	m_priority = priority; 
+}
+
+void SoundSource::SetLooping(bool state) 
+{ 
+	m_isLooping = state; 
+}
+
+void SoundSource::SetRadius(float value) 
+{ 
+	m_radius = std::max(0.0f, value); 
+}
+
+void SoundSource::SetTarget(GameObject* target) 
+{
+	m_target = target; 
+}
+
+void SoundSource::SetPitch(float value) 
+{ 
+	m_pitch = value; 
+}
+
+void SoundSource::SetRelative(bool value) 
+{ 
+	m_isRelative = value; 
+}

@@ -1,17 +1,25 @@
 #include "Game.h"
 
-#include "pch.h"
-#include "Window.h"
-#include "Graphics.h"
-#include "Input.h"
-#include "Timer.h"
 #include "AudioEngine.h"
-
+#include "FadeTransitionGameState.h"
+#include "GameplayGameState.h"
 #include "GameStateManager.h"
-#include "GameState.h"
-#include "GameStates.h"
-
 #include "GlobalConstants.h"
+#include "Graphics.h"
+#include "InitialLoadGameState.h"
+#include "Input.h"
+#include "LoadingGameState.h"
+#include "Logger.h"
+#include "MainMenuGameState.h"
+#include "Timer.h"
+#include "TitleScreenGameState.h"
+#include "Window.h"
+
+#include <Windows.h>
+
+#include <combaseapi.h>
+#include <objbase.h>
+#include <synchapi.h>
 
 using namespace GlobalConstants;
 
@@ -105,14 +113,6 @@ void Game::Render()
 	m_graphics->Begin();
 	m_gameStateManager->Render();
 	m_graphics->PresentBackBuffer();
-}
-
-void Game::ReleaseAll()
-{
-	if(m_gameStateManager->GetCurrentState() != nullptr)
-		m_gameStateManager->GetCurrentState()->OnExit();
-
-	m_gameStateManager->ReleaseAll();
 }
 
 void Game::DeleteAll()

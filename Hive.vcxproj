@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\GameDataManager.cpp" />
     <ClCompile Include="src\MenuSystem.cpp" />
     <ClCompile Include="src\UIMainMenuView.cpp" />
     <ClCompile Include="src\MainMenuGameState.cpp" />
@@ -44,8 +45,6 @@
     <ClCompile Include="src\EncounterHandler.cpp" />
     <ClCompile Include="src\EncounterSceneState.cpp" />
     <ClCompile Include="src\GameOverSceneState.cpp" />
-    <ClCompile Include="src\GameOverScreen.cpp" />
-    <ClCompile Include="src\GameOverScreenController.cpp" />
     <ClCompile Include="src\KingMook.cpp" />
     <ClCompile Include="src\KingMookChargeState.cpp" />
     <ClCompile Include="src\KingMookEnemyGlobalState.cpp" />
@@ -53,6 +52,8 @@
     <ClCompile Include="src\UISpriteText.cpp" />
     <ClCompile Include="src\UIMenuItemView.cpp" />
     <ClCompile Include="src\UITextMenuItemView.cpp" />
+    <ClInclude Include="src\AnimatedSpriteData.h" />
+    <ClInclude Include="src\GameDataManager.h" />
     <ClInclude Include="src\IMenuSystemInteraction.h" />
     <ClInclude Include="src\MenuSystem.h" />
     <ClInclude Include="src\Frame.h" />
@@ -90,7 +91,6 @@
     <ClCompile Include="src\AudioEngine.cpp" />
     <ClCompile Include="src\SoundSource.cpp" />
     <ClCompile Include="src\SoundManager.cpp" />
-    <ClCompile Include="src\TilemapHandler.cpp" />
     <ClCompile Include="src\UIStackingView.cpp" />
     <ClCompile Include="src\UITitleScreenView.cpp" />
     <ClCompile Include="src\TitleScreenGameState.cpp" />
@@ -156,21 +156,17 @@
     <ClInclude Include="src\EncounterHandler.h" />
     <ClInclude Include="src\EncounterSceneState.h" />
     <ClInclude Include="src\GameOverSceneState.h" />
-    <ClInclude Include="src\GameOverScreen.h" />
-    <ClInclude Include="src\GameOverScreenController.h" />
-    <ClInclude Include="src\GameplayOwnedSceneStates.h" />
     <ClInclude Include="src\KingMook.h" />
     <ClInclude Include="src\KingMookChargeState.h" />
     <ClInclude Include="src\NPCFactory.h" />
     <ClInclude Include="src\TilemapData.h" />
-    <ClInclude Include="src\TilemapHandler.h" />
     <ClInclude Include="src\UIStackingView.h" />
     <ClInclude Include="src\UITitleScreenView.h" />
     <ClInclude Include="src\TitleScreenGameState.h" />
     <ClInclude Include="src\TravellingHandler.h" />
     <ClInclude Include="src\TravellingSceneState.h" />
     <ClInclude Include="src\AABB.h" />
-    <ClInclude Include="src\Animation.h" />
+    <ClInclude Include="src\AnimationData.h" />
     <ClInclude Include="src\Animator.h" />
     <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\CharacterPortrait.h" />
@@ -181,11 +177,9 @@
     <ClInclude Include="src\EnemyData.h" />
     <ClInclude Include="src\EnemyDataContainer.h" />
     <ClInclude Include="src\EnemyDeadState.h" />
-    <ClInclude Include="Source\EnemyFightingState.h" />
     <ClInclude Include="src\MookEnemyGlobalState.h" />
     <ClInclude Include="src\EnemyHurtState.h" />
     <ClInclude Include="src\EnemyKnockbackState.h" />
-    <ClInclude Include="src\EnemyOwnedStates.h" />
     <ClInclude Include="src\EnemyRunningState.h" />
     <ClInclude Include="src\EnemyVictoryState.h" />
     <ClInclude Include="src\EnemyWalkingState.h" />
@@ -202,7 +196,6 @@
     <ClInclude Include="src\InGameHudManager.h" />
     <ClInclude Include="src\Input.h" />
     <ClInclude Include="src\NPCManager.h" />
-    <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\PlayerDeadState.h" />
     <ClInclude Include="src\PlayerGlobalState.h" />
@@ -210,7 +203,6 @@
     <ClInclude Include="src\PlayerIdleState.h" />
     <ClInclude Include="src\PlayerAttackState.h" />
     <ClInclude Include="src\PlayerKnockbackState.h" />
-    <ClInclude Include="src\PlayerOwnedStates.h" />
     <ClInclude Include="src\PlayerRunningState.h" />
     <ClInclude Include="src\Randomiser.h" />
     <ClInclude Include="src\Resources.h" />
@@ -234,9 +226,8 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="data\Sprites\hitbox.png" />
-    <Image Include="data\Sprites\kingMookSpritesheet.png" />
-    <Image Include="data\Sprites\mookSpriteSheet.png" />
-    <Image Include="data\Sprites\playerSpritesheet.png" />
+    <Image Include="data\Sprites\mooks_spritesheet.png" />
+    <Image Include="data\Sprites\player_spritesheet.png" />
     <Image Include="data\Sprites\shadow.png" />
     <Image Include="data\Sprites\shadow_large.png" />
     <Image Include="data\Sprites\UI\go_sign.png" />
@@ -262,34 +253,21 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
-    <None Include="data\HitBoxData\bossHitBoxData.json" />
-    <None Include="data\HitBoxData\dummyHitBoxData.json" />
-    <None Include="data\HitBoxData\mookHitBoxData.json" />
-    <None Include="data\HitBoxData\playerHitBoxData.json" />
+    <None Include="data\hitbox_data\mook_hitbox_data.json" />
+    <None Include="data\hitbox_data\player_hitbox_data.json" />
     <None Include="data\Sounds\scream.ogg" />
     <None Include="data\fonts\goodbye_despair_12pt.spritefont">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
-    <None Include="GameData\SpriteFonts\silkscreen_8pt.spritefont" />
-    <None Include="data\SpriteSheetData\bossSpriteSheetData.json" />
-    <None Include="data\SpriteSheetData\dummySpriteSheetData.json" />
-    <None Include="data\SpriteSheetData\gameOverSpritesheetData.json" />
-    <None Include="data\SpriteSheetData\mookSpritesheetData.json" />
-    <None Include="data\SpriteSheetData\playerSpritesheetData.json" />
-    <None Include="data\SpriteSheetData\travellingpromptSpritesheetData.json" />
-    <None Include="data\SpriteSheetData\vfx.json" />
+    <None Include="data\spritesheet_data\mook_spritesheet_data.json" />
+    <None Include="data\spritesheet_data\player_spritesheet_data.json" />
+    <None Include="data\spritesheet_data\impactfx_spritesheet_data.json" />
+    <None Include="GameData\SpriteFonts\silkscreen_8pt.spritefont">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
     <None Include="data\Tilemaps\tm_bunker.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="data\EncounterData\encounterPositions.txt" />
-    <Text Include="data\EnemyData\Damage\bossDamage.txt" />
-    <Text Include="data\EnemyData\Damage\mookDamage.txt" />
-    <Text Include="data\EnemyData\Damage\mookRunnerDamage.txt" />
-    <Text Include="data\EnemyData\enemyData.txt" />
-    <Text Include="data\EnemyData\typeData.txt" />
-    <Text Include="data\PlayerData\playerDamage.txt" />
-    <Text Include="data\PlayerData\playerData.txt" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="data\Sounds\boss_entrance_001.wav" />
@@ -323,6 +301,16 @@
     <Media Include="data\Sounds\walk_002.wav" />
     <Media Include="data\Sounds\walk_003.wav" />
     <Media Include="data\Sounds\walk_004.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="data\encounter_data\encounter_positions.txt" />
+    <Text Include="data\enemy_data\damage\boss_damage.txt" />
+    <Text Include="data\enemy_data\damage\mook_damage.txt" />
+    <Text Include="data\enemy_data\damage\mook_runner_damage.txt" />
+    <Text Include="data\enemy_data\enemy_data.txt" />
+    <Text Include="data\enemy_data\type_data.txt" />
+    <Text Include="data\player_data\player_damage.txt" />
+    <Text Include="data\player_data\player_data.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F07D24C5-CADD-4262-80F1-7370DF167E8E}</ProjectGuid>

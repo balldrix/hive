@@ -1,25 +1,34 @@
 #include "Player.h"
 
-#include "Graphics.h"
-#include "Sprite.h"
-#include "ControlSystem.h"
-#include "SpriteSheet.h"
 #include "Animator.h"
-#include "HitBoxManager.h"
-#include "Resources.h"
-#include "ControlSystem.h"
-#include "StateMachine.h"
-#include "PlayerOwnedStates.h"
-#include "UnitVectors.h"
-#include "Camera.h"
-#include "PlayerConstants.h"
-#include "GlobalConstants.h"
+#include "AssetLoader.h"
 #include "AudioEngine.h"
+#include "Camera.h"
+#include "ControlSystem.h"
+#include "DamageData.h"
+#include "GameDataManager.h"
+#include "GlobalConstants.h"
+#include "Graphics.h"
+#include "HitBoxManager.h"
+#include "Logger.h"
+#include "PlayerAttackState.h"
+#include "PlayerBlockState.h"
+#include "PlayerConstants.h"
+#include "PlayerDeadState.h"
+#include "PlayerGlobalState.h"
+#include "PlayerHurtState.h"
+#include "PlayerIdleState.h"
+#include "PlayerKnockbackState.h"
+#include "Randomiser.h"
+#include "Sound.h"
 #include "SoundManager.h"
 #include "SoundSource.h"
-#include "Sound.h"
-#include "Randomiser.h"
-#include "DamageData.h"
+#include "Sprite.h"
+#include "Spritesheet.h"
+#include "StateMachine.h"
+#include "UnitVectors.h"
+
+#include <fstream>
 
 using namespace PlayerConstants;
 using namespace GlobalConstants;
@@ -46,28 +55,45 @@ Player::~Player()
 	delete m_footStepsSoundSource;
 	delete m_punchSoundSource;
 	delete m_stateMachine;
+	delete m_spritesheet;
 	
 	m_vocalSoundSource = nullptr;
 	m_footStepsSoundSource = nullptr;
 	m_punchSoundSource = nullptr;
 	m_stateMachine = nullptr;
+	m_spritesheet = nullptr;
 }
 
-void Player::Init(Spritesheet* sprite, Sprite* shadow, Animator* animator, HitBoxManager* hitBoxManager, ControlSystem* controlSystem)
+void Player::Init(ControlSystem* controlSystem)
 {
-	m_spriteSheet = sprite;
 	m_controlSystem = controlSystem;
-	m_shadow = shadow;
+
+	AnimatedSpriteData animatedSpriteData;
+	animatedSpriteData = GameDataManager::LoadAnimatedSpriteData("data\\spritesheet_data\\player_spritesheet_data.json");
+
+	m_spritesheet = new Spritesheet();
+	m_spritesheet->Init(AssetLoader::GetTexture("t_player"), animatedSpriteData.spriteFrameData);
+	m_spritesheet->SetOrigin(animatedSpriteData.origin);
+
+	m_shadow = new Sprite();
+	m_shadow->Init(AssetLoader::GetTexture("t_shadow"));
+	m_shadow->SetAlpha(0.7f);
+
+	m_animator = new Animator();
+	m_animator->Init(animatedSpriteData);
+	m_animator->SetAnimation(0);
+
+	m_hitBoxManager = new HitBoxManager();
+	m_hitBoxManager->Init(this, GameDataManager::LoadHitboxData("data\\hitbox_data\\player_hitbox_data.json"));
+
+	LoadData("data\\player_data\\player_data.txt", "data\\player_data\\player_damage.txt");
+
 	m_position.x = m_playerData.objectData.startingPosition.x;
 	m_position.y = RespawnAirPositionY;
 	m_groundPosition = m_playerData.objectData.startingPosition;
 	m_acceleration = m_playerData.objectData.acceleration;
 	m_deceleration = m_playerData.objectData.deceleration;
 	m_movementSpeed = m_playerData.objectData.walkSpeed;
-	m_animator = animator;
-	m_animator->SetAnimation(0);
-	m_hitBoxManager = hitBoxManager;
-	m_hitBoxManager->SetOwner(this);
 	m_grounded = false;
 
 	m_stateMachine = new StateMachine<Player>(this);
@@ -261,19 +287,19 @@ void Player::ResetKnockoutTimer()
 
 void Player::Render(Graphics* graphics)
 {
-	if(m_spriteSheet)
+	if(m_spritesheet)
 	{
 		// set layer depth
-		m_spriteSheet->SetDepth(m_groundPosition.y / graphics->GetHeight());
+		m_spritesheet->SetDepth(m_groundPosition.y / graphics->GetHeight());
 
 		// render player sprite
 		if(m_animator)
 		{
-			m_spriteSheet->Render(graphics, m_animator->GetCurrentFrame() + m_animator->GetAnimation()->from);
+			m_spritesheet->Render(graphics, m_animator->GetCurrentFrame() + m_animator->GetAnimation().from);
 		}
 		else
 		{
-			m_spriteSheet->Render(graphics, 0);
+			m_spritesheet->Render(graphics, 0);
 		}
 	}
 

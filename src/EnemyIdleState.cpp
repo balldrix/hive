@@ -1,15 +1,21 @@
 #include "EnemyIdleState.h"
 
-#include "StateMachine.h"
-#include "PlayerOwnedStates.h"
-#include "Enemy.h"
-#include "EnemyOwnedStates.h"
-#include "Player.h"
-#include "HitBoxManager.h"
 #include "Animator.h"
-#include "Randomiser.h"
+#include "Enemy.h"
+#include "EnemyRunningState.h"
+#include "EnemyVictoryState.h"
+#include "EnemyWalkingState.h"
 #include "GameplayConstants.h"
+#include "HitBoxManager.h"
+#include "Player.h"
+#include "PlayerDeadState.h"
+#include "PlayerKnockbackState.h"
+#include "Randomiser.h"
+#include "StateMachine.h"
 
+#include "directxtk/SimpleMath.h"
+
+using namespace DirectX::SimpleMath;
 using namespace GameplayConstants;
 
 EnemyIdleState* EnemyIdleState::Instance()

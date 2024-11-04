@@ -1,8 +1,10 @@
 #pragma once
 
-#include "UIView.h"
 #include "Frame.h"
 #include "UIMenuItemView.h"
+#include "UIView.h"
+
+#include <string>
 
 class UIStackingView : public UIView
 {

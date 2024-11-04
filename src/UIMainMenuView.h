@@ -1,8 +1,10 @@
 #pragma once
 
-#include "UIView.h"
 #include "IMenuSystemInteraction.h"
 #include "UIStackingView.h"
+#include "UIView.h"
+
+#include <string>
 
 const int MaxOptions = 3;
 

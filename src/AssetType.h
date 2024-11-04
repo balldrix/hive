@@ -1,7 +1,7 @@
 #pragma once
 
-#include "pch.h"
-
+#include <map>
+#include <string>
 
 class AssetType
 {
@@ -10,6 +10,9 @@ public:
 	{
 		TextureAsset = 0,
 		SpriteFontAsset,
+		HitBoxData,
+		DamageData,
+		SpritesheetData,
 		None
 	};
 

@@ -1,21 +1,21 @@
 #pragma once
 
-#include "pch.h"
-#include "GameState.h"
 #include "AABB.h"
-#include "TilemapData.h"
+#include "GameState.h"
 #include "ParticleSystem.h"
+#include "Player.h"
+#include "StateMachine.h"
+
+#include <directxtk/SimpleMath.h>
 
 class GameStateManager;
 class Graphics;
 class Input;
 class Camera;
 class ControlSystem;
-class Texture;
 class Spritesheet;
 class Sprite;
 class Animator;
-class Player;
 class HitBoxManager;
 class NPCManager;
 class InGameHudManager;
@@ -47,19 +47,15 @@ public:
 	void ProcessCollisions() override;
 	void Render() override;
 
-	void ReleaseAll() override;
-
 	void SetPlayerBoundaryX(float minX, float maxX);
 	void ToggleHitBoxes();
 
 	Camera* GetCamera() const { return m_camera; }
 	Player* GetPlayer() const { return m_player; }
-	InGameHudManager* GetHudManager() const { return m_hudManager; }
 	TravellingHandler* GetTravellingHandler() const { return m_travellingHandler; }
 	NPCManager* GetNPCManager() const { return m_NPCManager; }
 	EncounterHandler* GetEncounterHandler() const { return m_encounterHandler; }
 	StateMachine<GameplayGameState>* GetSceneStateMachine() const { return m_sceneStateMachine; }
-	GameOverScreenController* GetGameOverScreenController() const { return m_gameOverScreenController; }
 	LevelRenderer* GetLevelRenderer() const { return m_levelRenderer; }
 
 private:
@@ -72,30 +68,13 @@ private:
 
 	Camera* m_camera;
 	ControlSystem* m_controlSystem;
-
-	Texture* m_playerTexture;
-	Texture* m_hitBoxTexture;
-	Texture* m_standardShadowTexture;
-
-	Spritesheet* m_playerSprite;
-	Sprite* m_playerShadowSprite;
-	Sprite* m_hitBoxSprite;
-
-	Animator* m_playerAnimator;
-
-	HitBoxManager* m_playerHitBoxManager;
-
 	NPCManager* m_NPCManager;
-
 	Player* m_player;
 
-	InGameHudManager* m_hudManager;
+	LevelRenderer* m_levelRenderer;
 	StateMachine<GameplayGameState>* m_sceneStateMachine;
 	EncounterHandler* m_encounterHandler;
 	TravellingHandler* m_travellingHandler;
-	LevelRenderer* m_levelRenderer;
-
-	GameOverScreenController* m_gameOverScreenController;
 
 	SoundSource* m_musicSoundSource;
 
@@ -108,7 +87,6 @@ private:
 	float m_stopTimer;
 	bool m_displayHitBoxes;
 
-	Texture* m_impactFxTexture;
 	Spritesheet* m_impactFxSpritesheet;
 	Animator* m_impactFxAnimator;
 	ImpactFx* m_impactFx;

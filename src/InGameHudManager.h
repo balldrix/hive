@@ -1,11 +1,16 @@
 #pragma once
 
-#include "pch.h"
+#include <DirectXtk/SimpleMath.h>
+#include <directxtk/SpriteFont.h>
+#include <string>
+#include <vector>
+
+using namespace DirectX;
+using namespace DirectX::SimpleMath;
 
 class BarController;
 class CharacterPortrait;
 class Graphics;
-class Texture;
 class Sprite;
 class Spritesheet;
 class TravelPrompt;
@@ -31,12 +36,10 @@ public:
 	void UpdatePlayerLives(const int& lives);
 	void HideEnemyHud(const std::string &id);
 	void ShowEnemyHud(const std::string &id, Sprite* sprite, BarController* healthBar);
-	void ReleaseAll();
 	void Reset();
 	void DeleteAll();
 
 private:
-	std::vector<Texture*> m_livesLeftTextures;
 	std::vector<Sprite*> m_livesLeftSprites;
 	BarController* m_playerHealthBar;
 	BarController* m_enemyHealthBar;

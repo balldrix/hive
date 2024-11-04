@@ -1,10 +1,10 @@
 #include "InitialLoadGameState.h"
+
 #include "AssetLoader.h"
-#include "Logger.h"
+#include "GameState.h"
 #include "GameStateManager.h"
 #include "LoadingGameState.h"
-#include "UIManager.h"
-#include "UIConfig.h"
+#include "Logger.h"
 
 InitialLoadGameState::InitialLoadGameState() : 
 	GameState("InitialLoad")

@@ -1,11 +1,36 @@
-#include "Window.h"
-#include "Graphics.h"
-#include "Game.h"
-#include "AudioEngine.h"
-#include "SoundManager.h"
+#ifdef _WIN32_WINNT
+#undef _WIN32_WINNT
+#endif
+#define _WIN32_WINNT 0x0601
+
+#define NOMINMAX
+#define NODRAWTEXT
+#define NOGDI
+#define NOBITMAP
+#define NOMCX
+#define NOSERVICE
+#define NOHELP
+
+#define WIN32_LEAN_AND_MEAN
+
 #include "AssetLoader.h"
-#include "UIManager.h"
+#include "AudioEngine.h"
+#include "Game.h"
+#include "GameDataManager.h"
+#include "Graphics.h"
+#include "Logger.h"
 #include "MenuSystem.h"
+#include "SoundManager.h"
+#include "UIManager.h"
+#include "Window.h"
+
+#include <combaseapi.h>
+#include <DirectXMathMisc.inl>
+#include <sal.h>
+#include <Windows.h>
+#include <winerror.h>
+#include <winnt.h>
+#include <WinUser.h>
 
 Graphics* graphics = nullptr;
 Window* window	= nullptr;
@@ -38,6 +63,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	
 	AudioEngine::Init();
 	AssetLoader::Init(graphics, "data\\assets.json");
+	GameDataManager::Init();
 	UIManager::Init();
 	MenuSystem::Init();
 
@@ -58,7 +84,6 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 		}
 	}
 
-	game->ReleaseAll(); 
 	Shutdown();
 	
 	CoUninitialize();
@@ -71,6 +96,7 @@ void Shutdown()
 	delete game;
 	MenuSystem::Destroy();
 	UIManager::Destroy();
+	GameDataManager::Shutdown();
 	AssetLoader::Shutdown();
 	SoundManager::DeleteSounds();
 	AudioEngine::Destroy();

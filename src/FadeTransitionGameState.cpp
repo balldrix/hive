@@ -1,9 +1,9 @@
 #include "FadeTransitionGameState.h"
 
-#include "UIManager.h"
+#include "GameState.h"
 #include "GameStateManager.h"
 #include "LoadingGameState.h"
-#include "Logger.h"
+#include "UIManager.h"
 
 FadeTransitionGameState::FadeTransitionGameState() :
 	m_graphics(nullptr),

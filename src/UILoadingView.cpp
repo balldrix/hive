@@ -5,6 +5,7 @@
 #include "Graphics.h"
 #include "Sprite.h"
 #include "UIManager.h"
+#include "Logger.h"
 
 UILoadingView::UILoadingView() :
 	m_loadingBackground(nullptr)

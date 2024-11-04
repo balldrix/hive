@@ -2,6 +2,8 @@
 
 #include "State.h"
 
+#include <cassert>
+
 template <class T>
 class StateMachine
 {

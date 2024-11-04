@@ -2,6 +2,7 @@
 
 #include "GameState.h"
 
+class GameStateManager;
 class Graphics;
 
 class FadeTransitionGameState : public GameState

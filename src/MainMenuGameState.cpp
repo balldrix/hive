@@ -1,10 +1,9 @@
 #include "MainMenuGameState.h"
 
-#include "UIManager.h"
+#include "GameState.h"
 #include "GameStateManager.h"
 #include "MenuSystem.h"
-
-#include "Input.h"
+#include "UIManager.h"
 
 MainMenuGameState::MainMenuGameState() :
 	GameState("MainMenu")

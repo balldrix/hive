@@ -1,6 +1,9 @@
-#include "pch.h"
-
 #pragma once
+
+#include "AnimationData.h"
+
+#include <string>
+#include <vector>
 
 namespace 
 {

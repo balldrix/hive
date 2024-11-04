@@ -1,10 +1,12 @@
-#include "PlayerOwnedStates.h"
-#include "StateMachine.h"
-#include "Player.h"
+#include "PlayerIdleState.h"
+
 #include "Animator.h"
-#include "HitBoxManager.h"
 #include "ControlSystem.h"
-#include "UnitVectors.h"
+#include "HitBoxManager.h"
+#include "Player.h"
+#include "PlayerRunningState.h"
+#include "PlayerSprintingState.h"
+#include "StateMachine.h"
 
 PlayerIdleState::PlayerIdleState(const std::string &name)
 {

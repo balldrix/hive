@@ -1,13 +1,11 @@
 #include "CharacterPortrait.h"
+
 #include "Graphics.h"
 #include "Sprite.h"
-#include "Texture.h"
 
 CharacterPortrait::CharacterPortrait():
-	m_playerPortraitTexture(nullptr),
 	m_playerPortraitSprite(nullptr)
 {
-
 }
 
 CharacterPortrait::~CharacterPortrait()
@@ -15,13 +13,10 @@ CharacterPortrait::~CharacterPortrait()
 	DeleteAll();
 }
 
-void CharacterPortrait::Init(Graphics* graphics, const std::string &texturePath)
+void CharacterPortrait::Init(Graphics* graphics, Texture* texture)
 {
-	m_playerPortraitTexture = new Texture();
-	m_playerPortraitTexture->LoadTexture(graphics, texturePath);
-
 	m_playerPortraitSprite = new Sprite();
-	m_playerPortraitSprite->Init(m_playerPortraitTexture);
+	m_playerPortraitSprite->Init(texture);
 	m_playerPortraitSprite->SetOrigin(Vector2::Zero);
 }
 
@@ -37,15 +32,4 @@ void CharacterPortrait::DeleteAll()
 		delete m_playerPortraitSprite;
 		m_playerPortraitSprite = nullptr;
 	}
-
-	if(m_playerPortraitTexture != nullptr)
-	{
-		delete m_playerPortraitTexture;
-		m_playerPortraitTexture = nullptr;
-	}
-}
-
-void CharacterPortrait::ReleaseAll()
-{
-	m_playerPortraitTexture->Release();
 }

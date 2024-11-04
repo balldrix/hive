@@ -1,7 +1,10 @@
 #pragma once
 
-#include "pch.h"
 #include "Timer.h"
+
+#include <directxtk/SpriteBatch.h>
+
+using namespace DirectX;
 
 class Window;
 class Graphics;
@@ -29,7 +32,6 @@ public:
 	void ProcessCollisions();
 	void Render();
 
-	void ReleaseAll();
 	void DeleteAll();
 
 	void OnSuspending();

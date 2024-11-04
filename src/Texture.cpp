@@ -1,6 +1,8 @@
 #include "Texture.h"
 
 #include "Graphics.h"
+#include "Logger.h"
+
 #include <DirectXTK/WICTextureLoader.h>
 
 Texture::Texture() :

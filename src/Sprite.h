@@ -1,6 +1,10 @@
 #pragma once
 
-#include "pch.h"
+#include <directxtk/SimpleMath.h>
+#include <directxtk/SpriteBatch.h>
+
+using namespace DirectX;
+using namespace SimpleMath;
 
 class Graphics;
 class Texture;

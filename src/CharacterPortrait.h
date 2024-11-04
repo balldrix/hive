@@ -1,6 +1,8 @@
 #pragma once
 
-#include <string>
+#include <directxtk/SimpleMath.h>
+
+using namespace DirectX::SimpleMath;
 
 class Graphics;
 class Sprite;
@@ -12,13 +14,11 @@ public:
 	CharacterPortrait();
 	~CharacterPortrait();
 
-	void Init(Graphics* graphics, const std::string &texturePath);
+	void Init(Graphics* graphics, Texture* texture);
 	void Render(Graphics* graphics);
-	void ReleaseAll();
 
 private:
 	void DeleteAll();
 
-	Texture* m_playerPortraitTexture;
 	Sprite* m_playerPortraitSprite;	
 };

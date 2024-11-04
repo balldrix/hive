@@ -1,6 +1,9 @@
 #pragma once
 
-#include "pch.h"
+#include <directxtk/SimpleMath.h>
+
+using namespace DirectX;
+using namespace SimpleMath;
 
 class Spritesheet;
 class Animator;
@@ -12,7 +15,7 @@ public:
 	ImpactFx();
 	~ImpactFx();
 
-	void Init(Spritesheet* spritesheet, Animator* animator);
+	void Init();
 	void Render(Graphics* graphics);
 	void Update(float deltaTime);
 
@@ -20,7 +23,6 @@ public:
 	Vector2 Position() const { return m_position; }
 
 private:
-
 	Spritesheet* m_spritesheet;
 	Animator* m_animator;
 	Vector2 m_position;

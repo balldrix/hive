@@ -1,11 +1,8 @@
 #include "ParticleSystem.h"
 
-#include "pch.h"
-
-#include "PixelTexture.h"
 #include "Graphics.h"
+#include "PixelTexture.h"
 #include "Randomiser.h"
-
 
 ParticleSystem::ParticleSystem() : 
 	m_texture(nullptr),
@@ -112,6 +109,8 @@ void ParticleSystem::Emit(const ParticleData& particleData)
 
 void ParticleSystem::DeleteAll()
 {
+	m_texture->Release();
+
 	delete m_texture;
 	m_texture = nullptr;
 }

@@ -1,43 +1,47 @@
 #pragma once
 
-#include "pch.h"
+#include <DirectXTK/SimpleMath.h>
+#include <nlohmann/json.hpp>
+#include <string>
 
-namespace
+using json = nlohmann::json;
+using namespace DirectX::SimpleMath;
+
+struct SpriteFrameData
 {
-	struct SpriteFrameData
-	{
-		std::string filename = {};
-		RECT frame = {};
-		bool rotated = {};
-		bool trimmed = {};
-		RECT spriteSourceSize = {};
-		Vector2	sourceSize = {};
-		float duration = {};
-	};
+	std::string filename = {};
+	RECT frame = {};
+	bool rotated = {};
+	bool trimmed = {};
+	RECT spriteSourceSize = {};
+	Vector2	sourceSize = {};
+	float duration = {};
 
-	void from_json(const json& j, SpriteFrameData& s)
-	{
-		s.filename = j.at("filename").get<std::string>();
+	SpriteFrameData() = default;
+};
 
-		json rect = j["frame"];
-		s.frame.left = rect["x"];
-		s.frame.top = rect["y"];
-		s.frame.right = s.frame.left + rect["w"];
-		s.frame.bottom = s.frame.top + rect["h"];
+inline void from_json(const json& j, SpriteFrameData& s)
+{
+	s.filename = j.at("filename").get<std::string>();
 
-		s.rotated = j["rotated"];
-		s.trimmed = j["trimmed"];
+	json rect = j["frame"];
+	s.frame.left = rect["x"];
+	s.frame.top = rect["y"];
+	s.frame.right = s.frame.left + rect["w"];
+	s.frame.bottom = s.frame.top + rect["h"];
 
-		rect = j["spriteSourceSize"];
-		s.spriteSourceSize.left = rect["x"];
-		s.spriteSourceSize.top = rect["y"];
-		s.spriteSourceSize.right = s.spriteSourceSize.left + rect["w"];
-		s.spriteSourceSize.bottom = s.spriteSourceSize.top + rect["h"];
-		
-		json size = j["sourceSize"];
-		s.sourceSize.x = size["w"];
-		s.sourceSize.y = size["h"];
+	s.rotated = j["rotated"];
+	s.trimmed = j["trimmed"];
 
-		s.duration = j["duration"];
-	}
+	rect = j["spriteSourceSize"];
+	s.spriteSourceSize.left = rect["x"];
+	s.spriteSourceSize.top = rect["y"];
+	s.spriteSourceSize.right = s.spriteSourceSize.left + rect["w"];
+	s.spriteSourceSize.bottom = s.spriteSourceSize.top + rect["h"];
+
+	json size = j["sourceSize"];
+	s.sourceSize.x = size["w"];
+	s.sourceSize.y = size["h"];
+
+	s.duration = j["duration"];
 }

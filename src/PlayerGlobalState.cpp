@@ -1,10 +1,6 @@
-#include "PlayerOwnedStates.h"
-#include "StateMachine.h"
+#include "PlayerGlobalState.h"
+
 #include "Player.h"
-#include "UnitVectors.h"
-#include "ControlSystem.h"
-#include "SpriteSheet.h"
-#include "Animator.h"
 
 PlayerGlobalState* PlayerGlobalState::Instance()
 {
