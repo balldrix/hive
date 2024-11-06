@@ -225,30 +225,6 @@
     <ClInclude Include="src\Window.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="data\Sprites\hitbox.png" />
-    <Image Include="data\Sprites\mooks_spritesheet.png" />
-    <Image Include="data\Sprites\player_spritesheet.png" />
-    <Image Include="data\Sprites\shadow.png" />
-    <Image Include="data\Sprites\shadow_large.png" />
-    <Image Include="data\Sprites\UI\go_sign.png" />
-    <Image Include="data\Sprites\UI\kingMook_hud_portrait.png" />
-    <Image Include="data\Sprites\UI\lives_x0.png" />
-    <Image Include="data\Sprites\UI\lives_x1.png" />
-    <Image Include="data\Sprites\UI\lives_x2.png" />
-    <Image Include="data\Sprites\UI\lives_x3.png" />
-    <Image Include="data\Sprites\UI\lives_x4.png" />
-    <Image Include="data\Sprites\UI\lives_x5.png" />
-    <Image Include="data\Sprites\UI\loadingScreen_bg.png" />
-    <Image Include="data\Sprites\UI\mook_hud_portrait.png" />
-    <Image Include="data\Sprites\UI\player1_hud_healthbar_background.png" />
-    <Image Include="data\Sprites\UI\player1_hud_healthbar_fill.png" />
-    <Image Include="data\Sprites\UI\player1_hud_healthbar_frame.png" />
-    <Image Include="data\Sprites\UI\player1_hud_portrait.png" />
-    <Image Include="data\Sprites\UI\player_won_screen.png" />
-    <Image Include="data\Sprites\vfx.png" />
-    <Image Include="data\Tilesets\ts_bunker.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="data\assets.json">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -311,6 +287,16 @@
     <Text Include="data\enemy_data\type_data.txt" />
     <Text Include="data\player_data\player_damage.txt" />
     <Text Include="data\player_data\player_data.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="data\textures\mook_spritesheet.png" />
+    <Image Include="data\textures\player_spritesheet.png" />
+    <Image Include="data\textures\shadow.png" />
+    <Image Include="data\textures\shadow_large.png" />
+    <Image Include="data\textures\ui\loading_screen_bg.png" />
+    <Image Include="data\textures\ui\title_logo.png" />
+    <Image Include="data\textures\ui\title_screen_bg.png" />
+    <Image Include="data\textures\vfx.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F07D24C5-CADD-4262-80F1-7370DF167E8E}</ProjectGuid>
@@ -411,7 +397,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_AMD64_; UNICODE</PreprocessorDefinitions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -427,7 +413,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_AMD64_; UNICODE</PreprocessorDefinitions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -446,7 +432,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_AMD64_; UNICODE</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -465,7 +451,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_AMD64_; UNICODE</PreprocessorDefinitions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>

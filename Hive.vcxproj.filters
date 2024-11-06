@@ -393,6 +393,9 @@
     <Filter Include="System\Data">
       <UniqueIdentifier>{088bc27f-fcb8-47cf-b5af-72b28449102f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Data\Textures\UI">
+      <UniqueIdentifier>{07c841b0-8ba5-4ebb-8c1d-ebabffdd2aed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Window.h">
@@ -724,74 +727,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="data\Sprites\UI\go_sign.png">
-      <Filter>Data\Textures</Filter>
-    </Image>
-    <Image Include="data\Sprites\hitbox.png">
-      <Filter>Data\Textures</Filter>
-    </Image>
-    <Image Include="data\Sprites\UI\kingMook_hud_portrait.png">
-      <Filter>Data\Textures</Filter>
-    </Image>
-    <Image Include="data\Sprites\UI\lives_x0.png">
-      <Filter>Data\Textures</Filter>
-    </Image>
-    <Image Include="data\Sprites\UI\lives_x1.png">
-      <Filter>Data\Textures</Filter>
-    </Image>
-    <Image Include="data\Sprites\UI\lives_x2.png">
-      <Filter>Data\Textures</Filter>
-    </Image>
-    <Image Include="data\Sprites\UI\lives_x3.png">
-      <Filter>Data\Textures</Filter>
-    </Image>
-    <Image Include="data\Sprites\UI\lives_x4.png">
-      <Filter>Data\Textures</Filter>
-    </Image>
-    <Image Include="data\Sprites\UI\lives_x5.png">
-      <Filter>Data\Textures</Filter>
-    </Image>
-    <Image Include="data\Sprites\UI\mook_hud_portrait.png">
-      <Filter>Data\Textures</Filter>
-    </Image>
-    <Image Include="data\Sprites\mooks_spritesheet.png">
-      <Filter>Data\Textures</Filter>
-    </Image>
-    <Image Include="data\Sprites\UI\player_won_screen.png">
-      <Filter>Data\Textures</Filter>
-    </Image>
-    <Image Include="data\Sprites\UI\player1_hud_healthbar_background.png">
-      <Filter>Data\Textures</Filter>
-    </Image>
-    <Image Include="data\Sprites\UI\player1_hud_healthbar_fill.png">
-      <Filter>Data\Textures</Filter>
-    </Image>
-    <Image Include="data\Sprites\UI\player1_hud_healthbar_frame.png">
-      <Filter>Data\Textures</Filter>
-    </Image>
-    <Image Include="data\Sprites\UI\player1_hud_portrait.png">
-      <Filter>Data\Textures</Filter>
-    </Image>
-    <Image Include="data\Sprites\player_spritesheet.png">
-      <Filter>Data\Textures</Filter>
-    </Image>
-    <Image Include="data\Tilesets\ts_bunker.png">
-      <Filter>Data\Textures</Filter>
-    </Image>
-    <Image Include="data\Sprites\shadow.png">
-      <Filter>Data\Textures</Filter>
-    </Image>
-    <Image Include="data\Sprites\shadow_large.png">
-      <Filter>Data\Textures</Filter>
-    </Image>
-    <Image Include="data\Sprites\vfx.png">
-      <Filter>Data\Textures</Filter>
-    </Image>
-    <Image Include="data\Sprites\UI\loadingScreen_bg.png">
-      <Filter>Data\Textures</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="data\fonts\goodbye_despair_12pt.spritefont">
       <Filter>Data\Fonts</Filter>
     </None>
@@ -943,5 +878,31 @@
     <Text Include="data\player_data\player_damage.txt">
       <Filter>Data\Player</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="data\textures\mook_spritesheet.png">
+      <Filter>Data\Textures</Filter>
+    </Image>
+    <Image Include="data\textures\player_spritesheet.png">
+      <Filter>Data\Textures</Filter>
+    </Image>
+    <Image Include="data\textures\shadow.png">
+      <Filter>Data\Textures</Filter>
+    </Image>
+    <Image Include="data\textures\shadow_large.png">
+      <Filter>Data\Textures</Filter>
+    </Image>
+    <Image Include="data\textures\vfx.png">
+      <Filter>Data\Textures</Filter>
+    </Image>
+    <Image Include="data\textures\ui\loading_screen_bg.png">
+      <Filter>Data\Textures\UI</Filter>
+    </Image>
+    <Image Include="data\textures\ui\title_logo.png">
+      <Filter>Data\Textures\UI</Filter>
+    </Image>
+    <Image Include="data\textures\ui\title_screen_bg.png">
+      <Filter>Data\Textures\UI</Filter>
+    </Image>
   </ItemGroup>
 </Project>
