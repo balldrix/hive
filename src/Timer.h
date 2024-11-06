@@ -6,6 +6,6 @@ public:
 	Timer() {};
 	~Timer() {};
 
-	static float GetTicks();
-	static float GetFrequency();
+	unsigned __int64 GetTicks() const;
+	unsigned __int64 GetFrequency() const;
 };

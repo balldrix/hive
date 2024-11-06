@@ -92,7 +92,7 @@ void GameplayGameState::OnExit()
 void GameplayGameState::LoadAssets()
 {
 	Timer timer;
-	static float startTime = timer.GetTicks();
+	static float startTime = (float)timer.GetTicks();
 
 	//SoundManager::AddSound(L"data\\Sounds\\punch_001.wav");
 	//SoundManager::AddSound(L"data\\Sounds\\punch_003.wav");
@@ -168,8 +168,8 @@ void GameplayGameState::LoadAssets()
 
 	m_running = true;
 
-	static float loadingTime = timer.GetTicks();
-	static float loadingDuration = (loadingTime - startTime) * timer.GetFrequency();
+	static float loadingTime = (float)timer.GetTicks();
+	static float loadingDuration = (float)((loadingTime - startTime) * timer.GetFrequency());
 
 	Logger::LogInfo(fmt::format("Gameplay Loading took {}s", loadingDuration));
 }

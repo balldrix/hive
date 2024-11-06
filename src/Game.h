@@ -48,9 +48,9 @@ private:
 	GameStateManager* m_gameStateManager;
 
 	Timer m_timer;
-	float m_timerFreq;
+	unsigned __int64 m_timerFreq;
 	float m_gameTime;
-	float m_currentTime;
+	unsigned __int64 m_lastTime;
 	float m_clientWidth;
 	float m_clientHeight;
 	bool m_paused;

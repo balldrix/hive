@@ -1,28 +1,29 @@
 #include "Timer.h"
 
-#include <Windows.h>
-#include <mmsystem.h>
+#include <windows.h>
 
-#pragma comment(lib, "winmm.lib")
-
-float Timer::GetTicks()
+unsigned __int64 Timer::GetTicks() const
 {
-	LARGE_INTEGER ticks;
+    unsigned __int64 ticks = 0;
 
-	if (!QueryPerformanceCounter(&ticks))
-	{
-		ticks.QuadPart = timeGetTime();
-	}
-	return (float)ticks.QuadPart;
+    if(!QueryPerformanceCounter((LARGE_INTEGER*) &ticks))
+    {
+        // Fallback to timeGetTime in milliseconds if QPC fails
+        ticks = (__int64) timeGetTime();
+    }
+
+    return ticks;
 }
 
-float Timer::GetFrequency()
+unsigned __int64 Timer::GetFrequency() const
 {
-	LARGE_INTEGER frequency;
+    unsigned __int64 frequency = 0;
 
-	if (!QueryPerformanceFrequency(&frequency))
-	{
-		frequency.QuadPart = 1000;
-	}
-	return 1 / (float)frequency.QuadPart;
+    if(!QueryPerformanceFrequency((LARGE_INTEGER*) &frequency))
+    {
+        // Fallback frequency for timeGetTime
+        frequency = 1000;
+    }
+
+    return frequency;
 }

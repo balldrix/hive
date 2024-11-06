@@ -15,11 +15,10 @@
 #include "TitleScreenGameState.h"
 #include "Window.h"
 
-#include <Windows.h>
-
 #include <combaseapi.h>
 #include <objbase.h>
 #include <synchapi.h>
+#include <windows.h>
 
 using namespace GlobalConstants;
 
@@ -29,9 +28,9 @@ Game::Game() noexcept :
 	m_spriteBatch(nullptr),
 	m_input(nullptr),
 	m_gameStateManager(nullptr),
-	m_timerFreq(0.0f),
+	m_timerFreq(0),
 	m_gameTime(0.0f),
-	m_currentTime(0.0f),
+	m_lastTime(0),
 	m_retryAudio(false),
 	m_clientWidth(0),
 	m_clientHeight(0),
@@ -61,7 +60,7 @@ void Game::Init(Window* window, Graphics* graphics)
 	m_gameStateManager->SwitchState("InitialLoad");
 
 	m_timerFreq = m_timer.GetFrequency();
-	m_currentTime = m_timer.GetTicks();
+	m_lastTime = m_timer.GetTicks();
 	m_paused = false;
 
 	Logger::LogInfo("Initialised Game.");
@@ -69,11 +68,22 @@ void Game::Init(Window* window, Graphics* graphics)
 
 void Game::Run()
 {
-	float newTime = m_timer.GetTicks();
-	float deltaTime = (newTime - m_currentTime) * m_timerFreq;
-	if(deltaTime > 0.033f) deltaTime = 0.033f;
+	const float TargetFramerate = 120.0f;
+	const float TargetFrameDuration = 1.0f / TargetFramerate;
 
-	m_currentTime = newTime;
+	unsigned __int64 timeNow = m_timer.GetTicks();
+	unsigned __int64 timeDiff = timeNow - m_lastTime;
+	m_lastTime = timeNow;
+
+	if(timeDiff > m_timerFreq)
+	{
+		timeDiff = m_timerFreq;
+	}
+
+	float deltaTime = (float)timeDiff / (float)m_timerFreq;
+	float fps = 1.0f / deltaTime;
+
+	Logger::LogInfo(fmt::format("Delta Time: {0}, FPS: {1}", deltaTime, fps));
 
 	if(m_paused == false)
 	{
