@@ -1,3 +1,5 @@
+#define LOG_FPS 0
+
 #include "Game.h"
 
 #include "AudioEngine.h"
@@ -81,9 +83,12 @@ void Game::Run()
 	}
 
 	float deltaTime = (float)timeDiff / (float)m_timerFreq;
-	float fps = 1.0f / deltaTime;
-
-	Logger::LogInfo(fmt::format("Delta Time: {0}, FPS: {1}", deltaTime, fps));
+	
+	if(LOG_FPS)
+	{
+		float fps = 1.0f / deltaTime;
+		Logger::LogInfo(fmt::format("Delta Time: {0}, FPS: {1}", deltaTime, fps));
+	}
 
 	if(m_paused == false)
 	{
