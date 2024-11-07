@@ -146,7 +146,7 @@ void GameplayGameState::LoadAssets()
 	m_encounterHandler->Init(m_NPCManager->GetEnemyList());
 
 	m_playerBoundary.SetMin(Vector2(StartingBoundaryMinX, StartingBoundaryMinY));
-	m_playerBoundary.SetMax(Vector2((float)m_levelRenderer->GetLevelPixelWidth() - 1.0f, (float)m_graphics->GetHeight() - 1.0f));
+	m_playerBoundary.SetMax(Vector2((float)m_levelRenderer->GetLevelPixelWidth() - 1.0f, StartingBoundaryMaxY));
 	
 	m_camera->Init(GameWidth);
 	
