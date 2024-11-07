@@ -8,7 +8,7 @@
 
 EnemyKnockbackState* EnemyKnockbackState::Instance()
 {
-	static EnemyKnockbackState instance("Knockback");
+	static EnemyKnockbackState instance("knockback");
 	return &instance;
 }
 
