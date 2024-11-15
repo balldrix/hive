@@ -85,8 +85,7 @@ void LoadingGameState::OnExit()
 	else
 	{
 		UIManager::DestroyUIFrontEndView();
-		
-		// TODO load gameplay data assets
+		m_gameStateManager->GetState(s_targetGameState->GetStateName())->LoadAssets();
 	}
 }
 

@@ -32,6 +32,7 @@
 #include "TravellingSceneState.h"
 #include "UIManager.h"
 #include "UnitVectors.h"
+#include "PlayerHurtState.h"
 
 #include <cmath>
 #include <DirectXColors.h>
@@ -82,7 +83,6 @@ GameplayGameState::~GameplayGameState()
 
 void GameplayGameState::OnEntry()
 {
-	LoadAssets();
 }
 
 void GameplayGameState::OnExit()
@@ -220,6 +220,9 @@ void GameplayGameState::DeleteAssets()
 
 void GameplayGameState::ProcessInput()
 {
+	if(m_player->GetStateMachine()->IsInState(*PlayerHurtState::Instance()))
+		return;
+
 	if(m_input->IsKeyDown(ESC_KEY))
 		PostQuitMessage(0);
 

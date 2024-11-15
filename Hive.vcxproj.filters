@@ -748,15 +748,9 @@
     <None Include="data\hitbox_data\player_hitbox_data.json">
       <Filter>Data\Hitboxes</Filter>
     </None>
-    <None Include="data\spritesheet_data\mook_spritesheet_data.json">
-      <Filter>Data\SpritesheetData</Filter>
-    </None>
-    <None Include="data\spritesheet_data\player_spritesheet_data.json">
-      <Filter>Data\SpritesheetData</Filter>
-    </None>
-    <None Include="data\spritesheet_data\impactfx_spritesheet_data.json">
-      <Filter>Data\SpritesheetData</Filter>
-    </None>
+    <None Include="data\spritesheet_data\player_spritesheet_data.json" />
+    <None Include="data\spritesheet_data\impactfx_spritesheet_data.json" />
+    <None Include="data\spritesheet_data\mook_spritesheet_data.json" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="data\Sounds\boss_entrance_001.wav">
