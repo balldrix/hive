@@ -11,6 +11,7 @@ PlayerHurtState* PlayerHurtState::Instance()
 
 void PlayerHurtState::OnEnter(Player* player)
 {
+	player->Stop();
 	player->GetAnimator()->Reset();
 	player->GetAnimator()->SetAnimation(m_name);
 	player->GetHitBoxManager()->SetCollidersUsingTag(m_name);
