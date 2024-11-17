@@ -1,6 +1,6 @@
 #pragma once
 
-const unsigned int MaxCombo = 5;
+const unsigned int MaxCombo = 4;
 const float ComboResetTime = 0.7f;
 const float DoubleTapWindowDuration = 0.2f;
 
@@ -40,6 +40,7 @@ public:
 	int GetComboCounter() const { return m_comboCounter; }
 
 	void IncrementComboCount();
+	void ResetComboCount();
 	
 	bool CanAttack() const { return m_canAttack; }
 	bool CanCombo() const { return m_canCombo; }

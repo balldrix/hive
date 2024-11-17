@@ -56,10 +56,15 @@ void ControlSystem::IncrementComboCount()
 {
 	m_comboCounter++;
 
-	if(m_comboCounter > MaxCombo - 1)
+	if(m_comboCounter > MaxCombo)
 	{
 		m_comboCounter = 0;
 	}
+}
+
+void ControlSystem::ResetComboCount()
+{
+	m_comboCounter = 0;	
 }
 
 void ControlSystem::Reset()

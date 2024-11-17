@@ -45,6 +45,8 @@ public:
 	void								Walk();
 	void								Move(const Vector2& direction);
 	void								Stop();
+	void								NormalAttack();
+	void								StrongAttack();
 	void								Attack(std::string attackName);
 	void								Block();
 	void								ApplyDamage(GameObject* source, const int& amount);

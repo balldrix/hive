@@ -8,6 +8,8 @@
 #include "PlayerIdleState.h"
 #include "Sprite.h"
 #include "StateMachine.h"
+#include "Logger.h"
+#include "SpriteSheet.h"
 
 PlayerAttackState* PlayerAttackState::Instance()
 {
@@ -65,6 +67,8 @@ void PlayerAttackState::OnExit(Player* player)
 	
 	endXPos *= (int)player->GetFacingDirection().x;	
 	player->SetPositionX(player->GetPositionX() + endXPos);
+	player->GetSprite()->SetPosition(player->GetPosition());
+	player->GetShadow()->SetPosition(player->GetPosition());
 	player->GetShadow()->EnableSprite();
 }
 

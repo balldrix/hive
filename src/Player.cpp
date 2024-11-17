@@ -248,14 +248,12 @@ void Player::Update(float deltaTime)
 
 	if(m_controlSystem->GetLastKeyPressed() == Controls::NormalAttack)
 	{
-		Attack("attackNormal_");
-		m_controlSystem->SetControlsPressed(Controls::None);
+		NormalAttack();
 	}
 
 	if(m_controlSystem->GetLastKeyPressed() == Controls::StrongAttack)
 	{
-		Attack("attackStrong_");
-		m_controlSystem->SetControlsPressed(Controls::None);
+		StrongAttack();
 	}
 }
 
@@ -377,8 +375,26 @@ void Player::Stop()
 	SetCurrentVelocity(Vector2::Zero);
 }
 
+void Player::NormalAttack()
+{
+	if(m_controlSystem->GetComboCounter() == MaxCombo)
+	{
+		m_controlSystem->ResetComboCount();
+	}
+
+	Attack("attackNormal_");
+}
+
+void Player::StrongAttack()
+{
+	Attack("attackStrong_");
+	m_controlSystem->ResetComboCount();
+}
+
 void Player::Attack(std::string attackName)
 {
+	m_controlSystem->SetControlsPressed(Controls::None);
+
 	auto comboCounter = m_controlSystem->GetComboCounter();
 	attackName.append(std::to_string(comboCounter + 1));
 
