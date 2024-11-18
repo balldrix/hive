@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Impact Sprite FX.
 - HitStops.
 - Running enemy type.
-- 
+- Controller Support.
 - 
 
 ### Changed
@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved Player attack combos.
 - Improved combo system.
 - Player block state.
-- Basic enemy has better sprite design
+- Basic enemy has better sprite design.
 
 ### Removed
 - Input buffer removed.
