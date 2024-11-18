@@ -40,6 +40,11 @@ Game::Game() noexcept :
 {
 }
 
+Game::~Game()
+{
+	Shutdown();
+}
+
 void Game::Init(Window* window, Graphics* graphics)
 {
 	// allow multi threading
@@ -130,17 +135,6 @@ void Game::Render()
 	m_graphics->PresentBackBuffer();
 }
 
-void Game::DeleteAll()
-{
-	delete m_gameStateManager;
-	delete m_input;
-	
-	m_gameStateManager = nullptr;
-	m_input = nullptr;
-	m_graphics = nullptr;
-	m_window = nullptr;
-}
-
 void Game::OnSuspending()
 {
 }
@@ -154,6 +148,18 @@ void Game::OnWindowSizeChanged(int width, int height)
 	m_window->SetWidth(width);
 	m_window->SetHeight(height);
 	m_graphics->CreateResources();
+}
+
+void Game::Shutdown()
+{
+	delete m_gameStateManager;
+	m_gameStateManager = nullptr;
+
+	delete m_input;
+	m_input = nullptr;
+
+	m_graphics = nullptr;
+	m_window = nullptr;
 }
 
 LRESULT Game::MessageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam)

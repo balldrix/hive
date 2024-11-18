@@ -15,7 +15,7 @@ class Game
 {
 public:
 	Game() noexcept;
-	~Game() = default;
+	~Game();
 
 	Game(Game&&) = default;
 	Game& operator= (Game&&) = default;
@@ -32,11 +32,11 @@ public:
 	void ProcessCollisions();
 	void Render();
 
-	void DeleteAll();
-
 	void OnSuspending();
 	void OnResuming();
 	void OnWindowSizeChanged(int width, int height);
+
+	void Shutdown();
 
 	LRESULT MessageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam);
 
