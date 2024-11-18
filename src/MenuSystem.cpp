@@ -32,8 +32,9 @@ void MenuSystem::Update(Input* input)
 	if(!s_instance->s_isInputAllowed) return;
 
 	auto currentSelectedItem = s_instance->s_menuItems[s_selectedItemIndex];
+	auto buttons = input->GetGamePadButtons();
 
-	if(input->WasKeyPressed(ENTER_KEY))
+	if(input->WasKeyPressed(ENTER_KEY) || input->WasGamePadButtonPressed(buttons.a))
 	{
 		currentSelectedItem->OnConfirmPressed();
 		s_currentMenu->OnConfirmPressed(s_selectedItemIndex);
@@ -43,22 +44,22 @@ void MenuSystem::Update(Input* input)
 	int index = -1;
 	Vector2 direction = Vector2::Zero;
 
-	if(input->WasKeyPressed(PLAYER_UP_KEY))
+	if(input->WasKeyPressed(PLAYER_UP_KEY) || input->WasGamePadButtonPressed(buttons.dpadUp) || input->WasGamePadButtonPressed(buttons.leftStickUp))
 	{
 		index = currentSelectedItem->GetNavigation().up;
 		direction = Vector2::UnitY;
 	}
-	else if(input->WasKeyPressed(PLAYER_DOWN_KEY))
+	else if(input->WasKeyPressed(PLAYER_DOWN_KEY) || input->WasGamePadButtonPressed(buttons.dpadDown) || input->WasGamePadButtonPressed(buttons.leftStickDown))
 	{
 		index = currentSelectedItem->GetNavigation().down;
 		direction = -Vector2::UnitY;
 	}
-	else if(input->WasKeyPressed(PLAYER_LEFT_KEY))
+	else if(input->WasKeyPressed(PLAYER_LEFT_KEY) || input->WasGamePadButtonPressed(buttons.dpadLeft) || input->WasGamePadButtonPressed(buttons.leftStickLeft))
 	{
 		index = currentSelectedItem->GetNavigation().left;
 		direction = Vector2::UnitX;
 	}
-	else if(input->WasKeyPressed(PLAYER_RIGHT_KEY))
+	else if(input->WasKeyPressed(PLAYER_RIGHT_KEY) || input->WasGamePadButtonPressed(buttons.dpadRight) || input->WasGamePadButtonPressed(buttons.leftStickRight))
 	{
 		index = currentSelectedItem->GetNavigation().right;
 		direction = -Vector2::UnitX;

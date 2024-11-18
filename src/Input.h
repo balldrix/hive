@@ -1,6 +1,9 @@
 #pragma once
 
+#include <directxtk/GamePad.h>
 #include <windows.h>
+
+using namespace DirectX;
 
 /* ****************************
 Keys
@@ -22,27 +25,8 @@ const UCHAR PLAYER_X_KEY = 0x58; // x key
 const UCHAR PLAYER_Z_KEY = 0x5A; // z key
 const UCHAR PLAYER_C_KEY = 0x43; // c key
 
- /* ****************************
- XboX Controller
- *******************************/
-
-const DWORD GAMEPAD_DPAD_UP = 0x0001;
-const DWORD GAMEPAD_DPAD_DOWN = 0x0002;
-const DWORD GAMEPAD_DPAD_LEFT = 0x0004;
-const DWORD GAMEPAD_DPAD_RIGHT = 0x0008;
-const DWORD GAMEPAD_START_BUTTON = 0x0010;
-const DWORD GAMEPAD_BACK_BUTTON = 0x0020;
-const DWORD GAMEPAD_LEFT_THUMB = 0x0040;
-const DWORD GAMEPAD_RIGHT_THUMB = 0x0080;
-const DWORD GAMEPAD_LEFT_SHOULDER = 0x0100;
-const DWORD GAMEPAD_RIGHT_SHOULDER = 0x0200;
-const DWORD GAMEPAD_A = 0x1000;
-const DWORD GAMEPAD_B = 0x2000;
-const DWORD GAMEPAD_X = 0x4000;
-const DWORD GAMEPAD_Y = 0x8000;
-
-const UINT MAX_KEY_ARRAY = 256;		// max number of keys available
-const float MAX_INPUT_DELAY = 0.2f;	// time delay between inputs
+const UINT MAX_KEY_ARRAY = 256;	
+const float MAX_INPUT_DELAY = 0.2f;
 
 class Input
 {
@@ -50,29 +34,42 @@ public:
 	Input();
 	~Input();
 
-	void SetKeyDown(WPARAM wParam); // set key down 
-	void SetKeyUp(WPARAM wParam);	// set key up
-	void SetMouseIn(LPARAM lParam); // set mouse position
-	void SetMouseX(UINT x);			// set mouse x position
-	void SetMouseY(UINT y);			// set mouse y position
+	void Init();
 
-	void SetMouseClicked(bool button); // set Mouse Left Button status
+	void UpdateGamePad();
+	void SetKeyDown(WPARAM wParam); 
+	void SetKeyUp(WPARAM wParam);
+	void SetMouseIn(LPARAM lParam);
+	void SetMouseX(UINT x);
+	void SetMouseY(UINT y);	
 
-	void ClearKeysDown();		// clear keys pressed array
-	void ClearKeysPressed();		// clear keys pressed array
-	void ClearAll();			// clear all input
+	void SetMouseClicked(bool button);
 
-	bool IsKeyDown(UCHAR key) const;			// check if key pressed
-	bool WasKeyPressed(UCHAR key) const;	// check if key was pressed
-	UINT GetMouseX() const { return m_mouseX; } // return mouse X position
-	UINT GetMouseY() const { return m_mouseY; } // return mouse Y position
-	bool GetMouseClicked() const { return m_mouseClicked; } // return mouse clicked status
+	void ClearKeysDown();
+	void ClearKeysPressed();
+	void ClearAll();
 
+	bool IsKeyDown(UCHAR key) const;	
+	bool WasKeyPressed(UCHAR key) const;
+	UINT GetMouseX() const { return m_mouseX; }
+	UINT GetMouseY() const { return m_mouseY; } 
+	bool GetMouseClicked() const { return m_mouseClicked; } 
+
+	void Shutdown();
+
+	void Suspend();
+	void Resume();
+
+	bool WasGamePadButtonPressed(GamePad::ButtonStateTracker::ButtonState buttonState) const;
+	GamePad::State GetGamePadState() const { return m_gamePad->GetState(0); }
+	GamePad::ButtonStateTracker GetGamePadButtons() const { return m_buttons; }
 
 private:
-	bool m_keysPressed[MAX_KEY_ARRAY]; // boolean array of keys 
-	bool m_keysDown[MAX_KEY_ARRAY]; // boolean array of keys 
-	UINT m_mouseX;					// mouse x position
-	UINT m_mouseY;					// mouse y position
-	bool m_mouseClicked;			// L mouse button
+	bool m_keysPressed[MAX_KEY_ARRAY];
+	bool m_keysDown[MAX_KEY_ARRAY]; 
+	UINT m_mouseX;					
+	UINT m_mouseY;					
+	bool m_mouseClicked;			
+	GamePad* m_gamePad;
+	GamePad::ButtonStateTracker m_buttons;
 };

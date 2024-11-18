@@ -31,6 +31,8 @@ GameStateManager::~GameStateManager()
 
 void GameStateManager::Init(Graphics* graphics, Input* input)
 {
+	Logger::LogInfo("Initialising Gamestate manager.");
+
 	m_graphics = graphics;
 	m_input = input;
 }

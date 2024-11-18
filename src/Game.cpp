@@ -54,6 +54,7 @@ void Game::Init(Window* window, Graphics* graphics)
 	m_graphics = graphics;
 
 	m_input = new Input();
+	m_input->Init();
 
 	m_gameStateManager = new GameStateManager();
 	m_gameStateManager->Init(m_graphics, m_input);
@@ -114,6 +115,7 @@ void Game::Run()
 
 void Game::ProcessInput()
 {
+	m_input->UpdateGamePad();
 	m_gameStateManager->ProcessInput();
 }
 
@@ -137,10 +139,12 @@ void Game::Render()
 
 void Game::OnSuspending()
 {
+	m_input->Suspend();
 }
 
 void Game::OnResuming()
 {
+	m_input->Resume();
 }
 
 void Game::OnWindowSizeChanged(int width, int height)

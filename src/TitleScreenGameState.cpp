@@ -25,7 +25,10 @@ void TitleScreenGameState::Update(float deltaTime)
 {
 	UIManager::Update(deltaTime);
 
-	if(m_gameStateManager->GetInput()->WasKeyPressed(ENTER_KEY))
+	auto input = m_gameStateManager->GetInput();
+	auto buttons = input->GetGamePadButtons();
+
+	if(input->WasKeyPressed(ENTER_KEY) || input->WasGamePadButtonPressed(buttons.a))
 	{
 		m_gameStateManager->SwitchState("MainMenu");
 	}

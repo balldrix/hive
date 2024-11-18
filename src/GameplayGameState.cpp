@@ -223,26 +223,32 @@ void GameplayGameState::ProcessInput()
 	if(m_player->GetStateMachine()->IsInState(*PlayerHurtState::Instance()))
 		return;
 
-	if(m_input->IsKeyDown(ESC_KEY))
+	auto gamePadState = m_input->GetGamePadState();
+	auto buttons = m_input->GetGamePadButtons();
+
+	if(m_input->IsKeyDown(ESC_KEY) || gamePadState.IsMenuPressed())
 		PostQuitMessage(0);
 
-	if(m_input->IsKeyDown('R'))
+#ifdef _DEBUG
+	if(m_input->IsKeyDown('R') || gamePadState.IsViewPressed())
 		ResetGame();
 
 	if(m_input->WasKeyPressed(F4_KEY))
 	{
 		ToggleHitBoxes();
 	}
+#endif
 
-	if(m_input->IsKeyDown(PLAYER_UP_KEY) &&
+
+	if(m_input->IsKeyDown(PLAYER_UP_KEY) || gamePadState.IsDPadUpPressed() || gamePadState.IsLeftThumbStickUp() &&
 		!m_input->IsKeyDown(PLAYER_DOWN_KEY))
 	{
-		if(m_input->IsKeyDown(PLAYER_LEFT_KEY) &&
+		if(m_input->IsKeyDown(PLAYER_LEFT_KEY) || gamePadState.IsDPadLeftPressed() || gamePadState.IsLeftThumbStickLeft() &&
 			!m_input->IsKeyDown(PLAYER_RIGHT_KEY))
 		{
 			m_player->Move(UnitVectors::UpLeft);
 		}
-		else if(m_input->IsKeyDown(PLAYER_RIGHT_KEY) &&
+		else if(m_input->IsKeyDown(PLAYER_RIGHT_KEY) || gamePadState.IsDPadRightPressed() || gamePadState.IsLeftThumbStickRight() &&
 			!m_input->IsKeyDown(PLAYER_LEFT_KEY))
 		{
 			m_player->Move(UnitVectors::UpRight);
@@ -252,14 +258,14 @@ void GameplayGameState::ProcessInput()
 			m_player->Move(UnitVectors::Up);
 		}
 	}
-	else if(m_input->IsKeyDown(PLAYER_DOWN_KEY))
+	else if(m_input->IsKeyDown(PLAYER_DOWN_KEY) || gamePadState.IsDPadDownPressed() || gamePadState.IsLeftThumbStickDown())
 	{
-		if(m_input->IsKeyDown(PLAYER_LEFT_KEY) &&
+		if(m_input->IsKeyDown(PLAYER_LEFT_KEY) || gamePadState.IsDPadLeftPressed() || gamePadState.IsLeftThumbStickLeft() &&
 			!m_input->IsKeyDown(PLAYER_RIGHT_KEY))
 		{
 			m_player->Move(UnitVectors::DownLeft);
 		}
-		else if(m_input->IsKeyDown(PLAYER_RIGHT_KEY) &&
+		else if(m_input->IsKeyDown(PLAYER_RIGHT_KEY) || gamePadState.IsDPadRightPressed() || gamePadState.IsLeftThumbStickRight() &&
 			!m_input->IsKeyDown(PLAYER_LEFT_KEY))
 		{
 			m_player->Move(UnitVectors::DownRight);
@@ -269,18 +275,18 @@ void GameplayGameState::ProcessInput()
 			m_player->Move(UnitVectors::Down);
 		}
 	}
-	else if(m_input->IsKeyDown(PLAYER_RIGHT_KEY) &&
+	else if(m_input->IsKeyDown(PLAYER_RIGHT_KEY) || gamePadState.IsDPadRightPressed() || gamePadState.IsLeftThumbStickRight() &&
 		!m_input->IsKeyDown(PLAYER_LEFT_KEY))
 	{
 		m_player->Move(UnitVectors::Right);
 	}
-	else if(m_input->IsKeyDown(PLAYER_LEFT_KEY) &&
+	else if(m_input->IsKeyDown(PLAYER_LEFT_KEY) || gamePadState.IsDPadLeftPressed() || gamePadState.IsLeftThumbStickLeft() &&
 		!m_input->IsKeyDown(PLAYER_RIGHT_KEY))
 	{
 		m_player->Move(UnitVectors::Left);
 	}
 
-	if(m_input->WasKeyPressed(PLAYER_RIGHT_KEY))
+	if(m_input->WasKeyPressed(PLAYER_RIGHT_KEY) || m_input->WasGamePadButtonPressed(buttons.dpadRight) || m_input->WasGamePadButtonPressed(buttons.leftStickRight))
 	{
 		m_controlSystem->SetControlsPressed(Controls::Right);
 		m_controlSystem->ResetDoubleTap();
@@ -292,7 +298,7 @@ void GameplayGameState::ProcessInput()
 		}
 	}
 	
-	if(m_input->WasKeyPressed(PLAYER_LEFT_KEY))
+	if(m_input->WasKeyPressed(PLAYER_LEFT_KEY) || m_input->WasGamePadButtonPressed(buttons.dpadLeft) || m_input->WasGamePadButtonPressed(buttons.leftStickLeft))
 	{
 		m_controlSystem->SetControlsPressed(Controls::Left);
 		m_controlSystem->ResetDoubleTap();
@@ -304,40 +310,37 @@ void GameplayGameState::ProcessInput()
 		}
 	}
 
-	if(m_input->IsKeyDown(PLAYER_Z_KEY))
+	if(m_input->IsKeyDown(PLAYER_Z_KEY) || gamePadState.IsBPressed())
 	{
 		m_player->Block();
+		return;
 	}
 	else if(m_player->GetStateMachine()->IsInState(*PlayerBlockState::Instance()))
 	{
 		m_player->GetStateMachine()->ChangeState(PlayerIdleState::Instance());
 	}
 
-	if(m_input->IsKeyDown(PLAYER_Z_KEY))
-	{
-		return;
-	}
-
-	if(m_input->WasKeyPressed(PLAYER_X_KEY))
+	if(m_input->WasKeyPressed(PLAYER_X_KEY) || m_input->WasGamePadButtonPressed(buttons.x))
 	{
 		m_controlSystem->SetControlsPressed(Controls::NormalAttack);
 		m_controlSystem->ResetComboTimer();
 		return;
 	}
 
-	if(m_input->WasKeyPressed(PLAYER_C_KEY))
+	if(m_input->WasKeyPressed(PLAYER_C_KEY) || m_input->WasGamePadButtonPressed(buttons.y))
 	{
 		m_controlSystem->SetControlsPressed(Controls::StrongAttack);
 		m_controlSystem->ResetComboTimer();
 		return;
 	}
 
-	if(!(m_input->IsKeyDown(PLAYER_UP_KEY) ||
-		m_input->IsKeyDown(PLAYER_DOWN_KEY) ||
-		m_input->IsKeyDown(PLAYER_LEFT_KEY) ||
-		m_input->IsKeyDown(PLAYER_RIGHT_KEY) ||
+	if(!(m_input->IsKeyDown(PLAYER_UP_KEY) || gamePadState.IsDPadUpPressed() || gamePadState.IsLeftThumbStickUp() ||
+		m_input->IsKeyDown(PLAYER_DOWN_KEY) || gamePadState.IsDPadDownPressed() || gamePadState.IsLeftThumbStickDown() ||
+		m_input->IsKeyDown(PLAYER_LEFT_KEY) || gamePadState.IsDPadLeftPressed() || gamePadState.IsLeftThumbStickLeft() ||
+		m_input->IsKeyDown(PLAYER_RIGHT_KEY) || gamePadState.IsDPadRightPressed() || gamePadState.IsLeftThumbStickRight() ||
 		m_input->IsKeyDown(PLAYER_X_KEY) ||
-		m_input->IsKeyDown(PLAYER_Z_KEY)))
+		m_input->IsKeyDown(PLAYER_Z_KEY) ||
+		m_input->WasKeyPressed(PLAYER_C_KEY)))
 	{
 		m_player->Move(Vector2::Zero);
 		m_player->Walk();

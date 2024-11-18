@@ -9,7 +9,7 @@
 
 PlayerDeadState* PlayerDeadState::Instance()
 {
-	static PlayerDeadState instance("Dead");
+	static PlayerDeadState instance("dead");
 	return &instance;
 }
 

@@ -8,7 +8,7 @@
 
 PlayerKnockbackState* PlayerKnockbackState::Instance()
 {
-	static PlayerKnockbackState instance("Knockback");
+	static PlayerKnockbackState instance("knockback");
 	return &instance;
 }
 
