@@ -92,7 +92,7 @@ void GameplayGameState::OnExit()
 void GameplayGameState::LoadAssets()
 {
 	Timer timer;
-	static float startTime = (float)timer.GetTicks();
+	unsigned __int64 startTime = timer.GetTicks();
 
 	//SoundManager::AddSound(L"data\\Sounds\\punch_001.wav");
 	//SoundManager::AddSound(L"data\\Sounds\\punch_003.wav");
@@ -168,8 +168,9 @@ void GameplayGameState::LoadAssets()
 
 	m_running = true;
 
-	static float loadingTime = (float)timer.GetTicks();
-	static float loadingDuration = (float)((loadingTime - startTime) * timer.GetFrequency());
+	unsigned __int64 endTime = timer.GetTicks();
+	unsigned __int64 timeDiff = endTime - startTime;
+	float loadingDuration = (float)timeDiff / (float)timer.GetFrequency();
 
 	Logger::LogInfo(fmt::format("Gameplay Loading took {}s", loadingDuration));
 }
@@ -239,7 +240,6 @@ void GameplayGameState::ProcessInput()
 	}
 #endif
 
-
 	if(m_input->IsKeyDown(PLAYER_UP_KEY) || gamePadState.IsDPadUpPressed() || gamePadState.IsLeftThumbStickUp() &&
 		!m_input->IsKeyDown(PLAYER_DOWN_KEY))
 	{
@@ -286,7 +286,8 @@ void GameplayGameState::ProcessInput()
 		m_player->Move(UnitVectors::Left);
 	}
 
-	if(m_input->WasKeyPressed(PLAYER_RIGHT_KEY) || m_input->WasGamePadButtonPressed(buttons.dpadRight) || m_input->WasGamePadButtonPressed(buttons.leftStickRight))
+	if(m_input->WasKeyPressed(PLAYER_RIGHT_KEY) || 
+		m_input->WasGamePadButtonPressed(buttons.dpadRight) || m_input->WasGamePadButtonPressed(buttons.leftStickRight))
 	{
 		m_controlSystem->SetControlsPressed(Controls::Right);
 		m_controlSystem->ResetDoubleTap();
@@ -298,7 +299,8 @@ void GameplayGameState::ProcessInput()
 		}
 	}
 	
-	if(m_input->WasKeyPressed(PLAYER_LEFT_KEY) || m_input->WasGamePadButtonPressed(buttons.dpadLeft) || m_input->WasGamePadButtonPressed(buttons.leftStickLeft))
+	if(m_input->WasKeyPressed(PLAYER_LEFT_KEY) || 
+		m_input->WasGamePadButtonPressed(buttons.dpadLeft) || m_input->WasGamePadButtonPressed(buttons.leftStickLeft))
 	{
 		m_controlSystem->SetControlsPressed(Controls::Left);
 		m_controlSystem->ResetDoubleTap();
@@ -396,11 +398,48 @@ void GameplayGameState::ProcessCollisions()
 	auto isPlayerHitBoxActive = m_player->GetHitBoxManager()->IsHitBoxActive();
 	auto playerGroundPositionX = m_player->GetGroundPosition().x;
 	auto playerGroundPositionY = m_player->GetGroundPosition().y;
-
+	auto playerPushBox = m_player->GetHitBoxManager()->GetPushBox();
 
 	for(size_t i = 0; i < enemyList.size(); i++)
 	{
 		Enemy* enemy = enemyList[i];
+
+		auto enemyPushBox = enemy->GetHitBoxManager()->GetPushBox();
+
+		if(playerPushBox.OnCollision(enemyPushBox))
+		{
+			float resolve = 0;
+
+			float xDiff = (playerPushBox.GetLeft() + (playerPushBox.GetWidth() * 0.5f)) - (enemyPushBox.GetLeft() + (enemyPushBox.GetWidth() * 0.5f));
+			float yDiff = (playerPushBox.GetTop() + (playerPushBox.GetHeight() * 0.5f)) - (enemyPushBox.GetTop() + (enemyPushBox.GetHeight() * 0.5f));
+
+			if(fabs(xDiff) > fabs(yDiff))
+			{
+				if(xDiff > 0)
+				{
+					resolve = (enemyPushBox.GetLeft() + enemyPushBox.GetWidth()) - playerPushBox.GetLeft();
+				}
+				else
+				{
+					resolve = -((playerPushBox.GetLeft() + playerPushBox.GetWidth()) - enemyPushBox.GetLeft());
+				}
+
+				m_player->SetPosition(playerGroundPositionX + resolve, playerGroundPositionY);
+			}
+			else
+			{
+				if(yDiff > 0)
+				{
+					resolve = (enemyPushBox.GetTop() + enemyPushBox.GetHeight()) - playerPushBox.GetTop();
+				}
+				else // Colliding below
+				{
+					resolve = -((playerPushBox.GetTop() + playerPushBox.GetHeight()) - enemyPushBox.GetTop());
+				}
+
+				m_player->SetPosition(playerGroundPositionX, playerGroundPositionY + resolve);
+			}
+		}
 
 		// true if player hitbox is active and enemy is in vertical range
 		if(isPlayerHitBoxActive &&

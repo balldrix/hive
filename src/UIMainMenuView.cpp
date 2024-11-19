@@ -30,6 +30,7 @@ UIMainMenuView::~UIMainMenuView()
 
 void UIMainMenuView::Init(std::string name)
 {
+	m_name = name;
 	m_uiStackingView.Init("Main Menu Stacking View");
 	m_uiStackingView.SetOrientation(UIStackingView::Orientations::Vertical);
 

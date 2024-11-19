@@ -16,6 +16,10 @@ public:
 	void Render(Graphics* graphics, const Vector2& position);
 
 	AABB GetAABB() const { return m_boundingBox; }
+	float GetLeft();
+	float GetWidth();
+	float GetTop();
+	float GetHeight();
 
 	void SetAABB(const AABB& boundingBox);
 	void SetFlipped(bool flipped);

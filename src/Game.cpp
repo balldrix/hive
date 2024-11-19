@@ -292,7 +292,7 @@ LRESULT Game::MessageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lPara
 
 			s_fullscreen = !s_fullscreen;
 		}
-
+		break;
 	case WM_MENUCHAR:
 		// A menu is active and the user presses a key that does not correspond
 		// to any mnemonic or accelerator key. Ignore so we don't produce an error beep.

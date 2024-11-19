@@ -311,23 +311,7 @@ void Enemy::Knockback(const Vector2& direction, const float& force)
 
 void Enemy::Attack()
 {
-	int randomNum = Randomiser::Instance()->GetRandNum(0, 2);
-	switch(randomNum)
-	{
-	case 0:
-		EnemyAttackState::Instance()->SetAttack("attackNormal");
-		break;
-	case 1:
-		EnemyAttackState::Instance()->SetAttack("attackNormal");
-		break;
-	case 2:
-		EnemyAttackState::Instance()->SetAttack("attackNormal");
-		break;
-	default:
-		EnemyAttackState::Instance()->SetAttack("attackNormal");
-		break;
-	}
-
+	EnemyAttackState::Instance()->SetAttack("attackNormal");
 	m_stateMachine->ChangeState(EnemyAttackState::Instance());
 }
 
