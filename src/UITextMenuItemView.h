@@ -31,6 +31,7 @@ public:
 	void SetSelectedStateColours(Color selected, Color unselected, Color disabled);
 	void SetPosition(const Vector2& position);
 	void SetColour(Color colour);
+	void SetAlignment(UISpriteText::Alignments alignment);
 
 private:
 	UISpriteText* m_uiSpriteText;

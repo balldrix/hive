@@ -88,3 +88,8 @@ void UITextMenuItemView::SetColour(Color colour)
 {
 	m_uiSpriteText->SetColour(colour);
 }
+
+void UITextMenuItemView::SetAlignment(UISpriteText::Alignments alignment)
+{
+	m_uiSpriteText->SetAlignment(alignment);
+}
