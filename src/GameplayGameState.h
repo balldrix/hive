@@ -85,7 +85,9 @@ private:
 
 	float m_deltaTime;
 	float m_stopTimer;
+	float m_collisionCooldown;
 	bool m_displayHitBoxes;
+	bool m_isCollisionOnCooldown;
 
 	Spritesheet* m_impactFxSpritesheet;
 	Animator* m_impactFxAnimator;

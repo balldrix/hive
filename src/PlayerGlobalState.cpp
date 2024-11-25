@@ -16,10 +16,8 @@ void PlayerGlobalState::OnEnter(Player* player)
 
 void PlayerGlobalState::Execute(Player* player)
 {
-	auto currentState = player->GetStateMachine()->GetCurrentState();
-
-	if(currentState == PlayerKnockbackState::Instance() ||
-		currentState == PlayerDeadState::Instance())
+	if(player->GetStateMachine()->IsInState(*PlayerKnockbackState::Instance()) ||
+		player->GetStateMachine()->IsInState(*PlayerDeadState::Instance()))
 	{
 		return;
 	}

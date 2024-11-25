@@ -22,7 +22,10 @@
 #include "ParticleSystem.h"
 #include "Player.h"
 #include "PlayerBlockState.h"
+#include "PlayerDeadState.h"
+#include "PlayerHurtState.h"
 #include "PlayerIdleState.h"
+#include "PlayerKnockbackState.h"
 #include "Randomiser.h"
 #include "SoundSource.h"
 #include "SpriteSheet.h"
@@ -32,7 +35,6 @@
 #include "TravellingSceneState.h"
 #include "UIManager.h"
 #include "UnitVectors.h"
-#include "PlayerHurtState.h"
 
 #include <cmath>
 #include <DirectXColors.h>
@@ -66,6 +68,8 @@ GameplayGameState::GameplayGameState() :
 	m_impactFxAnimator(nullptr),
 	m_impactFx(nullptr),
 	m_particleSystem(nullptr),
+	m_collisionCooldown(0.0f),
+	m_isCollisionOnCooldown(false),
 	GameState("Gameplay")
 {}
 
@@ -221,7 +225,9 @@ void GameplayGameState::DeleteAssets()
 
 void GameplayGameState::ProcessInput()
 {
-	if(m_player->GetStateMachine()->IsInState(*PlayerHurtState::Instance()))
+	if(m_player->GetStateMachine()->IsInState(*PlayerHurtState::Instance()) || 
+		m_player->GetStateMachine()->IsInState(*PlayerKnockbackState::Instance()) ||
+		m_player->GetStateMachine()->IsInState(*PlayerDeadState::Instance()))
 		return;
 
 	auto gamePadState = m_input->GetGamePadState();
@@ -376,6 +382,12 @@ void GameplayGameState::Tick(float deltaTime)
 		return;
 	}
 
+	if(m_collisionCooldown > 0)
+		m_collisionCooldown -= deltaTime;
+
+	if(m_collisionCooldown <= 0)
+		m_isCollisionOnCooldown = false;
+
 	m_controlSystem->Update(deltaTime);
 	m_camera->Update(deltaTime);
 	m_player->Update(deltaTime);
@@ -391,6 +403,9 @@ void GameplayGameState::Tick(float deltaTime)
 void GameplayGameState::ProcessCollisions()
 {
 	if(m_stopTimer > 0)
+		return;
+
+	if(m_isCollisionOnCooldown)
 		return;
 
 	std::vector<Enemy*> enemyList = m_NPCManager->GetEnemyList();
@@ -459,10 +474,13 @@ void GameplayGameState::ProcessCollisions()
 				enemy->ApplyDamage(m_player, damageData.amount);
 				enemy->ShowEnemyHud();
 
-				m_stopTimer = damageData.hitStopDuration;				
+				m_stopTimer = damageData.hitStopDuration;
 				m_impactFx->DisplayFx(Vector2(groundPosition.x, groundPosition.y - spriteHeight * 0.5f));
 
 				SpawnParticles(m_impactFx->Position(), normalDirection, (Color)Colors::Green, (Color)Colors::DarkGreen, 1.0f, 200);
+
+				m_isCollisionOnCooldown = true;
+				m_collisionCooldown = 1.0f;
 
 				return;
 			}
@@ -492,6 +510,7 @@ void GameplayGameState::ProcessCollisions()
 					m_player->FlipHorizontally(m_player->GetFacingDirection() != Vector3::Left);
 
 				enemy->ShowEnemyHud();
+
 				m_stopTimer = damageData.hitStopDuration;
 				m_impactFx->DisplayFx(Vector2(playerGroundPositionX, playerGroundPositionY - spriteHeight * 0.5f));
 
@@ -503,6 +522,9 @@ void GameplayGameState::ProcessCollisions()
 				{
 					SpawnParticles(m_impactFx->Position(), normalDirection, (Color)Colors::Red, (Color)Colors::DarkRed, 1.0f, 200);
 				}
+
+				m_isCollisionOnCooldown = true;
+				m_collisionCooldown = 1.0f;
 				
 				return;
 			}

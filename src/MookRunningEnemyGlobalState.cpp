@@ -2,14 +2,14 @@
 
 #include "Enemy.h"
 #include "EnemyAttackRunState.h"
+#include "EnemyDeadState.h"
 #include "EnemyIdleState.h"
+#include "EnemyKnockbackState.h"
+#include "EnemyRunningState.h"
 #include "GameplayConstants.h"
 #include "Player.h"
 #include "Randomiser.h"
 #include "StateMachine.h"
-#include "EnemyRunningState.h"
-#include "EnemyKnockbackState.h"
-#include "EnemyDeadState.h"
 
 using namespace GameplayConstants;
 
@@ -39,9 +39,9 @@ void MookRunningEnemyGlobalState::Execute(Enemy* enemy)
 		if(currentState == EnemyIdleState::Instance() &&
 			distance > enemy->GetData().chargeRange)
 		{
-				enemy->SetPosition(enemy->GetPositionX(), enemy->GetPlayerTarget()->GetGroundPosition().y + 1);
-				enemy->GetStateMachine()->ChangeState(EnemyRunningState::Instance());
-				enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.8f, 2.0f));
+			enemy->SetPosition(enemy->GetPositionX(), enemy->GetPlayerTarget()->GetGroundPosition().y + 1);
+			enemy->GetStateMachine()->ChangeState(EnemyRunningState::Instance());
+			enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.8f, 2.0f));
 		}
 
 		if (currentState == EnemyRunningState::Instance() &&
