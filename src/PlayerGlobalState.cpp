@@ -1,6 +1,8 @@
 #include "PlayerGlobalState.h"
 
 #include "Player.h"
+#include "PlayerDeadState.h"
+#include "PlayerKnockbackState.h"
 
 PlayerGlobalState* PlayerGlobalState::Instance()
 {
@@ -14,6 +16,14 @@ void PlayerGlobalState::OnEnter(Player* player)
 
 void PlayerGlobalState::Execute(Player* player)
 {
+	auto currentState = player->GetStateMachine()->GetCurrentState();
+
+	if(currentState == PlayerKnockbackState::Instance() ||
+		currentState == PlayerDeadState::Instance())
+	{
+		return;
+	}
+
 	if(player->GetCurrentVelocity().x < 0)
 		player->FlipHorizontally(true);
 

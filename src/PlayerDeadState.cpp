@@ -24,34 +24,12 @@ void PlayerDeadState::OnEnter(Player* player)
 	player->GetAnimator()->SetAnimation(m_name);
 	player->GetHitBoxManager()->SetCollidersUsingTag(m_name);
 	player->ResetKnockoutTimer();
-
-	if(player->GetHealth() <= 0)
-		player->PlayDeathSound();
+	player->PlayDeathSound();
 }
 
 void PlayerDeadState::Execute(Player* player)
 {
-	if(player->GetKnockbackCount() < 1 && player->IsGrounded())
-	{
-		player->SetTargetVelocity(Vector2::Zero);
-	}
-	else
-	{
-		Vector2 direction = Vector2::Zero;
-
-		if(player->GetCurrentVelocity().x > 0)
-		{
-			direction = UnitVectors::UpRight;
-		}
-		else
-		{
-			direction = UnitVectors::UpLeft;
-		}
-
-		player->Knockback(direction, 30.0f);
-		player->SetKnockbackCount(player->GetKnockbackCount() - 1);
-		player->GetStateMachine()->ChangeState(PlayerKnockbackState::Instance());
-	}
+	player->SetVelocity(Vector2::Zero);
 }
 
 void PlayerDeadState::OnExit(Player* player)

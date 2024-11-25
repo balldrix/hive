@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "PlayerDeadState.h"
 #include "StateMachine.h"
+#include "UnitVectors.h"
 
 PlayerKnockbackState* PlayerKnockbackState::Instance()
 {
@@ -32,9 +33,30 @@ void PlayerKnockbackState::Execute(Player* player)
 		player->FlipHorizontally(true);
 	}
 
-	if(player->IsGrounded())
+	if(!player->IsGrounded()) return;
+
+	player->ResetKnockoutTimer();
+
+	if(player->GetKnockbackCount() < 1 && player->GetHealth() <= 0)
 	{
 		player->GetStateMachine()->ChangeState(PlayerDeadState::Instance());
+	}
+	else
+	{
+		Vector2 direction = Vector2::Zero;
+
+		if(player->GetCurrentVelocity().x > 0)
+		{
+			direction = UnitVectors::UpRight;
+		}
+		else
+		{
+			direction = UnitVectors::UpLeft;
+		}
+
+		player->Knockback(direction, 30.0f);
+		player->SetKnockbackCount(player->GetKnockbackCount() - 1);
+		player->SetGrounded(false);
 	}
 }
 
