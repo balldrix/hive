@@ -43,9 +43,6 @@
     <ClCompile Include="src\EnemyRunningState.cpp">
       <Filter>Game\Enemy\States</Filter>
     </ClCompile>
-    <ClCompile Include="src\EnemyVictoryState.cpp">
-      <Filter>Game\Enemy\States</Filter>
-    </ClCompile>
     <ClCompile Include="src\EnemyWalkingState.cpp">
       <Filter>Game\Enemy\States</Filter>
     </ClCompile>
@@ -453,9 +450,6 @@
       <Filter>Game\Enemy\States</Filter>
     </ClInclude>
     <ClInclude Include="src\EnemyRunningState.h">
-      <Filter>Game\Enemy\States</Filter>
-    </ClInclude>
-    <ClInclude Include="src\EnemyVictoryState.h">
       <Filter>Game\Enemy\States</Filter>
     </ClInclude>
     <ClInclude Include="src\EnemyWalkingState.h">

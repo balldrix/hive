@@ -3,7 +3,6 @@
 #include "Animator.h"
 #include "Enemy.h"
 #include "EnemyRunningState.h"
-#include "EnemyVictoryState.h"
 #include "EnemyWalkingState.h"
 #include "GameplayConstants.h"
 #include "HitBoxManager.h"
@@ -47,7 +46,7 @@ void EnemyIdleState::Execute(Enemy* enemy)
 	}
 
 	if(enemy->GetPlayerTarget()->GetKnockbackCount() < 1 && enemy->GetPlayerTarget()->GetHealth() < 1)
-		enemy->GetStateMachine()->ChangeState(EnemyVictoryState::Instance());
+		return;
 
 	if(enemy->GetTimer() > 0 ||
 		enemy->GetHealth() < 0)
