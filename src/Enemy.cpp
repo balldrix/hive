@@ -102,8 +102,8 @@ void Enemy::Init(Graphics* graphics,
 	m_groundPosition = data.objectData.startingPosition;
 	m_grounded = true;
 
-	std::string spritesheetDataPath = "data\\spritesheet_data\\";
-	std::string suffix = "_spritesheet_data.json";
+	std::string spritesheetDataPath = "assets\\data\\spritesheets\\";
+	std::string suffix = "_spritesheet.json";
 
 	AnimatedSpriteData animatedSpriteData;
 	animatedSpriteData = GameDataManager::LoadAnimatedSpriteData(fmt::format("{0}{1}{2}", spritesheetDataPath, data.name, suffix));
@@ -121,7 +121,7 @@ void Enemy::Init(Graphics* graphics,
 	m_animator->SetAnimation(0);
 	
 	std::vector<HitBoxData> hitboxData;
-	hitboxData = GameDataManager::LoadHitboxData(fmt::format("data\\hitbox_data\\{}_hitbox_data.json", data.name));
+	hitboxData = GameDataManager::LoadHitboxData(fmt::format("assets\\data\\hitboxes\\{}_hitbox.json", data.name));
 
 	m_hitBoxManager = new HitBoxManager();
 	m_hitBoxManager->Init(this, hitboxData);
@@ -153,7 +153,7 @@ void Enemy::Init(Graphics* graphics,
 
 
 	// TOOD move to GameDataManager
-	std::string enemyDataFile = "data\\enemy_data\\damage\\" + data.type + "_damage.txt";
+	std::string enemyDataFile = "assets\\data\\damage\\" + data.type + "_damage.txt";
 
 	if(!LoadDamageData(enemyDataFile))
 	{

@@ -24,7 +24,7 @@ ImpactFx::~ImpactFx()
 void ImpactFx::Init()
 {
 	AnimatedSpriteData animatedSpriteData;
-	animatedSpriteData = GameDataManager::LoadAnimatedSpriteData("data\\spritesheet_data\\impactfx_spritesheet_data.json");
+	animatedSpriteData = GameDataManager::LoadAnimatedSpriteData("assets\\data\\spritesheets\\impactfx_spritesheet.json");
 
 	m_spritesheet = new Spritesheet();
 	m_spritesheet->Init(AssetLoader::GetTexture("t_impact"), animatedSpriteData.spriteFrameData);

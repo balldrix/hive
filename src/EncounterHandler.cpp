@@ -21,7 +21,7 @@ void EncounterHandler::Init(std::vector<Enemy*> enemyList)
 {
 	m_enemyList = enemyList;
 	std::string path;
-	path = "data\\encounter_data\\encounter_positions.txt";
+	path = "assets\\data\\encounters\\encounter_positions.txt";
 
 	if(LoadData(path) == true)
 		return;

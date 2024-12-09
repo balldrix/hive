@@ -28,7 +28,7 @@ void NPCManager::Init(Graphics* graphics, Camera* camera, Player* player)
 	m_enemyDataContainer = new EnemyDataContainer();
 	m_NPCFactory = new NPCFactory();
 
-	result = InitTypes("data\\enemy_data\\type_data.txt");
+	result = InitTypes("assets\\data\\enemies\\type_data.txt");
 
 	if(result == false)
 	{
@@ -36,7 +36,7 @@ void NPCManager::Init(Graphics* graphics, Camera* camera, Player* player)
 		PostQuitMessage(0); // quit game
 	}
 
-	result = InitNPCs(graphics, camera, player, "data\\enemy_data\\enemy_data.txt");
+	result = InitNPCs(graphics, camera, player, "assets\\data\\enemies\\enemy_data.txt");
 
 	if(result == false)
 	{

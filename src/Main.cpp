@@ -62,7 +62,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	graphics->Init(window->GetHwnd(), hInstance);
 	
 	AudioEngine::Init();
-	AssetLoader::Init(graphics, "data\\assets.json");
+	AssetLoader::Init(graphics, "assets\\assets.json");
 	GameDataManager::Init();
 	UIManager::Init();
 	MenuSystem::Init();

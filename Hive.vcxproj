@@ -223,78 +223,72 @@
     <ClInclude Include="src\Window.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="data\assets.json">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </None>
-    <None Include="data\hitbox_data\mook_hitbox_data.json" />
-    <None Include="data\hitbox_data\player_hitbox_data.json" />
-    <None Include="data\Sounds\scream.ogg" />
-    <None Include="data\fonts\goodbye_despair_12pt.spritefont">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </None>
-    <None Include="data\spritesheet_data\impactfx_spritesheet_data.json" />
-    <None Include="data\spritesheet_data\mook_spritesheet_data.json" />
-    <None Include="data\spritesheet_data\player_spritesheet_data.json" />
-    <None Include="GameData\SpriteFonts\silkscreen_8pt.spritefont">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </None>
-    <None Include="data\Tilemaps\tm_bunker.json" />
+    <None Include="assets\assets.json" />
+    <None Include="assets\data\hitboxes\mook_hitbox.json" />
+    <None Include="assets\data\hitboxes\player_hitbox.json" />
+    <None Include="assets\data\spritesheets\impactfx_spritesheet.json" />
+    <None Include="assets\data\spritesheets\mook_spritesheet.json" />
+    <None Include="assets\data\spritesheets\player_spritesheet.json" />
+    <None Include="assets\data\spritesheets\ui-sprites.json" />
+    <None Include="assets\data\tilemaps\tm_bunker.json" />
+    <None Include="assets\fonts\goodbye_despair_12pt.spritefont" />
+    <None Include="assets\fonts\goodbye_despair_8pt.spritefont" />
+    <None Include="assets\sounds\scream.ogg" />
   </ItemGroup>
   <ItemGroup>
-    <Media Include="data\Sounds\boss_entrance_001.wav" />
-    <Media Include="data\Sounds\boss_punch_001.wav" />
-    <Media Include="data\Sounds\boss_punch_002.wav" />
-    <Media Include="data\Sounds\boss_punch_003.wav" />
-    <Media Include="data\Sounds\boss_punch_004.wav" />
-    <Media Include="data\Sounds\boss_walk_001.wav" />
-    <Media Include="data\Sounds\boss_walk_002.wav" />
-    <Media Include="data\Sounds\boss_walk_003.wav" />
-    <Media Include="data\Sounds\hit_001.wav" />
-    <Media Include="data\Sounds\hit_002.wav" />
-    <Media Include="data\Sounds\hit_003.wav" />
-    <Media Include="data\Sounds\mook_death.wav" />
-    <Media Include="data\Sounds\mook_entrance_001.wav" />
-    <Media Include="data\Sounds\mook_entrance_002.wav" />
-    <Media Include="data\Sounds\mook_entrance_003.wav" />
-    <Media Include="data\Sounds\mook_entrance_004.wav" />
-    <Media Include="data\Sounds\mook_hit_001.wav" />
-    <Media Include="data\Sounds\mook_hit_002.wav" />
-    <Media Include="data\Sounds\mook_hit_003.wav" />
-    <Media Include="data\Sounds\mook_hit_004.wav" />
-    <Media Include="data\Sounds\mook_punch_001.wav" />
-    <Media Include="data\Sounds\mook_walk.wav" />
-    <Media Include="data\Sounds\punch_001.wav" />
-    <Media Include="data\Sounds\punch_002.wav" />
-    <Media Include="data\Sounds\punch_003.wav" />
-    <Media Include="data\Sounds\punch_004.wav" />
-    <Media Include="data\Sounds\travelling_master.wav" />
-    <Media Include="data\Sounds\walk_001.wav" />
-    <Media Include="data\Sounds\walk_002.wav" />
-    <Media Include="data\Sounds\walk_003.wav" />
-    <Media Include="data\Sounds\walk_004.wav" />
+    <Text Include="assets\data\damage\boss_damage.txt" />
+    <Text Include="assets\data\damage\mook_damage.txt" />
+    <Text Include="assets\data\damage\mook_runner_damage.txt" />
+    <Text Include="assets\data\damage\player_damage.txt" />
+    <Text Include="assets\data\encounters\encounter_positions.txt" />
+    <Text Include="assets\data\enemies\enemy_data.txt" />
+    <Text Include="assets\data\enemies\type_data.txt" />
+    <Text Include="assets\data\player\player_data.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="data\encounter_data\encounter_positions.txt" />
-    <Text Include="data\enemy_data\damage\boss_damage.txt" />
-    <Text Include="data\enemy_data\damage\mook_damage.txt" />
-    <Text Include="data\enemy_data\damage\mook_runner_damage.txt" />
-    <Text Include="data\enemy_data\enemy_data.txt" />
-    <Text Include="data\enemy_data\type_data.txt" />
-    <Text Include="data\player_data\player_damage.txt" />
-    <Text Include="data\player_data\player_data.txt" />
+    <Media Include="assets\sounds\boss_entrance_001.wav" />
+    <Media Include="assets\sounds\boss_punch_001.wav" />
+    <Media Include="assets\sounds\boss_punch_002.wav" />
+    <Media Include="assets\sounds\boss_punch_003.wav" />
+    <Media Include="assets\sounds\boss_punch_004.wav" />
+    <Media Include="assets\sounds\boss_walk_001.wav" />
+    <Media Include="assets\sounds\boss_walk_002.wav" />
+    <Media Include="assets\sounds\boss_walk_003.wav" />
+    <Media Include="assets\sounds\hit_001.wav" />
+    <Media Include="assets\sounds\hit_002.wav" />
+    <Media Include="assets\sounds\hit_003.wav" />
+    <Media Include="assets\sounds\mook_death.wav" />
+    <Media Include="assets\sounds\mook_entrance_001.wav" />
+    <Media Include="assets\sounds\mook_entrance_002.wav" />
+    <Media Include="assets\sounds\mook_entrance_003.wav" />
+    <Media Include="assets\sounds\mook_entrance_004.wav" />
+    <Media Include="assets\sounds\mook_hit_001.wav" />
+    <Media Include="assets\sounds\mook_hit_002.wav" />
+    <Media Include="assets\sounds\mook_hit_003.wav" />
+    <Media Include="assets\sounds\mook_hit_004.wav" />
+    <Media Include="assets\sounds\mook_punch_001.wav" />
+    <Media Include="assets\sounds\mook_walk.wav" />
+    <Media Include="assets\sounds\punch_001.wav" />
+    <Media Include="assets\sounds\punch_002.wav" />
+    <Media Include="assets\sounds\punch_003.wav" />
+    <Media Include="assets\sounds\punch_004.wav" />
+    <Media Include="assets\sounds\travelling_master.wav" />
+    <Media Include="assets\sounds\walk_001.wav" />
+    <Media Include="assets\sounds\walk_002.wav" />
+    <Media Include="assets\sounds\walk_003.wav" />
+    <Media Include="assets\sounds\walk_004.wav" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="data\textures\mook_spritesheet.png" />
-    <Image Include="data\textures\player_spritesheet.png" />
-    <Image Include="data\textures\shadow.png" />
-    <Image Include="data\textures\shadow_large.png" />
-    <Image Include="data\textures\ui\loading_screen_bg.png" />
-    <Image Include="data\textures\ui\title_logo.png" />
-    <Image Include="data\textures\ui\title_screen_bg.png" />
-    <Image Include="data\textures\vfx.png" />
+    <Image Include="assets\textures\mook_spritesheet.png" />
+    <Image Include="assets\textures\pixel.png" />
+    <Image Include="assets\textures\player_spritesheet.png" />
+    <Image Include="assets\textures\shadow.png" />
+    <Image Include="assets\textures\shadow_large.png" />
+    <Image Include="assets\textures\ui\loading_screen_bg.png" />
+    <Image Include="assets\textures\ui\player_won_screen.png" />
+    <Image Include="assets\textures\ui\title_logo.png" />
+    <Image Include="assets\textures\ui\title_screen_bg.png" />
+    <Image Include="assets\textures\vfx.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F07D24C5-CADD-4262-80F1-7370DF167E8E}</ProjectGuid>

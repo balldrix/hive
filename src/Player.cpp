@@ -69,7 +69,7 @@ void Player::Init(ControlSystem* controlSystem)
 	m_controlSystem = controlSystem;
 
 	AnimatedSpriteData animatedSpriteData;
-	animatedSpriteData = GameDataManager::LoadAnimatedSpriteData("data\\spritesheet_data\\player_spritesheet_data.json");
+	animatedSpriteData = GameDataManager::LoadAnimatedSpriteData("assets\\data\\spritesheets\\player_spritesheet.json");
 
 	m_spritesheet = new Spritesheet();
 	m_spritesheet->Init(AssetLoader::GetTexture("t_player"), animatedSpriteData.spriteFrameData);
@@ -84,9 +84,9 @@ void Player::Init(ControlSystem* controlSystem)
 	m_animator->SetAnimation(0);
 
 	m_hitBoxManager = new HitBoxManager();
-	m_hitBoxManager->Init(this, GameDataManager::LoadHitboxData("data\\hitbox_data\\player_hitbox_data.json"));
+	m_hitBoxManager->Init(this, GameDataManager::LoadHitboxData("assets\\data\\hitboxes\\player_hitbox.json"));
 
-	LoadData("data\\player_data\\player_data.txt", "data\\player_data\\player_damage.txt");
+	LoadData("assets\\data\\player\\player_data.txt", "assets\\data\\damage\\player_damage.txt");
 
 	m_position.x = m_playerData.objectData.startingPosition.x;
 	m_position.y = RespawnAirPositionY;

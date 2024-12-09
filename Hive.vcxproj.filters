@@ -279,9 +279,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Data">
-      <UniqueIdentifier>{321e2898-ecdc-48e2-a7aa-84590962e760}</UniqueIdentifier>
-    </Filter>
     <Filter Include="System">
       <UniqueIdentifier>{0834f2ca-689d-462c-9e50-6167afd0d8ef}</UniqueIdentifier>
     </Filter>
@@ -333,33 +330,6 @@
     <Filter Include="Graphics\Sprites\Animation">
       <UniqueIdentifier>{c50f3094-0fff-4ed0-9b69-c915e5c7eff8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Data\Textures">
-      <UniqueIdentifier>{f6335db0-ea85-4171-8e66-210153c2d12c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\Sounds">
-      <UniqueIdentifier>{a94ed7da-f908-4d40-88ff-74d0fb6e90c5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\Damage">
-      <UniqueIdentifier>{92cc0ac4-0494-4b44-a24d-41442efb1096}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\Hitboxes">
-      <UniqueIdentifier>{23816605-1b42-4655-936e-b6c16c765b39}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\Encounters">
-      <UniqueIdentifier>{c3936396-b4d6-499a-aed1-79f08e5e956d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\Enemies">
-      <UniqueIdentifier>{f80da53f-f102-40e8-969a-119353fae6a2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\Fonts">
-      <UniqueIdentifier>{cbd091d5-d8a8-4727-895e-513f6052281b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\Player">
-      <UniqueIdentifier>{09cd74b7-9ada-43ef-931b-22afbfadcad4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\Tilemaps">
-      <UniqueIdentifier>{07eb4a0e-b20d-47d2-8342-1dd86063cb2b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="UI\Shared">
       <UniqueIdentifier>{f03b5a82-5dc5-4dc5-9787-00a008d927bc}</UniqueIdentifier>
     </Filter>
@@ -384,14 +354,47 @@
     <Filter Include="Graphics\Tilemaps">
       <UniqueIdentifier>{7b381dd5-60c1-4fb0-a75e-cba1126fa59a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Data\SpritesheetData">
-      <UniqueIdentifier>{353fe369-9005-4ef5-9036-293713940adf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="System\Data">
       <UniqueIdentifier>{088bc27f-fcb8-47cf-b5af-72b28449102f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Data\Textures\UI">
+    <Filter Include="Assets">
+      <UniqueIdentifier>{321e2898-ecdc-48e2-a7aa-84590962e760}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Textures">
+      <UniqueIdentifier>{f6335db0-ea85-4171-8e66-210153c2d12c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Textures\UI">
       <UniqueIdentifier>{07c841b0-8ba5-4ebb-8c1d-ebabffdd2aed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Sounds">
+      <UniqueIdentifier>{a94ed7da-f908-4d40-88ff-74d0fb6e90c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Fonts">
+      <UniqueIdentifier>{cbd091d5-d8a8-4727-895e-513f6052281b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Data">
+      <UniqueIdentifier>{14c829cd-02d2-4caf-9a55-b1939bd0f172}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Data\Damage">
+      <UniqueIdentifier>{92cc0ac4-0494-4b44-a24d-41442efb1096}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Data\Encounters">
+      <UniqueIdentifier>{c3936396-b4d6-499a-aed1-79f08e5e956d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Data\Enemies">
+      <UniqueIdentifier>{f80da53f-f102-40e8-969a-119353fae6a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Data\Hitboxes">
+      <UniqueIdentifier>{23816605-1b42-4655-936e-b6c16c765b39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Data\Player">
+      <UniqueIdentifier>{09cd74b7-9ada-43ef-931b-22afbfadcad4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Data\Spritesheets">
+      <UniqueIdentifier>{353fe369-9005-4ef5-9036-293713940adf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Data\Tilemaps">
+      <UniqueIdentifier>{07eb4a0e-b20d-47d2-8342-1dd86063cb2b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -721,176 +724,191 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="data\fonts\goodbye_despair_12pt.spritefont">
-      <Filter>Data\Fonts</Filter>
+    <None Include="assets\fonts\goodbye_despair_8pt.spritefont">
+      <Filter>Assets\Fonts</Filter>
     </None>
-    <None Include="data\Sounds\scream.ogg">
-      <Filter>Data\Sounds</Filter>
+    <None Include="assets\fonts\goodbye_despair_12pt.spritefont">
+      <Filter>Assets\Fonts</Filter>
     </None>
-    <None Include="GameData\SpriteFonts\silkscreen_8pt.spritefont">
-      <Filter>Data\Fonts</Filter>
+    <None Include="assets\data\hitboxes\mook_hitbox.json">
+      <Filter>Assets\Data\Hitboxes</Filter>
     </None>
-    <None Include="data\Tilemaps\tm_bunker.json">
-      <Filter>Data\Tilemaps</Filter>
+    <None Include="assets\data\hitboxes\player_hitbox.json">
+      <Filter>Assets\Data\Hitboxes</Filter>
     </None>
-    <None Include="data\assets.json">
-      <Filter>Data</Filter>
+    <None Include="assets\data\spritesheets\impactfx_spritesheet.json">
+      <Filter>Assets\Data\Spritesheets</Filter>
     </None>
-    <None Include="data\hitbox_data\mook_hitbox_data.json">
-      <Filter>Data\Hitboxes</Filter>
+    <None Include="assets\data\spritesheets\mook_spritesheet.json">
+      <Filter>Assets\Data\Spritesheets</Filter>
     </None>
-    <None Include="data\hitbox_data\player_hitbox_data.json">
-      <Filter>Data\Hitboxes</Filter>
+    <None Include="assets\data\spritesheets\player_spritesheet.json">
+      <Filter>Assets\Data\Spritesheets</Filter>
     </None>
-    <None Include="data\spritesheet_data\player_spritesheet_data.json" />
-    <None Include="data\spritesheet_data\impactfx_spritesheet_data.json" />
-    <None Include="data\spritesheet_data\mook_spritesheet_data.json" />
+    <None Include="assets\data\spritesheets\ui-sprites.json">
+      <Filter>Assets\Data\Spritesheets</Filter>
+    </None>
+    <None Include="assets\data\tilemaps\tm_bunker.json">
+      <Filter>Assets\Data\Tilemaps</Filter>
+    </None>
+    <None Include="assets\sounds\scream.ogg">
+      <Filter>Assets\Sounds</Filter>
+    </None>
+    <None Include="assets\assets.json">
+      <Filter>Assets</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Media Include="data\Sounds\boss_entrance_001.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\boss_punch_001.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\boss_punch_002.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\boss_punch_003.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\boss_punch_004.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\boss_walk_001.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\boss_walk_002.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\boss_walk_003.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\hit_001.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\hit_002.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\hit_003.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\mook_death.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\mook_entrance_001.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\mook_entrance_002.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\mook_entrance_003.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\mook_entrance_004.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\mook_hit_001.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\mook_hit_002.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\mook_hit_003.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\mook_hit_004.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\mook_walk.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\mook_punch_001.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\punch_001.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\punch_002.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\punch_003.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\punch_004.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\walk_001.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\walk_002.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\walk_003.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\walk_004.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-    <Media Include="data\Sounds\travelling_master.wav">
-      <Filter>Data\Sounds</Filter>
-    </Media>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="data\encounter_data\encounter_positions.txt">
-      <Filter>Data\Encounters</Filter>
+    <Text Include="assets\data\encounters\encounter_positions.txt">
+      <Filter>Assets\Data\Encounters</Filter>
     </Text>
-    <Text Include="data\enemy_data\enemy_data.txt">
-      <Filter>Data\Enemies</Filter>
+    <Text Include="assets\data\enemies\enemy_data.txt">
+      <Filter>Assets\Data\Enemies</Filter>
     </Text>
-    <Text Include="data\enemy_data\type_data.txt">
-      <Filter>Data\Enemies</Filter>
+    <Text Include="assets\data\enemies\type_data.txt">
+      <Filter>Assets\Data\Enemies</Filter>
     </Text>
-    <Text Include="data\enemy_data\damage\boss_damage.txt">
-      <Filter>Data\Damage</Filter>
+    <Text Include="assets\data\player\player_data.txt">
+      <Filter>Assets\Data\Player</Filter>
     </Text>
-    <Text Include="data\enemy_data\damage\mook_damage.txt">
-      <Filter>Data\Damage</Filter>
+    <Text Include="assets\data\damage\boss_damage.txt">
+      <Filter>Assets\Data\Damage</Filter>
     </Text>
-    <Text Include="data\enemy_data\damage\mook_runner_damage.txt">
-      <Filter>Data\Damage</Filter>
+    <Text Include="assets\data\damage\mook_damage.txt">
+      <Filter>Assets\Data\Damage</Filter>
     </Text>
-    <Text Include="data\player_data\player_data.txt">
-      <Filter>Data\Player</Filter>
+    <Text Include="assets\data\damage\mook_runner_damage.txt">
+      <Filter>Assets\Data\Damage</Filter>
     </Text>
-    <Text Include="data\player_data\player_damage.txt">
-      <Filter>Data\Player</Filter>
+    <Text Include="assets\data\damage\player_damage.txt">
+      <Filter>Assets\Data\Damage</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="data\textures\mook_spritesheet.png">
-      <Filter>Data\Textures</Filter>
+    <Media Include="assets\sounds\boss_walk_003.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\hit_001.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\hit_002.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\hit_003.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\mook_death.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\mook_entrance_001.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\mook_entrance_002.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\mook_entrance_003.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\mook_entrance_004.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\mook_hit_001.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\mook_hit_002.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\mook_hit_003.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\mook_hit_004.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\mook_punch_001.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\mook_walk.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\punch_001.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\punch_002.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\punch_003.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\punch_004.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\travelling_master.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\walk_001.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\walk_002.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\walk_003.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\walk_004.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\boss_entrance_001.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\boss_punch_001.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\boss_punch_002.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\boss_punch_003.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\boss_punch_004.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\boss_walk_001.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\boss_walk_002.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\textures\mook_spritesheet.png">
+      <Filter>Assets\Textures</Filter>
     </Image>
-    <Image Include="data\textures\player_spritesheet.png">
-      <Filter>Data\Textures</Filter>
+    <Image Include="assets\textures\pixel.png">
+      <Filter>Assets\Textures</Filter>
     </Image>
-    <Image Include="data\textures\shadow.png">
-      <Filter>Data\Textures</Filter>
+    <Image Include="assets\textures\player_spritesheet.png">
+      <Filter>Assets\Textures</Filter>
     </Image>
-    <Image Include="data\textures\shadow_large.png">
-      <Filter>Data\Textures</Filter>
+    <Image Include="assets\textures\shadow.png">
+      <Filter>Assets\Textures</Filter>
     </Image>
-    <Image Include="data\textures\vfx.png">
-      <Filter>Data\Textures</Filter>
+    <Image Include="assets\textures\shadow_large.png">
+      <Filter>Assets\Textures</Filter>
     </Image>
-    <Image Include="data\textures\ui\loading_screen_bg.png">
-      <Filter>Data\Textures\UI</Filter>
+    <Image Include="assets\textures\vfx.png">
+      <Filter>Assets\Textures</Filter>
     </Image>
-    <Image Include="data\textures\ui\title_logo.png">
-      <Filter>Data\Textures\UI</Filter>
+    <Image Include="assets\textures\ui\loading_screen_bg.png">
+      <Filter>Assets\Textures\UI</Filter>
     </Image>
-    <Image Include="data\textures\ui\title_screen_bg.png">
-      <Filter>Data\Textures\UI</Filter>
+    <Image Include="assets\textures\ui\player_won_screen.png">
+      <Filter>Assets\Textures\UI</Filter>
+    </Image>
+    <Image Include="assets\textures\ui\title_logo.png">
+      <Filter>Assets\Textures\UI</Filter>
+    </Image>
+    <Image Include="assets\textures\ui\title_screen_bg.png">
+      <Filter>Assets\Textures\UI</Filter>
     </Image>
   </ItemGroup>
 </Project>
