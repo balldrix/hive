@@ -1,9 +1,11 @@
 #include "UISystemView.h"
 
-#include "UIManager.h"
+#include "Logger.h"
 #include "UIFadeOverlayView.h"
 #include "UILoadingView.h"
-#include "Logger.h"
+#include "UIView.h"
+
+#include <string>
 
 UISystemView::UISystemView() :
 	m_fadeOverlayView(nullptr),

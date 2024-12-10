@@ -1,12 +1,17 @@
 #include "UIFrontEndView.h"
 
-#include "Logger.h"
-#include "UIManager.h"
 #include "AssetLoader.h"
+#include "Logger.h"
 #include "Sprite.h"
 #include "UIImageView.h"
-#include "UITitleScreenView.h"
 #include "UIMainMenuView.h"
+#include "UIManager.h"
+#include "UITitleScreenView.h"
+#include "UIView.h"
+
+#include <directxtk/SimpleMath.h>
+#include <fmt/core.h>
+#include <string>
 
 UIFrontEndView::UIFrontEndView() :
 	m_background(nullptr),

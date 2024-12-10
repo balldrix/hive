@@ -68,5 +68,12 @@
     "path": "assets\\textures\\mook_spritesheet.png",
     "type": "texture",
     "tag": "gameplay_assets"
+  },
+  {
+    "id": 11,
+    "name": "t_profile_frame",
+    "path": "assets\\textures\\ui\\profile-frame.png",
+    "type": "texture",
+    "tag": "ui_assets"
   }
 ]

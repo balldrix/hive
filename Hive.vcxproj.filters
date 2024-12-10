@@ -277,6 +277,18 @@
     <ClCompile Include="src\GameDataManager.cpp">
       <Filter>System\Data</Filter>
     </ClCompile>
+    <ClCompile Include="src\UIMainView.cpp">
+      <Filter>UI\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIHudView.cpp">
+      <Filter>UI\Gameplay\Hud</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIProfileView.cpp">
+      <Filter>UI\Gameplay\Hud</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIPlayerInfoView.cpp">
+      <Filter>UI\Gameplay\Hud</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -395,6 +407,12 @@
     </Filter>
     <Filter Include="Assets\Data\Tilemaps">
       <UniqueIdentifier>{07eb4a0e-b20d-47d2-8342-1dd86063cb2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Gameplay">
+      <UniqueIdentifier>{505f7060-f8b5-41d9-b4f3-64acd68029da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Gameplay\Hud">
+      <UniqueIdentifier>{2af9ab78-06c5-4a9b-9444-f53e4dcb1c0a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -721,6 +739,18 @@
     </ClInclude>
     <ClInclude Include="src\GameDataManager.h">
       <Filter>System\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMainView.h">
+      <Filter>UI\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIHudView.h">
+      <Filter>UI\Gameplay\Hud</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIPlayerInfoView.h">
+      <Filter>UI\Gameplay\Hud</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIProfileView.h">
+      <Filter>UI\Gameplay\Hud</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -49,9 +49,13 @@
     <ClCompile Include="src\KingMookChargeState.cpp" />
     <ClCompile Include="src\KingMookEnemyGlobalState.cpp" />
     <ClCompile Include="src\UIConfig.cpp" />
+    <ClCompile Include="src\UIPlayerInfoView.cpp" />
+    <ClCompile Include="src\UIProfileView.cpp" />
     <ClCompile Include="src\UISpriteText.cpp" />
     <ClCompile Include="src\UIMenuItemView.cpp" />
     <ClCompile Include="src\UITextMenuItemView.cpp" />
+    <ClCompile Include="src\UIMainView.cpp" />
+    <ClCompile Include="src\UIHudView.cpp" />
     <ClInclude Include="src\AnimatedSpriteData.h" />
     <ClInclude Include="src\GameDataManager.h" />
     <ClInclude Include="src\IMenuSystemInteraction.h" />
@@ -147,9 +151,13 @@
     <ClCompile Include="src\UIView.cpp" />
     <ClCompile Include="src\Window.cpp" />
     <ClInclude Include="src\UIConfig.h" />
+    <ClInclude Include="src\UIPlayerInfoView.h" />
+    <ClInclude Include="src\UIProfileView.h" />
     <ClInclude Include="src\UISpriteText.h" />
     <ClInclude Include="src\UIMenuItemView.h" />
     <ClInclude Include="src\UITextMenuItemView.h" />
+    <ClInclude Include="src\UIMainView.h" />
+    <ClInclude Include="src\UIHudView.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\EncounterHandler.h" />

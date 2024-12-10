@@ -13,8 +13,8 @@ public:
 	virtual ~UISystemView();
 
 	void Init(std::string name) override;
-	void Render(Graphics* graphics) override;
 	void Update(float deltaTime);
+	void Render(Graphics* graphics) override;
 		
 	void FadeOut();
 	void FadeIn();

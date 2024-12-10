@@ -56,7 +56,8 @@ add_executable(${PROJECT_NAME} src/main.cpp src/AABB.cpp src/Animator.cpp src/Au
 								src/UIStackingView.cpp src/UISpriteText.h src/UISpriteText.cpp src/UIConfig.h src/UIConfig.cpp src/MainMenuGameState.h
 								src/MainMenuGameState.cpp src/UIMainMenuView.h src/UIMainMenuView.cpp scr/UIMenuItemView.h src/UIMenuItemView.cpp
 								src/UITextMenuItemView.h src/UITextMenuItemView.cpp src/Frame.h src/MenuSystem.h src/MenuSystem.cpp src/IMenuSystemInteraction.h
-								src/GameDataManager.h src/GameDataManager.cpp)
+								src/GameDataManager.h src/GameDataManager.cpp src/UIMainView.h src/UIMainView.cpp src/UIHudView.h src/UIHudView.cpp src/UIPlayerInfoView.h
+								src/UIPlayerInfoView.cpp src/UIProfileView.h src/UIProfileView.cpp)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Microsoft::DirectXTK)
 target_link_libraries(${PROJECT_NAME} PRIVATE nlohmann_json::nlohmann_json)

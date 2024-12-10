@@ -80,11 +80,18 @@ void LoadingGameState::OnExit()
 {
 	if(!s_isLoadingToMainGameplay)
 	{
+		if(isloadingFromMainGameplayToFrontend)
+		{
+			UIManager::DestroyUIMainView();
+		}
+
+		UIManager::DestroyUIMainView();
 		UIManager::CreateUIFrontEndView();
 	}
 	else
 	{
 		UIManager::DestroyUIFrontEndView();
+		UIManager::CreateUIMainView();
 		m_gameStateManager->GetState(s_targetGameState->GetStateName())->LoadAssets();
 	}
 }
@@ -96,8 +103,12 @@ void LoadingGameState::SetTargetGameState(GameState* gamestate)
 
 void LoadingGameState::ProceedToFrontEnd()
 {
-	UIConfig::Init();
-	UIManager::CreateUISystemView();
+	if(!isloadingFromMainGameplayToFrontend)
+	{
+		UIConfig::Init();
+		UIManager::CreateUISystemView();
+	}
+
 	s_isLoadingToMainGameplay = false;
 	LoadingGameState::SetTargetGameState(s_instance->m_gameStateManager->GetState("TitleScreen"));
 	s_instance->m_gameStateManager->SwitchState("Loading");

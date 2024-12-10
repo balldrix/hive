@@ -1,10 +1,11 @@
 #include "UIManager.h"
 
-#include "Logger.h"
-#include "UIView.h"
-#include "UISystemView.h"
-#include "UIFrontEndView.h"
 #include "GlobalConstants.h"
+#include "Logger.h"
+#include "UIFrontEndView.h"
+#include "UIMainView.h"
+#include "UISystemView.h"
+#include "UIView.h"
 
 using namespace GlobalConstants;
 
@@ -13,6 +14,7 @@ UIManager* UIManager::s_instance = nullptr;
 UIManager::UIManager() :
 	m_uiSystemView(nullptr),
 	m_uiFrontEndView(nullptr),
+	m_uiMainView(nullptr),
 	m_viewList(0)
 {
 }
@@ -89,6 +91,18 @@ void UIManager::DestroyUIFrontEndView()
 {
 	delete s_instance->m_uiFrontEndView;
 	s_instance->m_uiFrontEndView = nullptr;
+}
+
+void UIManager::CreateUIMainView()
+{
+	s_instance->m_uiMainView = new UIMainView();
+	s_instance->m_uiMainView->Init("UI Main View");
+}
+
+void UIManager::DestroyUIMainView()
+{
+	delete s_instance->m_uiMainView;
+	s_instance->m_uiMainView = nullptr;
 }
 
 void UIManager::RegisterUIView(UIView* uiView)
