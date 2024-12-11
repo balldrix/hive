@@ -1,4 +1,4 @@
-#include "UIProfileView.h"
+#include "UIPortraitView.h"
 
 #include "AssetLoader.h"
 #include "Sprite.h"
@@ -9,18 +9,18 @@
 #include <fmt/core.h>
 #include <string>
 
-UIProfileView::UIProfileView() :
+UIPortraitView::UIPortraitView() :
 	m_frame(nullptr),
 	m_characterImage(nullptr)
 {
 }
 
-UIProfileView::~UIProfileView()
+UIPortraitView::~UIPortraitView()
 {
 	Shutdown();
 }
 
-void UIProfileView::Init(std::string name)
+void UIPortraitView::Init(std::string name)
 {
 	m_name = name;
 
@@ -39,13 +39,13 @@ void UIProfileView::Init(std::string name)
 	m_characterImage->SetActive(true);
 }
 
-void UIProfileView::Render(Graphics* graphics)
+void UIPortraitView::Render(Graphics* graphics)
 {
 	m_frame->Render(graphics);
 	m_characterImage->Render(graphics);
 }
 
-void UIProfileView::Shutdown()
+void UIPortraitView::Shutdown()
 {
 	delete m_frame;
 	m_frame = nullptr;
@@ -54,7 +54,7 @@ void UIProfileView::Shutdown()
 	m_characterImage = nullptr;
 }
 
-void UIProfileView::SetPosition(const Vector2& position)
+void UIPortraitView::SetPosition(const Vector2& position)
 {
 	m_frame->SetPosition(position);
 	m_characterImage->SetPosition(position);

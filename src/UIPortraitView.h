@@ -8,11 +8,11 @@
 class Graphics;
 class UIImageView;
 
-class UIProfileView : public UIView
+class UIPortraitView : public UIView
 {
 public:
-	UIProfileView();
-	~UIProfileView();
+	UIPortraitView();
+	~UIPortraitView();
 
 	void Init(std::string name) override;
 	void Render(Graphics* graphics) override;

@@ -1,11 +1,8 @@
 #include "TravelPrompt.h"
 
 #include "Animator.h"
-#include "InGameHudConstants.h"
 #include "Spritesheet.h"
 #include "GameObject.h"
-
-using namespace InGameHudConstants;
 
 TravelPrompt::TravelPrompt() : 
 	m_animator(nullptr),

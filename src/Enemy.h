@@ -8,8 +8,6 @@
 
 class Graphics;
 class Texture;
-class BarController;
-class InGameHudManager;
 template<class T> class StateMachine;
 class SoundSource;
 
@@ -37,7 +35,6 @@ public:
 	bool					IsHostile() const { return m_isHostile; }
 	EnemyData				GetData() const { return m_enemyData; }
 	virtual DamageData		GetDamageData() const;
-	InGameHudManager*		GetUiManager() const { return m_hudManager; }
 
 	virtual void			ApplyDamage(GameObject* source, const int& amount);
 	void					Knockback(const Vector2& direction, const float& force);
@@ -66,10 +63,8 @@ protected:
 
 private:
 	Player*					m_playerTarget;
-	InGameHudManager*		m_hudManager;
 	Sprite*					m_portraitSprite;
 	Sprite*					m_hitBoxSprite;
-	BarController*			m_healthBar;
 	float					m_thinkingTimer;
 	bool					m_isHostile;
 	State<Enemy>*			m_startingState;

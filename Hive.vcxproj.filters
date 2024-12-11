@@ -118,9 +118,6 @@
     <ClCompile Include="src\PlayerSprintingState.cpp">
       <Filter>Game\Player\States</Filter>
     </ClCompile>
-    <ClCompile Include="src\BarController.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
     <ClCompile Include="src\TravelPrompt.cpp">
       <Filter>UI</Filter>
     </ClCompile>
@@ -129,9 +126,6 @@
     </ClCompile>
     <ClCompile Include="src\Camera.cpp">
       <Filter>System</Filter>
-    </ClCompile>
-    <ClCompile Include="src\CharacterPortrait.cpp">
-      <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="src\Game.cpp">
       <Filter>Game</Filter>
@@ -156,9 +150,6 @@
     </ClCompile>
     <ClCompile Include="src\HitBoxManager.cpp">
       <Filter>Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="src\InGameHudManager.cpp">
-      <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="src\KingMookChargeState.cpp">
       <Filter>Game\Enemy\States</Filter>
@@ -283,10 +274,13 @@
     <ClCompile Include="src\UIHudView.cpp">
       <Filter>UI\Gameplay\Hud</Filter>
     </ClCompile>
-    <ClCompile Include="src\UIProfileView.cpp">
+    <ClCompile Include="src\UIPortraitView.cpp">
       <Filter>UI\Gameplay\Hud</Filter>
     </ClCompile>
     <ClCompile Include="src\UIPlayerInfoView.cpp">
+      <Filter>UI\Gameplay\Hud</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIBarView.cpp">
       <Filter>UI\Gameplay\Hud</Filter>
     </ClCompile>
   </ItemGroup>
@@ -434,9 +428,6 @@
     <ClInclude Include="src\GlobalConstants.h">
       <Filter>Constants</Filter>
     </ClInclude>
-    <ClInclude Include="src\InGameHudConstants.h">
-      <Filter>Constants</Filter>
-    </ClInclude>
     <ClInclude Include="src\PlayerConstants.h">
       <Filter>Constants</Filter>
     </ClInclude>
@@ -542,9 +533,6 @@
     <ClInclude Include="src\PlayerSprintingState.h">
       <Filter>Game\Player\States</Filter>
     </ClInclude>
-    <ClInclude Include="src\BarController.h">
-      <Filter>UI</Filter>
-    </ClInclude>
     <ClInclude Include="src\TravelPrompt.h">
       <Filter>UI</Filter>
     </ClInclude>
@@ -553,9 +541,6 @@
     </ClInclude>
     <ClInclude Include="src\Camera.h">
       <Filter>System</Filter>
-    </ClInclude>
-    <ClInclude Include="src\CharacterPortrait.h">
-      <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="src\ControlSystem.h">
       <Filter>System</Filter>
@@ -595,9 +580,6 @@
     </ClInclude>
     <ClInclude Include="src\ParticleSystem.h">
       <Filter>Graphics\VFX</Filter>
-    </ClInclude>
-    <ClInclude Include="src\InGameHudManager.h">
-      <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="src\KingMook.h">
       <Filter>Game\Enemy</Filter>
@@ -749,7 +731,10 @@
     <ClInclude Include="src\UIPlayerInfoView.h">
       <Filter>UI\Gameplay\Hud</Filter>
     </ClInclude>
-    <ClInclude Include="src\UIProfileView.h">
+    <ClInclude Include="src\UIPortraitView.h">
+      <Filter>UI\Gameplay\Hud</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIBarView.h">
       <Filter>UI\Gameplay\Hud</Filter>
     </ClInclude>
   </ItemGroup>

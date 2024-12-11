@@ -4,7 +4,6 @@
 #include "Animator.h"
 #include "AssetLoader.h"
 #include "AudioEngine.h"
-#include "BarController.h"
 #include "DamageData.h"
 #include "EnemyAttackState.h"
 #include "EnemyData.h"
@@ -16,7 +15,6 @@
 #include "Graphics.h"
 #include "HitBoxData.h"
 #include "HitBoxManager.h"
-#include "InGameHudManager.h"
 #include "Logger.h"
 #include "Player.h"
 #include "Randomiser.h"
@@ -39,10 +37,8 @@
 Enemy::Enemy() :
 	m_playerTarget(nullptr),
 	m_stateMachine(nullptr),
-	m_hudManager(nullptr),
 	m_portraitSprite(nullptr),
 	m_hitBoxSprite(nullptr),
-	m_healthBar(nullptr),
 	m_vocalSoundSource(nullptr),
 	m_footStepsSoundSource(nullptr),
 	m_punchSoundSource(nullptr),
@@ -66,7 +62,6 @@ void Enemy::DeleteAll()
 	delete m_punchSoundSource;
 	delete m_footStepsSoundSource;
 	delete m_vocalSoundSource;
-	delete m_healthBar;
 	delete m_stateMachine;
 	delete m_hitBoxManager;
 	delete m_hitBoxSprite;
@@ -78,7 +73,6 @@ void Enemy::DeleteAll()
 	m_punchSoundSource = nullptr;
 	m_footStepsSoundSource = nullptr;
 	m_vocalSoundSource = nullptr;
-	m_healthBar = nullptr;
 	m_stateMachine = nullptr;
 	m_hitBoxManager = nullptr;
 	m_hitBoxSprite = nullptr;
@@ -138,21 +132,6 @@ void Enemy::Init(Graphics* graphics,
 	m_id = m_enemyData.objectData.id;
 	m_health = m_enemyData.objectData.startingHealth;
 
-	// TODO: move to UI manager
-	/*m_healthBar = new BarController();
-	m_portraitSprite = new Sprite();
-	m_portraitSprite->Init(AssetLoader::GetTexture(fmt::format("t_{}_portrait", data.name)));
-	m_healthBar->Init(graphics);
-	m_healthBar->SetMaxValue(m_health);
-	m_healthBar->SetCurrentValue(m_health);
-	m_healthBar->SetPosition(Vector2(HealthBarPositionX, EnemyHealthBarPositionY));
-
-	float percentage = (float)m_health / (float)m_playerTarget->GetMaxHealth();
-	unsigned int width = (unsigned int)(m_healthBar->GetWidth() * percentage);
-	m_healthBar->SetWidth(width);*/
-
-
-	// TOOD move to GameDataManager
 	std::string enemyDataFile = "assets\\data\\damage\\" + data.type + "_damage.txt";
 
 	if(!LoadDamageData(enemyDataFile))
@@ -317,8 +296,6 @@ void Enemy::Attack()
 
 void Enemy::Kill()
 {
-	GetUiManager()->AddEnemyKill();
-	GetUiManager()->HideEnemyHud(m_id);
 	m_dead = true;
 }
 

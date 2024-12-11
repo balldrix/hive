@@ -72,14 +72,21 @@
   {
     "id": 11,
     "name": "t_profile_frame",
-    "path": "assets\\textures\\ui\\profile-frame.png",
+    "path": "assets\\textures\\ui\\profile_frame.png",
     "type": "texture",
     "tag": "ui_assets"
   },
   {
     "id": 12,
     "name": "t_player_profile",
-    "path": "assets\\textures\\ui\\player-profile.png",
+    "path": "assets\\textures\\ui\\player_profile.png",
+    "type": "texture",
+    "tag": "ui_assets"
+  },
+  {
+    "id": 13,
+    "name": "t_bar_fill_red",
+    "path": "assets\\textures\\ui\\bar_fill_red.png",
     "type": "texture",
     "tag": "ui_assets"
   }

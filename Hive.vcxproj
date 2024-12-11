@@ -50,7 +50,7 @@
     <ClCompile Include="src\KingMookEnemyGlobalState.cpp" />
     <ClCompile Include="src\UIConfig.cpp" />
     <ClCompile Include="src\UIPlayerInfoView.cpp" />
-    <ClCompile Include="src\UIProfileView.cpp" />
+    <ClCompile Include="src\UIPortraitView.cpp" />
     <ClCompile Include="src\UISpriteText.cpp" />
     <ClCompile Include="src\UIMenuItemView.cpp" />
     <ClCompile Include="src\UITextMenuItemView.cpp" />
@@ -74,7 +74,6 @@
     <ClInclude Include="src\EnemyIdleState.h" />
     <ClInclude Include="src\GlobalConstants.h" />
     <ClInclude Include="src\ImpactFX.h" />
-    <ClInclude Include="src\InGameHudConstants.h" />
     <ClInclude Include="src\LevelRenderer.h" />
     <ClInclude Include="src\LoadingGameState.h" />
     <ClInclude Include="src\Logger.h" />
@@ -102,9 +101,8 @@
     <ClCompile Include="src\TravellingSceneState.cpp" />
     <ClCompile Include="src\AABB.cpp" />
     <ClCompile Include="src\Animator.cpp" />
-    <ClCompile Include="src\BarController.cpp" />
+    <ClCompile Include="src\UIBarView.cpp" />
     <ClCompile Include="src\Camera.cpp" />
-    <ClCompile Include="src\CharacterPortrait.cpp" />
     <ClCompile Include="src\ControlSystem.cpp" />
     <ClCompile Include="src\Enemy.cpp" />
     <ClCompile Include="src\EnemyAttackState.cpp" />
@@ -123,7 +121,6 @@
     <ClCompile Include="src\Graphics.cpp" />
     <ClCompile Include="src\Collider.cpp" />
     <ClCompile Include="src\HitBoxManager.cpp" />
-    <ClCompile Include="src\InGameHudManager.cpp" />
     <ClCompile Include="src\Input.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\NPCManager.cpp" />
@@ -152,7 +149,7 @@
     <ClCompile Include="src\Window.cpp" />
     <ClInclude Include="src\UIConfig.h" />
     <ClInclude Include="src\UIPlayerInfoView.h" />
-    <ClInclude Include="src\UIProfileView.h" />
+    <ClInclude Include="src\UIPortraitView.h" />
     <ClInclude Include="src\UISpriteText.h" />
     <ClInclude Include="src\UIMenuItemView.h" />
     <ClInclude Include="src\UITextMenuItemView.h" />
@@ -176,7 +173,6 @@
     <ClInclude Include="src\AnimationData.h" />
     <ClInclude Include="src\Animator.h" />
     <ClInclude Include="src\Camera.h" />
-    <ClInclude Include="src\CharacterPortrait.h" />
     <ClInclude Include="src\GameplayConstants.h" />
     <ClInclude Include="src\ControlSystem.h" />
     <ClInclude Include="src\Enemy.h" />
@@ -195,11 +191,10 @@
     <ClInclude Include="src\GameState.h" />
     <ClInclude Include="src\GameStateManager.h" />
     <ClInclude Include="src\Graphics.h" />
-    <ClInclude Include="src\BarController.h" />
+    <ClInclude Include="src\UIBarView.h" />
     <ClInclude Include="src\Collider.h" />
     <ClInclude Include="src\HitBoxData.h" />
     <ClInclude Include="src\HitBoxManager.h" />
-    <ClInclude Include="src\InGameHudManager.h" />
     <ClInclude Include="src\Input.h" />
     <ClInclude Include="src\NPCManager.h" />
     <ClInclude Include="src\Player.h" />

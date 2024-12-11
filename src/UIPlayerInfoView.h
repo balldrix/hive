@@ -4,9 +4,10 @@
 #include <string>
 
 class Graphics;
-class UIProfileView;
+class UIBarView;
+class UIPortraitView;
 
-class UIPlayerInfoView : UIView
+class UIPlayerInfoView : public UIView
 {
 public:
 	UIPlayerInfoView();
@@ -23,5 +24,6 @@ public:
 private:
 	void DoTransition(float deltaTime);
 
-	UIProfileView* m_profileView;
+	UIPortraitView* m_portraitView;
+	UIBarView* m_healthBar;
 };
