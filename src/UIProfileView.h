@@ -2,6 +2,7 @@
 
 #include "UIView.h"
 
+#include <directxtk/SimpleMath.h>
 #include <string>
 
 class Graphics;
@@ -17,6 +18,8 @@ public:
 	void Render(Graphics* graphics) override;
 
 	void Shutdown() override;
+
+	void SetPosition(const Vector2& position);
 
 private:
 	UIImageView* m_frame;

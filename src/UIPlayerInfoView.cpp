@@ -22,6 +22,7 @@ void UIPlayerInfoView::Init(std::string name)
 
 	m_profileView = new UIProfileView();
 	m_profileView->Init("Player Profile View");
+	m_profileView->SetPosition(Vector2(2.0f, 116.0f));
 }
 
 void UIPlayerInfoView::Update(float deltaTime)
