@@ -293,7 +293,9 @@
     <Image Include="assets\textures\shadow.png" />
     <Image Include="assets\textures\shadow_large.png" />
     <Image Include="assets\textures\ui\loading_screen_bg.png" />
+    <Image Include="assets\textures\ui\player-profile.png" />
     <Image Include="assets\textures\ui\player_won_screen.png" />
+    <Image Include="assets\textures\ui\profile-frame.png" />
     <Image Include="assets\textures\ui\title_logo.png" />
     <Image Include="assets\textures\ui\title_screen_bg.png" />
     <Image Include="assets\textures\vfx.png" />

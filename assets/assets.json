@@ -75,5 +75,12 @@
     "path": "assets\\textures\\ui\\profile-frame.png",
     "type": "texture",
     "tag": "ui_assets"
+  },
+  {
+    "id": 12,
+    "name": "t_player_profile",
+    "path": "assets\\textures\\ui\\player-profile.png",
+    "type": "texture",
+    "tag": "ui_assets"
   }
 ]

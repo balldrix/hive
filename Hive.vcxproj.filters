@@ -940,5 +940,11 @@
     <Image Include="assets\textures\ui\title_screen_bg.png">
       <Filter>Assets\Textures\UI</Filter>
     </Image>
+    <Image Include="assets\textures\ui\player-profile.png">
+      <Filter>Assets\Textures\UI</Filter>
+    </Image>
+    <Image Include="assets\textures\ui\profile-frame.png">
+      <Filter>Assets\Textures\UI</Filter>
+    </Image>
   </ItemGroup>
 </Project>
