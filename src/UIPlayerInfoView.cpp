@@ -29,19 +29,26 @@ void UIPlayerInfoView::Init(std::string name)
 	m_portraitView->SetPosition(Vector2(2.0f, 116.0f));
 
 	m_healthBar = new UIBarView();
+	m_healthBar->SetWidth(95);
 	m_healthBar->Init("Player Health Bar");
 	m_healthBar->SetBackgroundTexture(AssetLoader::GetTexture("t_pixel"));
-	m_healthBar->SetFillTexture(AssetLoader::GetTexture("t_bar_fill_red"));
+	m_healthBar->SetFillTexture(AssetLoader::GetTexture("t_bar_fill_green"));
+	m_healthBar->SetFrameTexture(AssetLoader::GetTexture("t_bar_frame_player_health"));
+	m_healthBar->SetPosition(Vector2(24.0f, 117.0f));
 
+	m_healthBar->SetCurrentValue(100);
+	m_healthBar->SetMaxValue(100);
 }
 
 void UIPlayerInfoView::Update(float deltaTime)
 {
+	m_healthBar->Update(deltaTime);
 }
 
 void UIPlayerInfoView::Render(Graphics* graphics)
 {
 	m_portraitView->Render(graphics);
+	m_healthBar->Render(graphics);
 }
 
 void UIPlayerInfoView::TransitionIn(bool isAnimating)

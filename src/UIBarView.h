@@ -30,10 +30,12 @@ public:
 	void SetCurrentValue(const int& value);
 	void SetMaxValue(const int& value);
 	void SetPosition(const Vector2& position);
+	void SetWidth(const unsigned int& value);
 
 private:
 	int	m_currentValue;
 	int	m_maxValue;
+	unsigned int m_width;
 
 	UIImageView* m_backgroundImage;
 	UIImageView* m_fillImage;

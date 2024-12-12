@@ -34,6 +34,11 @@ void UIHudView::Init(std::string name)
 	m_isActive = true;
 }
 
+void UIHudView::Update(float deltaTime)
+{
+	m_playerInfoView->Update(deltaTime);
+}
+
 void UIHudView::Render(Graphics* graphics)
 {
 	m_playerInfoView->Render(graphics);

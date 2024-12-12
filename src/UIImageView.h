@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Sprite.h"
 #include "UIView.h"
 
 #include <DirectXTK/SimpleMath.h>
@@ -8,7 +9,6 @@
 using namespace DirectX::SimpleMath;
 
 class Graphics;
-class Sprite;
 
 class UIImageView : public UIView
 {
@@ -20,6 +20,7 @@ public:
 	void Render(Graphics* graphics) override;
 
 	Sprite* GetSprite() const { return m_sprite; }
+	int GetHeight() const override { return (int)m_sprite->GetHeight(); }
 
 	void SetPosition(Vector2 position);
 	void SetOrigin(Vector2 origin);

@@ -89,5 +89,19 @@
     "path": "assets\\textures\\ui\\bar_fill_red.png",
     "type": "texture",
     "tag": "ui_assets"
+  },
+  {
+    "id": 14,
+    "name": "t_bar_fill_green",
+    "path": "assets\\textures\\ui\\bar_fill_green.png",
+    "type": "texture",
+    "tag": "ui_assets"
+  },
+  {
+    "id": 15,
+    "name": "t_bar_frame_player_health",
+    "path": "assets\\textures\\ui\\bar_frame_player_health.png",
+    "type": "texture",
+    "tag": "ui_assets"
   }
 ]

@@ -14,6 +14,7 @@
 UIBarView::UIBarView() :
 	m_currentValue(0),
 	m_maxValue(0),
+	m_width(0U),
 	m_backgroundImage(nullptr),
 	m_fillImage(nullptr),
 	m_frameImage(nullptr)
@@ -45,9 +46,12 @@ void UIBarView::Update(float deltaTime)
 	rect.left = 0;
 	rect.top = 0;
 	rect.bottom = m_fillImage->GetHeight();
-	rect.right = static_cast<LONG>((1.0f / static_cast<float>(m_maxValue)) * m_currentValue);
+	rect.right = static_cast<LONG>((m_width / static_cast<float>(m_maxValue)) * m_currentValue);
 
 	m_fillImage->GetSprite()->SetSourceRect(rect);
+
+	rect.right = m_width;
+	m_backgroundImage->GetSprite()->SetSourceRect(rect);
 }
 
 void UIBarView::Render(Graphics* graphics)
@@ -88,7 +92,7 @@ void UIBarView::SetFillTexture(Texture* texture)
 void UIBarView::SetFrameTexture(Texture* texture)
 {
 	m_frameImage->GetSprite()->Init(texture);
-	m_frameImage->SetOrigin(Vector2::Zero);
+	m_frameImage->SetOrigin(Vector2(1.0f, 1.0f));
 	m_frameImage->SetDepth(0.0f);
 	m_frameImage->SetActive(true);
 }
@@ -108,4 +112,9 @@ void UIBarView::SetPosition(const Vector2& position)
 	m_backgroundImage->SetPosition(position);
 	m_fillImage->SetPosition(position);
 	m_frameImage->SetPosition(position);
+}
+
+void UIBarView::SetWidth(const unsigned int& value)
+{
+	m_width = value;
 }

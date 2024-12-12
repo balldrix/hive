@@ -931,5 +931,8 @@
     <Image Include="assets\textures\ui\profile-frame.png">
       <Filter>Assets\Textures\UI</Filter>
     </Image>
+    <Image Include="assets\textures\ui\bar_frame_player_health.png">
+      <Filter>Assets\Textures\UI</Filter>
+    </Image>
   </ItemGroup>
 </Project>

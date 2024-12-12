@@ -13,6 +13,7 @@ public:
 	virtual ~UIHudView();
 
 	void Init(std::string name) override;
+	void Update(float deltaTime) override;
 	void Render(Graphics* graphics) override;
 
 	void Shutdown();
