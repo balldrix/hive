@@ -26,6 +26,8 @@
 #include "Sprite.h"
 #include "Spritesheet.h"
 #include "StateMachine.h"
+#include "UIBarView.h"
+#include "UIManager.h"
 #include "UnitVectors.h"
 
 #include <fstream>
@@ -136,6 +138,8 @@ void Player::Init(ControlSystem* controlSystem)
 		{ "Hurt3",		L"hit_003"},
 		{ "Dead",		L"scream"}
 	};
+
+	UpdateStats();
 }
 
 void Player::LoadData(const std::string &playerDataFile, const std::string &damageDataFile)
@@ -255,6 +259,8 @@ void Player::Update(float deltaTime)
 	{
 		StrongAttack();
 	}
+
+	UpdateStats();
 }
 
 void Player::Kill()
@@ -281,6 +287,13 @@ void Player::Respawn()
 void Player::ResetKnockoutTimer()
 {
 	m_knockoutTimer = 0.0f;
+}
+
+void Player::UpdateStats()
+{
+	UIBarView* healthbar = static_cast<UIBarView*>(UIManager::GetView("Player Health Bar"));
+	if(healthbar) healthbar->SetMaxValue(m_playerData.objectData.startingHealth);
+	if(healthbar) healthbar->SetCurrentValue(m_health);
 }
 
 void Player::Render(Graphics* graphics)

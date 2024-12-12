@@ -20,7 +20,7 @@ public:
 	static void Init();
 	static void Update(float deltaTime);
 	static void Render(Graphics* graphics);
-	
+
 	static void CreateUISystemView();
 
 	static void CreateUIFrontEndView();
@@ -28,7 +28,7 @@ public:
 
 	static void CreateUIMainView();
 	static void DestroyUIMainView();
-	
+
 	static void RegisterUIView(UIView* uiView);
 	static void UnregisterUIView(UIView* uiView);
 
@@ -36,9 +36,11 @@ public:
 
 	static void FadeOut();
 	static void FadeIn();
-	
+
 	static bool IsFading();
 	static bool AnyViewsInState(UIView::ViewStates state);
+
+	static UIView* GetView(std::string name);
 
 	static void Destroy();
 

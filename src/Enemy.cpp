@@ -250,6 +250,8 @@ void Enemy::ApplyDamage(GameObject* source, const int& amount)
 {
 	m_health -= amount;
 
+	if(m_health < 0) m_health = 0;
+
 	// true if health has gone or damage is high
 	if(m_health < 1 || amount > 15)
 	{

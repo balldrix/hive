@@ -1,13 +1,13 @@
 #include "UIManager.h"
 
-#include "GlobalConstants.h"
 #include "Logger.h"
 #include "UIFrontEndView.h"
 #include "UIMainView.h"
 #include "UISystemView.h"
 #include "UIView.h"
 
-using namespace GlobalConstants;
+#include <fmt/core.h>
+#include <string>
 
 UIManager* UIManager::s_instance = nullptr;
 
@@ -48,6 +48,19 @@ bool UIManager::AnyViewsInState(UIView::ViewStates state)
 	}
 
 	return false;
+}
+
+UIView* UIManager::GetView(std::string name)
+{
+	for(auto it = s_instance->m_viewList.begin(); it != s_instance->m_viewList.end(); ++it)
+	{
+		if((*it)->GetName() != name) continue;
+
+		return (*it);
+	}
+
+	Logger::LogWarning(fmt::format("[UIManager] GetView: no view named {} found.", name));
+	return nullptr;
 }
 
 void UIManager::UpdateUIViews(float deltaTime)

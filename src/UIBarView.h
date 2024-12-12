@@ -31,6 +31,7 @@ public:
 	void SetMaxValue(const int& value);
 	void SetPosition(const Vector2& position);
 	void SetWidth(const unsigned int& value);
+	void SetBackgroundColour(Color colour);
 
 private:
 	int	m_currentValue;

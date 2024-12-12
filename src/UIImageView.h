@@ -25,6 +25,7 @@ public:
 	void SetPosition(Vector2 position);
 	void SetOrigin(Vector2 origin);
 	void SetDepth(float depth);
+	void SetColour(Color colour) override;
 
 	void Shutdown();
 

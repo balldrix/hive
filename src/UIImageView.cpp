@@ -39,6 +39,11 @@ void UIImageView::SetDepth(float depth)
 	m_sprite->SetDepth(depth);
 }
 
+void UIImageView::SetColour(Color colour)
+{
+	m_sprite->SetColour(colour);
+}
+
 void UIImageView::Shutdown()
 {
 	delete m_sprite;

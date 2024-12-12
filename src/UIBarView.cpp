@@ -118,3 +118,8 @@ void UIBarView::SetWidth(const unsigned int& value)
 {
 	m_width = value;
 }
+
+void UIBarView::SetBackgroundColour(Color colour)
+{
+	m_backgroundImage->SetColour(colour);
+}
