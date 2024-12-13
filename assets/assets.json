@@ -110,5 +110,12 @@
     "path": "assets\\textures\\ui\\bar_frame_player_special.png",
     "type": "texture",
     "tag": "ui_assets"
+  },
+  {
+    "id": 17,
+    "name": "t_bar_fill_yellow",
+    "path": "assets\\textures\\ui\\bar_fill_yellow.png",
+    "type": "texture",
+    "tag": "ui_assets"
   }
 ]

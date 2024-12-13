@@ -292,8 +292,20 @@ void Player::ResetKnockoutTimer()
 void Player::UpdateStats()
 {
 	UIBarView* healthbar = static_cast<UIBarView*>(UIManager::GetView("Player Health Bar"));
-	if(healthbar) healthbar->SetMaxValue(m_playerData.objectData.startingHealth);
-	if(healthbar) healthbar->SetCurrentValue(m_health);
+	
+	if(healthbar)
+	{
+		healthbar->SetMaxValue(m_playerData.objectData.startingHealth);
+		healthbar->SetCurrentValue(m_health);
+	}
+
+	UIBarView* specialbar = static_cast<UIBarView*>(UIManager::GetView("Player Special Bar"));
+
+	if(specialbar)
+	{
+		specialbar->SetMaxValue(100);
+		specialbar->SetCurrentValue(20);
+	}
 }
 
 void Player::Render(Graphics* graphics)

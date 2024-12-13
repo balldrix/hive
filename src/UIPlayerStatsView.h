@@ -26,4 +26,5 @@ private:
 
 	UIPortraitView* m_portraitView;
 	UIBarView* m_healthBar;
+	UIBarView* m_specialBar;
 };
