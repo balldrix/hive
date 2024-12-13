@@ -49,7 +49,7 @@
     <ClCompile Include="src\KingMookChargeState.cpp" />
     <ClCompile Include="src\KingMookEnemyGlobalState.cpp" />
     <ClCompile Include="src\UIConfig.cpp" />
-    <ClCompile Include="src\UIPlayerInfoView.cpp" />
+    <ClCompile Include="src\UIPlayerStatsView.cpp" />
     <ClCompile Include="src\UIPortraitView.cpp" />
     <ClCompile Include="src\UISpriteText.cpp" />
     <ClCompile Include="src\UIMenuItemView.cpp" />
@@ -148,7 +148,7 @@
     <ClCompile Include="src\UIView.cpp" />
     <ClCompile Include="src\Window.cpp" />
     <ClInclude Include="src\UIConfig.h" />
-    <ClInclude Include="src\UIPlayerInfoView.h" />
+    <ClInclude Include="src\UIPlayerStatsView.h" />
     <ClInclude Include="src\UIPortraitView.h" />
     <ClInclude Include="src\UISpriteText.h" />
     <ClInclude Include="src\UIMenuItemView.h" />

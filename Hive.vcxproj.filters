@@ -277,7 +277,7 @@
     <ClCompile Include="src\UIPortraitView.cpp">
       <Filter>UI\Gameplay\Hud</Filter>
     </ClCompile>
-    <ClCompile Include="src\UIPlayerInfoView.cpp">
+    <ClCompile Include="src\UIPlayerStatsView.cpp">
       <Filter>UI\Gameplay\Hud</Filter>
     </ClCompile>
     <ClCompile Include="src\UIBarView.cpp">
@@ -728,7 +728,7 @@
     <ClInclude Include="src\UIHudView.h">
       <Filter>UI\Gameplay\Hud</Filter>
     </ClInclude>
-    <ClInclude Include="src\UIPlayerInfoView.h">
+    <ClInclude Include="src\UIPlayerStatsView.h">
       <Filter>UI\Gameplay\Hud</Filter>
     </ClInclude>
     <ClInclude Include="src\UIPortraitView.h">

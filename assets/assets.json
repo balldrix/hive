@@ -103,5 +103,12 @@
     "path": "assets\\textures\\ui\\bar_frame_player_health.png",
     "type": "texture",
     "tag": "ui_assets"
+  },
+  {
+    "id": 16,
+    "name": "t_bar_frame_player_special",
+    "path": "assets\\textures\\ui\\bar_frame_player_special.png",
+    "type": "texture",
+    "tag": "ui_assets"
   }
 ]

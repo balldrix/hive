@@ -4,7 +4,7 @@
 #include <string>
 
 class Graphics;
-class UIPlayerInfoView;
+class UIPlayerStatsView;
 
 class UIHudView : public UIView
 {
@@ -19,5 +19,5 @@ public:
 	void Shutdown();
 
 private:
-	UIPlayerInfoView* m_playerInfoView;
+	UIPlayerStatsView* m_playerInfoView;
 };

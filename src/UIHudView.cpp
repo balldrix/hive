@@ -2,7 +2,7 @@
 
 #include "Logger.h"
 #include "UIManager.h"
-#include "UIPlayerInfoView.h"
+#include "UIPlayerStatsView.h"
 #include "UIView.h"
 
 #include <string>
@@ -23,7 +23,7 @@ void UIHudView::Init(std::string name)
 
 	Logger::LogInfo("Initialising UI Hud View");
 
-	m_playerInfoView = new UIPlayerInfoView();
+	m_playerInfoView = new UIPlayerStatsView();
 	m_playerInfoView->Init("UI Player Info View");
 	m_playerInfoView->TransitionOut(false);
 

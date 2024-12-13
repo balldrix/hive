@@ -7,11 +7,11 @@ class Graphics;
 class UIBarView;
 class UIPortraitView;
 
-class UIPlayerInfoView : public UIView
+class UIPlayerStatsView : public UIView
 {
 public:
-	UIPlayerInfoView();
-	~UIPlayerInfoView();
+	UIPlayerStatsView();
+	~UIPlayerStatsView();
 
 	void Init(std::string name) override;
 	void Update(float deltaTime) override;

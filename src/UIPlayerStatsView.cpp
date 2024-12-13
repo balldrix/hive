@@ -1,4 +1,4 @@
-#include "UIPlayerInfoView.h"
+#include "UIPlayerStatsView.h"
 
 #include "AssetLoader.h"
 #include "Logger.h"
@@ -10,18 +10,18 @@
 #include <directxtk/SimpleMath.h>
 #include <string>
 
-UIPlayerInfoView::UIPlayerInfoView() :
+UIPlayerStatsView::UIPlayerStatsView() :
 	m_portraitView(nullptr),
 	m_healthBar(nullptr)
 {
 }
 
-UIPlayerInfoView::~UIPlayerInfoView()
+UIPlayerStatsView::~UIPlayerStatsView()
 {
 	Shutdown();
 }
 
-void UIPlayerInfoView::Init(std::string name)
+void UIPlayerStatsView::Init(std::string name)
 {
 	m_name = name;
 
@@ -41,24 +41,24 @@ void UIPlayerInfoView::Init(std::string name)
 	UIManager::RegisterUIView(m_healthBar);
 }
 
-void UIPlayerInfoView::Update(float deltaTime)
+void UIPlayerStatsView::Update(float deltaTime)
 {
 }
 
-void UIPlayerInfoView::Render(Graphics* graphics)
+void UIPlayerStatsView::Render(Graphics* graphics)
 {
 	m_portraitView->Render(graphics);
 }
 
-void UIPlayerInfoView::TransitionIn(bool isAnimating)
+void UIPlayerStatsView::TransitionIn(bool isAnimating)
 {
 }
 
-void UIPlayerInfoView::TransitionOut(bool isAnimating)
+void UIPlayerStatsView::TransitionOut(bool isAnimating)
 {
 }
 
-void UIPlayerInfoView::Shutdown()
+void UIPlayerStatsView::Shutdown()
 {
 	Logger::LogInfo("Shutting down UI PlayerInfoView");
 
@@ -71,6 +71,6 @@ void UIPlayerInfoView::Shutdown()
 	m_portraitView = nullptr;
 }
 
-void UIPlayerInfoView::DoTransition(float deltaTime)
+void UIPlayerStatsView::DoTransition(float deltaTime)
 {
 }
