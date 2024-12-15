@@ -3,7 +3,12 @@
 #include "Graphics.h"
 
 #include <DirectXColors.h>
+#include <DirectXMath.h>
+#include <DirectXMathVector.inl>
+#include <directxtk/SimpleMath.h>
+#include <directxtk/SpriteBatch.h>
 #include <directxtk/SpriteFont.h>
+#include <string>
 
 UISpriteText::UISpriteText() :
 	m_isActive(false),
@@ -11,8 +16,10 @@ UISpriteText::UISpriteText() :
 	m_text(""),
 	m_position(Vector2::Zero),
 	m_colour(Colors::White.v),
+	m_outlineColour(Colors::White.v),
 	m_depth(0.0f),
-	m_origin(Vector2::Zero)
+	m_origin(Vector2::Zero),
+	m_hasOutline(false)
 {
 }
 
@@ -34,6 +41,44 @@ void UISpriteText::Render(Graphics* graphics)
 		m_text.c_str(),
 		m_position,
 		m_colour, 0,
+		m_origin,
+		Vector2::One,
+		DX11::SpriteEffects_None,
+		m_depth + 0.1f);
+
+	if(!m_hasOutline) return;
+
+	m_spriteFont->DrawString(graphics->GetSpriteBatch().get(),
+		m_text.c_str(),
+		m_position + Vector2(1.0f, 0.0f),
+		m_outlineColour, 0,
+		m_origin,
+		Vector2::One,
+		DX11::SpriteEffects_None,
+		m_depth);
+
+	m_spriteFont->DrawString(graphics->GetSpriteBatch().get(),
+		m_text.c_str(),
+		m_position + Vector2(-1.0f, 0.0f),
+		m_outlineColour, 0,
+		m_origin,
+		Vector2::One,
+		DX11::SpriteEffects_None,
+		m_depth);
+
+	m_spriteFont->DrawString(graphics->GetSpriteBatch().get(),
+		m_text.c_str(),
+		m_position + Vector2(0.0f, 1.0f),
+		m_outlineColour, 0,
+		m_origin,
+		Vector2::One,
+		DX11::SpriteEffects_None,
+		m_depth);
+
+	m_spriteFont->DrawString(graphics->GetSpriteBatch().get(),
+		m_text.c_str(),
+		m_position + Vector2(0.0f, -1.0f),
+		m_outlineColour, 0,
 		m_origin,
 		Vector2::One,
 		DX11::SpriteEffects_None,
@@ -83,6 +128,12 @@ void UISpriteText::SetAlignment(Alignments alignment)
 	default:
 		break;
 	}
+}
+
+void UISpriteText::SetOutline(bool hasOutline, Color colour)
+{
+	m_hasOutline = hasOutline;
+	m_outlineColour = colour;
 }
 
 int UISpriteText::GetHeight() const

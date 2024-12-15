@@ -20,7 +20,8 @@ void UIKillCount::Init(std::string name)
 
 	m_labelText = new UISpriteText();
 	m_labelText->Init(UIConfig::ThaleahFont12);
-	m_labelText->SetColour(Color(0.36f, 0.22f, 0.22f));
+	m_labelText->SetColour(Color(0.85f, 0.65f, 0.65f));
+	m_labelText->SetOutline(true, Color(0.65f, 0.145f, 0.145f));
 	m_labelText->SetText("KO'S");
 	m_labelText->SetPosition(Vector2(166.0f, 124.0f));
 	m_labelText->SetAlignment(UISpriteText::Alignments::Right);
