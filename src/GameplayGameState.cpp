@@ -474,6 +474,8 @@ void GameplayGameState::ProcessCollisions()
 				enemy->ApplyDamage(m_player, damageData.amount);
 				enemy->ShowEnemyHud();
 
+				if(enemy->GetHealth() <= 0.0f) m_player->AddKill();
+
 				m_stopTimer = damageData.hitStopDuration;
 				m_impactFx->DisplayFx(Vector2(groundPosition.x, groundPosition.y - spriteHeight * 0.5f));
 

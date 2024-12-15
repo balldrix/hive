@@ -283,6 +283,7 @@
     <ClCompile Include="src\UIBarView.cpp">
       <Filter>UI\Gameplay\Hud</Filter>
     </ClCompile>
+    <ClCompile Include="src\UIKillCount.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -737,6 +738,7 @@
     <ClInclude Include="src\UIBarView.h">
       <Filter>UI\Gameplay\Hud</Filter>
     </ClInclude>
+    <ClInclude Include="src\UIKillCount.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\fonts\goodbye_despair_8pt.spritefont">
@@ -771,6 +773,15 @@
     </None>
     <None Include="assets\assets.json">
       <Filter>Assets</Filter>
+    </None>
+    <None Include="assets\fonts\gamer_34pt.spritefont">
+      <Filter>Assets\Fonts</Filter>
+    </None>
+    <None Include="assets\fonts\gamer_16pt.spritefont">
+      <Filter>Assets\Fonts</Filter>
+    </None>
+    <None Include="assets\fonts\thaleah_12pt.spritefont">
+      <Filter>Assets\Fonts</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

@@ -310,6 +310,12 @@ void Player::UpdateStats()
 	}
 
 	UIKillCount* killCount = static_cast<UIKillCount*>(UIManager::GetView("Player Kill Count"));
+	killCount->SetValue(m_kills);
+}
+
+void Player::AddKill()
+{
+	m_kills++;
 }
 
 void Player::Render(Graphics* graphics)

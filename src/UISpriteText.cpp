@@ -37,48 +37,49 @@ void UISpriteText::Render(Graphics* graphics)
 {
 	if(!m_isActive) return;
 
+	if(m_hasOutline)
+	{
+		m_spriteFont->DrawString(graphics->GetSpriteBatch().get(),
+			m_text.c_str(),
+			m_position + Vector2(1.0f, 0.0f),
+			m_outlineColour, 0,
+			m_origin,
+			Vector2::One,
+			DX11::SpriteEffects_None,
+			m_depth);
+
+		m_spriteFont->DrawString(graphics->GetSpriteBatch().get(),
+			m_text.c_str(),
+			m_position + Vector2(-1.0f, 0.0f),
+			m_outlineColour, 0,
+			m_origin,
+			Vector2::One,
+			DX11::SpriteEffects_None,
+			m_depth);
+
+		m_spriteFont->DrawString(graphics->GetSpriteBatch().get(),
+			m_text.c_str(),
+			m_position + Vector2(0.0f, 1.0f),
+			m_outlineColour, 0,
+			m_origin,
+			Vector2::One,
+			DX11::SpriteEffects_None,
+			m_depth);
+
+		m_spriteFont->DrawString(graphics->GetSpriteBatch().get(),
+			m_text.c_str(),
+			m_position + Vector2(0.0f, -1.0f),
+			m_outlineColour, 0,
+			m_origin,
+			Vector2::One,
+			DX11::SpriteEffects_None,
+			m_depth);
+	}
+
 	m_spriteFont->DrawString(graphics->GetSpriteBatch().get(),
 		m_text.c_str(),
 		m_position,
 		m_colour, 0,
-		m_origin,
-		Vector2::One,
-		DX11::SpriteEffects_None,
-		m_depth + 0.1f);
-
-	if(!m_hasOutline) return;
-
-	m_spriteFont->DrawString(graphics->GetSpriteBatch().get(),
-		m_text.c_str(),
-		m_position + Vector2(1.0f, 0.0f),
-		m_outlineColour, 0,
-		m_origin,
-		Vector2::One,
-		DX11::SpriteEffects_None,
-		m_depth);
-
-	m_spriteFont->DrawString(graphics->GetSpriteBatch().get(),
-		m_text.c_str(),
-		m_position + Vector2(-1.0f, 0.0f),
-		m_outlineColour, 0,
-		m_origin,
-		Vector2::One,
-		DX11::SpriteEffects_None,
-		m_depth);
-
-	m_spriteFont->DrawString(graphics->GetSpriteBatch().get(),
-		m_text.c_str(),
-		m_position + Vector2(0.0f, 1.0f),
-		m_outlineColour, 0,
-		m_origin,
-		Vector2::One,
-		DX11::SpriteEffects_None,
-		m_depth);
-
-	m_spriteFont->DrawString(graphics->GetSpriteBatch().get(),
-		m_text.c_str(),
-		m_position + Vector2(0.0f, -1.0f),
-		m_outlineColour, 0,
 		m_origin,
 		Vector2::One,
 		DX11::SpriteEffects_None,
@@ -114,7 +115,7 @@ void UISpriteText::SetAlignment(Alignments alignment)
 {
 	XMVECTOR measure = m_spriteFont->MeasureString(m_text.c_str());
 
-	switch (alignment)
+	switch(alignment)
 	{
 	case UISpriteText::Left:
 		m_origin = Vector2(0.0f, XMVectorGetY(measure) / 2.0f);

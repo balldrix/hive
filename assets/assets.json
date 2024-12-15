@@ -22,8 +22,8 @@
   },
   {
     "id": 4,
-    "name": "f_gamer_36",
-    "path": "assets\\fonts\\gamer_36pt.spritefont",
+    "name": "f_gamer_34",
+    "path": "assets\\fonts\\gamer_34pt.spritefont",
     "type": "spritefont",
     "tag": "initial_loading_assets"
   },

@@ -55,6 +55,7 @@ public:
 	void								Respawn();
 	void								ResetKnockoutTimer();
 	void								UpdateStats();
+	void								AddKill();
 
 	void								PlayPunchSound(const std::string &name);	
 	void								PlayWalkingSound();
