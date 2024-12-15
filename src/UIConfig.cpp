@@ -1,10 +1,15 @@
 #include "UIConfig.h"
 
-#include "Logger.h"
 #include "AssetLoader.h"
+#include "Logger.h"
+
+#include <directxtk/SpriteFont.h>
 
 SpriteFont* UIConfig::DespairFont8;
 SpriteFont* UIConfig::DespairFont12;
+SpriteFont* UIConfig::GamerFont16;
+SpriteFont* UIConfig::GamerFont36;
+SpriteFont* UIConfig::ThaleahFont16;
 
 void UIConfig::Init()
 {
@@ -12,4 +17,7 @@ void UIConfig::Init()
 
 	DespairFont8 = AssetLoader::GetSpriteFont("f_despair_8");
 	DespairFont12 = AssetLoader::GetSpriteFont("f_despair_12");
+	GamerFont16 = AssetLoader::GetSpriteFont("f_gamer_16");
+	GamerFont36 = AssetLoader::GetSpriteFont("f_gamer_36");
+	ThaleahFont16 = AssetLoader::GetSpriteFont("f_thaleah_16");
 }
