@@ -9,7 +9,7 @@ SpriteFont* UIConfig::DespairFont8;
 SpriteFont* UIConfig::DespairFont12;
 SpriteFont* UIConfig::GamerFont16;
 SpriteFont* UIConfig::GamerFont36;
-SpriteFont* UIConfig::ThaleahFont16;
+SpriteFont* UIConfig::ThaleahFont12;
 
 void UIConfig::Init()
 {
@@ -19,5 +19,5 @@ void UIConfig::Init()
 	DespairFont12 = AssetLoader::GetSpriteFont("f_despair_12");
 	GamerFont16 = AssetLoader::GetSpriteFont("f_gamer_16");
 	GamerFont36 = AssetLoader::GetSpriteFont("f_gamer_36");
-	ThaleahFont16 = AssetLoader::GetSpriteFont("f_thaleah_16");
+	ThaleahFont12 = AssetLoader::GetSpriteFont("f_thaleah_12");
 }

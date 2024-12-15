@@ -5,6 +5,7 @@
 
 class Graphics;
 class UIBarView;
+class UIKillCount;
 class UIPortraitView;
 
 class UIPlayerStatsView : public UIView
@@ -27,4 +28,5 @@ private:
 	UIPortraitView* m_portraitView;
 	UIBarView* m_healthBar;
 	UIBarView* m_specialBar;
+	UIKillCount* m_killCount;
 };

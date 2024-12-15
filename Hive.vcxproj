@@ -56,6 +56,7 @@
     <ClCompile Include="src\UITextMenuItemView.cpp" />
     <ClCompile Include="src\UIMainView.cpp" />
     <ClCompile Include="src\UIHudView.cpp" />
+    <ClCompile Include="src\UIKillCount.cpp" />
     <ClInclude Include="src\AnimatedSpriteData.h" />
     <ClInclude Include="src\GameDataManager.h" />
     <ClInclude Include="src\IMenuSystemInteraction.h" />
@@ -155,6 +156,7 @@
     <ClInclude Include="src\UITextMenuItemView.h" />
     <ClInclude Include="src\UIMainView.h" />
     <ClInclude Include="src\UIHudView.h" />
+    <ClInclude Include="src\UIKillCount.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\EncounterHandler.h" />
@@ -234,8 +236,11 @@
     <None Include="assets\data\spritesheets\player_spritesheet.json" />
     <None Include="assets\data\spritesheets\ui-sprites.json" />
     <None Include="assets\data\tilemaps\tm_bunker.json" />
+    <None Include="assets\fonts\gamer_16pt.spritefont" />
+    <None Include="assets\fonts\gamer_36pt.spritefont" />
     <None Include="assets\fonts\goodbye_despair_12pt.spritefont" />
     <None Include="assets\fonts\goodbye_despair_8pt.spritefont" />
+    <None Include="assets\fonts\thaleah_12pt.spritefont" />
     <None Include="assets\sounds\scream.ogg" />
   </ItemGroup>
   <ItemGroup>

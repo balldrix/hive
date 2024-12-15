@@ -4,6 +4,7 @@
 #include "Logger.h"
 #include "UIBarView.h"
 #include "UIManager.h"
+#include "UIKillCount.h"
 #include "UIPortraitView.h"
 #include "UIView.h"
 
@@ -13,7 +14,8 @@
 UIPlayerStatsView::UIPlayerStatsView() :
 	m_portraitView(nullptr),
 	m_healthBar(nullptr),
-	m_specialBar(nullptr)
+	m_specialBar(nullptr),
+	m_killCount(nullptr)
 {
 }
 
@@ -52,6 +54,11 @@ void UIPlayerStatsView::Init(std::string name)
 	m_specialBar->SetPosition(Vector2(24.0f, 125.0f));
 
 	UIManager::RegisterUIView(m_specialBar);
+
+	m_killCount = new UIKillCount();
+	m_killCount->Init("Player Kill Count");
+
+	UIManager::RegisterUIView(m_killCount);
 }
 
 void UIPlayerStatsView::Update(float deltaTime)
@@ -76,6 +83,10 @@ void UIPlayerStatsView::Shutdown()
 	Logger::LogInfo("Shutting down UI PlayerInfoView");
 
 	UIManager::UnregisterUIView(m_healthBar);
+	UIManager::UnregisterUIView(m_killCount);
+
+	delete m_killCount;
+	m_killCount = nullptr;
 
 	delete m_healthBar;
 	m_healthBar = nullptr;

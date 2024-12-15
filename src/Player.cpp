@@ -28,6 +28,7 @@
 #include "StateMachine.h"
 #include "UIBarView.h"
 #include "UIManager.h"
+#include "UIKillCount.h"
 #include "UnitVectors.h"
 
 #include <fstream>
@@ -43,7 +44,8 @@ Player::Player() :
 	m_footStepsSoundSource(nullptr),
 	m_vocalSoundSource(nullptr),
 	m_recentFootstepFrame(0),
-	m_hurtTimer(0.0f)
+	m_hurtTimer(0.0f),
+	m_kills(0)
 {
 }
 
@@ -306,6 +308,8 @@ void Player::UpdateStats()
 		specialbar->SetMaxValue(100);
 		specialbar->SetCurrentValue(20);
 	}
+
+	UIKillCount* killCount = static_cast<UIKillCount*>(UIManager::GetView("Player Kill Count"));
 }
 
 void Player::Render(Graphics* graphics)

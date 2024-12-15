@@ -73,4 +73,5 @@ private:
 	float								m_hurtTimer;
 	std::map<std::string, std::wstring>	m_playerSounds;
 	int									m_recentFootstepFrame;
+	int									m_kills;
 };

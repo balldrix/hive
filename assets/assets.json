@@ -15,104 +15,125 @@
   },
   {
     "id": 3,
+    "name": "f_gamer_16",
+    "path": "assets\\fonts\\gamer_16pt.spritefont",
+    "type": "spritefont",
+    "tag": "initial_loading_assets"
+  },
+  {
+    "id": 4,
+    "name": "f_gamer_36",
+    "path": "assets\\fonts\\gamer_36pt.spritefont",
+    "type": "spritefont",
+    "tag": "initial_loading_assets"
+  },
+  {
+    "id": 5,
+    "name": "f_thaleah_12",
+    "path": "assets\\fonts\\thaleah_12pt.spritefont",
+    "type": "spritefont",
+    "tag": "initial_loading_assets"
+  },
+  {
+    "id": 6,
     "name": "t_loadingScreen_bg",
     "path": "assets\\textures\\ui\\loading_screen_bg.png",
     "type": "texture",
     "tag": "initial_loading_assets"
   },
   {
-    "id": 4,
+    "id": 7,
     "name": "t_title_logo",
     "path": "assets\\textures\\ui\\title_logo.png",
     "type": "texture",
     "tag": "front_end_assets"
   },
   {
-    "id": 5,
+    "id": 8,
     "name": "t_titleScreen_bg",
     "path": "assets\\textures\\ui\\title_screen_bg.png",
     "type": "texture",
     "tag": "front_end_assets"
   },
   {
-    "id": 6,
+    "id": 9,
     "name": "t_player",
     "path": "assets\\textures\\player_spritesheet.png",
     "type": "texture",
     "tag": "gameplay_assets"
   },
   {
-    "id": 7,
+    "id": 10,
     "name": "t_shadow",
     "path": "assets\\textures\\shadow_large.png",
     "type": "texture",
     "tag": "gameplay_assets"
   },
   {
-    "id": 8,
+    "id": 11,
     "name": "t_impact",
     "path": "assets\\textures\\vfx.png",
     "type": "texture",
     "tag": "gameplay_assets"
   },
   {
-    "id": 9,
+    "id": 12,
     "name": "ts_bunker",
     "path": "assets\\tilesets\\ts_bunker.png",
     "type": "texture",
     "tag": "gameplay_assets"
   },
   {
-    "id": 10,
+    "id": 13,
     "name": "t_mook",
     "path": "assets\\textures\\mook_spritesheet.png",
     "type": "texture",
     "tag": "gameplay_assets"
   },
   {
-    "id": 11,
+    "id": 14,
     "name": "t_profile_frame",
     "path": "assets\\textures\\ui\\profile_frame.png",
     "type": "texture",
     "tag": "ui_assets"
   },
   {
-    "id": 12,
+    "id": 15,
     "name": "t_player_profile",
     "path": "assets\\textures\\ui\\player_profile.png",
     "type": "texture",
     "tag": "ui_assets"
   },
   {
-    "id": 13,
+    "id": 16,
     "name": "t_bar_fill_red",
     "path": "assets\\textures\\ui\\bar_fill_red.png",
     "type": "texture",
     "tag": "ui_assets"
   },
   {
-    "id": 14,
+    "id": 17,
     "name": "t_bar_fill_green",
     "path": "assets\\textures\\ui\\bar_fill_green.png",
     "type": "texture",
     "tag": "ui_assets"
   },
   {
-    "id": 15,
+    "id": 18,
     "name": "t_bar_frame_player_health",
     "path": "assets\\textures\\ui\\bar_frame_player_health.png",
     "type": "texture",
     "tag": "ui_assets"
   },
   {
-    "id": 16,
+    "id": 19,
     "name": "t_bar_frame_player_special",
     "path": "assets\\textures\\ui\\bar_frame_player_special.png",
     "type": "texture",
     "tag": "ui_assets"
   },
   {
-    "id": 17,
+    "id": 20,
     "name": "t_bar_fill_yellow",
     "path": "assets\\textures\\ui\\bar_fill_yellow.png",
     "type": "texture",

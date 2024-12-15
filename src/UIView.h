@@ -45,6 +45,7 @@ public:
 	virtual int GetHeight() const { return 0; };
 	virtual int GetWidth() const { return 0; };
 	virtual Color GetColour() { return Colors::White.v; }
+
 	virtual void Shutdown() = 0;	
 
 protected:

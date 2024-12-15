@@ -1,7 +1,12 @@
 #include "UITextMenuItemView.h"
 
-#include "UISpriteText.h"
 #include "UIConfig.h"
+#include "UIMenuItemView.h"
+#include "UISpriteText.h"
+#include "UIView.h"
+
+#include <directxtk/SimpleMath.h>
+#include <string>
 
 UITextMenuItemView::UITextMenuItemView() :
 	m_uiSpriteText(nullptr)
