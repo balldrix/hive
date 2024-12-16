@@ -26,6 +26,8 @@
 #include "State.h"
 #include "StateMachine.h"
 #include "Texture.h"
+#include "UIManager.h"
+#include "UIPortraitView.h"
 #include "UnitVectors.h"
 
 #include <cstdint>
@@ -167,8 +169,7 @@ void Enemy::Init(Graphics* graphics,
 void
 Enemy::Update(float deltaTime)
 {
-	if(m_active == false)
-		return;
+	if(!m_active) return;
 
 	m_stateMachine->Update();
 	GameObject::Update(deltaTime);
@@ -180,8 +181,7 @@ Enemy::Update(float deltaTime)
 void
 Enemy::Render(Graphics* graphics)
 {
-	if(m_active == false)
-		return;
+	if(!m_active) return;
 
 	if(m_shadow)
 	{
@@ -303,9 +303,12 @@ void Enemy::Kill()
 
 void Enemy::ShowEnemyHud()
 {
-	// TODO move to ui manager
-	/*m_healthBar->SetCurrentValue(m_health);
-	m_hudManager->ShowEnemyHud(m_id, m_portraitSprite, m_healthBar);*/
+	UIPortraitView* portraitView = static_cast<UIPortraitView*>(UIManager::GetView("Enemy Portrait"));
+
+	if(portraitView == nullptr) return;
+
+	portraitView->SetActive(true);
+	portraitView->SetPortraitTexture(AssetLoader::GetTexture(fmt::format("t_{}_portrait", m_enemyData.type)));
 }
 
 void Enemy::PlayEntranceSound()

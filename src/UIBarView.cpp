@@ -42,6 +42,8 @@ void UIBarView::Init(std::string name)
 
 void UIBarView::Update(float deltaTime)
 {
+	if(!m_isActive) return;
+
 	RECT rect{};
 	rect.left = 0;
 	rect.top = 0;
@@ -56,6 +58,8 @@ void UIBarView::Update(float deltaTime)
 
 void UIBarView::Render(Graphics* graphics)
 {
+	if(!m_isActive) return;
+
 	m_backgroundImage->Render(graphics);
 	m_fillImage->Render(graphics);
 	m_frameImage->Render(graphics);

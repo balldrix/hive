@@ -5,6 +5,7 @@
 #include "UIImageView.h"
 #include "UIView.h"
 
+#include "Texture.h"
 #include <directxtk/SimpleMath.h>
 #include <fmt/core.h>
 #include <string>
@@ -26,14 +27,13 @@ void UIPortraitView::Init(std::string name)
 
 	m_frame = new UIImageView();
 	m_frame->Init(fmt::format("{} Frame", name));
-	m_frame->GetSprite()->Init(AssetLoader::GetTexture("t_profile_frame"));
+	m_frame->GetSprite()->Init(AssetLoader::GetTexture("t_portrait_frame"));
 	m_frame->SetOrigin(Vector2::Zero);
 	m_frame->SetDepth(0.0f);
 	m_frame->SetActive(true);
 
 	m_characterImage = new UIImageView();
 	m_characterImage->Init(fmt::format("{} Character Image", name));
-	m_characterImage->GetSprite()->Init(AssetLoader::GetTexture("t_player_profile"));
 	m_characterImage->SetOrigin(Vector2::Zero);
 	m_characterImage->SetDepth(0.0f);
 	m_characterImage->SetActive(true);
@@ -41,6 +41,8 @@ void UIPortraitView::Init(std::string name)
 
 void UIPortraitView::Render(Graphics* graphics)
 {
+	if(!m_isActive) return;
+
 	m_frame->Render(graphics);
 	m_characterImage->Render(graphics);
 }
@@ -52,6 +54,12 @@ void UIPortraitView::Shutdown()
 
 	delete m_characterImage;
 	m_characterImage = nullptr;
+}
+
+void UIPortraitView::SetPortraitTexture(Texture* texture)
+{
+	m_characterImage->GetSprite()->Init(texture);
+	m_characterImage->SetOrigin(Vector2::Zero);
 }
 
 void UIPortraitView::SetPosition(const Vector2& position)

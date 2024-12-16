@@ -4,6 +4,7 @@
 #include <string>
 
 class Graphics;
+class UIEnemyStatsView;
 class UIPlayerStatsView;
 
 class UIHudView : public UIView
@@ -19,5 +20,6 @@ public:
 	void Shutdown();
 
 private:
-	UIPlayerStatsView* m_playerInfoView;
+	UIPlayerStatsView* m_playerStatsView;
+	UIEnemyStatsView* m_enemyStatsView;
 };

@@ -6,6 +6,7 @@
 #include <string>
 
 class Graphics;
+class Texture;
 class UIImageView;
 
 class UIPortraitView : public UIView
@@ -19,6 +20,7 @@ public:
 
 	void Shutdown() override;
 
+	void SetPortraitTexture(Texture* texture);
 	void SetPosition(const Vector2& position);
 
 private:

@@ -92,15 +92,15 @@
   },
   {
     "id": 14,
-    "name": "t_profile_frame",
-    "path": "assets\\textures\\ui\\profile_frame.png",
+    "name": "t_portrait_frame",
+    "path": "assets\\textures\\ui\\portrait_frame.png",
     "type": "texture",
     "tag": "ui_assets"
   },
   {
     "id": 15,
-    "name": "t_player_profile",
-    "path": "assets\\textures\\ui\\player_profile.png",
+    "name": "t_player_portrait",
+    "path": "assets\\textures\\ui\\player_portrait.png",
     "type": "texture",
     "tag": "ui_assets"
   },
@@ -136,6 +136,13 @@
     "id": 20,
     "name": "t_bar_fill_yellow",
     "path": "assets\\textures\\ui\\bar_fill_yellow.png",
+    "type": "texture",
+    "tag": "ui_assets"
+  },
+  {
+    "id": 21,
+    "name": "t_mook_portrait",
+    "path": "assets\\textures\\ui\\mook_portrait.png",
     "type": "texture",
     "tag": "ui_assets"
   }

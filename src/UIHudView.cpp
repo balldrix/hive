@@ -1,6 +1,7 @@
 #include "UIHudView.h"
 
 #include "Logger.h"
+#include "UIEnemyStatsView.h"
 #include "UIManager.h"
 #include "UIPlayerStatsView.h"
 #include "UIView.h"
@@ -8,7 +9,8 @@
 #include <string>
 
 UIHudView::UIHudView() : 
-	m_playerInfoView(nullptr)
+	m_playerStatsView(nullptr),
+	m_enemyStatsView(nullptr)
 {
 }
 
@@ -23,9 +25,12 @@ void UIHudView::Init(std::string name)
 
 	Logger::LogInfo("Initialising UI Hud View");
 
-	m_playerInfoView = new UIPlayerStatsView();
-	m_playerInfoView->Init("UI Player Info View");
-	m_playerInfoView->TransitionOut(false);
+	m_playerStatsView = new UIPlayerStatsView();
+	m_playerStatsView->Init("Player Stats View");
+	m_playerStatsView->TransitionOut(false);
+
+	m_enemyStatsView = new UIEnemyStatsView();
+	m_enemyStatsView->Init("Enemy Stats View");
 
 	m_assignedStates.push_back("Gameplay");
 
@@ -36,18 +41,23 @@ void UIHudView::Init(std::string name)
 
 void UIHudView::Update(float deltaTime)
 {
-	m_playerInfoView->Update(deltaTime);
+	m_playerStatsView->Update(deltaTime);
 }
 
 void UIHudView::Render(Graphics* graphics)
 {
-	m_playerInfoView->Render(graphics);
+	m_playerStatsView->Render(graphics);
 }
 
 void UIHudView::Shutdown()
 {
 	Logger::LogInfo("Shutting down UI Hud View");
 
-	delete m_playerInfoView;
-	m_playerInfoView = nullptr;
+	UIManager::UnregisterUIView(this);
+
+	delete m_enemyStatsView;
+	m_enemyStatsView = nullptr;
+
+	delete m_playerStatsView;
+	m_playerStatsView = nullptr;
 }

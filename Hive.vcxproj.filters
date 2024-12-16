@@ -286,6 +286,9 @@
     <ClCompile Include="src\UIKillCount.cpp">
       <Filter>UI\Gameplay\Hud</Filter>
     </ClCompile>
+    <ClCompile Include="src\UIEnemyStatsView.cpp">
+      <Filter>UI\Gameplay\Hud</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -741,6 +744,9 @@
       <Filter>UI\Gameplay\Hud</Filter>
     </ClInclude>
     <ClInclude Include="src\UIKillCount.h">
+      <Filter>UI\Gameplay\Hud</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIEnemyStatsView.h">
       <Filter>UI\Gameplay\Hud</Filter>
     </ClInclude>
   </ItemGroup>

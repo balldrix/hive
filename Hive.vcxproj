@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="src\GameDataManager.cpp" />
     <ClCompile Include="src\MenuSystem.cpp" />
+    <ClCompile Include="src\UIEnemyStatsView.cpp" />
     <ClCompile Include="src\UIMainMenuView.cpp" />
     <ClCompile Include="src\MainMenuGameState.cpp" />
     <ClCompile Include="src\AssetLoader.cpp" />
@@ -62,6 +63,7 @@
     <ClInclude Include="src\IMenuSystemInteraction.h" />
     <ClInclude Include="src\MenuSystem.h" />
     <ClInclude Include="src\Frame.h" />
+    <ClInclude Include="src\UIEnemyStatsView.h" />
     <ClInclude Include="src\UIMainMenuView.h" />
     <ClInclude Include="src\MainMenuGameState.h" />
     <ClInclude Include="src\AssetData.h" />

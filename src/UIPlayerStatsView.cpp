@@ -31,7 +31,9 @@ void UIPlayerStatsView::Init(std::string name)
 
 	m_portraitView = new UIPortraitView();
 	m_portraitView->Init("Player Portrait");
+	m_portraitView->SetPortraitTexture(AssetLoader::GetTexture("t_player_portrait"));
 	m_portraitView->SetPosition(Vector2(2.0f, 116.0f));
+	m_portraitView->SetActive(true);
 
 	m_healthBar = new UIBarView();
 	m_healthBar->SetWidth(95);
@@ -41,6 +43,7 @@ void UIPlayerStatsView::Init(std::string name)
 	m_healthBar->SetFillTexture(AssetLoader::GetTexture("t_bar_fill_green"));
 	m_healthBar->SetFrameTexture(AssetLoader::GetTexture("t_bar_frame_player_health"));
 	m_healthBar->SetPosition(Vector2(24.0f, 117.0f));
+	m_healthBar->SetActive(true);
 	
 	UIManager::RegisterUIView(m_healthBar);
 
@@ -52,6 +55,7 @@ void UIPlayerStatsView::Init(std::string name)
 	m_specialBar->SetFillTexture(AssetLoader::GetTexture("t_bar_fill_yellow"));
 	m_specialBar->SetFrameTexture(AssetLoader::GetTexture("t_bar_frame_player_special"));
 	m_specialBar->SetPosition(Vector2(24.0f, 125.0f));
+	m_specialBar->SetActive(true);
 
 	UIManager::RegisterUIView(m_specialBar);
 
