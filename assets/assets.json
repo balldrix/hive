@@ -145,5 +145,12 @@
     "path": "assets\\textures\\ui\\mook_portrait.png",
     "type": "texture",
     "tag": "ui_assets"
+  },
+  {
+    "id": 22,
+    "name": "t_bar_frame_enemy",
+    "path": "assets\\textures\\ui\\bar_frame_enemy.png",
+    "type": "texture",
+    "tag": "ui_assets"
   }
 ]

@@ -27,6 +27,7 @@
 #include "StateMachine.h"
 #include "Texture.h"
 #include "UIManager.h"
+#include "UIBarView.h"
 #include "UIPortraitView.h"
 #include "UnitVectors.h"
 
@@ -305,10 +306,20 @@ void Enemy::ShowEnemyHud()
 {
 	UIPortraitView* portraitView = static_cast<UIPortraitView*>(UIManager::GetView("Enemy Portrait"));
 
-	if(portraitView == nullptr) return;
+	if(portraitView)
+	{
+		portraitView->SetActive(true);
+		portraitView->SetPortraitTexture(AssetLoader::GetTexture(fmt::format("t_{}_portrait", m_enemyData.type)));
+	}
 
-	portraitView->SetActive(true);
-	portraitView->SetPortraitTexture(AssetLoader::GetTexture(fmt::format("t_{}_portrait", m_enemyData.type)));
+	UIBarView* healthbar = static_cast<UIBarView*>(UIManager::GetView("Enemy Health Bar"));
+
+	if(healthbar)
+	{
+		healthbar->SetActive(true);
+		healthbar->SetCurrentValue(m_health);
+		healthbar->SetMaxValue(m_enemyData.objectData.startingHealth);
+	}
 }
 
 void Enemy::PlayEntranceSound()

@@ -1,5 +1,6 @@
 #include "UIEnemyStatsView.h"
 
+#include "AssetLoader.h"
 #include "UIBarView.h"
 #include "UIManager.h"
 #include "UIPortraitView.h"
@@ -28,11 +29,21 @@ void UIEnemyStatsView::Init(std::string name)
 	m_portraitView->SetPosition(Vector2(2.0f, 2.0f));
 
 	UIManager::RegisterUIView(m_portraitView);
+
+	m_healthBar = new UIBarView();
+	m_healthBar->Init("Enemy Health Bar");
+	m_healthBar->SetWidth(95);
+	m_healthBar->SetBackgroundTexture(AssetLoader::GetTexture("t_pixel"));
+	m_healthBar->SetBackgroundColour(Color(0.525f, 0.509f, 0.603f));
+	m_healthBar->SetFillTexture(AssetLoader::GetTexture("t_bar_fill_red"));
+	m_healthBar->SetFrameTexture(AssetLoader::GetTexture("t_bar_frame_enemy"));
+	m_healthBar->SetPosition(Vector2(24.0f, 3.0f));
+
+	UIManager::RegisterUIView(m_healthBar);
 }
 
 void UIEnemyStatsView::Render(Graphics* graphics)
 {
-	m_portraitView->Render(graphics);
 }
 
 void UIEnemyStatsView::Shutdown()
