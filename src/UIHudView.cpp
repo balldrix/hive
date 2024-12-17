@@ -1,6 +1,7 @@
 #include "UIHudView.h"
 
 #include "Logger.h"
+#include "UIComboCounterView.h"
 #include "UIEnemyStatsView.h"
 #include "UIManager.h"
 #include "UIPlayerStatsView.h"
@@ -10,7 +11,8 @@
 
 UIHudView::UIHudView() : 
 	m_playerStatsView(nullptr),
-	m_enemyStatsView(nullptr)
+	m_enemyStatsView(nullptr),
+	m_comboCounterView(nullptr)
 {
 }
 
@@ -31,6 +33,11 @@ void UIHudView::Init(std::string name)
 
 	m_enemyStatsView = new UIEnemyStatsView();
 	m_enemyStatsView->Init("Enemy Stats View");
+	m_playerStatsView->TransitionOut(false);
+
+	m_comboCounterView = new UIComboCounterView();
+	m_comboCounterView->Init("Combo Counter View");
+	m_playerStatsView->TransitionOut(false);
 
 	m_assignedStates.push_back("Gameplay");
 
@@ -54,6 +61,9 @@ void UIHudView::Shutdown()
 	Logger::LogInfo("Shutting down UI Hud View");
 
 	UIManager::UnregisterUIView(this);
+
+	delete m_comboCounterView;
+	m_comboCounterView = nullptr;
 
 	delete m_enemyStatsView;
 	m_enemyStatsView = nullptr;

@@ -21,14 +21,13 @@ add_executable(${PROJECT_NAME} src/main.cpp src/AABB.cpp src/Animator.cpp src/Au
 								src/EnemyIdleState.cpp src/EnemyKnockbackState.cpp src/EnemyRunningState.cpp src/EnemyVictoryState.cpp 
 								src/EnemyWalkingState.cpp src/Game.cpp src/GameObject.cpp src/GameOverSceneState.cpp src/GameOverScreen.cpp 
 								src/GameOverScreenController.cpp src/GameState.cpp src/GameStateManager.cpp src/GameplayGameState.cpp 
-								src/Graphics.cpp src/HitBoxManager.cpp src/ImpactFx.cpp src/Input.cpp 
-								src/KingMook.cpp src/KingMookChargeState.cpp src/KingMookEnemyGlobalState.cpp src/LevelRenderer.cpp src/Main.cpp
-								src/MookEnemyGlobalState.cpp src/MookRunningEnemyGlobalState.cpp src/NPCFactory.cpp src/NPCManager.cpp 
-								src/ParticleSystem.cpp src/PixelTexture.cpp src/Player.cpp src/PlayerAttackState.cpp src/PlayerBlockState.cpp 
-								src/PlayerDeadState.cpp src/PlayerGlobalState.cpp src/PlayerHurtState.cpp src/PlayerIdleState.cpp 
-								src/PlayerKnockbackState.cpp src/PlayerRunningState.cpp src/PlayerSprintingState.cpp src/Randomiser.cpp 
-								src/RunningEnemy.cpp src/RunningEnemyDeadState.cpp src/Sound.cpp src/SoundManager.cpp src/SoundSource.cpp
-								src/Sprite.cpp src/Spritesheet.cpp src/Texture.cpp src/Timer.cpp src/TravelPrompt.cpp 
+								src/Graphics.cpp src/HitBoxManager.cpp src/ImpactFx.cpp src/Input.cpp src/KingMook.cpp src/KingMookChargeState.cpp 
+								src/KingMookEnemyGlobalState.cpp src/LevelRenderer.cpp src/Main.cpp src/MookEnemyGlobalState.cpp 
+								src/MookRunningEnemyGlobalState.cpp src/NPCFactory.cpp src/NPCManager.cpp src/ParticleSystem.cpp src/PixelTexture.cpp 
+								src/Player.cpp src/PlayerAttackState.cpp src/PlayerBlockState.cpp src/PlayerDeadState.cpp src/PlayerGlobalState.cpp 
+								src/PlayerHurtState.cpp src/PlayerIdleState.cpp src/PlayerKnockbackState.cpp src/PlayerRunningState.cpp 
+								src/PlayerSprintingState.cpp src/Randomiser.cpp src/RunningEnemy.cpp src/RunningEnemyDeadState.cpp src/Sound.cpp 
+								src/SoundManager.cpp src/SoundSource.cpp src/Sprite.cpp src/Spritesheet.cpp src/Texture.cpp src/Timer.cpp src/TravelPrompt.cpp 
 								src/TravellingHandler.cpp src/TravellingSceneState.cpp src/Window.cpp src/AABB.h src/AnimationData.h src/Animator.h 
 								src/AnimatedSpriteData.h src/AudioConstants.h src/AudioEngine.h src/UIBarView.h src/Camera.h 
 								src/Collider.h src/ControlSystem.h src/DamageData.h src/EncounterHandler.h src/EncounterSceneState.h src/Enemy.h 
@@ -36,8 +35,7 @@ add_executable(${PROJECT_NAME} src/main.cpp src/AABB.cpp src/Animator.cpp src/Au
 								src/EnemyHurtState.h src/EnemyIdleState.h src/EnemyKnockbackState.h src/EnemyRunningState.h 
 								src/EnemyVictoryState.h src/EnemyWalkingState.h src/Game.h src/GameObject.h src/GameOverSceneState.h 
 								src/GameOverScreen.h src/GameOverScreenController.h src/GameState.h src/GameStateManager.h src/GameplayConstants.h 
-								src/GameplayGameState.h src/GlobalConstants.h src/Graphics.h
-								src/HitBoxData.h src/HitBoxManager.h src/ImpactFX.h 
+								src/GameplayGameState.h src/GlobalConstants.h src/Graphics.h src/HitBoxData.h src/HitBoxManager.h src/ImpactFX.h 
 								src/Input.h src/KingMook.h src/KingMookChargeState.h src/KingMookEnemyGlobalState.h src/LevelRenderer.h
 								src/MookEnemyGlobalState.h src/MookRunningEnemyGlobalState.h src/NPCFactory.h src/NPCManager.h src/ParticleSystem.h 
 								src/PixelTexture.h src/Player.h src/PlayerAttackState.h src/PlayerBlockState.h src/PlayerConstants.h
@@ -57,7 +55,8 @@ add_executable(${PROJECT_NAME} src/main.cpp src/AABB.cpp src/Animator.cpp src/Au
 								src/MainMenuGameState.cpp src/UIMainMenuView.h src/UIMainMenuView.cpp scr/UIMenuItemView.h src/UIMenuItemView.cpp
 								src/UITextMenuItemView.h src/UITextMenuItemView.cpp src/Frame.h src/MenuSystem.h src/MenuSystem.cpp src/IMenuSystemInteraction.h
 								src/GameDataManager.h src/GameDataManager.cpp src/UIMainView.h src/UIMainView.cpp src/UIHudView.h src/UIHudView.cpp src/UIPlayerInfoView.h
-								src/UIPlayerInfoView.cpp src/UIPortraitView.h src/UIPortraitView.cpp src/UIKillCount.h src/UIKillCount.cpp src/UIEnemyStatsView.h src/UIEnemyStatsView.cpp)
+								src/UIPlayerInfoView.cpp src/UIPortraitView.h src/UIPortraitView.cpp src/UIKillCount.h src/UIKillCount.cpp src/UIEnemyStatsView.h src/UIEnemyStatsView.cpp
+								src/UIComboCounterView.h src/UIComboCounterView.cpp)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Microsoft::DirectXTK)
 target_link_libraries(${PROJECT_NAME} PRIVATE nlohmann_json::nlohmann_json)

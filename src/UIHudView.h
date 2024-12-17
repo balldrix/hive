@@ -4,6 +4,7 @@
 #include <string>
 
 class Graphics;
+class UIComboCounterView;
 class UIEnemyStatsView;
 class UIPlayerStatsView;
 
@@ -22,4 +23,5 @@ public:
 private:
 	UIPlayerStatsView* m_playerStatsView;
 	UIEnemyStatsView* m_enemyStatsView;
+	UIComboCounterView* m_comboCounterView;
 };

@@ -402,11 +402,7 @@ void GameplayGameState::Tick(float deltaTime)
 
 void GameplayGameState::ProcessCollisions()
 {
-	if(m_stopTimer > 0)
-		return;
-
-	if(m_isCollisionOnCooldown)
-		return;
+	if(m_stopTimer > 0 || m_isCollisionOnCooldown)	return;
 
 	std::vector<Enemy*> enemyList = m_NPCManager->GetEnemyList();
 
@@ -473,6 +469,8 @@ void GameplayGameState::ProcessCollisions()
 
 				enemy->ApplyDamage(m_player, damageData.amount);
 				enemy->ShowEnemyHud();
+
+				m_player->GetControlSystem()->IncrementHitComboCount();
 
 				if(enemy->GetHealth() <= 0.0f) m_player->AddKill();
 

@@ -48,6 +48,9 @@ void UIEnemyStatsView::Render(Graphics* graphics)
 
 void UIEnemyStatsView::Shutdown()
 {
+	UIManager::UnregisterUIView(m_portraitView);
+	UIManager::UnregisterUIView(m_healthBar);
+
 	delete m_healthBar;
 	m_healthBar = nullptr;
 

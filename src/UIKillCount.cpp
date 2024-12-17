@@ -2,8 +2,11 @@
 
 #include "UIConfig.h"
 #include "UISpriteText.h"
+#include "UIView.h"
 
-#include <fmt/format.h>
+#include <directxtk/SimpleMath.h>
+#include <fmt/core.h>
+#include <string>
 
 UIKillCount::UIKillCount() :
 	m_labelText(nullptr),
