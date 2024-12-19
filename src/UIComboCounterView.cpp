@@ -49,7 +49,7 @@ void UIComboCounterView::Shutdown()
 void UIComboCounterView::SetCombo(const int& value)
 {
 	m_comboText->SetActive(true);
-	m_comboText->SetText(fmt::format("{} COMBO'S", value));
+	m_comboText->SetText(fmt::format("{} COMBO!", value));
 }
 
 void UIComboCounterView::TransitionOut(bool IsAnimated)
