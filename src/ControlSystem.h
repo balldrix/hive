@@ -4,7 +4,7 @@ const unsigned int MaxCombo = 4;
 const float ComboResetTime = 0.7f;
 const float HitComboWindowDuration = 3.0f;
 const float DoubleTapWindowDuration = 0.2f;
-const int MinHitComboCount = 5;
+const int MinHitComboCount = 10;
 
 enum class Controls
 {
