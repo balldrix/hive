@@ -292,6 +292,7 @@
     <ClCompile Include="src\UIComboCounterView.cpp">
       <Filter>UI\Gameplay\Hud</Filter>
     </ClCompile>
+    <ClCompile Include="src\UIKillMilestoneView.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -753,6 +754,9 @@
       <Filter>UI\Gameplay\Hud</Filter>
     </ClInclude>
     <ClInclude Include="src\UIComboCounterView.h">
+      <Filter>UI\Gameplay\Hud</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIKillMilestoneView.h">
       <Filter>UI\Gameplay\Hud</Filter>
     </ClInclude>
   </ItemGroup>

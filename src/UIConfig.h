@@ -10,6 +10,7 @@ public:
 	static SpriteFont* DespairFont8;
 	static SpriteFont* DespairFont12;
 	static SpriteFont* GamerFont16;
+	static SpriteFont* GameBoy28;
 	static SpriteFont* GamerFont34;
 	static SpriteFont* ThaleahFont12;
 

@@ -27,8 +27,9 @@
 #include "Spritesheet.h"
 #include "StateMachine.h"
 #include "UIBarView.h"
-#include "UIManager.h"
 #include "UIKillCount.h"
+#include "UIKillMilestoneView.h"
+#include "UIManager.h"
 #include "UnitVectors.h"
 
 #include <fstream>
@@ -310,12 +311,22 @@ void Player::UpdateStats()
 	}
 
 	UIKillCount* killCount = static_cast<UIKillCount*>(UIManager::GetView("Player Kill Count"));
-	killCount->SetValue(m_kills);
+	
+	if(killCount)
+		killCount->SetValue(m_kills);
 }
 
 void Player::AddKill()
 {
 	m_kills++;
+
+	if(m_kills % 100 != 0) 
+		return;
+
+	UIKillMilestoneView* milestoneView = static_cast<UIKillMilestoneView*>(UIManager::GetView("Kill Milestone"));
+
+	if(milestoneView)
+		milestoneView->SetValue(m_kills);
 }
 
 void Player::Render(Graphics* graphics)

@@ -23,6 +23,7 @@
     <ClCompile Include="src\MenuSystem.cpp" />
     <ClCompile Include="src\UIComboCounterView.cpp" />
     <ClCompile Include="src\UIEnemyStatsView.cpp" />
+    <ClCompile Include="src\UIKillMilestoneView.cpp" />
     <ClCompile Include="src\UIMainMenuView.cpp" />
     <ClCompile Include="src\MainMenuGameState.cpp" />
     <ClCompile Include="src\AssetLoader.cpp" />
@@ -62,6 +63,7 @@
     <ClInclude Include="src\AnimatedSpriteData.h" />
     <ClInclude Include="src\GameDataManager.h" />
     <ClInclude Include="src\IMenuSystemInteraction.h" />
+    <ClInclude Include="src\UIKillMilestoneView.h" />
     <ClInclude Include="src\MenuSystem.h" />
     <ClInclude Include="src\Frame.h" />
     <ClInclude Include="src\UIComboCounterView.h" />

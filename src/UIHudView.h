@@ -6,6 +6,7 @@
 class Graphics;
 class UIComboCounterView;
 class UIEnemyStatsView;
+class UIKillMilestoneView;
 class UIPlayerStatsView;
 
 class UIHudView : public UIView
@@ -24,4 +25,5 @@ private:
 	UIPlayerStatsView* m_playerStatsView;
 	UIEnemyStatsView* m_enemyStatsView;
 	UIComboCounterView* m_comboCounterView;
+	UIKillMilestoneView* m_killMilestoneView;
 };

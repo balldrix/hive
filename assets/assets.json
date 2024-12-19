@@ -36,118 +36,125 @@
   },
   {
     "id": 6,
+    "name": "f_gameboy_28",
+    "path": "assets\\fonts\\gameboy_28pt.spritefont",
+    "type": "spritefont",
+    "tag": "initial_loading_assets"
+  },
+  {
+    "id": 7,
     "name": "t_loadingScreen_bg",
     "path": "assets\\textures\\ui\\loading_screen_bg.png",
     "type": "texture",
     "tag": "initial_loading_assets"
   },
   {
-    "id": 7,
+    "id": 8,
     "name": "t_title_logo",
     "path": "assets\\textures\\ui\\title_logo.png",
     "type": "texture",
     "tag": "front_end_assets"
   },
   {
-    "id": 8,
+    "id": 9,
     "name": "t_titleScreen_bg",
     "path": "assets\\textures\\ui\\title_screen_bg.png",
     "type": "texture",
     "tag": "front_end_assets"
   },
   {
-    "id": 9,
+    "id": 10,
     "name": "t_player",
     "path": "assets\\textures\\player_spritesheet.png",
     "type": "texture",
     "tag": "gameplay_assets"
   },
   {
-    "id": 10,
+    "id": 11,
     "name": "t_shadow",
     "path": "assets\\textures\\shadow_large.png",
     "type": "texture",
     "tag": "gameplay_assets"
   },
   {
-    "id": 11,
+    "id": 12,
     "name": "t_impact",
     "path": "assets\\textures\\vfx.png",
     "type": "texture",
     "tag": "gameplay_assets"
   },
   {
-    "id": 12,
+    "id": 13,
     "name": "ts_bunker",
     "path": "assets\\tilesets\\ts_bunker.png",
     "type": "texture",
     "tag": "gameplay_assets"
   },
   {
-    "id": 13,
+    "id": 14,
     "name": "t_mook",
     "path": "assets\\textures\\mook_spritesheet.png",
     "type": "texture",
     "tag": "gameplay_assets"
   },
   {
-    "id": 14,
+    "id": 15,
     "name": "t_portrait_frame",
     "path": "assets\\textures\\ui\\portrait_frame.png",
     "type": "texture",
     "tag": "ui_assets"
   },
   {
-    "id": 15,
+    "id": 16,
     "name": "t_player_portrait",
     "path": "assets\\textures\\ui\\player_portrait.png",
     "type": "texture",
     "tag": "ui_assets"
   },
   {
-    "id": 16,
+    "id": 17,
     "name": "t_bar_fill_red",
     "path": "assets\\textures\\ui\\bar_fill_red.png",
     "type": "texture",
     "tag": "ui_assets"
   },
   {
-    "id": 17,
+    "id": 18,
     "name": "t_bar_fill_green",
     "path": "assets\\textures\\ui\\bar_fill_green.png",
     "type": "texture",
     "tag": "ui_assets"
   },
   {
-    "id": 18,
+    "id": 19,
     "name": "t_bar_frame_player_health",
     "path": "assets\\textures\\ui\\bar_frame_player_health.png",
     "type": "texture",
     "tag": "ui_assets"
   },
   {
-    "id": 19,
+    "id": 20,
     "name": "t_bar_frame_player_special",
     "path": "assets\\textures\\ui\\bar_frame_player_special.png",
     "type": "texture",
     "tag": "ui_assets"
   },
   {
-    "id": 20,
+    "id": 21,
     "name": "t_bar_fill_yellow",
     "path": "assets\\textures\\ui\\bar_fill_yellow.png",
     "type": "texture",
     "tag": "ui_assets"
   },
   {
-    "id": 21,
+    "id": 22,
     "name": "t_mook_portrait",
     "path": "assets\\textures\\ui\\mook_portrait.png",
     "type": "texture",
     "tag": "ui_assets"
   },
   {
-    "id": 22,
+    "id": 23,
     "name": "t_bar_frame_enemy",
     "path": "assets\\textures\\ui\\bar_frame_enemy.png",
     "type": "texture",

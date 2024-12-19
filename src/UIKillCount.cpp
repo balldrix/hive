@@ -42,7 +42,7 @@ void UIKillCount::Init(std::string name)
 	m_countText->SetOutline(true, Color(0.65f, 0.145f, 0.145f));	
 	m_countText->SetText("0");
 
-	float countPos = GameWidth - m_labelText->GetWidth() - 4;
+	float countPos = (float)GameWidth - m_labelText->GetWidth() - 4;
 	m_countText->SetPosition(Vector2(countPos, 125.0f));
 	m_countText->SetAlignment(UISpriteText::Alignments::Right);
 	m_countText->SetActive(true);
