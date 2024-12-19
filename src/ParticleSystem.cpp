@@ -4,6 +4,11 @@
 #include "PixelTexture.h"
 #include "Randomiser.h"
 
+#include <cmath>
+#include <directxtk/SimpleMath.h>
+#include <directxtk/SpriteBatch.h>
+#include <windef.h>
+
 ParticleSystem::ParticleSystem() : 
 	m_texture(nullptr),
 	m_particlePool(0)
