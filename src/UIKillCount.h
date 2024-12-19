@@ -22,4 +22,6 @@ public:
 private:
 	UISpriteText* m_labelText;
 	UISpriteText* m_countText;
+
+	int m_currentCountWidth;
 };

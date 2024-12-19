@@ -36,6 +36,7 @@ public:
 	void SetAlignment(Alignments alignment);
 	void SetOutline(bool hasOutline, Color colour = Colors::White.v);
 
+	Vector2 GetPosition() const { return m_position; }
 	Color GetColour() const { return m_colour; }
 	int GetHeight() const;
 	int GetWidth() const;
