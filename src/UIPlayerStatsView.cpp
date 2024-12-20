@@ -86,8 +86,9 @@ void UIPlayerStatsView::Shutdown()
 {
 	Logger::LogInfo("Shutting down UI PlayerInfoView");
 
-	UIManager::UnregisterUIView(m_healthBar);
 	UIManager::UnregisterUIView(m_killCount);
+	UIManager::UnregisterUIView(m_specialBar);
+	UIManager::UnregisterUIView(m_healthBar);
 
 	delete m_killCount;
 	m_killCount = nullptr;

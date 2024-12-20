@@ -9,8 +9,14 @@
 #include "UIStackingView.h"
 #include "UITextMenuItemView.h"
 
+#include "UIMenuItemView.h"
+#include "UIView.h"
+#include <cmath>
 #include <DirectXColors.h>
+#include <directxtk/SimpleMath.h>
+#include <fmt/core.h>
 #include <string>
+#include <WinUser.h>
 
 using namespace GlobalConstants;
 
