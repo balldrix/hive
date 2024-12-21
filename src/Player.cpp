@@ -32,7 +32,14 @@
 #include "UIManager.h"
 #include "UnitVectors.h"
 
+#include "AnimatedSpriteData.h"
+#include "GameObject.h"
+#include <algorithm>
+#include <cstdint>
+#include <directxtk/SimpleMath.h>
 #include <fstream>
+#include <iosfwd>
+#include <string>
 
 using namespace PlayerConstants;
 using namespace GlobalConstants;
@@ -46,7 +53,8 @@ Player::Player() :
 	m_vocalSoundSource(nullptr),
 	m_recentFootstepFrame(0),
 	m_hurtTimer(0.0f),
-	m_kills(0)
+	m_kills(0),
+	m_special(0)
 {
 }
 
@@ -104,7 +112,8 @@ void Player::Init(ControlSystem* controlSystem)
 	m_stateMachine = new StateMachine<Player>(this);
 	m_stateMachine->Init(PlayerIdleState::Instance(), nullptr, PlayerGlobalState::Instance());
 
-	m_health = m_playerData.objectData.startingHealth;
+	m_health = 5;
+	//m_health = m_playerData.objectData.startingHealth;
 	m_lives = m_playerData.objectData.startingLives;
 
 	m_punchSoundSource = new SoundSource();
@@ -263,6 +272,11 @@ void Player::Update(float deltaTime)
 		StrongAttack();
 	}
 
+	if(m_health < 10)
+	{
+		IncreaseSpecial(deltaTime);
+	}
+
 	UpdateStats();
 }
 
@@ -306,8 +320,8 @@ void Player::UpdateStats()
 
 	if(specialbar)
 	{
-		specialbar->SetMaxValue(100);
-		specialbar->SetCurrentValue(20);
+		specialbar->SetMaxValue(MaxSpecial);
+		specialbar->SetCurrentValue((int)m_special);
 	}
 
 	UIKillCount* killCount = static_cast<UIKillCount*>(UIManager::GetView("Player Kill Count"));
@@ -327,6 +341,13 @@ void Player::AddKill()
 
 	if(milestoneView)
 		milestoneView->SetValue(m_kills);
+}
+
+void Player::IncreaseSpecial(float value)
+{
+	m_special += value;
+	
+	if(m_special > MaxSpecial) m_special = MaxSpecial;
 }
 
 void Player::Render(Graphics* graphics)
@@ -372,6 +393,8 @@ void Player::Reset()
 	m_dead = false;
 	m_active = true;
 	m_lives = m_playerData.objectData.startingLives;
+	m_kills = 0;
+	m_special = 0;
 	SetVelocity(Vector2::Zero);
 }
 

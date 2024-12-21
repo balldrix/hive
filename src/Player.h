@@ -56,6 +56,7 @@ public:
 	void								ResetKnockoutTimer();
 	void								UpdateStats();
 	void								AddKill();
+	void								IncreaseSpecial(float value = 1.0f);
 
 	void								PlayPunchSound(const std::string &name);	
 	void								PlayWalkingSound();
@@ -75,4 +76,5 @@ private:
 	std::map<std::string, std::wstring>	m_playerSounds;
 	int									m_recentFootstepFrame;
 	int									m_kills;
+	float								m_special;
 };

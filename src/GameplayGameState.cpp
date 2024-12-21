@@ -470,6 +470,7 @@ void GameplayGameState::ProcessCollisions()
 				enemy->ApplyDamage(m_player, damageData.amount);
 				enemy->ShowEnemyHud();
 
+				m_player->IncreaseSpecial();
 				m_player->GetControlSystem()->IncrementHitComboCount();
 
 				if(enemy->GetHealth() <= 0.0f) m_player->AddKill();
@@ -504,6 +505,7 @@ void GameplayGameState::ProcessCollisions()
 
 				m_player->ApplyDamage(enemy, damageData.amount);
 				m_player->SetPositionX(m_player->GetPositionX() + enemyVelocity.x);
+				m_player->IncreaseSpecial();
 				
 				if(m_player->GetFacingDirection() == enemy->GetFacingDirection())
 					m_player->FlipHorizontally(m_player->GetFacingDirection() != Vector3::Left);
