@@ -475,12 +475,11 @@ void GameplayGameState::ProcessCollisions()
 				if(enemy->GetHealth() <= 0.0f) m_player->AddKill();
 
 				m_stopTimer = damageData.hitStopDuration;
-				m_impactFx->DisplayFx(Vector2(groundPosition.x, groundPosition.y - spriteHeight * 0.5f));
-
-				SpawnParticles(m_impactFx->Position(), normalDirection, (Color)Colors::Green, (Color)Colors::DarkGreen, 1.0f, 200);
-
 				m_isCollisionOnCooldown = true;
-				m_collisionCooldown = 1.0f;
+				m_collisionCooldown = damageData.hitStopDuration;
+
+				m_impactFx->DisplayFx(Vector2(groundPosition.x, groundPosition.y - spriteHeight * 0.5f));
+				SpawnParticles(m_impactFx->Position(), normalDirection, (Color)Colors::Green, (Color)Colors::DarkGreen, 1.0f, 200);
 
 				return;
 			}
@@ -512,6 +511,9 @@ void GameplayGameState::ProcessCollisions()
 				enemy->ShowEnemyHud();
 
 				m_stopTimer = damageData.hitStopDuration;
+				m_isCollisionOnCooldown = true;
+				m_collisionCooldown = damageData.hitStopDuration;
+				
 				m_impactFx->DisplayFx(Vector2(playerGroundPositionX, playerGroundPositionY - spriteHeight * 0.5f));
 
 				if(m_player->GetStateMachine()->IsInState(*PlayerBlockState::Instance()))
@@ -522,9 +524,6 @@ void GameplayGameState::ProcessCollisions()
 				{
 					SpawnParticles(m_impactFx->Position(), normalDirection, (Color)Colors::Red, (Color)Colors::DarkRed, 1.0f, 200);
 				}
-
-				m_isCollisionOnCooldown = true;
-				m_collisionCooldown = 1.0f;
 				
 				return;
 			}
