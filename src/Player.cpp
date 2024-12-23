@@ -53,7 +53,7 @@ Player::Player() :
 	m_recentFootstepFrame(0),
 	m_hurtTimer(0.0f),
 	m_kills(0),
-	m_special(0)
+	m_special(100)
 {
 }
 
@@ -301,6 +301,7 @@ void Player::Respawn()
 	m_active = true;
 	m_grounded = false;
 	m_health = m_playerData.objectData.startingHealth;
+	m_special = 0;
 	SetVelocity(m_currentVelocity.x, m_currentVelocity.y + FallingSpeed);
 }
 
