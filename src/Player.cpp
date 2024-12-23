@@ -53,7 +53,7 @@ Player::Player() :
 	m_recentFootstepFrame(0),
 	m_hurtTimer(0.0f),
 	m_kills(0),
-	m_special(100)
+	m_special(0)
 {
 }
 
@@ -490,6 +490,9 @@ void Player::ApplyDamage(GameObject* source, const int& amount)
 	{
 		m_stateMachine->ChangeState(PlayerHurtState::Instance());
 	}
+
+	auto flash = UIManager::GetView("UI Screen Flash FX");
+	if(flash) flash->TransitionIn(true);
 }
 
 void Player::Knockback(const Vector2& direction, const float& force)
@@ -558,6 +561,9 @@ void Player::SpecialAttack()
 	PlayerAttackState::Instance()->SetAttack("special");
 	m_stateMachine->ChangeState(PlayerAttackState::Instance());
 	m_controlSystem->ResetComboCount();
+
+	auto flash = UIManager::GetView("UI Screen Flash FX");
+	if(flash) flash->TransitionIn(true);
 }
 
 void Player::Attack(std::string attackName)

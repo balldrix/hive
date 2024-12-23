@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\UIScreenFlashFX.cpp" />
     <ClCompile Include="src\GameDataManager.cpp" />
     <ClCompile Include="src\MenuSystem.cpp" />
     <ClCompile Include="src\UIComboCounterView.cpp" />
@@ -61,6 +62,7 @@
     <ClCompile Include="src\UIHudView.cpp" />
     <ClCompile Include="src\UIKillCount.cpp" />
     <ClInclude Include="src\AnimatedSpriteData.h" />
+    <ClInclude Include="src\UIScreenFlashFX.h" />
     <ClInclude Include="src\GameDataManager.h" />
     <ClInclude Include="src\IMenuSystemInteraction.h" />
     <ClInclude Include="src\UIKillMilestoneView.h" />

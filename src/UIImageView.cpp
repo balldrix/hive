@@ -44,6 +44,11 @@ void UIImageView::SetColour(Color colour)
 	m_sprite->SetColour(colour);
 }
 
+void UIImageView::SetAlpha(float alpha)
+{
+	m_sprite->SetAlpha(alpha);
+}
+
 void UIImageView::Shutdown()
 {
 	delete m_sprite;

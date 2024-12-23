@@ -292,7 +292,12 @@
     <ClCompile Include="src\UIComboCounterView.cpp">
       <Filter>UI\Gameplay\Hud</Filter>
     </ClCompile>
-    <ClCompile Include="src\UIKillMilestoneView.cpp" />
+    <ClCompile Include="src\UIScreenFlashFX.cpp">
+      <Filter>UI\Gameplay\ScreenFlashFX</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIKillMilestoneView.cpp">
+      <Filter>UI\Gameplay\Hud</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -417,6 +422,9 @@
     </Filter>
     <Filter Include="UI\Gameplay\Hud">
       <UniqueIdentifier>{2af9ab78-06c5-4a9b-9444-f53e4dcb1c0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Gameplay\ScreenFlashFX">
+      <UniqueIdentifier>{65171c29-2300-4aaa-8425-8f01aff686d4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -758,6 +766,9 @@
     </ClInclude>
     <ClInclude Include="src\UIKillMilestoneView.h">
       <Filter>UI\Gameplay\Hud</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIScreenFlashFX.h">
+      <Filter>UI\Gameplay\ScreenFlashFX</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

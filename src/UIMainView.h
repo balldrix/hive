@@ -4,6 +4,7 @@
 
 #include <string>
 
+class UIScreenFlashFX;
 class Graphics;
 class UIHudView;
 
@@ -15,12 +16,10 @@ public:
 
 	void Init(std::string name) override;
 	void Render(Graphics* graphics) override;
-
-	void FadeOut();
-	void FadeIn();
-	
+		
 	void Shutdown();
 
 private:
 	UIHudView* m_uiHudView;
+	UIScreenFlashFX* m_screenFlashFX;
 };
