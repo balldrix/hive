@@ -24,6 +24,7 @@ const UCHAR PLAYER_RIGHT_KEY = VK_RIGHT;
 const UCHAR PLAYER_X_KEY = 0x58; // x key
 const UCHAR PLAYER_Z_KEY = 0x5A; // z key
 const UCHAR PLAYER_C_KEY = 0x43; // c key
+const UCHAR PLAYER_V_KEY = 0x56; // v keys
 
 const UINT MAX_KEY_ARRAY = 256;	
 const float MAX_INPUT_DELAY = 0.2f;

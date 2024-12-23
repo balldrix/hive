@@ -1125,6 +1125,7 @@
         "from": 88,
         "to": 108,
         "direction": "forward",
+        "repeat": "1",
         "color": "#000000ff",
         "data": "endXPos=32"
       }

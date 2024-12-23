@@ -12,7 +12,6 @@
 #include "GameState.h"
 #include "GameStateManager.h"
 #include "GlobalConstants.h"
-#include "Graphics.h"
 #include "HitBoxManager.h"
 #include "ImpactFx.h"
 #include "Input.h"
@@ -340,6 +339,16 @@ void GameplayGameState::ProcessInput()
 		m_controlSystem->SetControlsPressed(Controls::StrongAttack);
 		m_controlSystem->ResetComboTimer();
 		return;
+	}
+
+	if(!m_player->IsSpecialReady() && m_input->IsKeyDown(PLAYER_V_KEY) || gamePadState.IsAPressed())
+	{
+		m_player->IncreaseSpecial(NormalSpecialRate * m_deltaTime);
+	}
+
+	if(m_player->IsSpecialReady() && m_input->WasKeyPressed(PLAYER_V_KEY) || m_input->WasGamePadButtonPressed(buttons.a))
+	{
+		m_controlSystem->SetControlsPressed(Controls::SpecialAttack);
 	}
 
 	if(!(m_input->IsKeyDown(PLAYER_UP_KEY) || gamePadState.IsDPadUpPressed() || gamePadState.IsLeftThumbStickUp() ||

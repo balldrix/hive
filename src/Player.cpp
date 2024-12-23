@@ -34,7 +34,6 @@
 
 #include "AnimatedSpriteData.h"
 #include "GameObject.h"
-#include <algorithm>
 #include <cstdint>
 #include <directxtk/SimpleMath.h>
 #include <fstream>
@@ -112,8 +111,7 @@ void Player::Init(ControlSystem* controlSystem)
 	m_stateMachine = new StateMachine<Player>(this);
 	m_stateMachine->Init(PlayerIdleState::Instance(), nullptr, PlayerGlobalState::Instance());
 
-	m_health = 5;
-	//m_health = m_playerData.objectData.startingHealth;
+	m_health = m_playerData.objectData.startingHealth;
 	m_lives = m_playerData.objectData.startingLives;
 
 	m_punchSoundSource = new SoundSource();
@@ -272,9 +270,14 @@ void Player::Update(float deltaTime)
 		StrongAttack();
 	}
 
+	if(m_controlSystem->GetLastKeyPressed() == Controls::SpecialAttack)
+	{
+		SpecialAttack();
+	}
+
 	if(m_health < 10)
 	{
-		IncreaseSpecial(deltaTime);
+		IncreaseSpecial(CriticalHealthSpecialRate * deltaTime);
 	}
 
 	UpdateStats();
@@ -407,6 +410,21 @@ DamageData Player::GetDamageData() const
 	return m_damageData.at(stateName);
 }
 
+void Player::Move(const Vector2& direction)
+{
+	if(m_stateMachine->IsInState(*PlayerBlockState::Instance()) == true)
+		return;
+
+	if(direction.x < 0 && m_currentVelocity.x > 0 ||
+		direction.x > 0 && m_currentVelocity.x < 0)
+	{
+		SetTargetVelocityX(0.0f);
+		return;
+	}
+
+	SetTargetVelocity(direction);
+}
+
 void Player::Run()
 {
 	if(m_stateMachine->IsInState(*PlayerBlockState::Instance()) == true)
@@ -423,52 +441,10 @@ void Player::Walk()
 	m_movementSpeed = m_playerData.objectData.walkSpeed;
 }
 
-void Player::Move(const Vector2& direction)
-{
-	if(m_stateMachine->IsInState(*PlayerBlockState::Instance()) == true)
-		return;
-
-	if(direction.x < 0 && m_currentVelocity.x > 0 ||
-		direction.x > 0 && m_currentVelocity.x < 0)
-	{
-		SetTargetVelocityX(0.0f);
-		return;
-	}
-
-	SetTargetVelocity(direction);
-}
-
 void Player::Stop()
 {
 	SetTargetVelocity(Vector2::Zero);
 	SetCurrentVelocity(Vector2::Zero);
-}
-
-void Player::NormalAttack()
-{
-	if(m_controlSystem->GetComboCounter() == MaxCombo)
-	{
-		m_controlSystem->ResetComboCount();
-	}
-
-	Attack("attackNormal_");
-}
-
-void Player::StrongAttack()
-{
-	Attack("attackStrong_");
-	m_controlSystem->ResetComboCount();
-}
-
-void Player::Attack(std::string attackName)
-{
-	m_controlSystem->SetControlsPressed(Controls::None);
-
-	auto comboCounter = m_controlSystem->GetComboCounter();
-	attackName.append(std::to_string(comboCounter + 1));
-
-	PlayerAttackState::Instance()->SetAttack(attackName);
-	m_stateMachine->ChangeState(PlayerAttackState::Instance());
 }
 
 void Player::Block()
@@ -556,4 +532,40 @@ void Player::PlayDeathSound()
 	
 	if(m_vocalSoundSource->GetSound() != sound)	
 		m_vocalSoundSource->SetSound(sound);
+}
+
+void Player::NormalAttack()
+{
+	if(m_controlSystem->GetComboCounter() == MaxCombo)
+	{
+		m_controlSystem->ResetComboCount();
+	}
+
+	Attack("attackNormal_");
+}
+
+void Player::StrongAttack()
+{
+	Attack("attackStrong_");
+	m_controlSystem->ResetComboCount();
+}
+
+void Player::SpecialAttack()
+{
+	m_special = 0;
+	m_controlSystem->SetControlsPressed(Controls::None);
+	PlayerAttackState::Instance()->SetAttack("special");
+	m_stateMachine->ChangeState(PlayerAttackState::Instance());
+	m_controlSystem->ResetComboCount();
+}
+
+void Player::Attack(std::string attackName)
+{
+	m_controlSystem->SetControlsPressed(Controls::None);
+
+	auto comboCounter = m_controlSystem->GetComboCounter();
+	attackName.append(std::to_string(comboCounter + 1));
+
+	PlayerAttackState::Instance()->SetAttack(attackName);
+	m_stateMachine->ChangeState(PlayerAttackState::Instance());
 }

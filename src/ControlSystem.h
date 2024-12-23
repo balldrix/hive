@@ -19,6 +19,7 @@ enum class Controls
 	Left,
 	NormalAttack,
 	StrongAttack,
+	SpecialAttack,
 	Roll,
 	MaxControls
 };
