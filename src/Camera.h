@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ScreenShake.h"
 #include <directxtk/SimpleMath.h>
 
 using namespace DirectX::SimpleMath;
@@ -17,12 +18,14 @@ public:
 	void			Update(float deltaTime);
 
 	float			GetWidth() const { return m_width; }
-	Vector2			GetPosition() const { return m_position; }
+	Vector2			GetPosition() const { return m_position + m_screenShake.GetPositionOffset(); }
 
 	void			SetTarget(GameObject* target);
 	void			SetPosition(const Vector2& position);
 	void			SetWidth(float width);
 	void			SetBoundary(float x);
+
+	void			StartShake(float intensity, float duration);
 
 	void			Reset();
 
@@ -40,4 +43,5 @@ private:
 	float			m_width;
 	float			m_boundary;
 	float			m_threshold;
+	ScreenShake		m_screenShake;
 };

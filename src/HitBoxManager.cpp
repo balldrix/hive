@@ -87,8 +87,8 @@ void HitBoxManager::Render(Graphics* graphics, Camera* camera)
 
 	Vector2 screenPosition = m_owner->GetPosition();
 
-	if (camera != nullptr)
-		screenPosition.x -= camera->GetPosition().x;
+	if(camera != nullptr)
+		screenPosition -= camera->GetPosition();
 
 	m_pushBox.Render(graphics, screenPosition);
 	m_hurtBox.Render(graphics, screenPosition);

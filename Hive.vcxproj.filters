@@ -124,9 +124,6 @@
     <ClCompile Include="src\Texture.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="src\Camera.cpp">
-      <Filter>System</Filter>
-    </ClCompile>
     <ClCompile Include="src\Game.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -298,6 +295,10 @@
     <ClCompile Include="src\UIKillMilestoneView.cpp">
       <Filter>UI\Gameplay\Hud</Filter>
     </ClCompile>
+    <ClCompile Include="src\Camera.cpp">
+      <Filter>System\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ScreenShake.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -425,6 +426,9 @@
     </Filter>
     <Filter Include="UI\Gameplay\ScreenFlashFX">
       <UniqueIdentifier>{65171c29-2300-4aaa-8425-8f01aff686d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Camera">
+      <UniqueIdentifier>{a0f860c5-b5c5-4aba-abe3-37efb6e7a4e1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -556,9 +560,6 @@
     </ClInclude>
     <ClInclude Include="src\AABB.h">
       <Filter>Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Camera.h">
-      <Filter>System</Filter>
     </ClInclude>
     <ClInclude Include="src\ControlSystem.h">
       <Filter>System</Filter>
@@ -769,6 +770,12 @@
     </ClInclude>
     <ClInclude Include="src\UIScreenFlashFX.h">
       <Filter>UI\Gameplay\ScreenFlashFX</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Camera.h">
+      <Filter>System\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ScreenShake.h">
+      <Filter>System\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

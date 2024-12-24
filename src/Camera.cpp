@@ -1,6 +1,7 @@
 #include "Camera.h"
 
 #include "GameObject.h"
+#include <directxtk/SimpleMath.h>
 
 const float CameraThresholdMod = 3.0f;
 const float CameraSpeedMod = 0.2f;
@@ -24,10 +25,14 @@ void Camera::Init(float width)
 	m_threshold = m_width / CameraThresholdMod;
 	m_boundary = 0.0f;
 	m_position = Vector2::Zero;
+
+	m_screenShake.Init(this);
 }
 
 void Camera::Update(float deltaTime)
 {
+	m_screenShake.Update(deltaTime);
+	
 	if(m_trackingTarget == nullptr)
 		return;
 
@@ -99,6 +104,11 @@ void Camera::SetWidth(float width)
 void Camera::SetBoundary(float x)
 {
 	m_boundary = x;
+}
+
+void Camera::StartShake(float intensity, float duration)
+{
+	m_screenShake.Start(intensity, duration);
 }
 
 void Camera::Reset()

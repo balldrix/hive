@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ScreenShake.cpp" />
     <ClCompile Include="src\UIScreenFlashFX.cpp" />
     <ClCompile Include="src\GameDataManager.cpp" />
     <ClCompile Include="src\MenuSystem.cpp" />
@@ -62,6 +63,7 @@
     <ClCompile Include="src\UIHudView.cpp" />
     <ClCompile Include="src\UIKillCount.cpp" />
     <ClInclude Include="src\AnimatedSpriteData.h" />
+    <ClInclude Include="src\ScreenShake.h" />
     <ClInclude Include="src\UIScreenFlashFX.h" />
     <ClInclude Include="src\GameDataManager.h" />
     <ClInclude Include="src\IMenuSystemInteraction.h" />
@@ -425,7 +427,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_AMD64_; UNICODE</PreprocessorDefinitions>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>

@@ -21,6 +21,7 @@
 #include "ParticleSystem.h"
 #include "Player.h"
 #include "PlayerBlockState.h"
+#include "PlayerConstants.h"
 #include "PlayerDeadState.h"
 #include "PlayerHurtState.h"
 #include "PlayerIdleState.h"
@@ -35,7 +36,6 @@
 #include "UIManager.h"
 #include "UnitVectors.h"
 
-#include <cmath>
 #include <DirectXColors.h>
 #include <directxtk/SimpleMath.h>
 #include <fmt/core.h>
@@ -385,6 +385,8 @@ void GameplayGameState::CheckForEncounter()
 
 void GameplayGameState::Tick(float deltaTime)
 {
+	m_camera->Update(deltaTime);
+
 	if(m_stopTimer > 0)
 	{
 		m_stopTimer -= deltaTime;
@@ -398,7 +400,6 @@ void GameplayGameState::Tick(float deltaTime)
 		m_isCollisionOnCooldown = false;
 
 	m_controlSystem->Update(deltaTime);
-	m_camera->Update(deltaTime);
 	m_player->Update(deltaTime);
 	m_NPCManager->Update(deltaTime);
 
@@ -479,6 +480,10 @@ void GameplayGameState::ProcessCollisions()
 				enemy->ApplyDamage(m_player, damageData.amount);
 				enemy->ShowEnemyHud();
 
+				auto animation = m_player->GetAnimator()->GetAnimation();
+				if(animation.name.contains("Strong"))
+					m_camera->StartShake(2.0f, 3.0f);
+
 				m_player->IncreaseSpecial();
 				m_player->GetControlSystem()->IncrementHitComboCount();
 
@@ -515,6 +520,7 @@ void GameplayGameState::ProcessCollisions()
 				m_player->ApplyDamage(enemy, damageData.amount);
 				m_player->SetPositionX(m_player->GetPositionX() + enemyVelocity.x);
 				m_player->IncreaseSpecial();
+				m_camera->StartShake(1.0f, 2.0f);
 				
 				if(m_player->GetFacingDirection() == enemy->GetFacingDirection())
 					m_player->FlipHorizontally(m_player->GetFacingDirection() != Vector3::Left);
