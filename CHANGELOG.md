@@ -15,7 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - HitStops.
 - Running enemy type.
 - Controller Support.
-- 
+- Screen shake.
+- FlashFX.
 
 ### Changed
 - Native resolution changed to 240 x 135.
@@ -24,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved combo system.
 - Player block state.
 - Basic enemy has better sprite design.
+- Improved In-game HUD UI.
 
 ### Removed
 - Input buffer removed.
