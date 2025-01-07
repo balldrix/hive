@@ -1,15 +1,15 @@
 #include "HitBoxManager.h"
 
 #include "AABB.h"
-#include "Collider.h"
 #include "AssetLoader.h"
 #include "Camera.h"
+#include "Collider.h"
 #include "GameObject.h"
 #include "GameplayConstants.h"
 #include "Graphics.h"
+#include "HitBoxData.h"
 #include "Sprite.h"
 #include "Spritesheet.h"
-#include "HitBoxData.h"
 
 #include <directxtk/SimpleMath.h>
 #include <vector>
@@ -49,7 +49,6 @@ void HitBoxManager::Init(GameObject* owner, std::vector<HitBoxData> hitBoxData)
 	m_hitBox.Init(m_sprite, Colors::Red.v);
 }
 
-// set box positions
 void HitBoxManager::Update()
 {
 	Vector2 ownerPosition = m_owner->GetPosition();
@@ -79,7 +78,6 @@ void HitBoxManager::UpdateCollider(const unsigned int& frameNumber, TagData& tag
 	collider.SetAABB(aabb);
 }
 
-// render boxes
 void HitBoxManager::Render(Graphics* graphics, Camera* camera)
 {
 	if(!m_isVisible)
@@ -93,7 +91,6 @@ void HitBoxManager::Render(Graphics* graphics, Camera* camera)
 	m_pushBox.Render(graphics, screenPosition);
 	m_hurtBox.Render(graphics, screenPosition);
 
-	// only render hitbox if it is active
 	if(IsHitBoxActive())
 	{
 		m_hitBox.Render(graphics, screenPosition);

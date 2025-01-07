@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AnimatedSpriteData.h"
+#include "AnimationData.h"
 
 #include <string>
 
