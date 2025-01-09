@@ -2,6 +2,14 @@
 
 #include "Graphics.h"
 
+#include <cstdint>
+#include <d3d11.h>
+#include <d3dcommon.h>
+#include <dxgiformat.h>
+#include <minwinbase.h>
+#include <winnt.h>
+#include <wrl/client.h>
+
 void PixelTexture::Init(Graphics* graphics)
 {
 	static const uint32_t WHITE_PIXEL = 0xffffffff;
@@ -48,5 +56,4 @@ void PixelTexture::Init(Graphics* graphics)
 
 void PixelTexture::Release()
 {
-	m_texture->Release();
 }

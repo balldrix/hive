@@ -1,5 +1,6 @@
 #include "Graphics.h"
 
+#include "AssetLoader.h"
 #include "GlobalConstants.h"
 #include "Logger.h"
 
@@ -243,6 +244,8 @@ void Graphics::PresentBackBuffer()
 
 void Graphics::OnDeviceLost()
 {
+	AssetLoader::OnDeviceLost();
+
 	m_alphaDisabledBlendState.Reset();
 	m_alphaEnabledBlendState.Reset();
 	m_renderTargetView.Reset();

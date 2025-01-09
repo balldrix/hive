@@ -13,6 +13,10 @@
 #include <string>
 #include <system_error>
 #include <vector>
+#include <WinUser.h>
+#include <iosfwd>
+#include <utility>
+#include <fmt/core.h>
 
 std::shared_ptr<AssetLoader> AssetLoader::s_assetLoader;
 
@@ -48,7 +52,7 @@ void AssetLoader::Init(Graphics* graphics, std::string fileName)
 	s_assetLoader->m_assetData = data.get<std::vector<AssetData>>();
 
 	PixelTexture* pixelTexture = new PixelTexture();
-	pixelTexture->Init(graphics);	
+	pixelTexture->Init(graphics);
 
 	s_assetLoader->m_textureAssets.insert({ "t_pixel", pixelTexture });
 }
@@ -115,6 +119,14 @@ SpriteFont* AssetLoader::GetSpriteFont(std::string name)
 
 	Logger::LogWarning(fmt::format("No sprite font found in AssetLoader with name {}", name));
 	return nullptr;
+}
+
+void AssetLoader::OnDeviceLost()
+{
+	for (auto it = s_assetLoader->m_textureAssets.begin(); it != s_assetLoader->m_textureAssets.end(); ++it)
+	{
+		(*it).second->Release();
+	}
 }
 
 void AssetLoader::AddToLoadList(const AssetData& data)
@@ -193,10 +205,8 @@ void AssetLoader::DeleteTextures(std::string tag)
 
 void AssetLoader::DeleteSpriteFonts()
 {
-	for(std::pair<std::string, Texture*> pair : m_textureAssets)
+	for(std::pair<std::string, SpriteFont*> pair : m_spriteFontAssets)
 	{
-		pair.second->Release();
-
 		delete pair.second;
 		pair.second = nullptr;
 	}

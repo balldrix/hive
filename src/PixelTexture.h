@@ -8,7 +8,7 @@ class PixelTexture : public Texture
 {
 public:
 	PixelTexture() {};
-	~PixelTexture() {};
+	~PixelTexture() = default;
 
 	void Init(Graphics* graphics);
 	void Release() override;

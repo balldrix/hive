@@ -4,14 +4,14 @@
 #include "Logger.h"
 
 #include <DirectXTK/WICTextureLoader.h>
+#include <string>
+#include <winerror.h>
+#include <winnt.h>
+#include <WinUser.h>
 
 Texture::Texture() :
 	m_texture(nullptr),
 	m_resource(nullptr)
-{
-}
-
-Texture::~Texture()
 {
 }
 
@@ -32,15 +32,6 @@ void Texture::LoadTexture(Graphics* graphics, const std::string &filename)
 
 void Texture::Release()
 {
-	if(m_resource)
-	{
-		m_resource->Release();
-		m_resource = nullptr;
-	}
-
-	if(m_texture)
-	{
-		m_texture->Release();
-		m_texture = nullptr;
-	}
+	m_resource->Release();
+	m_texture->Release();
 }

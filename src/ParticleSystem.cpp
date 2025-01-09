@@ -1,8 +1,9 @@
 #include "ParticleSystem.h"
 
+#include "AssetLoader.h"
 #include "Graphics.h"
-#include "PixelTexture.h"
 #include "Randomiser.h"
+#include "Texture.h"
 
 #include <cmath>
 #include <directxtk/SimpleMath.h>
@@ -15,17 +16,11 @@ ParticleSystem::ParticleSystem() :
 {
 }
 
-ParticleSystem::~ParticleSystem()
-{
-	DeleteAll();
-}
-
 void ParticleSystem::Init(Graphics* graphics)
 {
 	m_particlePool.resize(MAX_PARTICLES);
 
-	m_texture = new PixelTexture();
-	m_texture->Init(graphics);
+	m_texture = AssetLoader::GetTexture("t_pixel");
 }
 
 void ParticleSystem::Update(float deltaTime)
@@ -110,12 +105,4 @@ void ParticleSystem::Emit(const ParticleData& particleData)
 	particle.SizeEnd = particleData.SizeEnd;
 
 	m_poolIndex = ++m_poolIndex % m_particlePool.size();
-}
-
-void ParticleSystem::DeleteAll()
-{
-	m_texture->Release();
-
-	delete m_texture;
-	m_texture = nullptr;
 }

@@ -28,6 +28,8 @@ public:
 	static Texture* GetTexture(std::string name);
 	static SpriteFont* GetSpriteFont(std::string name);
 
+	static void OnDeviceLost();
+
 	static void Shutdown();
 
 private:

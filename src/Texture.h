@@ -9,7 +9,8 @@ class Texture
 {
 public:
 	Texture();
-	~Texture();
+	~Texture() = default;
+
 	void LoadTexture(Graphics* graphics, const std::string& filename);
 	ID3D11ShaderResourceView*	GetTexture() { return m_texture; }
 	ID3D11Resource* GetResource() { return m_resource; }

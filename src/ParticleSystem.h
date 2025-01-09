@@ -6,7 +6,7 @@
 using namespace DirectX::SimpleMath;
 
 class Graphics;
-class PixelTexture;
+class Texture;
 
 const unsigned int MAX_PARTICLES = 1000;
 
@@ -27,7 +27,7 @@ class ParticleSystem
 {
 public:
 	ParticleSystem();
-	~ParticleSystem();
+	~ParticleSystem() = default;
 	
 	void Init(Graphics* graphics);
 
@@ -52,9 +52,7 @@ private:
 		bool Active = false;
 	};
 
-	void DeleteAll();
-
-	PixelTexture* m_texture;
+	Texture* m_texture;
 	std::vector<Particle> m_particlePool;
 	unsigned int m_poolIndex = 0;
 };
