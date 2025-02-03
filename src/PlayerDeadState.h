@@ -11,9 +11,9 @@ class PlayerDeadState : public State<Player>
 public:
 	static PlayerDeadState* Instance();
 
-	virtual void OnEnter(Player* enemy);
-	virtual void Execute(Player* enemy);
-	virtual void OnExit(Player* enemy);
+	virtual void OnEnter(Player* player);
+	virtual void Execute(Player* player);
+	virtual void OnExit(Player* player);
 
 private:
 	PlayerDeadState() {}

@@ -21,6 +21,7 @@
 #include "ParticleSystem.h"
 #include "Player.h"
 #include "PlayerBlockState.h"
+#include "PlayerBuildSpecialState.h"
 #include "PlayerConstants.h"
 #include "PlayerDeadState.h"
 #include "PlayerHurtState.h"
@@ -343,7 +344,14 @@ void GameplayGameState::ProcessInput()
 
 	if(!m_player->IsSpecialReady() && m_input->IsKeyDown(PLAYER_V_KEY) || gamePadState.IsAPressed())
 	{
+		if(!m_player->GetStateMachine()->IsInState(*PlayerBuildSpecialState::Instance()))
+			m_player->GetStateMachine()->ChangeState(PlayerBuildSpecialState::Instance());
+		
 		m_player->IncreaseSpecial(NormalSpecialRate * m_deltaTime);
+	}
+	else if(m_player->GetStateMachine()->IsInState(*PlayerBuildSpecialState::Instance()))
+	{
+		m_player->GetStateMachine()->ChangeState(PlayerIdleState::Instance());
 	}
 
 	if(m_player->IsSpecialReady() && m_input->WasKeyPressed(PLAYER_V_KEY) || m_input->WasGamePadButtonPressed(buttons.a))

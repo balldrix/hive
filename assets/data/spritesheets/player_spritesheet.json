@@ -1229,7 +1229,7 @@
         "data": "endXPos=32"
       },
       {
-        "name": "build-special",
+        "name": "buildSpecial",
         "from": 90,
         "to": 93,
         "direction": "forward",

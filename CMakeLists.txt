@@ -57,7 +57,7 @@ add_executable(${PROJECT_NAME} src/main.cpp src/AABB.cpp src/Animator.cpp src/Au
 								src/GameDataManager.h src/GameDataManager.cpp src/UIMainView.h src/UIMainView.cpp src/UIHudView.h src/UIHudView.cpp src/UIPlayerInfoView.h
 								src/UIPlayerInfoView.cpp src/UIPortraitView.h src/UIPortraitView.cpp src/UIKillCount.h src/UIKillCount.cpp src/UIEnemyStatsView.h src/UIEnemyStatsView.cpp
 								src/UIComboCounterView.h src/UIComboCounterView.cpp src/UIKillMilestoneView.h src/UIKillMilestoneView.cpp src/UIScreenFlashFX.h src/UIScreenFlashFX.cpp
-								src/ScreenShake.h src/ScreenShake.cpp)
+								src/ScreenShake.h src/ScreenShake.cpp src/PlayerBuildSpecialState.h src/PlayerBuildSpecialState.cpp)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Microsoft::DirectXTK)
 target_link_libraries(${PROJECT_NAME} PRIVATE nlohmann_json::nlohmann_json)

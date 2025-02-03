@@ -7,6 +7,9 @@
 #include "StateMachine.h"
 #include "UnitVectors.h"
 
+#include <string>
+#include <directxtk/SimpleMath.h>
+
 PlayerDeadState* PlayerDeadState::Instance()
 {
 	static PlayerDeadState instance("dead");

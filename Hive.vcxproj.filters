@@ -299,6 +299,7 @@
       <Filter>System\Camera</Filter>
     </ClCompile>
     <ClCompile Include="src\ScreenShake.cpp" />
+    <ClCompile Include="src\PlayerBuildSpecialState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -776,6 +777,9 @@
     </ClInclude>
     <ClInclude Include="src\ScreenShake.h">
       <Filter>System\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PlayerBuildSpecialState.h">
+      <Filter>Game\Player\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
