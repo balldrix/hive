@@ -37,6 +37,7 @@
 #include "UIManager.h"
 #include "UnitVectors.h"
 
+#include <cmath>
 #include <DirectXColors.h>
 #include <directxtk/SimpleMath.h>
 #include <fmt/core.h>

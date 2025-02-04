@@ -3,12 +3,9 @@
 #include "Animator.h"
 #include "HitBoxManager.h"
 #include "Player.h"
-#include "PlayerKnockbackState.h"
-#include "StateMachine.h"
-#include "UnitVectors.h"
 
-#include <string>
 #include <directxtk/SimpleMath.h>
+#include <string>
 
 PlayerDeadState* PlayerDeadState::Instance()
 {

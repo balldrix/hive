@@ -4,8 +4,8 @@
 #include "Player.h"
 #include "State.h"
 
+#include <directxtk/SimpleMath.h>
 #include <string>
-#include "PlayerConstants.h"
 
 PlayerBuildSpecialState* PlayerBuildSpecialState::Instance()
 {
