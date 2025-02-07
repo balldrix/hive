@@ -421,7 +421,7 @@ void GameplayGameState::Tick(float deltaTime)
 
 void GameplayGameState::ProcessCollisions()
 {
-	if(m_stopTimer > 0 || m_isCollisionOnCooldown)	return;
+	if(m_stopTimer > 0)	return;
 
 	std::vector<Enemy*> enemyList = m_NPCManager->GetEnemyList();
 
@@ -466,11 +466,15 @@ void GameplayGameState::ProcessCollisions()
 
 				m_impactFx->DisplayFx(Vector2(groundPosition.x, groundPosition.y - spriteHeight * 0.5f));
 				SpawnParticles(m_impactFx->Position(), normalDirection, (Color)Colors::Green, (Color)Colors::DarkGreen, 1.0f, 200);
-
-				return;
 			}
 		}
+	}
 
+	if(m_isCollisionOnCooldown) return;
+
+	for(size_t i = 0; i < enemyList.size(); i++)
+	{
+		Enemy* enemy = enemyList[i];
 		// true if enemy hitbox is active and player is in vertical range
 		if(enemy->GetHitBoxManager()->IsHitBoxActive() &&
 			fabs(playerGroundPositionY - enemy->GetGroundPosition().y) < VerticalHitRange)
@@ -492,7 +496,7 @@ void GameplayGameState::ProcessCollisions()
 				m_player->SetPositionX(m_player->GetPositionX() + enemyVelocity.x);
 				m_player->IncreaseSpecial();
 				m_camera->StartShake(1.0f, 2.0f);
-				
+
 				if(m_player->GetFacingDirection() == enemy->GetFacingDirection())
 					m_player->FlipHorizontally(m_player->GetFacingDirection() != Vector3::Left);
 
@@ -501,18 +505,18 @@ void GameplayGameState::ProcessCollisions()
 				m_stopTimer = damageData.hitStopDuration;
 				m_isCollisionOnCooldown = true;
 				m_collisionCooldown = damageData.hitStopDuration;
-				
+
 				m_impactFx->DisplayFx(Vector2(playerGroundPositionX, playerGroundPositionY - spriteHeight * 0.5f));
 
 				if(m_player->GetStateMachine()->IsInState(*PlayerBlockState::Instance()))
 				{
 					m_player->SetPositionX((m_player->GetGroundPosition() + Vector2(normalDirection * 2.0f)).x);
 				}
-				else 
+				else
 				{
 					SpawnParticles(m_impactFx->Position(), normalDirection, (Color)Colors::Red, (Color)Colors::DarkRed, 1.0f, 200);
 				}
-				
+
 				return;
 			}
 		}
