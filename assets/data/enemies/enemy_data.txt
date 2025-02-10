@@ -1,5 +1,8 @@
 # id type dataName x_position y_position encounter_index
-enemy01 mook mook 160 95 0;
+enemy01 mook mook 162 90 0;
+enemy01 mook mook 162 94 0;
+#enemy01 mook mook 170 93 0;
+#enemy01 mook mook 158 92 0;
 #enemy02 mook_runner mook 170 99 0;
 #enemy03 mook mook 370 62 0;
 #enemy04 mook mook 595 64 1;

@@ -6,6 +6,7 @@
 #include "EnemyWalkingState.h"
 #include "GameplayConstants.h"
 #include "HitBoxManager.h"
+#include "NPCManager.h"
 #include "Player.h"
 #include "PlayerDeadState.h"
 #include "PlayerKnockbackState.h"
@@ -65,11 +66,13 @@ void EnemyIdleState::Execute(Enemy* enemy)
 		{
 			enemy->GetStateMachine()->ChangeState(EnemyWalkingState::Instance());
 			enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4f, 1.0f));
-		}			
+		}
 	}
 
 	if(enemy->IsHostile() == false)
 		return;
+
+	auto enemies = enemy->GetManager()->GetEnemyList();
 
 	if(distance < enemy->GetData().attackRange &&
 		verticalDistance < VerticalHitRange)
@@ -79,8 +82,18 @@ void EnemyIdleState::Execute(Enemy* enemy)
 		enemy->Stop();
 		enemy->ResetTimer((float)randnum);
 		enemy->Attack();
-
 		return;
+	}
+
+	for(auto it = enemies.begin(); it != enemies.end(); it++)
+	{
+		if(*it == enemy) continue;
+
+		auto toOther = enemy->GetPosition() - (*it)->GetPosition();
+
+		if(toOther.Length() > MinEnemyAvoidDistance) continue;
+
+		enemy->GetStateMachine()->ChangeState(EnemyWalkingState::Instance());
 	}
 }
 

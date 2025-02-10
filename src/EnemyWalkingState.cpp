@@ -22,20 +22,13 @@ void EnemyWalkingState::OnEnter(Enemy* enemy)
 	enemy->GetHitBoxManager()->SetCollidersUsingTag(m_name);
 	
 	enemy->SetMovementSpeed(enemy->GetData().objectData.walkSpeed);
-
-	Vector2 direction = Vector2::Zero;
-	Vector2 targetPosition = enemy->GetPlayerTarget()->GetPosition();
-	Vector2 position = enemy->GetPosition();
-
-	direction = targetPosition - position;
-	direction.Normalize();
-
-	enemy->SetVelocity(direction);
 }
 
 void EnemyWalkingState::Execute(Enemy* enemy)
 {
+	enemy->ProcessSteering();
 	enemy->PlayWalkingSound();
+
 	auto distance = (enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length();
 
 	if(distance < enemy->GetData().attackRange)

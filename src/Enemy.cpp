@@ -12,10 +12,12 @@
 #include "EnemyKnockbackState.h"
 #include "GameDataManager.h"
 #include "GameObject.h"
+#include "GameplayConstants.h"
 #include "Graphics.h"
 #include "HitBoxData.h"
 #include "HitBoxManager.h"
 #include "Logger.h"
+#include "NPCManager.h"
 #include "Player.h"
 #include "Randomiser.h"
 #include "Sound.h"
@@ -26,16 +28,19 @@
 #include "State.h"
 #include "StateMachine.h"
 #include "Texture.h"
-#include "UIManager.h"
 #include "UIBarView.h"
+#include "UIManager.h"
 #include "UIPortraitView.h"
 #include "UnitVectors.h"
+#include "Utils.h"
 
 #include <cstdint>
 #include <directxtk/SimpleMath.h>
 #include <fmt/core.h>
 #include <string>
 #include <vector>
+
+using namespace GameplayConstants;
 
 Enemy::Enemy() :
 	m_playerTarget(nullptr),
@@ -48,7 +53,8 @@ Enemy::Enemy() :
 	m_thinkingTimer(0.0f),
 	m_isHostile(false),
 	m_recentFootstepFrame(0),
-	m_startingState(nullptr)
+	m_startingState(nullptr),
+	m_npcManager(nullptr)
 {}
 
 Enemy::~Enemy()
@@ -87,7 +93,8 @@ void Enemy::DeleteAll()
 void Enemy::Init(Graphics* graphics,
 				Camera* camera,
 				Player* player,
-				const EnemyData& data, 
+				const EnemyData& data,
+				NPCManager* npcManager,
 				Texture* shadowTexture,
 				State<Enemy>* globalEnemyState,
 				State<Enemy>* startingState)
@@ -97,6 +104,7 @@ void Enemy::Init(Graphics* graphics,
 	m_enemyData = data;
 	m_position = data.objectData.startingPosition;
 	m_groundPosition = data.objectData.startingPosition;
+	m_npcManager = npcManager;
 	m_grounded = true;
 
 	std::string spritesheetDataPath = "assets\\data\\spritesheets\\";
@@ -167,20 +175,19 @@ void Enemy::Init(Graphics* graphics,
 	m_active = false;
 }
 
-void
-Enemy::Update(float deltaTime)
+void Enemy::Update(float deltaTime)
 {
 	if(!m_active) return;
 
 	m_stateMachine->Update();
 	GameObject::Update(deltaTime);
+
 	m_thinkingTimer -= deltaTime;
 
 	m_hitBoxManager->Update(m_animator->GetCurrentFrame());
 }
 
-void
-Enemy::Render(Graphics* graphics)
+void Enemy::Render(Graphics* graphics)
 {
 	if(!m_active) return;
 
@@ -209,8 +216,7 @@ Enemy::Render(Graphics* graphics)
 		m_hitBoxManager->Render(graphics, m_camera);
 }
 
-void
-Enemy::Reset()
+void Enemy::Reset()
 {
 	m_stateMachine->ChangeState(m_startingState);
 	m_position = m_enemyData.objectData.startingPosition;
@@ -300,6 +306,46 @@ void Enemy::Attack()
 void Enemy::Kill()
 {
 	m_dead = true;
+}
+
+void Enemy::ProcessSteering()
+{
+	m_targetVelocity = Vector2::Zero;
+	m_targetVelocity += Seek() * 2;
+	m_targetVelocity += Avoid();
+	m_targetVelocity.Normalize();
+}
+
+Vector2 Enemy::Seek() const
+{
+	Vector2 direction = Vector2::Zero;
+	Vector2 targetPosition = GetPlayerTarget()->GetPosition();
+	Vector2 position = GetPosition();
+
+	direction = targetPosition - position;
+	direction.Normalize();
+
+	return direction;
+}
+
+Vector2 Enemy::Avoid() const
+{
+	Vector2 force = Vector2::Zero;
+	auto enemyList = m_npcManager->GetEnemyList();
+
+	for(auto it = enemyList.begin(); it != enemyList.end(); it++)
+	{
+		if(*it == this) continue;
+
+		auto toOther = m_position - (*it)->GetPosition();
+
+		if(toOther.Length() > MinEnemyAvoidDistance) continue;
+
+		toOther.Normalize();
+		force += toOther / toOther.Length();
+	}
+
+	return force;
 }
 
 void Enemy::ShowEnemyHud()

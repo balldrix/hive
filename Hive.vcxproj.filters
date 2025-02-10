@@ -300,6 +300,9 @@
     </ClCompile>
     <ClCompile Include="src\ScreenShake.cpp" />
     <ClCompile Include="src\PlayerBuildSpecialState.cpp" />
+    <ClCompile Include="src\Utils.h">
+      <Filter>System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">

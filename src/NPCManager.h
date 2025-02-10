@@ -18,6 +18,7 @@ public:
 	~NPCManager();
 	NPCManager();
 
+	static NPCManager* Instance() { return s_instance; }
 	void	Init(Graphics* graphics, Camera* camera, Player* player);
 	bool	InitTypes(const std::string &fileName);
 	bool	InitNPCs(Graphics* graphics, Camera* camera, Player* player, const std::string &enemyDataFile);
@@ -29,8 +30,10 @@ public:
 	void	DeleteAll();
 
 	std::vector<Enemy*> GetEnemyList() const { return m_enemyList; }
-
+	
 private:
+	static  NPCManager*		s_instance;
+
 	NPCFactory*				m_NPCFactory;
 	std::vector<Enemy*>		m_enemyList;
 	EnemyDataContainer*		m_enemyDataContainer;

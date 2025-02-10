@@ -3,10 +3,16 @@
 #include "DamageData.h"
 #include "EnemyData.h"
 #include "GameObject.h"
+#include "HitBoxManager.h"
 #include "Player.h"
+#include "Sprite.h"
 #include "State.h"
+#include "StateMachine.h"
+
+#include <directxtk/SimpleMath.h>
 
 class Graphics;
+class NPCManager;
 class Texture;
 template<class T> class StateMachine;
 class SoundSource;
@@ -17,8 +23,15 @@ public:
 							Enemy();
 	virtual					~Enemy();
 
+	void					Init(Graphics* graphics,
+								Camera* camera,
+								Player* player,
+								const EnemyData& data,
+								NPCManager* npcManager,
+								Texture* shadowTexture,
+								State<Enemy>* globalEnemyState,
+								State<Enemy>* startingState);
 
-	void Init(Graphics* graphics, Camera* camera, Player* player, const EnemyData& data, Texture* shadowTexture, State<Enemy>* globalEnemyState, State<Enemy>* startingState);
 	void					Update(float deltaTime);
 	void					Render(Graphics* graphics);
 	virtual void			Reset();
@@ -35,16 +48,18 @@ public:
 	bool					IsHostile() const { return m_isHostile; }
 	EnemyData				GetData() const { return m_enemyData; }
 	virtual DamageData		GetDamageData() const;
+	NPCManager*				GetManager() const { return m_npcManager; }
 
 	virtual void			ApplyDamage(GameObject* source, const int& amount);
 	void					Knockback(const Vector2& direction, const float& force);
-	
+		
 	virtual void			Attack();
 	void					Kill();
 
 	void					ShowEnemyHud();
 	void					DeleteAll();
 
+	void					ProcessSteering();
 
 	virtual void			PlayEntranceSound();
 	virtual void			PlayWalkingSound();
@@ -62,10 +77,14 @@ protected:
 	EnemyData				m_enemyData;
 
 private:
+	Vector2					Seek() const;
+	Vector2					Avoid() const;
+
 	Player*					m_playerTarget;
 	Sprite*					m_portraitSprite;
 	Sprite*					m_hitBoxSprite;
 	float					m_thinkingTimer;
 	bool					m_isHostile;
 	State<Enemy>*			m_startingState;
+	NPCManager*				m_npcManager;
 };

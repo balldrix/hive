@@ -9,6 +9,7 @@ namespace GameplayConstants
 	const float StartingBoundaryMinX = 1.0f;
 	const float StartingBoundaryMinY = 76.0f;
 	const float StartingBoundaryMaxY = 110.0f;
+	const float MinEnemyAvoidDistance = 15.0f;
 
 	const std::string HitBoxName = "hitbox";
 	const std::string HurtBoxName = "hurtbox";

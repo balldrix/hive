@@ -11,6 +11,7 @@
 #include "KingMookEnemyGlobalState.h"
 #include "MookEnemyGlobalState.h"
 #include "MookRunningEnemyGlobalState.h"
+#include "NPCManager.h"
 #include "Player.h"
 #include "RunningEnemy.h"
 
@@ -48,6 +49,7 @@ Enemy* NPCFactory::CreateMook(EnemyData& data)
 {
 	auto mook = new Enemy();
 	mook->Init(m_graphics, m_camera, m_player, data,
+				NPCManager::Instance(),
 				AssetLoader::GetTexture("t_shadow"),
 				MookEnemyGlobalState::Instance(),
 				EnemyIdleState::Instance());
@@ -59,6 +61,7 @@ Enemy* NPCFactory::CreateMookRunner(EnemyData& data)
 {
 	auto mook = new RunningEnemy();
 	mook->Init(m_graphics, m_camera, m_player, data,
+				NPCManager::Instance(),
 				AssetLoader::GetTexture("t_shadow"),
 				MookRunningEnemyGlobalState::Instance(),
 				EnemyRunningState::Instance());
@@ -70,6 +73,7 @@ Enemy* NPCFactory::CreateBoss(EnemyData& data)
 {
 	auto boss = new KingMook();
 	boss->Init(m_graphics, m_camera, m_player, data,
+				NPCManager::Instance(),
 				AssetLoader::GetTexture("t_shadow"),
 				KingMookEnemyGlobalState::Instance(),
 				EnemyIdleState::Instance());

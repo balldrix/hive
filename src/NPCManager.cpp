@@ -7,7 +7,14 @@
 #include "Logger.h"
 #include "NPCFactory.h"
 
+#include "Graphics.h"
+#include "Player.h"
 #include <fstream>
+#include <iosfwd>
+#include <string>
+#include <WinUser.h>
+
+NPCManager* NPCManager::s_instance = nullptr;
 
 NPCManager::NPCManager() :
 	m_enemyDataContainer(nullptr),
@@ -18,11 +25,15 @@ NPCManager::NPCManager() :
 
 NPCManager::~NPCManager()
 {
+	s_instance = nullptr;
+
 	DeleteAll();
 }
 
 void NPCManager::Init(Graphics* graphics, Camera* camera, Player* player)
 {
+	s_instance = this;
+
 	bool result = false;
 
 	m_enemyDataContainer = new EnemyDataContainer();

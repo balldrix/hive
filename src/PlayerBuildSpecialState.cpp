@@ -33,5 +33,3 @@ void PlayerBuildSpecialState::Execute(Player* player)
 void PlayerBuildSpecialState::OnExit(Player* player)
 {
 }
-
-
