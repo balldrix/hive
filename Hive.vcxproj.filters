@@ -298,10 +298,17 @@
     <ClCompile Include="src\Camera.cpp">
       <Filter>System\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="src\ScreenShake.cpp" />
-    <ClCompile Include="src\PlayerBuildSpecialState.cpp" />
     <ClCompile Include="src\Utils.h">
       <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PlayerBuildSpecialState.cpp">
+      <Filter>Game\Player\States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ScreenShake.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LevelCollision.cpp">
+      <Filter>Collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -783,6 +790,9 @@
     </ClInclude>
     <ClInclude Include="src\PlayerBuildSpecialState.h">
       <Filter>Game\Player\States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LevelCollision.h">
+      <Filter>Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

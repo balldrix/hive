@@ -16,7 +16,7 @@ void TravellingSceneState::OnEnter(GameplayGameState* game)
 	game->GetCamera()->SetTarget(game->GetPlayer());
 	game->GetCamera()->SetBoundary(game->GetCamera()->GetPosition().x);
 	game->GetTravellingHandler()->SetTravelTimer(0.0f);
-	game->SetPlayerBoundaryX(game->GetCamera()->GetPosition().x, 
+	game->UpdateGameBounds(game->GetCamera()->GetPosition().x, 
 		(float)game->GetLevelRenderer()->GetLevelPixelWidth());
 }
 

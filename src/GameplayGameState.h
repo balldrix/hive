@@ -1,6 +1,5 @@
 #pragma once
 
-#include "AABB.h"
 #include "GameState.h"
 #include "ParticleSystem.h"
 #include "Player.h"
@@ -47,7 +46,7 @@ public:
 	void ProcessCollisions() override;
 	void Render() override;
 
-	void SetPlayerBoundaryX(float minX, float maxX);
+	void UpdateGameBounds(float minX, float maxX);
 	void ToggleHitBoxes();
 
 	Camera* GetCamera() const { return m_camera; }
@@ -80,8 +79,6 @@ private:
 
 	bool m_canAttack;
 	bool m_running;
-
-	AABB m_playerBoundary;
 
 	float m_deltaTime;
 	float m_stopTimer;

@@ -18,6 +18,7 @@
 #include "Game.h"
 #include "GameDataManager.h"
 #include "Graphics.h"
+#include "LevelCollision.h"
 #include "Logger.h"
 #include "MenuSystem.h"
 #include "SoundManager.h"
@@ -66,6 +67,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	GameDataManager::Init();
 	UIManager::Init();
 	MenuSystem::Init();
+	LevelCollision::Init();
 
 	game = new Game();
 	game->Init(window, graphics);
@@ -94,6 +96,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 void Shutdown()
 {
 	delete game;
+	LevelCollision::Shutdown();
 	MenuSystem::Destroy();
 	UIManager::Destroy();
 	GameDataManager::Shutdown();

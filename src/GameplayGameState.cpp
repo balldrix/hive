@@ -4,6 +4,7 @@
 #include "Animator.h"
 #include "AudioEngine.h"
 #include "Camera.h"
+#include "Collider.h"
 #include "ControlSystem.h"
 #include "EncounterHandler.h"
 #include "EncounterSceneState.h"
@@ -15,6 +16,7 @@
 #include "HitBoxManager.h"
 #include "ImpactFx.h"
 #include "Input.h"
+#include "LevelCollision.h"
 #include "LevelRenderer.h"
 #include "Logger.h"
 #include "NPCManager.h"
@@ -61,7 +63,6 @@ GameplayGameState::GameplayGameState() :
 	m_musicSoundSource(nullptr),
 	m_canAttack(true),
 	m_running(false),
-	m_playerBoundary(AABB()),
 	m_deltaTime(0.0f),
 	m_stopTimer(0.0f),
 	m_displayHitBoxes(false),
@@ -150,8 +151,21 @@ void GameplayGameState::LoadAssets()
 	m_sceneStateMachine->Init(TravellingSceneState::Instance(), nullptr, nullptr);
 	m_encounterHandler->Init(m_NPCManager->GetEnemyList());
 
-	m_playerBoundary.SetMin(Vector2(StartingBoundaryMinX, StartingBoundaryMinY));
-	m_playerBoundary.SetMax(Vector2((float)m_levelRenderer->GetLevelPixelWidth() - 1.0f, StartingBoundaryMaxY));
+	Collider upperBounds;
+	upperBounds.SetAABB(AABB(Vector2(0, 0), Vector2((float)m_levelRenderer->GetLevelPixelWidth(), GameplayBoundsUpperY)));
+	LevelCollision::AddCollider(UpperBoundsId, upperBounds);
+	
+	Collider lowerBounds;
+	lowerBounds.SetAABB(AABB(Vector2(0, GameplayBoundsLowerY), Vector2((float)m_levelRenderer->GetLevelPixelWidth(), GameHeight)));
+	LevelCollision::AddCollider(LowerBoundsId, lowerBounds);
+
+	Collider leftBounds;
+	leftBounds.SetAABB(AABB(Vector2(-10, 0), Vector2(0, GameHeight)));
+	LevelCollision::AddCollider(LeftBoundsId, leftBounds);
+
+	Collider rightBounds;
+	rightBounds.SetAABB(AABB(Vector2((float)m_levelRenderer->GetLevelPixelWidth()), Vector2((float)m_levelRenderer->GetLevelPixelWidth() + 10)));
+	LevelCollision::AddCollider(RightBoundsId, rightBounds);
 	
 	m_camera->Init(GameWidth);
 	
@@ -521,56 +535,6 @@ void GameplayGameState::ProcessCollisions()
 			}
 		}
 	}
-
-	Vector2 playerBoundaryMin = m_playerBoundary.GetMin();
-	Vector2 playerBoundaryMax = m_playerBoundary.GetMax();
-
-	if(playerGroundPositionX < playerBoundaryMin.x)
-	{
-		m_player->SetPosition(Vector2(playerBoundaryMin.x, m_player->GetPositionY()));
-		m_player->SetCurrentVelocity(Vector2(0.0f, m_player->GetCurrentVelocity().y));
-		m_player->SetTargetVelocity(Vector2(0.0f, m_player->GetTargetVelocity().y));
-	}
-
-	if(playerGroundPositionY < playerBoundaryMin.y)
-	{
-		m_player->SetPosition(Vector2(m_player->GetPositionX(), playerBoundaryMin.y));
-		m_player->SetCurrentVelocity(Vector2(m_player->GetCurrentVelocity().x, 0.0f));
-		m_player->SetTargetVelocity(Vector2(m_player->GetTargetVelocity().x, 0.0f));
-	}
-
-	if(playerGroundPositionX > playerBoundaryMax.x)
-	{
-		m_player->SetPosition(Vector2(playerBoundaryMax.x, m_player->GetPositionY()));
-		m_player->SetCurrentVelocity(Vector2(0.0f, m_player->GetCurrentVelocity().y));
-		m_player->SetTargetVelocity(Vector2(0.0f, m_player->GetTargetVelocity().y));
-	}
-
-	if(playerGroundPositionY > playerBoundaryMax.y)
-	{
-		m_player->SetPosition(Vector2(m_player->GetPositionX(), playerBoundaryMax.y));
-		m_player->SetCurrentVelocity(Vector2(m_player->GetCurrentVelocity().x, 0.0f));
-		m_player->SetTargetVelocity(Vector2(m_player->GetTargetVelocity().x, 0.0f));
-	}
-
-	for(size_t i = 0; i < enemyList.size(); i++)
-	{
-		Enemy* enemy = enemyList[i];
-
-		if(enemy->GetGroundPosition().y > playerBoundaryMax.y)
-		{
-			enemy->SetPosition(enemy->GetPositionX(), playerBoundaryMax.y);
-			enemy->SetCurrentVelocity(Vector2(enemy->GetCurrentVelocity().x, 0.0f));
-			enemy->SetTargetVelocity(Vector2(enemy->GetTargetVelocity().x, 0.0f));
-		}
-
-		if(enemy->GetGroundPosition().y < playerBoundaryMin.y)
-		{
-			enemy->SetPosition(enemy->GetPositionX(), playerBoundaryMin.y);
-			enemy->SetCurrentVelocity(Vector2(enemy->GetCurrentVelocity().x, 0.0f));
-			enemy->SetTargetVelocity(Vector2(enemy->GetTargetVelocity().x, 0.0f));
-		}
-	}
 }
 
 void GameplayGameState::SpawnParticles(const Vector2& position, const Vector2& velocity, Color startColour, Color endColour, float lifeTime, unsigned int number)
@@ -611,15 +575,20 @@ void GameplayGameState::ResetGame()
 	m_camera->SetTarget(m_player);
 	m_sceneStateMachine->ChangeState(TravellingSceneState::Instance());
 	m_encounterHandler->SetEncounterIndex(0);
-	SetPlayerBoundaryX(StartingBoundaryMinX, (float)m_levelRenderer->GetLevelPixelWidth());
+	UpdateGameBounds(0, (float)m_levelRenderer->GetLevelPixelWidth());
 }
 
-void GameplayGameState::SetPlayerBoundaryX(float minX, float maxX)
+void GameplayGameState::UpdateGameBounds(float minX, float maxX)
 {
-	Vector2 newMin = Vector2(minX, m_playerBoundary.GetMin().y);
-	Vector2 newMax = Vector2(maxX, m_playerBoundary.GetMax().y);
-	
-	m_playerBoundary.SetAABB(AABB(newMin, newMax));
+	Collider* upperBounds = LevelCollision::GetCollider(UpperBoundsId);
+	Collider* lowerBounds = LevelCollision::GetCollider(LowerBoundsId);
+	Collider* leftBounds = LevelCollision::GetCollider(LeftBoundsId);
+	Collider* rightBounds = LevelCollision::GetCollider(RightBoundsId);
+
+	upperBounds->SetAABB(AABB(Vector2(minX, upperBounds->GetAABB().GetMin().y), Vector2(maxX, upperBounds->GetAABB().GetMax().y)));
+	lowerBounds->SetAABB(AABB(Vector2(minX, lowerBounds->GetAABB().GetMin().y), Vector2(maxX, lowerBounds->GetAABB().GetMax().y)));
+	leftBounds->SetAABB(AABB(Vector2(minX - 10, 0), Vector2(minX, GameHeight)));
+	rightBounds->SetAABB(AABB(Vector2(maxX, 0), Vector2(maxX + 10, GameHeight)));
 }
 
 void GameplayGameState::ToggleHitBoxes()

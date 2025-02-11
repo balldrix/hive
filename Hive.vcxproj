@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\LevelCollision.cpp" />
     <ClCompile Include="src\PlayerBuildSpecialState.cpp" />
     <ClCompile Include="src\ScreenShake.cpp" />
     <ClCompile Include="src\UIScreenFlashFX.cpp" />
@@ -64,6 +65,7 @@
     <ClCompile Include="src\UIHudView.cpp" />
     <ClCompile Include="src\UIKillCount.cpp" />
     <ClCompile Include="src\Utils.h" />
+    <ClInclude Include="src\LevelCollision.h" />
     <ClInclude Include="src\PlayerBuildSpecialState.h" />
     <ClInclude Include="src\AnimatedSpriteData.h" />
     <ClInclude Include="src\ScreenShake.h" />

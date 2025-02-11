@@ -5,15 +5,19 @@
 #include "DamageData.h"
 #include "GameplayConstants.h"
 #include "HitBoxManager.h"
+#include "LevelCollision.h"
+#include "Logger.h"
 #include "SpriteSheet.h"
 
+#include "Collider.h"
 #include <directxtk/SimpleMath.h>
+#include <directxtk/SpriteBatch.h>
+#include <fmt/core.h>
 #include <fstream>
 #include <iosfwd>
 #include <string>
 
 using namespace DirectX::SimpleMath;
-
 using namespace GameplayConstants;
 
 GameObject::GameObject() :
@@ -90,7 +94,36 @@ void GameObject::Update(float deltaTime)
 	y = Lerp(m_targetVelocity.y, m_currentVelocity.y, t * deltaTime);
 	m_currentVelocity.y = y;
 
-	m_position += (m_currentVelocity * m_movementSpeed) * deltaTime;	
+	Vector2 impulse = Vector2::Zero;
+	Vector2 velocity = (m_currentVelocity * m_movementSpeed) * deltaTime;
+	Vector2 newPosition = m_position + velocity;
+	Collider pushBox = m_hitBoxManager->GetPushBox();
+	
+	if(LevelCollision::IsCollision(Vector2(newPosition.x + pushBox.GetWidth(), m_groundPosition.y)))
+	{
+		impulse += -(velocity.x * Vector2(-1, 0)) * Vector2(-1, 0);
+		m_position.x -= 0.05f;
+	}
+	else if(LevelCollision::IsCollision(Vector2(newPosition.x - pushBox.GetWidth(), m_groundPosition.y)))
+	{
+		impulse += -(velocity.x * Vector2(1, 0)) * Vector2(1, 0);
+		m_position.x += 0.05f;
+	}
+
+	if(m_grounded && LevelCollision::IsCollision(Vector2(m_groundPosition.x, newPosition.y - pushBox.GetHeight())))
+	{ 
+		impulse += -(velocity.y * Vector2(0, -1)) * Vector2(0, -1);
+		m_position.y += 0.05f;
+	}
+	else if(m_grounded && LevelCollision::IsCollision(Vector2(m_groundPosition.x, newPosition.y + pushBox.GetHeight())))
+	{
+		impulse += -(velocity.y * Vector2(0, 1)) * Vector2(0, 1);
+		m_position.y -= 0.05f;
+	}
+
+	velocity += impulse;
+	m_position += velocity;
+	m_currentVelocity = (velocity / m_movementSpeed) / deltaTime;
 	m_groundPosition.x = m_position.x;
 
 	if(m_animator != nullptr)
