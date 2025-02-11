@@ -8,6 +8,9 @@
 #include "StateMachine.h"
 #include "UnitVectors.h"
 
+#include <directxtk/SimpleMath.h>
+#include <string>
+
 EnemyDeadState* EnemyDeadState::Instance()
 {
 	static EnemyDeadState instance("dead");

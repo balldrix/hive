@@ -185,6 +185,16 @@ void Enemy::Update(float deltaTime)
 	m_thinkingTimer -= deltaTime;
 
 	m_hitBoxManager->Update(m_animator->GetCurrentFrame());
+
+	if(!m_dead) return;
+
+	if(m_health > 0)
+		m_deathTimer -= deltaTime;
+
+	if(m_deathTimer > 0) return;
+
+	m_stateMachine->ChangeState(EnemyIdleState::Instance());
+	m_dead = false;
 }
 
 void Enemy::Render(Graphics* graphics)
@@ -260,7 +270,7 @@ void Enemy::ApplyDamage(GameObject* source, const int& amount)
 	if(m_health < 0) m_health = 0;
 
 	// true if health has gone or damage is high
-	if(m_health < 1 || amount > 15)
+	if(m_health < 1 || amount > 50)
 	{
 		// set knockback state
 		m_stateMachine->ChangeState(EnemyKnockbackState::Instance());
@@ -281,7 +291,8 @@ void Enemy::ApplyDamage(GameObject* source, const int& amount)
 		Knockback(direction, 100.0f);
 
 		// bounce 
-		SetKnockbackCount(2);
+		SetKnockbackCount(1);
+		m_deathTimer = 2.0f;
 	}
 	else
 	{
