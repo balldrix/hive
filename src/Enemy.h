@@ -79,6 +79,7 @@ protected:
 private:
 	Vector2					Seek() const;
 	Vector2					Avoid() const;
+	Vector2					Strafe() const;
 
 	Player*					m_playerTarget;
 	Sprite*					m_portraitSprite;

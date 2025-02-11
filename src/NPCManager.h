@@ -29,6 +29,9 @@ public:
 	void	Reset();
 	void	DeleteAll();
 
+	void	SetAttackingEnemy(Enemy* enemy);
+	Enemy*	GetAttackingEnemy() const { return m_hostileEnemy; }
+
 	std::vector<Enemy*> GetEnemyList() const { return m_enemyList; }
 	
 private:
@@ -37,4 +40,5 @@ private:
 	NPCFactory*				m_NPCFactory;
 	std::vector<Enemy*>		m_enemyList;
 	EnemyDataContainer*		m_enemyDataContainer;
+	Enemy*					m_hostileEnemy;
 };

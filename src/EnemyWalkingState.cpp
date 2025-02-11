@@ -4,6 +4,7 @@
 #include "Enemy.h"
 #include "EnemyIdleState.h"
 #include "HitBoxManager.h"
+#include "Randomiser.h"
 #include "StateMachine.h"
 
 #include <directxtk/SimpleMath.h>
@@ -20,7 +21,7 @@ void EnemyWalkingState::OnEnter(Enemy* enemy)
 	enemy->GetAnimator()->Reset();
 	enemy->GetAnimator()->SetAnimation(m_name);
 	enemy->GetHitBoxManager()->SetCollidersUsingTag(m_name);
-	
+	enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4f, 1.0f));
 	enemy->SetMovementSpeed(enemy->GetData().objectData.walkSpeed);
 }
 
@@ -31,6 +32,8 @@ void EnemyWalkingState::Execute(Enemy* enemy)
 
 	auto distance = (enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length();
 
+	if(enemy->GetTimer() > 0) return;
+
 	if(distance < enemy->GetData().attackRange)
 	{
 		enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
@@ -40,6 +43,8 @@ void EnemyWalkingState::Execute(Enemy* enemy)
 	{
 		enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
 	}
+
+	enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4f, 1.0f));
 }
 
 void EnemyWalkingState::OnExit(Enemy* enemy)

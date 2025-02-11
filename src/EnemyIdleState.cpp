@@ -14,6 +14,7 @@
 #include "StateMachine.h"
 
 #include "directxtk/SimpleMath.h"
+#include <string>
 
 using namespace DirectX::SimpleMath;
 using namespace GameplayConstants;
@@ -74,8 +75,9 @@ void EnemyIdleState::Execute(Enemy* enemy)
 
 	auto enemies = enemy->GetManager()->GetEnemyList();
 
-	if(distance < enemy->GetData().attackRange &&
-		verticalDistance < VerticalHitRange)
+	if(distance < enemy->GetData().attackRange
+		&& verticalDistance < VerticalHitRange
+		&& NPCManager::Instance()->GetAttackingEnemy() == enemy)
 	{
 		double randnum = Randomiser::Instance()->GetRandNum(0.02, 1.8);
 	

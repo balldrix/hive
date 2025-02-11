@@ -18,7 +18,8 @@ NPCManager* NPCManager::s_instance = nullptr;
 
 NPCManager::NPCManager() :
 	m_enemyDataContainer(nullptr),
-	m_NPCFactory(nullptr)
+	m_NPCFactory(nullptr),
+	m_hostileEnemy(nullptr)
 {
 	m_enemyList.clear();
 }
@@ -221,4 +222,9 @@ void NPCManager::DeleteAll()
 
 	m_NPCFactory = nullptr;	
 	m_enemyDataContainer = nullptr;
+}
+
+void NPCManager::SetAttackingEnemy(Enemy* enemy)
+{
+	m_hostileEnemy = enemy;
 }

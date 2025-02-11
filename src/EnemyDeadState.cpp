@@ -4,6 +4,7 @@
 #include "Enemy.h"
 #include "EnemyKnockbackState.h"
 #include "HitBoxManager.h"
+#include "NPCManager.h"
 #include "StateMachine.h"
 #include "UnitVectors.h"
 
@@ -21,6 +22,9 @@ void EnemyDeadState::OnEnter(Enemy* enemy)
 
 	if(enemy->GetHealth() <= 0)
 		enemy->PlayDeathSound();
+
+	if(NPCManager::Instance()->GetAttackingEnemy() == enemy)
+		NPCManager::Instance()->SetAttackingEnemy(nullptr);
 }
 
 void EnemyDeadState::Execute(Enemy* enemy)

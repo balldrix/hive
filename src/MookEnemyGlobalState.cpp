@@ -4,7 +4,7 @@
 #include "EnemyDeadState.h"
 #include "EnemyIdleState.h"
 #include "EnemyKnockbackState.h"
-#include "Player.h"
+#include "NPCManager.h"
 #include "StateMachine.h"
 
 MookEnemyGlobalState* MookEnemyGlobalState::Instance()
@@ -35,10 +35,16 @@ void MookEnemyGlobalState::Execute(Enemy* enemy)
 			enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
 			enemy->SetHostile(true);
 		}
+
+		if(NPCManager::Instance()->GetAttackingEnemy() == nullptr)
+			NPCManager::Instance()->SetAttackingEnemy(enemy);
 	}
 	else
 	{
 		enemy->SetHostile(false);
+
+		if(NPCManager::Instance()->GetAttackingEnemy() == enemy)
+			NPCManager::Instance()->SetAttackingEnemy(nullptr);
 	}
 
 	// true if the enemy is not knocked back or dead

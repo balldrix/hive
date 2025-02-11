@@ -311,13 +311,16 @@ void Enemy::Kill()
 void Enemy::ProcessSteering()
 {
 	m_targetVelocity = Vector2::Zero;
-	m_targetVelocity += Seek() * 2;
-	m_targetVelocity += Avoid();
+	m_targetVelocity += Seek() * 3;
+	m_targetVelocity += Avoid() * 2;
+	m_targetVelocity += Strafe();
 	m_targetVelocity.Normalize();
 }
 
 Vector2 Enemy::Seek() const
 {
+	if(m_isHostile && NPCManager::Instance()->GetAttackingEnemy() != this) return Vector2::Zero;
+
 	Vector2 direction = Vector2::Zero;
 	Vector2 targetPosition = GetPlayerTarget()->GetPosition();
 	Vector2 position = GetPosition();
@@ -346,6 +349,16 @@ Vector2 Enemy::Avoid() const
 	}
 
 	return force;
+}
+
+Vector2 Enemy::Strafe() const
+{
+	if(NPCManager::Instance()->GetAttackingEnemy() == this || !IsHostile()) return Vector2::Zero;
+
+	auto toTarget = m_playerTarget->GetPosition() - GetPosition();
+	auto crossProduct = Vector2(toTarget.y, -toTarget.x);
+	crossProduct.Normalize();
+	return crossProduct;
 }
 
 void Enemy::ShowEnemyHud()
