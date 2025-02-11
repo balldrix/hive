@@ -22,6 +22,7 @@
 #include "NPCManager.h"
 #include "ParticleSystem.h"
 #include "Player.h"
+#include "PlayerAttackState.h"
 #include "PlayerBlockState.h"
 #include "PlayerBuildSpecialState.h"
 #include "PlayerConstants.h"
@@ -357,7 +358,9 @@ void GameplayGameState::ProcessInput()
 		return;
 	}
 
-	if(!m_player->IsSpecialReady() && m_input->IsKeyDown(PLAYER_V_KEY) || gamePadState.IsAPressed())
+	if(!m_player->GetStateMachine()->IsInState(*PlayerAttackState::Instance()) 
+		&& !m_player->IsSpecialReady() 
+		&& m_input->IsKeyDown(PLAYER_V_KEY) || gamePadState.IsAPressed())
 	{
 		if(!m_player->GetStateMachine()->IsInState(*PlayerBuildSpecialState::Instance()))
 			m_player->GetStateMachine()->ChangeState(PlayerBuildSpecialState::Instance());

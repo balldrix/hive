@@ -53,7 +53,7 @@ Player::Player() :
 	m_recentFootstepFrame(0),
 	m_hurtTimer(0.0f),
 	m_kills(0),
-	m_special(0)
+	m_special(100)
 {
 }
 
@@ -398,7 +398,7 @@ void Player::Reset()
 	m_active = true;
 	m_lives = m_playerData.objectData.startingLives;
 	m_kills = 0;
-	m_special = 0;
+	m_special = 100;
 	SetVelocity(Vector2::Zero);
 }
 

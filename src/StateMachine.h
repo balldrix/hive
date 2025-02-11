@@ -2,7 +2,10 @@
 
 #include "State.h"
 
+#include "Logger.h"
+
 #include <cassert>
+#include <fmt/core.h>
 
 template <class T>
 class StateMachine
@@ -46,6 +49,7 @@ public:
 
 	void ChangeState(State<T>* newState)
 	{
+		Logger::LogInfo(fmt::format("changing state from {0} to {1}", m_currentState->GetName(), newState->GetName()));
 		assert(m_currentState && newState);
 		m_previousState = m_currentState;
 		m_currentState->OnExit(m_owner);
