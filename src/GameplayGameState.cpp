@@ -438,7 +438,7 @@ void GameplayGameState::Tick(float deltaTime)
 
 void GameplayGameState::ProcessCollisions()
 {
-	if(m_stopTimer > 0)	return;
+	if(m_stopTimer > 0 || m_isCollisionOnCooldown)	return;
 
 	std::vector<Enemy*> enemyList = m_NPCManager->GetEnemyList();
 
@@ -450,12 +450,17 @@ void GameplayGameState::ProcessCollisions()
 	{
 		Enemy* enemy = enemyList[i];
 
+		auto playerHitBox = m_player->GetHitBoxManager()->GetHitBox();
+		auto playerVerticalRange = VerticalHitRange;
+
+		if(m_player->GetStateMachine()->GetCurrentState()->GetName() == "special")
+			playerVerticalRange = GameHeight;
+
 		// true if player hitbox is active and enemy is in vertical range
-		if(isPlayerHitBoxActive &&
-			fabs(enemy->GetGroundPosition().y - playerGroundPositionY) < VerticalHitRange)
+		if(isPlayerHitBoxActive && fabs(enemy->GetGroundPosition().y - playerGroundPositionY) < playerVerticalRange)
 		{
 			// check player has hit an enemy
-			if(m_player->GetHitBoxManager()->GetHitBox().OnCollision(
+			if(playerHitBox.OnCollision(
 				enemy->GetHitBoxManager()->GetHurtBox()))
 			{
 				auto damageData = m_player->GetDamageData();
@@ -469,7 +474,7 @@ void GameplayGameState::ProcessCollisions()
 				enemy->ShowEnemyHud();
 
 				auto animation = m_player->GetAnimator()->GetAnimation();
-				if(animation.name.contains("Strong"))
+				if(animation.name.contains("Strong") || animation.name.contains("special"))
 					m_camera->StartShake(2.0f, 3.0f);
 
 				m_player->IncreaseSpecial();
@@ -486,8 +491,6 @@ void GameplayGameState::ProcessCollisions()
 			}
 		}
 	}
-
-	if(m_isCollisionOnCooldown) return;
 
 	for(size_t i = 0; i < enemyList.size(); i++)
 	{
