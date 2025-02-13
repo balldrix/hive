@@ -303,6 +303,11 @@ void Player::Respawn()
 	m_health = m_playerData.objectData.startingHealth;
 	m_special = 0;
 	SetVelocity(m_currentVelocity.x, m_currentVelocity.y + FallingSpeed);
+
+	UIKillCount* killCount = static_cast<UIKillCount*>(UIManager::GetView("Player Kill Count"));
+
+	if(killCount)
+		killCount->SetValue(m_kills);
 }
 
 void Player::ResetKnockoutTimer()
@@ -327,16 +332,16 @@ void Player::UpdateStats()
 		specialbar->SetMaxValue(MaxSpecial);
 		specialbar->SetCurrentValue((int)m_special);
 	}
-
-	UIKillCount* killCount = static_cast<UIKillCount*>(UIManager::GetView("Player Kill Count"));
-	
-	if(killCount)
-		killCount->SetValue(m_kills);
 }
 
 void Player::AddKill()
 {
 	m_kills++;
+
+	UIKillCount* killCount = static_cast<UIKillCount*>(UIManager::GetView("Player Kill Count"));
+
+	if(killCount)
+		killCount->UpdateKills(m_kills);
 
 	if(m_kills % 100 != 0) 
 		return;

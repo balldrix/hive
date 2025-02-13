@@ -14,7 +14,9 @@ using namespace GlobalConstants;
 UIKillCount::UIKillCount() :
 	m_labelText(nullptr),
 	m_countText(nullptr),
-	m_currentCountWidth(0)
+	m_currentCountWidth(0),
+	m_previousCount(0),
+	m_targetCount(0)
 {
 }
 
@@ -48,6 +50,26 @@ void UIKillCount::Init(std::string name)
 	m_countText->SetActive(true);
 }
 
+void UIKillCount::Update(float deltaTime)
+{
+	if(m_previousCount == m_targetCount) return;
+
+	m_updateTimer -= deltaTime;
+
+	if(m_updateTimer > 0.0f) return;
+
+	if(m_previousCount < m_targetCount)
+		m_previousCount++;
+	else
+		m_previousCount--;
+
+	m_countText->SetText(fmt::format("{}", m_previousCount));
+	m_countText->SetAlignment(UISpriteText::Alignments::Right);
+
+	const float UpdateDelay = 0.1f;
+	m_updateTimer = UpdateDelay;
+}
+
 void UIKillCount::Render(Graphics* graphics)
 {
 	m_labelText->Render(graphics);
@@ -65,6 +87,14 @@ void UIKillCount::Shutdown()
 
 void UIKillCount::SetValue(int count)
 {
+	m_previousCount = count;
+	m_targetCount = count;
+
 	m_countText->SetText(fmt::format("{}", count));
 	m_countText->SetAlignment(UISpriteText::Alignments::Right);
+}
+
+void UIKillCount::UpdateKills(int count)
+{
+	m_targetCount = count;
 }
