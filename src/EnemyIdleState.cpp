@@ -71,7 +71,7 @@ void EnemyIdleState::Execute(Enemy* enemy)
 			enemy->GetStateMachine()->ChangeState(EnemyRunningState::Instance());
 			enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4f, 1.0f));
 		}
-		else if(distance > enemy->GetData().attackRange)
+		else if(distance > enemy->GetData().attackRange || (NPCManager::Instance()->GetAttackingEnemy() == enemy && distance > MaxEnemyAttackDistance))
 		{
 			enemy->GetStateMachine()->ChangeState(EnemyWalkingState::Instance());
 			enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4f, 1.0f));
