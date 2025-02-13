@@ -810,7 +810,7 @@
     "duration": 100
    },
    {
-    "filename": "build-special-90",
+    "filename": "buildSpecial-90",
     "frame": { "x": 1280, "y": 420, "w": 128, "h": 60 },
     "rotated": false,
     "trimmed": false,
@@ -819,7 +819,7 @@
     "duration": 100
    },
    {
-    "filename": "build-special-91",
+    "filename": "buildSpecial-91",
     "frame": { "x": 0, "y": 480, "w": 128, "h": 60 },
     "rotated": false,
     "trimmed": false,
@@ -828,7 +828,7 @@
     "duration": 100
    },
    {
-    "filename": "build-special-92",
+    "filename": "buildSpecial-92",
     "frame": { "x": 128, "y": 480, "w": 128, "h": 60 },
     "rotated": false,
     "trimmed": false,
@@ -837,7 +837,7 @@
     "duration": 100
    },
    {
-    "filename": "build-special-93",
+    "filename": "buildSpecial-93",
     "frame": { "x": 256, "y": 480, "w": 128, "h": 60 },
     "rotated": false,
     "trimmed": false,
