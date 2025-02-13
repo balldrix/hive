@@ -391,7 +391,7 @@ void Enemy::ShowEnemyHud()
 	if(healthbar)
 	{
 		healthbar->SetActive(true);
-		healthbar->SetCurrentValue(m_health);
+		healthbar->SetCurrentValue(m_health, true);
 		healthbar->SetMaxValue(m_enemyData.objectData.startingHealth);
 	}
 }

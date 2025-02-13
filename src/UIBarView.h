@@ -27,16 +27,19 @@ public:
 	void SetFillTexture(Texture* texture);
 	void SetFrameTexture(Texture* texture);
 
-	void SetCurrentValue(const int& value);
+	void SetCurrentValue(const int& value, bool animate = false);
 	void SetMaxValue(const int& value);
 	void SetPosition(const Vector2& position);
 	void SetWidth(const unsigned int& value);
 	void SetBackgroundColour(Color colour);
 
 private:
-	int	m_currentValue;
+	float m_currentValue;
+	int m_targetValue;
 	int	m_maxValue;
 	unsigned int m_width;
+	bool m_isUpdating;
+	float m_updateTimer;
 
 	UIImageView* m_backgroundImage;
 	UIImageView* m_fillImage;

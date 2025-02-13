@@ -42,7 +42,7 @@ public:
 	int									GetLives() const { return m_lives; }
 
 	float								GetHurtTimer() const { return m_hurtTimer; }
-	inline void							SetHurtTimer(const float& time) { m_hurtTimer = time; }
+	void								SetHurtTimer(const float& time) { m_hurtTimer = time; }
 
 	void								Move(const Vector2& direction);
 	void								Run();
@@ -54,7 +54,6 @@ public:
 	void								Kill();
 	void								Respawn();
 	void								ResetKnockoutTimer();
-	void								UpdateStats();
 	void								AddKill();
 	void								IncreaseSpecial(float value = 1.0f);
 	bool								IsSpecialReady() const { return m_special == MaxSpecial; }
@@ -69,6 +68,8 @@ private:
 	void								StrongAttack();
 	void								SpecialAttack();
 	void								Attack(std::string attackName);
+	void								InitStats();
+	void								UpdateStats();
 
 	PlayerData							m_playerData;
 	StateMachine<Player>*				m_stateMachine;

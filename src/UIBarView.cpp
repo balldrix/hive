@@ -5,19 +5,22 @@
 #include "UIImageView.h"
 #include "UIView.h"
 
+#include <cmath>
 #include <directxtk/SimpleMath.h>
 #include <fmt/core.h>
 #include <string>
-#include <windef.h>
-#include <winnt.h>
+#include <Windows.h>
 
 UIBarView::UIBarView() :
-	m_currentValue(0),
+	m_currentValue(0.0f),
+	m_targetValue(0),
 	m_maxValue(0),
 	m_width(0U),
 	m_backgroundImage(nullptr),
 	m_fillImage(nullptr),
-	m_frameImage(nullptr)
+	m_frameImage(nullptr),
+	m_isUpdating(false),
+	m_updateTimer(0.0f)
 {
 }
 
@@ -48,12 +51,29 @@ void UIBarView::Update(float deltaTime)
 	rect.left = 0;
 	rect.top = 0;
 	rect.bottom = m_fillImage->GetHeight();
-	rect.right = static_cast<LONG>((m_width / static_cast<float>(m_maxValue)) * m_currentValue);
+	rect.right = static_cast<LONG>((m_width / static_cast<float>(m_maxValue)) * std::round(m_currentValue));
 
 	m_fillImage->GetSprite()->SetSourceRect(rect);
 
 	rect.right = m_width;
 	m_backgroundImage->GetSprite()->SetSourceRect(rect);
+
+	if(m_currentValue != m_targetValue)
+	{
+		m_isUpdating = true;
+		m_updateTimer = 0.0f;
+	}
+	
+	if(m_isUpdating)
+	{
+		const float UpdateDuration = 0.2f;
+		m_updateTimer += deltaTime;
+		float newValue = std::lerp(m_currentValue, m_targetValue, m_updateTimer / UpdateDuration);
+		m_currentValue = newValue;
+
+		if(m_updateTimer >= UpdateDuration) 
+			m_isUpdating = false;
+	}
 }
 
 void UIBarView::Render(Graphics* graphics)
@@ -101,8 +121,12 @@ void UIBarView::SetFrameTexture(Texture* texture)
 	m_frameImage->SetActive(true);
 }
 
-void UIBarView::SetCurrentValue(const int& value)
+void UIBarView::SetCurrentValue(const int& value, bool animate)
 {
+	m_targetValue = value;
+
+	if(animate) return;
+
 	m_currentValue = value;
 }
 

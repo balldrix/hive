@@ -149,7 +149,7 @@ void Player::Init(ControlSystem* controlSystem)
 		{ "Dead",		L"scream"}
 	};
 
-	UpdateStats();
+	InitStats();
 }
 
 void Player::LoadData(const std::string &playerDataFile, const std::string &damageDataFile)
@@ -313,25 +313,6 @@ void Player::Respawn()
 void Player::ResetKnockoutTimer()
 {
 	m_knockoutTimer = 0.0f;
-}
-
-void Player::UpdateStats()
-{
-	UIBarView* healthbar = static_cast<UIBarView*>(UIManager::GetView("Player Health Bar"));
-	
-	if(healthbar)
-	{
-		healthbar->SetMaxValue(m_playerData.objectData.startingHealth);
-		healthbar->SetCurrentValue(m_health);
-	}
-
-	UIBarView* specialbar = static_cast<UIBarView*>(UIManager::GetView("Player Special Bar"));
-
-	if(specialbar)
-	{
-		specialbar->SetMaxValue(MaxSpecial);
-		specialbar->SetCurrentValue((int)m_special);
-	}
 }
 
 void Player::AddKill()
@@ -580,4 +561,42 @@ void Player::Attack(std::string attackName)
 
 	PlayerAttackState::Instance()->SetAttack(attackName);
 	m_stateMachine->ChangeState(PlayerAttackState::Instance());
+}
+
+void Player::InitStats()
+{
+	UIBarView* healthbar = static_cast<UIBarView*>(UIManager::GetView("Player Health Bar"));
+
+	if(healthbar)
+	{
+		healthbar->SetMaxValue(m_playerData.objectData.startingHealth);
+		healthbar->SetCurrentValue(m_health);
+	}
+
+	UIBarView* specialbar = static_cast<UIBarView*>(UIManager::GetView("Player Special Bar"));
+
+	if(specialbar)
+	{
+		specialbar->SetMaxValue(MaxSpecial);
+		specialbar->SetCurrentValue((int)m_special);
+	}
+}
+
+void Player::UpdateStats()
+{
+	UIBarView* healthbar = static_cast<UIBarView*>(UIManager::GetView("Player Health Bar"));
+
+	if(healthbar)
+	{
+		healthbar->SetMaxValue(m_playerData.objectData.startingHealth);
+		healthbar->SetCurrentValue(m_health, true);
+	}
+
+	UIBarView* specialbar = static_cast<UIBarView*>(UIManager::GetView("Player Special Bar"));
+
+	if(specialbar)
+	{
+		specialbar->SetMaxValue(MaxSpecial);
+		specialbar->SetCurrentValue((int)m_special, true);
+	}
 }
