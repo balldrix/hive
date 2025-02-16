@@ -322,8 +322,8 @@ void Enemy::Kill()
 void Enemy::ProcessSteering()
 {
 	m_targetVelocity = Vector2::Zero;
-	m_targetVelocity += Seek() * 3;
-	m_targetVelocity += Avoid() * 2;
+	m_targetVelocity += Seek() * 2;
+	m_targetVelocity += Avoid();
 	m_targetVelocity += Strafe();
 	m_targetVelocity.Normalize();
 }
