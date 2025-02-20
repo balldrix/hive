@@ -53,7 +53,7 @@ Enemy* NPCFactory::CreateWasteDog(EnemyData& data)
 	auto enemy = new Enemy();
 	enemy->Init(m_graphics, m_camera, m_player, data,
 				NPCManager::Instance(),
-				AssetLoader::GetTexture("t_shadow"),
+				AssetLoader::GetTexture("t_shadow_l"),
 				MookEnemyGlobalState::Instance(),
 				EnemyIdleState::Instance());
 
@@ -65,7 +65,7 @@ Enemy* NPCFactory::CreateMook(EnemyData& data)
 	auto mook = new Enemy();
 	mook->Init(m_graphics, m_camera, m_player, data,
 				NPCManager::Instance(),
-				AssetLoader::GetTexture("t_shadow"),
+				AssetLoader::GetTexture("t_shadow_s"),
 				MookEnemyGlobalState::Instance(),
 				EnemyIdleState::Instance());
 
@@ -77,7 +77,7 @@ Enemy* NPCFactory::CreateMookRunner(EnemyData& data)
 	auto mook = new RunningEnemy();
 	mook->Init(m_graphics, m_camera, m_player, data,
 				NPCManager::Instance(),
-				AssetLoader::GetTexture("t_shadow"),
+				AssetLoader::GetTexture("t_shadow_s"),
 				MookRunningEnemyGlobalState::Instance(),
 				EnemyRunningState::Instance());
 
@@ -89,7 +89,7 @@ Enemy* NPCFactory::CreateBoss(EnemyData& data)
 	auto boss = new KingMook();
 	boss->Init(m_graphics, m_camera, m_player, data,
 				NPCManager::Instance(),
-				AssetLoader::GetTexture("t_shadow"),
+				AssetLoader::GetTexture("t_shadow_l"),
 				KingMookEnemyGlobalState::Instance(),
 				EnemyIdleState::Instance());
 

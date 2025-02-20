@@ -88,7 +88,7 @@ void Player::Init(ControlSystem* controlSystem)
 	m_spritesheet->SetOrigin(animatedSpriteData.origin);
 
 	m_shadow = new Sprite();
-	m_shadow->Init(AssetLoader::GetTexture("t_shadow"));
+	m_shadow->Init(AssetLoader::GetTexture("t_shadow_s"));
 	m_shadow->SetAlpha(0.7f);
 
 	m_animator = new Animator();

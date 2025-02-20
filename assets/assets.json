@@ -60,7 +60,13 @@
     "tag": "gameplay_assets"
   },
   {
-    "id": "t_shadow",
+    "id": "t_shadow_s",
+    "path": "assets\\textures\\shadow_standard.png",
+    "type": "texture",
+    "tag": "gameplay_assets"
+  },
+  {
+    "id": "t_shadow_l",
     "path": "assets\\textures\\shadow_large.png",
     "type": "texture",
     "tag": "gameplay_assets"
