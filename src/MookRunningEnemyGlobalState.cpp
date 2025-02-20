@@ -52,7 +52,7 @@ void MookRunningEnemyGlobalState::Execute(Enemy* enemy)
 		}
 	}
 
-	if(distance < enemy->GetData().attackRange &&
+	if(distance < enemy->GetData().fightRange &&
 		fabs(enemy->GetPositionY() - enemy->GetPlayerTarget()->GetPositionY()) < VerticalHitRange)
 	{		
 		auto playerPos = Vector2(enemy->GetPlayerTarget()->GetPositionX(), 0);

@@ -33,6 +33,9 @@ void NPCFactory::Init(Graphics* graphics,
 
 Enemy* NPCFactory::GetEnemy(EnemyData data)
 {
+	if(data.type == "waste-dog")
+		return CreateWasteDog(data);
+
 	if(data.type == "mook")
 		return CreateMook(data);
 
@@ -43,6 +46,18 @@ Enemy* NPCFactory::GetEnemy(EnemyData data)
 		return CreateBoss(data);
 
 	return nullptr;
+}
+
+Enemy* NPCFactory::CreateWasteDog(EnemyData& data)
+{
+	auto enemy = new Enemy();
+	enemy->Init(m_graphics, m_camera, m_player, data,
+				NPCManager::Instance(),
+				AssetLoader::GetTexture("t_shadow"),
+				MookEnemyGlobalState::Instance(),
+				EnemyIdleState::Instance());
+
+	return enemy;
 }
 
 Enemy* NPCFactory::CreateMook(EnemyData& data)

@@ -338,7 +338,7 @@ Vector2 Enemy::Seek() const
 
 	direction = targetPosition - position;
 
-	if(direction.Length() < MaxEnemyAttackDistance) 
+	if(direction.Length() < m_enemyData.attackRange) 
 		direction = -direction;
 
 	direction.Normalize();

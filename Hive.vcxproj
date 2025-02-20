@@ -246,10 +246,11 @@
     <None Include="assets\assets.json" />
     <None Include="assets\data\hitboxes\mook_hitbox.json" />
     <None Include="assets\data\hitboxes\player_hitbox.json" />
+    <None Include="assets\data\hitboxes\waste-dog_hitbox.json" />
     <None Include="assets\data\spritesheets\impactfx_spritesheet.json" />
     <None Include="assets\data\spritesheets\mook_spritesheet.json" />
     <None Include="assets\data\spritesheets\player_spritesheet.json" />
-    <None Include="assets\data\spritesheets\ui-sprites.json" />
+    <None Include="assets\data\spritesheets\waste-dog_spritesheet.json" />
     <None Include="assets\data\tilemaps\tm_bunker.json" />
     <None Include="assets\fonts\gamer_16pt.spritefont" />
     <None Include="assets\fonts\gamer_34pt.spritefont" />
@@ -263,6 +264,7 @@
     <Text Include="assets\data\damage\mook_damage.txt" />
     <Text Include="assets\data\damage\mook_runner_damage.txt" />
     <Text Include="assets\data\damage\player_damage.txt" />
+    <Text Include="assets\data\damage\waste-dog_damage.txt" />
     <Text Include="assets\data\encounters\encounter_positions.txt" />
     <Text Include="assets\data\enemies\enemy_data.txt" />
     <Text Include="assets\data\enemies\type_data.txt" />
@@ -315,6 +317,7 @@
     <Image Include="assets\textures\ui\title_logo.png" />
     <Image Include="assets\textures\ui\title_screen_bg.png" />
     <Image Include="assets\textures\vfx.png" />
+    <Image Include="assets\textures\waste-dog_spritesheet.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F07D24C5-CADD-4262-80F1-7370DF167E8E}</ProjectGuid>

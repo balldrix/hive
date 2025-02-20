@@ -9,6 +9,7 @@ struct EnemyData
 	ObjectData				objectData = {};
 	float					thinkingTime = {};
 	float					hostileRange = {};
+	float					fightRange = {};
 	float					attackRange = {};
 	float					chargeRange = {};
 	float					chargeSpeed = {};

@@ -97,27 +97,27 @@ void AssetLoader::LoadAllPrewarmedAssets()
 	}
 }
 
-Texture* AssetLoader::GetTexture(std::string name)
+Texture* AssetLoader::GetTexture(std::string id)
 {
 	for(auto it = s_assetLoader->m_textureAssets.begin(); it != s_assetLoader->m_textureAssets.end(); ++it)
 	{
-		if((*it).first == name)
+		if((*it).first == id)
 			return (*it).second;
 	}
 
-	Logger::LogWarning(fmt::format("No texture found in AssetLoader with name {}", name));
+	Logger::LogWarning(fmt::format("No texture found in AssetLoader with name {}", id));
 	return nullptr;
 }
 
-SpriteFont* AssetLoader::GetSpriteFont(std::string name)
+SpriteFont* AssetLoader::GetSpriteFont(std::string id)
 {
 	for(auto it = s_assetLoader->m_spriteFontAssets.begin(); it != s_assetLoader->m_spriteFontAssets.end(); ++it)
 	{
-		if((*it).first == name)
+		if((*it).first == id)
 			return (*it).second;
 	}
 
-	Logger::LogWarning(fmt::format("No sprite font found in AssetLoader with name {}", name));
+	Logger::LogWarning(fmt::format("No sprite font found in AssetLoader with name {}", id));
 	return nullptr;
 }
 
@@ -136,24 +136,24 @@ void AssetLoader::AddToLoadList(const AssetData& data)
 
 void AssetLoader::LoadTexture(AssetData asset)
 {
-	Logger::LogInfo(fmt::format("Loading Texture: {}.", asset.name));
+	Logger::LogInfo(fmt::format("Loading Texture: {}.", asset.id));
 
 	Texture* texture = new Texture();
 	texture->LoadTexture(m_graphics, asset.path);
 
-	m_textureAssets.insert({ {asset.name, texture} });
+	m_textureAssets.insert({ {asset.id, texture} });
 }
 
 void AssetLoader::LoadSpriteFont(AssetData asset)
 {
-	Logger::LogInfo(fmt::format("Loading Sprite Font: {}.", asset.name));
+	Logger::LogInfo(fmt::format("Loading Sprite Font: {}.", asset.id));
 
 	auto path = std::wstring(asset.path.begin(), asset.path.end());
 	SpriteFont* spriteFont = new SpriteFont(m_graphics->GetDevice().Get(), path.c_str());
 
 	if(spriteFont != nullptr) 
 	{
-		m_spriteFontAssets.insert({ {asset.name, spriteFont}});	
+		m_spriteFontAssets.insert({ {asset.id, spriteFont}});	
 		return;
 	}
 
@@ -190,7 +190,7 @@ void AssetLoader::DeleteTextures(std::string tag)
 	{
 		if(asset.tag != tag) continue;
 
-		auto texture = m_textureAssets.find(asset.name);
+		auto texture = m_textureAssets.find(asset.id);
 
 		if(texture == m_textureAssets.end()) continue;
 

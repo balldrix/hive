@@ -7,9 +7,6 @@
     <ClCompile Include="src\Timer.cpp">
       <Filter>System</Filter>
     </ClCompile>
-    <ClCompile Include="src\Main.cpp">
-      <Filter>System</Filter>
-    </ClCompile>
     <ClCompile Include="src\AudioEngine.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
@@ -309,6 +306,9 @@
     </ClCompile>
     <ClCompile Include="src\LevelCollision.cpp">
       <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Main.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -817,9 +817,6 @@
     <None Include="assets\data\spritesheets\player_spritesheet.json">
       <Filter>Assets\Data\Spritesheets</Filter>
     </None>
-    <None Include="assets\data\spritesheets\ui-sprites.json">
-      <Filter>Assets\Data\Spritesheets</Filter>
-    </None>
     <None Include="assets\data\tilemaps\tm_bunker.json">
       <Filter>Assets\Data\Tilemaps</Filter>
     </None>
@@ -837,6 +834,12 @@
     </None>
     <None Include="assets\fonts\thaleah_12pt.spritefont">
       <Filter>Assets\Fonts</Filter>
+    </None>
+    <None Include="assets\data\hitboxes\waste-dog_hitbox.json">
+      <Filter>Assets\Data\Hitboxes</Filter>
+    </None>
+    <None Include="assets\data\spritesheets\waste-dog_spritesheet.json">
+      <Filter>Assets\Data\Spritesheets</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -862,6 +865,9 @@
       <Filter>Assets\Data\Damage</Filter>
     </Text>
     <Text Include="assets\data\damage\player_damage.txt">
+      <Filter>Assets\Data\Damage</Filter>
+    </Text>
+    <Text Include="assets\data\damage\waste-dog_damage.txt">
       <Filter>Assets\Data\Damage</Filter>
     </Text>
   </ItemGroup>
@@ -999,6 +1005,9 @@
     </Image>
     <Image Include="assets\textures\ui\bar_frame_player_health.png">
       <Filter>Assets\Textures\UI</Filter>
+    </Image>
+    <Image Include="assets\textures\waste-dog_spritesheet.png">
+      <Filter>Assets\Textures</Filter>
     </Image>
   </ItemGroup>
 </Project>

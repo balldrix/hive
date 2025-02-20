@@ -103,7 +103,7 @@ bool NPCManager::InitTypes(const std::string &fileName)
 				data.hostileRange = std::stof(result);
 
 				iss >> result;
-				data.attackRange = std::stof(result);
+				data.fightRange = std::stof(result);
 
 				iss >> result;
 				data.chargeRange = std::stof(result);

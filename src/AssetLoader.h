@@ -25,8 +25,8 @@ public:
 	static void LoadAllPrewarmedAssets();
 	static bool IsLoadingDone() { return s_assetLoader->m_assetsToLoad.empty(); }
 
-	static Texture* GetTexture(std::string name);
-	static SpriteFont* GetSpriteFont(std::string name);
+	static Texture* GetTexture(std::string id);
+	static SpriteFont* GetSpriteFont(std::string id);
 
 	static void OnDeviceLost();
 

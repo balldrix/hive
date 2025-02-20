@@ -23,6 +23,7 @@ public:
 	Enemy* GetEnemy(EnemyData data);
 
 private:
+	Enemy* CreateWasteDog(EnemyData& data);
 	Enemy* CreateMook(EnemyData& data);
 	Enemy* CreateMookRunner(EnemyData& data);
 	Enemy* CreateBoss(EnemyData& data);

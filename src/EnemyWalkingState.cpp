@@ -34,7 +34,7 @@ void EnemyWalkingState::Execute(Enemy* enemy)
 
 	if(enemy->GetTimer() > 0) return;
 
-	if(distance < enemy->GetData().attackRange)
+	if(distance < enemy->GetData().fightRange)
 	{
 		enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
 		enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.6f, 2.0f));
