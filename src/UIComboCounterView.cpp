@@ -35,6 +35,8 @@ void UIComboCounterView::Init(std::string name)
 
 void UIComboCounterView::Render(Graphics* graphics)
 {
+	if(!m_isActive || m_isForcedHidden) return;
+
 	m_comboText->Render(graphics);
 }
 
@@ -48,6 +50,7 @@ void UIComboCounterView::Shutdown()
 
 void UIComboCounterView::SetCombo(const int& value)
 {
+	TransitionIn(true);
 	m_comboText->SetActive(true);
 	m_comboText->SetText(fmt::format("{} COMBO!", value));
 }

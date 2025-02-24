@@ -42,8 +42,10 @@ void UIEnemyStatsView::Init(std::string name)
 	UIManager::RegisterUIView(m_healthBar);
 }
 
-void UIEnemyStatsView::Render(Graphics* graphics)
+void UIEnemyStatsView::ForceHide(bool isForced)
 {
+	m_portraitView->ForceHide(isForced);
+	m_healthBar->ForceHide(isForced);
 }
 
 void UIEnemyStatsView::Shutdown()

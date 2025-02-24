@@ -35,8 +35,7 @@ public:
 	virtual void SetPosition(const Vector2& position) {};
 	virtual void SetColour(Color colour) {};
 
-	virtual void ForceHide() {};
-	virtual void ForceShow() {};
+	virtual void ForceHide(bool isForced);
 
 	void AssignState(std::string stateName);
 	bool IsActive() const { return m_isActive; }
@@ -60,4 +59,5 @@ protected:
 	bool m_isActive;
 	float m_transitionTimer;
 	ViewStates m_currentViewState;
+	bool m_isForcedHidden;
 };

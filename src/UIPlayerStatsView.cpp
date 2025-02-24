@@ -35,6 +35,8 @@ void UIPlayerStatsView::Init(std::string name)
 	m_portraitView->SetPosition(Vector2(2.0f, 116.0f));
 	m_portraitView->SetActive(true);
 
+	UIManager::RegisterUIView(m_portraitView);
+
 	m_healthBar = new UIBarView();
 	m_healthBar->SetWidth(95);
 	m_healthBar->Init("Player Health Bar");
@@ -61,17 +63,9 @@ void UIPlayerStatsView::Init(std::string name)
 
 	m_killCount = new UIKillCount();
 	m_killCount->Init("Player Kill Count");
+	m_killCount->SetActive(true);
 
 	UIManager::RegisterUIView(m_killCount);
-}
-
-void UIPlayerStatsView::Update(float deltaTime)
-{
-}
-
-void UIPlayerStatsView::Render(Graphics* graphics)
-{
-	m_portraitView->Render(graphics);
 }
 
 void UIPlayerStatsView::TransitionIn(bool isAnimating)
@@ -82,6 +76,14 @@ void UIPlayerStatsView::TransitionOut(bool isAnimating)
 {
 }
 
+void UIPlayerStatsView::ForceHide(bool isForced)
+{
+	m_portraitView->ForceHide(isForced);
+	m_healthBar->ForceHide(isForced);
+	m_specialBar->ForceHide(isForced);
+	m_killCount->ForceHide(isForced);
+}
+
 void UIPlayerStatsView::Shutdown()
 {
 	Logger::LogInfo("Shutting down UI PlayerInfoView");
@@ -89,6 +91,7 @@ void UIPlayerStatsView::Shutdown()
 	UIManager::UnregisterUIView(m_killCount);
 	UIManager::UnregisterUIView(m_specialBar);
 	UIManager::UnregisterUIView(m_healthBar);
+	UIManager::UnregisterUIView(m_portraitView);
 
 	delete m_killCount;
 	m_killCount = nullptr;

@@ -41,7 +41,7 @@ void UIPortraitView::Init(std::string name)
 
 void UIPortraitView::Render(Graphics* graphics)
 {
-	if(!m_isActive) return;
+	if(!m_isActive || m_isForcedHidden) return;
 
 	m_frame->Render(graphics);
 	m_characterImage->Render(graphics);

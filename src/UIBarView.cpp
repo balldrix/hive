@@ -78,7 +78,7 @@ void UIBarView::Update(float deltaTime)
 
 void UIBarView::Render(Graphics* graphics)
 {
-	if(!m_isActive) return;
+	if(!m_isActive || m_isForcedHidden) return;
 
 	m_backgroundImage->Render(graphics);
 	m_fillImage->Render(graphics);

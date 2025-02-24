@@ -52,18 +52,13 @@ void UIHudView::Init(std::string name)
 	m_isActive = true;
 }
 
-void UIHudView::Update(float deltaTime)
+void UIHudView::ForceHide(bool isForced)
 {
-	m_playerStatsView->Update(deltaTime);
-}
-
-void UIHudView::Render(Graphics* graphics)
-{
-	m_playerStatsView->Render(graphics);
-}
-
-void UIHudView::ForceHide()
-{
+	m_playerStatsView->ForceHide(isForced);
+	m_playerStatsView->ForceHide(isForced);
+	m_enemyStatsView->ForceHide(isForced);
+	m_comboCounterView->ForceHide(isForced);
+	m_killMilestoneView->ForceHide(isForced);
 }
 
 void UIHudView::Shutdown()

@@ -264,7 +264,7 @@ void GameplayGameState::ProcessInput()
 
 	if(m_input->WasKeyPressed(F5_KEY))
 	{
-		
+		TogglePlayerHud();
 	}
 
 #endif
@@ -618,7 +618,7 @@ void GameplayGameState::ToggleHitBoxes()
 	}
 }
 
-void GameplayGameState::TogglePlayerHUD()
+void GameplayGameState::TogglePlayerHud()
 {
 	m_hidePlayerHud = !m_hidePlayerHud;
 
@@ -626,12 +626,5 @@ void GameplayGameState::TogglePlayerHUD()
 	
 	if(hud == nullptr) return;
 
-	if(m_hidePlayerHud)
-	{
-		hud->ForceHide();
-	}
-	else
-	{
-		hud->ForceShow();
-	}
+	hud->ForceHide(m_hidePlayerHud);
 }

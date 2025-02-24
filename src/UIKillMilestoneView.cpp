@@ -49,7 +49,7 @@ void UIKillMilestoneView::Update(float deltaTime)
 
 void UIKillMilestoneView::Render(Graphics* graphics)
 {
-	if(!m_isActive) return;
+	if(!m_isActive || m_isForcedHidden) return;
 
 	m_spriteText->Render(graphics);
 }

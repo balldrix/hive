@@ -72,6 +72,8 @@ void UIKillCount::Update(float deltaTime)
 
 void UIKillCount::Render(Graphics* graphics)
 {
+	if(!m_isActive || m_isForcedHidden) return;
+
 	m_labelText->Render(graphics);
 	m_countText->Render(graphics);
 }

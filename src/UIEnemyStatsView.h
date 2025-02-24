@@ -13,7 +13,8 @@ public:
 	~UIEnemyStatsView();
 
 	void Init(std::string name) override;
-	void Render(Graphics* graphics) override;
+	void Render(Graphics* graphics) override {}
+	void ForceHide(bool isForced) override;
 
 	void Shutdown() override;
 

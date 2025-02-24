@@ -61,7 +61,7 @@ private:
 	void Tick(float deltaTime);
 	void ResetGame();
 	void ToggleHitBoxes();
-	void TogglePlayerHUD();
+	void TogglePlayerHud();
 
 	Graphics* m_graphics;
 	Input* m_input;

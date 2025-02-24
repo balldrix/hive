@@ -15,11 +15,11 @@ public:
 	~UIPlayerStatsView();
 
 	void Init(std::string name) override;
-	void Update(float deltaTime) override;
-	void Render(Graphics* graphics) override;
+	void Render(Graphics* graphics) override {}
 
 	void TransitionIn(bool isAnimating) override;
 	void TransitionOut(bool isAnimating) override;
+	void ForceHide(bool isForced) override;
 
 	void Shutdown() override;
 private:
