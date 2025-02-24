@@ -324,6 +324,7 @@
         "from": 19,
         "to": 24,
         "direction": "forward",
+        "repeat": "1",
         "color": "#000000ff"
       },
       {

@@ -1,5 +1,5 @@
 # type HP starting_lives walk_speed running_speed acceleration deceleration thinking_time hostile_range fight_range attack_range charge_range charge_speed
-waste-dog	100 1 40 60 3.5 1.5 2.0 70 50 30 0 0 0
+waste-dog	100 1 35 40 0.8 3.5 1.5 55 30 20 0 0 0
 mook		100 1 35 40 0.8 3.5 1.5 40 25 10 0 0 0
 mook_runner 30 1 30 90 5 5 1.5 100.0 60.0 10 120.0 100
 boss 70 1 10 10 2.0 3.5 5.0 30.0 10.0 10 60.0 70
