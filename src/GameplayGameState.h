@@ -47,7 +47,6 @@ public:
 	void Render() override;
 
 	void UpdateGameBounds(float minX, float maxX);
-	void ToggleHitBoxes();
 
 	Camera* GetCamera() const { return m_camera; }
 	Player* GetPlayer() const { return m_player; }
@@ -61,6 +60,8 @@ private:
 	void SpawnParticles(const Vector2& position, const Vector2& velocity, Color startColour, Color endColour, float lifeTime, unsigned int number);
 	void Tick(float deltaTime);
 	void ResetGame();
+	void ToggleHitBoxes();
+	void TogglePlayerHUD();
 
 	Graphics* m_graphics;
 	Input* m_input;
@@ -84,6 +85,7 @@ private:
 	float m_stopTimer;
 	float m_collisionCooldown;
 	bool m_displayHitBoxes;
+	bool m_hidePlayerHud;
 	bool m_isCollisionOnCooldown;
 
 	Spritesheet* m_impactFxSpritesheet;

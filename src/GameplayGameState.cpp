@@ -67,6 +67,7 @@ GameplayGameState::GameplayGameState() :
 	m_deltaTime(0.0f),
 	m_stopTimer(0.0f),
 	m_displayHitBoxes(false),
+	m_hidePlayerHud(false),
 	m_impactFxSpritesheet(nullptr),
 	m_impactFxAnimator(nullptr),
 	m_impactFx(nullptr),
@@ -260,6 +261,12 @@ void GameplayGameState::ProcessInput()
 	{
 		ToggleHitBoxes();
 	}
+
+	if(m_input->WasKeyPressed(F5_KEY))
+	{
+		
+	}
+
 #endif
 
 	if(m_input->IsKeyDown(PLAYER_UP_KEY) || gamePadState.IsDPadUpPressed() || gamePadState.IsLeftThumbStickUp() &&
@@ -608,5 +615,23 @@ void GameplayGameState::ToggleHitBoxes()
 	for(Enemy* enemy : npcList)
 	{
 		enemy->GetHitBoxManager()->SetVisible(m_displayHitBoxes);
+	}
+}
+
+void GameplayGameState::TogglePlayerHUD()
+{
+	m_hidePlayerHud = !m_hidePlayerHud;
+
+	auto hud = UIManager::GetView("UI Hud View");
+	
+	if(hud == nullptr) return;
+
+	if(m_hidePlayerHud)
+	{
+		hud->ForceHide();
+	}
+	else
+	{
+		hud->ForceShow();
 	}
 }

@@ -35,18 +35,21 @@ public:
 	virtual void SetPosition(const Vector2& position) {};
 	virtual void SetColour(Color colour) {};
 
+	virtual void ForceHide() {};
+	virtual void ForceShow() {};
+
 	void AssignState(std::string stateName);
 	bool IsActive() const { return m_isActive; }
 	bool IsAnimating() const { return m_isAnimating; }
 
 	std::string GetName() const { return m_name; }
-	ViewStates GetCurrentUIViewState() const {	return m_currentViewState;	}
+	ViewStates GetCurrentUIViewState() const {	return m_currentViewState; }
 	std::vector<std::string> GetAssignedStates() const { return m_assignedStates; }
 	virtual int GetHeight() const { return 0; };
 	virtual int GetWidth() const { return 0; };
 	virtual Color GetColour() { return Colors::White.v; }
 
-	virtual void Shutdown() = 0;	
+	virtual void Shutdown() = 0;
 
 protected:
 	virtual void DoTransition(float deltaTime) {};

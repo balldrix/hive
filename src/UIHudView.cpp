@@ -62,6 +62,10 @@ void UIHudView::Render(Graphics* graphics)
 	m_playerStatsView->Render(graphics);
 }
 
+void UIHudView::ForceHide()
+{
+}
+
 void UIHudView::Shutdown()
 {
 	Logger::LogInfo("Shutting down UI Hud View");
