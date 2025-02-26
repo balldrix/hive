@@ -367,7 +367,7 @@ void GameplayGameState::ProcessInput()
 
 	if(!m_player->GetStateMachine()->IsInState(*PlayerAttackState::Instance()) 
 		&& !m_player->IsSpecialReady() 
-		&& m_input->IsKeyDown(PLAYER_V_KEY) || gamePadState.IsAPressed())
+		&& (m_input->IsKeyDown(PLAYER_V_KEY) || gamePadState.IsAPressed()))
 	{
 		if(!m_player->GetStateMachine()->IsInState(*PlayerBuildSpecialState::Instance()))
 			m_player->GetStateMachine()->ChangeState(PlayerBuildSpecialState::Instance());
@@ -379,7 +379,7 @@ void GameplayGameState::ProcessInput()
 		m_player->GetStateMachine()->ChangeState(PlayerIdleState::Instance());
 	}
 
-	if(m_player->IsSpecialReady() && m_input->WasKeyPressed(PLAYER_V_KEY) || m_input->WasGamePadButtonPressed(buttons.a))
+	if(m_player->IsSpecialReady() && (m_input->WasKeyPressed(PLAYER_V_KEY) || m_input->WasGamePadButtonPressed(buttons.a)))
 	{
 		m_controlSystem->SetControlsPressed(Controls::SpecialAttack);
 	}
