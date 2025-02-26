@@ -14,6 +14,10 @@
 #include "NPCManager.h"
 #include "Player.h"
 #include "RunningEnemy.h"
+#include "Logger.h"
+#include <fmt/core.h>
+#include "Logger.h"
+#include <fmt/core.h>
 
 NPCFactory::NPCFactory() :
 	m_graphics(nullptr),
@@ -33,18 +37,22 @@ void NPCFactory::Init(Graphics* graphics,
 
 Enemy* NPCFactory::GetEnemy(EnemyData data)
 {
+	if(data.type == "jungle-ape")
+		return CreateMook(data);
+
 	if(data.type == "waste-dog")
 		return CreateWasteDog(data);
 
 	if(data.type == "mook")
 		return CreateMook(data);
 
-	if (data.type == "mook_runner")
+	if(data.type == "mook_runner")
 		return CreateMookRunner(data);
 
 	if(data.type == "boss")
 		return CreateBoss(data);
 
+	Logger::LogWarning(fmt::format("[NPCFactory] No Enemy type {0} found.", data.type));
 	return nullptr;
 }
 

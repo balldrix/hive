@@ -73,7 +73,6 @@ bool NPCManager::InitTypes(const std::string &fileName)
 			{
 				std::string result;
 				std::istringstream iss(line);
-				
 
 				iss >> result;
 				data.type = result;

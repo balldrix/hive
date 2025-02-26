@@ -84,14 +84,20 @@
     "tag": "gameplay_assets"
   },
   {
-    "id": "t_mook",
-    "path": "assets\\textures\\mook_spritesheet.png",
+    "id": "t_waste-dog",
+    "path": "assets\\textures\\waste-dog_spritesheet.png",
     "type": "texture",
     "tag": "gameplay_assets"
   },
   {
-    "id": "t_waste-dog",
-    "path": "assets\\textures\\waste-dog_spritesheet.png",
+    "id": "t_jungle-ape",
+    "path": "assets\\textures\\jungle-ape_spritesheet.png",
+    "type": "texture",
+    "tag": "gameplay_assets"
+  },
+  {
+    "id": "t_mook",
+    "path": "assets\\textures\\mook_spritesheet.png",
     "type": "texture",
     "tag": "gameplay_assets"
   },
@@ -108,14 +114,20 @@
     "tag": "ui_assets"
   },
   {
-    "id": "t_mook_portrait",
-    "path": "assets\\textures\\ui\\mook_portrait.png",
+    "id": "t_waste-dog_portrait",
+    "path": "assets\\textures\\ui\\waste-dog_portrait.png",
     "type": "texture",
     "tag": "ui_assets"
   },
   {
-    "id": "t_waste-dog_portrait",
-    "path": "assets\\textures\\ui\\waste-dog_portrait.png",
+    "id": "t_jungle-ape_portrait",
+    "path": "assets\\textures\\ui\\jungle-ape_portrait.png",
+    "type": "texture",
+    "tag": "ui_assets"
+  },
+  {
+    "id": "t_mook_portrait",
+    "path": "assets\\textures\\ui\\mook_portrait.png",
     "type": "texture",
     "tag": "ui_assets"
   },
