@@ -53,11 +53,6 @@ void EnemyIdleState::Execute(Enemy* enemy)
 	if((enemy->GetPlayerTarget()->GetStateMachine()->GetCurrentState() == PlayerKnockbackState::Instance() ||
 		enemy->GetPlayerTarget()->GetStateMachine()->GetCurrentState() == PlayerDeadState::Instance())) return;
 
-	//if(distance < enemy->GetData().fightRange)
-	//{
-	//	enemy->GetStateMachine()->ChangeState(EnemyWalkingState::Instance());
-	//}
-
 	if(enemy->GetTimer() > 0 ||
 		enemy->GetHealth() < 0)
 		return;
