@@ -247,10 +247,12 @@
     <None Include="assets\data\hitboxes\mook_hitbox.json" />
     <None Include="assets\data\hitboxes\player_hitbox.json" />
     <None Include="assets\data\hitboxes\waste-dog_hitbox.json" />
+    <None Include="assets\data\hitboxes\waste-lobster_hitbox.json" />
     <None Include="assets\data\spritesheets\impactfx_spritesheet.json" />
     <None Include="assets\data\spritesheets\mook_spritesheet.json" />
     <None Include="assets\data\spritesheets\player_spritesheet.json" />
     <None Include="assets\data\spritesheets\waste-dog_spritesheet.json" />
+    <None Include="assets\data\spritesheets\waste-lobster_spritesheet.json" />
     <None Include="assets\data\tilemaps\tm_bunker.json" />
     <None Include="assets\fonts\gamer_16pt.spritefont" />
     <None Include="assets\fonts\gamer_34pt.spritefont" />
@@ -316,8 +318,10 @@
     <Image Include="assets\textures\ui\profile-frame.png" />
     <Image Include="assets\textures\ui\title_logo.png" />
     <Image Include="assets\textures\ui\title_screen_bg.png" />
+    <Image Include="assets\textures\ui\waste-lobster_portrait.png" />
     <Image Include="assets\textures\vfx.png" />
     <Image Include="assets\textures\waste-dog_spritesheet.png" />
+    <Image Include="assets\textures\waste-lobster_spritesheet.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F07D24C5-CADD-4262-80F1-7370DF167E8E}</ProjectGuid>
@@ -487,7 +491,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties />
+      <UserProperties assets_4data_4hitboxes_4waste-lobster_3hitbox_1json__JsonSchema="https://appsemble.app/api.json" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

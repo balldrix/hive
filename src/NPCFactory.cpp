@@ -52,6 +52,9 @@ Enemy* NPCFactory::GetEnemy(EnemyData data)
 	if(data.type == "boss")
 		return CreateBoss(data);
 
+	if(data.type == "waste-lobster")
+		return CreateWasteDog(data);
+
 	Logger::LogWarning(fmt::format("[NPCFactory] No Enemy type {0} found.", data.type));
 	return nullptr;
 }

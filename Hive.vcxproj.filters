@@ -841,6 +841,12 @@
     <None Include="assets\data\spritesheets\waste-dog_spritesheet.json">
       <Filter>Assets\Data\Spritesheets</Filter>
     </None>
+    <None Include="assets\data\spritesheets\waste-lobster_spritesheet.json">
+      <Filter>Assets\Data\Spritesheets</Filter>
+    </None>
+    <None Include="assets\data\hitboxes\waste-lobster_hitbox.json">
+      <Filter>Assets\Data\Hitboxes</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\data\encounters\encounter_positions.txt">
@@ -1007,6 +1013,12 @@
       <Filter>Assets\Textures\UI</Filter>
     </Image>
     <Image Include="assets\textures\waste-dog_spritesheet.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="assets\textures\ui\waste-lobster_portrait.png">
+      <Filter>Assets\Textures\UI</Filter>
+    </Image>
+    <Image Include="assets\textures\waste-lobster_spritesheet.png">
       <Filter>Assets\Textures</Filter>
     </Image>
   </ItemGroup>
