@@ -2,6 +2,7 @@
 
 #include "AssetLoader.h"
 #include "Camera.h"
+#include "GlobalConstants.h"
 #include "Graphics.h"
 #include "Logger.h"
 #include "Sprite.h"
@@ -10,6 +11,8 @@
 #include <fmt/core.h>
 #include <fstream>
 #include <string>
+
+using namespace GlobalConstants;
 
 LevelRenderer::LevelRenderer() :
 	m_camera(nullptr),
@@ -31,10 +34,10 @@ void LevelRenderer::Init(Graphics* graphics, Camera* camera)
 {
 	m_camera = camera;
 
-	m_tilemapData = LoadTilemap("assets\\data\\tilemaps\\tm_bunker.json");
+	m_tilemapData = LoadTilemap("assets\\data\\tilemaps\\tm_trailer-level-showcase.json");
 	m_tileSetSprite = new Sprite();
 
-	m_tileSetSprite->Init(AssetLoader::GetTexture("ts_bunker"));
+	m_tileSetSprite->Init(AssetLoader::GetTexture("ts_master"));
 	m_tileSetSprite->SetOrigin(Vector2(0, 0));
 
 	m_tileWidth = m_tilemapData.tilewidth;
@@ -74,12 +77,15 @@ TilemapData LevelRenderer::LoadTilemap(std::string path)
 
 void LevelRenderer::RenderLayer(Graphics* graphics, const TilemapLayer& layer)
 {
-	auto layerData = layer;
 	auto tileMapWidth = m_tilemapData.width;
 	auto tileMapHeight = m_tilemapData.height;
 
 	for(size_t x = 0; x < tileMapWidth; x++)
 	{
+		auto tileX = x * m_tileWidth;
+		if(tileX < m_camera->GetPosition().x - m_tileWidth) continue;
+		if(tileX > m_camera->GetPosition().x + GameWidth) continue;
+
 		for(size_t y = 0; y < tileMapHeight; y++)
 		{
 			auto tileId = layer.data[y * tileMapWidth + x] - 1;

@@ -78,8 +78,8 @@
     "tag": "gameplay_assets"
   },
   {
-    "id": "ts_bunker",
-    "path": "assets\\tilesets\\ts_bunker.png",
+    "id": "ts_master",
+    "path": "assets\\tilesets\\master_tileset.png",
     "type": "texture",
     "tag": "gameplay_assets"
   },

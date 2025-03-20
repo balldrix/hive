@@ -404,7 +404,7 @@ void GameplayGameState::Update(float deltaTime)
 	if(UIManager::IsFading()) return;
 
 	m_deltaTime = deltaTime;
-	m_sceneStateMachine->Update();
+//	m_sceneStateMachine->Update();
 	Tick(deltaTime);
 }
 

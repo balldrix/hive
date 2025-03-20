@@ -254,6 +254,7 @@
     <None Include="assets\data\spritesheets\waste-dog_spritesheet.json" />
     <None Include="assets\data\spritesheets\waste-lobster_spritesheet.json" />
     <None Include="assets\data\tilemaps\tm_bunker.json" />
+    <None Include="assets\data\tilemaps\tm_trailer-level-showcase.json" />
     <None Include="assets\fonts\gamer_16pt.spritefont" />
     <None Include="assets\fonts\gamer_34pt.spritefont" />
     <None Include="assets\fonts\goodbye_despair_12pt.spritefont" />
