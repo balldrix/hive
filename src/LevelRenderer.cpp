@@ -79,22 +79,23 @@ void LevelRenderer::RenderLayer(Graphics* graphics, const TilemapLayer& layer)
 {
 	auto tileMapWidth = m_tilemapData.width;
 	auto tileMapHeight = m_tilemapData.height;
+	auto parallaxMod = layer.parallaxMod;
 
 	for(size_t x = 0; x < tileMapWidth; x++)
 	{
 		auto tileX = x * m_tileWidth;
-		if(tileX < m_camera->GetPosition().x - m_tileWidth) continue;
-		if(tileX > m_camera->GetPosition().x + GameWidth) continue;
+		if(tileX < m_camera->GetPosition().x * parallaxMod - m_tileWidth) continue;
+		if(tileX > m_camera->GetPosition().x * parallaxMod + GameWidth) continue;
 
 		for(size_t y = 0; y < tileMapHeight; y++)
 		{
 			auto tileId = layer.data[y * tileMapWidth + x] - 1;
-			RenderTile(graphics, tileId, (unsigned int)x, (unsigned int)y);
+			RenderTile(graphics, tileId, (unsigned int)x, (unsigned int)y, parallaxMod, layer.depth);
 		}
 	}
 }
 
-void LevelRenderer::RenderTile(Graphics* graphics, unsigned int tileId, unsigned int posX, unsigned int posY)
+void LevelRenderer::RenderTile(Graphics* graphics, unsigned int tileId, unsigned int posX, unsigned int posY, float parallaxMod, float depth)
 {
 	RECT rect {};
 	rect.left = (tileId % m_tileSetWidth) * m_tileWidth;
@@ -103,10 +104,11 @@ void LevelRenderer::RenderTile(Graphics* graphics, unsigned int tileId, unsigned
 	rect.bottom = rect.top + m_tileHeight;
 
 	Vector2 spritePosition = { (float)(posX * m_tileWidth), (float)(posY * m_tileHeight) };
-	spritePosition -= m_camera->GetPosition();
+	spritePosition -= m_camera->GetPosition() * parallaxMod;
 
 	m_tileSetSprite->SetSourceRect(rect);
 	m_tileSetSprite->SetPosition(spritePosition);
+	m_tileSetSprite->SetDepth(depth);
 	m_tileSetSprite->Render(graphics);
 }
 

@@ -22,7 +22,7 @@ public:
 private:
 	TilemapData LoadTilemap(std::string path);
 	void RenderLayer(Graphics* graphics, const TilemapLayer& layer);
-	void RenderTile(Graphics* graphics, unsigned int tileId, unsigned int x, unsigned int y);
+	void RenderTile(Graphics* graphics, unsigned int tileId, unsigned int x, unsigned int y, float parallaxMod, float depth);
 
 	Camera* m_camera;
 	TilemapData m_tilemapData;
