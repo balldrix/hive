@@ -55,7 +55,7 @@ void ParticleSystem::Render(Graphics* graphics)
 		rect.right = 1;
 		rect.bottom = 1;
 
-		graphics->GetSpriteBatch()->Draw(m_texture->GetTexture(),
+		graphics->GetDefaultSpriteBatch()->Draw(m_texture->GetTexture(),
 			particle.Position,
 			&rect,
 			colour,

@@ -27,7 +27,6 @@ using namespace GlobalConstants;
 Game::Game() noexcept : 
 	m_window(nullptr),
 	m_graphics(nullptr),
-	m_spriteBatch(nullptr),
 	m_input(nullptr),
 	m_gameStateManager(nullptr),
 	m_timerFreq(0),

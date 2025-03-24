@@ -207,8 +207,10 @@ void Graphics::CreateResources()
 	bsd.RenderTarget[0].BlendEnable = TRUE;
 	DX::ThrowIfFailed(m_d3dDevice->CreateBlendState(&bsd, &m_alphaDisabledBlendState));
 
-	if(m_d3dDeviceContext)
-		m_spriteBatch = std::make_shared<SpriteBatch>(m_d3dDeviceContext.Get());
+	if(!m_d3dDeviceContext) return;
+
+	m_defaultSpriteBatch = std::make_shared<SpriteBatch>(m_d3dDeviceContext.Get());
+	m_uiSpriteBatch = std::make_shared<SpriteBatch>(m_d3dDeviceContext.Get());
 }
 
 void Graphics::Begin()
@@ -219,7 +221,8 @@ void Graphics::Begin()
 	CD3D11_VIEWPORT viewport(0.0f, 0.0f, static_cast<float>(m_backBufferWidth), static_cast<float>(m_backbufferHeight));
 	m_d3dDeviceContext->RSSetViewports(1, &viewport);
 	
-	m_spriteBatch->Begin(SpriteSortMode_FrontToBack, m_alphaEnabledBlendState.Get(), m_samplerState.Get());
+	m_defaultSpriteBatch->Begin(SpriteSortMode_FrontToBack, m_alphaEnabledBlendState.Get(), m_samplerState.Get());
+	m_uiSpriteBatch->Begin(SpriteSortMode_FrontToBack, m_alphaEnabledBlendState.Get(), m_samplerState.Get());
 
 	TurnOnAlphaBlending();
 }
@@ -228,7 +231,8 @@ void Graphics::PresentBackBuffer()
 {
 	TurnOffAlphaBlending();
 
-	m_spriteBatch->End();
+	m_defaultSpriteBatch->End();
+	m_uiSpriteBatch->End();
 	HRESULT hr = m_swapChain->Present(1, 0);
 
 	// If the device was reset we must completely reinitialize the renderer.

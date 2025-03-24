@@ -48,7 +48,8 @@ public:
 	Microsoft::WRL::ComPtr<ID3D11Device1> GetDevice() const { return m_d3dDevice; }
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> GetDeviceContext() const { return m_d3dDeviceContext; }
 	Microsoft::WRL::ComPtr<IDXGISwapChain1> GetSwapChain() const { return m_swapChain; }
-	std::shared_ptr<SpriteBatch> GetSpriteBatch() const { return m_spriteBatch; }
+	std::shared_ptr<SpriteBatch> GetDefaultSpriteBatch() const { return m_defaultSpriteBatch; }
+	std::shared_ptr<SpriteBatch> GetUISpriteBatch() const { return m_uiSpriteBatch; }
 
 	int GetWidth()	const { return m_backBufferWidth; }
 	int GetHeight()	const { return m_backbufferHeight; }
@@ -78,7 +79,8 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11BlendState> m_alphaEnabledBlendState;
 	Microsoft::WRL::ComPtr<ID3D11BlendState> m_alphaDisabledBlendState;
 
-	std::shared_ptr<SpriteBatch> m_spriteBatch;
+	std::shared_ptr<SpriteBatch> m_defaultSpriteBatch;
+	std::shared_ptr<SpriteBatch> m_uiSpriteBatch;
 	
 	bool m_fullscreen;		
 	int m_backBufferWidth;		

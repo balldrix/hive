@@ -6,7 +6,7 @@
 #include <vector>
 
 class Graphics;
-class Sprite;
+class UISprite;
 class UISystemView;
 class UIFrontEndView;
 class UIMainView;

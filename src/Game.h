@@ -43,7 +43,6 @@ public:
 private:
 	Window* m_window;
 	Graphics* m_graphics;
-	SpriteBatch* m_spriteBatch;
 	Input* m_input;
 	GameStateManager* m_gameStateManager;
 

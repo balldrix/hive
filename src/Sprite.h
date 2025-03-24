@@ -14,11 +14,11 @@ class Sprite
 public:
 	Sprite();
 	virtual ~Sprite();
-	void				Init(Texture* texture); 
-	void				Render(Graphics* graphics); 
+	void				Init(Texture* texture);
+	virtual void		Render(Graphics* graphics);
 	void				Render(Graphics* graphics, float alpha);
-	void				Render(Graphics* graphics, const Vector2& position); 
-	void				Render(Graphics* graphics, const Vector2& position, const RECT& destination); 
+	void				Render(Graphics* graphics, const Vector2& position);
+	void				Render(Graphics* graphics, const Vector2& position, const RECT& destination);
 
 	void				EnableSprite();
 	void				DisableSprite();
@@ -45,7 +45,7 @@ public:
 	const float			GetDepth() const		{ return m_depth;}
 
 protected:
-	Texture*			m_texture;			
+	Texture*			m_texture;
 
 	Vector2				m_position;
 	float				m_scale;

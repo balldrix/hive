@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Sprite.h"
+#include "UISprite.h"
 #include "UIView.h"
 
 #include <DirectXTK/SimpleMath.h>
@@ -19,8 +19,8 @@ public:
 	void Init(std::string name) override;
 	void Render(Graphics* graphics) override;
 
-	Sprite* GetSprite() const { return m_sprite; }
-	int GetHeight() const override { return (int)m_sprite->GetHeight(); }
+	UISprite* GetSprite() const { return m_uiSprite; }
+	int GetHeight() const override { return (int)m_uiSprite->GetHeight(); }
 
 	void SetPosition(Vector2 position);
 	void SetOrigin(Vector2 origin);
@@ -31,5 +31,5 @@ public:
 	void Shutdown();
 
 protected:
-	Sprite* m_sprite;
+	UISprite* m_uiSprite;
 };

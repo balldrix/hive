@@ -65,6 +65,7 @@
     <ClCompile Include="src\UIHudView.cpp" />
     <ClCompile Include="src\UIKillCount.cpp" />
     <ClCompile Include="src\Utils.h" />
+    <ClCompile Include="src\UISprite.cpp" />
     <ClInclude Include="src\LevelCollision.h" />
     <ClInclude Include="src\PlayerBuildSpecialState.h" />
     <ClInclude Include="src\AnimatedSpriteData.h" />
@@ -172,6 +173,7 @@
     <ClInclude Include="src\UIMainView.h" />
     <ClInclude Include="src\UIHudView.h" />
     <ClInclude Include="src\UIKillCount.h" />
+    <ClInclude Include="src\UISprite.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\EncounterHandler.h" />

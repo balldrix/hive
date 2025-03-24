@@ -310,6 +310,9 @@
     <ClCompile Include="src\Main.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="src\UISprite.cpp">
+      <Filter>Graphics\Sprites</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -793,6 +796,9 @@
     </ClInclude>
     <ClInclude Include="src\LevelCollision.h">
       <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UISprite.h">
+      <Filter>Graphics\Sprites</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

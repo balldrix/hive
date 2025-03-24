@@ -3,7 +3,7 @@
 #include "AssetLoader.h"
 #include "GlobalConstants.h"
 #include "Logger.h"
-#include "Sprite.h"
+#include "UISprite.h"
 
 using namespace GlobalConstants;
 
@@ -24,9 +24,9 @@ void UIFadeOverlayView::Init(std::string name)
 
 	Logger::LogInfo("Initialising UI Fade Overlay.");
 
-	m_sprite = new Sprite();
-	m_sprite->Init(AssetLoader::GetTexture("t_pixel"));
-	m_sprite->SetColour(OpaqueColour);
+	m_uiSprite = new UISprite();
+	m_uiSprite->Init(AssetLoader::GetTexture("t_pixel"));
+	m_uiSprite->SetColour(OpaqueColour);
 
 	RECT rect;
 	rect.left = 0;
@@ -34,9 +34,9 @@ void UIFadeOverlayView::Init(std::string name)
 	rect.top = 0;
 	rect.bottom = GameHeight;
 
-	m_sprite->SetSourceRect(rect);
-	m_sprite->SetOrigin(Vector2::Zero);
-	m_sprite->SetDepth(1.0f);
+	m_uiSprite->SetSourceRect(rect);
+	m_uiSprite->SetOrigin(Vector2::Zero);
+	m_uiSprite->SetDepth(1.0f);
 }
 
 void UIFadeOverlayView::Update(float deltaTime)
@@ -60,16 +60,16 @@ void UIFadeOverlayView::Update(float deltaTime)
 	float b = m_targetAlpha;
 	float lerp = std::lerp(a, b, 1 - t);
 
-	m_sprite->SetAlpha(lerp);
+	m_uiSprite->SetAlpha(lerp);
 
-	if(m_sprite->GetAlpha() == 0.0f && !m_isAnimating)
+	if(m_uiSprite->GetAlpha() == 0.0f && !m_isAnimating)
 		m_isActive = false;
 }
 
 void UIFadeOverlayView::Render(Graphics* graphics)
 {
 	if(m_isActive)
-		m_sprite->Render(graphics);
+		m_uiSprite->Render(graphics);
 }
 
 void UIFadeOverlayView::TransitionIn(bool isAnimating)
@@ -82,11 +82,11 @@ void UIFadeOverlayView::TransitionIn(bool isAnimating)
 
 	if(!isAnimating)
 	{
-		m_sprite->SetAlpha(m_targetAlpha);
+		m_uiSprite->SetAlpha(m_targetAlpha);
 		return;
 	}
 
-	m_sprite->SetAlpha(m_startingAlpha);
+	m_uiSprite->SetAlpha(m_startingAlpha);
 	m_transitionTimer = FadeDuration;
 }
 
@@ -100,12 +100,12 @@ void UIFadeOverlayView::TransitionOut(bool isAnimating)
 
 	if(!isAnimating)
 	{
-		m_sprite->SetAlpha(m_targetAlpha);
+		m_uiSprite->SetAlpha(m_targetAlpha);
 		m_isActive = false;
 		return;
 	}
 
-	m_sprite->SetAlpha(m_startingAlpha);
+	m_uiSprite->SetAlpha(m_startingAlpha);
 	m_transitionTimer = FadeDuration;
 }
 

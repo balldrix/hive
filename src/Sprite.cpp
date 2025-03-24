@@ -58,7 +58,7 @@ void Sprite::Render(Graphics* graphics)
 	if(!m_enabled)
 		return;
 
-	graphics->GetSpriteBatch()->Draw(m_texture->GetTexture(),
+	graphics->GetDefaultSpriteBatch()->Draw(m_texture->GetTexture(),
 		m_position,
 		&m_rect,
 		m_colour,
@@ -85,7 +85,7 @@ Sprite::Render(Graphics* graphics, const Vector2& position)
 		return;
 
 	// draw sprite
-	graphics->GetSpriteBatch()->Draw(m_texture->GetTexture(),
+	graphics->GetDefaultSpriteBatch()->Draw(m_texture->GetTexture(),
 		position,
 		&m_rect,
 		m_colour,
@@ -107,8 +107,8 @@ void Sprite::Render(Graphics* graphics, const Vector2& position, const RECT& des
 	SetPosition(position);
 
 	// draw sprite
-	//graphics->GetSpriteBatch()->Draw(m_texture->GetTexture(), destination, m_colour);
-	graphics->GetSpriteBatch()->Draw(m_texture->GetTexture(), destination, &m_rect,
+	//graphics->GetDefaultSpriteBatch()->Draw(m_texture->GetTexture(), destination, m_colour);
+	graphics->GetDefaultSpriteBatch()->Draw(m_texture->GetTexture(), destination, &m_rect,
 		m_colour,
 		m_rotation,
 		m_origin,
