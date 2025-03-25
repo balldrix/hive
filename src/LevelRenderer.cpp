@@ -8,6 +8,7 @@
 #include "Sprite.h"
 #include "TilemapData.h"
 
+#include <directxtk/SimpleMath.h>
 #include <fmt/core.h>
 #include <fstream>
 #include <string>

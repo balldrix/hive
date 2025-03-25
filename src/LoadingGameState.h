@@ -30,4 +30,5 @@ private:
 	static bool isloadingFromMainGameplayToFrontend;
 	Graphics* m_graphics;
 	float m_timer;
+	float m_isDone;
 };

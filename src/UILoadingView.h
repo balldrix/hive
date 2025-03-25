@@ -1,6 +1,10 @@
 #pragma once
 
+#include "Graphics.h"
 #include "UIImageView.h"
+#include "UIView.h"
+
+#include <string>
 
 class UILoadingView : public UIView
 {

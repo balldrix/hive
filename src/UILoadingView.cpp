@@ -1,11 +1,15 @@
 #include "UILoadingView.h"
 
 #include "AssetLoader.h"
-#include "UIImageView.h"
 #include "Graphics.h"
-#include "Sprite.h"
-#include "UIManager.h"
 #include "Logger.h"
+#include "UIImageView.h"
+#include "UIManager.h"
+#include "UIView.h"
+
+#include <directxtk/SimpleMath.h>
+#include <fmt/core.h>
+#include <string>
 
 UILoadingView::UILoadingView() :
 	m_loadingBackground(nullptr)
@@ -26,8 +30,8 @@ void UILoadingView::Init(std::string name)
 	m_loadingBackground = new UIImageView();
 	m_loadingBackground->Init("Background Image");
 	m_loadingBackground->GetSprite()->Init(AssetLoader::GetTexture("t_loadingScreen_bg"));
-	m_loadingBackground->GetSprite()->SetOrigin(Vector2::Zero);
-	m_loadingBackground->GetSprite()->SetDepth(0.0f);
+	m_loadingBackground->SetOrigin(Vector2::Zero);
+	m_loadingBackground->SetDepth(0.9f);
 
 	m_assignedStates.push_back("Loading");
 

@@ -99,9 +99,6 @@ void GameplayGameState::OnExit()
 
 void GameplayGameState::LoadAssets()
 {
-	Timer timer;
-	unsigned __int64 startTime = timer.GetTicks();
-
 	//SoundManager::AddSound(L"assets\\sounds\\punch_001.wav");
 	//SoundManager::AddSound(L"assets\\sounds\\punch_003.wav");
 	//SoundManager::AddSound(L"assets\\sounds\\punch_004.wav");
@@ -188,12 +185,6 @@ void GameplayGameState::LoadAssets()
 	m_musicSoundSource->SetSound(SoundManager::GetSound(musicTitle));*/
 
 	m_running = true;
-
-	unsigned __int64 endTime = timer.GetTicks();
-	unsigned __int64 timeDiff = endTime - startTime;
-	float loadingDuration = (float)timeDiff / (float)timer.GetFrequency();
-
-	Logger::LogInfo(fmt::format("Gameplay Loading took {}s", loadingDuration));
 }
 
 void GameplayGameState::DeleteAssets()
@@ -400,8 +391,6 @@ void GameplayGameState::ProcessInput()
 void GameplayGameState::Update(float deltaTime)
 {
 	UIManager::Update(deltaTime);
-
-	if(UIManager::IsFading()) return;
 
 	m_deltaTime = deltaTime;
 	m_sceneStateMachine->Update();

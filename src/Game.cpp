@@ -75,9 +75,6 @@ void Game::Init(Window* window, Graphics* graphics)
 
 void Game::Run()
 {
-	const float TargetFramerate = 120.0f;
-	const float TargetFrameDuration = 1.0f / TargetFramerate;
-
 	unsigned __int64 timeNow = m_timer.GetTicks();
 	unsigned __int64 timeDiff = timeNow - m_lastTime;
 	m_lastTime = timeNow;

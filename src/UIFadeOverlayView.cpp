@@ -3,7 +3,14 @@
 #include "AssetLoader.h"
 #include "GlobalConstants.h"
 #include "Logger.h"
+#include "Sprite.h"
 #include "UISprite.h"
+
+#include <cmath>
+#include <directxtk/SimpleMath.h>
+#include <fmt/core.h>
+#include <string>
+#include <Windows.h>
 
 using namespace GlobalConstants;
 

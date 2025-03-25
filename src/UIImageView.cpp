@@ -3,6 +3,9 @@
 #include "Graphics.h"
 #include "UISprite.h"
 
+#include <directxtk/SimpleMath.h>
+#include <string>
+
 UIImageView::UIImageView() :
 	m_uiSprite(nullptr)
 {

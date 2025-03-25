@@ -4,6 +4,7 @@
 #include "GameStateManager.h"
 #include "LoadingGameState.h"
 #include "UIManager.h"
+#include "UIView.h"
 
 FadeTransitionGameState::FadeTransitionGameState() :
 	m_graphics(nullptr),

@@ -1,14 +1,18 @@
 #include "UITitleScreenView.h"
 
-#include "UISpriteText.h"
-#include "UIImageView.h"
-#include "Sprite.h"
-#include "UIManager.h"
-#include "Logger.h"
-#include "UIConfig.h"
 #include "AssetLoader.h"
 #include "GlobalConstants.h"
-#include "Sprite.h"
+#include "Logger.h"
+#include "UIConfig.h"
+#include "UIImageView.h"
+#include "UIManager.h"
+#include "UISpriteText.h"
+#include "UIView.h"
+
+#include <cmath>
+#include <directxtk/SimpleMath.h>
+#include <fmt/core.h>
+#include <string>
 
 using namespace GlobalConstants;
 
@@ -34,13 +38,14 @@ void UITitleScreenView::Init(std::string name)
 	m_startGameText->SetPosition(StartGameTextStartPosition);
 	m_startGameText->SetActive(true);
 	m_startGameText->SetAlignment(UISpriteText::Alignments::Centre);
+	m_startGameText->SetDepth(0.5f);
 
 	m_logoImage = new UIImageView();
 	m_logoImage->Init("Title Logo");
 	m_logoImage->GetSprite()->Init(AssetLoader::GetTexture("t_title_logo"));
 	m_logoImage->SetPosition(LogoImageStartPosition);
 	m_logoImage->SetOrigin(Vector2((float)m_logoImage->GetSprite()->GetWidth(), 0.0f));
-	m_logoImage->SetDepth(0.9f);
+	m_logoImage->SetDepth(0.5f);
 	m_logoImage->TransitionOut(false);
 
 	UIManager::RegisterUIView(this);
@@ -60,20 +65,20 @@ void UITitleScreenView::Update(float deltaTime)
 
 	switch (m_currentViewState)
 	{
-	case UIView::ViewStates::NotVisible:
+	case ViewStates::NotVisible:
 		m_startGameText->SetActive(false);
 		m_logoImage->SetActive(false);
 		m_isActive = false;
 		m_isAnimating = false;
 		break;
-	case UIView::ViewStates::AnimatingIn:
+	case ViewStates::AnimatingIn:
 		m_currentViewState = ViewStates::Visible;
 		m_startGameText->SetActive(true);
 		m_logoImage->SetActive(true);
 		break;
-	case UIView::ViewStates::Visible:
+	case ViewStates::Visible:
 		break;
-	case UIView::ViewStates::AnimatingOut:
+	case ViewStates::AnimatingOut:
 		DoTransition(deltaTime);
 		break;
 	default:
@@ -89,7 +94,7 @@ void UITitleScreenView::DoTransition(float deltaTime)
 		float logoImageXPos = (float)(std::lerp(LogoImageStartPosition.x, GameWidth + m_logoImage->GetSprite()->GetWidth(), 1 - t));
 		float lerpedAlpha = std::lerp(1.0f, 0.0f, 1 - t);
 		Color colour = m_startGameText->GetColour();
-		colour.A(lerpedAlpha);		
+		colour.A(lerpedAlpha);
 
 		m_logoImage->SetPosition(Vector2(logoImageXPos, LogoImageStartPosition.y));
 		m_startGameText->SetColour(colour);
@@ -106,14 +111,9 @@ void UITitleScreenView::TransitionIn(bool isAnimating)
 
 	m_isAnimating = isAnimating;
 	m_isActive = true;
-
-	if(isAnimating)
-	{
-		m_currentViewState = UIView::ViewStates::AnimatingIn;
-		return;
-	}
-
-	m_currentViewState = UIView::ViewStates::Visible;
+	m_currentViewState = ViewStates::Visible;
+	m_startGameText->SetActive(true);
+	m_logoImage->SetActive(true);
 }
 
 void UITitleScreenView::TransitionOut(bool isAnimating)
@@ -123,11 +123,11 @@ void UITitleScreenView::TransitionOut(bool isAnimating)
 	if (isAnimating)
 	{
 		m_transitionTimer = TransitionDuration;
-		m_currentViewState = UIView::ViewStates::AnimatingOut;
+		m_currentViewState = ViewStates::AnimatingOut;
 		return;
 	}
 
-	m_currentViewState = UIView::ViewStates::NotVisible;
+	m_currentViewState = ViewStates::NotVisible;
 	m_startGameText->SetActive(false);
 	m_isActive = false;
 }

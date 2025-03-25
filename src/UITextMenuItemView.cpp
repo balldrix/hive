@@ -26,6 +26,7 @@ void UITextMenuItemView::Init(std::string name)
 	m_uiSpriteText->SetAlignment(UISpriteText::Alignments::Left);
 	m_uiSpriteText->SetActive(false);
 	m_uiSpriteText->SetColour(m_unselectedTextColour);
+	m_uiSpriteText->SetDepth(0.5f);
 	m_selectionState = SelectionStates::UnSelected;
 	m_isActive = false;
 }

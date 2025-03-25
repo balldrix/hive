@@ -14,6 +14,7 @@ bool LoadingGameState::s_isLoadingToMainGameplay = false;
 LoadingGameState::LoadingGameState() :
 	m_graphics(nullptr),
 	m_timer(0.0f),
+	m_isDone(false),
 	GameState("Loading")
 {
 	s_instance = this;
@@ -33,7 +34,7 @@ LoadingGameState::~LoadingGameState()
 void LoadingGameState::OnEntry()
 {
 	m_timer = 1.0f; // fake loading time
-	
+	m_isDone = false;
 
 	if(!s_isLoadingToMainGameplay)
 	{
@@ -62,13 +63,21 @@ void LoadingGameState::Update(float deltaTime)
 		AssetLoader::LoadAllPrewarmedAssets();
 		return;
 	}
-	
+
 	UIManager::Update(deltaTime);
 
 	m_timer -= deltaTime;
 
-	if(m_timer <= 0.0f)
-		m_gameStateManager->SwitchState("FadeTransition");
+	if(m_timer > 0.0f || UIManager::IsFading()) return;
+	
+	if(!m_isDone)
+	{
+		m_gameStateManager->GetState(s_targetGameState->GetStateName())->LoadAssets();
+		m_isDone = true;
+		return;
+	}
+
+	m_gameStateManager->SwitchState("FadeTransition");
 }
 
 void LoadingGameState::Render()
@@ -92,7 +101,6 @@ void LoadingGameState::OnExit()
 	{
 		UIManager::DestroyUIFrontEndView();
 		UIManager::CreateUIMainView();
-		m_gameStateManager->GetState(s_targetGameState->GetStateName())->LoadAssets();
 	}
 }
 

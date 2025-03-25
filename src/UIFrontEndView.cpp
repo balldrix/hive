@@ -110,6 +110,7 @@ void UIFrontEndView::TransitionIn(bool isAnimating)
 	Logger::LogInfo(fmt::format("Transition In: UI Front End View {} animation.", isAnimating ? "with" : "without"));
 
 	m_currentViewState = UIView::ViewStates::AnimatingIn;
+	m_background->SetActive(true);
 	m_isActive = true;
 }
 
