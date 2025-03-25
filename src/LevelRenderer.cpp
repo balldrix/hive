@@ -35,7 +35,8 @@ void LevelRenderer::Init(Graphics* graphics, Camera* camera)
 {
 	m_camera = camera;
 
-	m_tilemapData = LoadTilemap("assets\\data\\tilemaps\\tm_trailer-level-showcase.json");
+	//m_tilemapData = LoadTilemap("assets\\data\\tilemaps\\tm_trailer-level-showcase.json");
+	m_tilemapData = LoadTilemap("assets\\data\\tilemaps\\tm_lift.json");
 	m_tileSetSprite = new Sprite();
 
 	m_tileSetSprite->Init(AssetLoader::GetTexture("ts_master"));
