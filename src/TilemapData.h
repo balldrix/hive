@@ -1,11 +1,10 @@
 #pragma once
 
 #include "AnimationData.h"
-
 #include <string>
 #include <vector>
 
-namespace 
+namespace
 {
 	struct TilemapLayer
 	{
@@ -27,61 +26,62 @@ namespace
 		unsigned int width = {};
 	};
 
+	void ParseLayers(TilemapData& t, const json& layers)
+	{
+		for(auto layerIt = layers.begin(); layerIt != layers.end(); ++layerIt)
+		{
+			json layer = layerIt.value();
+
+			// If it has "layers", it's a group; process it recursively
+			if(layer.contains("layers"))
+			{
+				ParseLayers(t, layer["layers"]);
+				continue;
+			}
+
+			// Ensure the layer contains "data" before processing
+			if(!layer.contains("data")) continue;
+
+			TilemapLayer tilemapLayer;
+			for(auto& dataValue : layer["data"])
+			{
+				tilemapLayer.data.push_back(dataValue.get<unsigned int>());
+			}
+
+			tilemapLayer.height = layer["height"];
+			tilemapLayer.id = layer["id"];
+			tilemapLayer.name = layer["name"];
+			tilemapLayer.width = layer["width"];
+			tilemapLayer.parallaxMod = layer.value("parallaxx", 1.0f);
+			tilemapLayer.depth = 0.0f;
+
+			if(layer.contains("properties"))
+			{
+				json customProperties = layer["properties"];
+				for(auto& property : customProperties)
+				{
+					if(property.contains("name") && property["name"] == "depth" && property.contains("value"))
+					{
+						tilemapLayer.depth = property["value"];
+						break;
+					}
+				}
+			}
+
+			t.layers.push_back(tilemapLayer);
+		}
+	}
+
 	void from_json(const json& j, TilemapData& t)
 	{
 		t.height = j.at("height").get<unsigned int>();
-		json groups = j["layers"];
-
-		for(auto groupIt = groups.begin(); groupIt != groups.end(); ++groupIt)
-		{
-			json layers = groupIt.value()["layers"];
-
-			for(auto layerIt = layers.begin(); layerIt != layers.end(); ++layerIt)
-			{
-				json layer = layerIt.value();
-				json data = layer["data"];
-
-				TilemapLayer tilemapLayer;
-
-				for(auto dataIt = data.begin(); dataIt != data.end(); ++dataIt)
-				{
-					tilemapLayer.data.push_back(dataIt.value());
-				}
-
-				tilemapLayer.height = layer["height"];
-				tilemapLayer.id = layer["id"];
-				tilemapLayer.name = layer["name"];
-				tilemapLayer.width = layer["width"];
-				tilemapLayer.parallaxMod = 1;
-
-				if(layer.contains("parallaxx"))
-				{
-					tilemapLayer.parallaxMod = layer["parallaxx"];
-				}
-
-				tilemapLayer.depth = 0.0f;
-
-				if(layer.contains("properties"))
-				{
-					json customProperties = layer["properties"];
-
-					for(auto propertyIt = customProperties.begin(); propertyIt != customProperties.end(); ++propertyIt)
-					{
-						if(propertyIt.value().contains("name") && propertyIt.value()["name"] == "depth" &&
-						   propertyIt.value().contains("value"))
-						{
-							tilemapLayer.depth = propertyIt.value()["value"];
-							break;
-						}
-					}
-				}
-
-				t.layers.push_back(tilemapLayer);
-			}
-		}
-
 		t.tileheight = j.at("tileheight").get<unsigned int>();
 		t.tilewidth = j.at("tilewidth").get<unsigned int>();
 		t.width = j.at("width").get<unsigned int>();
+
+		if(j.contains("layers"))
+		{
+			ParseLayers(t, j["layers"]);
+		}
 	}
 }
