@@ -68,7 +68,26 @@ void LevelRenderer::Update(float deltaTime)
 	for(auto it = m_tilemapData.layers.begin(); it != m_tilemapData.layers.end(); ++it)
 	{
 		it->scrollOffset.x += it->scrollSpeedX * deltaTime;
+
+		if(it->scrollOffset.x > GameWidth)
+		{
+			it->scrollOffset.x -= GameWidth;
+		}
+		else if(it->scrollOffset.x < 0)
+		{
+			it->scrollOffset.x += GameWidth;
+		}
+		
 		it->scrollOffset.y += it->scrollSpeedY * deltaTime;
+
+		if(it->scrollOffset.y > GameHeight)
+		{
+			it->scrollOffset.y -= GameHeight;
+		}
+		else if(it->scrollOffset.y < 0) 
+		{
+			it->scrollOffset.y += GameHeight;
+		}
 	}
 }
 

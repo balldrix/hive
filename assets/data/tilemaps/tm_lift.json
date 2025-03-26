@@ -31,9 +31,14 @@
                  "value":0
                 }, 
                 {
-                 "name":"scrollSpeed",
+                 "name":"scrollSpeedX",
                  "type":"float",
-                 "value":-8
+                 "value":0
+                }, 
+                {
+                 "name":"scrollSpeedY",
+                 "type":"float",
+                 "value":-16
                 }],
          "type":"tilelayer",
          "visible":true,

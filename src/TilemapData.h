@@ -71,19 +71,21 @@ namespace
 					if(property.contains("name") && property["name"] == "depth" && property.contains("value"))
 					{
 						tilemapLayer.depth = property["value"];
-						break;
+						continue;
+					}
+
+					if(property.contains("name") && property["name"] == "scrollSpeedX" && property.contains("value"))
+					{
+						tilemapLayer.scrollSpeedX = property["value"];
+						continue;
+					}
+
+					if(property.contains("name") && property["name"] == "scrollSpeedY" && property.contains("value"))
+					{
+						tilemapLayer.scrollSpeedY = property["value"];
+						continue;
 					}
 				}
-			}
-
-			if(layer.contains("scrollSpeedX"))
-			{
-				tilemapLayer.scrollSpeedX = layer["scrollSpeedX"];
-			}
-
-			if(layer.contains("scrollSpeedY"))
-			{
-				tilemapLayer.scrollSpeedY = layer["scrollSpeedY"];
 			}
 
 			t.layers.push_back(tilemapLayer);
