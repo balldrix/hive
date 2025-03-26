@@ -61,8 +61,6 @@ namespace
 			tilemapLayer.width = layer["width"];
 			tilemapLayer.parallaxMod = layer.value("parallaxx", 1.0f);
 			tilemapLayer.depth = 0.0f;
-			tilemapLayer.scrollSpeedX = 0.0f;
-			tilemapLayer.scrollSpeedY = -12.0f;
 			tilemapLayer.scrollOffset = Vector2::Zero;
 
 			if(layer.contains("properties"))
@@ -76,6 +74,16 @@ namespace
 						break;
 					}
 				}
+			}
+
+			if(layer.contains("scrollSpeedX"))
+			{
+				tilemapLayer.scrollSpeedX = layer["scrollSpeedX"];
+			}
+
+			if(layer.contains("scrollSpeedY"))
+			{
+				tilemapLayer.scrollSpeedY = layer["scrollSpeedY"];
 			}
 
 			t.layers.push_back(tilemapLayer);
