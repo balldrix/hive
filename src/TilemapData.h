@@ -1,8 +1,12 @@
 #pragma once
 
 #include "AnimationData.h"
+
+#include <directxtk/SimpleMath.h>
 #include <string>
 #include <vector>
+
+using namespace DirectX::SimpleMath;
 
 namespace
 {
@@ -15,6 +19,9 @@ namespace
 		unsigned int width = {};
 		float parallaxMod = {};
 		float depth = {};
+		float scrollSpeedX = {};
+		float scrollSpeedY = {};
+		Vector2 scrollOffset;
 	};
 
 	struct TilemapData
@@ -54,6 +61,9 @@ namespace
 			tilemapLayer.width = layer["width"];
 			tilemapLayer.parallaxMod = layer.value("parallaxx", 1.0f);
 			tilemapLayer.depth = 0.0f;
+			tilemapLayer.scrollSpeedX = 0.0f;
+			tilemapLayer.scrollSpeedY = -12.0f;
+			tilemapLayer.scrollOffset = Vector2::Zero;
 
 			if(layer.contains("properties"))
 			{

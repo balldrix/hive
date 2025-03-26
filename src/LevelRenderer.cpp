@@ -1,5 +1,6 @@
 #include "LevelRenderer.h"
 
+#include "AnimationData.h"
 #include "AssetLoader.h"
 #include "Camera.h"
 #include "GlobalConstants.h"
@@ -11,7 +12,9 @@
 #include <directxtk/SimpleMath.h>
 #include <fmt/core.h>
 #include <fstream>
+#include <iosfwd>
 #include <string>
+#include <Windows.h>
 
 using namespace GlobalConstants;
 
@@ -52,11 +55,20 @@ void LevelRenderer::Init(Graphics* graphics, Camera* camera)
 void LevelRenderer::Render(Graphics* graphics)
 {
 	auto numLayers = m_tilemapData.layers.size();
-	auto layers = m_tilemapData.layers;
+	auto &layers = m_tilemapData.layers;
 
 	for(auto i = layers.begin(); i != layers.end(); ++i)
 	{
 		RenderLayer(graphics, *i);
+	}
+}
+
+void LevelRenderer::Update(float deltaTime)
+{
+	for(auto it = m_tilemapData.layers.begin(); it != m_tilemapData.layers.end(); ++it)
+	{
+		it->scrollOffset.x += it->scrollSpeedX * deltaTime;
+		it->scrollOffset.y += it->scrollSpeedY * deltaTime;
 	}
 }
 
@@ -92,12 +104,12 @@ void LevelRenderer::RenderLayer(Graphics* graphics, const TilemapLayer& layer)
 		for(size_t y = 0; y < tileMapHeight; y++)
 		{
 			auto tileId = layer.data[y * tileMapWidth + x] - 1;
-			RenderTile(graphics, tileId, (unsigned int)x, (unsigned int)y, parallaxMod, layer.depth);
+			RenderTile(graphics, tileId, (unsigned int)x, (unsigned int)y, parallaxMod, layer.depth, layer.scrollOffset);
 		}
 	}
 }
 
-void LevelRenderer::RenderTile(Graphics* graphics, unsigned int tileId, unsigned int posX, unsigned int posY, float parallaxMod, float depth)
+void LevelRenderer::RenderTile(Graphics* graphics, unsigned int tileId, unsigned int posX, unsigned int posY, float parallaxMod, float depth, const Vector2& scrollOffset)
 {
 	RECT rect {};
 	rect.left = (tileId % m_tileSetWidth) * m_tileWidth;
@@ -106,6 +118,8 @@ void LevelRenderer::RenderTile(Graphics* graphics, unsigned int tileId, unsigned
 	rect.bottom = rect.top + m_tileHeight;
 
 	Vector2 spritePosition = { (float)(posX * m_tileWidth), (float)(posY * m_tileHeight) };
+	spritePosition.x += scrollOffset.x;
+	spritePosition.y += scrollOffset.y;
 	spritePosition -= m_camera->GetPosition() * parallaxMod;
 
 	m_tileSetSprite->SetSourceRect(rect);

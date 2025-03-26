@@ -408,6 +408,7 @@ void GameplayGameState::CheckForEncounter()
 void GameplayGameState::Tick(float deltaTime)
 {
 	m_camera->Update(deltaTime);
+	m_levelRenderer->Update(deltaTime);
 
 	if(m_stopTimer > 0)
 	{

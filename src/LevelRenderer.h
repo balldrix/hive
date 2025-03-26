@@ -14,6 +14,7 @@ public:
 
 	void Init(Graphics* graphics, Camera* camera);
 	void Render(Graphics* graphics);
+	void Update(float deltaTime);
 
 	void DeleteAll();
 
@@ -22,7 +23,7 @@ public:
 private:
 	TilemapData LoadTilemap(std::string path);
 	void RenderLayer(Graphics* graphics, const TilemapLayer& layer);
-	void RenderTile(Graphics* graphics, unsigned int tileId, unsigned int x, unsigned int y, float parallaxMod, float depth);
+	void RenderTile(Graphics* graphics, unsigned int tileId, unsigned int x, unsigned int y, float parallaxMod, float depth, const Vector2& scrollOffset);
 
 	Camera* m_camera;
 	TilemapData m_tilemapData;
