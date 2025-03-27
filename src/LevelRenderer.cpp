@@ -165,8 +165,7 @@ void LevelRenderer::RenderTile(Graphics* graphics, unsigned int tileId, float po
 	rect.top = (tileId / m_tileSetWidth) * m_tileHeight;
 	rect.bottom = rect.top + m_tileHeight;
 
-	Vector2 spritePosition = { posX, posY };
-	spritePosition -= m_camera->GetPosition() * parallaxMod;
+	Vector2 spritePosition = { posX - m_camera->GetPosition().x * parallaxMod, posY - m_camera->GetPosition().y };
 
 	m_tileSetSprite->SetSourceRect(rect);
 	m_tileSetSprite->SetPosition(spritePosition);

@@ -15,6 +15,7 @@ const UCHAR	ALT_KEY = VK_MENU;
 const UCHAR ENTER_KEY = VK_RETURN;
 const UCHAR F4_KEY = VK_F4;
 const UCHAR F5_KEY = VK_F5;
+const UCHAR F9_KEY = VK_F9;
 
 // rename consts 
 const UCHAR PLAYER_UP_KEY = VK_UP;
