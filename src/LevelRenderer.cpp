@@ -1,3 +1,5 @@
+#define NOMINMAX
+
 #include "LevelRenderer.h"
 
 #include "AnimationData.h"
@@ -9,12 +11,14 @@
 #include "Sprite.h"
 #include "TilemapData.h"
 
+#include <algorithm>
 #include <cmath>
 #include <directxtk/SimpleMath.h>
 #include <fmt/core.h>
 #include <fstream>
 #include <iosfwd>
 #include <string>
+#include <utility>
 #include <Windows.h>
 
 using namespace GlobalConstants;
@@ -124,26 +128,34 @@ void LevelRenderer::RenderLayer(Graphics* graphics, const TilemapLayer& layer)
 	auto parallaxMod = layer.parallaxMod;
 	auto scrollOffset = layer.scrollOffset;
 
-	for(size_t x = 0; x < GameWidth / m_tileWidth + 2; x++)
+	Vector2 cameraPos = m_camera->GetPosition() * parallaxMod;
+
+	int startX = std::max(0, (int)(cameraPos.x / m_tileWidth) - 1);
+	int endX = std::min(tileMapWidth, startX + (GameWidth / m_tileWidth) + 2);
+
+	int startY = std::max(0, (int)(cameraPos.y / m_tileHeight) - 1);
+	int endY = std::min(tileMapHeight, startY + (GameHeight / m_tileHeight) + 2);
+
+	for(int x = startX; x < endX; x++)
 	{
 		int wrappedX = (x + (int)(scrollOffset.x / m_tileWidth)) % tileMapWidth;
 		if(wrappedX < 0) wrappedX += tileMapWidth;
 
-		float tileXPos = x * m_tileWidth - fmod(scrollOffset.x, m_tileWidth);
+		float tileXPos = x * m_tileWidth - (float)fmod(scrollOffset.x, m_tileWidth);
 
-		for(size_t y = 0; y < GameHeight / m_tileHeight + 2; y++)
+		for(int y = startY; y < endY; y++)
 		{
 			int wrappedY = (y + (int)(scrollOffset.y / m_tileHeight)) % tileMapHeight;
 			if(wrappedY < 0) wrappedY += tileMapHeight;
 
-			float tileYPos = y * m_tileHeight - fmod(scrollOffset.y, m_tileHeight);
+			float tileYPos = y * m_tileHeight - (float)fmod(scrollOffset.y, m_tileHeight);
 
 			auto tileId = layer.data[wrappedY * tileMapWidth + wrappedX] - 1;
 			RenderTile(graphics, tileId, tileXPos, tileYPos, parallaxMod, layer.depth);
 		}
 	}
-
 }
+
 
 void LevelRenderer::RenderTile(Graphics* graphics, unsigned int tileId, float posX, float posY, float parallaxMod, float depth)
 {
