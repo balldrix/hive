@@ -126,25 +126,23 @@ void LevelRenderer::RenderLayer(Graphics* graphics, const TilemapLayer& layer)
 
 	for(size_t x = 0; x < GameWidth / m_tileWidth + 2; x++)
 	{
-		int wrappedX = (x - (int)(scrollOffset.x / m_tileWidth)) % tileMapWidth;
-		
+		int wrappedX = (x + (int)(scrollOffset.x / m_tileWidth)) % tileMapWidth;
 		if(wrappedX < 0) wrappedX += tileMapWidth;
-		if(wrappedX >= tileMapWidth) wrappedX -= tileMapWidth;
-		
-		float tileXPos = x * m_tileWidth - scrollOffset.x;
+
+		float tileXPos = x * m_tileWidth - fmod(scrollOffset.x, m_tileWidth);
 
 		for(size_t y = 0; y < GameHeight / m_tileHeight + 2; y++)
 		{
-			int wrappedY = (y - (int)(scrollOffset.y / m_tileHeight)) % tileMapHeight;
+			int wrappedY = (y + (int)(scrollOffset.y / m_tileHeight)) % tileMapHeight;
 			if(wrappedY < 0) wrappedY += tileMapHeight;
-			if(wrappedY >= tileMapHeight) wrappedY -= tileMapHeight;
 
-			float tileYPos = y * m_tileHeight - scrollOffset.y;
+			float tileYPos = y * m_tileHeight - fmod(scrollOffset.y, m_tileHeight);
 
 			auto tileId = layer.data[wrappedY * tileMapWidth + wrappedX] - 1;
 			RenderTile(graphics, tileId, tileXPos, tileYPos, parallaxMod, layer.depth);
 		}
 	}
+
 }
 
 void LevelRenderer::RenderTile(Graphics* graphics, unsigned int tileId, float posX, float posY, float parallaxMod, float depth)

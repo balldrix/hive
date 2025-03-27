@@ -856,6 +856,9 @@
     <None Include="assets\data\tilemaps\tm_trailer-level-showcase.json">
       <Filter>Assets\Data\Tilemaps</Filter>
     </None>
+    <None Include="assets\data\tilemaps\tm_lift.json">
+      <Filter>Assets\Data\Tilemaps</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\data\encounters\encounter_positions.txt">

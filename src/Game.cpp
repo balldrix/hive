@@ -24,7 +24,7 @@
 
 using namespace GlobalConstants;
 
-Game::Game() noexcept : 
+Game::Game() noexcept :
 	m_window(nullptr),
 	m_graphics(nullptr),
 	m_input(nullptr),

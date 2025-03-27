@@ -41,7 +41,7 @@
                 {
                  "name":"scrollSpeedY",
                  "type":"float",
-                 "value":-16
+                 "value":16
                 }],
          "type":"tilelayer",
          "visible":true,
