@@ -2,6 +2,9 @@
 
 #include "TilemapData.h"
 
+#include <directxtk/SimpleMath.h>
+#include <string>
+
 class Camera;
 class Graphics;
 class Sprite;
@@ -23,7 +26,7 @@ public:
 private:
 	TilemapData LoadTilemap(std::string path);
 	void RenderLayer(Graphics* graphics, const TilemapLayer& layer);
-	void RenderTile(Graphics* graphics, unsigned int tileId, unsigned int x, unsigned int y, float parallaxMod, float depth, const Vector2& scrollOffset);
+	void RenderTile(Graphics* graphics, unsigned int tileId, float x, float y, float parallaxMod, float depth);
 
 	Camera* m_camera;
 	TilemapData m_tilemapData;

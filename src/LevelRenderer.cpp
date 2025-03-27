@@ -9,6 +9,7 @@
 #include "Sprite.h"
 #include "TilemapData.h"
 
+#include <cmath>
 #include <directxtk/SimpleMath.h>
 #include <fmt/core.h>
 #include <fstream>
@@ -50,6 +51,8 @@ void LevelRenderer::Init(Graphics* graphics, Camera* camera)
 	m_tileSetSpriteWidth = m_tileSetSprite->GetWidth();
 	m_tileSetSpriteHeight = m_tileSetSprite->GetHeight();
 	m_tileSetWidth = m_tileSetSpriteWidth / m_tileWidth;
+
+	Logger::LogInfo("Initialised LevelRenderer");
 }
 
 void LevelRenderer::Render(Graphics* graphics)
@@ -67,26 +70,32 @@ void LevelRenderer::Update(float deltaTime)
 {
 	for(auto it = m_tilemapData.layers.begin(); it != m_tilemapData.layers.end(); ++it)
 	{
-		it->scrollOffset.x += it->scrollSpeedX * deltaTime;
+		if(std::abs(it->scrollSpeedX) > 0)
+		{
+			it->scrollOffset.x += it->scrollSpeedX * deltaTime;
 
-		if(it->scrollOffset.x > GameWidth)
-		{
-			it->scrollOffset.x -= GameWidth;
-		}
-		else if(it->scrollOffset.x < 0)
-		{
-			it->scrollOffset.x += GameWidth;
+			if(it->scrollOffset.x > m_tileWidth * it->width)
+			{
+				it->scrollOffset.x -= m_tileWidth * it->width;
+			}
+			else if(it->scrollOffset.x < 0)
+			{
+				it->scrollOffset.x += m_tileWidth * it->width;
+			}
 		}
 		
-		it->scrollOffset.y += it->scrollSpeedY * deltaTime;
+		if(std::abs(it->scrollSpeedY) > 0)
+		{
+			it->scrollOffset.y += it->scrollSpeedY * deltaTime;
 
-		if(it->scrollOffset.y > GameHeight)
-		{
-			it->scrollOffset.y -= GameHeight;
-		}
-		else if(it->scrollOffset.y < 0) 
-		{
-			it->scrollOffset.y += GameHeight;
+			if(it->scrollOffset.y > m_tileWidth * it->height)
+			{
+				it->scrollOffset.y -= m_tileWidth * it->height;
+			}
+			else if(it->scrollOffset.y < 0)
+			{
+				it->scrollOffset.y += m_tileWidth * it->height;
+			}
 		}
 	}
 }
@@ -113,22 +122,32 @@ void LevelRenderer::RenderLayer(Graphics* graphics, const TilemapLayer& layer)
 	auto tileMapWidth = m_tilemapData.width;
 	auto tileMapHeight = m_tilemapData.height;
 	auto parallaxMod = layer.parallaxMod;
+	auto scrollOffset = layer.scrollOffset;
 
-	for(size_t x = 0; x < tileMapWidth; x++)
+	for(size_t x = 0; x < GameWidth / m_tileWidth + 2; x++)
 	{
-		auto tileX = x * m_tileWidth;
-		if(tileX < m_camera->GetPosition().x * parallaxMod - m_tileWidth) continue;
-		if(tileX > m_camera->GetPosition().x * parallaxMod + GameWidth) continue;
+		int wrappedX = (x - (int)(scrollOffset.x / m_tileWidth)) % tileMapWidth;
+		
+		if(wrappedX < 0) wrappedX += tileMapWidth;
+		if(wrappedX >= tileMapWidth) wrappedX -= tileMapWidth;
+		
+		float tileXPos = x * m_tileWidth - scrollOffset.x;
 
-		for(size_t y = 0; y < tileMapHeight; y++)
+		for(size_t y = 0; y < GameHeight / m_tileHeight + 2; y++)
 		{
-			auto tileId = layer.data[y * tileMapWidth + x] - 1;
-			RenderTile(graphics, tileId, (unsigned int)x, (unsigned int)y, parallaxMod, layer.depth, layer.scrollOffset);
+			int wrappedY = (y - (int)(scrollOffset.y / m_tileHeight)) % tileMapHeight;
+			if(wrappedY < 0) wrappedY += tileMapHeight;
+			if(wrappedY >= tileMapHeight) wrappedY -= tileMapHeight;
+
+			float tileYPos = y * m_tileHeight - scrollOffset.y;
+
+			auto tileId = layer.data[wrappedY * tileMapWidth + wrappedX] - 1;
+			RenderTile(graphics, tileId, tileXPos, tileYPos, parallaxMod, layer.depth);
 		}
 	}
 }
 
-void LevelRenderer::RenderTile(Graphics* graphics, unsigned int tileId, unsigned int posX, unsigned int posY, float parallaxMod, float depth, const Vector2& scrollOffset)
+void LevelRenderer::RenderTile(Graphics* graphics, unsigned int tileId, float posX, float posY, float parallaxMod, float depth)
 {
 	RECT rect {};
 	rect.left = (tileId % m_tileSetWidth) * m_tileWidth;
@@ -136,9 +155,7 @@ void LevelRenderer::RenderTile(Graphics* graphics, unsigned int tileId, unsigned
 	rect.top = (tileId / m_tileSetWidth) * m_tileHeight;
 	rect.bottom = rect.top + m_tileHeight;
 
-	Vector2 spritePosition = { (float)(posX * m_tileWidth), (float)(posY * m_tileHeight) };
-	spritePosition.x += scrollOffset.x;
-	spritePosition.y += scrollOffset.y;
+	Vector2 spritePosition = { posX, posY };
 	spritePosition -= m_camera->GetPosition() * parallaxMod;
 
 	m_tileSetSprite->SetSourceRect(rect);
