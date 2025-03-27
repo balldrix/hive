@@ -258,6 +258,11 @@ void GameplayGameState::ProcessInput()
 		TogglePlayerHud();
 	}
 
+	if(m_input->WasKeyPressed(F9_KEY))
+	{
+		m_camera->StartShake(3.0f, 10.0f);
+	}
+
 #endif
 
 	if(m_input->IsKeyDown(PLAYER_UP_KEY) || gamePadState.IsDPadUpPressed() || gamePadState.IsLeftThumbStickUp() &&
