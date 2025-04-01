@@ -14,7 +14,4 @@ struct EnemyData
 	float					attackRange = {};
 	float					chargeRange = {};
 	float					chargeSpeed = {};
-	int						encounterIndex = {};
-
-	EnemyData() = default;
 };

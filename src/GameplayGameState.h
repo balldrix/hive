@@ -1,9 +1,9 @@
 #pragma once
 
+#include "EnemySpawner.h"
 #include "GameState.h"
 #include "ParticleSystem.h"
 #include "Player.h"
-#include "StateMachine.h"
 
 #include <directxtk/SimpleMath.h>
 
@@ -18,9 +18,6 @@ class Animator;
 class HitBoxManager;
 class NPCManager;
 class InGameHudManager;
-template<class T> class StateMachine;
-class EncounterHandler;
-class TravellingHandler;
 class GameOverScreenController;
 class SoundSource;
 class LevelRenderer;
@@ -33,7 +30,6 @@ public:
 	GameplayGameState(GameStateManager* gameStateManager);
 	virtual ~GameplayGameState();
 
-	void CheckForEncounter();
 	float GetDeltaTime() const { return m_deltaTime; }
 
 	void OnEntry() override;
@@ -50,10 +46,7 @@ public:
 
 	Camera* GetCamera() const { return m_camera; }
 	Player* GetPlayer() const { return m_player; }
-	TravellingHandler* GetTravellingHandler() const { return m_travellingHandler; }
 	NPCManager* GetNPCManager() const { return m_NPCManager; }
-	EncounterHandler* GetEncounterHandler() const { return m_encounterHandler; }
-	StateMachine<GameplayGameState>* GetSceneStateMachine() const { return m_sceneStateMachine; }
 	LevelRenderer* GetLevelRenderer() const { return m_levelRenderer; }
 
 private:
@@ -72,10 +65,6 @@ private:
 	Player* m_player;
 
 	LevelRenderer* m_levelRenderer;
-	StateMachine<GameplayGameState>* m_sceneStateMachine;
-	EncounterHandler* m_encounterHandler;
-	TravellingHandler* m_travellingHandler;
-
 	SoundSource* m_musicSoundSource;
 
 	bool m_canAttack;
@@ -93,4 +82,5 @@ private:
 	ImpactFx* m_impactFx;
 	ParticleSystem* m_particleSystem;
 	ParticleData m_particleData;
+	EnemySpawner m_enemySpawner;
 };

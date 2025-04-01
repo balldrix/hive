@@ -13,9 +13,6 @@
     <ClCompile Include="src\Enemy.cpp">
       <Filter>Game\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="src\EnemyDataContainer.cpp">
-      <Filter>Game\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="src\RunningEnemy.cpp">
       <Filter>Game\Enemy</Filter>
     </ClCompile>
@@ -57,15 +54,6 @@
     </ClCompile>
     <ClCompile Include="src\GameplayGameState.cpp">
       <Filter>Game\States</Filter>
-    </ClCompile>
-    <ClCompile Include="src\TravellingSceneState.cpp">
-      <Filter>Game\Scenes\States</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameOverSceneState.cpp">
-      <Filter>Game\Scenes\States</Filter>
-    </ClCompile>
-    <ClCompile Include="src\EncounterSceneState.cpp">
-      <Filter>Game\Scenes\States</Filter>
     </ClCompile>
     <ClCompile Include="src\Input.cpp">
       <Filter>System</Filter>
@@ -115,9 +103,6 @@
     <ClCompile Include="src\PlayerSprintingState.cpp">
       <Filter>Game\Player\States</Filter>
     </ClCompile>
-    <ClCompile Include="src\TravelPrompt.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
     <ClCompile Include="src\Texture.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
@@ -150,12 +135,6 @@
     </ClCompile>
     <ClCompile Include="src\KingMook.cpp">
       <Filter>Game\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="src\TravellingHandler.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\EncounterHandler.cpp">
-      <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="src\GameObject.cpp">
       <Filter>Game</Filter>
@@ -313,6 +292,9 @@
     <ClCompile Include="src\UISprite.cpp">
       <Filter>Graphics\Sprites</Filter>
     </ClCompile>
+    <ClCompile Include="src\EnemySpawner.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -332,12 +314,6 @@
     </Filter>
     <Filter Include="Game\States">
       <UniqueIdentifier>{16b3cf1e-e87d-4f63-9986-e04f74dd8ed0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes">
-      <UniqueIdentifier>{9412fef3-e878-4fd7-9cc1-9b63be714e55}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\States">
-      <UniqueIdentifier>{3c89834e-8131-4c21-aaba-8ce7c30d7000}</UniqueIdentifier>
     </Filter>
     <Filter Include="Graphics">
       <UniqueIdentifier>{84ba73c8-d904-4698-ab16-3cadebf351c6}</UniqueIdentifier>
@@ -473,9 +449,6 @@
     <ClInclude Include="src\EnemyData.h">
       <Filter>Game\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="src\EnemyDataContainer.h">
-      <Filter>Game\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="src\RunningEnemy.h">
       <Filter>Game\Enemy</Filter>
     </ClInclude>
@@ -514,15 +487,6 @@
     </ClInclude>
     <ClInclude Include="src\RunningEnemyDeadState.h">
       <Filter>Game\Enemy\States</Filter>
-    </ClInclude>
-    <ClInclude Include="src\TravellingSceneState.h">
-      <Filter>Game\Scenes\States</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameOverSceneState.h">
-      <Filter>Game\Scenes\States</Filter>
-    </ClInclude>
-    <ClInclude Include="src\EncounterSceneState.h">
-      <Filter>Game\Scenes\States</Filter>
     </ClInclude>
     <ClInclude Include="src\Input.h">
       <Filter>System</Filter>
@@ -569,17 +533,11 @@
     <ClInclude Include="src\PlayerSprintingState.h">
       <Filter>Game\Player\States</Filter>
     </ClInclude>
-    <ClInclude Include="src\TravelPrompt.h">
-      <Filter>UI</Filter>
-    </ClInclude>
     <ClInclude Include="src\AABB.h">
       <Filter>Collision</Filter>
     </ClInclude>
     <ClInclude Include="src\ControlSystem.h">
       <Filter>System</Filter>
-    </ClInclude>
-    <ClInclude Include="src\EncounterHandler.h">
-      <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="src\UnitVectors.h">
       <Filter>Game</Filter>
@@ -643,9 +601,6 @@
     </ClInclude>
     <ClInclude Include="src\Texture.h">
       <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="src\TravellingHandler.h">
-      <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="src\AnimationData.h">
       <Filter>Graphics\Sprites\Animation</Filter>
@@ -799,6 +754,12 @@
     </ClInclude>
     <ClInclude Include="src\UISprite.h">
       <Filter>Graphics\Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EnemySpawner.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EnemyDefinition.h">
+      <Filter>Game\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

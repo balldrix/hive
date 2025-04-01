@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\EnemySpawner.cpp" />
     <ClCompile Include="src\LevelCollision.cpp" />
     <ClCompile Include="src\PlayerBuildSpecialState.cpp" />
     <ClCompile Include="src\ScreenShake.cpp" />
@@ -49,9 +50,6 @@
     <ClCompile Include="src\RunningEnemy.cpp" />
     <ClCompile Include="src\RunningEnemyDeadState.cpp" />
     <ClCompile Include="src\Sound.cpp" />
-    <ClCompile Include="src\EncounterHandler.cpp" />
-    <ClCompile Include="src\EncounterSceneState.cpp" />
-    <ClCompile Include="src\GameOverSceneState.cpp" />
     <ClCompile Include="src\KingMook.cpp" />
     <ClCompile Include="src\KingMookChargeState.cpp" />
     <ClCompile Include="src\KingMookEnemyGlobalState.cpp" />
@@ -66,6 +64,8 @@
     <ClCompile Include="src\UIKillCount.cpp" />
     <ClCompile Include="src\Utils.h" />
     <ClCompile Include="src\UISprite.cpp" />
+    <ClInclude Include="src\EnemyDefinition.h" />
+    <ClInclude Include="src\EnemySpawner.h" />
     <ClInclude Include="src\LevelCollision.h" />
     <ClInclude Include="src\PlayerBuildSpecialState.h" />
     <ClInclude Include="src\AnimatedSpriteData.h" />
@@ -114,8 +114,6 @@
     <ClCompile Include="src\UIStackingView.cpp" />
     <ClCompile Include="src\UITitleScreenView.cpp" />
     <ClCompile Include="src\TitleScreenGameState.cpp" />
-    <ClCompile Include="src\TravellingHandler.cpp" />
-    <ClCompile Include="src\TravellingSceneState.cpp" />
     <ClCompile Include="src\AABB.cpp" />
     <ClCompile Include="src\Animator.cpp" />
     <ClCompile Include="src\UIBarView.cpp" />
@@ -123,7 +121,6 @@
     <ClCompile Include="src\ControlSystem.cpp" />
     <ClCompile Include="src\Enemy.cpp" />
     <ClCompile Include="src\EnemyAttackState.cpp" />
-    <ClCompile Include="src\EnemyDataContainer.cpp" />
     <ClCompile Include="src\EnemyDeadState.cpp" />
     <ClCompile Include="src\MookEnemyGlobalState.cpp" />
     <ClCompile Include="src\EnemyHurtState.cpp" />
@@ -155,7 +152,6 @@
     <ClCompile Include="src\Spritesheet.cpp" />
     <ClCompile Include="src\Texture.cpp" />
     <ClCompile Include="src\Timer.cpp" />
-    <ClCompile Include="src\TravelPrompt.cpp" />
     <ClCompile Include="src\UIFadeOverlayView.cpp" />
     <ClCompile Include="src\UIFrontEndView.cpp" />
     <ClCompile Include="src\UIImageView.cpp" />
@@ -176,9 +172,6 @@
     <ClInclude Include="src\UISprite.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\EncounterHandler.h" />
-    <ClInclude Include="src\EncounterSceneState.h" />
-    <ClInclude Include="src\GameOverSceneState.h" />
     <ClInclude Include="src\KingMook.h" />
     <ClInclude Include="src\KingMookChargeState.h" />
     <ClInclude Include="src\NPCFactory.h" />
@@ -186,8 +179,6 @@
     <ClInclude Include="src\UIStackingView.h" />
     <ClInclude Include="src\UITitleScreenView.h" />
     <ClInclude Include="src\TitleScreenGameState.h" />
-    <ClInclude Include="src\TravellingHandler.h" />
-    <ClInclude Include="src\TravellingSceneState.h" />
     <ClInclude Include="src\AABB.h" />
     <ClInclude Include="src\AnimationData.h" />
     <ClInclude Include="src\Animator.h" />
@@ -197,7 +188,6 @@
     <ClInclude Include="src\Enemy.h" />
     <ClInclude Include="src\EnemyAttackState.h" />
     <ClInclude Include="src\EnemyData.h" />
-    <ClInclude Include="src\EnemyDataContainer.h" />
     <ClInclude Include="src\EnemyDeadState.h" />
     <ClInclude Include="src\MookEnemyGlobalState.h" />
     <ClInclude Include="src\EnemyHurtState.h" />
@@ -233,7 +223,6 @@
     <ClInclude Include="src\StateMachine.h" />
     <ClInclude Include="src\Texture.h" />
     <ClInclude Include="src\Timer.h" />
-    <ClInclude Include="src\TravelPrompt.h" />
     <ClInclude Include="src\UIFadeOverlayView.h" />
     <ClInclude Include="src\UIFrontEndView.h" />
     <ClInclude Include="src\UIImageView.h" />

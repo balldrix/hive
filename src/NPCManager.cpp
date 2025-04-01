@@ -2,22 +2,19 @@
 
 #include "Enemy.h"
 #include "EnemyData.h"
-#include "EnemyDataContainer.h"
-#include "HitBoxManager.h"
-#include "Logger.h"
-#include "NPCFactory.h"
-
+#include "EnemyDefinition.h"
 #include "Graphics.h"
+#include "NPCFactory.h"
 #include "Player.h"
-#include <fstream>
-#include <iosfwd>
-#include <string>
-#include <WinUser.h>
+
+#include <directxtk/SimpleMath.h>
+#include "GameObject.h"
+
+using namespace DirectX::SimpleMath;
 
 NPCManager* NPCManager::s_instance = nullptr;
 
 NPCManager::NPCManager() :
-	m_enemyDataContainer(nullptr),
 	m_NPCFactory(nullptr),
 	m_hostileEnemy(nullptr)
 {
@@ -35,154 +32,49 @@ void NPCManager::Init(Graphics* graphics, Camera* camera, Player* player)
 {
 	s_instance = this;
 
-	bool result = false;
-
-	m_enemyDataContainer = new EnemyDataContainer();
+	m_player = player;
 	m_NPCFactory = new NPCFactory();
-
-	result = InitTypes("assets\\data\\enemies\\type_data.txt");
-
-	if(result == false)
-	{
-		Logger::LogError("Error initialising enemy type data. NPCManager.cpp line 31.");
-		PostQuitMessage(0); // quit game
-	}
-
-	result = InitNPCs(graphics, camera, player, "assets\\data\\enemies\\enemy_data.txt");
-
-	if(result == false)
-	{
-		Logger::LogError(" Error initialising enemy list. NPCManager.cpp line 39.");
-		PostQuitMessage(0); // quit game
-	}
 }
 
-bool NPCManager::InitTypes(const std::string &fileName)
+void NPCManager::SpawnNPC(const Vector2& position, const EnemyDefinition& enemyDefinition, const Vector2& velocity, float height)
 {
-	std::ifstream file;
-	file.open(fileName);
+	ObjectData objData =
+	{
+		"Enemy1",
+		10,
+		1,
+		Vector2(100, 90),
+		35,
+		40,
+		0.8f,
+		3.5
+	};
+
+	EnemyData data = 
+	{
+		"mook",
+		"mook",
+		objData,
+		1.5,
+		40,
+		25,
+		10,
+		0,
+		0
+	};
+
+	Enemy* enemy = s_instance->m_NPCFactory->GetEnemy(data);
+	enemy->SetActive(true);
+	enemy->SetPlayerTarget(m_player);
+	enemy->SetVelocity(velocity);
 	
-	if(file)
+	if(height > 0)
 	{
-		EnemyData data;
-		std::string line;
-
-		while(std::getline(file, line))
-		{
-			if(line[0] != '#')
-			{
-				std::string result;
-				std::istringstream iss(line);
-
-				iss >> result;
-				data.type = result;
-
-				iss >> result;
-				data.objectData.startingHealth = std::stoi(result);
-
-				iss >> result;
-				data.objectData.startingLives = std::stoi(result);
-
-				iss >> result;
-				data.objectData.walkSpeed = std::stof(result);
-
-				iss >> result;
-				data.objectData.runningSpeed = std::stof(result);
-
-				iss >> result;
-				data.objectData.acceleration = std::stof(result);
-
-				iss >> result;
-				data.objectData.deceleration = std::stof(result);
-
-				iss >> result;
-				data.thinkingTime = std::stof(result);
-
-				iss >> result;
-				data.hostileRange = std::stof(result);
-
-				iss >> result;
-				data.fightRange = std::stof(result);
-
-				iss >> result;
-				data.attackRange = std::stof(result);
-
-				iss >> result;
-				data.chargeRange = std::stof(result);
-
-				iss >> result;
-				data.chargeSpeed = std::stof(result);
-
-				m_enemyDataContainer->Add(data);
-			}
-		}
+		enemy->SetPositionY(-height);
+		enemy->SetGrounded(false);
 	}
-	else
-	{
-		return false;
-	}
-	file.close(); // close file
-	return true;
-}
 
-bool NPCManager::InitNPCs(Graphics* graphics, Camera* camera, Player* player, const std::string &fileName)
-{
-	std::ifstream file;
-	file.open(fileName);
-	if(file) 
-	{
-		m_NPCFactory->Init(graphics, camera, player);
-
-		EnemyData data;
-		std::string result;
-
-		// loop until end of file
-		while(!file.eof())
-		{
-			// ready data
-			result = "";
-
-			// ID
-			file >> result;
-			std::string id = result;
-			
-			if(id[0] == '#')
-			{
-				std::getline(file, id);
-				continue;
-			}
-
-			// enemy Type
-			file >> result;
-			data = m_enemyDataContainer->GetData(result);
-			
-			data.objectData.id = id;
-
-			// data name
-			file >> result;
-			data.name = result;
-
-			// start position X
-			file >> result;
-			data.objectData.startingPosition.x = std::stof(result);
-			
-			// start position Y
-			file >> result;
-			data.objectData.startingPosition.y = std::stof(result);
-
-			file >> result;
-			data.encounterIndex = std::stoi(result);
-
-			Enemy* enemy = m_NPCFactory->GetEnemy(data);
-			m_enemyList.push_back(enemy);
-		}
-	}
-	else
-	{
-		return false;
-	}
-	file.close(); // close file
-	return true;
+	s_instance->m_enemyList.push_back(enemy);
 }
 
 void NPCManager::Render(Graphics* graphics)
@@ -220,10 +112,8 @@ void NPCManager::DeleteAll()
 	m_enemyList.clear();
 	
 	delete m_NPCFactory;
-	delete m_enemyDataContainer;
 
-	m_NPCFactory = nullptr;	
-	m_enemyDataContainer = nullptr;
+	m_NPCFactory = nullptr;
 }
 
 void NPCManager::SetAttackingEnemy(Enemy* enemy)

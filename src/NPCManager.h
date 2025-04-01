@@ -1,9 +1,12 @@
 #pragma once
 
-#include "EnemyDataContainer.h"
+#include "EnemyDefinition.h"
 
+#include <directxtk/SimpleMath.h>
 #include <string>
 #include <vector>
+
+using namespace DirectX::SimpleMath;
 
 class Camera;
 class Enemy;
@@ -20,8 +23,8 @@ public:
 
 	static NPCManager* Instance() { return s_instance; }
 	void	Init(Graphics* graphics, Camera* camera, Player* player);
-	bool	InitTypes(const std::string &fileName);
-	bool	InitNPCs(Graphics* graphics, Camera* camera, Player* player, const std::string &enemyDataFile);
+
+	void	SpawnNPC(const Vector2& position, const EnemyDefinition& enemyDefinition, const Vector2& velocity, float height);
 
 	void	Render(Graphics* graphics);
 	void	Update(float deltaTime);
@@ -35,10 +38,10 @@ public:
 	std::vector<Enemy*> GetEnemyList() const { return m_enemyList; }
 	
 private:
-	static  NPCManager*		s_instance;
+	static  NPCManager* s_instance;
 
-	NPCFactory*				m_NPCFactory;
-	std::vector<Enemy*>		m_enemyList;
-	EnemyDataContainer*		m_enemyDataContainer;
-	Enemy*					m_hostileEnemy;
+	NPCFactory* m_NPCFactory;
+	std::vector<Enemy*> m_enemyList;
+	Enemy* m_hostileEnemy;
+	Player* m_player;
 };

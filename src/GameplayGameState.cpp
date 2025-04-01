@@ -6,9 +6,8 @@
 #include "Camera.h"
 #include "Collider.h"
 #include "ControlSystem.h"
-#include "EncounterHandler.h"
-#include "EncounterSceneState.h"
 #include "Enemy.h"
+#include "EnemySpawner.h"
 #include "GameplayConstants.h"
 #include "GameState.h"
 #include "GameStateManager.h"
@@ -35,8 +34,6 @@
 #include "SpriteSheet.h"
 #include "StateMachine.h"
 #include "Timer.h"
-#include "TravellingHandler.h"
-#include "TravellingSceneState.h"
 #include "UIManager.h"
 #include "UnitVectors.h"
 
@@ -58,9 +55,6 @@ GameplayGameState::GameplayGameState() :
 	m_NPCManager(nullptr),
 	m_player(nullptr),
 	m_levelRenderer(nullptr),
-	m_sceneStateMachine(nullptr),
-	m_encounterHandler(nullptr),
-	m_travellingHandler(nullptr),
 	m_musicSoundSource(nullptr),
 	m_canAttack(true),
 	m_running(false),
@@ -136,19 +130,13 @@ void GameplayGameState::LoadAssets()
 	m_NPCManager = new NPCManager();
 	m_player = new Player();
 	m_levelRenderer = new LevelRenderer();
-	m_sceneStateMachine = new StateMachine<GameplayGameState>(this);
-	m_encounterHandler = new EncounterHandler();
-	m_travellingHandler = new TravellingHandler();
 
 	m_player->Init(m_controlSystem);
 	m_player->SetCamera(m_camera);
-	m_camera->SetTarget(m_player);
+	//m_camera->SetTarget(m_player);
 
 	m_levelRenderer->Init(m_graphics, m_camera);
 	m_NPCManager->Init(m_graphics, m_camera, m_player);
-	
-	m_sceneStateMachine->Init(TravellingSceneState::Instance(), nullptr, nullptr);
-	m_encounterHandler->Init(m_NPCManager->GetEnemyList());
 
 	Collider upperBounds;
 	upperBounds.SetAABB(AABB(Vector2(0, 0), Vector2((float)m_levelRenderer->GetLevelPixelWidth(), GameplayBoundsUpperY)));
@@ -184,6 +172,14 @@ void GameplayGameState::LoadAssets()
 	const std::wstring musicTitle = L"travelling_master";
 	m_musicSoundSource->SetSound(SoundManager::GetSound(musicTitle));*/
 
+	SpawnData spawnData;
+	spawnData.spawnRate = 30.0f;
+	spawnData.spawnPosition = Vector2(180, 90);
+	spawnData.enemyDefinition;
+	spawnData.height = 20.0f;
+	spawnData.startingVelocity = Vector2(-0.2f, 0.0f);
+	m_enemySpawner.Init(spawnData);
+
 	m_running = true;
 }
 
@@ -205,15 +201,6 @@ void GameplayGameState::DeleteAssets()
 
 	delete m_musicSoundSource;
 	m_musicSoundSource = nullptr;
-
-	delete m_travellingHandler;
-	m_travellingHandler = nullptr;
-
-	delete m_encounterHandler;
-	m_encounterHandler = nullptr;
-
-	delete m_sceneStateMachine;
-	m_sceneStateMachine = nullptr;
 
 	delete m_levelRenderer;
 	m_levelRenderer = nullptr;
@@ -398,16 +385,7 @@ void GameplayGameState::Update(float deltaTime)
 	UIManager::Update(deltaTime);
 
 	m_deltaTime = deltaTime;
-	m_sceneStateMachine->Update();
 	Tick(deltaTime);
-}
-
-void GameplayGameState::CheckForEncounter()
-{
-	if(m_camera->GetPosition().x < m_encounterHandler->GetEncounterPosition())
-		return;
-
-	m_sceneStateMachine->ChangeState(EncounterSceneState::Instance());
 }
 
 void GameplayGameState::Tick(float deltaTime)
@@ -436,6 +414,7 @@ void GameplayGameState::Tick(float deltaTime)
 
 	m_impactFx->Update(deltaTime);
 	m_particleSystem->Update(deltaTime);
+	m_enemySpawner.Update(deltaTime);
 }
 
 void GameplayGameState::ProcessCollisions()
@@ -581,8 +560,6 @@ void GameplayGameState::ResetGame()
 	m_NPCManager->Reset();
 	m_camera->Reset();
 	m_camera->SetTarget(m_player);
-	m_sceneStateMachine->ChangeState(TravellingSceneState::Instance());
-	m_encounterHandler->SetEncounterIndex(0);
 	UpdateGameBounds(0, (float)m_levelRenderer->GetLevelPixelWidth());
 }
 

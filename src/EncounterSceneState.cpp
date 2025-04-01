@@ -21,23 +21,10 @@ void EncounterSceneState::OnEnter(GameplayGameState* game)
 	float cameraWidth = game->GetCamera()->GetWidth();
 
 	game->UpdateGameBounds(cameraPositionX, cameraPositionX + cameraWidth);
-	game->GetEncounterHandler()->SpawnEncounter();
 }
 
 void EncounterSceneState::Execute(GameplayGameState* game)
 {
-	EncounterHandler* encounterHandler = game->GetEncounterHandler();
-
-	if(encounterHandler->GetIsEncounterDone() == false)
-		return;
-	
-	encounterHandler->IncreaseEncounterIndex();
-
-	if(encounterHandler->GetEncounterIndex() < encounterHandler->GetNumberOfEncounters())
-		game->GetSceneStateMachine()->ChangeState(TravellingSceneState::Instance());
-
-	if(encounterHandler->GetEncounterIndex() == encounterHandler->GetNumberOfEncounters())
-		game->GetSceneStateMachine()->ChangeState(GameOverSceneState::Instance());
 }
 
 void EncounterSceneState::OnExit(GameplayGameState* game)
