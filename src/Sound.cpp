@@ -84,7 +84,7 @@ void Sound::LoadFromWav(const char* filename)
     }
     num_bytes = (ALsizei) (num_frames * sfinfo.channels) * (ALsizei) sizeof(short);
 
-    /* Buffer the audio data into a new buffer object, then free the data and
+    /* Buffer the audio objectData into a new buffer object, then free the objectData and
      * close the file.
      */
     buffer = 0;

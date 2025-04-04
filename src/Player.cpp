@@ -156,14 +156,14 @@ void Player::LoadData(const std::string &playerDataFile, const std::string &dama
 {
 	if(!LoadPlayerData(playerDataFile))
 	{
-		// unable to load player data file
+		// unable to load player objectData file
 		std::string error = " Error! No player data file " + playerDataFile + " found.";
 		Logger::LogError(error);
 	}
 
 	if(!LoadDamageData(damageDataFile))
 	{
-		// unable to load player data file
+		// unable to load player objectData file
 		std::string error = " Error! No player damage data file " + damageDataFile + " found.";
 		Logger::LogError(error);
 	}

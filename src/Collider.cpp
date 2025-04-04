@@ -39,7 +39,20 @@ void Collider::Update(const Vector2& position)
 	m_position = position;
 }
 
-// draw hitbox
+void Collider::Render(Graphics* graphics)
+{
+	AABB box = m_boundingBox;
+
+	RECT rect;
+	rect.left = (LONG)box.GetMin().x;
+	rect.top = (LONG)box.GetMin().y;
+	rect.right = (LONG)box.GetMax().x;
+	rect.bottom = (LONG)box.GetMax().y;
+
+	m_sprite->SetDepth(1.0f);
+	m_sprite->Render(graphics, m_sprite->GetPosition(), rect);
+}
+
 void Collider::Render(Graphics* graphics, const Vector2& position)
 {
 	AABB box = m_boundingBox;

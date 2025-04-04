@@ -295,6 +295,9 @@
     <ClCompile Include="src\EnemySpawner.cpp">
       <Filter>System</Filter>
     </ClCompile>
+    <ClCompile Include="src\TilemapLoader.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -362,9 +365,6 @@
     </Filter>
     <Filter Include="UI\FrontEnd\MainMenu">
       <UniqueIdentifier>{0f43ca10-ec66-43a5-9ede-1ba939bc8d5c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\Tilemaps">
-      <UniqueIdentifier>{7b381dd5-60c1-4fb0-a75e-cba1126fa59a}</UniqueIdentifier>
     </Filter>
     <Filter Include="System\Data">
       <UniqueIdentifier>{088bc27f-fcb8-47cf-b5af-72b28449102f}</UniqueIdentifier>
@@ -689,9 +689,6 @@
     <ClInclude Include="src\IMenuSystemInteraction.h">
       <Filter>UI\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\TilemapData.h">
-      <Filter>Graphics\Tilemaps</Filter>
-    </ClInclude>
     <ClInclude Include="src\AnimatedSpriteData.h">
       <Filter>Graphics\Sprites\Animation</Filter>
     </ClInclude>
@@ -760,6 +757,12 @@
     </ClInclude>
     <ClInclude Include="src\EnemyDefinition.h">
       <Filter>Game\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TilemapLoader.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TilemapData.h">
+      <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

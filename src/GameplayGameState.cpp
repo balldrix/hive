@@ -17,7 +17,6 @@
 #include "Input.h"
 #include "LevelCollision.h"
 #include "LevelRenderer.h"
-#include "Logger.h"
 #include "NPCManager.h"
 #include "ParticleSystem.h"
 #include "Player.h"
@@ -33,16 +32,14 @@
 #include "SoundSource.h"
 #include "SpriteSheet.h"
 #include "StateMachine.h"
-#include "Timer.h"
+#include "TilemapLoader.h"
 #include "UIManager.h"
 #include "UnitVectors.h"
 
 #include <cmath>
 #include <DirectXColors.h>
 #include <directxtk/SimpleMath.h>
-#include <fmt/core.h>
 #include <vector>
-#include <WinUser.h>
 
 using namespace GlobalConstants;
 using namespace GameplayConstants;
@@ -125,6 +122,9 @@ void GameplayGameState::LoadAssets()
 	//SoundManager::AddSound(L"assets\\sounds\\boss_punch_004.wav");
 	//SoundManager::AddSound(L"assets\\sounds\\travelling_master.wav");
 
+	TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_lift.json");
+	//TilemapLoader::LoadTilemap("assets\\objectData\\tilemaps\\tm_trailer-level-showcase.json");
+
 	m_camera = new Camera();
 	m_controlSystem = new ControlSystem();
 	m_NPCManager = new NPCManager();
@@ -136,24 +136,9 @@ void GameplayGameState::LoadAssets()
 	//m_camera->SetTarget(m_player);
 
 	m_levelRenderer->Init(m_graphics, m_camera);
-	m_NPCManager->Init(m_graphics, m_camera, m_player);
+	LevelCollision::CreateBounds(m_levelRenderer);
 
-	Collider upperBounds;
-	upperBounds.SetAABB(AABB(Vector2(0, 0), Vector2((float)m_levelRenderer->GetLevelPixelWidth(), GameplayBoundsUpperY)));
-	LevelCollision::AddCollider(UpperBoundsId, upperBounds);
-	
-	Collider lowerBounds;
-	lowerBounds.SetAABB(AABB(Vector2(0, GameplayBoundsLowerY), Vector2((float)m_levelRenderer->GetLevelPixelWidth(), GameHeight)));
-	LevelCollision::AddCollider(LowerBoundsId, lowerBounds);
-
-	Collider leftBounds;
-	leftBounds.SetAABB(AABB(Vector2(-10, 0), Vector2(0, GameHeight)));
-	LevelCollision::AddCollider(LeftBoundsId, leftBounds);
-
-	Collider rightBounds;
-	rightBounds.SetAABB(AABB(Vector2((float)m_levelRenderer->GetLevelPixelWidth()), Vector2((float)m_levelRenderer->GetLevelPixelWidth() + 10)));
-	LevelCollision::AddCollider(RightBoundsId, rightBounds);
-	
+	m_NPCManager->Init(m_graphics, m_camera, m_player);	
 	m_camera->Init(GameWidth);
 	
 	m_musicSoundSource = new SoundSource();
@@ -178,7 +163,7 @@ void GameplayGameState::LoadAssets()
 	spawnData.enemyDefinition;
 	spawnData.height = 20.0f;
 	spawnData.startingVelocity = Vector2(-0.2f, 0.0f);
-	m_enemySpawner.Init(spawnData);
+	//m_enemySpawner.Init(spawnData);
 
 	m_running = true;
 }
@@ -415,6 +400,7 @@ void GameplayGameState::Tick(float deltaTime)
 	m_impactFx->Update(deltaTime);
 	m_particleSystem->Update(deltaTime);
 	m_enemySpawner.Update(deltaTime);
+	LevelCollision::Update(m_camera);
 }
 
 void GameplayGameState::ProcessCollisions()
@@ -551,6 +537,7 @@ void GameplayGameState::Render()
 	m_particleSystem->Render(m_graphics); 
 	m_impactFx->Render(m_graphics);
 	UIManager::Render(m_graphics);
+	LevelCollision::Render(m_graphics);
 }
 
 void GameplayGameState::ResetGame()
@@ -559,7 +546,7 @@ void GameplayGameState::ResetGame()
 	m_player->Reset();
 	m_NPCManager->Reset();
 	m_camera->Reset();
-	m_camera->SetTarget(m_player);
+	//m_camera->SetTarget(m_player);
 	UpdateGameBounds(0, (float)m_levelRenderer->GetLevelPixelWidth());
 }
 
@@ -588,6 +575,8 @@ void GameplayGameState::ToggleHitBoxes()
 	{
 		enemy->GetHitBoxManager()->SetVisible(m_displayHitBoxes);
 	}
+
+	LevelCollision::SetVisible(m_displayHitBoxes);
 }
 
 void GameplayGameState::TogglePlayerHud()

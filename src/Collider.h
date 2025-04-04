@@ -13,6 +13,7 @@ public:
 
 	void Init(Sprite* sprite, Color colour);
 	void Update(const Vector2& position);
+	void Render(Graphics* graphics);
 	void Render(Graphics* graphics, const Vector2& position);
 
 	AABB GetAABB() const { return m_boundingBox; }

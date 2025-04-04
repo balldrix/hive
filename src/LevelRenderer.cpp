@@ -2,7 +2,6 @@
 
 #include "LevelRenderer.h"
 
-#include "AnimationData.h"
 #include "AssetLoader.h"
 #include "Camera.h"
 #include "GlobalConstants.h"
@@ -11,13 +10,10 @@
 #include "Sprite.h"
 #include "TilemapData.h"
 
-#include <algorithm>
+#include "TilemapLoader.h"
 #include <cmath>
+#include <cstdlib>
 #include <directxtk/SimpleMath.h>
-#include <fmt/core.h>
-#include <fstream>
-#include <iosfwd>
-#include <string>
 #include <utility>
 #include <Windows.h>
 
@@ -43,8 +39,7 @@ void LevelRenderer::Init(Graphics* graphics, Camera* camera)
 {
 	m_camera = camera;
 
-	//m_tilemapData = LoadTilemap("assets\\data\\tilemaps\\tm_trailer-level-showcase.json");
-	m_tilemapData = LoadTilemap("assets\\data\\tilemaps\\tm_lift.json");
+	m_tilemapData = TilemapLoader::GetCurrentMap();
 	m_tileSetSprite = new Sprite();
 
 	m_tileSetSprite->Init(AssetLoader::GetTexture("ts_master"));
@@ -66,6 +61,8 @@ void LevelRenderer::Render(Graphics* graphics)
 
 	for(auto i = layers.begin(); i != layers.end(); ++i)
 	{
+		if(i->data.size() == 0) continue;
+
 		RenderLayer(graphics, *i);
 	}
 }
@@ -104,23 +101,6 @@ void LevelRenderer::Update(float deltaTime)
 	}
 }
 
-TilemapData LevelRenderer::LoadTilemap(std::string path)
-{
-	Logger::LogInfo(fmt::format("Loading Tilemap Data: {}.", path));
-
-	std::ifstream file(path);
-
-	if(file.fail())
-	{
-		Logger::LogError(fmt::format("[AssetLoader] [Tilemap] Failed to load tile map at {0}.", path));
-		return TilemapData();
-	}
-
-	json data = json::parse(file);
-	TilemapData tilemapData = data.get<TilemapData>();
-	return tilemapData;
-}
-
 void LevelRenderer::RenderLayer(Graphics* graphics, const TilemapLayer& layer)
 {
 	auto tileMapWidth = m_tilemapData.width;
@@ -155,7 +135,6 @@ void LevelRenderer::RenderLayer(Graphics* graphics, const TilemapLayer& layer)
 		}
 	}
 }
-
 
 void LevelRenderer::RenderTile(Graphics* graphics, unsigned int tileId, float posX, float posY, float parallaxMod, float depth)
 {

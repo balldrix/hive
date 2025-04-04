@@ -23,6 +23,7 @@
     <ClCompile Include="src\LevelCollision.cpp" />
     <ClCompile Include="src\PlayerBuildSpecialState.cpp" />
     <ClCompile Include="src\ScreenShake.cpp" />
+    <ClCompile Include="src\TilemapLoader.cpp" />
     <ClCompile Include="src\UIScreenFlashFX.cpp" />
     <ClCompile Include="src\GameDataManager.cpp" />
     <ClCompile Include="src\MenuSystem.cpp" />
@@ -70,6 +71,7 @@
     <ClInclude Include="src\PlayerBuildSpecialState.h" />
     <ClInclude Include="src\AnimatedSpriteData.h" />
     <ClInclude Include="src\ScreenShake.h" />
+    <ClInclude Include="src\TilemapLoader.h" />
     <ClInclude Include="src\UIScreenFlashFX.h" />
     <ClInclude Include="src\GameDataManager.h" />
     <ClInclude Include="src\IMenuSystemInteraction.h" />

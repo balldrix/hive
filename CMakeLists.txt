@@ -16,7 +16,7 @@ find_package(spdlog CONFIG REQUIRED)
 
 add_executable(${PROJECT_NAME} src/main.cpp src/AABB.cpp src/Animator.cpp src/AudioEngine.cpp src/UIBarView.cpp 
 								src/Camera.cpp src/Collider.cpp src/ControlSystem.cpp 
-								src/Enemy.cpp src/EnemyAttackRunState.cpp 
+								src/Enemy.cpp src/EnemyAttackRunState.cpp TilemapLoader.h TilemapLoader.cpp
 								src/EnemyAttackState.cpp src/EnemyDataContainer.cpp src/EnemyDeadState.cpp src/EnemyHurtState.cpp 
 								src/EnemyIdleState.cpp src/EnemyKnockbackState.cpp src/EnemyRunningState.cpp src/EnemyVictoryState.cpp 
 								src/EnemyWalkingState.cpp src/Game.cpp src/GameObject.cpp src/GameOverSceneState.cpp src/GameOverScreen.cpp 

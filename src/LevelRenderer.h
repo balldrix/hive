@@ -2,9 +2,6 @@
 
 #include "TilemapData.h"
 
-#include <directxtk/SimpleMath.h>
-#include <string>
-
 class Camera;
 class Graphics;
 class Sprite;
@@ -24,7 +21,6 @@ public:
 	unsigned int GetLevelPixelWidth() const { return m_tilemapData.width * m_tileWidth; }
 
 private:
-	TilemapData LoadTilemap(std::string path);
 	void RenderLayer(Graphics* graphics, const TilemapLayer& layer);
 	void RenderTile(Graphics* graphics, unsigned int tileId, float x, float y, float parallaxMod, float depth);
 

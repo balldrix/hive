@@ -22,6 +22,7 @@
 #include "Logger.h"
 #include "MenuSystem.h"
 #include "SoundManager.h"
+#include "TilemapLoader.h"
 #include "UIManager.h"
 #include "Window.h"
 
@@ -68,6 +69,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	UIManager::Init();
 	MenuSystem::Init();
 	LevelCollision::Init();
+	TilemapLoader::Init();
 
 	game = new Game();
 	game->Init(window, graphics);
@@ -96,6 +98,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 void Shutdown()
 {
 	delete game;
+	TilemapLoader::Shutdown();
 	LevelCollision::Shutdown();
 	MenuSystem::Destroy();
 	UIManager::Destroy();
