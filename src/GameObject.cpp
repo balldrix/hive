@@ -94,34 +94,31 @@ void GameObject::Update(float deltaTime)
 	y = Lerp(m_targetVelocity.y, m_currentVelocity.y, t * deltaTime);
 	m_currentVelocity.y = y;
 
-	Vector2 impulse = Vector2::Zero;
 	Vector2 velocity = (m_currentVelocity * m_movementSpeed) * deltaTime;
 	Vector2 newPosition = m_position + velocity;
 	Collider pushBox = m_hitBoxManager->GetPushBox();
-	
-	if(LevelCollision::IsCollision(Vector2(newPosition.x + pushBox.GetWidth(), m_groundPosition.y)))
+
+	if(velocity.x > 0 && LevelCollision::IsCollision(Vector2(newPosition.x + pushBox.GetWidth(), m_groundPosition.y)))
 	{
-		impulse += -(velocity.x * Vector2(-1, 0)) * Vector2(-1, 0);
-		m_position.x -= 0.05f;
+		velocity.x = 0;
 	}
-	else if(LevelCollision::IsCollision(Vector2(newPosition.x - pushBox.GetWidth(), m_groundPosition.y)))
+	else if(velocity.x < 0 && LevelCollision::IsCollision(Vector2(newPosition.x - pushBox.GetWidth(), m_groundPosition.y)))
 	{
-		impulse += -(velocity.x * Vector2(1, 0)) * Vector2(1, 0);
-		m_position.x += 0.05f;
+		velocity.x = 0;
 	}
 
-	if(m_grounded && LevelCollision::IsCollision(Vector2(m_groundPosition.x, newPosition.y - pushBox.GetHeight())))
-	{ 
-		impulse += -(velocity.y * Vector2(0, -1)) * Vector2(0, -1);
-		m_position.y += 0.05f;
-	}
-	else if(m_grounded && LevelCollision::IsCollision(Vector2(m_groundPosition.x, newPosition.y + pushBox.GetHeight())))
+	if(m_grounded)
 	{
-		impulse += -(velocity.y * Vector2(0, 1)) * Vector2(0, 1);
-		m_position.y -= 0.05f;
+		if(velocity.y > 0 && LevelCollision::IsCollision(Vector2(m_groundPosition.x, newPosition.y + pushBox.GetHeight())))
+		{
+			velocity.y = 0;
+		}
+		else if(velocity.y < 0 && LevelCollision::IsCollision(Vector2(m_groundPosition.x, newPosition.y - pushBox.GetHeight())))
+		{
+			velocity.y = 0;
+		}
 	}
 
-	velocity += impulse;
 	m_position += velocity;
 	m_currentVelocity = (velocity / m_movementSpeed) / deltaTime;
 	m_groundPosition.x = m_position.x;
