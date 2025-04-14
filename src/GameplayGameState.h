@@ -83,4 +83,5 @@ private:
 	ParticleSystem* m_particleSystem;
 	ParticleData m_particleData;
 	EnemySpawner m_enemySpawner;
+	EnemySpawner m_enemySpawner2;
 };

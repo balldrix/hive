@@ -31,6 +31,7 @@ namespace
 		unsigned int width = {};
 		float parallaxMod = {};
 		float depth = {};
+		float opacity = {};
 		float scrollSpeedX = {};
 		float scrollSpeedY = {};
 		Vector2 scrollOffset;
@@ -73,6 +74,7 @@ namespace
 				tilemapLayer.width = layer["width"];
 				tilemapLayer.parallaxMod = layer.value("parallaxx", 1.0f);
 				tilemapLayer.depth = 0.0f;
+				tilemapLayer.opacity = layer.value("opacity", 1.0f);
 				tilemapLayer.scrollOffset = Vector2::Zero;
 				tilemapLayer.scrollSpeedX = 0;
 				tilemapLayer.scrollSpeedY= 0;

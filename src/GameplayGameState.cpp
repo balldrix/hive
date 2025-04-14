@@ -158,12 +158,18 @@ void GameplayGameState::LoadAssets()
 	m_musicSoundSource->SetSound(SoundManager::GetSound(musicTitle));*/
 
 	SpawnData spawnData;
+	spawnData.enemyDefinition.id = "lift-spider";
 	spawnData.spawnRate = 10.0f;
 	spawnData.spawnPosition = Vector2(180, 90);
 	spawnData.enemyDefinition;
 	spawnData.height = 20.0f;
 	spawnData.startingVelocity = Vector2(-0.2f, 0.0f);
 	m_enemySpawner.Init(spawnData);
+
+	spawnData.spawnPosition = Vector2(80, 90);
+	spawnData.spawnRate = 9.0f;
+	spawnData.startingVelocity = Vector2(0.2f, 0.0f);
+	m_enemySpawner2.Init(spawnData);
 
 	m_running = true;
 }
@@ -400,6 +406,7 @@ void GameplayGameState::Tick(float deltaTime)
 	m_impactFx->Update(deltaTime);
 	m_particleSystem->Update(deltaTime);
 	m_enemySpawner.Update(deltaTime);
+	m_enemySpawner2.Update(deltaTime);
 	LevelCollision::Update(m_camera);
 }
 

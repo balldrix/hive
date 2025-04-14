@@ -239,6 +239,17 @@ void Enemy::Reset()
 	ResetTimer(Randomiser::Instance()->GetRandNum(0.8f, 2.0f));
 	m_active = false;
 	m_dead = false;
+	m_isFlashing = false;
+}
+
+void Enemy::Spawn(const Vector2& position)
+{
+	SetPosition(position);
+	GetSprite()->EnableSprite();
+	SetDead(false);
+	SetActive(true);
+
+	m_stateMachine->ChangeState(m_startingState);
 }
 
 void Enemy::SetData(const EnemyData& data)
@@ -246,9 +257,9 @@ void Enemy::SetData(const EnemyData& data)
 	m_enemyData = data;
 }
 
-void Enemy::SetDead()
+void Enemy::SetDead(bool isDead)
 {
-	m_dead = true;
+	m_dead = isDead;
 }
 
 void Enemy::SetPlayerTarget(Player* player)

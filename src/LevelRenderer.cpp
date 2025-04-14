@@ -131,12 +131,12 @@ void LevelRenderer::RenderLayer(Graphics* graphics, const TilemapLayer& layer)
 			float tileYPos = y * m_tileHeight - (float)fmod(scrollOffset.y, m_tileHeight);
 
 			auto tileId = layer.data[wrappedY * tileMapWidth + wrappedX] - 1;
-			RenderTile(graphics, tileId, tileXPos, tileYPos, parallaxMod, layer.depth);
+			RenderTile(graphics, tileId, tileXPos, tileYPos, parallaxMod, layer.depth, layer.opacity);
 		}
 	}
 }
 
-void LevelRenderer::RenderTile(Graphics* graphics, unsigned int tileId, float posX, float posY, float parallaxMod, float depth)
+void LevelRenderer::RenderTile(Graphics* graphics, unsigned int tileId, float posX, float posY, float parallaxMod, float depth, float alpha)
 {
 	RECT rect {};
 	rect.left = (tileId % m_tileSetWidth) * m_tileWidth;
@@ -149,6 +149,7 @@ void LevelRenderer::RenderTile(Graphics* graphics, unsigned int tileId, float po
 	m_tileSetSprite->SetSourceRect(rect);
 	m_tileSetSprite->SetPosition(spritePosition);
 	m_tileSetSprite->SetDepth(depth);
+	m_tileSetSprite->SetAlpha(alpha);
 	m_tileSetSprite->Render(graphics);
 }
 

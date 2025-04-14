@@ -36,8 +36,10 @@ public:
 	void					Render(Graphics* graphics);
 	virtual void			Reset();
 
+	void					Spawn(const Vector2& position);
+
 	void					SetData(const EnemyData& data);
-	void					SetDead();
+	void					SetDead(bool isDead);
 	void					SetPlayerTarget(Player* player);
 	void					SetHostile(bool isHostile);
 	void					ResetTimer(float timerMod);
