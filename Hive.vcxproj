@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\EnemyFallingState.cpp" />
+    <ClCompile Include="src\EnemyLandingState.cpp" />
     <ClCompile Include="src\EnemySpawner.cpp" />
     <ClCompile Include="src\LevelCollision.cpp" />
     <ClCompile Include="src\PlayerBuildSpecialState.cpp" />
@@ -66,6 +68,8 @@
     <ClCompile Include="src\Utils.h" />
     <ClCompile Include="src\UISprite.cpp" />
     <ClInclude Include="src\EnemyDefinition.h" />
+    <ClInclude Include="src\EnemyFallingState.h" />
+    <ClInclude Include="src\EnemyLandingState.h" />
     <ClInclude Include="src\EnemySpawner.h" />
     <ClInclude Include="src\LevelCollision.h" />
     <ClInclude Include="src\PlayerBuildSpecialState.h" />
@@ -237,11 +241,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\assets.json" />
+    <None Include="assets\data\hitboxes\lift-spider_hitbox.json" />
     <None Include="assets\data\hitboxes\mook_hitbox.json" />
     <None Include="assets\data\hitboxes\player_hitbox.json" />
     <None Include="assets\data\hitboxes\waste-dog_hitbox.json" />
     <None Include="assets\data\hitboxes\waste-lobster_hitbox.json" />
     <None Include="assets\data\spritesheets\impactfx_spritesheet.json" />
+    <None Include="assets\data\spritesheets\jungle-ape_spritesheet.json" />
+    <None Include="assets\data\spritesheets\lift-spider_spritesheet.json" />
     <None Include="assets\data\spritesheets\mook_spritesheet.json" />
     <None Include="assets\data\spritesheets\player_spritesheet.json" />
     <None Include="assets\data\spritesheets\waste-dog_spritesheet.json" />
@@ -249,6 +256,7 @@
     <None Include="assets\data\tilemaps\tm_bunker.json" />
     <None Include="assets\data\tilemaps\tm_lift.json" />
     <None Include="assets\data\tilemaps\tm_trailer-level-showcase.json" />
+    <None Include="assets\fonts\gameboy_28pt.spritefont" />
     <None Include="assets\fonts\gamer_16pt.spritefont" />
     <None Include="assets\fonts\gamer_34pt.spritefont" />
     <None Include="assets\fonts\goodbye_despair_12pt.spritefont" />
@@ -258,6 +266,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\data\damage\boss_damage.txt" />
+    <Text Include="assets\data\damage\life-spider_damage.txt" />
     <Text Include="assets\data\damage\mook_damage.txt" />
     <Text Include="assets\data\damage\mook_runner_damage.txt" />
     <Text Include="assets\data\damage\player_damage.txt" />
@@ -301,22 +310,40 @@
     <Media Include="assets\sounds\walk_004.wav" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="assets\textures\jungle-ape_spritesheet.png" />
+    <Image Include="assets\textures\lift-spider_spritesheet.png" />
     <Image Include="assets\textures\mook_spritesheet.png" />
     <Image Include="assets\textures\pixel.png" />
     <Image Include="assets\textures\player_spritesheet.png" />
     <Image Include="assets\textures\shadow.png" />
     <Image Include="assets\textures\shadow_large.png" />
+    <Image Include="assets\textures\shadow_standard.png" />
+    <Image Include="assets\textures\ui\bar-fill-green-dark.png" />
+    <Image Include="assets\textures\ui\bar-fill-red-dark.png" />
+    <Image Include="assets\textures\ui\bar-fill-yellow-dark.png" />
+    <Image Include="assets\textures\ui\bar_fill_green.png" />
+    <Image Include="assets\textures\ui\bar_fill_red.png" />
+    <Image Include="assets\textures\ui\bar_fill_yellow.png" />
+    <Image Include="assets\textures\ui\bar_frame_enemy.png" />
     <Image Include="assets\textures\ui\bar_frame_player_health.png" />
+    <Image Include="assets\textures\ui\bar_frame_player_special.png" />
+    <Image Include="assets\textures\ui\jungle-ape_portrait.png" />
     <Image Include="assets\textures\ui\loading_screen_bg.png" />
+    <Image Include="assets\textures\ui\mook_portrait.png" />
     <Image Include="assets\textures\ui\player-profile.png" />
+    <Image Include="assets\textures\ui\player_portrait.png" />
     <Image Include="assets\textures\ui\player_won_screen.png" />
+    <Image Include="assets\textures\ui\portrait_frame.png" />
     <Image Include="assets\textures\ui\profile-frame.png" />
     <Image Include="assets\textures\ui\title_logo.png" />
     <Image Include="assets\textures\ui\title_screen_bg.png" />
+    <Image Include="assets\textures\ui\waste-dog_portrait.png" />
     <Image Include="assets\textures\ui\waste-lobster_portrait.png" />
     <Image Include="assets\textures\vfx.png" />
     <Image Include="assets\textures\waste-dog_spritesheet.png" />
     <Image Include="assets\textures\waste-lobster_spritesheet.png" />
+    <Image Include="assets\tilesets\ts_bunker.png" />
+    <Image Include="assets\tilesets\ts_master.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F07D24C5-CADD-4262-80F1-7370DF167E8E}</ProjectGuid>

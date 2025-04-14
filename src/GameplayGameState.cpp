@@ -163,7 +163,7 @@ void GameplayGameState::LoadAssets()
 	spawnData.enemyDefinition;
 	spawnData.height = 20.0f;
 	spawnData.startingVelocity = Vector2(-0.2f, 0.0f);
-	//m_enemySpawner.Init(spawnData);
+	m_enemySpawner.Init(spawnData);
 
 	m_running = true;
 }

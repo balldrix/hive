@@ -15,7 +15,6 @@ MookEnemyGlobalState* MookEnemyGlobalState::Instance()
 
 void MookEnemyGlobalState::OnEnter(Enemy* enemy)
 {
-
 }
 
 void MookEnemyGlobalState::Execute(Enemy* enemy)

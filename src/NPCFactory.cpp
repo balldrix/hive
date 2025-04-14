@@ -3,20 +3,20 @@
 #include "AssetLoader.h"
 #include "Enemy.h"
 #include "EnemyData.h"
+#include "EnemyFallingState.h"
 #include "EnemyIdleState.h"
 #include "EnemyRunningState.h"
 #include "Graphics.h"
 #include "HitBoxManager.h"
 #include "KingMook.h"
 #include "KingMookEnemyGlobalState.h"
+#include "Logger.h"
 #include "MookEnemyGlobalState.h"
 #include "MookRunningEnemyGlobalState.h"
 #include "NPCManager.h"
 #include "Player.h"
 #include "RunningEnemy.h"
-#include "Logger.h"
-#include <fmt/core.h>
-#include "Logger.h"
+
 #include <fmt/core.h>
 
 NPCFactory::NPCFactory() :
@@ -54,6 +54,9 @@ Enemy* NPCFactory::GetEnemy(EnemyData data)
 
 	if(data.type == "waste-lobster")
 		return CreateWasteDog(data);
+
+	if(data.type == "lift-spider")
+		return CreateSpider(data);
 
 	Logger::LogWarning(fmt::format("[NPCFactory] No Enemy type {0} found.", data.type));
 	return nullptr;
@@ -105,4 +108,16 @@ Enemy* NPCFactory::CreateBoss(EnemyData& data)
 				EnemyIdleState::Instance());
 
 	return boss;
+}
+
+Enemy* NPCFactory::CreateSpider(EnemyData& data)
+{
+	auto spider = new Enemy();
+	spider->Init(m_graphics, m_camera, m_player, data,
+				NPCManager::Instance(),
+				AssetLoader::GetTexture("t_shadow_l"),
+				MookEnemyGlobalState::Instance(),
+				EnemyFallingState::Instance());
+
+	return spider;
 }

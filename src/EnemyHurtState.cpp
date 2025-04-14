@@ -1,10 +1,10 @@
 #include "EnemyHurtState.h"
 
-#include "StateMachine.h"
-#include "Enemy.h"
 #include "Animator.h"
-#include "HitBoxManager.h"
+#include "Enemy.h"
 #include "EnemyIdleState.h"
+#include "HitBoxManager.h"
+#include "StateMachine.h"
 
 EnemyHurtState* EnemyHurtState::Instance()
 {
@@ -22,9 +22,6 @@ void EnemyHurtState::OnEnter(Enemy* enemy)
 
 void EnemyHurtState::Execute(Enemy* enemy)
 {
-	//if(enemy->GetAnimator()->IsDone())
-		//enemy->GetHitBoxManager()->SetCurrentHitBox(m_name);
-
 	if(enemy->GetPlayerTarget()->GetHitBoxManager()->IsHitBoxActive() == false)
 		enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
 }

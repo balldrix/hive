@@ -27,6 +27,7 @@ private:
 	Enemy* CreateMook(EnemyData& data);
 	Enemy* CreateMookRunner(EnemyData& data);
 	Enemy* CreateBoss(EnemyData& data);
+	Enemy* CreateSpider(EnemyData& data);
 
 	Graphics* m_graphics;
 	Camera* m_camera;

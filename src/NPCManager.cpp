@@ -52,8 +52,8 @@ void NPCManager::SpawnNPC(const Vector2& position, const EnemyDefinition& enemyD
 
 	EnemyData data = 
 	{
-		"mook",
-		"mook",
+		"lift-spider",
+		"lift-spider",
 		objData,
 		1.5,
 		40,

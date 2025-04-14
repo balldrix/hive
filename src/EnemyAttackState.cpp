@@ -6,6 +6,9 @@
 #include "HitBoxManager.h"
 #include "StateMachine.h"
 
+#include <directxtk/SimpleMath.h>
+#include <string>
+
 EnemyAttackState* EnemyAttackState::Instance()
 {
 	static EnemyAttackState instance;

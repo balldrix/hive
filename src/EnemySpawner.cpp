@@ -1,7 +1,7 @@
 #include "EnemySpawner.h"
 
-#include "NPCManager.h"
 #include "Logger.h"
+#include "NPCManager.h"
 
 const float seconds = 60.0f;
 
