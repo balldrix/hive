@@ -60,6 +60,7 @@ public:
 	void					DeleteAll();
 
 	void					ProcessSteering();
+	void					Flash();
 
 	virtual void			PlayEntranceSound();
 	virtual void			PlayWalkingSound();
@@ -85,7 +86,9 @@ private:
 	Sprite*					m_portraitSprite;
 	Sprite*					m_hitBoxSprite;
 	float					m_thinkingTimer;
+	float					m_flashingTimer;
 	bool					m_isHostile;
+	bool					m_isFlashing;
 	State<Enemy>*			m_startingState;
 	NPCManager*				m_npcManager;
 };

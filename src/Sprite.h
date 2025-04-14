@@ -33,6 +33,7 @@ public:
 	void				SetFlipEffect(SpriteEffects effect);
 	void				SetDepth(const float& depth);
 
+	bool				GetEnabled() const		{ return m_enabled; }
 	const Vector2		GetPosition() const		{ return m_position; }
 	const float			GetScale() const		{ return m_scale; }
 	const float			GetRotation() const		{ return m_rotation; }

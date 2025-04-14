@@ -2,14 +2,14 @@
 
 #include "Animator.h"
 #include "Enemy.h"
-#include "EnemyKnockbackState.h"
+#include "GameplayConstants.h"
 #include "HitBoxManager.h"
 #include "NPCManager.h"
-#include "StateMachine.h"
-#include "UnitVectors.h"
 
 #include <directxtk/SimpleMath.h>
 #include <string>
+
+using namespace GameplayConstants;
 
 EnemyDeadState* EnemyDeadState::Instance()
 {
@@ -28,33 +28,22 @@ void EnemyDeadState::OnEnter(Enemy* enemy)
 
 	if(NPCManager::Instance()->GetAttackingEnemy() == enemy)
 		NPCManager::Instance()->SetAttackingEnemy(nullptr);
+
+	enemy->SetTargetVelocity(Vector2::Zero);
 }
 
 void EnemyDeadState::Execute(Enemy* enemy)
 {
-	if(enemy->IsDead())
-	{
-		enemy->SetTargetVelocity(Vector2::Zero);
-	}
-	else
-	{
-		Vector2 direction = Vector2::Zero;
-		
-		if(enemy->GetCurrentVelocity().x > 0)
-		{
-			direction = UnitVectors::UpRight;
-		}
-		else
-		{
-			direction = UnitVectors::UpLeft;
-		}
+	auto deadTimer = enemy->GetDeathTimer();
 
-		enemy->Knockback(direction, 50.0f);
-		enemy->SetKnockbackCount(enemy->GetKnockbackCount() - 1);
-		enemy->GetStateMachine()->ChangeState(EnemyKnockbackState::Instance());
-		
-		if(enemy->GetKnockbackCount() < 1)
-			enemy->Kill();
+	if((EnemyDeadDuration - deadTimer) > EnemyFlashStartTime)
+	{
+		enemy->Flash();
+	}
+
+	if(deadTimer <= 0.0f)
+	{
+		enemy->SetActive(false);
 	}
 }
 

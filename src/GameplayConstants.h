@@ -18,4 +18,8 @@ namespace GameplayConstants
 	const std::string LowerBoundsId = "lower bounds";
 	const std::string LeftBoundsId = "left bounds";
 	const std::string RightBoundsId = "right bounds";
+
+	const float EnemyDeadDuration = 4.0f;
+	const float EnemyFlashStartTime = 1.0f;
+	const float EnemyFlashDuration = 0.2f;
 }

@@ -27,12 +27,16 @@ void Spritesheet::Init(Texture* texture, std::vector<SpriteFrameData> spriteFram
 
 void Spritesheet::Render(Graphics* graphics, int frameNum)
 {
+	if(!m_enabled) return;
+
 	graphics->GetDefaultSpriteBatch()->Draw(m_texture->GetTexture(), m_position, &m_frames[frameNum].frame, m_colour,
 									 m_rotation, OffsetOrigin(frameNum), m_scale, m_spriteEffects, m_depth);
 }
 
 void Spritesheet::Render(Graphics* graphics, Vector2 position, int frameNum)
 {
+	if(!m_enabled) return;
+
 	graphics->GetDefaultSpriteBatch()->Draw(m_texture->GetTexture(), position, &m_frames[frameNum].frame, m_colour,
 									 m_rotation, OffsetOrigin(frameNum), m_scale, m_spriteEffects, m_depth);
 }

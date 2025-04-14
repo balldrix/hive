@@ -32,7 +32,6 @@
 #include "UIManager.h"
 #include "UIPortraitView.h"
 #include "UnitVectors.h"
-#include "Utils.h"
 
 #include <cstdint>
 #include <directxtk/SimpleMath.h>
@@ -51,7 +50,9 @@ Enemy::Enemy() :
 	m_footStepsSoundSource(nullptr),
 	m_punchSoundSource(nullptr),
 	m_thinkingTimer(0.0f),
+	m_flashingTimer(0.0f),
 	m_isHostile(false),
+	m_isFlashing(false),
 	m_recentFootstepFrame(0),
 	m_startingState(nullptr),
 	m_npcManager(nullptr)
@@ -182,19 +183,21 @@ void Enemy::Update(float deltaTime)
 	m_stateMachine->Update();
 	GameObject::Update(deltaTime);
 
-	m_thinkingTimer -= deltaTime;
+	if(m_thinkingTimer > 0.0f) m_thinkingTimer -= deltaTime;
+	if(m_flashingTimer > 0.0f) m_flashingTimer -= deltaTime;
+
+	if(m_isFlashing && m_flashingTimer <= 0.0f)
+	{
+		auto isSpriteEnabled = m_spritesheet->GetEnabled();
+		isSpriteEnabled ? m_spritesheet->DisableSprite() : m_spritesheet->EnableSprite();
+		m_flashingTimer = EnemyFlashDuration;
+	}
 
 	m_hitBoxManager->Update(m_animator->GetCurrentFrame());
 
 	if(!m_dead) return;
 
-	if(m_health > 0)
-		m_deathTimer -= deltaTime;
-
-	if(m_deathTimer > 0) return;
-
-	m_stateMachine->ChangeState(EnemyIdleState::Instance());
-	m_dead = false;
+	m_deathTimer -= deltaTime;
 }
 
 void Enemy::Render(Graphics* graphics)
@@ -287,12 +290,8 @@ void Enemy::ApplyDamage(GameObject* source, const int& amount)
 			direction = UnitVectors::UpRight;
 		}
 
-		// knockback Enemy with force
 		Knockback(direction, 100.0f);
-
-		// bounce 
 		SetKnockbackCount(1);
-		m_deathTimer = 2.0f;
 	}
 	else
 	{
@@ -318,6 +317,7 @@ void Enemy::Attack()
 void Enemy::Kill()
 {
 	m_dead = true;
+	m_deathTimer = EnemyDeadDuration;
 }
 
 void Enemy::ProcessSteering()
@@ -327,6 +327,11 @@ void Enemy::ProcessSteering()
 	m_targetVelocity += Avoid();
 	m_targetVelocity += Strafe();
 	m_targetVelocity.Normalize();
+}
+
+void Enemy::Flash()
+{
+	if(!m_isFlashing) m_isFlashing = true;
 }
 
 Vector2 Enemy::Seek() const
@@ -354,7 +359,7 @@ Vector2 Enemy::Avoid() const
 
 	for(auto it = enemyList.begin(); it != enemyList.end(); it++)
 	{
-		if(*it == this) continue;
+		if(*it == this || !(*it)->IsActive()) continue;
 
 		auto toOther = m_position - (*it)->GetPosition();
 

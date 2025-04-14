@@ -5,6 +5,8 @@
 #include "EnemyDeadState.h"
 #include "HitBoxManager.h"
 #include "StateMachine.h"
+#include <directxtk/SimpleMath.h>
+#include "UnitVectors.h"
 
 EnemyKnockbackState* EnemyKnockbackState::Instance()
 {
@@ -33,7 +35,33 @@ void EnemyKnockbackState::Execute(Enemy* enemy)
 
 	if(enemy->IsGrounded())
 	{
-		enemy->GetStateMachine()->ChangeState(EnemyDeadState::Instance());
+		if(enemy->GetKnockbackCount() == 0)
+		{
+			enemy->Kill();
+		}
+
+		if(!enemy->IsDead())
+		{
+			Vector2 direction = Vector2::Zero;
+
+			if(enemy->GetCurrentVelocity().x > 0)
+			{
+				direction = UnitVectors::UpRight;
+			}
+			else
+			{
+				direction = UnitVectors::UpLeft;
+			}
+
+			enemy->Knockback(direction, 50.0f);
+			enemy->SetKnockbackCount(enemy->GetKnockbackCount() - 1);
+			enemy->GetAnimator()->Reset();
+			enemy->SetGrounded(false);
+		}
+		else
+		{
+			enemy->GetStateMachine()->ChangeState(EnemyDeadState::Instance());
+		}
 	}
 }
 
