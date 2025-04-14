@@ -7,7 +7,8 @@ const float seconds = 60.0f;
 
 EnemySpawner::EnemySpawner() :
 	m_spawnRate(0.0f),
-	m_timer(0.0f)
+	m_timer(0.0f),
+	m_height(0.0f)
 {
 }
 

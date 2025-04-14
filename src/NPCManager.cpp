@@ -43,7 +43,7 @@ void NPCManager::SpawnNPC(const Vector2& position, const EnemyDefinition& enemyD
 		"Enemy1",
 		10,
 		1,
-		Vector2(100, 90),
+		position,
 		35,
 		40,
 		0.8f,

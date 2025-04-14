@@ -158,7 +158,7 @@ void GameplayGameState::LoadAssets()
 	m_musicSoundSource->SetSound(SoundManager::GetSound(musicTitle));*/
 
 	SpawnData spawnData;
-	spawnData.spawnRate = 30.0f;
+	spawnData.spawnRate = 10.0f;
 	spawnData.spawnPosition = Vector2(180, 90);
 	spawnData.enemyDefinition;
 	spawnData.height = 20.0f;
