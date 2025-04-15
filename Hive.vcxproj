@@ -246,6 +246,7 @@
     <None Include="assets\data\hitboxes\player_hitbox.json" />
     <None Include="assets\data\hitboxes\waste-dog_hitbox.json" />
     <None Include="assets\data\hitboxes\waste-lobster_hitbox.json" />
+    <None Include="assets\data\spritesheets\dustfx_spritesheet.json" />
     <None Include="assets\data\spritesheets\impactfx_spritesheet.json" />
     <None Include="assets\data\spritesheets\jungle-ape_spritesheet.json" />
     <None Include="assets\data\spritesheets\lift-spider_spritesheet.json" />
@@ -310,6 +311,7 @@
     <Media Include="assets\sounds\walk_004.wav" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="assets\textures\dustfx.png" />
     <Image Include="assets\textures\jungle-ape_spritesheet.png" />
     <Image Include="assets\textures\lift-spider_spritesheet.png" />
     <Image Include="assets\textures\mook_spritesheet.png" />

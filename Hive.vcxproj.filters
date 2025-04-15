@@ -839,6 +839,9 @@
     </None>
     <None Include="assets\fonts\gameboy_28pt.spritefont" />
     <None Include="assets\data\spritesheets\jungle-ape_spritesheet.json" />
+    <None Include="assets\data\spritesheets\dustfx_spritesheet.json">
+      <Filter>Assets\Data\Spritesheets</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\data\encounters\encounter_positions.txt">
@@ -1036,5 +1039,8 @@
     <Image Include="assets\textures\ui\waste-dog_portrait.png" />
     <Image Include="assets\tilesets\ts_master.png" />
     <Image Include="assets\tilesets\ts_bunker.png" />
+    <Image Include="assets\textures\dustfx.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
   </ItemGroup>
 </Project>
