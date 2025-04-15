@@ -84,4 +84,6 @@ private:
 	ParticleData m_particleData;
 	EnemySpawner m_enemySpawner;
 	EnemySpawner m_enemySpawner2;
+	EnemySpawner m_enemySpawner3;
+	EnemySpawner m_enemySpawner4;
 };

@@ -434,7 +434,7 @@
                 {
                  "name":"depth",
                  "type":"float",
-                 "value":0.5
+                 "value":0.21
                 }],
          "type":"tilelayer",
          "visible":true,

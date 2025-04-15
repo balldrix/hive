@@ -160,16 +160,26 @@ void GameplayGameState::LoadAssets()
 	SpawnData spawnData;
 	spawnData.enemyDefinition.id = "lift-spider";
 	spawnData.spawnRate = 10.0f;
-	spawnData.spawnPosition = Vector2(180, 90);
+	spawnData.spawnPosition = Vector2(170, 80);
 	spawnData.enemyDefinition;
 	spawnData.height = 20.0f;
 	spawnData.startingVelocity = Vector2(-0.2f, 0.0f);
 	m_enemySpawner.Init(spawnData);
 
-	spawnData.spawnPosition = Vector2(80, 90);
+	spawnData.spawnPosition = Vector2(180, 90);
 	spawnData.spawnRate = 9.0f;
-	spawnData.startingVelocity = Vector2(0.2f, 0.0f);
+	spawnData.startingVelocity = Vector2(-0.2f, 0.0f);
 	m_enemySpawner2.Init(spawnData);
+
+	spawnData.spawnPosition = Vector2(90, 80);
+	spawnData.spawnRate = 10.5f;
+	spawnData.startingVelocity = Vector2(0.2f, 0.0f);
+	m_enemySpawner3.Init(spawnData);
+
+	spawnData.spawnPosition = Vector2(80, 90);
+	spawnData.startingVelocity = Vector2(0.2f, 0.0f);
+	spawnData.spawnRate = 9.5f;
+	m_enemySpawner4.Init(spawnData);
 
 	m_running = true;
 }
@@ -407,6 +417,8 @@ void GameplayGameState::Tick(float deltaTime)
 	m_particleSystem->Update(deltaTime);
 	m_enemySpawner.Update(deltaTime);
 	m_enemySpawner2.Update(deltaTime);
+	m_enemySpawner3.Update(deltaTime);
+	m_enemySpawner4.Update(deltaTime);
 	LevelCollision::Update(m_camera);
 }
 
