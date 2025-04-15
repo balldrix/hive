@@ -244,11 +244,12 @@ void Enemy::Reset()
 
 void Enemy::Spawn(const Vector2& position)
 {
-	SetPosition(position);
-	GetSprite()->EnableSprite();
-	SetDead(false);
-	SetActive(true);
+	m_position = position;
+	m_dead = false;
+	m_active = true;
+	m_isFlashing = false;
 
+	GetSprite()->EnableSprite();
 	m_stateMachine->ChangeState(m_startingState);
 }
 
