@@ -73,7 +73,13 @@
   },
   {
     "id": "t_impact",
-    "path": "assets\\textures\\vfx.png",
+    "path": "assets\\textures\\impactfx.png",
+    "type": "texture",
+    "tag": "gameplay_assets"
+  },
+  {
+    "id": "t_dust",
+    "path": "assets\\textures\\dustfx.png",
     "type": "texture",
     "tag": "gameplay_assets"
   },

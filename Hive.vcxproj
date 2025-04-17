@@ -312,6 +312,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\textures\dustfx.png" />
+    <Image Include="assets\textures\impactfx.png" />
     <Image Include="assets\textures\jungle-ape_spritesheet.png" />
     <Image Include="assets\textures\lift-spider_spritesheet.png" />
     <Image Include="assets\textures\mook_spritesheet.png" />
@@ -341,7 +342,6 @@
     <Image Include="assets\textures\ui\title_screen_bg.png" />
     <Image Include="assets\textures\ui\waste-dog_portrait.png" />
     <Image Include="assets\textures\ui\waste-lobster_portrait.png" />
-    <Image Include="assets\textures\vfx.png" />
     <Image Include="assets\textures\waste-dog_spritesheet.png" />
     <Image Include="assets\textures\waste-lobster_spritesheet.png" />
     <Image Include="assets\tilesets\ts_bunker.png" />

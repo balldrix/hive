@@ -986,9 +986,6 @@
     <Image Include="assets\textures\shadow_large.png">
       <Filter>Assets\Textures</Filter>
     </Image>
-    <Image Include="assets\textures\vfx.png">
-      <Filter>Assets\Textures</Filter>
-    </Image>
     <Image Include="assets\textures\ui\loading_screen_bg.png">
       <Filter>Assets\Textures\UI</Filter>
     </Image>
@@ -1040,6 +1037,9 @@
     <Image Include="assets\tilesets\ts_master.png" />
     <Image Include="assets\tilesets\ts_bunker.png" />
     <Image Include="assets\textures\dustfx.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="assets\textures\impactfx.png">
       <Filter>Assets\Textures</Filter>
     </Image>
   </ItemGroup>
