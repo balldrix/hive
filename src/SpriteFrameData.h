@@ -2,7 +2,9 @@
 
 #include <DirectXTK/SimpleMath.h>
 #include <nlohmann/json.hpp>
+#include <nlohmann/json_fwd.hpp>
 #include <string>
+#include <Windows.h>
 
 using json = nlohmann::json;
 using namespace DirectX::SimpleMath;
