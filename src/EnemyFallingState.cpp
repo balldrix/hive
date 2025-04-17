@@ -2,6 +2,8 @@
 
 #include "Enemy.h"
 #include "EnemyLandingState.h"
+
+#include <directxtk/SimpleMath.h>
 #include <string>
 
 EnemyFallingState* EnemyFallingState::Instance()
@@ -22,6 +24,7 @@ void EnemyFallingState::Execute(Enemy* enemy)
 {
 	if(enemy->IsGrounded())
 	{
+		enemy->SetVelocity(Vector2::Zero);
 		enemy->GetStateMachine()->ChangeState(EnemyLandingState::Instance());
 	}
 }
