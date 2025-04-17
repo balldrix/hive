@@ -109,7 +109,7 @@
     <ClCompile Include="src\Game.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="src\ImpactFx.cpp">
+    <ClCompile Include="src\SpriteFx.cpp">
       <Filter>Graphics\VFX</Filter>
     </ClCompile>
     <ClCompile Include="src\PixelTexture.cpp">
@@ -565,7 +565,7 @@
     <ClInclude Include="src\Collider.h">
       <Filter>Collision</Filter>
     </ClInclude>
-    <ClInclude Include="src\ImpactFX.h">
+    <ClInclude Include="src\SpriteFx.h">
       <Filter>Graphics\VFX</Filter>
     </ClInclude>
     <ClInclude Include="src\PixelTexture.h">

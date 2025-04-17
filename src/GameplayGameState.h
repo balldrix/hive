@@ -21,7 +21,7 @@ class InGameHudManager;
 class GameOverScreenController;
 class SoundSource;
 class LevelRenderer;
-class ImpactFx;
+class SpriteFx;
 
 class GameplayGameState : public GameState
 {
@@ -77,9 +77,7 @@ private:
 	bool m_hidePlayerHud;
 	bool m_isCollisionOnCooldown;
 
-	Spritesheet* m_impactFxSpritesheet;
-	Animator* m_impactFxAnimator;
-	ImpactFx* m_impactFx;
+	SpriteFx* m_impactFx;
 	ParticleSystem* m_particleSystem;
 	ParticleData m_particleData;
 	EnemySpawner m_enemySpawner;

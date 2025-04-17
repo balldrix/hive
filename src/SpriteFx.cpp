@@ -1,15 +1,17 @@
-#include "ImpactFx.h"
+#include "SpriteFx.h"
 
+#include "AnimatedSpriteData.h"
 #include "Animator.h"
 #include "AssetLoader.h"
 #include "GameDataManager.h"
 #include "Graphics.h"
 #include "Spritesheet.h"
-#include "Texture.h"
-#include "SpriteFrameData.h"
-#include "AnimatedSpriteData.h"
 
-ImpactFx::ImpactFx() : 
+#include <directxtk/SimpleMath.h>
+#include <fmt/core.h>
+#include <string>
+
+SpriteFx::SpriteFx() : 
 	m_spritesheet(nullptr),
 	m_animator(nullptr),
 	m_position(0.0f, 0.0f),
@@ -17,24 +19,24 @@ ImpactFx::ImpactFx() :
 {
 }
 
-ImpactFx::~ImpactFx()
+SpriteFx::~SpriteFx()
 {
 }
 
-void ImpactFx::Init()
+void SpriteFx::Init(std::string textureId, std::string spriteDataId)
 {
 	AnimatedSpriteData animatedSpriteData;
-	animatedSpriteData = GameDataManager::LoadAnimatedSpriteData("assets\\data\\spritesheets\\impactfx_spritesheet.json");
+	animatedSpriteData = GameDataManager::LoadAnimatedSpriteData(fmt::format("assets\\data\\spritesheets\\{0}_spritesheet.json", spriteDataId));
 
 	m_spritesheet = new Spritesheet();
-	m_spritesheet->Init(AssetLoader::GetTexture("t_impact"), animatedSpriteData.spriteFrameData);
+	m_spritesheet->Init(AssetLoader::GetTexture(textureId), animatedSpriteData.spriteFrameData);
 	m_spritesheet->SetOrigin(animatedSpriteData.origin);
 
 	m_animator = new Animator();
 	m_animator->Init(animatedSpriteData);
 }
 
-void ImpactFx::Render(Graphics* graphics)
+void SpriteFx::Render(Graphics* graphics)
 {
 	if(!m_isActive)
 		return;
@@ -44,7 +46,7 @@ void ImpactFx::Render(Graphics* graphics)
 	m_spritesheet->Render(graphics, m_position, framenum);
 }
 
-void ImpactFx::Update(float deltaTime)
+void SpriteFx::Update(float deltaTime)
 {
 	if(!m_isActive)
 		return;
@@ -55,7 +57,7 @@ void ImpactFx::Update(float deltaTime)
 		m_isActive = false;
 }
 
-void ImpactFx::DisplayFx(const Vector2& position)
+void SpriteFx::DisplayFx(const Vector2& position)
 {
 	m_isActive = true;
 	m_position = position;

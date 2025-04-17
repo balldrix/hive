@@ -1,6 +1,7 @@
 #pragma once
 
 #include <directxtk/SimpleMath.h>
+#include <string>
 
 using namespace DirectX;
 using namespace SimpleMath;
@@ -9,13 +10,13 @@ class Spritesheet;
 class Animator;
 class Graphics;
 
-class ImpactFx
+class SpriteFx
 {
 public:
-	ImpactFx();
-	~ImpactFx();
+	SpriteFx();
+	~SpriteFx();
 
-	void Init();
+	void Init(std::string textureId, std::string id);
 	void Render(Graphics* graphics);
 	void Update(float deltaTime);
 

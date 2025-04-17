@@ -40,7 +40,7 @@
     <ClCompile Include="src\EnemyAttackRunState.cpp" />
     <ClCompile Include="src\EnemyIdleState.cpp" />
     <ClCompile Include="src\FadeTransitionGameState.cpp" />
-    <ClCompile Include="src\ImpactFx.cpp" />
+    <ClCompile Include="src\SpriteFx.cpp" />
     <ClCompile Include="src\InitialLoadGameState.cpp" />
     <ClCompile Include="src\LevelRenderer.cpp" />
     <ClCompile Include="src\LoadingGameState.cpp" />
@@ -96,7 +96,7 @@
     <ClInclude Include="src\EnemyAttackRunState.h" />
     <ClInclude Include="src\EnemyIdleState.h" />
     <ClInclude Include="src\GlobalConstants.h" />
-    <ClInclude Include="src\ImpactFX.h" />
+    <ClInclude Include="src\SpriteFx.h" />
     <ClInclude Include="src\LevelRenderer.h" />
     <ClInclude Include="src\LoadingGameState.h" />
     <ClInclude Include="src\Logger.h" />

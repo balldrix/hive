@@ -13,7 +13,6 @@
 #include "GameStateManager.h"
 #include "GlobalConstants.h"
 #include "HitBoxManager.h"
-#include "ImpactFx.h"
 #include "Input.h"
 #include "LevelCollision.h"
 #include "LevelRenderer.h"
@@ -30,6 +29,7 @@
 #include "PlayerKnockbackState.h"
 #include "Randomiser.h"
 #include "SoundSource.h"
+#include "SpriteFx.h"
 #include "SpriteSheet.h"
 #include "StateMachine.h"
 #include "TilemapLoader.h"
@@ -59,8 +59,6 @@ GameplayGameState::GameplayGameState() :
 	m_stopTimer(0.0f),
 	m_displayHitBoxes(false),
 	m_hidePlayerHud(false),
-	m_impactFxSpritesheet(nullptr),
-	m_impactFxAnimator(nullptr),
 	m_impactFx(nullptr),
 	m_particleSystem(nullptr),
 	m_collisionCooldown(0.0f),
@@ -146,8 +144,8 @@ void GameplayGameState::LoadAssets()
 	m_musicSoundSource->SetLooping(true);
 	m_musicSoundSource->SetRelative(true);
 
-	m_impactFx = new ImpactFx();
-	m_impactFx->Init();
+	m_impactFx = new SpriteFx();
+	m_impactFx->Init("t_impact", "impactfx");
 
 	m_particleSystem = new ParticleSystem();
 	m_particleSystem->Init(m_graphics);
@@ -191,12 +189,6 @@ void GameplayGameState::DeleteAssets()
 
 	delete m_impactFx;
 	m_impactFx = nullptr;
-
-	delete m_impactFxAnimator;
-	m_impactFxAnimator = nullptr;
-
-	delete m_impactFxSpritesheet;
-	m_impactFxSpritesheet = nullptr;
 
 	AudioEngine::Instance()->RemoveSoundSource(m_musicSoundSource);
 
