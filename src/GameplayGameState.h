@@ -6,6 +6,7 @@
 #include "Player.h"
 
 #include <directxtk/SimpleMath.h>
+#include <vector>
 
 class GameStateManager;
 class Graphics;
@@ -21,6 +22,7 @@ class InGameHudManager;
 class GameOverScreenController;
 class SoundSource;
 class LevelRenderer;
+class ImpactFxPool;
 class SpriteFx;
 
 class GameplayGameState : public GameState
@@ -77,7 +79,8 @@ private:
 	bool m_hidePlayerHud;
 	bool m_isCollisionOnCooldown;
 
-	SpriteFx* m_impactFx;
+	ImpactFxPool* m_impactFxPool;
+	std::vector<SpriteFx*> m_activeImpacts;
 	ParticleSystem* m_particleSystem;
 	ParticleData m_particleData;
 	EnemySpawner m_enemySpawner;

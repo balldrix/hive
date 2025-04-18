@@ -43,8 +43,8 @@ add_executable(${PROJECT_NAME} src/main.cpp src/AABB.cpp src/Animator.cpp src/Au
 								src/PlayerKnockbackState.h src/PlayerRunningState.h src/PlayerSprintingState.h
 								src/Randomiser.h src/Resources.h src/RunningEnemy.h src/RunningEnemyDeadState.h src/Sound.h src/SoundManager.h 
 								src/SoundSource.h src/Sprite.h src/SpriteFrameData.h src/Spritesheet.h src/State.h src/StateMachine.h
-								src/Texture.h src/TilemapData.h src/Timer.h
-								src/UnitVectors.h src/Window.h src/pch.h src/Logger.cpp src/Logger.h 
+								src/Texture.h src/TilemapData.h src/Timer.h src/ObjectPool.h
+								src/UnitVectors.h src/Window.h src/pch.h src/Logger.cpp src/Logger.h src/ImpactFxPool.h src/ImpactFxPool.cpp
 								src/AssetLoader.h src/AssetLoader.cpp src/InitialLoadGameState.h src/InitialLoadGameState.cpp src/AssetData.h 
 								src/AssetType.h src/AssetType.cpp src/LoadingGameState.h src/LoadingGameState.cpp src/UIManager.h src/UIManager.cpp
 								src/UISystemView.h src/UISystemView.cpp src/UIFadeOverlayView.h src/UIFadeOverlayView.cpp src/UIView.h src/UIView.cpp 

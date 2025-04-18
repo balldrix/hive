@@ -13,6 +13,7 @@
 #include "GameStateManager.h"
 #include "GlobalConstants.h"
 #include "HitBoxManager.h"
+#include "ImpactFxPool.h"
 #include "Input.h"
 #include "LevelCollision.h"
 #include "LevelRenderer.h"
@@ -29,7 +30,6 @@
 #include "PlayerKnockbackState.h"
 #include "Randomiser.h"
 #include "SoundSource.h"
-#include "SpriteFx.h"
 #include "SpriteSheet.h"
 #include "StateMachine.h"
 #include "TilemapLoader.h"
@@ -59,7 +59,8 @@ GameplayGameState::GameplayGameState() :
 	m_stopTimer(0.0f),
 	m_displayHitBoxes(false),
 	m_hidePlayerHud(false),
-	m_impactFx(nullptr),
+	m_impactFxPool(nullptr),
+	m_activeImpacts(0),
 	m_particleSystem(nullptr),
 	m_collisionCooldown(0.0f),
 	m_isCollisionOnCooldown(false),
@@ -144,8 +145,7 @@ void GameplayGameState::LoadAssets()
 	m_musicSoundSource->SetLooping(true);
 	m_musicSoundSource->SetRelative(true);
 
-	m_impactFx = new SpriteFx();
-	m_impactFx->Init("t_impact", "impactfx");
+	m_impactFxPool = new ImpactFxPool();
 
 	m_particleSystem = new ParticleSystem();
 	m_particleSystem->Init(m_graphics);
@@ -184,11 +184,13 @@ void GameplayGameState::LoadAssets()
 
 void GameplayGameState::DeleteAssets()
 {
+	m_activeImpacts.clear();
+
 	delete m_particleSystem;
 	m_particleSystem = nullptr;
 
-	delete m_impactFx;
-	m_impactFx = nullptr;
+	delete m_impactFxPool;
+	m_impactFxPool = nullptr;
 
 	AudioEngine::Instance()->RemoveSoundSource(m_musicSoundSource);
 
@@ -405,7 +407,21 @@ void GameplayGameState::Tick(float deltaTime)
 	if(m_player->IsDead() && m_player->GetLives() > 0)
 		m_player->Respawn();
 
-	m_impactFx->Update(deltaTime);
+	for(auto it = m_activeImpacts.begin(); it != m_activeImpacts.end();)
+	{
+		(*it)->Update(deltaTime);
+
+		if(!(*it)->IsActive())
+		{
+			m_impactFxPool->ReturnObject(*it);
+			it = m_activeImpacts.erase(it);
+		}
+		else
+		{
+			++it;
+		}
+	}
+
 	m_particleSystem->Update(deltaTime);
 	m_enemySpawner.Update(deltaTime);
 	m_enemySpawner2.Update(deltaTime);
@@ -464,8 +480,10 @@ void GameplayGameState::ProcessCollisions()
 				m_isCollisionOnCooldown = true;
 				m_collisionCooldown = damageData.hitStopDuration;
 
-				m_impactFx->DisplayFx(Vector2(groundPosition.x, groundPosition.y - spriteHeight * 0.5f));
-				SpawnParticles(m_impactFx->Position(), normalDirection, (Color)Colors::Green, (Color)Colors::DarkGreen, 1.0f, 200);
+				auto impactFx = m_impactFxPool->Get();
+				m_activeImpacts.push_back(impactFx);
+				impactFx->DisplayFx(Vector2(groundPosition.x, groundPosition.y - spriteHeight * 0.5f));
+				SpawnParticles(impactFx->Position(), normalDirection, (Color)Colors::Green, (Color)Colors::DarkGreen, 1.0f, 200);
 			}
 		}
 	}
@@ -504,7 +522,9 @@ void GameplayGameState::ProcessCollisions()
 				m_isCollisionOnCooldown = true;
 				m_collisionCooldown = damageData.hitStopDuration;
 
-				m_impactFx->DisplayFx(Vector2(playerGroundPositionX, playerGroundPositionY - spriteHeight * 0.5f));
+				auto impactFx = m_impactFxPool->Get();
+				m_activeImpacts.push_back(impactFx);
+				impactFx->DisplayFx(Vector2(playerGroundPositionX, playerGroundPositionY - spriteHeight * 0.5f));
 
 				if(m_player->GetStateMachine()->IsInState(*PlayerBlockState::Instance()))
 				{
@@ -512,7 +532,7 @@ void GameplayGameState::ProcessCollisions()
 				}
 				else
 				{
-					SpawnParticles(m_impactFx->Position(), normalDirection, (Color)Colors::Red, (Color)Colors::DarkRed, 1.0f, 200);
+					SpawnParticles(impactFx->Position(), normalDirection, (Color)Colors::Red, (Color)Colors::DarkRed, 1.0f, 200);
 				}
 
 				return;
@@ -546,9 +566,13 @@ void GameplayGameState::Render()
 	m_player->Render(m_graphics);
 	m_NPCManager->Render(m_graphics);
 	m_particleSystem->Render(m_graphics); 
-	m_impactFx->Render(m_graphics);
 	UIManager::Render(m_graphics);
 	LevelCollision::Render(m_graphics);
+
+	for(auto* it : m_activeImpacts)
+	{
+		it->Render(m_graphics);
+	}
 }
 
 void GameplayGameState::ResetGame()

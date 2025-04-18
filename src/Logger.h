@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <spdlog/logger.h>
+#include <string>
 
 class Logger
 {

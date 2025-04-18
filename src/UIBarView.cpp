@@ -68,7 +68,7 @@ void UIBarView::Update(float deltaTime)
 	{
 		const float UpdateDuration = 0.2f;
 		m_updateTimer += deltaTime;
-		float newValue = std::lerp(m_currentValue, m_targetValue, m_updateTimer / UpdateDuration);
+		float newValue = std::lerp(m_currentValue, (float)m_targetValue, m_updateTimer / UpdateDuration);
 		m_currentValue = newValue;
 
 		if(m_updateTimer >= UpdateDuration) 

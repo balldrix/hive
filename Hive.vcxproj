@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ImpactFxPool.cpp" />
     <ClCompile Include="src\EnemyFallingState.cpp" />
     <ClCompile Include="src\EnemyLandingState.cpp" />
     <ClCompile Include="src\EnemySpawner.cpp" />
@@ -67,6 +68,8 @@
     <ClCompile Include="src\UIKillCount.cpp" />
     <ClCompile Include="src\Utils.h" />
     <ClCompile Include="src\UISprite.cpp" />
+    <ClInclude Include="src\ImpactFxPool.h" />
+    <ClInclude Include="src\ObjectPool.h" />
     <ClInclude Include="src\EnemyDefinition.h" />
     <ClInclude Include="src\EnemyFallingState.h" />
     <ClInclude Include="src\EnemyLandingState.h" />

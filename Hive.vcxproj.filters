@@ -298,8 +298,15 @@
     <ClCompile Include="src\TilemapLoader.cpp">
       <Filter>System</Filter>
     </ClCompile>
-    <ClCompile Include="src\EnemyFallingState.cpp" />
-    <ClCompile Include="src\EnemyLandingState.cpp" />
+    <ClCompile Include="src\EnemyFallingState.cpp">
+      <Filter>Game\Enemy\States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EnemyLandingState.cpp">
+      <Filter>Game\Enemy\States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ImpactFxPool.cpp">
+      <Filter>Graphics\VFX</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -772,6 +779,12 @@
     <ClInclude Include="src\EnemyFallingState.h">
       <Filter>Game\Enemy\States</Filter>
     </ClInclude>
+    <ClInclude Include="src\ObjectPool.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ImpactFxPool.h">
+      <Filter>Graphics\VFX</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\fonts\goodbye_despair_8pt.spritefont">
@@ -837,10 +850,14 @@
     <None Include="assets\data\spritesheets\lift-spider_spritesheet.json">
       <Filter>Assets\Data\Spritesheets</Filter>
     </None>
-    <None Include="assets\fonts\gameboy_28pt.spritefont" />
-    <None Include="assets\data\spritesheets\jungle-ape_spritesheet.json" />
     <None Include="assets\data\spritesheets\dustfx_spritesheet.json">
       <Filter>Assets\Data\Spritesheets</Filter>
+    </None>
+    <None Include="assets\data\spritesheets\jungle-ape_spritesheet.json">
+      <Filter>Assets\Textures</Filter>
+    </None>
+    <None Include="assets\fonts\gameboy_28pt.spritefont">
+      <Filter>Assets\Fonts</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -1019,28 +1036,62 @@
     <Image Include="assets\textures\lift-spider_spritesheet.png">
       <Filter>Assets\Textures</Filter>
     </Image>
-    <Image Include="assets\textures\shadow_standard.png" />
-    <Image Include="assets\textures\jungle-ape_spritesheet.png" />
-    <Image Include="assets\textures\ui\bar_fill_green.png" />
-    <Image Include="assets\textures\ui\bar_fill_red.png" />
-    <Image Include="assets\textures\ui\bar_fill_yellow.png" />
-    <Image Include="assets\textures\ui\bar_frame_enemy.png" />
-    <Image Include="assets\textures\ui\bar_frame_player_special.png" />
-    <Image Include="assets\textures\ui\bar-fill-green-dark.png" />
-    <Image Include="assets\textures\ui\bar-fill-red-dark.png" />
-    <Image Include="assets\textures\ui\bar-fill-yellow-dark.png" />
-    <Image Include="assets\textures\ui\jungle-ape_portrait.png" />
-    <Image Include="assets\textures\ui\mook_portrait.png" />
-    <Image Include="assets\textures\ui\player_portrait.png" />
-    <Image Include="assets\textures\ui\portrait_frame.png" />
-    <Image Include="assets\textures\ui\waste-dog_portrait.png" />
-    <Image Include="assets\tilesets\ts_master.png" />
-    <Image Include="assets\tilesets\ts_bunker.png" />
     <Image Include="assets\textures\dustfx.png">
       <Filter>Assets\Textures</Filter>
     </Image>
     <Image Include="assets\textures\impactfx.png">
       <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="assets\textures\jungle-ape_spritesheet.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="assets\textures\shadow_standard.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="assets\tilesets\ts_bunker.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="assets\tilesets\ts_master.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="assets\textures\ui\bar_fill_green.png">
+      <Filter>Assets\Textures\UI</Filter>
+    </Image>
+    <Image Include="assets\textures\ui\bar_fill_red.png">
+      <Filter>Assets\Textures\UI</Filter>
+    </Image>
+    <Image Include="assets\textures\ui\bar_fill_yellow.png">
+      <Filter>Assets\Textures\UI</Filter>
+    </Image>
+    <Image Include="assets\textures\ui\bar_frame_enemy.png">
+      <Filter>Assets\Textures\UI</Filter>
+    </Image>
+    <Image Include="assets\textures\ui\bar_frame_player_special.png">
+      <Filter>Assets\Textures\UI</Filter>
+    </Image>
+    <Image Include="assets\textures\ui\bar-fill-green-dark.png">
+      <Filter>Assets\Textures\UI</Filter>
+    </Image>
+    <Image Include="assets\textures\ui\bar-fill-red-dark.png">
+      <Filter>Assets\Textures\UI</Filter>
+    </Image>
+    <Image Include="assets\textures\ui\bar-fill-yellow-dark.png">
+      <Filter>Assets\Textures\UI</Filter>
+    </Image>
+    <Image Include="assets\textures\ui\waste-dog_portrait.png">
+      <Filter>Assets\Textures\UI</Filter>
+    </Image>
+    <Image Include="assets\textures\ui\player_portrait.png">
+      <Filter>Assets\Textures\UI</Filter>
+    </Image>
+    <Image Include="assets\textures\ui\jungle-ape_portrait.png">
+      <Filter>Assets\Textures\UI</Filter>
+    </Image>
+    <Image Include="assets\textures\ui\portrait_frame.png">
+      <Filter>Assets\Textures\UI</Filter>
+    </Image>
+    <Image Include="assets\textures\ui\mook_portrait.png">
+      <Filter>Assets\Textures\UI</Filter>
     </Image>
   </ItemGroup>
 </Project>
