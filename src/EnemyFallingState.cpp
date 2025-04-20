@@ -24,6 +24,7 @@ void EnemyFallingState::Execute(Enemy* enemy)
 {
 	if(enemy->IsGrounded())
 	{
+		enemy->DisplayDust(enemy->GetPosition());
 		enemy->SetVelocity(Vector2::Zero);
 		enemy->GetStateMachine()->ChangeState(EnemyLandingState::Instance());
 	}

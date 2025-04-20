@@ -6,13 +6,13 @@
 #include "GameplayConstants.h"
 #include "HitBoxManager.h"
 #include "LevelCollision.h"
-#include "Logger.h"
-#include "SpriteSheet.h"
+#include "SpriteFx.h"
+#include "Spritesheet.h"
 
 #include "Collider.h"
 #include <directxtk/SimpleMath.h>
 #include <directxtk/SpriteBatch.h>
-#include <fmt/core.h>
+
 #include <fstream>
 #include <iosfwd>
 #include <string>
@@ -34,6 +34,7 @@ GameObject::GameObject() :
 	m_spritesheet(nullptr),
 	m_animator(nullptr),
 	m_shadow(nullptr),
+	m_dustFx(nullptr),
 	m_hitBoxManager(nullptr),
 	m_controlSystem(nullptr),
 	m_health(0),
@@ -141,6 +142,9 @@ void GameObject::Update(float deltaTime)
 
 	if(m_shadow != nullptr)
 		m_shadow->SetPosition(screenGroundPosition);
+
+	if(m_dustFx != nullptr)
+		m_dustFx->Update(deltaTime);
 }
 
 void GameObject::Move(const Vector2 &direction)
@@ -353,6 +357,11 @@ void GameObject::ApplyDamage(GameObject* source, const int& amount)
 
 void GameObject::Knockback(const Vector2& direction, const float& force)
 {
+}
+
+void GameObject::DisplayDust(const Vector2& position)
+{
+	m_dustFx->DisplayFx(position);
 }
 
 DamageData GameObject::GetDamageData() const

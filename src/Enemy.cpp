@@ -38,6 +38,7 @@
 #include <fmt/core.h>
 #include <string>
 #include <vector>
+#include "SpriteFx.h"
 
 using namespace GameplayConstants;
 
@@ -72,6 +73,7 @@ void Enemy::DeleteAll()
 	delete m_punchSoundSource;
 	delete m_footStepsSoundSource;
 	delete m_vocalSoundSource;
+	delete m_dustFx;
 	delete m_stateMachine;
 	delete m_hitBoxManager;
 	delete m_hitBoxSprite;
@@ -83,6 +85,7 @@ void Enemy::DeleteAll()
 	m_punchSoundSource = nullptr;
 	m_footStepsSoundSource = nullptr;
 	m_vocalSoundSource = nullptr;
+	m_dustFx = nullptr;
 	m_stateMachine = nullptr;
 	m_hitBoxManager = nullptr;
 	m_hitBoxSprite = nullptr;
@@ -151,6 +154,9 @@ void Enemy::Init(Graphics* graphics,
 		std::string error = "Error! Enemy damage data " + enemyDataFile + " not found.";
 		Logger::LogError(error);
 	}
+
+	m_dustFx = new SpriteFx();
+	m_dustFx->Init("t_dust", "dustfx");
 
 	m_vocalSoundSource = new SoundSource();
 	m_vocalSoundSource->SetTarget(this);
@@ -227,6 +233,9 @@ void Enemy::Render(Graphics* graphics)
 	//	 render hitbox
 	if(m_hitBoxManager)
 		m_hitBoxManager->Render(graphics, m_camera);
+
+	if(m_dustFx)
+		m_dustFx->Render(graphics);
 }
 
 void Enemy::Reset()

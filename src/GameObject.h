@@ -4,16 +4,16 @@
 #include "DamageData.h"
 #include "HitBoxManager.h"
 
+#include <directxtk/SimpleMath.h>
 #include <map>
 #include <string>
-
-#include <directxtk/SimpleMath.h>
 
 using namespace DirectX::SimpleMath;
 
 class Graphics;
 class Sprite;
 class Spritesheet;
+class SpriteFx;
 class ControlSystem;
 class Camera;
 
@@ -103,6 +103,8 @@ public:
 	bool				IsDead() const { return m_dead; }
 	bool				IsActive() const { return m_active; }
 
+	void				DisplayDust(const Vector2& position);
+
 	virtual void		Reset() = 0;
 
 protected:
@@ -121,6 +123,7 @@ protected:
 	Animator* m_animator;
 
 	Sprite* m_shadow;
+	SpriteFx* m_dustFx;
 
 	HitBoxManager* m_hitBoxManager;
 	ControlSystem* m_controlSystem;

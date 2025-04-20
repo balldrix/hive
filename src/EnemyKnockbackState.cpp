@@ -35,6 +35,8 @@ void EnemyKnockbackState::Execute(Enemy* enemy)
 
 	if(enemy->IsGrounded())
 	{
+		enemy->DisplayDust(enemy->GetGroundPosition());
+
 		if(enemy->GetKnockbackCount() == 0)
 		{
 			enemy->Kill();

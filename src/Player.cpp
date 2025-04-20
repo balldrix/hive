@@ -25,6 +25,7 @@
 #include "SoundSource.h"
 #include "Sprite.h"
 #include "Spritesheet.h"
+#include "SpriteFx.h"
 #include "StateMachine.h"
 #include "UIBarView.h"
 #include "UIKillCount.h"
@@ -66,12 +67,14 @@ Player::~Player()
 	delete m_vocalSoundSource;
 	delete m_footStepsSoundSource;
 	delete m_punchSoundSource;
+	delete m_dustFx;
 	delete m_stateMachine;
 	delete m_spritesheet;
 	
 	m_vocalSoundSource = nullptr;
 	m_footStepsSoundSource = nullptr;
 	m_punchSoundSource = nullptr;
+	m_dustFx = nullptr;
 	m_stateMachine = nullptr;
 	m_spritesheet = nullptr;
 }
@@ -110,6 +113,9 @@ void Player::Init(ControlSystem* controlSystem)
 
 	m_stateMachine = new StateMachine<Player>(this);
 	m_stateMachine->Init(PlayerIdleState::Instance(), nullptr, PlayerGlobalState::Instance());
+
+	m_dustFx = new SpriteFx();
+	m_dustFx->Init("t_dust", "dustfx");
 
 	m_health = m_playerData.objectData.startingHealth;
 	m_lives = m_playerData.objectData.startingLives;
@@ -366,9 +372,10 @@ void Player::Render(Graphics* graphics)
 
 	// render hitbox
 	if(m_hitBoxManager)
-	{
 		m_hitBoxManager->Render(graphics, m_camera);
-	}
+
+	if(m_dustFx)
+		m_dustFx->Render(graphics);
 }
 
 void Player::Reset()
