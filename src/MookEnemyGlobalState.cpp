@@ -2,8 +2,10 @@
 
 #include "Enemy.h"
 #include "EnemyDeadState.h"
+#include "EnemyFallingState.h"
 #include "EnemyIdleState.h"
 #include "EnemyKnockbackState.h"
+#include "EnemyLandingState.h"
 #include "NPCManager.h"
 #include "StateMachine.h"
 
@@ -27,6 +29,25 @@ void MookEnemyGlobalState::Execute(Enemy* enemy)
 	auto currentState = enemy->GetStateMachine()->GetCurrentState();
 	auto distance = (enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length();
 
+	// true if the enemy is not knocked back or dead
+	if(currentState != EnemyKnockbackState::Instance() &&
+		currentState != EnemyDeadState::Instance())
+	{
+		// true if moving to the left
+		if(enemy->GetCurrentVelocity().x < 0)
+		{
+			enemy->FlipHorizontally(true);
+		}
+
+		// true if moving to the right
+		if(enemy->GetCurrentVelocity().x > 0)
+		{
+			enemy->FlipHorizontally(false);
+		}
+	}
+
+	if(currentState == EnemyFallingState::Instance() || currentState == EnemyLandingState::Instance()) return;
+
 	if(distance <= enemy->GetData().hostileRange)
 	{
 		if (enemy->IsHostile() == false)
@@ -44,23 +65,6 @@ void MookEnemyGlobalState::Execute(Enemy* enemy)
 
 		if(NPCManager::Instance()->GetAttackingEnemy() == enemy)
 			NPCManager::Instance()->SetAttackingEnemy(nullptr);
-	}
-
-	// true if the enemy is not knocked back or dead
-	if(currentState != EnemyKnockbackState::Instance() &&
-		currentState != EnemyDeadState::Instance())
-	{
-		// true if moving to the left
-		if(enemy->GetCurrentVelocity().x < 0)
-		{
-			enemy->FlipHorizontally(true);
-		}
-
-		// true if moving to the right
-		if(enemy->GetCurrentVelocity().x > 0)
-		{
-			enemy->FlipHorizontally(false);
-		}
 	}
 }
 

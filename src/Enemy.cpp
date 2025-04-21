@@ -254,9 +254,11 @@ void Enemy::Reset()
 void Enemy::Spawn(const Vector2& position)
 {
 	m_position = position;
+	m_groundPosition = position;
 	m_dead = false;
 	m_active = true;
 	m_isFlashing = false;
+	m_health = m_enemyData.objectData.startingHealth;
 
 	GetSprite()->EnableSprite();
 	m_stateMachine->ChangeState(m_startingState);

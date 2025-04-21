@@ -1093,5 +1093,8 @@
     <Image Include="assets\textures\ui\mook_portrait.png">
       <Filter>Assets\Textures\UI</Filter>
     </Image>
+    <Image Include="assets\textures\ui\lift-spider_portrait.png">
+      <Filter>Assets\Textures\UI</Filter>
+    </Image>
   </ItemGroup>
 </Project>

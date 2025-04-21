@@ -334,6 +334,7 @@
     <Image Include="assets\textures\ui\bar_frame_player_health.png" />
     <Image Include="assets\textures\ui\bar_frame_player_special.png" />
     <Image Include="assets\textures\ui\jungle-ape_portrait.png" />
+    <Image Include="assets\textures\ui\lift-spider_portrait.png" />
     <Image Include="assets\textures\ui\loading_screen_bg.png" />
     <Image Include="assets\textures\ui\mook_portrait.png" />
     <Image Include="assets\textures\ui\player-profile.png" />

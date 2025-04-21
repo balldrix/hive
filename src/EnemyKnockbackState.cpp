@@ -5,8 +5,10 @@
 #include "EnemyDeadState.h"
 #include "HitBoxManager.h"
 #include "StateMachine.h"
-#include <directxtk/SimpleMath.h>
 #include "UnitVectors.h"
+
+#include <directxtk/SimpleMath.h>
+#include <string>
 
 EnemyKnockbackState* EnemyKnockbackState::Instance()
 {
@@ -35,7 +37,10 @@ void EnemyKnockbackState::Execute(Enemy* enemy)
 
 	if(enemy->IsGrounded())
 	{
-		enemy->DisplayDust(enemy->GetGroundPosition());
+		if(enemy->GetKnockbackCount() == 1)
+		{
+			enemy->DisplayDust(enemy->GetGroundPosition());
+		}
 
 		if(enemy->GetKnockbackCount() == 0)
 		{

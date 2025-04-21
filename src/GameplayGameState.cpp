@@ -423,8 +423,8 @@ void GameplayGameState::Tick(float deltaTime)
 	}
 
 	m_particleSystem->Update(deltaTime);
+	m_enemySpawner3.Update(deltaTime);
 	m_enemySpawner.Update(deltaTime);
-	m_enemySpawner2.Update(deltaTime);
 	m_enemySpawner3.Update(deltaTime);
 	m_enemySpawner4.Update(deltaTime);
 	LevelCollision::Update(m_camera);
