@@ -139,12 +139,6 @@
     <ClCompile Include="src\GameObject.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="src\NPCFactory.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\NPCManager.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="src\DamageData.h">
       <Filter>Game</Filter>
     </ClCompile>
@@ -306,6 +300,12 @@
     </ClCompile>
     <ClCompile Include="src\ImpactFxPool.cpp">
       <Filter>Graphics\VFX</Filter>
+    </ClCompile>
+    <ClCompile Include="src\NPCManager.cpp">
+      <Filter>Game\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\NPCFactory.cpp">
+      <Filter>Game\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -593,12 +593,6 @@
     <ClInclude Include="src\Resources.h">
       <Filter>System</Filter>
     </ClInclude>
-    <ClInclude Include="src\NPCManager.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\NPCFactory.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="src\GameStateManager.h">
       <Filter>Game\States</Filter>
     </ClInclude>
@@ -764,9 +758,6 @@
     <ClInclude Include="src\EnemySpawner.h">
       <Filter>System</Filter>
     </ClInclude>
-    <ClInclude Include="src\EnemyDefinition.h">
-      <Filter>Game\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="src\TilemapLoader.h">
       <Filter>System</Filter>
     </ClInclude>
@@ -784,6 +775,18 @@
     </ClInclude>
     <ClInclude Include="src\ImpactFxPool.h">
       <Filter>Graphics\VFX</Filter>
+    </ClInclude>
+    <ClInclude Include="src\NPCManager.h">
+      <Filter>Game\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\NPCFactory.h">
+      <Filter>Game\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EnemyDefinition.h">
+      <Filter>Game\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySpawnerData.h">
+      <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

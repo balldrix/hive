@@ -8,7 +8,6 @@
 #include "Spritesheet.h"
 
 #include <directxtk/SimpleMath.h>
-#include <fmt/core.h>
 #include <string>
 
 SpriteFx::SpriteFx() : 
@@ -23,10 +22,10 @@ SpriteFx::~SpriteFx()
 {
 }
 
-void SpriteFx::Init(std::string textureId, std::string spriteDataId)
+void SpriteFx::Init(std::string textureId, std::string spriteId)
 {
 	AnimatedSpriteData animatedSpriteData;
-	animatedSpriteData = GameDataManager::LoadAnimatedSpriteData(fmt::format("assets\\data\\spritesheets\\{0}_spritesheet.json", spriteDataId));
+	animatedSpriteData = GameDataManager::LoadAnimatedSpriteData(spriteId);
 
 	m_spritesheet = new Spritesheet();
 	m_spritesheet->Init(AssetLoader::GetTexture(textureId), animatedSpriteData.spriteFrameData);

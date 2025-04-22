@@ -137,7 +137,7 @@ void GameplayGameState::LoadAssets()
 	m_levelRenderer->Init(m_graphics, m_camera);
 	LevelCollision::CreateBounds(m_levelRenderer);
 
-	m_NPCManager->Init(m_graphics, m_camera, m_player);	
+	m_NPCManager->Init(m_graphics, m_camera, m_player);
 	m_camera->Init(GameWidth);
 	
 	m_musicSoundSource = new SoundSource();

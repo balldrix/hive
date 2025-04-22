@@ -68,9 +68,9 @@
     <ClCompile Include="src\UIKillCount.cpp" />
     <ClCompile Include="src\Utils.h" />
     <ClCompile Include="src\UISprite.cpp" />
+    <ClInclude Include="EnemySpawnerData.h" />
     <ClInclude Include="src\ImpactFxPool.h" />
     <ClInclude Include="src\ObjectPool.h" />
-    <ClInclude Include="src\EnemyDefinition.h" />
     <ClInclude Include="src\EnemyFallingState.h" />
     <ClInclude Include="src\EnemyLandingState.h" />
     <ClInclude Include="src\EnemySpawner.h" />

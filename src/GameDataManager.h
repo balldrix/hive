@@ -15,8 +15,8 @@ public:
 	static void Init();
 	static void Shutdown();
 	
-	static AnimatedSpriteData LoadAnimatedSpriteData(std::string path);
-	static std::vector<HitBoxData> LoadHitboxData(std::string path);
+	static AnimatedSpriteData LoadAnimatedSpriteData(std::string id);
+	static std::vector<HitBoxData> LoadHitboxData(std::string id);
 
 private:
 	static GameDataManager* s_instance;

@@ -33,12 +33,12 @@
 #include "UIPortraitView.h"
 #include "UnitVectors.h"
 
+#include "SpriteFx.h"
 #include <cstdint>
 #include <directxtk/SimpleMath.h>
 #include <fmt/core.h>
 #include <string>
 #include <vector>
-#include "SpriteFx.h"
 
 using namespace GameplayConstants;
 
@@ -111,11 +111,8 @@ void Enemy::Init(Graphics* graphics,
 	m_npcManager = npcManager;
 	m_grounded = true;
 
-	std::string spritesheetDataPath = "assets\\data\\spritesheets\\";
-	std::string suffix = "_spritesheet.json";
-
 	AnimatedSpriteData animatedSpriteData;
-	animatedSpriteData = GameDataManager::LoadAnimatedSpriteData(fmt::format("{0}{1}{2}", spritesheetDataPath, data.name, suffix));
+	animatedSpriteData = GameDataManager::LoadAnimatedSpriteData(data.name);
 
 	m_spritesheet = new Spritesheet();
 	m_spritesheet->Init(AssetLoader::GetTexture(fmt::format("t_{}", data.name)), animatedSpriteData.spriteFrameData);
@@ -130,7 +127,7 @@ void Enemy::Init(Graphics* graphics,
 	m_animator->SetAnimation(0);
 	
 	std::vector<HitBoxData> hitboxData;
-	hitboxData = GameDataManager::LoadHitboxData(fmt::format("assets\\data\\hitboxes\\{}_hitbox.json", data.name));
+	hitboxData = GameDataManager::LoadHitboxData(data.name);
 
 	m_hitBoxManager = new HitBoxManager();
 	m_hitBoxManager->Init(this, hitboxData);

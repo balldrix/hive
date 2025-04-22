@@ -84,7 +84,7 @@ void Player::Init(ControlSystem* controlSystem)
 	m_controlSystem = controlSystem;
 
 	AnimatedSpriteData animatedSpriteData;
-	animatedSpriteData = GameDataManager::LoadAnimatedSpriteData("assets\\data\\spritesheets\\player_spritesheet.json");
+	animatedSpriteData = GameDataManager::LoadAnimatedSpriteData("player");
 
 	m_spritesheet = new Spritesheet();
 	m_spritesheet->Init(AssetLoader::GetTexture("t_player"), animatedSpriteData.spriteFrameData);
@@ -99,7 +99,7 @@ void Player::Init(ControlSystem* controlSystem)
 	m_animator->SetAnimation(0);
 
 	m_hitBoxManager = new HitBoxManager();
-	m_hitBoxManager->Init(this, GameDataManager::LoadHitboxData("assets\\data\\hitboxes\\player_hitbox.json"));
+	m_hitBoxManager->Init(this, GameDataManager::LoadHitboxData("player"));
 
 	LoadData("assets\\data\\player\\player_data.txt", "assets\\data\\damage\\player_damage.txt");
 
