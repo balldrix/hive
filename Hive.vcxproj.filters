@@ -286,9 +286,6 @@
     <ClCompile Include="src\UISprite.cpp">
       <Filter>Graphics\Sprites</Filter>
     </ClCompile>
-    <ClCompile Include="src\EnemySpawner.cpp">
-      <Filter>System</Filter>
-    </ClCompile>
     <ClCompile Include="src\TilemapLoader.cpp">
       <Filter>System</Filter>
     </ClCompile>
@@ -305,6 +302,12 @@
       <Filter>Game\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="src\NPCFactory.cpp">
+      <Filter>Game\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EnemySpawnManager.cpp">
+      <Filter>Game\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EnemySpawner.cpp">
       <Filter>Game\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
@@ -755,9 +758,6 @@
     <ClInclude Include="src\UISprite.h">
       <Filter>Graphics\Sprites</Filter>
     </ClInclude>
-    <ClInclude Include="src\EnemySpawner.h">
-      <Filter>System</Filter>
-    </ClInclude>
     <ClInclude Include="src\TilemapLoader.h">
       <Filter>System</Filter>
     </ClInclude>
@@ -785,8 +785,11 @@
     <ClInclude Include="src\EnemyDefinition.h">
       <Filter>Game\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="EnemySpawnerData.h">
-      <Filter>System</Filter>
+    <ClInclude Include="src\EnemySpawnManager.h">
+      <Filter>Game\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EnemySpawner.h">
+      <Filter>Game\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

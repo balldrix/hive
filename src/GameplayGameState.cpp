@@ -7,7 +7,7 @@
 #include "Collider.h"
 #include "ControlSystem.h"
 #include "Enemy.h"
-#include "EnemySpawner.h"
+#include "EnemySpawnManager.h"
 #include "GameplayConstants.h"
 #include "GameState.h"
 #include "GameStateManager.h"
@@ -52,6 +52,7 @@ GameplayGameState::GameplayGameState() :
 	m_NPCManager(nullptr),
 	m_player(nullptr),
 	m_levelRenderer(nullptr),
+	m_enemySpawnManager(nullptr),
 	m_musicSoundSource(nullptr),
 	m_canAttack(true),
 	m_running(false),
@@ -129,12 +130,14 @@ void GameplayGameState::LoadAssets()
 	m_NPCManager = new NPCManager();
 	m_player = new Player();
 	m_levelRenderer = new LevelRenderer();
+	m_enemySpawnManager = new EnemySpawnManager();
 
 	m_player->Init(m_controlSystem);
 	m_player->SetCamera(m_camera);
 	//m_camera->SetTarget(m_player);
 
 	m_levelRenderer->Init(m_graphics, m_camera);
+	m_enemySpawnManager->Init();
 	LevelCollision::CreateBounds(m_levelRenderer);
 
 	m_NPCManager->Init(m_graphics, m_camera, m_player);
@@ -155,30 +158,6 @@ void GameplayGameState::LoadAssets()
 	const std::wstring musicTitle = L"travelling_master";
 	m_musicSoundSource->SetSound(SoundManager::GetSound(musicTitle));*/
 
-	SpawnData spawnData;
-	spawnData.enemyDefinition.id = "lift-spider";
-	spawnData.spawnRate = 10.0f;
-	spawnData.spawnPosition = Vector2(170, 80);
-	spawnData.enemyDefinition;
-	spawnData.height = 20.0f;
-	spawnData.startingVelocity = Vector2(-0.2f, 0.0f);
-	m_enemySpawner.Init(spawnData);
-
-	spawnData.spawnPosition = Vector2(180, 90);
-	spawnData.spawnRate = 9.0f;
-	spawnData.startingVelocity = Vector2(-0.2f, 0.0f);
-	m_enemySpawner2.Init(spawnData);
-
-	spawnData.spawnPosition = Vector2(90, 80);
-	spawnData.spawnRate = 10.5f;
-	spawnData.startingVelocity = Vector2(0.2f, 0.0f);
-	m_enemySpawner3.Init(spawnData);
-
-	spawnData.spawnPosition = Vector2(80, 90);
-	spawnData.startingVelocity = Vector2(0.2f, 0.0f);
-	spawnData.spawnRate = 9.5f;
-	m_enemySpawner4.Init(spawnData);
-
 	m_running = true;
 }
 
@@ -196,6 +175,9 @@ void GameplayGameState::DeleteAssets()
 
 	delete m_musicSoundSource;
 	m_musicSoundSource = nullptr;
+
+	delete m_enemySpawnManager;
+	m_enemySpawnManager = nullptr;
 
 	delete m_levelRenderer;
 	m_levelRenderer = nullptr;
@@ -387,6 +369,7 @@ void GameplayGameState::Tick(float deltaTime)
 {
 	m_camera->Update(deltaTime);
 	m_levelRenderer->Update(deltaTime);
+	m_enemySpawnManager->Update(deltaTime);
 
 	if(m_stopTimer > 0)
 	{
@@ -423,10 +406,6 @@ void GameplayGameState::Tick(float deltaTime)
 	}
 
 	m_particleSystem->Update(deltaTime);
-	m_enemySpawner3.Update(deltaTime);
-	m_enemySpawner.Update(deltaTime);
-	m_enemySpawner3.Update(deltaTime);
-	m_enemySpawner4.Update(deltaTime);
 	LevelCollision::Update(m_camera);
 }
 

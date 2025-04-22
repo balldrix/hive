@@ -4,13 +4,14 @@
 
 #include <directxtk/SimpleMath.h>
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 using namespace DirectX::SimpleMath;
 
 namespace
 {
-	struct ObjectData
+	struct MapObjectData
 	{
 		unsigned int id = {};
 		std::string type = {};
@@ -19,12 +20,13 @@ namespace
 		float width = {};
 		float x = {};
 		float y = {};
+		std::unordered_map<std::string, std::string> customProperties;
 	};
 
 	struct TilemapLayer
 	{
 		std::vector<unsigned int> data;
-		std::vector<ObjectData> objectData;
+		std::vector<MapObjectData> objectData;
 		unsigned int height = {};
 		unsigned int id = {};
 		std::string name = {};
@@ -65,7 +67,7 @@ namespace
 
 			if(layer.contains("data"))
 			{
-				for(auto& dataValue : layer["data"])
+				for(const auto& dataValue : layer["data"])
 				{
 					tilemapLayer.data.push_back(dataValue.get<unsigned int>());
 				}
@@ -83,7 +85,7 @@ namespace
 			if(layer.contains("properties"))
 			{
 				json customProperties = layer["properties"];
-				for(auto& property : customProperties)
+				for(const auto& property : customProperties)
 				{
 					if(property.contains("name") && property["name"] == "depth" && property.contains("value"))
 					{
@@ -107,10 +109,10 @@ namespace
 
 			if(layer.contains("objects"))
 			{
-				for(auto& objects : layer["objects"])
+				for(const auto& objects : layer["objects"])
 				{
 					static unsigned int id = 0;
-					ObjectData objectData;
+					MapObjectData objectData;
 					objectData.id = objects.value("id", id++);
 					objectData.name = objects.value("name", "");
 					objectData.type = objects.value("type", "");
@@ -118,6 +120,25 @@ namespace
 					objectData.width = objects.value("width", 0.0f);
 					objectData.x = objects.value("x", 0.0f);
 					objectData.y = objects.value("y", 0.0f);
+
+					if(objects.contains("properties"))
+					{
+						for(const auto& property : objects["properties"])
+						{
+							std::string key = property.value("name", "");
+							std::string value;
+
+							if(property.contains("value"))
+							{
+								if(property["value"].is_string())
+									value = property["value"].get<std::string>();
+								else
+									value = property["value"].dump();
+							}
+
+							objectData.customProperties[key] = value;
+						}
+					}
 
 					tilemapLayer.objectData.push_back(objectData);
 				}

@@ -7,7 +7,7 @@
 #include "Graphics.h"
 #include "NPCFactory.h"
 #include "Player.h"
-#include "Spritesheet.h"
+#include "Player.h"
 
 #include <directxtk/SimpleMath.h>
 #include <string>
@@ -43,7 +43,7 @@ void NPCManager::SpawnNPC(const Vector2& position, const EnemyDefinition& enemyD
 {
 	Enemy* enemy = nullptr;
 
-	auto enemyList = s_instance->m_enemyList;
+	auto& enemyList = s_instance->m_enemyList;
 	for(auto it = enemyList.begin(); it != enemyList.end(); ++it)
 	{
 		std::string name = (*it)->GetData().name;
