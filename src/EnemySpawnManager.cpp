@@ -2,6 +2,7 @@
 
 #include "EnemyDefinition.h"
 #include "EnemySpawner.h"
+#include "GameDataManager.h"
 #include "TilemapData.h"
 #include "TilemapLoader.h"
 
@@ -51,12 +52,10 @@ void EnemySpawnManager::CreateSpawners(const std::vector<MapObjectData>& mapObje
 	{
 		EnemySpawner* enemySpawner = new EnemySpawner();
 
-		// @TODO get definition data from file later
-		EnemyDefinition def;
-		def.id = mapObj.customProperties.at("enemyDefinitionId");
+		std::string defId = mapObj.customProperties.at("enemyDefinitionId");
 
 		SpawnData data;
-		data.enemyDefinition = def;
+		data.enemyDefinition = GameDataManager::GetEnemyDefinition(defId);
 		data.spawnRate = std::stof(mapObj.customProperties.at("spawnRate"));
 		data.spawnPosition = Vector2(mapObj.x, mapObj.y);
 		data.height = std::stof(mapObj.customProperties.at("height"));

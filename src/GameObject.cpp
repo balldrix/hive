@@ -2,17 +2,15 @@
 
 #include "Animator.h"
 #include "Camera.h"
+#include "Collider.h"
 #include "DamageData.h"
 #include "GameplayConstants.h"
 #include "HitBoxManager.h"
 #include "LevelCollision.h"
 #include "SpriteFx.h"
-#include "Spritesheet.h"
 
-#include "Collider.h"
 #include <directxtk/SimpleMath.h>
 #include <directxtk/SpriteBatch.h>
-
 #include <fstream>
 #include <iosfwd>
 #include <string>
@@ -156,7 +154,7 @@ void GameObject::Stop()
 	SetVelocity(Vector2::Zero);
 }
 
-float GameObject::GetLerpAmount(const float& num)
+float GameObject::GetLerpAmount(const float& num) const
 {
 	if(num == 0.0f)
 	{
@@ -208,11 +206,11 @@ bool GameObject::LoadDamageData(const std::string& filename)
 				file >> hitStopDuration;
 
 				DamageData data;
-				data.attackName = attackName;
+				data.name = attackName;
 				data.amount = std::stoi(damageAmount);
 				data.hitStopDuration = std::stof(hitStopDuration);
 
-				m_damageData.insert({ attackName, data });
+				m_damageData.push_back(data);
 			}
 		}
 	}

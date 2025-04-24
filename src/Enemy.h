@@ -1,9 +1,9 @@
 #pragma once
 
+#include "Camera.h"
 #include "DamageData.h"
-#include "EnemyData.h"
+#include "EnemyDefinition.h"
 #include "GameObject.h"
-#include "HitBoxManager.h"
 #include "Player.h"
 #include "Sprite.h"
 #include "State.h"
@@ -26,7 +26,7 @@ public:
 	void					Init(Graphics* graphics,
 								Camera* camera,
 								Player* player,
-								const EnemyData& data,
+								const EnemyDefinition& definition,
 								NPCManager* npcManager,
 								Texture* shadowTexture,
 								State<Enemy>* globalEnemyState,
@@ -34,11 +34,11 @@ public:
 
 	void					Update(float deltaTime);
 	void					Render(Graphics* graphics);
-	virtual void			Reset();
+	virtual void			Reset() {};
 
 	void					Spawn(const Vector2& position);
 
-	void					SetData(const EnemyData& data);
+	void					SetDefinition(const EnemyDefinition& definition);
 	void					SetDead(bool isDead);
 	void					SetPlayerTarget(Player* player);
 	void					SetHostile(bool isHostile);
@@ -48,7 +48,7 @@ public:
 	StateMachine<Enemy>*	GetStateMachine() const { return m_stateMachine; }
 	float					GetTimer() const { return m_thinkingTimer; }
 	bool					IsHostile() const { return m_isHostile; }
-	EnemyData				GetData() const { return m_enemyData; }
+	EnemyDefinition			GetData() const { return m_enemyDefinition; }
 	virtual DamageData		GetDamageData() const;
 	NPCManager*				GetManager() const { return m_npcManager; }
 
@@ -77,7 +77,7 @@ protected:
 	SoundSource*			m_footStepsSoundSource;
 	SoundSource*			m_punchSoundSource;
 	int						m_recentFootstepFrame;
-	EnemyData				m_enemyData;
+	EnemyDefinition			m_enemyDefinition;
 
 private:
 	Vector2					Seek() const;

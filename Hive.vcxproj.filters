@@ -139,9 +139,6 @@
     <ClCompile Include="src\GameObject.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="src\DamageData.h">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="src\ParticleSystem.cpp">
       <Filter>Graphics\VFX</Filter>
     </ClCompile>
@@ -456,9 +453,6 @@
       <Filter>Constants</Filter>
     </ClInclude>
     <ClInclude Include="src\Enemy.h">
-      <Filter>Game\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="src\EnemyData.h">
       <Filter>Game\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="src\RunningEnemy.h">
@@ -782,14 +776,17 @@
     <ClInclude Include="src\NPCFactory.h">
       <Filter>Game\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="src\EnemyDefinition.h">
-      <Filter>Game\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="src\EnemySpawnManager.h">
       <Filter>Game\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="src\EnemySpawner.h">
       <Filter>Game\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EnemyDefinition.h">
+      <Filter>Game\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DamageData.h">
+      <Filter>System\Data</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -865,16 +862,13 @@
     <None Include="assets\fonts\gameboy_28pt.spritefont">
       <Filter>Assets\Fonts</Filter>
     </None>
+    <None Include="assets\data\enemies\enemyDefinitions.json">
+      <Filter>Assets\Data\Enemies</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\data\encounters\encounter_positions.txt">
       <Filter>Assets\Data\Encounters</Filter>
-    </Text>
-    <Text Include="assets\data\enemies\enemy_data.txt">
-      <Filter>Assets\Data\Enemies</Filter>
-    </Text>
-    <Text Include="assets\data\enemies\type_data.txt">
-      <Filter>Assets\Data\Enemies</Filter>
     </Text>
     <Text Include="assets\data\player\player_data.txt">
       <Filter>Assets\Data\Player</Filter>
@@ -894,7 +888,7 @@
     <Text Include="assets\data\damage\waste-dog_damage.txt">
       <Filter>Assets\Data\Damage</Filter>
     </Text>
-    <Text Include="assets\data\damage\life-spider_damage.txt">
+    <Text Include="assets\data\damage\lift-spider_damage.txt">
       <Filter>Assets\Data\Damage</Filter>
     </Text>
   </ItemGroup>

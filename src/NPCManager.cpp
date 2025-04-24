@@ -1,12 +1,10 @@
 #include "NPCManager.h"
 
 #include "Enemy.h"
-#include "EnemyData.h"
 #include "EnemyDefinition.h"
 #include "GameObject.h"
 #include "Graphics.h"
 #include "NPCFactory.h"
-#include "Player.h"
 #include "Player.h"
 
 #include <directxtk/SimpleMath.h>
@@ -46,9 +44,9 @@ void NPCManager::SpawnNPC(const Vector2& position, const EnemyDefinition& enemyD
 	auto& enemyList = s_instance->m_enemyList;
 	for(auto it = enemyList.begin(); it != enemyList.end(); ++it)
 	{
-		std::string name = (*it)->GetData().name;
+		std::string id = (*it)->GetData().id;
 		bool isActive = (*it)->IsActive();
-		if(name != enemyDefinition.id || isActive) continue;
+		if(id != enemyDefinition.id || isActive) continue;
 
 		enemy = (*it);
 		break;
@@ -56,32 +54,7 @@ void NPCManager::SpawnNPC(const Vector2& position, const EnemyDefinition& enemyD
 
 	if(enemy == nullptr)
 	{
-		ObjectData objData =
-		{
-			"Enemy1",
-			10,
-			1,
-			position,
-			35,
-			40,
-			0.8f,
-			3.5
-		};
-
-		EnemyData data =
-		{
-			"lift-spider",
-			"lift-spider",
-			objData,
-			1.5,
-			40,
-			25,
-			10,
-			0,
-			0
-		};
-
-		enemy = s_instance->m_NPCFactory->GetEnemy(data);
+		enemy = s_instance->m_NPCFactory->GetEnemy(enemyDefinition);
 		s_instance->m_enemyList.push_back(enemy);
 	}
 

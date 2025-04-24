@@ -25,7 +25,7 @@ struct FrameData
 		auto it = std::find_if(frameData.begin(), frameData.end(),
 			[&frameIndex](const FrameData& obj) { return obj.frameIndex == frameIndex; });
 
-		if (it != frameData.end())
+		if(it != frameData.end())
 			return *it;
 		else
 
@@ -43,7 +43,7 @@ struct TagData
 		auto it = std::find_if(tagData.begin(), tagData.end(),
 			[&tagName](const TagData& obj) { return obj.name == tagName; });
 
-		if (it != tagData.end())
+		if(it != tagData.end())
 			return *it;
 		else
 
@@ -61,7 +61,7 @@ struct HitBoxData
 		auto it = std::find_if(hitBoxData.begin(), hitBoxData.end(),
 			[&hitBoxName](const HitBoxData& obj) { return obj.name == hitBoxName; });
 
-		if (it != hitBoxData.end())
+		if(it != hitBoxData.end())
 			return *it;
 		else
 
@@ -69,29 +69,32 @@ struct HitBoxData
 	}
 };
 
-inline void from_json(const json& j, HitBoxData& h)
+namespace nlohmann
 {
-	h.name = j["hitBoxName"];
-
-	for(auto& it : j["tagData"])
+	static inline void from_json(const json& j, HitBoxData& h)
 	{
-		TagData tagdata;
-		tagdata.name = it["animationName"];
+		h.name = j.at("hitBoxName");
 
-		for (auto& it : it["frames"])
+		for(auto& it : j.at("tagData"))
 		{
-			FrameData frameData {};
-			auto bounds = it["bounds"];
-				
-			frameData.frameIndex = it["frameIndex"];
-			frameData.bounds.height = bounds["height"];
-			frameData.bounds.width = bounds["width"];
-			frameData.bounds.x = bounds["x"];
-			frameData.bounds.y = bounds["y"];
+			TagData tagdata;
+			tagdata.name = it.at("animationName");
 
-			tagdata.frameData.push_back(frameData);
+			for(auto& it : it.at("frames"))
+			{
+				FrameData frameData{};
+				auto& bounds = it.at("bounds");
+
+				frameData.frameIndex = it.at("frameIndex");
+				frameData.bounds.height = bounds.at("height");
+				frameData.bounds.width = bounds.at("width");
+				frameData.bounds.x = bounds.at("x");
+				frameData.bounds.y = bounds.at("y");
+
+				tagdata.frameData.push_back(frameData);
+			}
+
+			h.tagData.push_back(tagdata);
 		}
-
-		h.tagData.push_back(tagdata);
 	}
 }

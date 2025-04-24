@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AnimatedSpriteData.h"
+#include "EnemyDefinition.h"
 #include "HitBoxData.h"
 
 #include <string>
@@ -15,9 +16,12 @@ public:
 	static void Init();
 	static void Shutdown();
 	
-	static AnimatedSpriteData LoadAnimatedSpriteData(std::string id);
-	static std::vector<HitBoxData> LoadHitboxData(std::string id);
+	static AnimatedSpriteData LoadAnimatedSpriteData(std::string path);
+	static std::vector<HitBoxData> LoadHitboxData(std::string path);
+	static void LoadAllEnemyDefinitions();
+	static EnemyDefinition GetEnemyDefinition(const std::string& id);
 
 private:
 	static GameDataManager* s_instance;
+	std::vector<EnemyDefinition> m_enemyDefinitions;
 };

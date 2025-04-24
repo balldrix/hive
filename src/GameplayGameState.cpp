@@ -8,6 +8,7 @@
 #include "ControlSystem.h"
 #include "Enemy.h"
 #include "EnemySpawnManager.h"
+#include "GameDataManager.h"
 #include "GameplayConstants.h"
 #include "GameState.h"
 #include "GameStateManager.h"
@@ -122,9 +123,13 @@ void GameplayGameState::LoadAssets()
 	//SoundManager::AddSound(L"assets\\sounds\\boss_punch_004.wav");
 	//SoundManager::AddSound(L"assets\\sounds\\travelling_master.wav");
 
+	LevelCollision::Init();
+	TilemapLoader::Init();
+
 	TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_lift.json");
 	//TilemapLoader::LoadTilemap("assets\\objectData\\tilemaps\\tm_trailer-level-showcase.json");
 
+	GameDataManager::LoadAllEnemyDefinitions();
 	m_camera = new Camera();
 	m_controlSystem = new ControlSystem();
 	m_NPCManager = new NPCManager();
@@ -193,6 +198,9 @@ void GameplayGameState::DeleteAssets()
 
 	delete m_camera;
 	m_camera = nullptr;
+
+	LevelCollision::Shutdown();
+	TilemapLoader::Shutdown();
 }
 
 void GameplayGameState::ProcessInput()

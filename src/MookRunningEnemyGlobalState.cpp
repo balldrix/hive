@@ -7,9 +7,11 @@
 #include "EnemyKnockbackState.h"
 #include "EnemyRunningState.h"
 #include "GameplayConstants.h"
-#include "Player.h"
 #include "Randomiser.h"
 #include "StateMachine.h"
+
+#include <cmath>
+#include <directxtk/SimpleMath.h>
 
 using namespace GameplayConstants;
 
@@ -54,7 +56,7 @@ void MookRunningEnemyGlobalState::Execute(Enemy* enemy)
 
 	if(distance < enemy->GetData().fightRange &&
 		fabs(enemy->GetPositionY() - enemy->GetPlayerTarget()->GetPositionY()) < VerticalHitRange)
-	{		
+	{
 		auto playerPos = Vector2(enemy->GetPlayerTarget()->GetPositionX(), 0);
 		auto enemyPos = Vector2(enemy->GetPositionX(), 0);
 		Vector2 dirToPlayer = (playerPos - enemyPos);

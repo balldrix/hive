@@ -127,7 +127,7 @@ void UIBarView::SetCurrentValue(const int& value, bool animate)
 
 	if(animate) return;
 
-	m_currentValue = value;
+	m_currentValue = static_cast<float>(value);
 }
 
 void UIBarView::SetMaxValue(const int& value)

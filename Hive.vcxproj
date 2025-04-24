@@ -38,7 +38,6 @@
     <ClCompile Include="src\MainMenuGameState.cpp" />
     <ClCompile Include="src\AssetLoader.cpp" />
     <ClCompile Include="src\AssetType.cpp" />
-    <ClCompile Include="src\DamageData.h" />
     <ClCompile Include="src\EnemyAttackRunState.cpp" />
     <ClCompile Include="src\EnemyIdleState.cpp" />
     <ClCompile Include="src\FadeTransitionGameState.cpp" />
@@ -69,6 +68,8 @@
     <ClCompile Include="src\UIKillCount.cpp" />
     <ClCompile Include="src\Utils.h" />
     <ClCompile Include="src\UISprite.cpp" />
+    <ClInclude Include="src\DamageData.h" />
+    <ClInclude Include="src\EnemyDefinition.h" />
     <ClInclude Include="src\EnemySpawnManager.h" />
     <ClInclude Include="src\ImpactFxPool.h" />
     <ClInclude Include="src\ObjectPool.h" />
@@ -197,7 +198,6 @@
     <ClInclude Include="src\ControlSystem.h" />
     <ClInclude Include="src\Enemy.h" />
     <ClInclude Include="src\EnemyAttackState.h" />
-    <ClInclude Include="src\EnemyData.h" />
     <ClInclude Include="src\EnemyDeadState.h" />
     <ClInclude Include="src\MookEnemyGlobalState.h" />
     <ClInclude Include="src\EnemyHurtState.h" />
@@ -245,6 +245,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\assets.json" />
+    <None Include="assets\data\enemies\enemyDefinitions.json" />
     <None Include="assets\data\hitboxes\lift-spider_hitbox.json" />
     <None Include="assets\data\hitboxes\mook_hitbox.json" />
     <None Include="assets\data\hitboxes\player_hitbox.json" />
@@ -271,14 +272,12 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\data\damage\boss_damage.txt" />
-    <Text Include="assets\data\damage\life-spider_damage.txt" />
+    <Text Include="assets\data\damage\lift-spider_damage.txt" />
     <Text Include="assets\data\damage\mook_damage.txt" />
     <Text Include="assets\data\damage\mook_runner_damage.txt" />
     <Text Include="assets\data\damage\player_damage.txt" />
     <Text Include="assets\data\damage\waste-dog_damage.txt" />
     <Text Include="assets\data\encounters\encounter_positions.txt" />
-    <Text Include="assets\data\enemies\enemy_data.txt" />
-    <Text Include="assets\data\enemies\type_data.txt" />
     <Text Include="assets\data\player\player_data.txt" />
   </ItemGroup>
   <ItemGroup>

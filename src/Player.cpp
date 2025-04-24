@@ -1,5 +1,6 @@
 #include "Player.h"
 
+#include "AnimatedSpriteData.h"
 #include "Animator.h"
 #include "AssetLoader.h"
 #include "AudioEngine.h"
@@ -7,6 +8,7 @@
 #include "ControlSystem.h"
 #include "DamageData.h"
 #include "GameDataManager.h"
+#include "GameObject.h"
 #include "GlobalConstants.h"
 #include "Graphics.h"
 #include "HitBoxManager.h"
@@ -24,8 +26,8 @@
 #include "SoundManager.h"
 #include "SoundSource.h"
 #include "Sprite.h"
-#include "Spritesheet.h"
 #include "SpriteFx.h"
+#include "Spritesheet.h"
 #include "StateMachine.h"
 #include "UIBarView.h"
 #include "UIKillCount.h"
@@ -33,8 +35,6 @@
 #include "UIManager.h"
 #include "UnitVectors.h"
 
-#include "AnimatedSpriteData.h"
-#include "GameObject.h"
 #include <cstdint>
 #include <directxtk/SimpleMath.h>
 #include <fstream>
@@ -84,7 +84,7 @@ void Player::Init(ControlSystem* controlSystem)
 	m_controlSystem = controlSystem;
 
 	AnimatedSpriteData animatedSpriteData;
-	animatedSpriteData = GameDataManager::LoadAnimatedSpriteData("player");
+	animatedSpriteData = GameDataManager::LoadAnimatedSpriteData("assets\\data\\spritesheets\\player_spritesheet.json");
 
 	m_spritesheet = new Spritesheet();
 	m_spritesheet->Init(AssetLoader::GetTexture("t_player"), animatedSpriteData.spriteFrameData);
@@ -99,9 +99,9 @@ void Player::Init(ControlSystem* controlSystem)
 	m_animator->SetAnimation(0);
 
 	m_hitBoxManager = new HitBoxManager();
-	m_hitBoxManager->Init(this, GameDataManager::LoadHitboxData("player"));
+	m_hitBoxManager->Init(this, GameDataManager::LoadHitboxData("assets\\data\\hitboxes\\player_hitbox.json"));
 
-	LoadData("assets\\data\\player\\player_data.txt", "assets\\data\\damage\\player_damage.txt");
+	LoadData("assets\\data\\player\\player_data.txt", "assets\\data\\amount\\player_damage.txt");
 
 	m_position.x = m_playerData.objectData.startingPosition.x;
 	m_position.y = RespawnAirPositionY;
@@ -170,7 +170,7 @@ void Player::LoadData(const std::string &playerDataFile, const std::string &dama
 	if(!LoadDamageData(damageDataFile))
 	{
 		// unable to load player objectData file
-		std::string error = " Error! No player damage data file " + damageDataFile + " found.";
+		std::string error = " Error! No player amount data file " + damageDataFile + " found.";
 		Logger::LogError(error);
 	}
 }
@@ -398,10 +398,13 @@ void Player::Reset()
 DamageData Player::GetDamageData() const
 {
 	std::string stateName = m_stateMachine->GetCurrentState()->GetName();
-	if(m_damageData.count(stateName) == 0)
-		return DamageData();
 
-	return m_damageData.at(stateName);
+	for(const auto& data : m_damageData)
+	{
+		if(data.name == stateName) return data;
+	}
+
+	return DamageData();
 }
 
 void Player::Move(const Vector2& direction)

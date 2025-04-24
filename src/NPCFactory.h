@@ -1,6 +1,6 @@
 #pragma once
 
-#include "EnemyData.h"
+#include "EnemyDefinition.h"
 
 class Camera;
 class Enemy;
@@ -20,14 +20,11 @@ public:
 			  Camera* camera, 
 			  Player* player);
 	
-	Enemy* GetEnemy(EnemyData data);
+	Enemy* GetEnemy(EnemyDefinition definition);
 
 private:
-	Enemy* CreateWasteDog(EnemyData& data);
-	Enemy* CreateMook(EnemyData& data);
-	Enemy* CreateMookRunner(EnemyData& data);
-	Enemy* CreateBoss(EnemyData& data);
-	Enemy* CreateSpider(EnemyData& data);
+	Enemy* CreateNormalEnemy(EnemyDefinition& definition);
+	Enemy* CreateFallingEnemy(EnemyDefinition& definition);
 
 	Graphics* m_graphics;
 	Camera* m_camera;

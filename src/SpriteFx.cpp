@@ -25,7 +25,7 @@ SpriteFx::~SpriteFx()
 void SpriteFx::Init(std::string textureId, std::string spriteId)
 {
 	AnimatedSpriteData animatedSpriteData;
-	animatedSpriteData = GameDataManager::LoadAnimatedSpriteData(spriteId);
+	animatedSpriteData = GameDataManager::LoadAnimatedSpriteData(fmt::format("assets\\data\\spritesheets\\{}_spritesheet.json", spriteId));
 
 	m_spritesheet = new Spritesheet();
 	m_spritesheet->Init(AssetLoader::GetTexture(textureId), animatedSpriteData.spriteFrameData);

@@ -3,7 +3,6 @@
 #include "EnemyDefinition.h"
 
 #include <directxtk/SimpleMath.h>
-#include <string>
 #include <vector>
 
 using namespace DirectX::SimpleMath;

@@ -7,23 +7,23 @@
 
 using json = nlohmann::json;
 
-namespace
+struct AssetData
 {
-	struct AssetData
-	{
-		std::string id = {};
-		std::string path = {};
-		AssetType::Type type;
-		std::string tag = {};
-	};
+	std::string id = {};
+	std::string path = {};
+	AssetType::Type type;
+	std::string tag = {};
+};
 
-	void from_json(const json& j, AssetData& data)
+namespace nlohmann 
+{
+	static inline void from_json(const json& j, AssetData& data)
 	{
-		data.id = j["id"];
-		data.path = j["path"];
-		data.tag = j["tag"];
+		data.id = j.at("id");
+		data.path = j.at("path");
+		data.tag = j.at("tag");
 
-		std::string typeString = j["type"];
+		std::string typeString = j.at("type");
 		AssetType::Type type = AssetType::GetMappedType(typeString);
 
 		if(type != AssetType::Type::None)

@@ -5,10 +5,7 @@
 
 #include <directxtk/SimpleMath.h>
 #include <nlohmann/json.hpp>
-#include <nlohmann/json_fwd.hpp>
 #include <vector>
-
-using json = nlohmann::json;
 
 struct AnimatedSpriteData
 {
@@ -19,21 +16,24 @@ struct AnimatedSpriteData
 	AnimatedSpriteData() = default;
 };
 
-inline void from_json(const json& j, AnimatedSpriteData& a)
+namespace nlohmann 
 {
-	a.spriteFrameData = j["frames"].get<std::vector<SpriteFrameData>>();
-
-	json m = j["meta"];
-	a.animationData = m["frameTags"].get<std::vector<AnimationData>>();
-
-	if(m.contains("origin") && m["origin"].contains("x") && m["origin"].contains("y")) 
+	static inline void from_json(const json& j, AnimatedSpriteData& a)
 	{
-		a.origin.x = m["origin"]["x"];
-		a.origin.y = m["origin"]["y"];
-	}
-	else 
-	{
-		a.origin.x = 0;
-		a.origin.y = 0;
+		a.spriteFrameData = j.at("frames").get<std::vector<SpriteFrameData>>();
+
+		json m = j["meta"];
+		a.animationData = m["frameTags"].get<std::vector<AnimationData>>();
+
+		if(m.contains("origin") && m.at("origin").contains("x") && m.at("origin").contains("y"))
+		{
+			a.origin.x = m.at("origin").at("x");
+			a.origin.y = m.at("origin").at("y");
+		}
+		else
+		{
+			a.origin.x = 0;
+			a.origin.y = 0;
+		}
 	}
 }

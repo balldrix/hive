@@ -7,7 +7,6 @@
 #include "Randomiser.h"
 #include "StateMachine.h"
 
-#include <directxtk/SimpleMath.h>
 #include <string>
 
 EnemyWalkingState* EnemyWalkingState::Instance()
@@ -22,7 +21,7 @@ void EnemyWalkingState::OnEnter(Enemy* enemy)
 	enemy->GetAnimator()->SetAnimation(m_name);
 	enemy->GetHitBoxManager()->SetCollidersUsingTag(m_name);
 	enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4f, 1.0f));
-	enemy->SetMovementSpeed(enemy->GetData().objectData.walkSpeed);
+	enemy->SetMovementSpeed(enemy->GetData().walkSpeed);
 }
 
 void EnemyWalkingState::Execute(Enemy* enemy)

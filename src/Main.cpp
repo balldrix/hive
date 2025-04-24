@@ -18,11 +18,9 @@
 #include "Game.h"
 #include "GameDataManager.h"
 #include "Graphics.h"
-#include "LevelCollision.h"
 #include "Logger.h"
 #include "MenuSystem.h"
 #include "SoundManager.h"
-#include "TilemapLoader.h"
 #include "UIManager.h"
 #include "Window.h"
 
@@ -30,9 +28,6 @@
 #include <DirectXMathMisc.inl>
 #include <sal.h>
 #include <Windows.h>
-#include <winerror.h>
-#include <winnt.h>
-#include <WinUser.h>
 
 Graphics* graphics = nullptr;
 Window* window	= nullptr;
@@ -68,8 +63,6 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	GameDataManager::Init();
 	UIManager::Init();
 	MenuSystem::Init();
-	LevelCollision::Init();
-	TilemapLoader::Init();
 
 	game = new Game();
 	game->Init(window, graphics);
@@ -98,8 +91,6 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 void Shutdown()
 {
 	delete game;
-	TilemapLoader::Shutdown();
-	LevelCollision::Shutdown();
 	MenuSystem::Destroy();
 	UIManager::Destroy();
 	GameDataManager::Shutdown();

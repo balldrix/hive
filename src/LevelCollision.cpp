@@ -14,7 +14,7 @@
 
 #include <DirectXColors.h>
 #include <directxtk/SimpleMath.h>
-#include <fmt/core.h>
+#include <fmt/format.h>
 #include <string>
 
 using namespace GameplayConstants;

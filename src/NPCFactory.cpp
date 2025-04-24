@@ -1,21 +1,16 @@
 #include "NPCFactory.h"
 
 #include "AssetLoader.h"
+#include "Camera.h"
 #include "Enemy.h"
-#include "EnemyData.h"
+#include "EnemyDefinition.h"
 #include "EnemyFallingState.h"
 #include "EnemyIdleState.h"
-#include "EnemyRunningState.h"
 #include "Graphics.h"
-#include "HitBoxManager.h"
-#include "KingMook.h"
-#include "KingMookEnemyGlobalState.h"
 #include "Logger.h"
 #include "MookEnemyGlobalState.h"
-#include "MookRunningEnemyGlobalState.h"
 #include "NPCManager.h"
 #include "Player.h"
-#include "RunningEnemy.h"
 
 #include <fmt/core.h>
 
@@ -35,49 +30,22 @@ void NPCFactory::Init(Graphics* graphics,
 	m_player = player;
 }
 
-Enemy* NPCFactory::GetEnemy(EnemyData data)
+Enemy* NPCFactory::GetEnemy(EnemyDefinition definition)
 {
-	if(data.type == "jungle-ape")
-		return CreateMook(data);
+	if(definition.enemyType == EnemyType::Normal)
+		return CreateNormalEnemy(definition);
 
-	if(data.type == "waste-dog")
-		return CreateWasteDog(data);
+	if(definition.enemyType == EnemyType::Falling)
+		return CreateFallingEnemy(definition);
 
-	if(data.type == "mook")
-		return CreateMook(data);
-
-	if(data.type == "mook_runner")
-		return CreateMookRunner(data);
-
-	if(data.type == "boss")
-		return CreateBoss(data);
-
-	if(data.type == "waste-lobster")
-		return CreateWasteDog(data);
-
-	if(data.type == "lift-spider")
-		return CreateSpider(data);
-
-	Logger::LogWarning(fmt::format("[NPCFactory] No Enemy type {0} found.", data.type));
+	Logger::LogWarning(fmt::format("[NPCFactory] No Enemy type {0} found.", EnemyTypeToString(definition.enemyType)));
 	return nullptr;
 }
 
-Enemy* NPCFactory::CreateWasteDog(EnemyData& data)
-{
-	auto enemy = new Enemy();
-	enemy->Init(m_graphics, m_camera, m_player, data,
-				NPCManager::Instance(),
-				AssetLoader::GetTexture("t_shadow_l"),
-				MookEnemyGlobalState::Instance(),
-				EnemyIdleState::Instance());
-
-	return enemy;
-}
-
-Enemy* NPCFactory::CreateMook(EnemyData& data)
+Enemy* NPCFactory::CreateNormalEnemy(EnemyDefinition& definition)
 {
 	auto mook = new Enemy();
-	mook->Init(m_graphics, m_camera, m_player, data,
+	mook->Init(m_graphics, m_camera, m_player, definition,
 				NPCManager::Instance(),
 				AssetLoader::GetTexture("t_shadow_s"),
 				MookEnemyGlobalState::Instance(),
@@ -86,34 +54,10 @@ Enemy* NPCFactory::CreateMook(EnemyData& data)
 	return mook;
 }
 
-Enemy* NPCFactory::CreateMookRunner(EnemyData& data)
-{
-	auto mook = new RunningEnemy();
-	mook->Init(m_graphics, m_camera, m_player, data,
-				NPCManager::Instance(),
-				AssetLoader::GetTexture("t_shadow_s"),
-				MookRunningEnemyGlobalState::Instance(),
-				EnemyRunningState::Instance());
-
-	return mook;
-}
-
-Enemy* NPCFactory::CreateBoss(EnemyData& data)
-{
-	auto boss = new KingMook();
-	boss->Init(m_graphics, m_camera, m_player, data,
-				NPCManager::Instance(),
-				AssetLoader::GetTexture("t_shadow_l"),
-				KingMookEnemyGlobalState::Instance(),
-				EnemyIdleState::Instance());
-
-	return boss;
-}
-
-Enemy* NPCFactory::CreateSpider(EnemyData& data)
+Enemy* NPCFactory::CreateFallingEnemy(EnemyDefinition& definition)
 {
 	auto spider = new Enemy();
-	spider->Init(m_graphics, m_camera, m_player, data,
+	spider->Init(m_graphics, m_camera, m_player, definition,
 				NPCManager::Instance(),
 				AssetLoader::GetTexture("t_shadow_l"),
 				MookEnemyGlobalState::Instance(),

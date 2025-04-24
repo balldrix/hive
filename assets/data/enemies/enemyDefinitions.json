@@ -1,0 +1,137 @@
+[
+  {
+    "id": "lift-spider",
+    "enemyType": "falling",
+    "spritesheetDataPath": "assets\\data\\spritesheets\\lift-spider_spritesheet.json",
+    "textureId": "t_lift-spider",
+    "shadowId": "t_shadow_l",
+    "hitBoxDataPath": "assets\\data\\hitboxes\\lift-spider_hitbox.json",
+    "damageData": [
+      {
+        "name": "attack1",
+        "value": 10,
+        "hitStop": 0.5
+      },
+      {
+        "name": "attack2",
+        "value": 12,
+        "hitStop": 0.75
+      }
+    ],
+    "hp": 100,
+    "walkSpeed": 35,
+    "runningSpeed": 40,
+    "acceleration": 0.8,
+    "deceleration": 3.5,
+    "thinkingTime": 1.5,
+    "hostileRange": 40,
+    "fightRange": 25,
+    "attackRange": 10,
+    "chargeRange": 0,
+    "chargeSpeed": 0
+  },
+  {
+    "id": "mook",
+    "enemyType": "normal",
+    "spritesheetDataPath": "assets\\\\data\\\\spritesheets\\\\mook_spritesheet.json",
+    "textureId": "t_mook",
+    "shadowId": "t_shadow_l",
+    "hitBoxDataPath": "assets\\\\data\\\\hitboxes\\\\mook_hitbox.json",
+    "damageData": [
+      {
+        "name": "attackNormal",
+        "value": 5,
+        "hitStop": 0.2
+      }
+    ],
+    "hp": 100,
+    "walkSpeed": 35,
+    "runningSpeed": 40,
+    "acceleration": 0.8,
+    "deceleration": 3.5,
+    "thinkingTime": 1.5,
+    "hostileRange": 40,
+    "fightRange": 25,
+    "attackRange": 10,
+    "chargeRange": 0,
+    "chargeSpeed": 0
+  },
+  {
+    "id": "runner",
+    "enemyType": "runner",
+    "spritesheetDataPath": "assets\\\\data\\\\spritesheets\\\\mook_spritesheet.json",
+    "textureId": "t_mook",
+    "shadowId": "t_shadow_l",
+    "hitBoxDataPath": "assets\\\\data\\\\hitboxes\\\\mook_hitbox.json",
+    "damageData": [
+      {
+        "name": "attackRun",
+        "value": 8,
+        "hitStop": 0.2
+      }
+    ],
+    "hp": 100,
+    "walkSpeed": 30,
+    "runningSpeed": 90,
+    "acceleration": 5,
+    "deceleration": 5,
+    "thinkingTime": 1.5,
+    "hostileRange": 100,
+    "fightRange": 60,
+    "attackRange": 10,
+    "chargeRange": 120,
+    "chargeSpeed": 100
+  },
+  {
+    "id": "waste-dog",
+    "enemyType": "normal",
+    "spritesheetDataPath": "assets\\\\data\\\\spritesheets\\\\waste-dog_spritesheet.json",
+    "textureId": "t_waste-dog",
+    "shadowId": "t_shadow_l",
+    "hitBoxDataPath": "assets\\\\data\\\\hitboxes\\\\waste-dog_hitbox.json",
+    "damageData": [
+      {
+        "name": "attackNormal",
+        "value": 5,
+        "hitStop": 0.2
+      }
+    ],
+    "hp": 100,
+    "walkSpeed": 35,
+    "runningSpeed": 40,
+    "acceleration": 0.8,
+    "deceleration": 3.5,
+    "thinkingTime": 1.5,
+    "hostileRange": 55,
+    "fightRange": 30,
+    "attackRange": 20,
+    "chargeRange": 0,
+    "chargeSpeed": 0
+  },
+  {
+    "id": "waste-lobster",
+    "enemyType": "ranged",
+    "spritesheetDataPath": "assets\\\\data\\\\spritesheets\\\\waste-lobster_spritesheet.json",
+    "textureId": "t_waste-lobster",
+    "shadowId": "t_shadow_s",
+    "hitBoxDataPath": "assets\\\\data\\\\hitboxes\\\\waste-lobster_hitbox.json",
+    "damageData": [
+      {
+        "name": "attackNormal",
+        "value": 5,
+        "hitStop": 0.2
+      }
+    ],
+    "hp": 100,
+    "walkSpeed": 25,
+    "runningSpeed": 35,
+    "acceleration": 1.2,
+    "deceleration": 4,
+    "thinkingTime": 2.5,
+    "hostileRange": 70,
+    "fightRange": 50,
+    "attackRange": 50,
+    "chargeRange": 0,
+    "chargeSpeed": 0
+  }
+]

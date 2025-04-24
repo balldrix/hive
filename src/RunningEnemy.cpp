@@ -1,8 +1,9 @@
 #include "RunningEnemy.h"
 
 #include "Enemy.h"
-#include "StateMachine.h"
+#include "GameObject.h"
 #include "RunningEnemyDeadState.h"
+#include "StateMachine.h"
 
 RunningEnemy::RunningEnemy()
 {
@@ -24,5 +25,5 @@ void RunningEnemy::Reset()
 {
 	Enemy::Reset();
 
-	m_movementSpeed = m_enemyData.objectData.runningSpeed;
+	m_movementSpeed = m_enemyDefinition.runningSpeed;
 }

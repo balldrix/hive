@@ -3,16 +3,16 @@
 #include "Animator.h"
 #include "DamageData.h"
 #include "HitBoxManager.h"
+#include "SpriteSheet.h"
 
 #include <directxtk/SimpleMath.h>
-#include <map>
 #include <string>
+#include <vector>
 
 using namespace DirectX::SimpleMath;
 
 class Graphics;
 class Sprite;
-class Spritesheet;
 class SpriteFx;
 class ControlSystem;
 class Camera;
@@ -43,7 +43,7 @@ public:
 	virtual void		Move(const Vector2& direction);
 	virtual void		Stop();
 
-	float				GetLerpAmount(const float& num);
+	float				GetLerpAmount(const float& num) const;
 	float				Lerp(float target, float current, float amount);
 	bool				LoadDamageData(const std::string& damageDataFile);
 
@@ -136,5 +136,5 @@ protected:
 	bool					m_grounded;
 	bool					m_dead;
 	bool					m_active;
-	std::map<std::string, DamageData>	m_damageData;
+	std::vector<DamageData>	m_damageData;
 };

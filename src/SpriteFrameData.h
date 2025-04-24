@@ -2,7 +2,6 @@
 
 #include <DirectXTK/SimpleMath.h>
 #include <nlohmann/json.hpp>
-#include <nlohmann/json_fwd.hpp>
 #include <string>
 #include <Windows.h>
 
@@ -22,28 +21,31 @@ struct SpriteFrameData
 	SpriteFrameData() = default;
 };
 
-inline void from_json(const json& j, SpriteFrameData& s)
+namespace nlohmann
 {
-	s.filename = j.at("filename").get<std::string>();
+	static inline void from_json(const json& j, SpriteFrameData& s)
+	{
+		s.filename = j.at("filename").get<std::string>();
 
-	json rect = j["frame"];
-	s.frame.left = rect["x"];
-	s.frame.top = rect["y"];
-	s.frame.right = s.frame.left + rect["w"];
-	s.frame.bottom = s.frame.top + rect["h"];
+		json rect = j.at("frame");
+		s.frame.left = rect.at("x");
+		s.frame.top = rect.at("y");
+		s.frame.right = s.frame.left + rect.at("w");
+		s.frame.bottom = s.frame.top + rect.at("h");
 
-	s.rotated = j["rotated"];
-	s.trimmed = j["trimmed"];
+		s.rotated = j.at("rotated");
+		s.trimmed = j.at("trimmed");
 
-	rect = j["spriteSourceSize"];
-	s.spriteSourceSize.left = rect["x"];
-	s.spriteSourceSize.top = rect["y"];
-	s.spriteSourceSize.right = s.spriteSourceSize.left + rect["w"];
-	s.spriteSourceSize.bottom = s.spriteSourceSize.top + rect["h"];
+		rect = j.at("spriteSourceSize");
+		s.spriteSourceSize.left = rect.at("x");
+		s.spriteSourceSize.top = rect.at("y");
+		s.spriteSourceSize.right = s.spriteSourceSize.left + rect.at("w");
+		s.spriteSourceSize.bottom = s.spriteSourceSize.top + rect.at("h");
 
-	json size = j["sourceSize"];
-	s.sourceSize.x = size["w"];
-	s.sourceSize.y = size["h"];
+		json size = j.at("sourceSize");
+		s.sourceSize.x = size.at("w");
+		s.sourceSize.y = size.at("h");
 
-	s.duration = j["duration"];
+		s.duration = j.at("duration");
+	}
 }

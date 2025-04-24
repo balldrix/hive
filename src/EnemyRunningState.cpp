@@ -29,7 +29,7 @@ void EnemyRunningState::OnEnter(Enemy* enemy)
 	enemy->GetAnimator()->SetAnimation(m_name);
 	enemy->GetHitBoxManager()->SetCollidersUsingTag(m_name);
 
-	enemy->SetMovementSpeed(enemy->GetData().objectData.runningSpeed);
+	enemy->SetMovementSpeed(enemy->GetData().runningSpeed);
 
 	if(enemy->GetStateMachine()->GetPreviousState() == EnemyAttackRunState::Instance())
 		return;

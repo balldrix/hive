@@ -6,7 +6,7 @@
 #include "AudioEngine.h"
 #include "DamageData.h"
 #include "EnemyAttackState.h"
-#include "EnemyData.h"
+#include "EnemyDefinition.h"
 #include "EnemyHurtState.h"
 #include "EnemyIdleState.h"
 #include "EnemyKnockbackState.h"
@@ -16,7 +16,6 @@
 #include "Graphics.h"
 #include "HitBoxData.h"
 #include "HitBoxManager.h"
-#include "Logger.h"
 #include "NPCManager.h"
 #include "Player.h"
 #include "Randomiser.h"
@@ -24,6 +23,7 @@
 #include "SoundManager.h"
 #include "SoundSource.h"
 #include "Sprite.h"
+#include "SpriteFx.h"
 #include "SpriteSheet.h"
 #include "State.h"
 #include "StateMachine.h"
@@ -33,7 +33,6 @@
 #include "UIPortraitView.h"
 #include "UnitVectors.h"
 
-#include "SpriteFx.h"
 #include <cstdint>
 #include <directxtk/SimpleMath.h>
 #include <fmt/core.h>
@@ -97,7 +96,7 @@ void Enemy::DeleteAll()
 void Enemy::Init(Graphics* graphics,
 				Camera* camera,
 				Player* player,
-				const EnemyData& data,
+				const EnemyDefinition& data,
 				NPCManager* npcManager,
 				Texture* shadowTexture,
 				State<Enemy>* globalEnemyState,
@@ -105,17 +104,15 @@ void Enemy::Init(Graphics* graphics,
 {
 	m_camera = camera;
 	m_playerTarget = player;
-	m_enemyData = data;
-	m_position = data.objectData.startingPosition;
-	m_groundPosition = data.objectData.startingPosition;
+	m_enemyDefinition = data;
 	m_npcManager = npcManager;
 	m_grounded = true;
 
 	AnimatedSpriteData animatedSpriteData;
-	animatedSpriteData = GameDataManager::LoadAnimatedSpriteData(data.name);
+	animatedSpriteData = GameDataManager::LoadAnimatedSpriteData(data.spritesheetDataPath);
 
 	m_spritesheet = new Spritesheet();
-	m_spritesheet->Init(AssetLoader::GetTexture(fmt::format("t_{}", data.name)), animatedSpriteData.spriteFrameData);
+	m_spritesheet->Init(AssetLoader::GetTexture(fmt::format("t_{}", data.id)), animatedSpriteData.spriteFrameData);
 	m_spritesheet->SetOrigin(animatedSpriteData.origin);
 
 	m_shadow = new Sprite();
@@ -127,30 +124,22 @@ void Enemy::Init(Graphics* graphics,
 	m_animator->SetAnimation(0);
 	
 	std::vector<HitBoxData> hitboxData;
-	hitboxData = GameDataManager::LoadHitboxData(data.name);
+	hitboxData = GameDataManager::LoadHitboxData(data.hitBoxDataPath);
 
 	m_hitBoxManager = new HitBoxManager();
 	m_hitBoxManager->Init(this, hitboxData);
 	
-	m_movementSpeed = data.objectData.walkSpeed;
-	m_acceleration = data.objectData.acceleration;
-	m_deceleration = data.objectData.deceleration;
+	m_movementSpeed = data.walkSpeed;
+	m_acceleration = data.acceleration;
+	m_deceleration = data.deceleration;
 
 	m_startingState = startingState;
 	m_stateMachine = new StateMachine<Enemy>(this);
 	m_stateMachine->Init(EnemyIdleState::Instance(), nullptr, globalEnemyState);
 	m_stateMachine->ChangeState(startingState);
 
-	m_id = m_enemyData.objectData.id;
-	m_health = m_enemyData.objectData.startingHealth;
-
-	std::string enemyDataFile = "assets\\data\\damage\\" + data.type + "_damage.txt";
-
-	if(!LoadDamageData(enemyDataFile))
-	{
-		std::string error = "Error! Enemy damage data " + enemyDataFile + " not found.";
-		Logger::LogError(error);
-	}
+	m_id = m_enemyDefinition.id;
+	m_health = m_enemyDefinition.hp;
 
 	m_dustFx = new SpriteFx();
 	m_dustFx->Init("t_dust", "dustfx");
@@ -235,19 +224,6 @@ void Enemy::Render(Graphics* graphics)
 		m_dustFx->Render(graphics);
 }
 
-void Enemy::Reset()
-{
-	m_stateMachine->ChangeState(m_startingState);
-	m_position = m_enemyData.objectData.startingPosition;
-	m_grounded = true;
-	m_movementSpeed = m_enemyData.objectData.walkSpeed;
-	m_health = m_enemyData.objectData.startingHealth;
-	ResetTimer(Randomiser::Instance()->GetRandNum(0.8f, 2.0f));
-	m_active = false;
-	m_dead = false;
-	m_isFlashing = false;
-}
-
 void Enemy::Spawn(const Vector2& position)
 {
 	m_position = position;
@@ -255,15 +231,15 @@ void Enemy::Spawn(const Vector2& position)
 	m_dead = false;
 	m_active = true;
 	m_isFlashing = false;
-	m_health = m_enemyData.objectData.startingHealth;
+	m_health = m_enemyDefinition.hp;
 
 	GetSprite()->EnableSprite();
 	m_stateMachine->ChangeState(m_startingState);
 }
 
-void Enemy::SetData(const EnemyData& data)
+void Enemy::SetDefinition(const EnemyDefinition& data)
 {
-	m_enemyData = data;
+	m_enemyDefinition = data;
 }
 
 void Enemy::SetDead(bool isDead)
@@ -292,7 +268,7 @@ void Enemy::ApplyDamage(GameObject* source, const int& amount)
 
 	if(m_health < 0) m_health = 0;
 
-	// true if health has gone or damage is high
+	// true if health has gone or amount is high
 	if(m_health < 1 || amount > 50)
 	{
 		// set knockback state
@@ -364,7 +340,7 @@ Vector2 Enemy::Seek() const
 
 	direction = targetPosition - position;
 
-	if(direction.Length() < m_enemyData.attackRange)
+	if(direction.Length() < m_enemyDefinition.attackRange)
 		direction = -direction;
 
 	direction.Normalize();
@@ -409,7 +385,7 @@ void Enemy::ShowEnemyHud()
 	if(portraitView)
 	{
 		portraitView->SetActive(true);
-		portraitView->SetPortraitTexture(AssetLoader::GetTexture(fmt::format("t_{}_portrait", m_enemyData.type)));
+		portraitView->SetPortraitTexture(AssetLoader::GetTexture(fmt::format("t_{0}_portrait", m_enemyDefinition.id)));
 	}
 
 	UIBarView* healthbar = static_cast<UIBarView*>(UIManager::GetView("Enemy Health Bar"));
@@ -418,7 +394,7 @@ void Enemy::ShowEnemyHud()
 	{
 		healthbar->SetActive(true);
 		healthbar->SetCurrentValue(m_health, true);
-		healthbar->SetMaxValue(m_enemyData.objectData.startingHealth);
+		healthbar->SetMaxValue(m_enemyDefinition.hp);
 	}
 }
 
@@ -471,8 +447,11 @@ void Enemy::PlayDeathSound()
 DamageData Enemy::GetDamageData() const
 {
 	std::string stateName = m_stateMachine->GetCurrentState()->GetName();
-	if(m_damageData.count(stateName) == 0)
-		return DamageData();
-
-	return m_damageData.at(stateName);
+	
+	for(const auto& data : m_enemyDefinition.damageData)
+	{
+		if(data.name == stateName) return data;
+	}
+	
+	return DamageData();
 }
