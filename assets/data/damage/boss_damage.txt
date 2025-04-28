@@ -1,5 +1,0 @@
-# attack_name damage_value
-
-attack1 8 0.5
-attack2 10 0.75
-attack3 16 1.0

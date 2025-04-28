@@ -237,11 +237,6 @@ void Enemy::Spawn(const Vector2& position)
 	m_stateMachine->ChangeState(m_startingState);
 }
 
-void Enemy::SetDefinition(const EnemyDefinition& data)
-{
-	m_enemyDefinition = data;
-}
-
 void Enemy::SetDead(bool isDead)
 {
 	m_dead = isDead;

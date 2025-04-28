@@ -40,13 +40,13 @@
 #include <fstream>
 #include <iosfwd>
 #include <string>
+#include <system_error>
 
 using namespace PlayerConstants;
 using namespace GlobalConstants;
 
 Player::Player() :
 	m_stateMachine(nullptr),
-	m_lives(0),
 	m_knockoutTimer(0.0f),
 	m_punchSoundSource(nullptr),
 	m_footStepsSoundSource(nullptr),
@@ -81,17 +81,21 @@ Player::~Player()
 
 void Player::Init(ControlSystem* controlSystem)
 {
+	Logger::LogInfo("Initialising Player.");
+
 	m_controlSystem = controlSystem;
 
+	m_playerDefinition = LoadPlayerDefinition();
+
 	AnimatedSpriteData animatedSpriteData;
-	animatedSpriteData = GameDataManager::LoadAnimatedSpriteData("assets\\data\\spritesheets\\player_spritesheet.json");
+	animatedSpriteData = GameDataManager::LoadAnimatedSpriteData(m_playerDefinition.spritesheetDataPath);
 
 	m_spritesheet = new Spritesheet();
-	m_spritesheet->Init(AssetLoader::GetTexture("t_player"), animatedSpriteData.spriteFrameData);
+	m_spritesheet->Init(AssetLoader::GetTexture(m_playerDefinition.textureId), animatedSpriteData.spriteFrameData);
 	m_spritesheet->SetOrigin(animatedSpriteData.origin);
 
 	m_shadow = new Sprite();
-	m_shadow->Init(AssetLoader::GetTexture("t_shadow_s"));
+	m_shadow->Init(AssetLoader::GetTexture(m_playerDefinition.shadowId));
 	m_shadow->SetAlpha(0.7f);
 
 	m_animator = new Animator();
@@ -99,16 +103,14 @@ void Player::Init(ControlSystem* controlSystem)
 	m_animator->SetAnimation(0);
 
 	m_hitBoxManager = new HitBoxManager();
-	m_hitBoxManager->Init(this, GameDataManager::LoadHitboxData("assets\\data\\hitboxes\\player_hitbox.json"));
+	m_hitBoxManager->Init(this, GameDataManager::LoadHitboxData(m_playerDefinition.hitBoxDataPath));
 
-	LoadData("assets\\data\\player\\player_data.txt", "assets\\data\\amount\\player_damage.txt");
-
-	m_position.x = m_playerData.objectData.startingPosition.x;
-	m_position.y = RespawnAirPositionY;
-	m_groundPosition = m_playerData.objectData.startingPosition;
-	m_acceleration = m_playerData.objectData.acceleration;
-	m_deceleration = m_playerData.objectData.deceleration;
-	m_movementSpeed = m_playerData.objectData.walkSpeed;
+	m_position.x = StartingPositionX;
+	m_position.y = StartingPositionY;
+	m_groundPosition = m_position;
+	m_acceleration = m_playerDefinition.acceleration;
+	m_deceleration = m_playerDefinition.deceleration;
+	m_movementSpeed = m_playerDefinition.walkSpeed;
 	m_grounded = false;
 
 	m_stateMachine = new StateMachine<Player>(this);
@@ -117,8 +119,7 @@ void Player::Init(ControlSystem* controlSystem)
 	m_dustFx = new SpriteFx();
 	m_dustFx->Init("t_dust", "dustfx");
 
-	m_health = m_playerData.objectData.startingHealth;
-	m_lives = m_playerData.objectData.startingLives;
+	m_health = m_playerDefinition.hp;
 
 	m_punchSoundSource = new SoundSource();
 	m_punchSoundSource->SetTarget(this);
@@ -158,84 +159,6 @@ void Player::Init(ControlSystem* controlSystem)
 	InitStats();
 }
 
-void Player::LoadData(const std::string &playerDataFile, const std::string &damageDataFile)
-{
-	if(!LoadPlayerData(playerDataFile))
-	{
-		// unable to load player objectData file
-		std::string error = " Error! No player data file " + playerDataFile + " found.";
-		Logger::LogError(error);
-	}
-
-	if(!LoadDamageData(damageDataFile))
-	{
-		// unable to load player objectData file
-		std::string error = " Error! No player amount data file " + damageDataFile + " found.";
-		Logger::LogError(error);
-	}
-}
-
-bool Player::LoadPlayerData(const std::string &filename)
-{
-	std::ifstream file;
-	file.open(filename);
-
-	if(file)
-	{
-		std::string line;
-		ObjectData data;
-
-		while(std::getline(file, line))
-		{
-			if(line[0] != '#')
-			{
-				std::string result = "";
-
-				data.id = "PLAYER";
-
-				file >> result;
-				data.startingHealth = std::stoi(result);
-
-				file >> result;
-				data.startingLives = std::stoi(result);
-
-				file >> result;
-				data.startingPosition.x = std::stof(result);
-
-				file >> result;
-				data.startingPosition.y = std::stof(result);
-
-				file >> result;
-				data.walkSpeed = std::stof(result);
-
-				file >> result;
-				data.runningSpeed = std::stof(result);
-
-				file >> result;
-				data.acceleration = std::stof(result);
-
-				file >> result;
-				data.deceleration = std::stof(result);
-
-				m_playerData.objectData = data;
-
-				file >> result;
-				m_playerData.deathTime = std::stof(result);
-
-				file >> result;
-				m_playerData.knockoutDuration = std::stof(result);
-			}
-		}
-	}
-	else
-	{
-		return false;
-	}
-
-	file.close();
-	return true;
-}
-
 void Player::Update(float deltaTime)
 {
 	if(m_dead == true)
@@ -249,7 +172,7 @@ void Player::Update(float deltaTime)
 	if(m_stateMachine->IsInState(*PlayerDeadState::Instance()) && m_health <= 0)
 		m_deathTimer += deltaTime;
 
-	if(m_deathTimer > m_playerData.deathTime)
+	if(m_deathTimer > m_playerDefinition.deathTime)
 		Kill();
 
 	if (m_stateMachine->IsInState(*PlayerHurtState::Instance()))
@@ -260,7 +183,7 @@ void Player::Update(float deltaTime)
 	if(m_stateMachine->IsInState(*PlayerDeadState::Instance()) && m_health > 0)
 		m_knockoutTimer += deltaTime;
 
-	if(m_knockoutTimer > m_playerData.knockoutDuration)
+	if(m_knockoutTimer > m_playerDefinition.knockoutDuration)
 		m_stateMachine->ChangeState(PlayerIdleState::Instance());
 
 	if(!m_controlSystem->CanAttack())
@@ -291,22 +214,21 @@ void Player::Update(float deltaTime)
 
 void Player::Kill()
 {
-	m_lives--;
 	m_dead = true;
 }
 
 void Player::Respawn()
 {
 	m_stateMachine->ChangeState((PlayerIdleState::Instance()));
-	m_position = m_camera->GetPosition() + Vector2(GameWidth * 0.5f, RespawnGroundPositionY);
+	m_position = m_camera->GetPosition() + Vector2(GameWidth * 0.5f, StartingPositionY);
 	m_groundPosition = m_position;
-	m_position.y = RespawnAirPositionY;
+	m_position.y = StartingPositionY;
 	m_deathTimer = 0.0f;
 	m_knockoutTimer = 0.0f;
 	m_dead = false;
 	m_active = true;
 	m_grounded = false;
-	m_health = m_playerData.objectData.startingHealth;
+	m_health = m_playerDefinition.hp;
 	m_special = 0;
 	SetVelocity(m_currentVelocity.x, m_currentVelocity.y + FallingSpeed);
 
@@ -381,15 +303,14 @@ void Player::Render(Graphics* graphics)
 void Player::Reset()
 {
 	m_stateMachine->ChangeState((PlayerIdleState::Instance()));
-	SetPosition(m_playerData.objectData.startingPosition);
+	SetPosition(StartingPositionX, StartingPositionY);
 	m_groundPosition = m_position;
-	m_position.y = RespawnAirPositionY;
+	m_position.y = StartingPositionY;
 	m_grounded = false;
-	m_health = m_playerData.objectData.startingHealth;
+	m_health = m_playerDefinition.hp;
 	m_deathTimer = 0.0f;
 	m_dead = false;
 	m_active = true;
-	m_lives = m_playerData.objectData.startingLives;
 	m_kills = 0;
 	m_special = 100;
 	SetVelocity(Vector2::Zero);
@@ -399,7 +320,7 @@ DamageData Player::GetDamageData() const
 {
 	std::string stateName = m_stateMachine->GetCurrentState()->GetName();
 
-	for(const auto& data : m_damageData)
+	for(const auto& data : m_playerDefinition.damageData)
 	{
 		if(data.name == stateName) return data;
 	}
@@ -427,7 +348,7 @@ void Player::Run()
 	if(m_stateMachine->IsInState(*PlayerBlockState::Instance()) == true)
 		return;
 
-	m_movementSpeed = m_playerData.objectData.runningSpeed;
+	m_movementSpeed = m_playerDefinition.runningSpeed;
 }
 
 void Player::Walk()
@@ -435,7 +356,7 @@ void Player::Walk()
 	if(m_stateMachine->IsInState(*PlayerBlockState::Instance()) == true)
 		return;
 
-	m_movementSpeed = m_playerData.objectData.walkSpeed;
+	m_movementSpeed = m_playerDefinition.walkSpeed;
 }
 
 void Player::Stop()
@@ -534,6 +455,33 @@ void Player::PlayDeathSound()
 		m_vocalSoundSource->SetSound(sound);
 }
 
+PlayerDefinition Player::LoadPlayerDefinition()
+{
+	Logger::LogInfo("Loading Player definition.");
+
+	auto path = "assets\\data\\player\\playerDefinition.json";
+	std::ifstream file;
+
+	file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+
+	try
+	{
+		file.open(path);
+	}
+	catch(std::system_error& e)
+	{
+		std::string message = fmt::format("[Player] [LoadPlayerDefinition] Failed to load Player Definition data at {0}: {1}.",
+			path,
+			e.code().message());
+
+		Logger::LogError(message);
+		return PlayerDefinition();
+	}
+
+	json j = json::parse(file);
+	return j.get<PlayerDefinition>();
+}
+
 void Player::NormalAttack()
 {
 	if(m_controlSystem->GetComboCounter() == MaxCombo)
@@ -579,7 +527,7 @@ void Player::InitStats()
 
 	if(healthbar)
 	{
-		healthbar->SetMaxValue(m_playerData.objectData.startingHealth);
+		healthbar->SetMaxValue(m_playerDefinition.hp);
 		healthbar->SetCurrentValue(m_health);
 	}
 
@@ -598,7 +546,7 @@ void Player::UpdateStats()
 
 	if(healthbar)
 	{
-		healthbar->SetMaxValue(m_playerData.objectData.startingHealth);
+		healthbar->SetMaxValue(m_playerDefinition.hp);
 		healthbar->SetCurrentValue(m_health, true);
 	}
 

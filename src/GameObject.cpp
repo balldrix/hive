@@ -183,46 +183,6 @@ float GameObject::Lerp(float target, float current, float amount)
 	return target;
 }
 
-bool GameObject::LoadDamageData(const std::string& filename)
-{
-	std::ifstream file;
-	file.open(filename);
-
-	if(file)
-	{
-		std::string line;
-		m_damageData.clear();
-
-		while(std::getline(file, line))
-		{
-			if(line[0] != '#')
-			{
-				std::string attackName = "";
-				std::string damageAmount = "";
-				std::string hitStopDuration = "";
-
-				file >> attackName;
-				file >> damageAmount;
-				file >> hitStopDuration;
-
-				DamageData data;
-				data.name = attackName;
-				data.amount = std::stoi(damageAmount);
-				data.hitStopDuration = std::stof(hitStopDuration);
-
-				m_damageData.push_back(data);
-			}
-		}
-	}
-	else
-	{
-		return false;
-	}
-
-	file.close();
-	return true;
-}
-
 void GameObject::FlipHorizontally(bool flip)
 {
 	auto facingDirection = Vector3::Right;

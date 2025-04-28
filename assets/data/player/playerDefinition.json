@@ -1,0 +1,65 @@
+  {
+    "spritesheetDataPath": "assets\\data\\spritesheets\\player_spritesheet.json",
+    "textureId": "t_player",
+    "shadowId": "t_shadow_s",
+    "hitBoxDataPath": "assets\\data\\hitboxes\\player_hitbox.json",
+    "hp": 100,
+    "walkSpeed": 50,
+    "runningSpeed": 80,
+    "acceleration": 20,
+    "deceleration": 20,
+    "death_time": 5,
+    "knockout_duration": 3.5,
+    "damageData": [
+      {
+        "name": "attackNormal_1",
+        "value": 40,
+        "hitStop": 0.2
+      },
+      {
+        "name": "attackNormal_2",
+        "value": 40,
+        "hitStop": 0.2
+      },
+      {
+        "name": "attackNormal_3",
+        "value": 40,
+        "hitStop": 0.2
+      },
+      {
+        "name": "attackNormal_4",
+        "value": 40,
+        "hitStop": 0.2
+      },
+      {
+        "name": "attackStrong_1",
+        "value": 60,
+        "hitStop": 0.4
+      },
+      {
+        "name": "attackStrong_2",
+        "value": 60,
+        "hitStop": 0.4
+      },
+      {
+        "name": "attackStrong_3",
+        "value": 60,
+        "hitStop": 0.4
+      },
+      {
+        "name": "attackStrong_4",
+        "value": 30,
+        "hitStop": 0.4
+      },
+      {
+        "name": "attackStrong_5",
+        "value": 40,
+        "hitStop": 0.2
+      },
+      {
+        "name": "special",
+        "value": 100,
+        "hitStop": 0.5
+      }
+    ]
+  }

@@ -79,6 +79,7 @@
     <ClInclude Include="src\LevelCollision.h" />
     <ClInclude Include="src\PlayerBuildSpecialState.h" />
     <ClInclude Include="src\AnimatedSpriteData.h" />
+    <ClInclude Include="src\PlayerDefinition.h" />
     <ClInclude Include="src\ScreenShake.h" />
     <ClInclude Include="src\TilemapLoader.h" />
     <ClInclude Include="src\UIScreenFlashFX.h" />
@@ -150,7 +151,6 @@
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\NPCManager.cpp" />
     <ClCompile Include="src\Player.cpp" />
-    <ClCompile Include="src\PlayerData.h" />
     <ClCompile Include="src\PlayerDeadState.cpp" />
     <ClCompile Include="src\PlayerGlobalState.cpp" />
     <ClCompile Include="src\PlayerHurtState.cpp" />
@@ -251,6 +251,7 @@
     <None Include="assets\data\hitboxes\player_hitbox.json" />
     <None Include="assets\data\hitboxes\waste-dog_hitbox.json" />
     <None Include="assets\data\hitboxes\waste-lobster_hitbox.json" />
+    <None Include="assets\data\player\playerDefinition.json" />
     <None Include="assets\data\spritesheets\dustfx_spritesheet.json" />
     <None Include="assets\data\spritesheets\impactfx_spritesheet.json" />
     <None Include="assets\data\spritesheets\jungle-ape_spritesheet.json" />
@@ -271,14 +272,7 @@
     <None Include="assets\sounds\scream.ogg" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="assets\data\damage\boss_damage.txt" />
-    <Text Include="assets\data\damage\lift-spider_damage.txt" />
-    <Text Include="assets\data\damage\mook_damage.txt" />
-    <Text Include="assets\data\damage\mook_runner_damage.txt" />
-    <Text Include="assets\data\damage\player_damage.txt" />
-    <Text Include="assets\data\damage\waste-dog_damage.txt" />
     <Text Include="assets\data\encounters\encounter_positions.txt" />
-    <Text Include="assets\data\player\player_data.txt" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\sounds\boss_entrance_001.wav" />

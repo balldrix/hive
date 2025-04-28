@@ -4,7 +4,7 @@
 #include "GameObject.h"
 #include "Graphics.h"
 #include "PlayerConstants.h"
-#include "PlayerData.h"
+#include "PlayerDefinition.h"
 #include "Sprite.h"
 #include "StateMachine.h"
 
@@ -25,8 +25,6 @@ public:
 	virtual								~Player();
 
 	void								Init(ControlSystem* controlSystem);
-	void								LoadData(const std::string &playerDataFile, const std::string &attackDataFile);
-	bool								LoadPlayerData(const std::string &filename);
 	void								Update(float deltaTime);
 	void								Render(Graphics* graphics);
 	void								Reset();
@@ -34,12 +32,11 @@ public:
 	Sprite*								GetShadow() const { return m_shadow; }
 	StateMachine<Player>*				GetStateMachine() const { return m_stateMachine; }
 
-	virtual int							GetMaxHealth() const { return m_playerData.objectData.startingHealth; }
-	float								GetWalkSpeed() const { return m_playerData.objectData.walkSpeed; }
-	float								GetRunSpeed() const { return m_playerData.objectData.runningSpeed; }
+	virtual int							GetMaxHealth() const { return m_playerDefinition.hp; }
+	float								GetWalkSpeed() const { return m_playerDefinition.walkSpeed; }
+	float								GetRunSpeed() const { return m_playerDefinition.runningSpeed; }
 
 	virtual DamageData					GetDamageData() const;
-	int									GetLives() const { return m_lives; }
 
 	float								GetHurtTimer() const { return m_hurtTimer; }
 	void								SetHurtTimer(const float& time) { m_hurtTimer = time; }
@@ -64,6 +61,7 @@ public:
 	void								PlayDeathSound();
 
 private:
+	PlayerDefinition					LoadPlayerDefinition();
 	void								NormalAttack();
 	void								StrongAttack();
 	void								SpecialAttack();
@@ -71,12 +69,11 @@ private:
 	void								InitStats();
 	void								UpdateStats();
 
-	PlayerData							m_playerData;
+	PlayerDefinition					m_playerDefinition;
 	StateMachine<Player>*				m_stateMachine;
 	SoundSource*						m_punchSoundSource;
 	SoundSource*						m_footStepsSoundSource;
 	SoundSource*						m_vocalSoundSource;
-	int									m_lives;
 	float								m_knockoutTimer;
 	float								m_hurtTimer;
 	std::map<std::string, std::wstring>	m_playerSounds;

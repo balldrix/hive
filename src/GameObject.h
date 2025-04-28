@@ -45,7 +45,6 @@ public:
 
 	float				GetLerpAmount(const float& num) const;
 	float				Lerp(float target, float current, float amount);
-	bool				LoadDamageData(const std::string& damageDataFile);
 
 	// flip sprite and hitboxes
 	void				FlipHorizontally(bool flip);
@@ -136,5 +135,4 @@ protected:
 	bool					m_grounded;
 	bool					m_dead;
 	bool					m_active;
-	std::vector<DamageData>	m_damageData;
 };

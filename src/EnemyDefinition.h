@@ -4,7 +4,7 @@
 #include "Logger.h"
 
 #include <fmt/core.h>
-#include <nlohmann/json_fwd.hpp>
+#include <nlohmann/json.hpp>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -77,7 +77,8 @@ struct EnemyDefinition
 
 namespace nlohmann 
 {
-	static inline void from_json(const json& j, EnemyDefinition& enemyDefinition) {
+	static inline void from_json(const json& j, EnemyDefinition& enemyDefinition)
+	{
 		enemyDefinition.id = j.at("id");
 		enemyDefinition.enemyType = StringToEnemyType(j.at("enemyType"));
 		enemyDefinition.spritesheetDataPath = j.at("spritesheetDataPath");

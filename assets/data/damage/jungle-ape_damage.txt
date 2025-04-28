@@ -1,3 +1,0 @@
-# attack_name damage_value hitstop_duration
-
-attackNormal 3 0.1

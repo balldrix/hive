@@ -12,7 +12,7 @@ struct DamageData
 	float hitStopDuration = {};
 };
 
-namespace nlohmann 
+namespace nlohmann
 {
 	static inline void from_json(const json& j, DamageData& damageData)
 	{

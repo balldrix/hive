@@ -39,7 +39,7 @@ add_executable(${PROJECT_NAME} src/main.cpp src/AABB.cpp src/Animator.cpp src/Au
 								src/Input.h src/KingMook.h src/KingMookChargeState.h src/KingMookEnemyGlobalState.h src/LevelRenderer.h
 								src/MookEnemyGlobalState.h src/MookRunningEnemyGlobalState.h src/NPCFactory.h src/NPCManager.h src/ParticleSystem.h 
 								src/PixelTexture.h src/Player.h src/PlayerAttackState.h src/PlayerBlockState.h src/PlayerConstants.h
-								src/PlayerData.h src/PlayerDeadState.h src/PlayerGlobalState.h src/PlayerHurtState.h src/PlayerIdleState.h 
+								src/PlayerDeadState.h src/PlayerGlobalState.h src/PlayerHurtState.h src/PlayerIdleState.h 
 								src/PlayerKnockbackState.h src/PlayerRunningState.h src/PlayerSprintingState.h
 								src/Randomiser.h src/Resources.h src/RunningEnemy.h src/RunningEnemyDeadState.h src/Sound.h src/SoundManager.h 
 								src/SoundSource.h src/Sprite.h src/SpriteFrameData.h src/Spritesheet.h src/State.h src/StateMachine.h
@@ -58,7 +58,7 @@ add_executable(${PROJECT_NAME} src/main.cpp src/AABB.cpp src/Animator.cpp src/Au
 								src/UIPlayerInfoView.cpp src/UIPortraitView.h src/UIPortraitView.cpp src/UIKillCount.h src/UIKillCount.cpp src/UIEnemyStatsView.h src/UIEnemyStatsView.cpp
 								src/UIComboCounterView.h src/UIComboCounterView.cpp src/UIKillMilestoneView.h src/UIKillMilestoneView.cpp src/UIScreenFlashFX.h src/UIScreenFlashFX.cpp
 								src/ScreenShake.h src/ScreenShake.cpp src/PlayerBuildSpecialState.h src/PlayerBuildSpecialState.cpp src/Utils.h src/LevelCollision.h src/LevelCollision.cpp
-								src/UISprite.h src/UISprite.cpp src/EnemySpawner.h src/EnemySpawer.cpp src/EnemyDefinition.h
+								src/UISprite.h src/UISprite.cpp src/EnemySpawner.h src/EnemySpawer.cpp src/EnemyDefinition.h src/PlayerDefinition.h
 								src/EnemyFallingState.h src/EnemyFallingState.cpp src/EnemyLandingState.h src/EnemyLandingState.cpp)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Microsoft::DirectXTK)

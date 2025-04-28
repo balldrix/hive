@@ -38,7 +38,6 @@ public:
 
 	void					Spawn(const Vector2& position);
 
-	void					SetDefinition(const EnemyDefinition& definition);
 	void					SetDead(bool isDead);
 	void					SetPlayerTarget(Player* player);
 	void					SetHostile(bool isHostile);

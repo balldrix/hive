@@ -70,9 +70,6 @@
     <ClCompile Include="src\Graphics.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="src\PlayerData.h">
-      <Filter>Game\Player</Filter>
-    </ClCompile>
     <ClCompile Include="src\Player.cpp">
       <Filter>Game\Player</Filter>
     </ClCompile>
@@ -395,9 +392,6 @@
     </Filter>
     <Filter Include="Assets\Data">
       <UniqueIdentifier>{14c829cd-02d2-4caf-9a55-b1939bd0f172}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Assets\Data\Damage">
-      <UniqueIdentifier>{92cc0ac4-0494-4b44-a24d-41442efb1096}</UniqueIdentifier>
     </Filter>
     <Filter Include="Assets\Data\Encounters">
       <UniqueIdentifier>{c3936396-b4d6-499a-aed1-79f08e5e956d}</UniqueIdentifier>
@@ -788,6 +782,9 @@
     <ClInclude Include="src\DamageData.h">
       <Filter>System\Data</Filter>
     </ClInclude>
+    <ClInclude Include="src\PlayerDefinition.h">
+      <Filter>Game\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\fonts\goodbye_despair_8pt.spritefont">
@@ -865,31 +862,13 @@
     <None Include="assets\data\enemies\enemyDefinitions.json">
       <Filter>Assets\Data\Enemies</Filter>
     </None>
+    <None Include="assets\data\player\playerDefinition.json">
+      <Filter>Assets\Data\Player</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\data\encounters\encounter_positions.txt">
       <Filter>Assets\Data\Encounters</Filter>
-    </Text>
-    <Text Include="assets\data\player\player_data.txt">
-      <Filter>Assets\Data\Player</Filter>
-    </Text>
-    <Text Include="assets\data\damage\boss_damage.txt">
-      <Filter>Assets\Data\Damage</Filter>
-    </Text>
-    <Text Include="assets\data\damage\mook_damage.txt">
-      <Filter>Assets\Data\Damage</Filter>
-    </Text>
-    <Text Include="assets\data\damage\mook_runner_damage.txt">
-      <Filter>Assets\Data\Damage</Filter>
-    </Text>
-    <Text Include="assets\data\damage\player_damage.txt">
-      <Filter>Assets\Data\Damage</Filter>
-    </Text>
-    <Text Include="assets\data\damage\waste-dog_damage.txt">
-      <Filter>Assets\Data\Damage</Filter>
-    </Text>
-    <Text Include="assets\data\damage\lift-spider_damage.txt">
-      <Filter>Assets\Data\Damage</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

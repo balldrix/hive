@@ -395,8 +395,11 @@ void GameplayGameState::Tick(float deltaTime)
 	m_player->Update(deltaTime);
 	m_NPCManager->Update(deltaTime);
 
-	if(m_player->IsDead() && m_player->GetLives() > 0)
+	if(m_player->IsDead())
+	{
+		//@TODO add game over sequence
 		m_player->Respawn();
+	}
 
 	for(auto it = m_activeImpacts.begin(); it != m_activeImpacts.end();)
 	{

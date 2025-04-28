@@ -87,6 +87,8 @@ void GameDataManager::LoadAllEnemyDefinitions()
 	auto path = "assets\\data\\enemies\\enemyDefinitions.json";
 	std::ifstream file;
 
+	file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+
 	try
 	{
 		file.open(path);

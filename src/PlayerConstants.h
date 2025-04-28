@@ -2,8 +2,8 @@
 
 namespace PlayerConstants
 {
-	const float RespawnGroundPositionY = 70.0f;
-	const float RespawnAirPositionY = -20.0f;
+	const float StartingPositionX = 80.0f;
+	const float StartingPositionY = 90.0f;
 	const float FallingSpeed = 5.0f;
 	const unsigned int DodgeDirectionModifier = 3;
 	const int MaxSpecial = 100;
