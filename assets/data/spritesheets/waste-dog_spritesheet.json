@@ -305,10 +305,6 @@
         "direction": "forward",
         "color": "#000000ff"
       }
-    ],
-    "origin": {
-      "x": 20,
-      "y": 20
-    }
+    ]
   }
 }

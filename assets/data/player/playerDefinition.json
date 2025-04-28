@@ -1,5 +1,7 @@
   {
     "spritesheetDataPath": "assets\\data\\spritesheets\\player_spritesheet.json",
+    "spriteOriginX": 56,
+    "spriteOriginY": 55,
     "textureId": "t_player",
     "shadowId": "t_shadow_s",
     "hitBoxDataPath": "assets\\data\\hitboxes\\player_hitbox.json",

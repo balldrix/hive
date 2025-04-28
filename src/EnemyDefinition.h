@@ -3,12 +3,14 @@
 #include "DamageData.h"
 #include "Logger.h"
 
+#include <directxtk/SimpleMath.h>
 #include <fmt/core.h>
 #include <nlohmann/json.hpp>
 #include <string>
 #include <unordered_map>
 #include <vector>
 
+using namespace DirectX::SimpleMath;
 using json = nlohmann::json;
 
 enum EnemyType
@@ -58,6 +60,7 @@ struct EnemyDefinition
 	std::string id = {};
 	EnemyType enemyType = {};
 	std::string spritesheetDataPath = {};
+	Vector2 spriteOrigin = {};
 	std::string textureId = {};
 	std::string shadowId = {};
 	std::string hitBoxDataPath = {};
@@ -82,6 +85,7 @@ namespace nlohmann
 		enemyDefinition.id = j.at("id");
 		enemyDefinition.enemyType = StringToEnemyType(j.at("enemyType"));
 		enemyDefinition.spritesheetDataPath = j.at("spritesheetDataPath");
+		enemyDefinition.spriteOrigin = Vector2(j.at("spriteOriginX"), j.at("spriteOriginY"));
 		enemyDefinition.textureId = j.at("textureId");
 		enemyDefinition.shadowId = j.at("shadowId");
 		enemyDefinition.hitBoxDataPath = j.at("hitBoxDataPath");

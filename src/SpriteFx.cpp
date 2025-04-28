@@ -22,14 +22,14 @@ SpriteFx::~SpriteFx()
 {
 }
 
-void SpriteFx::Init(std::string textureId, std::string spriteId)
+void SpriteFx::Init(std::string textureId, std::string spriteId, const Vector2& origin)
 {
 	AnimatedSpriteData animatedSpriteData;
 	animatedSpriteData = GameDataManager::LoadAnimatedSpriteData(fmt::format("assets\\data\\spritesheets\\{}_spritesheet.json", spriteId));
 
 	m_spritesheet = new Spritesheet();
 	m_spritesheet->Init(AssetLoader::GetTexture(textureId), animatedSpriteData.spriteFrameData);
-	m_spritesheet->SetOrigin(animatedSpriteData.origin);
+	m_spritesheet->SetOrigin(origin);
 
 	m_animator = new Animator();
 	m_animator->Init(animatedSpriteData);

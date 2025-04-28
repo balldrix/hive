@@ -16,7 +16,7 @@ public:
 	SpriteFx();
 	~SpriteFx();
 
-	void Init(std::string textureId, std::string spriteId);
+	void Init(std::string textureId, std::string spriteId, const Vector2& origin);
 	void Render(Graphics* graphics);
 	void Update(float deltaTime);
 

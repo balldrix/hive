@@ -113,7 +113,7 @@ void Enemy::Init(Graphics* graphics,
 
 	m_spritesheet = new Spritesheet();
 	m_spritesheet->Init(AssetLoader::GetTexture(data.textureId), animatedSpriteData.spriteFrameData);
-	m_spritesheet->SetOrigin(animatedSpriteData.origin);
+	m_spritesheet->SetOrigin(m_enemyDefinition.spriteOrigin);
 
 	m_shadow = new Sprite();
 	m_shadow->Init(shadowTexture);
@@ -142,7 +142,7 @@ void Enemy::Init(Graphics* graphics,
 	m_health = m_enemyDefinition.hp;
 
 	m_dustFx = new SpriteFx();
-	m_dustFx->Init("t_dust", "dustfx");
+	m_dustFx->Init("t_dust", "dustfx", Vector2(20.0f, 30.0f));
 
 	m_vocalSoundSource = new SoundSource();
 	m_vocalSoundSource->SetTarget(this);

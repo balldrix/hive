@@ -3,6 +3,8 @@
     "id": "lift-spider",
     "enemyType": "falling",
     "spritesheetDataPath": "assets\\data\\spritesheets\\lift-spider_spritesheet.json",
+    "spriteOriginX": 23,
+    "spriteOriginY": 24,
     "textureId": "t_lift-spider",
     "shadowId": "t_shadow_l",
     "hitBoxDataPath": "assets\\data\\hitboxes\\lift-spider_hitbox.json",
@@ -33,10 +35,12 @@
   {
     "id": "mook",
     "enemyType": "normal",
-    "spritesheetDataPath": "assets\\\\data\\\\spritesheets\\\\mook_spritesheet.json",
+    "spritesheetDataPath": "assets\\data\\spritesheets\\mook_spritesheet.json",
+    "spriteOriginX": 25,
+    "spriteOriginY": 36,
     "textureId": "t_mook",
     "shadowId": "t_shadow_l",
-    "hitBoxDataPath": "assets\\\\data\\\\hitboxes\\\\mook_hitbox.json",
+    "hitBoxDataPath": "assets\\data\\hitboxes\\mook_hitbox.json",
     "damageData": [
       {
         "name": "attackNormal",
@@ -59,10 +63,12 @@
   {
     "id": "runner",
     "enemyType": "runner",
-    "spritesheetDataPath": "assets\\\\data\\\\spritesheets\\\\mook_spritesheet.json",
+    "spritesheetDataPath": "assets\\data\\spritesheets\\mook_spritesheet.json",
+    "spriteOriginX": 25,
+    "spriteOriginY": 36,
     "textureId": "t_mook",
     "shadowId": "t_shadow_l",
-    "hitBoxDataPath": "assets\\\\data\\\\hitboxes\\\\mook_hitbox.json",
+    "hitBoxDataPath": "assets\\data\\hitboxes\\mook_hitbox.json",
     "damageData": [
       {
         "name": "attackRun",
@@ -85,10 +91,12 @@
   {
     "id": "waste-dog",
     "enemyType": "normal",
-    "spritesheetDataPath": "assets\\\\data\\\\spritesheets\\\\waste-dog_spritesheet.json",
+    "spritesheetDataPath": "assets\\data\\spritesheets\\waste-dog_spritesheet.json",
+    "spriteOriginX": 20,
+    "spriteOriginY": 20,
     "textureId": "t_waste-dog",
     "shadowId": "t_shadow_l",
-    "hitBoxDataPath": "assets\\\\data\\\\hitboxes\\\\waste-dog_hitbox.json",
+    "hitBoxDataPath": "assets\\data\\hitboxes\\waste-dog_hitbox.json",
     "damageData": [
       {
         "name": "attackNormal",
@@ -111,10 +119,12 @@
   {
     "id": "waste-lobster",
     "enemyType": "ranged",
-    "spritesheetDataPath": "assets\\\\data\\\\spritesheets\\\\waste-lobster_spritesheet.json",
+    "spritesheetDataPath": "assets\\data\\spritesheets\\waste-lobster_spritesheet.json",
+    "spriteOriginX": 20,
+    "spriteOriginY": 45,
     "textureId": "t_waste-lobster",
     "shadowId": "t_shadow_s",
-    "hitBoxDataPath": "assets\\\\data\\\\hitboxes\\\\waste-lobster_hitbox.json",
+    "hitBoxDataPath": "assets\\data\\hitboxes\\waste-lobster_hitbox.json",
     "damageData": [
       {
         "name": "attackNormal",

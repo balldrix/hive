@@ -92,7 +92,7 @@ void Player::Init(ControlSystem* controlSystem)
 
 	m_spritesheet = new Spritesheet();
 	m_spritesheet->Init(AssetLoader::GetTexture(m_playerDefinition.textureId), animatedSpriteData.spriteFrameData);
-	m_spritesheet->SetOrigin(animatedSpriteData.origin);
+	m_spritesheet->SetOrigin(m_playerDefinition.spriteOrigin);
 
 	m_shadow = new Sprite();
 	m_shadow->Init(AssetLoader::GetTexture(m_playerDefinition.shadowId));
@@ -117,7 +117,7 @@ void Player::Init(ControlSystem* controlSystem)
 	m_stateMachine->Init(PlayerIdleState::Instance(), nullptr, PlayerGlobalState::Instance());
 
 	m_dustFx = new SpriteFx();
-	m_dustFx->Init("t_dust", "dustfx");
+	m_dustFx->Init("t_dust", "dustfx", Vector2(20.0f, 30.0f));
 
 	m_health = m_playerDefinition.hp;
 
