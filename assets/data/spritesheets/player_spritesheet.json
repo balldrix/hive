@@ -1126,7 +1126,7 @@
    },
    {
     "filename": "surprise-125",
-    "frame": { "x": 0, "y": 0, "w": 128, "h": 60 },
+    "frame": { "x": 256, "y": 600, "w": 128, "h": 60 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 128, "h": 60 },
@@ -1134,175 +1134,46 @@
     "duration": 800
    }
  ],
-  "meta": {
-    "app": "https://www.aseprite.org/",
-    "version": "1.3.14-beta1-x64",
-    "image": "player_spritesheet.png",
-    "format": "RGBA8888",
-    "size": {
-      "w": 1536,
-      "h": 660
-    },
-    "scale": "1",
-    "frameTags": [
-      {
-        "name": "idle",
-        "from": 0,
-        "to": 1,
-        "direction": "forward",
-        "color": "#000000ff"
-      },
-      {
-        "name": "hurt",
-        "from": 2,
-        "to": 2,
-        "direction": "forward",
-        "repeat": "1",
-        "color": "#000000ff"
-      },
-      {
-        "name": "block",
-        "from": 3,
-        "to": 5,
-        "direction": "forward",
-        "repeat": "1",
-        "color": "#000000ff"
-      },
-      {
-        "name": "run",
-        "from": 6,
-        "to": 13,
-        "direction": "forward",
-        "color": "#000000ff"
-      },
-      {
-        "name": "sprint",
-        "from": 14,
-        "to": 21,
-        "direction": "forward",
-        "color": "#000000ff"
-      },
-      {
-        "name": "knockback",
-        "from": 22,
-        "to": 26,
-        "direction": "forward",
-        "repeat": "1",
-        "color": "#000000ff"
-      },
-      {
-        "name": "dead",
-        "from": 27,
-        "to": 27,
-        "direction": "forward",
-        "color": "#000000ff"
-      },
-      {
-        "name": "attackNormal_1",
-        "from": 28,
-        "to": 33,
-        "direction": "forward",
-        "repeat": "1",
-        "color": "#000000ff"
-      },
-      {
-        "name": "attackNormal_2",
-        "from": 34,
-        "to": 39,
-        "direction": "forward",
-        "repeat": "1",
-        "color": "#000000ff"
-      },
-      {
-        "name": "attackNormal_3",
-        "from": 40,
-        "to": 44,
-        "direction": "forward",
-        "repeat": "1",
-        "color": "#000000ff"
-      },
-      {
-        "name": "attackNormal_4",
-        "from": 45,
-        "to": 48,
-        "direction": "forward",
-        "repeat": "1",
-        "color": "#000000ff"
-      },
-      {
-        "name": "attackStrong_1",
-        "from": 49,
-        "to": 54,
-        "direction": "forward",
-        "repeat": "1",
-        "color": "#000000ff"
-      },
-      {
-        "name": "attackStrong_2",
-        "from": 55,
-        "to": 61,
-        "direction": "forward",
-        "repeat": "1",
-        "color": "#000000ff",
-        "data": "endXPos=10"
-      },
-      {
-        "name": "attackStrong_3",
-        "from": 62,
-        "to": 69,
-        "direction": "forward",
-        "repeat": "1",
-        "color": "#000000ff",
-        "data": "endXPos=20"
-      },
-      {
-        "name": "attackStrong_4",
-        "from": 70,
-        "to": 74,
-        "direction": "forward",
-        "repeat": "1",
-        "color": "#000000ff",
-        "data": "endXPos=24"
-      },
-      {
-        "name": "attackStrong_5",
-        "from": 75,
-        "to": 87,
-        "direction": "forward",
-        "repeat": "1",
-        "color": "#000000ff",
-        "data": "endXPos=51"
-      },
-      {
-        "name": "special",
-        "from": 88,
-        "to": 115,
-        "direction": "forward",
-        "repeat": "1",
-        "color": "#000000ff",
-        "data": "endXPos=32"
-      },
-      {
-        "name": "buildSpecial",
-        "from": 90,
-        "to": 99,
-        "direction": "forward",
-        "color": "#000000ff"
-      },
-      {
-        "name": "fixing",
-        "from": 116,
-        "to": 117,
-        "direction": "forward",
-        "color": "#000000ff"
-      },
-      {
-        "name": "surprise",
-        "from": 118,
-        "to": 125,
-        "direction": "forward",
-        "color": "#000000ff"
-      }
-    ]
-  }
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.14-beta1-x64",
+  "format": "RGBA8888",
+  "size": { "w": 1536, "h": 660 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "idle", "from": 0, "to": 1, "direction": "forward", "color": "#000000ff" },
+   { "name": "hurt", "from": 2, "to": 2, "direction": "forward", "repeat": "1", "color": "#000000ff" },
+   { "name": "block", "from": 3, "to": 5, "direction": "forward", "repeat": "1", "color": "#000000ff" },
+   { "name": "run", "from": 6, "to": 13, "direction": "forward", "color": "#000000ff" },
+   { "name": "sprint", "from": 14, "to": 21, "direction": "forward", "color": "#000000ff" },
+   { "name": "knockback", "from": 22, "to": 26, "direction": "forward", "repeat": "1", "color": "#000000ff" },
+   { "name": "dead", "from": 27, "to": 27, "direction": "forward", "color": "#000000ff" },
+   { "name": "attackNormal_1", "from": 28, "to": 33, "direction": "forward", "repeat": "1", "color": "#000000ff" },
+   { "name": "attackNormal_2", "from": 34, "to": 39, "direction": "forward", "repeat": "1", "color": "#000000ff" },
+   { "name": "attackNormal_3", "from": 40, "to": 44, "direction": "forward", "repeat": "1", "color": "#000000ff" },
+   { "name": "attackNormal_4", "from": 45, "to": 48, "direction": "forward", "repeat": "1", "color": "#000000ff" },
+   { "name": "attackStrong_1", "from": 49, "to": 54, "direction": "forward", "repeat": "1", "color": "#000000ff" },
+   { "name": "attackStrong_2", "from": 55, "to": 61, "direction": "forward", "repeat": "1", "color": "#000000ff", "data": "endXPos=10" },
+   { "name": "attackStrong_3", "from": 62, "to": 69, "direction": "forward", "repeat": "1", "color": "#000000ff", "data": "endXPos=20" },
+   { "name": "attackStrong_4", "from": 70, "to": 74, "direction": "forward", "repeat": "1", "color": "#000000ff", "data": "endXPos=24" },
+   { "name": "attackStrong_5", "from": 75, "to": 87, "direction": "forward", "repeat": "1", "color": "#000000ff", "data": "endXPos=51" },
+   { "name": "special", "from": 88, "to": 115, "direction": "forward", "repeat": "1", "color": "#000000ff", "data": "endXPos=32" },
+   { "name": "buildSpecial", "from": 90, "to": 99, "direction": "forward", "color": "#000000ff" },
+   { "name": "fixing", "from": 116, "to": 117, "direction": "forward", "color": "#000000ff" },
+   { "name": "surprise", "from": 118, "to": 125, "direction": "forward", "color": "#000000ff" }
+  ],
+  "layers": [
+   { "name": "shadow", "opacity": 179, "blendMode": "normal" },
+   { "name": "left leg", "opacity": 255, "blendMode": "normal" },
+   { "name": "left arm", "opacity": 255, "blendMode": "normal", "cels": [{ "frame": 84, "zIndex": 3 }] },
+   { "name": "right leg", "opacity": 255, "blendMode": "normal", "cels": [{ "frame": 78, "zIndex": 2 }, { "frame": 79, "zIndex": 2 }, { "frame": 80, "zIndex": 5 }, { "frame": 81, "zIndex": 5 }, { "frame": 102, "zIndex": 2 }, { "frame": 108, "zIndex": 2 }] },
+   { "name": "body", "opacity": 255, "blendMode": "normal", "cels": [{ "frame": 29, "data": "event:MovePlayer, 1" }, { "frame": 30, "data": "event:MovePlayer, 1" }, { "frame": 31, "data": "event:MovePlayer, 1" }, { "frame": 32, "data": "event:MovePlayer, 1" }] },
+   { "name": "sword", "opacity": 255, "blendMode": "normal", "cels": [{ "frame": 18, "zIndex": -1 }, { "frame": 19, "zIndex": -1 }, { "frame": 22, "zIndex": 2 }, { "frame": 40, "zIndex": 1 }, { "frame": 46, "zIndex": 1 }, { "frame": 67, "zIndex": 2 }, { "frame": 75, "zIndex": 2 }, { "frame": 86, "zIndex": 2 }, { "frame": 87, "zIndex": 2 }, { "frame": 120, "zIndex": 4 }] },
+   { "name": "head", "opacity": 255, "blendMode": "normal" },
+   { "name": "right arm", "opacity": 255, "blendMode": "normal" },
+   { "name": "smear", "opacity": 255, "blendMode": "normal", "cels": [{ "frame": 72, "zIndex": -7 }, { "frame": 78, "zIndex": -7 }, { "frame": 81, "zIndex": -7 }] },
+   { "name": "fx", "opacity": 255, "blendMode": "normal" },
+   { "name": "fx2", "opacity": 255, "blendMode": "normal" }
+  ]
+ }
 }

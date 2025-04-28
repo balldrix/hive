@@ -68,6 +68,7 @@
     <ClCompile Include="src\UIKillCount.cpp" />
     <ClCompile Include="src\Utils.h" />
     <ClCompile Include="src\UISprite.cpp" />
+    <ClInclude Include="src\AnimationEventData.h" />
     <ClInclude Include="src\DamageData.h" />
     <ClInclude Include="src\EnemyDefinition.h" />
     <ClInclude Include="src\EnemySpawnManager.h" />
@@ -191,7 +192,7 @@
     <ClInclude Include="src\UITitleScreenView.h" />
     <ClInclude Include="src\TitleScreenGameState.h" />
     <ClInclude Include="src\AABB.h" />
-    <ClInclude Include="src\AnimationData.h" />
+    <ClInclude Include="src\AnimationStateData.h" />
     <ClInclude Include="src\Animator.h" />
     <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\GameplayConstants.h" />

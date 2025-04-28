@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AnimatedSpriteData.h"
-#include "AnimationData.h"
+#include "AnimationStateData.h"
 
 #include <string>
 
@@ -17,7 +17,7 @@ public:
 	void SetAnimation(unsigned int index);
 	void SetAnimation(const std::string& name);
 
-	AnimationData GetAnimation() const { return m_currentAnimation; }
+	AnimationStateData GetAnimation() const { return m_currentAnimation; }
 	int GetCurrentFrame() const { return m_currentFrame; }
 
 	void AddSoundSource() { m_paused = false; }
@@ -28,7 +28,7 @@ public:
 	void Reset();
 
 private:
-	AnimationData m_currentAnimation;
+	AnimationStateData m_currentAnimation;
 	AnimatedSpriteData m_animatedSpriteData;
 
 	bool m_paused;

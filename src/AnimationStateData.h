@@ -5,7 +5,7 @@
 
 using json = nlohmann::json;
 
-struct AnimationData
+struct AnimationStateData
 {
 	std::string	name = {};
 	unsigned int from = {};
@@ -14,12 +14,12 @@ struct AnimationData
 	unsigned int frameCount = 1;
 	unsigned int endXPos = 0;
 
-	AnimationData() = default;
+	AnimationStateData() = default;
 };
 
 namespace nlohmann 
 {
-	static inline void from_json(const json& j, AnimationData& a)
+	static inline void from_json(const json& j, AnimationStateData& a)
 	{
 		a.name = j.at("name");
 		a.from = j.at("from");

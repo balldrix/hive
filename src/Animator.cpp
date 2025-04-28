@@ -1,7 +1,7 @@
 #include "Animator.h"
 
-#include "AnimationData.h"
 #include "AnimatedSpriteData.h"
+#include "AnimationStateData.h"
 #include "Logger.h"
 #include "SpriteFrameData.h"
 
@@ -50,6 +50,7 @@ void Animator::Update(float deltaTime)
 				return;
 			}
 
+
 			m_currentFrame = m_currentAnimation.frameCount - 1;
 			m_animDone = true;
 		}
@@ -58,15 +59,15 @@ void Animator::Update(float deltaTime)
 
 void Animator::SetAnimation(unsigned int index)
 {
-	m_currentAnimation = m_animatedSpriteData.animationData[index];
+	m_currentAnimation = m_animatedSpriteData.animationStateData[index];
 	m_animDone = false;
 }
 
 void Animator::SetAnimation(const std::string& name)
 {
-	AnimationData newAnimation;
+	AnimationStateData newAnimation;
 
-	for(AnimationData data : m_animatedSpriteData.animationData)
+	for(AnimationStateData data : m_animatedSpriteData.animationStateData)
 	{
 		if(data.name == name)
 		{

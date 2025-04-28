@@ -32,7 +32,7 @@ void PlayerAttackState::OnEnter(Player* player)
 
 	player->PlayPunchSound(m_name);
 
-	AnimationData currentAnimation = player->GetAnimator()->GetAnimation();
+	AnimationStateData currentAnimation = player->GetAnimator()->GetAnimation();
 	int endXPos = currentAnimation.endXPos;
 
 	if(endXPos == 0)
@@ -59,7 +59,7 @@ void PlayerAttackState::Execute(Player* player)
 
 void PlayerAttackState::OnExit(Player* player)
 {
-	AnimationData currentAnimation = player->GetAnimator()->GetAnimation();
+	AnimationStateData currentAnimation = player->GetAnimator()->GetAnimation();
 	int endXPos = currentAnimation.endXPos;
 
 	if(endXPos == 0)

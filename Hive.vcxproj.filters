@@ -596,7 +596,7 @@
     <ClInclude Include="src\Texture.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="src\AnimationData.h">
+    <ClInclude Include="src\AnimationStateData.h">
       <Filter>Graphics\Sprites\Animation</Filter>
     </ClInclude>
     <ClInclude Include="src\Animator.h">
@@ -784,6 +784,9 @@
     </ClInclude>
     <ClInclude Include="src\PlayerDefinition.h">
       <Filter>Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AnimationEventData.h">
+      <Filter>Graphics\Sprites\Animation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
