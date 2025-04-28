@@ -112,7 +112,7 @@ void Enemy::Init(Graphics* graphics,
 	animatedSpriteData = GameDataManager::LoadAnimatedSpriteData(data.spritesheetDataPath);
 
 	m_spritesheet = new Spritesheet();
-	m_spritesheet->Init(AssetLoader::GetTexture(fmt::format("t_{}", data.id)), animatedSpriteData.spriteFrameData);
+	m_spritesheet->Init(AssetLoader::GetTexture(data.textureId), animatedSpriteData.spriteFrameData);
 	m_spritesheet->SetOrigin(animatedSpriteData.origin);
 
 	m_shadow = new Sprite();
