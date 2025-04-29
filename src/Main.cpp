@@ -13,6 +13,7 @@
 
 #define WIN32_LEAN_AND_MEAN
 
+#include "AnimationEventManager.h"
 #include "AssetLoader.h"
 #include "AudioEngine.h"
 #include "Game.h"
@@ -63,6 +64,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	GameDataManager::Init();
 	UIManager::Init();
 	MenuSystem::Init();
+	AnimationEventManager::Init();
 
 	game = new Game();
 	game->Init(window, graphics);
@@ -91,6 +93,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 void Shutdown()
 {
 	delete game;
+	AnimationEventManager::Destroy();
 	MenuSystem::Destroy();
 	UIManager::Destroy();
 	GameDataManager::Destroy();

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "AnimationEventManager.h"
+
 #include <nlohmann/json.hpp>
 #include <stdexcept>
 #include <string>
@@ -11,7 +13,7 @@ struct AnimationEventData
 {
 	std::string eventName = {};
 	unsigned int frameNumber = {};
-	std::variant<int, std::string> argument;
+	EventArgument argument;
 
 	AnimationEventData() = default;
 };
@@ -39,7 +41,7 @@ namespace nlohmann
 
 			try
 			{
-				eventData.argument = std::stoi(argString);
+				eventData.argument = std::stof(argString);
 			}
 			catch(const std::invalid_argument&)
 			{

@@ -1,11 +1,13 @@
 #include "Animator.h"
 
 #include "AnimatedSpriteData.h"
+#include "AnimationEventManager.h"
 #include "AnimationStateData.h"
 #include "Logger.h"
 #include "SpriteFrameData.h"
 
 #include <string>
+#include "AnimationEventData.h"
 
 Animator::Animator() :
 	m_currentAnimation(),
@@ -39,20 +41,21 @@ void Animator::Update(float deltaTime)
 
 		if(!m_animDone)
 		{
-			m_currentFrame++;
-
-			if(m_currentFrame < m_currentAnimation.frameCount)
-				return;
-
-			if(m_currentAnimation.loop)
+			if(m_currentFrame + 1 < m_currentAnimation.frameCount)
+			{
+				m_currentFrame++;
+			}
+			else if(m_currentAnimation.loop)
 			{
 				m_currentFrame = 0;
-				return;
 			}
-
-
-			m_currentFrame = m_currentAnimation.frameCount - 1;
-			m_animDone = true;
+			else
+			{
+				m_currentFrame = m_currentAnimation.frameCount - 1;
+				m_animDone = true;
+			}
+			
+			TriggerEvents();
 		}
 	}
 }
@@ -86,4 +89,16 @@ void Animator::Reset()
 	m_animationTimer = 0.0f;
 	m_animDone = false;
 	m_currentFrame = 0;
+}
+
+void Animator::TriggerEvents()
+{
+	int targetFrame = m_currentAnimation.from + m_currentFrame;
+	
+	auto it = std::find_if(m_animatedSpriteData.animationEventData.begin(), m_animatedSpriteData.animationEventData.end(),
+	[&](const AnimationEventData& event) { return event.frameNumber == targetFrame; });
+
+	if(it != m_animatedSpriteData.animationEventData.end()) {
+		AnimationEventManager::TriggerEvent(it->eventName, it->argument);
+	}
 }

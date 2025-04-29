@@ -304,6 +304,7 @@
     <ClCompile Include="src\EnemySpawner.cpp">
       <Filter>Game\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="src\AnimationEventManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -786,6 +787,9 @@
       <Filter>Game\Player</Filter>
     </ClInclude>
     <ClInclude Include="src\AnimationEventData.h">
+      <Filter>Graphics\Sprites\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AnimationEventManager.h">
       <Filter>Graphics\Sprites\Animation</Filter>
     </ClInclude>
   </ItemGroup>

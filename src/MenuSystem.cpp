@@ -1,10 +1,12 @@
 #include "MenuSystem.h"
 
-#include "Logger.h"
-#include "Input.h"
 #include "IMenuSystemInteraction.h"
+#include "Input.h"
+#include "Logger.h"
+#include "UIMenuItemView.h"
 
 #include <directxtk/SimpleMath.h>
+#include <vector>
 
 using namespace DirectX;
 using namespace SimpleMath;
@@ -22,7 +24,7 @@ MenuSystem::~MenuSystem()
 
 void MenuSystem::Init()
 {
-	Logger::LogInfo("Initialising Menu System");
+	Logger::LogInfo("Initialising Menu System.");
 
 	s_instance = new MenuSystem;
 }

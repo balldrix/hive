@@ -27,6 +27,7 @@ UIManager::~UIManager()
 void UIManager::Init()
 {
 	Logger::LogInfo("Initialising UI Manager.");
+
 	s_instance = new UIManager;
 }
 

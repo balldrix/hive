@@ -31,6 +31,8 @@ AssetLoader::AssetLoader() :
 
 void AssetLoader::Init(Graphics* graphics, std::string fileName)
 {
+	Logger::LogInfo("Initialising Asset Loader.");
+
 	s_assetLoader = std::make_shared<AssetLoader>();
 	s_assetLoader->m_graphics = graphics;
 

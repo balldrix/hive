@@ -1,6 +1,7 @@
 #include "Player.h"
 
 #include "AnimatedSpriteData.h"
+#include "AnimationEventManager.h"
 #include "Animator.h"
 #include "AssetLoader.h"
 #include "AudioEngine.h"
@@ -12,6 +13,7 @@
 #include "GlobalConstants.h"
 #include "Graphics.h"
 #include "HitBoxManager.h"
+#include "LevelCollision.h"
 #include "Logger.h"
 #include "PlayerAttackState.h"
 #include "PlayerBlockState.h"
@@ -41,6 +43,8 @@
 #include <iosfwd>
 #include <string>
 #include <system_error>
+#include <functional>
+#include <variant>
 
 using namespace PlayerConstants;
 using namespace GlobalConstants;
@@ -60,6 +64,8 @@ Player::Player() :
 
 Player::~Player()
 {
+	AnimationEventManager::UnRegisterEvent("MovePlayer");
+
 	AudioEngine::Instance()->RemoveSoundSource(m_vocalSoundSource);
 	AudioEngine::Instance()->RemoveSoundSource(m_footStepsSoundSource);
 	AudioEngine::Instance()->RemoveSoundSource(m_punchSoundSource);
@@ -70,7 +76,7 @@ Player::~Player()
 	delete m_dustFx;
 	delete m_stateMachine;
 	delete m_spritesheet;
-	
+
 	m_vocalSoundSource = nullptr;
 	m_footStepsSoundSource = nullptr;
 	m_punchSoundSource = nullptr;
@@ -157,6 +163,7 @@ void Player::Init(ControlSystem* controlSystem)
 	};
 
 	InitStats();
+	RegisterAnimationEvents();
 }
 
 void Player::Update(float deltaTime)
@@ -166,7 +173,7 @@ void Player::Update(float deltaTime)
 
 	m_stateMachine->Update();
 	GameObject::Update(deltaTime);
-	
+
 	m_hitBoxManager->Update(m_animator->GetCurrentFrame());
 
 	if(m_stateMachine->IsInState(*PlayerDeadState::Instance()) && m_health <= 0)
@@ -175,7 +182,7 @@ void Player::Update(float deltaTime)
 	if(m_deathTimer > m_playerDefinition.deathTime)
 		Kill();
 
-	if (m_stateMachine->IsInState(*PlayerHurtState::Instance()))
+	if(m_stateMachine->IsInState(*PlayerHurtState::Instance()))
 	{
 		m_hurtTimer += deltaTime;
 	}
@@ -252,7 +259,7 @@ void Player::AddKill()
 	if(killCount)
 		killCount->UpdateKills(m_kills);
 
-	if(m_kills % 100 != 0) 
+	if(m_kills % 100 != 0)
 		return;
 
 	UIKillMilestoneView* milestoneView = static_cast<UIKillMilestoneView*>(UIManager::GetView("Kill Milestone"));
@@ -264,7 +271,7 @@ void Player::AddKill()
 void Player::IncreaseSpecial(float value)
 {
 	m_special += value;
-	
+
 	if(m_special > MaxSpecial) m_special = MaxSpecial;
 }
 
@@ -377,7 +384,7 @@ void Player::ApplyDamage(GameObject* source, const int& amount)
 {
 	PlayHurtSound();
 
-	if (m_stateMachine->IsInState(*PlayerBlockState::Instance()))
+	if(m_stateMachine->IsInState(*PlayerBlockState::Instance()))
 	{
 		m_health -= 1;
 		return;
@@ -418,7 +425,7 @@ void Player::Knockback(const Vector2& direction, const float& force)
 	SetMovementSpeed(force);
 }
 
-void Player::PlayPunchSound(const std::string &name)
+void Player::PlayPunchSound(const std::string& name)
 {
 	std::wstring soundName = m_playerSounds[name];
 	m_punchSoundSource->SetSound(SoundManager::GetSound(soundName));
@@ -430,7 +437,7 @@ void Player::PlayWalkingSound()
 		return;
 
 	m_recentFootstepFrame = m_animator->GetCurrentFrame();
-	
+
 	uint32_t randomWalkIndex = Randomiser::Instance()->GetRandNum(1, 4);
 
 	std::wstring soundName = m_playerSounds[m_stateMachine->GetCurrentState()->GetName() + std::to_string(randomWalkIndex)];
@@ -448,10 +455,10 @@ void Player::PlayHurtSound()
 void Player::PlayDeathSound()
 {
 	std::wstring soundName = m_playerSounds[m_stateMachine->GetCurrentState()->GetName()];
-	
+
 	Sound* sound = SoundManager::GetSound(soundName);
-	
-	if(m_vocalSoundSource->GetSound() != sound)	
+
+	if(m_vocalSoundSource->GetSound() != sound)
 		m_vocalSoundSource->SetSound(sound);
 }
 
@@ -557,4 +564,28 @@ void Player::UpdateStats()
 		specialbar->SetMaxValue(MaxSpecial);
 		specialbar->SetCurrentValue((int)m_special, true);
 	}
+}
+
+void Player::RegisterAnimationEvents()
+{
+	AnimationEventManager::RegisterEvent("MovePlayer", [this](EventArgument arg) {
+		if(!std::holds_alternative<float>(arg))
+		{
+			Logger::LogError("[Player] [RegisterEvents] Incorrect argument for MovePlayer, must be a float");
+			return;
+		}
+
+		MovePlayerEvent(std::get<float>(arg));
+	});
+}
+
+void Player::MovePlayerEvent(float distance)
+{
+	Vector2 offset = m_facingDirection == Vector3::Right ? Vector2(distance, 0.0f) : Vector2(-distance, 0.0f);
+	Vector2 newPosition = m_position += offset;
+	Vector2 newGroundPosition = m_groundPosition += offset;
+	if(LevelCollision::IsCollision(newPosition) || LevelCollision::IsCollision(newGroundPosition)) return;
+
+	m_position = newPosition;
+	m_groundPosition = newGroundPosition;
 }

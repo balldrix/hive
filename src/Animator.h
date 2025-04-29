@@ -28,6 +28,8 @@ public:
 	void Reset();
 
 private:
+	void TriggerEvents();
+
 	AnimationStateData m_currentAnimation;
 	AnimatedSpriteData m_animatedSpriteData;
 

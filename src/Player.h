@@ -68,6 +68,8 @@ private:
 	void								Attack(std::string attackName);
 	void								InitStats();
 	void								UpdateStats();
+	void								RegisterAnimationEvents();
+	void								MovePlayerEvent(float distance);
 
 	PlayerDefinition					m_playerDefinition;
 	StateMachine<Player>*				m_stateMachine;

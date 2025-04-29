@@ -21,6 +21,8 @@ GameDataManager* GameDataManager::s_instance = nullptr;
 
 void GameDataManager::Init()
 {
+	Logger::LogInfo("Initialising Game Data Manager.");
+
 	s_instance = new GameDataManager();
 }
 

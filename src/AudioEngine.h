@@ -30,10 +30,10 @@ public:
 	static AudioEngine* Instance() { return s_instance; }
 	static void Init(unsigned int channels = 32)
 	{
+		Logger::LogInfo("Initialising Audio Engine.");
+
 		if(s_instance == nullptr)
 			s_instance = new AudioEngine(channels);
-
-		Logger::LogInfo("Initialised Audio Engine.");
 	}
 
 	static void Destroy()
