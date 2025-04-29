@@ -8,15 +8,15 @@
 #include "Texture.h"
 
 #include <directxtk/SpriteFont.h>
+#include <fmt/core.h>
 #include <fstream>
+#include <iosfwd>
 #include <memory>
 #include <string>
 #include <system_error>
+#include <utility>
 #include <vector>
 #include <WinUser.h>
-#include <iosfwd>
-#include <utility>
-#include <fmt/core.h>
 
 std::shared_ptr<AssetLoader> AssetLoader::s_assetLoader;
 
@@ -163,7 +163,7 @@ void AssetLoader::LoadSpriteFont(AssetData asset)
 	PostQuitMessage(0);
 }
 
-void AssetLoader::Shutdown()
+void AssetLoader::Destroy()
 {
 	Logger::LogInfo("Shutting down Asset Loader");
 	

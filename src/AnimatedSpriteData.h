@@ -16,7 +16,7 @@ struct AnimatedSpriteData
 	AnimatedSpriteData() = default;
 };
 
-namespace nlohmann 
+namespace nlohmann
 {
     static inline void from_json(const json& j, AnimatedSpriteData& a)
     {

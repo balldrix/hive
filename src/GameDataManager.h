@@ -10,11 +10,8 @@
 class GameDataManager
 {
 public:
-	GameDataManager() {};
-	~GameDataManager() {};
-
 	static void Init();
-	static void Shutdown();
+	static void Destroy();
 	
 	static AnimatedSpriteData LoadAnimatedSpriteData(std::string path);
 	static std::vector<HitBoxData> LoadHitboxData(std::string path);
@@ -22,6 +19,9 @@ public:
 	static EnemyDefinition GetEnemyDefinition(const std::string& id);
 
 private:
+	GameDataManager() {};
+	~GameDataManager() {};
+
 	static GameDataManager* s_instance;
 	std::vector<EnemyDefinition> m_enemyDefinitions;
 };

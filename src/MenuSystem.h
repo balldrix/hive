@@ -10,9 +10,6 @@ class IMenuSystemInteraction;
 class MenuSystem
 {
 public:
-	MenuSystem() {};
-	~MenuSystem();
-
 	static void Init();
 	static void Update(Input* input);
 	static void Destroy();
@@ -22,6 +19,9 @@ public:
 	static bool IsInputAllowed() { return s_isInputAllowed; }
 
 private:
+	MenuSystem() {};
+	~MenuSystem();
+
 	static void SelectIndex(int index);
 	static void SelectNextPossibleIndex(int index, Vector2 direction, int counter = 0);
 

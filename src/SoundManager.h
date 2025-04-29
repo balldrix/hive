@@ -1,8 +1,9 @@
 #pragma once
 
+#include "Sound.h"
+
 #include <map>
 #include <string>
-#include "Sound.h"
 
 class SoundManager
 {
@@ -10,7 +11,7 @@ public:
 	static void AddSound(const std::wstring& filename);
 	static Sound* GetSound(const std::wstring& name);
 
-	static void DeleteSounds();
+	static void Destroy();
 protected:
 	SoundManager();
 	~SoundManager();

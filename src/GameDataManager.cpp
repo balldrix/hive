@@ -24,7 +24,7 @@ void GameDataManager::Init()
 	s_instance = new GameDataManager();
 }
 
-void GameDataManager::Shutdown()
+void GameDataManager::Destroy()
 {
 	delete s_instance;
 	s_instance = nullptr;

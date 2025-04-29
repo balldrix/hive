@@ -14,9 +14,6 @@ class UIMainView;
 class UIManager
 {
 public:
-	UIManager();
-	~UIManager();
-
 	static void Init();
 	static void Update(float deltaTime);
 	static void Render(Graphics* graphics);
@@ -45,6 +42,9 @@ public:
 	static void Destroy();
 
 private:
+	UIManager();
+	~UIManager();
+
 	static UIManager* s_instance;
 	
 	void SwitchState();

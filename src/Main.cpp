@@ -93,9 +93,9 @@ void Shutdown()
 	delete game;
 	MenuSystem::Destroy();
 	UIManager::Destroy();
-	GameDataManager::Shutdown();
-	AssetLoader::Shutdown();
-	SoundManager::DeleteSounds();
+	GameDataManager::Destroy();
+	AssetLoader::Destroy();
+	SoundManager::Destroy();
 	AudioEngine::Destroy();
 	delete graphics;
 	delete window;
@@ -104,7 +104,7 @@ void Shutdown()
 	graphics = nullptr;
 	window = nullptr;	
 
-	Logger::LogInfo("Shutdown Game.");
+	Logger::LogInfo("Destroy Game.");
 }
 
 LRESULT CALLBACK WndProc(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam)

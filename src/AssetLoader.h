@@ -15,7 +15,7 @@ class Graphics;
 
 class AssetLoader
 {
-public:	
+public:
 	AssetLoader();
 	~AssetLoader() {};
 
@@ -30,7 +30,7 @@ public:
 
 	static void OnDeviceLost();
 
-	static void Shutdown();
+	static void Destroy();
 
 private:
 	void AddToLoadList(const AssetData& data);

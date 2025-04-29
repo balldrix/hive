@@ -32,7 +32,7 @@ Sound* SoundManager::GetSound(const std::wstring &name)
 		return nullptr;
 }
 
-void SoundManager::DeleteSounds()
+void SoundManager::Destroy()
 {
 	for(std::map<std::wstring, Sound*>::iterator i = s_sounds.begin(); i != s_sounds.end(); ++i)
 	{
