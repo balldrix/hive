@@ -72,7 +72,7 @@ inline void ParseLayers(TilemapData& t, const json& layers)
 
 			tilemapLayer.height = layer.at("height");
 			tilemapLayer.width = layer.at("width");
-			tilemapLayer.parallaxMod = layer.value("parallaxx", 0.0f);
+			tilemapLayer.parallaxMod = layer.value("parallaxx", 1.0f);
 			tilemapLayer.depth = 0.0f;
 			tilemapLayer.opacity = layer.at("opacity");
 			tilemapLayer.scrollOffset = Vector2::Zero;

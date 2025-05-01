@@ -29,16 +29,7 @@ void PlayerAttackState::OnEnter(Player* player)
 	player->GetHitBoxManager()->SetCollidersUsingTag(m_name);
 	player->GetControlSystem()->SetCanAttack(false);
 	player->GetControlSystem()->IncrementComboCount();
-
 	player->PlayPunchSound(m_name);
-
-	AnimationStateData currentAnimation = player->GetAnimator()->GetAnimation();
-	int endXPos = currentAnimation.endXPos;
-
-	if(endXPos == 0)
-		return;
-
-	player->GetShadow()->DisableSprite();
 }
 
 void PlayerAttackState::Execute(Player* player)
@@ -57,20 +48,7 @@ void PlayerAttackState::Execute(Player* player)
 	}
 }
 
-void PlayerAttackState::OnExit(Player* player)
-{
-	AnimationStateData currentAnimation = player->GetAnimator()->GetAnimation();
-	int endXPos = currentAnimation.endXPos;
-
-	if(endXPos == 0)
-		return;
-	
-	endXPos *= (int)player->GetFacingDirection().x;	
-	player->SetPositionX(player->GetPositionX() + endXPos);
-	player->GetSprite()->SetPosition(player->GetPosition());
-	player->GetShadow()->SetPosition(player->GetPosition());
-	player->GetShadow()->EnableSprite();
-}
+void PlayerAttackState::OnExit(Player* player) { }
 
 PlayerAttackState::PlayerAttackState(const std::string &name)
 {

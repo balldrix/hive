@@ -126,8 +126,8 @@ void GameplayGameState::LoadAssets()
 	LevelCollision::Init();
 	TilemapLoader::Init();
 
-	TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_lift.json");
-	//TilemapLoader::LoadTilemap("assets\\objectData\\tilemaps\\tm_trailer-level-showcase.json");
+	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_lift.json");
+	TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_trailer-level-showcase.json");
 
 	GameDataManager::LoadAllEnemyDefinitions();
 	m_camera = new Camera();
@@ -139,7 +139,7 @@ void GameplayGameState::LoadAssets()
 
 	m_player->Init(m_controlSystem);
 	m_player->SetCamera(m_camera);
-	//m_camera->SetTarget(m_player);
+	m_camera->SetTarget(m_player);
 
 	m_levelRenderer->Init(m_graphics, m_camera);
 	m_enemySpawnManager->Init();
