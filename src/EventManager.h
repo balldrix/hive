@@ -7,11 +7,11 @@
 
 using EventArgument = std::variant<float, std::string>;
 
-class AnimationEventManager
+class EventManager
 {
 public:
 	using EventCallback = std::function<void(EventArgument)>;
-	static AnimationEventManager* s_instance;
+	static EventManager* s_instance;
 
 	static void Init();
 	static void Destroy();
@@ -21,8 +21,8 @@ public:
 	static void TriggerEvent(const std::string& name, EventArgument arg);
 
 private:
-	AnimationEventManager() {};
-	~AnimationEventManager();
+	EventManager() {};
+	~EventManager();
 
 	void Shutdown();
 

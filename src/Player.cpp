@@ -1,10 +1,10 @@
 #include "Player.h"
 
 #include "AnimatedSpriteData.h"
-#include "AnimationEventManager.h"
 #include "Animator.h"
 #include "AssetLoader.h"
 #include "AudioEngine.h"
+#include "EventManager.h"
 #include "Camera.h"
 #include "ControlSystem.h"
 #include "DamageData.h"
@@ -64,7 +64,7 @@ Player::Player() :
 
 Player::~Player()
 {
-	AnimationEventManager::UnRegisterEvent("MovePlayer");
+	EventManager::UnRegisterEvent("MovePlayer");
 
 	AudioEngine::Instance()->RemoveSoundSource(m_vocalSoundSource);
 	AudioEngine::Instance()->RemoveSoundSource(m_footStepsSoundSource);
@@ -568,7 +568,7 @@ void Player::UpdateStats()
 
 void Player::RegisterAnimationEvents()
 {
-	AnimationEventManager::RegisterEvent("MovePlayer", [this](EventArgument arg) {
+	EventManager::RegisterEvent("MovePlayer", [this](EventArgument arg) {
 		if(!std::holds_alternative<float>(arg))
 		{
 			Logger::LogError("[Player] [RegisterEvents] Incorrect argument for MovePlayer, must be a float");

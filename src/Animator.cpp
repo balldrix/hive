@@ -1,8 +1,8 @@
 #include "Animator.h"
 
 #include "AnimatedSpriteData.h"
-#include "AnimationEventManager.h"
 #include "AnimationStateData.h"
+#include "EventManager.h"
 #include "Logger.h"
 #include "SpriteFrameData.h"
 
@@ -99,6 +99,6 @@ void Animator::TriggerEvents()
 	[&](const AnimationEventData& event) { return event.frameNumber == targetFrame; });
 
 	if(it != m_animatedSpriteData.animationEventData.end()) {
-		AnimationEventManager::TriggerEvent(it->eventName, it->argument);
+		EventManager::TriggerEvent(it->eventName, it->argument);
 	}
 }

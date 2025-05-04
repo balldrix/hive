@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\AnimationEventManager.cpp" />
+    <ClCompile Include="src\EventManager.cpp" />
     <ClCompile Include="src\EnemySpawnManager.cpp" />
     <ClCompile Include="src\ImpactFxPool.cpp" />
     <ClCompile Include="src\EnemyFallingState.cpp" />
@@ -69,7 +69,7 @@
     <ClCompile Include="src\UIKillCount.cpp" />
     <ClCompile Include="src\Utils.h" />
     <ClCompile Include="src\UISprite.cpp" />
-    <ClInclude Include="src\AnimationEventManager.h" />
+    <ClInclude Include="src\EventManager.h" />
     <ClInclude Include="src\AnimationEventData.h" />
     <ClInclude Include="src\DamageData.h" />
     <ClInclude Include="src\EnemyDefinition.h" />
