@@ -872,6 +872,9 @@
     <None Include="assets\data\player\playerDefinition.json">
       <Filter>Assets\Data\Player</Filter>
     </None>
+    <None Include="assets\data\tilemaps\tm_demo.json">
+      <Filter>Assets\Data\Tilemaps</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\data\encounters\encounter_positions.txt">

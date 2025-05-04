@@ -264,6 +264,7 @@
     <None Include="assets\data\spritesheets\waste-dog_spritesheet.json" />
     <None Include="assets\data\spritesheets\waste-lobster_spritesheet.json" />
     <None Include="assets\data\tilemaps\tm_bunker.json" />
+    <None Include="assets\data\tilemaps\tm_demo.json" />
     <None Include="assets\data\tilemaps\tm_lift.json" />
     <None Include="assets\data\tilemaps\tm_trailer-level-showcase.json" />
     <None Include="assets\fonts\gameboy_28pt.spritefont" />
