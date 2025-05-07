@@ -27,7 +27,7 @@ void EnemyDeadState::OnEnter(Enemy* enemy)
 		enemy->PlayDeathSound();
 
 	if(NPCManager::Instance()->GetAttackingEnemy() == enemy)
-		NPCManager::Instance()->SetAttackingEnemy(nullptr);
+		NPCManager::Instance()->SetNextAttackingEnemy();
 
 	enemy->SetTargetVelocity(Vector2::Zero);
 }

@@ -40,13 +40,11 @@ public:
 
 	void					SetDead(bool isDead);
 	void					SetPlayerTarget(Player* player);
-	void					SetHostile(bool isHostile);
 	void					ResetTimer(float timerMod);
 
 	Player*					GetPlayerTarget() const { return m_playerTarget; }
 	StateMachine<Enemy>*	GetStateMachine() const { return m_stateMachine; }
 	float					GetTimer() const { return m_thinkingTimer; }
-	bool					IsHostile() const { return m_isHostile; }
 	EnemyDefinition			GetData() const { return m_enemyDefinition; }
 	virtual DamageData		GetDamageData() const;
 	NPCManager*				GetManager() const { return m_npcManager; }
@@ -88,7 +86,6 @@ private:
 	Sprite*					m_hitBoxSprite;
 	float					m_thinkingTimer;
 	float					m_flashingTimer;
-	bool					m_isHostile;
 	bool					m_isFlashing;
 	State<Enemy>*			m_startingState;
 	NPCManager*				m_npcManager;

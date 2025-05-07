@@ -26,15 +26,6 @@ void EnemyKnockbackState::OnEnter(Enemy* enemy)
 
 void EnemyKnockbackState::Execute(Enemy* enemy)
 {
-	if(enemy->GetCurrentVelocity().x < 0)
-	{
-		enemy->FlipHorizontally(false);
-	} 
-	else if(enemy->GetCurrentVelocity().x > 0)
-	{
-		enemy->FlipHorizontally(true);
-	}
-
 	if(enemy->IsGrounded())
 	{
 		if(enemy->GetKnockbackCount() == 1)
@@ -47,7 +38,11 @@ void EnemyKnockbackState::Execute(Enemy* enemy)
 			enemy->Kill();
 		}
 
-		if(!enemy->IsDead())
+		if(enemy->IsDead())
+		{
+			enemy->GetStateMachine()->ChangeState(EnemyDeadState::Instance());
+		}
+		else
 		{
 			Vector2 direction = Vector2::Zero;
 
@@ -64,10 +59,6 @@ void EnemyKnockbackState::Execute(Enemy* enemy)
 			enemy->SetKnockbackCount(enemy->GetKnockbackCount() - 1);
 			enemy->GetAnimator()->Reset();
 			enemy->SetGrounded(false);
-		}
-		else
-		{
-			enemy->GetStateMachine()->ChangeState(EnemyDeadState::Instance());
 		}
 	}
 }

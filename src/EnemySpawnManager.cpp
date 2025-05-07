@@ -63,6 +63,8 @@ void EnemySpawnManager::CreateSpawners(const std::vector<MapObjectData>& mapObje
 			std::stof(mapObj.customProperties.at("startingVelocityX")),
 			std::stof(mapObj.customProperties.at("startingVelocityY"))
 		);
+		data.direction = mapObj.customProperties.at("facing") == "left" ? -Vector2::UnitX : Vector2::UnitX;
+		data.maxSpawns = std::stoi(mapObj.customProperties.at("maxSpawns"));
 
 		enemySpawner->Init(data);
 		m_spawners.push_back(enemySpawner);

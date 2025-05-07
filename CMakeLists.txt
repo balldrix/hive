@@ -22,7 +22,7 @@ add_executable(${PROJECT_NAME} src/main.cpp src/AABB.cpp src/Animator.cpp src/Au
 								src/EnemyWalkingState.cpp src/Game.cpp src/GameObject.cpp src/GameOverSceneState.cpp src/GameOverScreen.cpp 
 								src/GameOverScreenController.cpp src/GameState.cpp src/GameStateManager.cpp src/GameplayGameState.cpp 
 								src/Graphics.cpp src/HitBoxManager.cpp src/SpriteFx.cpp src/Input.cpp src/KingMook.cpp src/KingMookChargeState.cpp 
-								src/KingMookEnemyGlobalState.cpp src/LevelRenderer.cpp src/Main.cpp src/MookEnemyGlobalState.cpp 
+								src/KingMookEnemyGlobalState.cpp src/LevelRenderer.cpp src/Main.cpp src/NormalEnemyGlobalState.cpp 
 								src/MookRunningEnemyGlobalState.cpp src/NPCFactory.cpp src/NPCManager.cpp src/ParticleSystem.cpp src/PixelTexture.cpp 
 								src/Player.cpp src/PlayerAttackState.cpp src/PlayerBlockState.cpp src/PlayerDeadState.cpp src/PlayerGlobalState.cpp 
 								src/PlayerHurtState.cpp src/PlayerIdleState.cpp src/PlayerKnockbackState.cpp src/PlayerRunningState.cpp 
@@ -37,7 +37,7 @@ add_executable(${PROJECT_NAME} src/main.cpp src/AABB.cpp src/Animator.cpp src/Au
 								src/GameOverScreen.h src/GameOverScreenController.h src/GameState.h src/GameStateManager.h src/GameplayConstants.h 
 								src/GameplayGameState.h src/GlobalConstants.h src/Graphics.h src/HitBoxData.h src/HitBoxManager.h src/SpriteFx.h 
 								src/Input.h src/KingMook.h src/KingMookChargeState.h src/KingMookEnemyGlobalState.h src/LevelRenderer.h
-								src/MookEnemyGlobalState.h src/MookRunningEnemyGlobalState.h src/NPCFactory.h src/NPCManager.h src/ParticleSystem.h 
+								src/NormalEnemyGlobalState.h src/MookRunningEnemyGlobalState.h src/NPCFactory.h src/NPCManager.h src/ParticleSystem.h 
 								src/PixelTexture.h src/Player.h src/PlayerAttackState.h src/PlayerBlockState.h src/PlayerConstants.h
 								src/PlayerDeadState.h src/PlayerGlobalState.h src/PlayerHurtState.h src/PlayerIdleState.h 
 								src/PlayerKnockbackState.h src/PlayerRunningState.h src/PlayerSprintingState.h

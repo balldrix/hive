@@ -8,6 +8,7 @@
 #include "Player.h"
 
 #include <directxtk/SimpleMath.h>
+#include <limits>
 #include <string>
 
 using namespace DirectX::SimpleMath;
@@ -35,9 +36,10 @@ void NPCManager::Init(Graphics* graphics, Camera* camera, Player* player)
 
 	m_player = player;
 	m_NPCFactory = new NPCFactory();
+	m_NPCFactory->Init(graphics, camera, player);
 }
 
-void NPCManager::SpawnNPC(const Vector2& position, const EnemyDefinition& enemyDefinition, const Vector2& velocity, float height)
+void NPCManager::SpawnNPC(const Vector2& position, const EnemyDefinition& enemyDefinition, const Vector2& velocity, const Vector2& direction, float height)
 {
 	Enemy* enemy = nullptr;
 
@@ -61,6 +63,7 @@ void NPCManager::SpawnNPC(const Vector2& position, const EnemyDefinition& enemyD
 	enemy->Spawn(position);
 	enemy->SetPlayerTarget(m_player);
 	enemy->SetVelocity(velocity);
+	enemy->FlipHorizontally(direction != Vector2::UnitX);
 	
 	if(height > 0)
 	{
@@ -95,7 +98,7 @@ void NPCManager::Reset()
 
 void NPCManager::DeleteAll()
 {
-	for (const Enemy* i : m_enemyList)
+	for(const Enemy* i : m_enemyList)
 	{
 		delete i;
 		i = nullptr;
@@ -106,6 +109,39 @@ void NPCManager::DeleteAll()
 	delete m_NPCFactory;
 
 	m_NPCFactory = nullptr;
+}
+
+void NPCManager::SetNextAttackingEnemy()
+{
+	static std::vector<Enemy*> previousHostiles;
+
+	float closestDistance = std::numeric_limits<float>::max();
+	Enemy* newHostile = nullptr;
+
+	for(Enemy* enemy : m_enemyList)
+	{
+		if(enemy == m_hostileEnemy || enemy->IsDead() || !enemy->IsActive()) continue;
+
+		if(std::find(previousHostiles.begin(), previousHostiles.end(), enemy) != previousHostiles.end())
+			continue;
+
+		float distance = Vector2::DistanceSquared(enemy->GetPosition(), m_player->GetPosition());
+
+		if(distance >= closestDistance) continue;
+
+		closestDistance = distance;
+		newHostile = enemy;
+	}
+
+	if(newHostile)
+	{
+		previousHostiles.push_back(newHostile);
+		if(previousHostiles.size() > 3)
+			previousHostiles.erase(previousHostiles.begin());
+
+		m_hostileEnemy = newHostile;
+	}
+
 }
 
 void NPCManager::SetAttackingEnemy(Enemy* enemy)

@@ -13,6 +13,8 @@ struct SpawnData
 	float spawnRate = {};
 	float height = {};
 	Vector2 startingVelocity = {};
+	int maxSpawns = {};
+	Vector2 direction = {};
 };
 
 class EnemySpawner
@@ -23,13 +25,17 @@ public:
 
 	void Init(const SpawnData& spawnData);
 	void Update(float deltaTime);
+
 private:
-	void Spawn() const;
+	void Spawn();
 
 	EnemyDefinition m_enemyDefinition;
 	Vector2 m_spawnPosition;
 	Vector2 m_startingVelocity;
+	Vector2 m_facingDirection;
 	float m_height;
 	float m_spawnRate;
 	float m_timer;
+	int m_maxSpawns;
+	int m_spawnCount;
 };

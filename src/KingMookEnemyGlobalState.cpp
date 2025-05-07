@@ -44,20 +44,20 @@ void KingMookEnemyGlobalState::Execute(Enemy* enemy)
 			enemy->FlipHorizontally(false);
 	}
 
-	if(toPlayerTarget.Length() < enemy->GetData().hostileRange &&
-	   enemy->GetStateMachine()->GetCurrentState() != KingMookChargeState::Instance() &&
-	   enemy->GetPlayerTarget()->GetStateMachine()->IsInState(*PlayerDeadState::Instance()) == false)
-	{
-		if(enemy->IsHostile() == false)
-		{
-			enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
-			enemy->SetHostile(true);
-		}
-	}
-	else
-	{
-		enemy->SetHostile(false);
-	}
+	//if(toPlayerTarget.Length() < enemy->GetData().hostileRange &&
+	//   enemy->GetStateMachine()->GetCurrentState() != KingMookChargeState::Instance() &&
+	//   enemy->GetPlayerTarget()->GetStateMachine()->IsInState(*PlayerDeadState::Instance()) == false)
+	//{
+	//	if(enemy->IsHostile() == false)
+	//	{
+	//		enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
+	//		enemy->SetHostile(true);
+	//	}
+	//}
+	//else
+	//{
+	//	enemy->SetHostile(false);
+	//}
 
 	if(toPlayerTarget.Length() > enemy->GetData().hostileRange &&
 	   toPlayerTarget.Length() < enemy->GetData().chargeRange)

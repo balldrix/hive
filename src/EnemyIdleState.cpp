@@ -1,6 +1,7 @@
 #include "EnemyIdleState.h"
 
 #include "Animator.h"
+#include "directxtk/SimpleMath.h"
 #include "Enemy.h"
 #include "EnemyRunningState.h"
 #include "EnemyWalkingState.h"
@@ -13,7 +14,7 @@
 #include "Randomiser.h"
 #include "StateMachine.h"
 
-#include "directxtk/SimpleMath.h"
+#include <cmath>
 #include <string>
 
 using namespace DirectX::SimpleMath;
@@ -36,77 +37,107 @@ void EnemyIdleState::OnEnter(Enemy* enemy)
 
 void EnemyIdleState::Execute(Enemy* enemy)
 {
+	if(enemy->GetTimer() > 0 || enemy->GetHealth() < 0)
+		return;
+
 	auto verticalDistance = fabs(enemy->GetPositionY() - enemy->GetPlayerTarget()->GetPositionY());
 	auto distance = (enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length();
 
-	if(enemy->GetCurrentVelocity().LengthSquared() < 0.01f)
+	if(distance > enemy->GetData().fightRange)
 	{
-		if(enemy->GetPlayerTarget()->GetPositionX() < enemy->GetPositionX())
-			enemy->FlipHorizontally(true);
-		else
-			enemy->FlipHorizontally(false);
+		enemy->GetStateMachine()->ChangeState(EnemyWalkingState::Instance());
+		return;
 	}
 
-	if(enemy->GetPlayerTarget()->GetKnockbackCount() < 1 && enemy->GetPlayerTarget()->GetHealth() < 1)
-		return;
+	double randnum = Randomiser::Instance()->GetRandNum(0.4, 1.8);
+	Enemy* attackingEnemy = NPCManager::Instance()->GetAttackingEnemy();
 
-	if((enemy->GetPlayerTarget()->GetStateMachine()->GetCurrentState() == PlayerKnockbackState::Instance() ||
-		enemy->GetPlayerTarget()->GetStateMachine()->GetCurrentState() == PlayerDeadState::Instance())) return;
-
-	if(enemy->GetTimer() > 0 ||
-		enemy->GetHealth() < 0)
-		return;
-
-	if((enemy->GetPlayerTarget()->GetStateMachine()->GetCurrentState() != PlayerKnockbackState::Instance() &&
-		enemy->GetPlayerTarget()->GetStateMachine()->GetCurrentState() != PlayerDeadState::Instance()))
+	if(attackingEnemy != enemy)
 	{
-		// true if enemy is outside hostile range
-		if(distance > enemy->GetData().hostileRange)
+		enemy->ResetTimer((float)randnum);
+
+		if(attackingEnemy == nullptr)
 		{
-			enemy->GetStateMachine()->ChangeState(EnemyRunningState::Instance());
-			enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4f, 1.0f));
+			NPCManager::Instance()->SetAttackingEnemy(enemy);
 		}
-		else if(distance > enemy->GetData().fightRange || (NPCManager::Instance()->GetAttackingEnemy() == enemy && distance > enemy->GetData().attackRange))
-		{
-			enemy->GetStateMachine()->ChangeState(EnemyWalkingState::Instance());
-			enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4f, 1.0f));
-		}
+
+		return;
 	}
 
-	if(enemy->IsHostile() == false)
-		return;
-
-	auto enemies = enemy->GetManager()->GetEnemyList();
-
-	if(distance < enemy->GetData().fightRange
-		&& verticalDistance < VerticalHitRange
-		&& NPCManager::Instance()->GetAttackingEnemy() == enemy)
+	if(distance > enemy->GetData().attackRange && distance < enemy->GetData().fightRange)
 	{
-		double randnum = Randomiser::Instance()->GetRandNum(0.02, 1.8);
-	
+		enemy->GetStateMachine()->ChangeState(EnemyWalkingState::Instance());
+		return;
+	}
+
+	if(distance < enemy->GetData().attackRange && verticalDistance < VerticalHitRange)
+	{
 		enemy->Stop();
 		enemy->ResetTimer((float)randnum);
 		enemy->Attack();
 		return;
 	}
 
-	for(auto it = enemies.begin(); it != enemies.end(); it++)
-	{
-		if(*it == enemy) continue;
+	//if(enemy->GetPlayerTarget()->GetKnockbackCount() < 1 && enemy->GetPlayerTarget()->GetHealth() < 1)
+	//	return;
 
-		auto toOther = enemy->GetPosition() - (*it)->GetPosition();
+	//if((enemy->GetPlayerTarget()->GetStateMachine()->GetCurrentState() == PlayerKnockbackState::Instance() ||
+	//	enemy->GetPlayerTarget()->GetStateMachine()->GetCurrentState() == PlayerDeadState::Instance())) return;
 
-		if(toOther.Length() > MinEnemyAvoidDistance) continue;
+	//if(enemy->GetTimer() > 0 ||
+	//	enemy->GetHealth() < 0)
+	//	return;
 
-		enemy->GetStateMachine()->ChangeState(EnemyWalkingState::Instance());
-	}
+	//if((enemy->GetPlayerTarget()->GetStateMachine()->GetCurrentState() != PlayerKnockbackState::Instance() &&
+	//	enemy->GetPlayerTarget()->GetStateMachine()->GetCurrentState() != PlayerDeadState::Instance()))
+	//{
+	//	// true if enemy is outside hostile range
+	//	if(distance > enemy->GetData().hostileRange)
+	//	{
+	//		enemy->GetStateMachine()->ChangeState(EnemyRunningState::Instance());
+	//		enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4f, 1.0f));
+	//	}
+	//	else if(distance > enemy->GetData().fightRange || (NPCManager::Instance()->GetAttackingEnemy() == enemy && distance > enemy->GetData().attackRange))
+	//	{
+	//		enemy->GetStateMachine()->ChangeState(EnemyWalkingState::Instance());
+	//		enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4f, 1.0f));
+	//	}
+	//}
+
+	//if(enemy->IsHostile() == false)
+	//	return;
+
+	//auto enemies = enemy->GetManager()->GetEnemyList();
+
+	//if(distance < enemy->GetData().fightRange
+	//	&& verticalDistance < VerticalHitRange
+	//	&& NPCManager::Instance()->GetAttackingEnemy() == enemy)
+	//{
+	//	double randnum = Randomiser::Instance()->GetRandNum(0.02, 1.8);
+	//
+	//	enemy->Stop();
+	//	enemy->ResetTimer((float)randnum);
+	//	enemy->Attack();
+	//	return;
+	//}
+
+	//for(auto it = enemies.begin(); it != enemies.end(); it++)
+	//{
+	//	if(*it == enemy) continue;
+
+	//	auto toOther = enemy->GetPosition() - (*it)->GetPosition();
+
+	//	if(toOther.Length() > MinEnemyAvoidDistance) continue;
+
+	//	enemy->GetStateMachine()->ChangeState(EnemyWalkingState::Instance());
+	//}
 }
 
 void EnemyIdleState::OnExit(Enemy* enemy)
 {
 }
 
-EnemyIdleState::EnemyIdleState(const std::string &name)
+EnemyIdleState::EnemyIdleState(const std::string& name)
 {
 	m_name = name;
 }

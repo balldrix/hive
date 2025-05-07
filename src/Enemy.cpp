@@ -51,7 +51,6 @@ Enemy::Enemy() :
 	m_punchSoundSource(nullptr),
 	m_thinkingTimer(0.0f),
 	m_flashingTimer(0.0f),
-	m_isHostile(false),
 	m_isFlashing(false),
 	m_recentFootstepFrame(0),
 	m_startingState(nullptr),
@@ -247,11 +246,6 @@ void Enemy::SetPlayerTarget(Player* player)
 	m_playerTarget = player;
 }
 
-void Enemy::SetHostile(bool isHostile)
-{
-	m_isHostile = isHostile;
-}
-
 void Enemy::ResetTimer(float timerMod)
 {
 	m_thinkingTimer = GetData().thinkingTime * timerMod;
@@ -300,9 +294,10 @@ void Enemy::Knockback(const Vector2& direction, const float& force)
 
 void Enemy::Attack()
 {
-	int attackNum = Randomiser::Instance()->GetRandNum(1, 2);
-	EnemyAttackState::Instance()->SetAttack(fmt::format("attack{}", attackNum));
+	int attackNum = Randomiser::Instance()->GetRandNum(0, (int)m_enemyDefinition.damageData.size() - 1);
+	EnemyAttackState::Instance()->SetAttack(m_enemyDefinition.damageData[attackNum].name);
 	m_stateMachine->ChangeState(EnemyAttackState::Instance());
+	NPCManager::Instance()->SetNextAttackingEnemy();
 }
 
 void Enemy::Kill()
@@ -314,9 +309,8 @@ void Enemy::Kill()
 void Enemy::ProcessSteering()
 {
 	m_targetVelocity = Vector2::Zero;
-	m_targetVelocity += Seek() * 2;
+	m_targetVelocity += Seek() * 2.0f;
 	m_targetVelocity += Avoid();
-	m_targetVelocity += Strafe();
 	m_targetVelocity.Normalize();
 }
 
@@ -327,8 +321,6 @@ void Enemy::Flash()
 
 Vector2 Enemy::Seek() const
 {
-	if(m_isHostile && NPCManager::Instance()->GetAttackingEnemy() != this) return Vector2::Zero;
-
 	Vector2 direction = Vector2::Zero;
 	Vector2 targetPosition = GetPlayerTarget()->GetPosition();
 	Vector2 position = GetPosition();
@@ -365,7 +357,7 @@ Vector2 Enemy::Avoid() const
 
 Vector2 Enemy::Strafe() const
 {
-	if(NPCManager::Instance()->GetAttackingEnemy() == this || !IsHostile()) return Vector2::Zero;
+	if(NPCManager::Instance()->GetAttackingEnemy() == this) return Vector2::Zero;
 
 	auto toTarget = m_playerTarget->GetPosition() - GetPosition();
 	auto crossProduct = Vector2(toTarget.y, -toTarget.x);

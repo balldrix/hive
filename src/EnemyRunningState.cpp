@@ -9,6 +9,8 @@
 #include "NPCManager.h"
 #include "StateMachine.h"
 #include "UnitVectors.h"
+#include "EnemyIdleState.h"
+#include "Randomiser.h"
 
 #include <directxtk/SimpleMath.h>
 #include <string>
@@ -28,11 +30,10 @@ void EnemyRunningState::OnEnter(Enemy* enemy)
 	enemy->GetAnimator()->Reset();
 	enemy->GetAnimator()->SetAnimation(m_name);
 	enemy->GetHitBoxManager()->SetCollidersUsingTag(m_name);
-
 	enemy->SetMovementSpeed(enemy->GetData().runningSpeed);
 
-	if(enemy->GetStateMachine()->GetPreviousState() == EnemyAttackRunState::Instance())
-		return;
+	//if(enemy->GetStateMachine()->GetPreviousState() == EnemyAttackRunState::Instance())
+		//return;
 
 	//Vector2 direction = Vector2::Zero;
 	//float targetXPosition = enemy->GetPlayerTarget()->GetPositionX();
@@ -55,6 +56,14 @@ void EnemyRunningState::Execute(Enemy* enemy)
 {
 	enemy->ProcessSteering();
 	enemy->PlayWalkingSound();
+
+	auto distance = (enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length();
+
+	if(distance < enemy->GetData().hostileRange)
+	{
+		enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
+		enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4f, 1.0f));
+	}
 }
 
 void EnemyRunningState::OnExit(Enemy* enemy)

@@ -137,7 +137,7 @@
     <ClCompile Include="src\Enemy.cpp" />
     <ClCompile Include="src\EnemyAttackState.cpp" />
     <ClCompile Include="src\EnemyDeadState.cpp" />
-    <ClCompile Include="src\MookEnemyGlobalState.cpp" />
+    <ClCompile Include="src\NormalEnemyGlobalState.cpp" />
     <ClCompile Include="src\EnemyHurtState.cpp" />
     <ClCompile Include="src\EnemyKnockbackState.cpp" />
     <ClCompile Include="src\EnemyRunningState.cpp" />
@@ -202,7 +202,7 @@
     <ClInclude Include="src\Enemy.h" />
     <ClInclude Include="src\EnemyAttackState.h" />
     <ClInclude Include="src\EnemyDeadState.h" />
-    <ClInclude Include="src\MookEnemyGlobalState.h" />
+    <ClInclude Include="src\NormalEnemyGlobalState.h" />
     <ClInclude Include="src\EnemyHurtState.h" />
     <ClInclude Include="src\EnemyKnockbackState.h" />
     <ClInclude Include="src\EnemyRunningState.h" />
@@ -274,9 +274,6 @@
     <None Include="assets\fonts\goodbye_despair_8pt.spritefont" />
     <None Include="assets\fonts\thaleah_12pt.spritefont" />
     <None Include="assets\sounds\scream.ogg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="assets\data\encounters\encounter_positions.txt" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\sounds\boss_entrance_001.wav" />

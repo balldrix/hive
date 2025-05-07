@@ -43,7 +43,7 @@
     <ClCompile Include="src\KingMookEnemyGlobalState.cpp">
       <Filter>Game\Enemy\States</Filter>
     </ClCompile>
-    <ClCompile Include="src\MookEnemyGlobalState.cpp">
+    <ClCompile Include="src\NormalEnemyGlobalState.cpp">
       <Filter>Game\Enemy\States</Filter>
     </ClCompile>
     <ClCompile Include="src\MookRunningEnemyGlobalState.cpp">
@@ -482,7 +482,7 @@
     <ClInclude Include="src\KingMookEnemyGlobalState.h">
       <Filter>Game\Enemy\States</Filter>
     </ClInclude>
-    <ClInclude Include="src\MookEnemyGlobalState.h">
+    <ClInclude Include="src\NormalEnemyGlobalState.h">
       <Filter>Game\Enemy\States</Filter>
     </ClInclude>
     <ClInclude Include="src\MookRunningEnemyGlobalState.h">
@@ -877,11 +877,6 @@
     <None Include="assets\data\tilemaps\tm_demo.json">
       <Filter>Assets\Data\Tilemaps</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="assets\data\encounters\encounter_positions.txt">
-      <Filter>Assets\Data\Encounters</Filter>
-    </Text>
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\sounds\boss_walk_003.wav">

@@ -109,9 +109,9 @@
     "runningSpeed": 40,
     "acceleration": 0.8,
     "deceleration": 3.5,
-    "thinkingTime": 1.5,
-    "hostileRange": 55,
-    "fightRange": 30,
+    "thinkingTime": 1.2,
+    "hostileRange": 60,
+    "fightRange": 45,
     "attackRange": 20,
     "chargeRange": 0,
     "chargeSpeed": 0

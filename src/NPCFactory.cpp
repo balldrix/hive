@@ -8,7 +8,7 @@
 #include "EnemyIdleState.h"
 #include "Graphics.h"
 #include "Logger.h"
-#include "MookEnemyGlobalState.h"
+#include "NormalEnemyGlobalState.h"
 #include "NPCManager.h"
 #include "Player.h"
 
@@ -48,7 +48,7 @@ Enemy* NPCFactory::CreateNormalEnemy(EnemyDefinition& definition)
 	mook->Init(m_graphics, m_camera, m_player, definition,
 				NPCManager::Instance(),
 				AssetLoader::GetTexture("t_shadow_s"),
-				MookEnemyGlobalState::Instance(),
+				NormalEnemyGlobalState::Instance(),
 				EnemyIdleState::Instance());
 
 	return mook;
@@ -60,7 +60,7 @@ Enemy* NPCFactory::CreateFallingEnemy(EnemyDefinition& definition)
 	spider->Init(m_graphics, m_camera, m_player, definition,
 				NPCManager::Instance(),
 				AssetLoader::GetTexture("t_shadow_l"),
-				MookEnemyGlobalState::Instance(),
+				NormalEnemyGlobalState::Instance(),
 				EnemyFallingState::Instance());
 
 	return spider;
