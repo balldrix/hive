@@ -473,7 +473,7 @@ void GameplayGameState::ProcessCollisions()
 
 				auto impactFx = m_impactFxPool->Get();
 				m_activeImpacts.push_back(impactFx);
-				impactFx->DisplayFx(Vector2(groundPosition.x, groundPosition.y - spriteHeight * 0.5f));
+				impactFx->DisplayFx(Vector2(groundPosition.x, groundPosition.y - spriteHeight * 0.5f) - m_camera->GetPosition());
 				SpawnParticles(impactFx->Position(), normalDirection, (Color)Colors::Green, (Color)Colors::DarkGreen, 1.0f, 200);
 			}
 		}
@@ -515,7 +515,7 @@ void GameplayGameState::ProcessCollisions()
 
 				auto impactFx = m_impactFxPool->Get();
 				m_activeImpacts.push_back(impactFx);
-				impactFx->DisplayFx(Vector2(playerGroundPositionX, playerGroundPositionY - spriteHeight * 0.5f));
+				impactFx->DisplayFx(Vector2(playerGroundPositionX, playerGroundPositionY - spriteHeight * 0.5f) - m_camera->GetPosition());
 
 				if(m_player->GetStateMachine()->IsInState(*PlayerBlockState::Instance()))
 				{

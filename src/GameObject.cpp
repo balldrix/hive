@@ -319,7 +319,7 @@ void GameObject::Knockback(const Vector2& direction, const float& force)
 
 void GameObject::DisplayDust(const Vector2& position)
 {
-	m_dustFx->DisplayFx(position);
+	m_dustFx->DisplayFx(position - m_camera->GetPosition());
 }
 
 DamageData GameObject::GetDamageData() const

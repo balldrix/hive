@@ -35,7 +35,7 @@ void PlayerKnockbackState::Execute(Player* player)
 
 	if(!player->IsGrounded()) return;
 
-	player->DisplayDust(player->GetGroundPosition());
+	player->DisplayDust(player->GetPosition());
 	player->ResetKnockoutTimer();
 
 	if(player->GetKnockbackCount() < 1 && player->GetHealth() <= 0)

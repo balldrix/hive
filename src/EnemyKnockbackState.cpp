@@ -30,7 +30,7 @@ void EnemyKnockbackState::Execute(Enemy* enemy)
 	{
 		if(enemy->GetKnockbackCount() == 1)
 		{
-			enemy->DisplayDust(enemy->GetGroundPosition());
+			enemy->DisplayDust(enemy->GetPosition());
 		}
 
 		if(enemy->GetKnockbackCount() == 0)
