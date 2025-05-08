@@ -542,10 +542,10 @@ void GameplayGameState::SpawnParticles(const Vector2& position, const Vector2& v
 
 	for (unsigned int i = 0; i < number; i++)
 	{
-		m_particleData.VelocityVariation.x = (Randomiser::Instance()->GetRandNum(1.0f, 5.0f));
-		m_particleData.VelocityVariation.y = (Randomiser::Instance()->GetRandNum(-10.0f, 1.0f));
+		m_particleData.VelocityVariation.x = (Randomiser::Instance()->GetRandNumUniform(1.0f, 5.0f));
+		m_particleData.VelocityVariation.y = (Randomiser::Instance()->GetRandNumUniform(-10.0f, 1.0f));
 		m_particleData.VelocityVariation.Normalize();
-		m_particleData.VelocityVariation *= Randomiser::Instance()->GetRandNum(1.0f, 40.0f);
+		m_particleData.VelocityVariation *= Randomiser::Instance()->GetRandNumUniform(1.0f, 40.0f);
 
 		m_particleSystem->Emit(m_particleData);
 	}

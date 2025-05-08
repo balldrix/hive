@@ -62,26 +62,26 @@ void KingMookEnemyGlobalState::Execute(Enemy* enemy)
 	if(toPlayerTarget.Length() > enemy->GetData().hostileRange &&
 	   toPlayerTarget.Length() < enemy->GetData().chargeRange)
 	{
-		int randNum = Randomiser::Instance()->GetRandNum(0, 1);
+		int randNum = Randomiser::Instance()->GetRandNumUniform(0, 1);
 		float m_timer = enemy->GetTimer();
-		float thinkingTime = enemy->GetData().thinkingTime * Randomiser::Instance()->GetRandNum(0.5f, 1.0f);
-		if(randNum > 0 && m_timer > thinkingTime)
+		//float thinkingTime = enemy->GetData().thinkingTime * Randomiser::Instance()->GetRandNumUniform(0.5f, 1.0f);
+		/*if(randNum > 0 && m_timer > thinkingTime)
 		{
 			enemy->GetStateMachine()->ChangeState(KingMookChargeState::Instance());
-			enemy->ResetTimer(0);
+			enemy->ResetStateChangeTimer(0);
 			return;
-		}
+		}*/
 	}
 
 	if((enemy->GetStateMachine()->GetCurrentState() == EnemyWalkingState::Instance() ||
 		enemy->GetStateMachine()->GetCurrentState() == EnemyRunningState::Instance()) &&
 	   toPlayerTarget.Length() > enemy->GetData().hostileRange)
 	{
-		if(enemy->GetTimer() > enemy->GetData().thinkingTime * Randomiser::Instance()->GetRandNum(0.8f, 2.0f))
+		/*if(enemy->GetTimer() > enemy->GetData().thinkingTime * Randomiser::Instance()->GetRandNumUniform(0.8f, 2.0f))
 		{
 			enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
-			enemy->ResetTimer(0);	
-		}
+			enemy->ResetStateChangeTimer(0);	
+		}*/
 	}
 }
 

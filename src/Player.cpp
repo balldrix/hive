@@ -438,7 +438,7 @@ void Player::PlayWalkingSound()
 
 	m_recentFootstepFrame = m_animator->GetCurrentFrame();
 
-	uint32_t randomWalkIndex = Randomiser::Instance()->GetRandNum(1, 4);
+	uint32_t randomWalkIndex = Randomiser::Instance()->GetRandNumUniform(1, 4);
 
 	std::wstring soundName = m_playerSounds[m_stateMachine->GetCurrentState()->GetName() + std::to_string(randomWalkIndex)];
 	m_footStepsSoundSource->SetSound(SoundManager::GetSound(soundName));
@@ -446,7 +446,7 @@ void Player::PlayWalkingSound()
 
 void Player::PlayHurtSound()
 {
-	uint32_t randomHurtSound = Randomiser::Instance()->GetRandNum(1, 3);
+	uint32_t randomHurtSound = Randomiser::Instance()->GetRandNumUniform(1, 3);
 
 	std::wstring soundName = m_playerSounds[m_stateMachine->GetCurrentState()->GetName() + std::to_string(randomHurtSound)];
 	m_vocalSoundSource->SetSound(SoundManager::GetSound(soundName));

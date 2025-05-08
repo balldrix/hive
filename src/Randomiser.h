@@ -9,12 +9,13 @@ public:
 
 	static Randomiser* Instance();
 	
-	double GetRandNum(double min, double max);
-	float GetRandNum(float min, float max);
-	int GetRandNum(int min, int max);
+	double GetRandNumUniform(double min, double max);
+	float GetRandNumUniform(float min, float max);
+	int GetRandNumUniform(int min, int max);
 
-	std::mt19937 m_generator;
+	float GetRandNumNormal(float min, float max);
 
 private:
+	std::mt19937 m_generator;
 	Randomiser();
 };

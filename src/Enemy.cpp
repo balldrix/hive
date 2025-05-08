@@ -49,7 +49,7 @@ Enemy::Enemy() :
 	m_vocalSoundSource(nullptr),
 	m_footStepsSoundSource(nullptr),
 	m_punchSoundSource(nullptr),
-	m_thinkingTimer(0.0f),
+	m_stateChangeTimer(0.0f),
 	m_flashingTimer(0.0f),
 	m_isFlashing(false),
 	m_recentFootstepFrame(0),
@@ -162,7 +162,7 @@ void Enemy::Init(Graphics* graphics,
 	AudioEngine::Instance()->AddSoundSource(m_footStepsSoundSource);
 	AudioEngine::Instance()->AddSoundSource(m_punchSoundSource);
 
-	ResetTimer(Randomiser::Instance()->GetRandNum(0.8f, 2.0f));
+	ResetStateChangeTimer();
 
 	m_active = false;
 }
@@ -174,7 +174,7 @@ void Enemy::Update(float deltaTime)
 	m_stateMachine->Update();
 	GameObject::Update(deltaTime);
 
-	if(m_thinkingTimer > 0.0f) m_thinkingTimer -= deltaTime;
+	if(m_stateChangeTimer > 0.0f) m_stateChangeTimer -= deltaTime;
 	if(m_flashingTimer > 0.0f) m_flashingTimer -= deltaTime;
 
 	if(m_isFlashing && m_flashingTimer <= 0.0f)
@@ -246,9 +246,9 @@ void Enemy::SetPlayerTarget(Player* player)
 	m_playerTarget = player;
 }
 
-void Enemy::ResetTimer(float timerMod)
+void Enemy::ResetStateChangeTimer()
 {
-	m_thinkingTimer = GetData().thinkingTime * timerMod;
+	m_stateChangeTimer = Randomiser::Instance()->GetRandNumNormal(m_enemyDefinition.minStateChangeTime, m_enemyDefinition.maxStateChangeTime);
 }
 
 void Enemy::ApplyDamage(GameObject* source, const int& amount)
@@ -294,7 +294,7 @@ void Enemy::Knockback(const Vector2& direction, const float& force)
 
 void Enemy::Attack()
 {
-	int attackNum = Randomiser::Instance()->GetRandNum(0, (int)m_enemyDefinition.damageData.size() - 1);
+	int attackNum = Randomiser::Instance()->GetRandNumUniform(0, (int)m_enemyDefinition.damageData.size() - 1);
 	EnemyAttackState::Instance()->SetAttack(m_enemyDefinition.damageData[attackNum].name);
 	m_stateMachine->ChangeState(EnemyAttackState::Instance());
 	NPCManager::Instance()->SetNextAttackingEnemy();
@@ -338,6 +338,9 @@ Vector2 Enemy::Seek() const
 Vector2 Enemy::Avoid() const
 {
 	Vector2 force = Vector2::Zero;
+
+	if(this == NPCManager::Instance()->GetAttackingEnemy()) return force;
+
 	auto enemyList = m_npcManager->GetEnemyList();
 
 	for(auto it = enemyList.begin(); it != enemyList.end(); it++)
@@ -387,7 +390,7 @@ void Enemy::ShowEnemyHud()
 
 void Enemy::PlayEntranceSound()
 {
-	uint32_t randomNumber = Randomiser::Instance()->GetRandNum(1, 4);
+	uint32_t randomNumber = Randomiser::Instance()->GetRandNumUniform(1, 4);
 
 	std::wstring soundName = L"mook_entrance_00" + std::to_wstring(randomNumber);
 	m_vocalSoundSource->SetSound(SoundManager::GetSound(soundName));
@@ -410,14 +413,14 @@ void Enemy::PlayPunchSound()
 {
 	Sound* sound = SoundManager::GetSound(L"mook_punch_001");
 	
-	float randomPitch = Randomiser::Instance()->GetRandNum(0.80f, 1.2f);
+	float randomPitch = Randomiser::Instance()->GetRandNumUniform(0.80f, 1.2f);
 	m_punchSoundSource->SetPitch(randomPitch);
 	m_punchSoundSource->SetSound(sound);
 }
 
 void Enemy::PlayHurtSound()
 {
-	uint32_t randomNumber = Randomiser::Instance()->GetRandNum(1, 4);
+	uint32_t randomNumber = Randomiser::Instance()->GetRandNumUniform(1, 4);
 
 	std::wstring soundName = L"mook_hit_00" + std::to_wstring(randomNumber);
 	m_vocalSoundSource->SetSound(SoundManager::GetSound(soundName));

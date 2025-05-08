@@ -70,7 +70,8 @@ struct EnemyDefinition
 	float runningSpeed = {};
 	float acceleration = {};
 	float deceleration = {};
-	float thinkingTime = {};
+	float minStateChangeTime = {};
+	float maxStateChangeTime = {};
 	float hostileRange = {};
 	float fightRange = {};
 	float attackRange = {};
@@ -95,7 +96,8 @@ namespace nlohmann
 		enemyDefinition.runningSpeed = j.at("runningSpeed");
 		enemyDefinition.acceleration = j.at("acceleration");
 		enemyDefinition.deceleration = j.at("deceleration");
-		enemyDefinition.thinkingTime = j.at("thinkingTime");
+		enemyDefinition.minStateChangeTime = j.at("minStateChangeTime");
+		enemyDefinition.maxStateChangeTime = j.at("maxStateChangeTime");
 		enemyDefinition.hostileRange = j.at("hostileRange");
 		enemyDefinition.fightRange = j.at("fightRange");
 		enemyDefinition.attackRange = j.at("attackRange");

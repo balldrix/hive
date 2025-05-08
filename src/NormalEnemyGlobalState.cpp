@@ -1,15 +1,9 @@
 #include "NormalEnemyGlobalState.h"
 
 #include "Enemy.h"
-#include "EnemyDeadState.h"
-#include "EnemyFallingState.h"
-#include "EnemyIdleState.h"
 #include "EnemyKnockbackState.h"
-#include "EnemyLandingState.h"
-#include "NPCManager.h"
-#include "StateMachine.h"
-#include "Randomiser.h"
 #include "EnemyRunningState.h"
+#include "StateMachine.h"
 
 NormalEnemyGlobalState* NormalEnemyGlobalState::Instance()
 {
@@ -49,7 +43,7 @@ void NormalEnemyGlobalState::Execute(Enemy* enemy)
 	if(distance > enemy->GetData().hostileRange)
 	{
 		enemy->GetStateMachine()->ChangeState(EnemyRunningState::Instance());
-		enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4f, 1.0f));
+		enemy->ResetStateChangeTimer();
 	}
 
 	//if(currentState == EnemyFallingState::Instance() || currentState == EnemyLandingState::Instance()) return;

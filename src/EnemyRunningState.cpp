@@ -2,20 +2,12 @@
 
 #include "Animator.h"
 #include "Enemy.h"
-#include "EnemyAttackRunState.h"
-#include "EnemyWalkingState.h"
-#include "GameplayConstants.h"
-#include "HitBoxManager.h"
-#include "NPCManager.h"
-#include "StateMachine.h"
-#include "UnitVectors.h"
 #include "EnemyIdleState.h"
-#include "Randomiser.h"
+#include "HitBoxManager.h"
+#include "StateMachine.h"
 
 #include <directxtk/SimpleMath.h>
 #include <string>
-
-using namespace GameplayConstants;
 
 using namespace DirectX::SimpleMath;
 
@@ -62,7 +54,7 @@ void EnemyRunningState::Execute(Enemy* enemy)
 	if(distance < enemy->GetData().hostileRange)
 	{
 		enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
-		enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4f, 1.0f));
+		enemy->ResetStateChangeTimer();
 	}
 }
 

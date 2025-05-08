@@ -7,7 +7,6 @@
 #include "EnemyKnockbackState.h"
 #include "EnemyRunningState.h"
 #include "GameplayConstants.h"
-#include "Randomiser.h"
 #include "StateMachine.h"
 
 #include <cmath>
@@ -43,13 +42,13 @@ void MookRunningEnemyGlobalState::Execute(Enemy* enemy)
 		{
 			enemy->SetPosition(enemy->GetPositionX(), enemy->GetPlayerTarget()->GetGroundPosition().y + 1);
 			enemy->GetStateMachine()->ChangeState(EnemyRunningState::Instance());
-			enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.8f, 2.0f));
+			enemy->ResetStateChangeTimer();
 		}
 
 		if (currentState == EnemyRunningState::Instance() &&
 			distance > enemy->GetData().chargeRange)
 		{
-			enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.8f, 2.0f));
+			enemy->ResetStateChangeTimer();
 			enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
 		}
 	}

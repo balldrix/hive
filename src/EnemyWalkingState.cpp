@@ -5,7 +5,6 @@
 #include "EnemyIdleState.h"
 #include "HitBoxManager.h"
 #include "NPCManager.h"
-#include "Randomiser.h"
 #include "StateMachine.h"
 
 #include <directxtk/SimpleMath.h>
@@ -22,7 +21,7 @@ void EnemyWalkingState::OnEnter(Enemy* enemy)
 	enemy->GetAnimator()->Reset();
 	enemy->GetAnimator()->SetAnimation(m_name);
 	enemy->GetHitBoxManager()->SetCollidersUsingTag(m_name);
-	enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4f, 1.0f));
+	enemy->ResetStateChangeTimer();
 	enemy->SetMovementSpeed(enemy->GetData().walkSpeed);
 }
 
@@ -44,14 +43,14 @@ void EnemyWalkingState::Execute(Enemy* enemy)
 	if(distance < enemy->GetData().fightRange && distance > enemy->GetData().attackRange && NPCManager::Instance()->GetAttackingEnemy() != enemy)
 	{
 		enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
-		enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.6f, 2.0f));
+		enemy->ResetStateChangeTimer();
 		return;
 	}
 
 	if(distance < enemy->GetData().attackRange)
 	{
 		enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
-		enemy->ResetTimer(Randomiser::Instance()->GetRandNum(0.4f, 1.0f));
+		enemy->ResetStateChangeTimer();
 	}
 }
 
