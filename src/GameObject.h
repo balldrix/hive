@@ -7,7 +7,6 @@
 
 #include <directxtk/SimpleMath.h>
 #include <string>
-#include <vector>
 
 using namespace DirectX::SimpleMath;
 
@@ -16,18 +15,6 @@ class Sprite;
 class SpriteFx;
 class ControlSystem;
 class Camera;
-
-struct ObjectData
-{
-	std::string				id = {};
-	unsigned int			startingHealth = {};
-	unsigned int			startingLives = {};
-	Vector2					startingPosition = {};
-	float					walkSpeed = {};
-	float					runningSpeed = {};
-	float					acceleration = {};
-	float					deceleration = {};
-};
 
 class GameObject
 {
@@ -85,10 +72,10 @@ public:
 	Vector3				GetFacingDirection() const { return m_facingDirection; };
 
 	// pointers for important objects
-	ControlSystem* GetControlSystem() const { return m_controlSystem; }
-	Spritesheet* GetSprite() const { return m_spritesheet; }
-	Animator* GetAnimator() const { return m_animator; }
-	HitBoxManager* GetHitBoxManager() const { return m_hitBoxManager; }
+	ControlSystem*		GetControlSystem() const { return m_controlSystem; }
+	Spritesheet*		GetSprite() const { return m_spritesheet; }
+	Animator*			GetAnimator() const { return m_animator; }
+	HitBoxManager*		GetHitBoxManager() const { return m_hitBoxManager; }
 
 	int					GetHealth() const { return m_health; }
 	virtual int			GetMaxHealth() const;
@@ -118,14 +105,14 @@ protected:
 	float					m_deceleration;
 	Vector3					m_facingDirection;
 
-	Spritesheet* m_spritesheet;
-	Animator* m_animator;
+	Spritesheet*			m_spritesheet;
+	Animator*				m_animator;
 
-	Sprite* m_shadow;
-	SpriteFx* m_dustFx;
+	Sprite*					m_shadow;
+	SpriteFx*				m_dustFx;
 
-	HitBoxManager* m_hitBoxManager;
-	ControlSystem* m_controlSystem;
+	HitBoxManager*			m_hitBoxManager;
+	ControlSystem*			m_controlSystem;
 
 	int						m_health;
 	int						m_knockbackCount;
