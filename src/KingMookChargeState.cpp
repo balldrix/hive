@@ -28,7 +28,7 @@ void KingMookChargeState::OnEnter(Enemy* enemy)
 
 void KingMookChargeState::Execute(Enemy* enemy)
 {
-	enemy->PlayWalkingSound();
+	enemy->PlayFootstepSound();
 
 	if(enemy->GetAnimator()->IsDone() == true)
 		enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());

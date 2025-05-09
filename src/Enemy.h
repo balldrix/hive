@@ -62,7 +62,7 @@ public:
 	void					Flash();
 
 	virtual void			PlayEntranceSound();
-	virtual void			PlayWalkingSound();
+	virtual void			PlayFootstepSound();
 	void					StopWalkingSound();
 	virtual void			PlayPunchSound();
 	void					PlayHurtSound();
@@ -71,8 +71,8 @@ public:
 protected:
 	StateMachine<Enemy>*	m_stateMachine;
 	SoundSource*			m_vocalSoundSource;
-	SoundSource*			m_footStepsSoundSource;
-	SoundSource*			m_punchSoundSource;
+	SoundSource*			m_footStepSoundSource;
+	SoundSource*			m_attackSoundSource;
 	int						m_recentFootstepFrame;
 	EnemyDefinition			m_enemyDefinition;
 

@@ -36,7 +36,7 @@ void KingMook::PlayEntranceSound()
 	m_vocalSoundSource->SetSound(SoundManager::GetSound(soundName));
 }
 
-void KingMook::PlayWalkingSound()
+void KingMook::PlayFootstepSound()
 {
 	if(m_recentFootstepFrame == m_animator->GetCurrentFrame())
 		return;
@@ -46,7 +46,7 @@ void KingMook::PlayWalkingSound()
 	uint32_t randomWalkIndex = Randomiser::Instance()->GetRandNumUniform(1, 3);
 
 	std::wstring soundName = L"boss_walk_00" + std::to_wstring(randomWalkIndex);
-	m_footStepsSoundSource->SetSound(SoundManager::GetSound(soundName));
+	m_footStepSoundSource->SetSound(SoundManager::GetSound(soundName));
 }
 
 void KingMook::PlayPunchSound()
@@ -54,5 +54,5 @@ void KingMook::PlayPunchSound()
 	uint32_t randomWalkIndex = Randomiser::Instance()->GetRandNumUniform(1, 4);
 
 	std::wstring soundName = L"boss_punch_00" + std::to_wstring(randomWalkIndex);
-	m_punchSoundSource->SetSound(SoundManager::GetSound(soundName));
+	m_attackSoundSource->SetSound(SoundManager::GetSound(soundName));
 }

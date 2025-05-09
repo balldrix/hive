@@ -56,7 +56,7 @@ public:
 	bool								IsSpecialReady() const { return m_special == MaxSpecial; }
 
 	void								PlayPunchSound(const std::string &name);	
-	void								PlayWalkingSound();
+	void								PlayFootstepSound();
 	void								PlayHurtSound();
 	void								PlayDeathSound();
 
@@ -73,8 +73,8 @@ private:
 
 	PlayerDefinition					m_playerDefinition;
 	StateMachine<Player>*				m_stateMachine;
-	SoundSource*						m_punchSoundSource;
-	SoundSource*						m_footStepsSoundSource;
+	SoundSource*						m_attackSoundSource;
+	SoundSource*						m_footStepSoundSource;
 	SoundSource*						m_vocalSoundSource;
 	float								m_knockoutTimer;
 	float								m_hurtTimer;

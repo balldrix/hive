@@ -91,38 +91,6 @@ void GameplayGameState::OnExit()
 
 void GameplayGameState::LoadAssets()
 {
-	//SoundManager::AddSound(L"assets\\sounds\\punch_001.wav");
-	//SoundManager::AddSound(L"assets\\sounds\\punch_003.wav");
-	//SoundManager::AddSound(L"assets\\sounds\\punch_004.wav");
-	//SoundManager::AddSound(L"assets\\sounds\\walk_001.wav");
-	//SoundManager::AddSound(L"assets\\sounds\\walk_002.wav");
-	//SoundManager::AddSound(L"assets\\sounds\\walk_003.wav");
-	//SoundManager::AddSound(L"assets\\sounds\\walk_004.wav");
-	//SoundManager::AddSound(L"assets\\sounds\\hit_001.wav");
-	//SoundManager::AddSound(L"assets\\sounds\\hit_002.wav");
-	//SoundManager::AddSound(L"assets\\sounds\\hit_003.wav");
-	//SoundManager::AddSound(L"assets\\sounds\\scream.ogg");
-	//SoundManager::AddSound(L"assets\\sounds\\mook_entrance_001.wav");
-	//SoundManager::AddSound(L"assets\\sounds\\mook_entrance_002.wav");
-	//SoundManager::AddSound(L"assets\\sounds\\mook_entrance_003.wav");
-	//SoundManager::AddSound(L"assets\\sounds\\mook_entrance_004.wav");
-	//SoundManager::AddSound(L"assets\\sounds\\mook_walk.wav");
-	//SoundManager::AddSound(L"assets\\sounds\\mook_punch_001.wav");
-	//SoundManager::AddSound(L"assets\\sounds\\mook_hit_001.wav");
-	//SoundManager::AddSound(L"assets\\sounds\\mook_hit_002.wav");
-	//SoundManager::AddSound(L"assets\\sounds\\mook_hit_003.wav");
-	//SoundManager::AddSound(L"assets\\sounds\\mook_hit_004.wav");
-	//SoundManager::AddSound(L"assets\\sounds\\mook_death.wav");
-	//SoundManager::AddSound(L"assets\\sounds\\boss_entrance_001.wav");
-	//SoundManager::AddSound(L"assets\\sounds\\boss_walk_001.wav");
-	//SoundManager::AddSound(L"assets\\sounds\\boss_walk_002.wav");
-	//SoundManager::AddSound(L"assets\\sounds\\boss_walk_003.wav");
-	//SoundManager::AddSound(L"assets\\sounds\\boss_punch_001.wav");
-	//SoundManager::AddSound(L"assets\\sounds\\boss_punch_002.wav");
-	//SoundManager::AddSound(L"assets\\sounds\\boss_punch_003.wav");
-	//SoundManager::AddSound(L"assets\\sounds\\boss_punch_004.wav");
-	//SoundManager::AddSound(L"assets\\sounds\\travelling_master.wav");
-
 	LevelCollision::Init();
 	TilemapLoader::Init();
 

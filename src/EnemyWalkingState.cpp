@@ -28,7 +28,7 @@ void EnemyWalkingState::OnEnter(Enemy* enemy)
 void EnemyWalkingState::Execute(Enemy* enemy)
 {
 	enemy->ProcessSteering();
-	enemy->PlayWalkingSound();
+	enemy->PlayFootstepSound();
 
 	//if(enemy->GetTargetVelocity() == Vector2::Zero && enemy->GetCurrentVelocity() == Vector2::Zero)
 	//{

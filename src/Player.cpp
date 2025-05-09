@@ -52,8 +52,8 @@ using namespace GlobalConstants;
 Player::Player() :
 	m_stateMachine(nullptr),
 	m_knockoutTimer(0.0f),
-	m_punchSoundSource(nullptr),
-	m_footStepsSoundSource(nullptr),
+	m_attackSoundSource(nullptr),
+	m_footStepSoundSource(nullptr),
 	m_vocalSoundSource(nullptr),
 	m_recentFootstepFrame(0),
 	m_hurtTimer(0.0f),
@@ -67,19 +67,19 @@ Player::~Player()
 	EventManager::UnRegisterEvent("MovePlayer");
 
 	AudioEngine::Instance()->RemoveSoundSource(m_vocalSoundSource);
-	AudioEngine::Instance()->RemoveSoundSource(m_footStepsSoundSource);
-	AudioEngine::Instance()->RemoveSoundSource(m_punchSoundSource);
+	AudioEngine::Instance()->RemoveSoundSource(m_footStepSoundSource);
+	AudioEngine::Instance()->RemoveSoundSource(m_attackSoundSource);
 
 	delete m_vocalSoundSource;
-	delete m_footStepsSoundSource;
-	delete m_punchSoundSource;
+	delete m_footStepSoundSource;
+	delete m_attackSoundSource;
 	delete m_dustFx;
 	delete m_stateMachine;
 	delete m_spritesheet;
 
 	m_vocalSoundSource = nullptr;
-	m_footStepsSoundSource = nullptr;
-	m_punchSoundSource = nullptr;
+	m_footStepSoundSource = nullptr;
+	m_attackSoundSource = nullptr;
 	m_dustFx = nullptr;
 	m_stateMachine = nullptr;
 	m_spritesheet = nullptr;
@@ -127,15 +127,15 @@ void Player::Init(ControlSystem* controlSystem)
 
 	m_health = m_playerDefinition.hp;
 
-	m_punchSoundSource = new SoundSource();
-	m_punchSoundSource->SetTarget(this);
-	m_punchSoundSource->SetLooping(false);
-	m_punchSoundSource->SetRelative(true);
+	m_attackSoundSource = new SoundSource();
+	m_attackSoundSource->SetTarget(this);
+	m_attackSoundSource->SetLooping(false);
+	m_attackSoundSource->SetRelative(true);
 
-	m_footStepsSoundSource = new SoundSource();
-	m_footStepsSoundSource->SetTarget(this);
-	m_footStepsSoundSource->SetLooping(false);
-	m_footStepsSoundSource->SetRelative(true);
+	m_footStepSoundSource = new SoundSource();
+	m_footStepSoundSource->SetTarget(this);
+	m_footStepSoundSource->SetLooping(false);
+	m_footStepSoundSource->SetRelative(true);
 
 	m_vocalSoundSource = new SoundSource();
 	m_vocalSoundSource->SetTarget(this);
@@ -143,8 +143,8 @@ void Player::Init(ControlSystem* controlSystem)
 	m_vocalSoundSource->SetRelative(true);
 
 	AudioEngine::Instance()->SetListener(this);
-	AudioEngine::Instance()->AddSoundSource(m_punchSoundSource);
-	AudioEngine::Instance()->AddSoundSource(m_footStepsSoundSource);
+	AudioEngine::Instance()->AddSoundSource(m_attackSoundSource);
+	AudioEngine::Instance()->AddSoundSource(m_footStepSoundSource);
 	AudioEngine::Instance()->AddSoundSource(m_vocalSoundSource);
 
 	m_playerSounds =
@@ -428,20 +428,12 @@ void Player::Knockback(const Vector2& direction, const float& force)
 void Player::PlayPunchSound(const std::string& name)
 {
 	std::wstring soundName = m_playerSounds[name];
-	m_punchSoundSource->SetSound(SoundManager::GetSound(soundName));
+	m_attackSoundSource->SetSound(SoundManager::GetSound(soundName));
 }
 
-void Player::PlayWalkingSound()
+void Player::PlayFootstepSound()
 {
-	if(m_recentFootstepFrame == m_animator->GetCurrentFrame())
-		return;
-
-	m_recentFootstepFrame = m_animator->GetCurrentFrame();
-
-	uint32_t randomWalkIndex = Randomiser::Instance()->GetRandNumUniform(1, 4);
-
-	std::wstring soundName = m_playerSounds[m_stateMachine->GetCurrentState()->GetName() + std::to_string(randomWalkIndex)];
-	m_footStepsSoundSource->SetSound(SoundManager::GetSound(soundName));
+	m_footStepSoundSource->SetSound(SoundManager::GetSound(L"footstep"));
 }
 
 void Player::PlayHurtSound()

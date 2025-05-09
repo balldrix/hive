@@ -32,7 +32,7 @@ void PlayerRunningState::Execute(Player* player)
 		player->GetStateMachine()->ChangeState((PlayerSprintingState::Instance()));
 
 	if(player->IsGrounded())
-		player->PlayWalkingSound();
+		player->PlayFootstepSound();
 }
 
 void PlayerRunningState::OnExit(Player* player)
