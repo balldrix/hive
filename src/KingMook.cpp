@@ -7,6 +7,9 @@
 #include "SoundSource.h"
 #include "StateMachine.h"
 
+#include <cstdint>
+#include <string>
+
 KingMook::~KingMook()
 {
 }
@@ -32,8 +35,8 @@ void KingMook::Attack()
 
 void KingMook::PlayEntranceSound()
 {
-	std::wstring soundName = L"boss_entrance_001";
-	m_vocalSoundSource->SetSound(SoundManager::GetSound(soundName));
+	std::string soundName = "boss_entrance_001";
+	m_vocalSoundSource->Play(SoundManager::GetSound(soundName));
 }
 
 void KingMook::PlayFootstepSound()
@@ -45,14 +48,14 @@ void KingMook::PlayFootstepSound()
 
 	uint32_t randomWalkIndex = Randomiser::Instance()->GetRandNumUniform(1, 3);
 
-	std::wstring soundName = L"boss_walk_00" + std::to_wstring(randomWalkIndex);
-	m_footStepSoundSource->SetSound(SoundManager::GetSound(soundName));
+	std::string soundName = "boss_walk_00" + std::to_string(randomWalkIndex);
+	m_footStepSoundSource->Play(SoundManager::GetSound(soundName));
 }
 
 void KingMook::PlayPunchSound()
 {
 	uint32_t randomWalkIndex = Randomiser::Instance()->GetRandNumUniform(1, 4);
 
-	std::wstring soundName = L"boss_punch_00" + std::to_wstring(randomWalkIndex);
-	m_attackSoundSource->SetSound(SoundManager::GetSound(soundName));
+	std::string soundName = "boss_punch_00" + std::to_string(randomWalkIndex);
+	m_attackSoundSource->Play(SoundManager::GetSound(soundName));
 }

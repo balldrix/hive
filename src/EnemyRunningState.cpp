@@ -47,7 +47,6 @@ void EnemyRunningState::OnEnter(Enemy* enemy)
 void EnemyRunningState::Execute(Enemy* enemy)
 {
 	enemy->ProcessSteering();
-	enemy->PlayFootstepSound();
 
 	auto distance = (enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length();
 
@@ -61,7 +60,6 @@ void EnemyRunningState::Execute(Enemy* enemy)
 void EnemyRunningState::OnExit(Enemy* enemy)
 {
 	enemy->GetAnimator()->Reset();
-	enemy->StopWalkingSound();
 }
 
 EnemyRunningState::EnemyRunningState(const std::string &name)

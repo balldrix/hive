@@ -20,7 +20,7 @@ public:
 	AnimationStateData GetAnimation() const { return m_currentAnimation; }
 	int GetCurrentFrame() const { return m_currentFrame; }
 
-	void AddSoundSource() { m_paused = false; }
+	void Play() { m_paused = false; }
 	void Pause() { m_paused = true; }
 	bool IsPaused() const { return m_paused; }
 	bool IsDone() const { return m_animDone; }

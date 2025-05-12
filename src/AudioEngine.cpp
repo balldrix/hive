@@ -8,7 +8,11 @@
 #include <AL/al.h>
 #include <AL/alc.h>
 #include <algorithm>
+#include <directxtk/SimpleMath.h>
+#include <exception>
+#include <nlohmann/json_fwd.hpp>
 #include <utility>
+#include <vector>
 
 using namespace DirectX;
 using namespace DirectX::DX11;
@@ -144,33 +148,33 @@ void AudioEngine::Update(float deltaTime)
 	{
 		std::sort(m_frameEmitters.begin(), m_frameEmitters.end(), SoundSource::CompareNodesByPriority);
 
-		DetachSources(m_frameEmitters.begin() + (m_sources.size() + 1), m_frameEmitters.end());
-		AttachSources(m_frameEmitters.begin(), m_frameEmitters.begin() + m_sources.size());
+		StopSources(m_frameEmitters.begin() + (m_sources.size() + 1), m_frameEmitters.end());
+		PlaySources(m_frameEmitters.begin(), m_frameEmitters.begin() + m_sources.size());
 	}
 	else
 	{
-		AttachSources(m_frameEmitters.begin(), m_frameEmitters.end());
+		PlaySources(m_frameEmitters.begin(), m_frameEmitters.end());
 	}
 
 	m_frameEmitters.clear();
 }
 
-void AudioEngine::AttachSources(std::vector<SoundSource*>::iterator from, std::vector<SoundSource*>::iterator to)
+void AudioEngine::PlaySources(std::vector<SoundSource*>::iterator from, std::vector<SoundSource*>::iterator to)
 {
 	for(std::vector<SoundSource*>::iterator i = from; i != to; ++i)
 	{
 		if(!(*i)->GetSource())
 		{
-			(*i)->AttachSource(GetSource());
+			(*i)->Play(GetSource());
 		}
 	}
 }
 
-void AudioEngine::DetachSources(std::vector<SoundSource*>::iterator from, std::vector<SoundSource*>::iterator to)
+void AudioEngine::StopSources(std::vector<SoundSource*>::iterator from, std::vector<SoundSource*>::iterator to)
 {
 	for(std::vector<SoundSource*>::iterator i = from; i != to; ++i)
 	{
-		(*i)->DetachSource();
+		(*i)->Stop();
 	}
 }
 
@@ -194,7 +198,7 @@ void AudioEngine::CullTargets()
 
 		if(distance > emitter->GetRadius() || !emitter->GetSound() || emitter->GetTimeLeft() < 0.0f)
 		{
-			emitter->DetachSource();
+			emitter->Stop();
 			i = m_frameEmitters.erase(i);
 		}
 		else

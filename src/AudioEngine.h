@@ -61,8 +61,8 @@ protected:
 
 	void SetListenerPosition(const Vector3& position) { m_listenerPosition = position; }
 
-	void AttachSources(std::vector<SoundSource*>::iterator from, std::vector<SoundSource*>::iterator to);
-	void DetachSources(std::vector<SoundSource*>::iterator from, std::vector<SoundSource*>::iterator to);
+	void PlaySources(std::vector<SoundSource*>::iterator from, std::vector<SoundSource*>::iterator to);
+	void StopSources(std::vector<SoundSource*>::iterator from, std::vector<SoundSource*>::iterator to);
 
 	void CullTargets();
 	OALSource* GetSource();

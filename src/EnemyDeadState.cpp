@@ -23,9 +23,6 @@ void EnemyDeadState::OnEnter(Enemy* enemy)
 	enemy->GetAnimator()->SetAnimation(m_name);
 	enemy->GetHitBoxManager()->SetCollidersUsingTag(m_name);
 
-	if(enemy->GetHealth() <= 0)
-		enemy->PlayDeathSound();
-
 	if(NPCManager::Instance()->GetAttackingEnemy() == enemy)
 		NPCManager::Instance()->SetNextAttackingEnemy();
 

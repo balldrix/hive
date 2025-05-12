@@ -26,7 +26,6 @@ void EnemyAttackState::OnEnter(Enemy* enemy)
 	enemy->GetAnimator()->SetAnimation(m_name);
 	enemy->GetHitBoxManager()->SetCollidersUsingTag(m_name);
 	enemy->SetTargetVelocity(Vector2::Zero);
-	enemy->PlayPunchSound();
 }
 
 void EnemyAttackState::Execute(Enemy* enemy)

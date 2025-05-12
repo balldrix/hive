@@ -18,7 +18,7 @@ SoundSource::SoundSource()
 SoundSource::SoundSource(Sound* sound)
 {
 	Reset();
-	SetSound(sound);
+	Play(sound);
 }
 
 void SoundSource::Reset()
@@ -37,10 +37,10 @@ void SoundSource::Reset()
 
 SoundSource::~SoundSource()
 {
-	DetachSource();
+	Stop();
 }
 
-void SoundSource::AttachSource(OALSource* source)
+void SoundSource::Play(OALSource* source)
 {
 	m_currentSource = source;
 
@@ -57,7 +57,7 @@ void SoundSource::AttachSource(OALSource* source)
 	alSourcePlay(m_currentSource->source);
 }
 
-void SoundSource::DetachSource()
+void SoundSource::Stop()
 {
 	if(!m_currentSource)
 		return;
@@ -104,10 +104,10 @@ void SoundSource::Update(float deltaTime)
 	alSourcei(m_currentSource->source, AL_SOURCE_RELATIVE, m_isRelative);
 }
 
-void SoundSource::SetSound(Sound* sound)
+void SoundSource::Play(Sound* sound)
 {
 	m_sound = sound;
-	DetachSource();
+	Stop();
 
 	if(sound != nullptr)
 		m_timeLeft = sound->GetLength();

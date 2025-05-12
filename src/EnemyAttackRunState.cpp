@@ -20,7 +20,6 @@ void EnemyAttackRunState::OnEnter(Enemy* enemy)
 	enemy->GetAnimator()->SetAnimation(m_name);
 	enemy->GetHitBoxManager()->SetCollidersUsingTag(m_name);
 	enemy->SetMovementSpeed(enemy->GetData().chargeSpeed);
-	enemy->PlayPunchSound();
 }
 
 void EnemyAttackRunState::Execute(Enemy* enemy)

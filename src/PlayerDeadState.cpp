@@ -24,7 +24,6 @@ void PlayerDeadState::OnEnter(Player* player)
 	player->GetAnimator()->SetAnimation(m_name);
 	player->GetHitBoxManager()->SetCollidersUsingTag(m_name);
 	player->ResetKnockoutTimer();
-	player->PlayDeathSound();
 }
 
 void PlayerDeadState::Execute(Player* player)

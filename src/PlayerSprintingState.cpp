@@ -23,9 +23,6 @@ void PlayerSprintingState::Execute(Player* player)
 	if(player->GetCurrentVelocity() == Vector2::Zero &&
 		player->GetTargetVelocity() == Vector2::Zero)
 		player->GetStateMachine()->ChangeState(PlayerIdleState::Instance());
-
-	if(player->IsGrounded())
-		player->PlayFootstepSound();
 }
 
 void PlayerSprintingState::OnExit(Player* player)

@@ -3,11 +3,12 @@
 #include "Enemy.h"
 #include "EnemyIdleState.h"
 #include "StateMachine.h"
+#include <directxtk/SimpleMath.h>
 
 KingMookChargeState* KingMookChargeState::Instance()
 {
-    static KingMookChargeState instance("Attack3");
-    return &instance;
+	static KingMookChargeState instance("Attack3");
+	return &instance;
 }
 
 KingMookChargeState::KingMookChargeState(const std::string &name)
@@ -28,13 +29,10 @@ void KingMookChargeState::OnEnter(Enemy* enemy)
 
 void KingMookChargeState::Execute(Enemy* enemy)
 {
-	enemy->PlayFootstepSound();
-
 	if(enemy->GetAnimator()->IsDone() == true)
 		enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
 }
 
 void KingMookChargeState::OnExit(Enemy* enemy)
 {
-	enemy->StopWalkingSound();
 }

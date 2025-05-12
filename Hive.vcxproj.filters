@@ -820,9 +820,6 @@
     <None Include="assets\data\tilemaps\tm_bunker.json">
       <Filter>Assets\Data\Tilemaps</Filter>
     </None>
-    <None Include="assets\sounds\scream.ogg">
-      <Filter>Assets\Sounds</Filter>
-    </None>
     <None Include="assets\assets.json">
       <Filter>Assets</Filter>
     </None>
@@ -877,101 +874,6 @@
     <None Include="assets\data\tilemaps\tm_demo.json">
       <Filter>Assets\Data\Tilemaps</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Media Include="assets\sounds\boss_walk_003.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\hit_001.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\hit_002.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\hit_003.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\mook_death.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\mook_entrance_001.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\mook_entrance_002.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\mook_entrance_003.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\mook_entrance_004.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\mook_hit_001.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\mook_hit_002.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\mook_hit_003.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\mook_hit_004.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\mook_punch_001.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\mook_walk.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\punch_001.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\punch_002.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\punch_003.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\punch_004.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\travelling_master.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\walk_001.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\walk_002.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\walk_003.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\walk_004.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\boss_entrance_001.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\boss_punch_001.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\boss_punch_002.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\boss_punch_003.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\boss_punch_004.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\boss_walk_001.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
-    <Media Include="assets\sounds\boss_walk_002.wav">
-      <Filter>Assets\Sounds</Filter>
-    </Media>
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\textures\mook_spritesheet.png">

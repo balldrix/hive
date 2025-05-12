@@ -6,6 +6,7 @@
 #include "Logger.h"
 #include "PixelTexture.h"
 #include "Texture.h"
+#include "Utils.h"
 
 #include <directxtk/SpriteFont.h>
 #include <fmt/core.h>
@@ -150,7 +151,7 @@ void AssetLoader::LoadSpriteFont(AssetData asset)
 {
 	Logger::LogInfo(fmt::format("Loading Sprite Font: {}.", asset.id));
 
-	auto path = std::wstring(asset.path.begin(), asset.path.end());
+	std::wstring path = Utils::ToWideString(asset.path);
 	SpriteFont* spriteFont = new SpriteFont(m_graphics->GetDevice().Get(), path.c_str());
 
 	if(spriteFont != nullptr) 

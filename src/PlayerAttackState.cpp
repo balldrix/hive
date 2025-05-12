@@ -29,7 +29,6 @@ void PlayerAttackState::OnEnter(Player* player)
 	player->GetHitBoxManager()->SetCollidersUsingTag(m_name);
 	player->GetControlSystem()->SetCanAttack(false);
 	player->GetControlSystem()->IncrementComboCount();
-	player->PlayPunchSound(m_name);
 }
 
 void PlayerAttackState::Execute(Player* player)

@@ -273,40 +273,6 @@
     <None Include="assets\fonts\goodbye_despair_12pt.spritefont" />
     <None Include="assets\fonts\goodbye_despair_8pt.spritefont" />
     <None Include="assets\fonts\thaleah_12pt.spritefont" />
-    <None Include="assets\sounds\scream.ogg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Media Include="assets\sounds\boss_entrance_001.wav" />
-    <Media Include="assets\sounds\boss_punch_001.wav" />
-    <Media Include="assets\sounds\boss_punch_002.wav" />
-    <Media Include="assets\sounds\boss_punch_003.wav" />
-    <Media Include="assets\sounds\boss_punch_004.wav" />
-    <Media Include="assets\sounds\boss_walk_001.wav" />
-    <Media Include="assets\sounds\boss_walk_002.wav" />
-    <Media Include="assets\sounds\boss_walk_003.wav" />
-    <Media Include="assets\sounds\hit_001.wav" />
-    <Media Include="assets\sounds\hit_002.wav" />
-    <Media Include="assets\sounds\hit_003.wav" />
-    <Media Include="assets\sounds\mook_death.wav" />
-    <Media Include="assets\sounds\mook_entrance_001.wav" />
-    <Media Include="assets\sounds\mook_entrance_002.wav" />
-    <Media Include="assets\sounds\mook_entrance_003.wav" />
-    <Media Include="assets\sounds\mook_entrance_004.wav" />
-    <Media Include="assets\sounds\mook_hit_001.wav" />
-    <Media Include="assets\sounds\mook_hit_002.wav" />
-    <Media Include="assets\sounds\mook_hit_003.wav" />
-    <Media Include="assets\sounds\mook_hit_004.wav" />
-    <Media Include="assets\sounds\mook_punch_001.wav" />
-    <Media Include="assets\sounds\mook_walk.wav" />
-    <Media Include="assets\sounds\punch_001.wav" />
-    <Media Include="assets\sounds\punch_002.wav" />
-    <Media Include="assets\sounds\punch_003.wav" />
-    <Media Include="assets\sounds\punch_004.wav" />
-    <Media Include="assets\sounds\travelling_master.wav" />
-    <Media Include="assets\sounds\walk_001.wav" />
-    <Media Include="assets\sounds\walk_002.wav" />
-    <Media Include="assets\sounds\walk_003.wav" />
-    <Media Include="assets\sounds\walk_004.wav" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\textures\dustfx.png" />

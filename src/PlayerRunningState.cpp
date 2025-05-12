@@ -30,9 +30,6 @@ void PlayerRunningState::Execute(Player* player)
 
 	if(player->GetMovementSpeed() == player->GetRunSpeed())
 		player->GetStateMachine()->ChangeState((PlayerSprintingState::Instance()));
-
-	if(player->IsGrounded())
-		player->PlayFootstepSound();
 }
 
 void PlayerRunningState::OnExit(Player* player)

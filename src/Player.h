@@ -55,7 +55,7 @@ public:
 	void								IncreaseSpecial(float value = 1.0f);
 	bool								IsSpecialReady() const { return m_special == MaxSpecial; }
 
-	void								PlayPunchSound(const std::string &name);	
+	void								PlayPunchSound(const std::string &name);
 	void								PlayFootstepSound();
 	void								PlayHurtSound();
 	void								PlayDeathSound();
@@ -78,7 +78,6 @@ private:
 	SoundSource*						m_vocalSoundSource;
 	float								m_knockoutTimer;
 	float								m_hurtTimer;
-	std::map<std::string, std::wstring>	m_playerSounds;
 	int									m_recentFootstepFrame;
 	int									m_kills;
 	float								m_special;

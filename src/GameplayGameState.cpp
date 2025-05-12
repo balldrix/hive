@@ -30,7 +30,6 @@
 #include "PlayerIdleState.h"
 #include "PlayerKnockbackState.h"
 #include "Randomiser.h"
-#include "SoundSource.h"
 #include "SpriteSheet.h"
 #include "StateMachine.h"
 #include "TilemapLoader.h"
@@ -54,7 +53,6 @@ GameplayGameState::GameplayGameState() :
 	m_player(nullptr),
 	m_levelRenderer(nullptr),
 	m_enemySpawnManager(nullptr),
-	m_musicSoundSource(nullptr),
 	m_canAttack(true),
 	m_running(false),
 	m_deltaTime(0.0f),
@@ -116,21 +114,11 @@ void GameplayGameState::LoadAssets()
 
 	m_NPCManager->Init(m_graphics, m_camera, m_player);
 	m_camera->Init(GameWidth);
-	
-	m_musicSoundSource = new SoundSource();
-	m_musicSoundSource->SetTarget(m_player);
-	m_musicSoundSource->SetLooping(true);
-	m_musicSoundSource->SetRelative(true);
 
 	m_impactFxPool = new ImpactFxPool();
 
 	m_particleSystem = new ParticleSystem();
 	m_particleSystem->Init(m_graphics);
-
-	/*AudioEngine::Instance()->AddSoundSource(m_musicSoundSource);
-
-	const std::wstring musicTitle = L"travelling_master";
-	m_musicSoundSource->SetSound(SoundManager::GetSound(musicTitle));*/
 
 	m_running = true;
 }
@@ -144,11 +132,6 @@ void GameplayGameState::DeleteAssets()
 
 	delete m_impactFxPool;
 	m_impactFxPool = nullptr;
-
-	AudioEngine::Instance()->RemoveSoundSource(m_musicSoundSource);
-
-	delete m_musicSoundSource;
-	m_musicSoundSource = nullptr;
 
 	delete m_enemySpawnManager;
 	m_enemySpawnManager = nullptr;

@@ -68,7 +68,6 @@ private:
 
 	LevelRenderer* m_levelRenderer;
 	EnemySpawnManager* m_enemySpawnManager;
-	SoundSource* m_musicSoundSource;
 
 	bool m_canAttack;
 	bool m_running;

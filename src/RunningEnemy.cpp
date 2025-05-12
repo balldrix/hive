@@ -17,8 +17,6 @@ void RunningEnemy::ApplyDamage(GameObject* source, const int& amount)
 	{
 		m_stateMachine->ChangeState(RunningEnemyDeadState::Instance());
 	}
-
-	PlayHurtSound();
 }
 
 void RunningEnemy::Reset()

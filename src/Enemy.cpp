@@ -282,8 +282,6 @@ void Enemy::ApplyDamage(GameObject* source, const int& amount)
 	{
 		m_stateMachine->ChangeState(EnemyHurtState::Instance());
 	}
-
-	PlayHurtSound();
 }
 
 void Enemy::Knockback(const Vector2& direction, const float& force)
@@ -388,50 +386,37 @@ void Enemy::ShowEnemyHud()
 	}
 }
 
-void Enemy::PlayEntranceSound()
-{
-	uint32_t randomNumber = Randomiser::Instance()->GetRandNumUniform(1, 4);
-
-	std::wstring soundName = L"mook_entrance_00" + std::to_wstring(randomNumber);
-	m_vocalSoundSource->SetSound(SoundManager::GetSound(soundName));
-}
-
 void Enemy::PlayFootstepSound()
 {
-	Sound* sound = SoundManager::GetSound(L"mook_walk");
+	Sound* sound = SoundManager::GetSound("mook_walk");
 
 	if(m_footStepSoundSource->GetSound() != sound)
-		m_footStepSoundSource->SetSound(sound);
-}
-
-void Enemy::StopWalkingSound()
-{
-	m_footStepSoundSource->SetSound(nullptr);
+		m_footStepSoundSource->Play(sound);
 }
 
 void Enemy::PlayPunchSound()
 {
-	Sound* sound = SoundManager::GetSound(L"mook_punch_001");
+	Sound* sound = SoundManager::GetSound("mook_punch_001");
 	
 	float randomPitch = Randomiser::Instance()->GetRandNumUniform(0.80f, 1.2f);
 	m_attackSoundSource->SetPitch(randomPitch);
-	m_attackSoundSource->SetSound(sound);
+	m_attackSoundSource->Play(sound);
 }
 
 void Enemy::PlayHurtSound()
 {
 	uint32_t randomNumber = Randomiser::Instance()->GetRandNumUniform(1, 4);
 
-	std::wstring soundName = L"mook_hit_00" + std::to_wstring(randomNumber);
-	m_vocalSoundSource->SetSound(SoundManager::GetSound(soundName));
+	std::string soundName = "mook_hit_00" + std::to_string(randomNumber);
+	m_vocalSoundSource->Play(SoundManager::GetSound(soundName));
 }
 
 void Enemy::PlayDeathSound()
 {
-	Sound* sound = SoundManager::GetSound(L"mook_death");
+	Sound* sound = SoundManager::GetSound("mook_death");
 
 	if(m_vocalSoundSource->GetSound() != sound)
-		m_vocalSoundSource->SetSound(sound);
+		m_vocalSoundSource->Play(sound);
 }
 
 DamageData Enemy::GetDamageData() const

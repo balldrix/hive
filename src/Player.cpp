@@ -4,10 +4,10 @@
 #include "Animator.h"
 #include "AssetLoader.h"
 #include "AudioEngine.h"
-#include "EventManager.h"
 #include "Camera.h"
 #include "ControlSystem.h"
 #include "DamageData.h"
+#include "EventManager.h"
 #include "GameDataManager.h"
 #include "GameObject.h"
 #include "GlobalConstants.h"
@@ -36,14 +36,16 @@
 #include "UIKillMilestoneView.h"
 #include "UIManager.h"
 #include "UnitVectors.h"
+#include "Utils.h"
 
+#include <codecvt>
 #include <cstdint>
 #include <directxtk/SimpleMath.h>
 #include <fstream>
 #include <iosfwd>
+#include <locale>
 #include <string>
 #include <system_error>
-#include <functional>
 #include <variant>
 
 using namespace PlayerConstants;
@@ -146,21 +148,6 @@ void Player::Init(ControlSystem* controlSystem)
 	AudioEngine::Instance()->AddSoundSource(m_attackSoundSource);
 	AudioEngine::Instance()->AddSoundSource(m_footStepSoundSource);
 	AudioEngine::Instance()->AddSoundSource(m_vocalSoundSource);
-
-	m_playerSounds =
-	{
-		{ "Attack1",	L"punch_001" },
-		{ "Attack2",	L"punch_003" },
-		{ "Attack3",	L"punch_004" },
-		{ "Walking1",	L"walk_001"},
-		{ "Walking2",	L"walk_002"},
-		{ "Walking3",	L"walk_003"},
-		{ "Walking4",	L"walk_004"},
-		{ "Hurt1",		L"hit_001"},
-		{ "Hurt2",		L"hit_002"},
-		{ "Hurt3",		L"hit_003"},
-		{ "Dead",		L"scream"}
-	};
 
 	InitStats();
 	RegisterAnimationEvents();
@@ -382,8 +369,6 @@ void Player::Block()
 
 void Player::ApplyDamage(GameObject* source, const int& amount)
 {
-	PlayHurtSound();
-
 	if(m_stateMachine->IsInState(*PlayerBlockState::Instance()))
 	{
 		m_health -= 1;
@@ -427,31 +412,25 @@ void Player::Knockback(const Vector2& direction, const float& force)
 
 void Player::PlayPunchSound(const std::string& name)
 {
-	std::wstring soundName = m_playerSounds[name];
-	m_attackSoundSource->SetSound(SoundManager::GetSound(soundName));
+	m_attackSoundSource->Play(SoundManager::GetSound(name));
 }
 
 void Player::PlayFootstepSound()
 {
-	m_footStepSoundSource->SetSound(SoundManager::GetSound(L"footstep"));
+	m_footStepSoundSource->Play(SoundManager::GetSound("footstep"));
 }
 
 void Player::PlayHurtSound()
 {
-	uint32_t randomHurtSound = Randomiser::Instance()->GetRandNumUniform(1, 3);
-
-	std::wstring soundName = m_playerSounds[m_stateMachine->GetCurrentState()->GetName() + std::to_string(randomHurtSound)];
-	m_vocalSoundSource->SetSound(SoundManager::GetSound(soundName));
+	m_vocalSoundSource->Play(SoundManager::GetSound("hurt"));
 }
 
 void Player::PlayDeathSound()
 {
-	std::wstring soundName = m_playerSounds[m_stateMachine->GetCurrentState()->GetName()];
-
-	Sound* sound = SoundManager::GetSound(soundName);
+	Sound* sound = SoundManager::GetSound("death");
 
 	if(m_vocalSoundSource->GetSound() != sound)
-		m_vocalSoundSource->SetSound(sound);
+		m_vocalSoundSource->Play(sound);
 }
 
 PlayerDefinition Player::LoadPlayerDefinition()

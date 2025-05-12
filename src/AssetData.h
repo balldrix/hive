@@ -11,7 +11,7 @@ struct AssetData
 {
 	std::string id = {};
 	std::string path = {};
-	AssetType::Type type;
+	AssetType::Type type = AssetType::Type::None;
 	std::string tag = {};
 };
 

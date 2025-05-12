@@ -1,31 +1,34 @@
 #include "SoundManager.h"
 
+#include "Sound.h"
+
 #include <filesystem>
+#include <map>
+#include <string>
+#include <utility>
 
 SoundManager::SoundManager() { }
 
 SoundManager::~SoundManager() { }
 
-void SoundManager::AddSound(const std::wstring &filename)
+void SoundManager::AddSound(const std::string &filename)
 {
 	if(!GetSound(filename))
 	{
 		Sound* sound = new Sound();
 
-		std::string narrow = std::string(filename.begin(), filename.end());
-
-		sound->LoadFromWav(narrow.c_str());
+		sound->LoadFromWav(filename.c_str());
 
 		std::filesystem::path p(filename);
-		std::wstring name = p.stem();
+		std::string name = p.stem().string();
 
 		s_sounds.insert(std::make_pair(name, sound));
 	}
 }
 
-Sound* SoundManager::GetSound(const std::wstring &name)
+Sound* SoundManager::GetSound(const std::string &name)
 {
-	std::map<std::wstring, Sound*>::iterator soundIterator = s_sounds.find(name);
+	std::map<std::string, Sound*>::iterator soundIterator = s_sounds.find(name);
 	if(soundIterator != s_sounds.end())
 		return soundIterator->second;
 	else
@@ -34,7 +37,7 @@ Sound* SoundManager::GetSound(const std::wstring &name)
 
 void SoundManager::Destroy()
 {
-	for(std::map<std::wstring, Sound*>::iterator i = s_sounds.begin(); i != s_sounds.end(); ++i)
+	for(auto i = s_sounds.begin(); i != s_sounds.end(); ++i)
 	{
 		delete i->second;
 	}

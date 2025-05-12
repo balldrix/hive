@@ -2,12 +2,11 @@
 
 #include "Graphics.h"
 #include "Logger.h"
+#include "Utils.h"
 
 #include <DirectXTK/WICTextureLoader.h>
 #include <string>
-#include <winerror.h>
-#include <winnt.h>
-#include <WinUser.h>
+#include <Windows.h>
 
 Texture::Texture() :
 	m_texture(nullptr),
@@ -17,7 +16,7 @@ Texture::Texture() :
 
 void Texture::LoadTexture(Graphics* graphics, const std::string &filename)
 {
-	std::wstring textureFile = std::wstring(filename.begin(), filename.end());
+	std::wstring textureFile = Utils::ToWideString(filename);
 
 	HRESULT result = CreateWICTextureFromFile(graphics->GetDevice().Get(), nullptr, textureFile.c_str(), &m_resource, &m_texture, 0);
 	

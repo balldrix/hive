@@ -61,9 +61,7 @@ public:
 	void					ProcessSteering();
 	void					Flash();
 
-	virtual void			PlayEntranceSound();
 	virtual void			PlayFootstepSound();
-	void					StopWalkingSound();
 	virtual void			PlayPunchSound();
 	void					PlayHurtSound();
 	void					PlayDeathSound();
