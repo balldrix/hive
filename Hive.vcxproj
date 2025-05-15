@@ -118,14 +118,12 @@
     <ClInclude Include="src\RunningEnemy.h" />
     <ClInclude Include="src\RunningEnemyDeadState.h" />
     <ClInclude Include="src\SoundSource.h" />
-    <ClInclude Include="src\SoundManager.h" />
     <ClInclude Include="src\Sound.h" />
     <ClInclude Include="src\AudioEngine.h" />
     <ClInclude Include="src\KingMookEnemyGlobalState.h" />
     <ClCompile Include="src\NPCFactory.cpp" />
     <ClCompile Include="src\AudioEngine.cpp" />
     <ClCompile Include="src\SoundSource.cpp" />
-    <ClCompile Include="src\SoundManager.cpp" />
     <ClCompile Include="src\UIStackingView.cpp" />
     <ClCompile Include="src\UITitleScreenView.cpp" />
     <ClCompile Include="src\TitleScreenGameState.cpp" />
@@ -311,6 +309,22 @@
     <Image Include="assets\textures\waste-lobster_spritesheet.png" />
     <Image Include="assets\tilesets\ts_bunker.png" />
     <Image Include="assets\tilesets\ts_master.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="assets\sounds\swingNormal_001.wav" />
+    <Media Include="assets\sounds\swingNormal_002.wav" />
+    <Media Include="assets\sounds\swingNormal_003.wav" />
+    <Media Include="assets\sounds\swingNormal_004.wav" />
+    <Media Include="assets\sounds\swingSpecial_001.wav" />
+    <Media Include="assets\sounds\swingSpecial_002.wav" />
+    <Media Include="assets\sounds\swingSpecial_003.wav" />
+    <Media Include="assets\sounds\swingStrong_001.wav" />
+    <Media Include="assets\sounds\swingStrong_002.wav" />
+    <Media Include="assets\sounds\swingStrong_003.wav" />
+    <Media Include="assets\sounds\swingStrong_004.wav" />
+    <Media Include="assets\sounds\swingStrong_005.wav" />
+    <Media Include="assets\sounds\swingStrong_006.wav" />
+    <Media Include="assets\sounds\swingStrong_007.wav" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F07D24C5-CADD-4262-80F1-7370DF167E8E}</ProjectGuid>

@@ -25,7 +25,6 @@
 #include "PlayerKnockbackState.h"
 #include "Randomiser.h"
 #include "Sound.h"
-#include "SoundManager.h"
 #include "SoundSource.h"
 #include "Sprite.h"
 #include "SpriteFx.h"
@@ -412,22 +411,22 @@ void Player::Knockback(const Vector2& direction, const float& force)
 
 void Player::PlayPunchSound(const std::string& name)
 {
-	m_attackSoundSource->Play(SoundManager::GetSound(name));
+	m_attackSoundSource->Play(AssetLoader::GetSound(name));
 }
 
 void Player::PlayFootstepSound()
 {
-	m_footStepSoundSource->Play(SoundManager::GetSound("footstep"));
+	m_footStepSoundSource->Play(AssetLoader::GetSound("footstep"));
 }
 
 void Player::PlayHurtSound()
 {
-	m_vocalSoundSource->Play(SoundManager::GetSound("hurt"));
+	m_vocalSoundSource->Play(AssetLoader::GetSound("hurt"));
 }
 
 void Player::PlayDeathSound()
 {
-	Sound* sound = SoundManager::GetSound("death");
+	Sound* sound = AssetLoader::GetSound("death");
 
 	if(m_vocalSoundSource->GetSound() != sound)
 		m_vocalSoundSource->Play(sound);

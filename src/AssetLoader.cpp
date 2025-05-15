@@ -5,6 +5,7 @@
 #include "Graphics.h"
 #include "Logger.h"
 #include "PixelTexture.h"
+#include "Sound.h"
 #include "Texture.h"
 #include "Utils.h"
 
@@ -12,12 +13,12 @@
 #include <fmt/core.h>
 #include <fstream>
 #include <iosfwd>
+#include <map>
 #include <memory>
 #include <string>
 #include <system_error>
 #include <utility>
 #include <vector>
-#include <WinUser.h>
 
 std::shared_ptr<AssetLoader> AssetLoader::s_assetLoader;
 
@@ -90,9 +91,13 @@ void AssetLoader::LoadAllPrewarmedAssets()
 	case AssetType::Type::TextureAsset :
 		s_assetLoader->LoadTexture(asset);
 		s_assetLoader->m_assetsToLoad.pop_front();
-			break;
+		break;
 	case AssetType::Type::SpriteFontAsset :
 		s_assetLoader->LoadSpriteFont(asset);
+		s_assetLoader->m_assetsToLoad.pop_front();
+		break;
+	case AssetType::Type::SoundFX :
+		s_assetLoader->LoadSound(asset);
 		s_assetLoader->m_assetsToLoad.pop_front();
 		break;
 	default:
@@ -100,7 +105,7 @@ void AssetLoader::LoadAllPrewarmedAssets()
 	}
 }
 
-Texture* AssetLoader::GetTexture(std::string id)
+Texture* AssetLoader::GetTexture(const std::string& id)
 {
 	for(auto it = s_assetLoader->m_textureAssets.begin(); it != s_assetLoader->m_textureAssets.end(); ++it)
 	{
@@ -108,11 +113,11 @@ Texture* AssetLoader::GetTexture(std::string id)
 			return (*it).second;
 	}
 
-	Logger::LogWarning(fmt::format("No texture found in AssetLoader with name {}", id));
+	Logger::LogWarning(fmt::format("No texture found in AssetLoader with id {}", id));
 	return nullptr;
 }
 
-SpriteFont* AssetLoader::GetSpriteFont(std::string id)
+SpriteFont* AssetLoader::GetSpriteFont(const std::string& id)
 {
 	for(auto it = s_assetLoader->m_spriteFontAssets.begin(); it != s_assetLoader->m_spriteFontAssets.end(); ++it)
 	{
@@ -120,7 +125,19 @@ SpriteFont* AssetLoader::GetSpriteFont(std::string id)
 			return (*it).second;
 	}
 
-	Logger::LogWarning(fmt::format("No sprite font found in AssetLoader with name {}", id));
+	Logger::LogWarning(fmt::format("No sprite font found in AssetLoader with id {}", id));
+	return nullptr;
+}
+
+Sound* AssetLoader::GetSound(const std::string& id)
+{
+	std::map<std::string, Sound*>::iterator soundIterator = s_assetLoader->m_sounds.find(id);
+	if(soundIterator != s_assetLoader->m_sounds.end())
+	{
+		return soundIterator->second;
+	}
+
+	Logger::LogWarning(fmt::format("No sound found in AssetLoader with id {}", id));
 	return nullptr;
 }
 
@@ -166,12 +183,28 @@ void AssetLoader::LoadSpriteFont(AssetData asset)
 	PostQuitMessage(0);
 }
 
+void AssetLoader::LoadSound(AssetData asset)
+{
+	if(!GetSound(asset.path))
+	{
+		Sound* sound = new Sound();
+
+		sound->LoadFromWav(asset.path.c_str());
+
+		std::filesystem::path p(asset.path);
+		std::string name = p.stem().string();
+
+		s_assetLoader->m_sounds.insert(std::make_pair(name, sound));
+	}
+}
+
 void AssetLoader::Destroy()
 {
 	Logger::LogInfo("Shutting down Asset Loader");
 	
 	s_assetLoader->DeleteTextures();
 	s_assetLoader->DeleteSpriteFonts();
+	s_assetLoader->DeleteSounds();
 }
 
 void AssetLoader::DeleteTextures()
@@ -215,4 +248,29 @@ void AssetLoader::DeleteSpriteFonts()
 	}
 
 	m_textureAssets.clear();
+}
+
+void AssetLoader::DeleteSounds()
+{
+	for(auto i = s_assetLoader->m_sounds.begin(); i != s_assetLoader->m_sounds.end(); ++i)
+	{
+		delete i->second;
+	}
+}
+
+void AssetLoader::DeleteSounds(std::string tag)
+{
+	for(AssetData asset : m_assetData)
+	{
+		if(asset.tag != tag) continue;
+
+		auto pair = m_sounds.find(asset.id);
+
+		if(pair == m_sounds.end()) continue;
+
+		delete pair->second;
+		pair->second = nullptr;
+
+		m_sounds.erase(pair->first);
+	}
 }

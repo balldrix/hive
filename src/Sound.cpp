@@ -1,18 +1,12 @@
 #include "Sound.h"
 
-#include "SoundManager.h"
-
 #include <AL/al.h>
 #include <AL/alext.h>
 #include <cinttypes>
 #include <climits>
 #include <malloc.h>
-#include <map>
 #include <sndfile.h>
 #include <stdio.h>
-#include <string>
-
-std::map<std::string, Sound*> SoundManager::s_sounds;
 
 Sound::Sound() : 
 	m_length(0),

@@ -14,11 +14,6 @@ GameStateManager::GameStateManager() :
 
 GameStateManager::~GameStateManager()
 {
-	if(m_currentState != nullptr)
-	{
-		m_currentState->OnExit();
-	}
-
 	if(!m_stateList.empty())
 	{
 		for(unsigned int i = 0; i < m_stateList.size(); i++)

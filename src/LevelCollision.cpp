@@ -42,6 +42,8 @@ void LevelCollision::Init()
 
 void LevelCollision::Shutdown()
 {
+	if(s_instance == nullptr) return;
+
 	delete s_instance->m_sprite;
 	s_instance->m_sprite = nullptr;
 

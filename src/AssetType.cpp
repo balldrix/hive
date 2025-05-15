@@ -1,10 +1,11 @@
 #include "AssetType.h"
 
-AssetType::AssetTypeMap AssetType::s_assetTypeMap = { 
+AssetType::AssetTypeMap AssetType::s_assetTypeMap = {
 	{ "texture", Type::TextureAsset },
 	{ "spritefont", Type::SpriteFontAsset },
 	{ "hitbox", Type::HitBoxData },
-	{ "spritesheet", Type::SpritesheetData }
+	{ "spritesheet", Type::SpritesheetData },
+	{ "soundFX", Type::SoundFX }
 };
 
 AssetType::Type AssetType::GetMappedType(std::string key)

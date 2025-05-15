@@ -39,7 +39,7 @@ void UISystemView::Render(Graphics* graphics)
 {
 	if(!m_isActive) return;
 
-	m_loadingView->Render(graphics);
+	//m_loadingView->Render(graphics);
 	m_fadeOverlayView->Render(graphics);
 }
 

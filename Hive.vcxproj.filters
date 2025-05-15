@@ -64,9 +64,6 @@
     <ClCompile Include="src\Sound.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
-    <ClCompile Include="src\SoundManager.cpp">
-      <Filter>Audio</Filter>
-    </ClCompile>
     <ClCompile Include="src\Graphics.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
@@ -495,9 +492,6 @@
       <Filter>System</Filter>
     </ClInclude>
     <ClInclude Include="src\Sound.h">
-      <Filter>Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="src\SoundManager.h">
       <Filter>Audio</Filter>
     </ClInclude>
     <ClInclude Include="src\SoundSource.h">
@@ -984,5 +978,49 @@
     <Image Include="assets\textures\ui\lift-spider_portrait.png">
       <Filter>Assets\Textures\UI</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="assets\sounds\swingNormal_001.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\swingNormal_002.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\swingNormal_003.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\swingNormal_004.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\swingSpecial_001.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\swingSpecial_002.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\swingSpecial_003.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\swingStrong_001.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\swingStrong_002.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\swingStrong_003.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\swingStrong_004.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\swingStrong_005.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\swingStrong_006.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\swingStrong_007.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
   </ItemGroup>
 </Project>

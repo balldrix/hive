@@ -120,6 +120,90 @@
     "tag": "gameplay_assets"
   },
   {
+    "id": "s_playerSwing_001",
+    "path": "assets\\sounds\\swingNormal_001.wav",
+    "type": "soundFX",
+    "tag": "gameplay_assets"
+  },
+  {
+    "id": "s_playerSwing_002",
+    "path": "assets\\sounds\\swingNormal_002.wav",
+    "type": "soundFX",
+    "tag": "gameplay_assets"
+  },
+  {
+    "id": "s_playerSwing_003",
+    "path": "assets\\sounds\\swingNormal_003.wav",
+    "type": "soundFX",
+    "tag": "gameplay_assets"
+  },
+  {
+    "id": "s_playerSwing_004",
+    "path": "assets\\sounds\\swingNormal_004.wav",
+    "type": "soundFX",
+    "tag": "gameplay_assets"
+  },
+  {
+    "id": "s_playerSwing_005",
+    "path": "assets\\sounds\\swingStrong_001.wav",
+    "type": "soundFX",
+    "tag": "gameplay_assets"
+  },
+  {
+    "id": "s_playerSwing_006",
+    "path": "assets\\sounds\\swingStrong_002.wav",
+    "type": "soundFX",
+    "tag": "gameplay_assets"
+  },
+  {
+    "id": "s_playerSwing_007",
+    "path": "assets\\sounds\\swingStrong_003.wav",
+    "type": "soundFX",
+    "tag": "gameplay_assets"
+  },
+  {
+    "id": "s_playerSwing_008",
+    "path": "assets\\sounds\\swingStrong_004.wav",
+    "type": "soundFX",
+    "tag": "gameplay_assets"
+  },
+  {
+    "id": "s_playerSwing_009",
+    "path": "assets\\sounds\\swingStrong_005.wav",
+    "type": "soundFX",
+    "tag": "gameplay_assets"
+  },
+  {
+    "id": "s_playerSwing_010",
+    "path": "assets\\sounds\\swingStrong_006.wav",
+    "type": "soundFX",
+    "tag": "gameplay_assets"
+  },
+  {
+    "id": "s_playerSwing_011",
+    "path": "assets\\sounds\\swingStrong_007.wav",
+    "type": "soundFX",
+    "tag": "gameplay_assets"
+  },
+  {
+    "id": "s_playerSwing_012",
+    "path": "assets\\sounds\\swingSpecial_001.wav",
+    "type": "soundFX",
+    "tag": "gameplay_assets"
+  },
+  {
+    "id": "s_playerSwing_013",
+    "path": "assets\\sounds\\swingSpecial_002.wav",
+    "type": "soundFX",
+    "tag": "gameplay_assets"
+  },
+  {
+    "id": "s_playerSwing_014",
+    "path": "assets\\sounds\\swingSpecial_003.wav",
+    "type": "soundFX",
+    "tag": "gameplay_assets"
+  },
+  {
     "id": "t_portrait_frame",
     "path": "assets\\textures\\ui\\portrait_frame.png",
     "type": "texture",

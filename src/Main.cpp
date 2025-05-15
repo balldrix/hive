@@ -21,7 +21,6 @@
 #include "Graphics.h"
 #include "Logger.h"
 #include "MenuSystem.h"
-#include "SoundManager.h"
 #include "UIManager.h"
 #include "Window.h"
 
@@ -98,7 +97,6 @@ void Shutdown()
 	UIManager::Destroy();
 	GameDataManager::Destroy();
 	AssetLoader::Destroy();
-	SoundManager::Destroy();
 	AudioEngine::Destroy();
 	delete graphics;
 	delete window;

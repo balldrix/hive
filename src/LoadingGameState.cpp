@@ -58,17 +58,17 @@ void LoadingGameState::OnEntry()
 
 void LoadingGameState::Update(float deltaTime)
 {
-	if(!AssetLoader::IsLoadingDone())
-	{
-		AssetLoader::LoadAllPrewarmedAssets();
-		return;
-	}
-
 	UIManager::Update(deltaTime);
 
 	m_timer -= deltaTime;
 
 	if(m_timer > 0.0f || UIManager::IsFading()) return;
+
+	if(!AssetLoader::IsLoadingDone())
+	{
+		AssetLoader::LoadAllPrewarmedAssets();
+		return;
+	}
 	
 	if(!m_isDone)
 	{

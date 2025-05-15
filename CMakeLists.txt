@@ -27,7 +27,7 @@ add_executable(${PROJECT_NAME} src/main.cpp src/AABB.cpp src/Animator.cpp src/Au
 								src/Player.cpp src/PlayerAttackState.cpp src/PlayerBlockState.cpp src/PlayerDeadState.cpp src/PlayerGlobalState.cpp 
 								src/PlayerHurtState.cpp src/PlayerIdleState.cpp src/PlayerKnockbackState.cpp src/PlayerRunningState.cpp 
 								src/PlayerSprintingState.cpp src/Randomiser.cpp src/RunningEnemy.cpp src/RunningEnemyDeadState.cpp src/Sound.cpp 
-								src/SoundManager.cpp src/SoundSource.cpp src/Sprite.cpp src/Spritesheet.cpp src/Texture.cpp src/Timer.cpp 
+								src/SoundSource.cpp src/Sprite.cpp src/Spritesheet.cpp src/Texture.cpp src/Timer.cpp 
 								src/Window.cpp src/AABB.h src/AnimationStateData.h src/Animator.h src/AnimationEventData.h
 								src/AnimatedSpriteData.h src/AudioConstants.h src/AudioEngine.h src/UIBarView.h src/Camera.h 
 								src/Collider.h src/ControlSystem.h src/DamageData.h src/Enemy.h src/EventManager src/EventManager.cpp
@@ -41,7 +41,7 @@ add_executable(${PROJECT_NAME} src/main.cpp src/AABB.cpp src/Animator.cpp src/Au
 								src/PixelTexture.h src/Player.h src/PlayerAttackState.h src/PlayerBlockState.h src/PlayerConstants.h
 								src/PlayerDeadState.h src/PlayerGlobalState.h src/PlayerHurtState.h src/PlayerIdleState.h 
 								src/PlayerKnockbackState.h src/PlayerRunningState.h src/PlayerSprintingState.h
-								src/Randomiser.h src/Resources.h src/RunningEnemy.h src/RunningEnemyDeadState.h src/Sound.h src/SoundManager.h 
+								src/Randomiser.h src/Resources.h src/RunningEnemy.h src/RunningEnemyDeadState.h src/Sound.h
 								src/SoundSource.h src/Sprite.h src/SpriteFrameData.h src/Spritesheet.h src/State.h src/StateMachine.h
 								src/Texture.h src/TilemapData.h src/Timer.h src/ObjectPool.h src/EnemySpawnManager.h src/EnemySpawnManager.cpp
 								src/UnitVectors.h src/Window.h src/pch.h src/Logger.cpp src/Logger.h src/ImpactFxPool.h src/ImpactFxPool.cpp

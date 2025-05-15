@@ -4,7 +4,7 @@
 
 class Sound
 {
-	friend class SoundManager;
+	friend class AssetLoader;
 public:
 
 	float GetLength() const { return m_length; }

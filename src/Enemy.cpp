@@ -20,7 +20,6 @@
 #include "Player.h"
 #include "Randomiser.h"
 #include "Sound.h"
-#include "SoundManager.h"
 #include "SoundSource.h"
 #include "Sprite.h"
 #include "SpriteFx.h"
@@ -388,7 +387,7 @@ void Enemy::ShowEnemyHud()
 
 void Enemy::PlayFootstepSound()
 {
-	Sound* sound = SoundManager::GetSound("mook_walk");
+	Sound* sound = AssetLoader::GetSound("mook_walk");
 
 	if(m_footStepSoundSource->GetSound() != sound)
 		m_footStepSoundSource->Play(sound);
@@ -396,7 +395,7 @@ void Enemy::PlayFootstepSound()
 
 void Enemy::PlayPunchSound()
 {
-	Sound* sound = SoundManager::GetSound("mook_punch_001");
+	Sound* sound = AssetLoader::GetSound("mook_punch_001");
 	
 	float randomPitch = Randomiser::Instance()->GetRandNumUniform(0.80f, 1.2f);
 	m_attackSoundSource->SetPitch(randomPitch);
@@ -408,12 +407,12 @@ void Enemy::PlayHurtSound()
 	uint32_t randomNumber = Randomiser::Instance()->GetRandNumUniform(1, 4);
 
 	std::string soundName = "mook_hit_00" + std::to_string(randomNumber);
-	m_vocalSoundSource->Play(SoundManager::GetSound(soundName));
+	m_vocalSoundSource->Play(AssetLoader::GetSound(soundName));
 }
 
 void Enemy::PlayDeathSound()
 {
-	Sound* sound = SoundManager::GetSound("mook_death");
+	Sound* sound = AssetLoader::GetSound("mook_death");
 
 	if(m_vocalSoundSource->GetSound() != sound)
 		m_vocalSoundSource->Play(sound);
