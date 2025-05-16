@@ -2,6 +2,7 @@
 
 #include "AnimatedSpriteData.h"
 #include "AnimationStateData.h"
+#include "EventManager.h"
 
 #include <string>
 
@@ -11,7 +12,7 @@ public:
 	Animator();
 	~Animator() {};
 
-	void Init(AnimatedSpriteData animatedSpriteData);
+	void Init(AnimatedSpriteData animatedSpriteData, EventManager* eventManager);
 	void Update(float deltaTime);
 
 	void SetAnimation(unsigned int index);
@@ -30,6 +31,7 @@ public:
 private:
 	void TriggerEvents();
 
+	EventManager* m_eventManager;
 	AnimationStateData m_currentAnimation;
 	AnimatedSpriteData m_animatedSpriteData;
 

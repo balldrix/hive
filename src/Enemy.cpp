@@ -118,7 +118,7 @@ void Enemy::Init(Graphics* graphics,
 	m_shadow->SetAlpha(0.7f);
 
 	m_animator = new Animator();
-	m_animator->Init(animatedSpriteData);
+	m_animator->Init(animatedSpriteData, &m_eventManager);
 	m_animator->SetAnimation(0);
 	
 	std::vector<HitBoxData> hitboxData;

@@ -19,11 +19,11 @@
 #include "PlayerBlockState.h"
 #include "PlayerConstants.h"
 #include "PlayerDeadState.h"
+#include "PlayerDefinition.h"
 #include "PlayerGlobalState.h"
 #include "PlayerHurtState.h"
 #include "PlayerIdleState.h"
 #include "PlayerKnockbackState.h"
-#include "Randomiser.h"
 #include "Sound.h"
 #include "SoundSource.h"
 #include "Sprite.h"
@@ -35,14 +35,10 @@
 #include "UIKillMilestoneView.h"
 #include "UIManager.h"
 #include "UnitVectors.h"
-#include "Utils.h"
 
-#include <codecvt>
-#include <cstdint>
 #include <directxtk/SimpleMath.h>
 #include <fstream>
 #include <iosfwd>
-#include <locale>
 #include <string>
 #include <system_error>
 #include <variant>
@@ -65,7 +61,7 @@ Player::Player() :
 
 Player::~Player()
 {
-	EventManager::UnRegisterEvent("MovePlayer");
+	m_eventManager.UnRegisterEvent("MovePlayer");
 
 	AudioEngine::Instance()->RemoveSoundSource(m_vocalSoundSource);
 	AudioEngine::Instance()->RemoveSoundSource(m_footStepSoundSource);
@@ -106,7 +102,7 @@ void Player::Init(ControlSystem* controlSystem)
 	m_shadow->SetAlpha(0.7f);
 
 	m_animator = new Animator();
-	m_animator->Init(animatedSpriteData);
+	m_animator->Init(animatedSpriteData, &m_eventManager);
 	m_animator->SetAnimation(0);
 
 	m_hitBoxManager = new HitBoxManager();
@@ -538,7 +534,7 @@ void Player::UpdateStats()
 
 void Player::RegisterAnimationEvents()
 {
-	EventManager::RegisterEvent("MovePlayer", [this](EventArgument arg) {
+	m_eventManager.RegisterEvent("MovePlayer", [this](EventArgument arg) {
 		if(!std::holds_alternative<float>(arg))
 		{
 			Logger::LogError("[Player] [RegisterEvents] Incorrect argument for MovePlayer, must be a float");

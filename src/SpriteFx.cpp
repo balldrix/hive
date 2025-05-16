@@ -32,7 +32,7 @@ void SpriteFx::Init(std::string textureId, std::string spriteId, const Vector2& 
 	m_spritesheet->SetOrigin(origin);
 
 	m_animator = new Animator();
-	m_animator->Init(animatedSpriteData);
+	m_animator->Init(animatedSpriteData, nullptr);
 }
 
 void SpriteFx::Render(Graphics* graphics)

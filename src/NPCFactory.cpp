@@ -47,7 +47,7 @@ Enemy* NPCFactory::CreateNormalEnemy(EnemyDefinition& definition)
 	auto mook = new Enemy();
 	mook->Init(m_graphics, m_camera, m_player, definition,
 				NPCManager::Instance(),
-				AssetLoader::GetTexture("t_shadow_s"),
+				AssetLoader::GetTexture(definition.shadowId),
 				NormalEnemyGlobalState::Instance(),
 				EnemyIdleState::Instance());
 
@@ -59,7 +59,7 @@ Enemy* NPCFactory::CreateFallingEnemy(EnemyDefinition& definition)
 	auto spider = new Enemy();
 	spider->Init(m_graphics, m_camera, m_player, definition,
 				NPCManager::Instance(),
-				AssetLoader::GetTexture("t_shadow_l"),
+				AssetLoader::GetTexture(definition.shadowId),
 				NormalEnemyGlobalState::Instance(),
 				EnemyFallingState::Instance());
 

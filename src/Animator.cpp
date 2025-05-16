@@ -1,13 +1,13 @@
 #include "Animator.h"
 
 #include "AnimatedSpriteData.h"
+#include "AnimationEventData.h"
 #include "AnimationStateData.h"
 #include "EventManager.h"
 #include "Logger.h"
 #include "SpriteFrameData.h"
 
 #include <string>
-#include "AnimationEventData.h"
 
 Animator::Animator() :
 	m_currentAnimation(),
@@ -15,13 +15,15 @@ Animator::Animator() :
 	m_paused(false),
 	m_currentFrame(0),
 	m_animDone(false),
-	m_animationTimer(0.0f)
+	m_animationTimer(0.0f),
+	m_eventManager(nullptr)
 {
 }
 
-void Animator::Init(AnimatedSpriteData animatedSpriteData)
+void Animator::Init(AnimatedSpriteData animatedSpriteData, EventManager* eventManager)
 {
 	m_animatedSpriteData = animatedSpriteData;
+	m_eventManager = eventManager;
 	SetAnimation(0);
 }
 
@@ -99,6 +101,6 @@ void Animator::TriggerEvents()
 	[&](const AnimationEventData& event) { return event.frameNumber == targetFrame; });
 
 	if(it != m_animatedSpriteData.animationEventData.end()) {
-		EventManager::TriggerEvent(it->eventName, it->argument);
+		m_eventManager->TriggerEvent(it->eventName, it->argument);
 	}
 }

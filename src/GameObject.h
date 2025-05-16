@@ -2,6 +2,7 @@
 
 #include "Animator.h"
 #include "DamageData.h"
+#include "EventManager.h"
 #include "HitBoxManager.h"
 #include "SpriteSheet.h"
 
@@ -111,6 +112,7 @@ protected:
 	Sprite*					m_shadow;
 	SpriteFx*				m_dustFx;
 
+	EventManager			m_eventManager;
 	HitBoxManager*			m_hitBoxManager;
 	ControlSystem*			m_controlSystem;
 
