@@ -43,6 +43,8 @@
 #include <system_error>
 #include <variant>
 
+#undef PlaySound
+
 using namespace PlayerConstants;
 using namespace GlobalConstants;
 
@@ -410,24 +412,6 @@ void Player::PlayPunchSound(const std::string& name)
 	m_attackSoundSource->Play(AssetLoader::GetSound(name));
 }
 
-void Player::PlayFootstepSound()
-{
-	m_footStepSoundSource->Play(AssetLoader::GetSound("footstep"));
-}
-
-void Player::PlayHurtSound()
-{
-	m_vocalSoundSource->Play(AssetLoader::GetSound("hurt"));
-}
-
-void Player::PlayDeathSound()
-{
-	Sound* sound = AssetLoader::GetSound("death");
-
-	if(m_vocalSoundSource->GetSound() != sound)
-		m_vocalSoundSource->Play(sound);
-}
-
 PlayerDefinition Player::LoadPlayerDefinition()
 {
 	Logger::LogInfo("Loading Player definition.");
@@ -543,6 +527,16 @@ void Player::RegisterAnimationEvents()
 
 		MovePlayerEvent(std::get<float>(arg));
 	});
+
+	m_eventManager.RegisterEvent("PlaySound", [this](EventArgument arg) {
+		if(!std::holds_alternative<std::string>(arg))
+		{
+			Logger::LogError("[Player] [RegisterEvents] Incorrect argument for PlaySound, must be a string");
+			return;
+		}
+
+		PlaySound(std::get<std::string>(arg));
+	});
 }
 
 void Player::MovePlayerEvent(float distance)
@@ -554,4 +548,27 @@ void Player::MovePlayerEvent(float distance)
 
 	m_position = newPosition;
 	m_groundPosition = newGroundPosition;
+}
+
+void Player::PlaySound(const std::string& id)
+{
+
+}
+
+void Player::PlayFootstepSound()
+{
+	m_footStepSoundSource->Play(AssetLoader::GetSound("footstep"));
+}
+
+void Player::PlayHurtSound()
+{
+	m_vocalSoundSource->Play(AssetLoader::GetSound("hurt"));
+}
+
+void Player::PlayDeathSound()
+{
+	Sound* sound = AssetLoader::GetSound("death");
+
+	if(m_vocalSoundSource->GetSound() != sound)
+		m_vocalSoundSource->Play(sound);
 }

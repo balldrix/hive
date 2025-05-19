@@ -9,8 +9,9 @@
 #include "StateMachine.h"
 
 #include <directxtk/SimpleMath.h>
-#include <map>
 #include <string>
+
+#undef PlaySound
 
 using namespace PlayerConstants;
 
@@ -55,11 +56,6 @@ public:
 	void								IncreaseSpecial(float value = 1.0f);
 	bool								IsSpecialReady() const { return m_special == MaxSpecial; }
 
-	void								PlayPunchSound(const std::string &name);
-	void								PlayFootstepSound();
-	void								PlayHurtSound();
-	void								PlayDeathSound();
-
 private:
 	PlayerDefinition					LoadPlayerDefinition();
 	void								NormalAttack();
@@ -70,6 +66,11 @@ private:
 	void								UpdateStats();
 	void								RegisterAnimationEvents();
 	void								MovePlayerEvent(float distance);
+	void								PlaySound(const std::string& id);
+	void								PlayPunchSound(const std::string& name);
+	void								PlayFootstepSound();
+	void								PlayHurtSound();
+	void								PlayDeathSound();
 
 	PlayerDefinition					m_playerDefinition;
 	StateMachine<Player>*				m_stateMachine;
