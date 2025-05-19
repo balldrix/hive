@@ -552,7 +552,9 @@ void Player::MovePlayerEvent(float distance)
 
 void Player::PlaySound(const std::string& id)
 {
+	Sound* sound = AssetLoader::GetSound(id);
 
+	if(sound != nullptr) m_attackSoundSource->Play(sound);
 }
 
 void Player::PlayFootstepSound()

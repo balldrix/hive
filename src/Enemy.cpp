@@ -4,6 +4,7 @@
 #include "Animator.h"
 #include "AssetLoader.h"
 #include "AudioEngine.h"
+#include "Camera.h"
 #include "DamageData.h"
 #include "EnemyAttackState.h"
 #include "EnemyDefinition.h"
@@ -214,7 +215,7 @@ void Enemy::Render(Graphics* graphics)
 		}
 	}
 
-	//	 render hitbox
+	//	render hitbox
 	if(m_hitBoxManager)
 		m_hitBoxManager->Render(graphics, m_camera);
 

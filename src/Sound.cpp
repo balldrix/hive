@@ -1,9 +1,12 @@
 #include "Sound.h"
 
+#include "Logger.h"
+
 #include <AL/al.h>
 #include <AL/alext.h>
 #include <cinttypes>
 #include <climits>
+#include <fmt/core.h>
 #include <malloc.h>
 #include <sndfile.h>
 #include <stdio.h>
@@ -25,6 +28,10 @@ Sound::~Sound()
 
 void Sound::LoadFromWav(const char* filename)
 {
+	Logger::LogInfo(fmt::format("Loading sound {}", filename));
+
+	m_filename = filename;
+
 	ALenum err, format;
 	ALuint buffer;
 	SNDFILE* sndfile;

@@ -33,11 +33,13 @@ namespace nlohmann
 		if(colonPos != std::string::npos)
 		{
 			eventData.eventName = dataString.substr(colonPos + 1, commaPos - colonPos - 1);
+			eventData.eventName.erase(0, eventData.eventName.find_first_not_of(" \t"));
 		}
 
 		if(commaPos != std::string::npos)
 		{
 			std::string argString = dataString.substr(commaPos + 1);
+			argString.erase(0, argString.find_first_not_of(" \t"));
 
 			try
 			{

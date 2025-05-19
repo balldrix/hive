@@ -4,10 +4,12 @@
 
 #include "AudioEngine.h"
 #include "GameObject.h"
+#include "Logger.h"
 #include "Sound.h"
 
 #include <AL/al.h>
 #include <directxtk/SimpleMath.h>
+#include <fmt/core.h>
 #include <utility>
 
 SoundSource::SoundSource()
@@ -52,8 +54,8 @@ void SoundSource::Play(OALSource* source)
 	alSourcef(m_currentSource->source, AL_MAX_DISTANCE, m_radius);
 	alSourcef(m_currentSource->source, AL_REFERENCE_DISTANCE, m_radius * 0.2f);
 	alSourcei(m_currentSource->source, AL_BUFFER, m_sound->GetBuffer());
-	alSourcei(m_currentSource->source, AL_SEC_OFFSET, 
-			  (int)(m_sound->GetLength() / 1000.0f) - (int)(m_timeLeft / 1000.0f));
+	alSourcei(m_currentSource->source, AL_SEC_OFFSET,
+		(int)(m_sound->GetLength() / 1000.0f) - (int)(m_timeLeft / 1000.0f));
 	alSourcePlay(m_currentSource->source);
 }
 
@@ -106,6 +108,8 @@ void SoundSource::Update(float deltaTime)
 
 void SoundSource::Play(Sound* sound)
 {
+	Logger::LogInfo(fmt::format("Playing Sound", sound->GetFilename()));
+
 	m_sound = sound;
 	Stop();
 

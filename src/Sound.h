@@ -1,6 +1,7 @@
 #pragma once
 
 #include <AL/al.h>
+#include <string>
 
 class Sound
 {
@@ -12,7 +13,7 @@ public:
 	int GetSampleRate() const { return m_samplerate; }
 	int GetSize() const { return m_size; }
 	int GetChannels() const { return m_channels; }
-
+	std::string GetFilename() const { return m_filename; }
 	ALuint GetBuffer() const { return m_buffer; }
 
 protected:
@@ -21,6 +22,7 @@ protected:
 
 	void LoadFromWav(const char* filename);
 
+	std::string m_filename;
 	float m_length;
 	int m_bitrate;
 	int m_samplerate;

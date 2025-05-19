@@ -10,6 +10,7 @@
 #include "Utils.h"
 
 #include <directxtk/SpriteFont.h>
+#include <filesystem>
 #include <fmt/core.h>
 #include <fstream>
 #include <iosfwd>
@@ -173,7 +174,7 @@ void AssetLoader::LoadSpriteFont(AssetData asset)
 
 	if(spriteFont != nullptr) 
 	{
-		m_spriteFontAssets.insert({ {asset.id, spriteFont}});	
+		m_spriteFontAssets.insert({ {asset.id, spriteFont}});
 		return;
 	}
 
@@ -185,16 +186,16 @@ void AssetLoader::LoadSpriteFont(AssetData asset)
 
 void AssetLoader::LoadSound(AssetData asset)
 {
-	if(!GetSound(asset.path))
+	std::filesystem::path p(asset.path);
+	std::string id = p.stem().string();
+
+	if(!GetSound(id))
 	{
 		Sound* sound = new Sound();
 
 		sound->LoadFromWav(asset.path.c_str());
 
-		std::filesystem::path p(asset.path);
-		std::string name = p.stem().string();
-
-		s_assetLoader->m_sounds.insert(std::make_pair(name, sound));
+		s_assetLoader->m_sounds.insert(std::make_pair(id, sound));
 	}
 }
 
