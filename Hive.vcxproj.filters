@@ -393,9 +393,6 @@
     <Filter Include="Assets\Data">
       <UniqueIdentifier>{14c829cd-02d2-4caf-9a55-b1939bd0f172}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Assets\Data\Encounters">
-      <UniqueIdentifier>{c3936396-b4d6-499a-aed1-79f08e5e956d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Assets\Data\Enemies">
       <UniqueIdentifier>{f80da53f-f102-40e8-969a-119353fae6a2}</UniqueIdentifier>
     </Filter>

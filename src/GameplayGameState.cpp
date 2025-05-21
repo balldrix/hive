@@ -386,6 +386,8 @@ void GameplayGameState::ProcessCollisions()
 	{
 		Enemy* enemy = enemyList[i];
 
+		if(!enemy->IsActive() || enemy->IsDead()) continue;
+
 		auto playerHitBox = m_player->GetHitBoxManager()->GetHitBox();
 		auto playerVerticalRange = VerticalHitRange;
 
@@ -433,6 +435,9 @@ void GameplayGameState::ProcessCollisions()
 	for(size_t i = 0; i < enemyList.size(); i++)
 	{
 		Enemy* enemy = enemyList[i];
+
+		if(!enemy->IsActive() || enemy->IsDead()) return;
+
 		// true if enemy hitbox is active and player is in vertical range
 		if(enemy->GetHitBoxManager()->IsHitBoxActive() &&
 			fabs(playerGroundPositionY - enemy->GetGroundPosition().y) < VerticalHitRange)

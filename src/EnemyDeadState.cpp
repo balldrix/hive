@@ -19,6 +19,7 @@ EnemyDeadState* EnemyDeadState::Instance()
 
 void EnemyDeadState::OnEnter(Enemy* enemy)
 {
+	enemy->SetDead(true);
 	enemy->GetAnimator()->Reset();
 	enemy->GetAnimator()->SetAnimation(m_name);
 	enemy->GetHitBoxManager()->SetCollidersUsingTag(m_name);
