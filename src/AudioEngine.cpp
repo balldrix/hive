@@ -68,16 +68,6 @@ AudioEngine::~AudioEngine()
 	alcCloseDevice(m_alcDevice);
 }
 
-void AudioEngine::Pause()
-{
-	PauseSources(m_soundEmitters.begin(), m_soundEmitters.end());
-}
-
-void AudioEngine::Resume()
-{
-	ResumeSources(m_soundEmitters.begin(), m_soundEmitters.end());
-}
-
 void AudioEngine::SetMasterVolume(float volume)
 {
 	volume = std::max(0.0f, volume);
@@ -124,6 +114,13 @@ void AudioEngine::UpdateTemporaryEmitters(float deltaTime)
 	}
 }
 
+void AudioEngine::AddSoundSource(SoundSource* soundSource, bool pauseable)
+{
+	m_soundEmitters.push_back(soundSource);
+
+	if(pauseable) m_pauseableEmitters.push_back(soundSource);
+}
+
 void AudioEngine::RemoveSoundSource(SoundSource* soundEmitter)
 {
 	for(std::vector<SoundSource*>::iterator i = m_soundEmitters.begin(); i != m_soundEmitters.end();)
@@ -132,6 +129,20 @@ void AudioEngine::RemoveSoundSource(SoundSource* soundEmitter)
 		if(s == soundEmitter)
 		{
 			m_soundEmitters.erase(i);
+			return;
+		}
+		else
+		{
+			++i;
+		}
+	}
+
+	for(std::vector<SoundSource*>::iterator i = m_pauseableEmitters.begin(); i != m_pauseableEmitters.end();)
+	{
+		SoundSource* s = *i;
+		if(s == soundEmitter)
+		{
+			m_pauseableEmitters.erase(i);
 			return;
 		}
 		else
@@ -167,6 +178,16 @@ void AudioEngine::Update(float deltaTime)
 	}
 
 	m_frameEmitters.clear();
+}
+
+void AudioEngine::Pause()
+{
+	PauseSources(m_pauseableEmitters.begin(), m_pauseableEmitters.end());
+}
+
+void AudioEngine::Resume()
+{
+	ResumeSources(m_pauseableEmitters.begin(), m_pauseableEmitters.end());
 }
 
 void AudioEngine::PlaySources(std::vector<SoundSource*>::iterator from, std::vector<SoundSource*>::iterator to)

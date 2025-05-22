@@ -91,6 +91,7 @@ public:
 	bool				IsActive() const { return m_active; }
 
 	void				DisplayDust(const Vector2& position);
+	virtual void		PlayImpactSound() {};
 
 	virtual void		Reset() = 0;
 

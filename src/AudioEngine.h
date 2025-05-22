@@ -42,18 +42,17 @@ public:
 		s_instance = nullptr;
 	}
 
-	void Pause();
-	void Resume();
-
 	void SetListener(GameObject* object) { m_listener = object; }
 	void SetMasterVolume(float volume);
 
 	Vector3 GetListenerPosition() const { return m_listenerPosition; }
 
-	void AddSoundSource(SoundSource* soundSource) { m_soundEmitters.push_back(soundSource); }
+	void AddSoundSource(SoundSource* soundSource, bool pauseable = false);
 	void RemoveSoundSource(SoundSource* soundSource);
 
 	void Update(float deltaTime);
+	void Pause();
+	void Resume();
 
 protected:
 	AudioEngine(unsigned int channels = 32);
@@ -81,6 +80,7 @@ protected:
 	std::vector<OALSource*> m_sources;
 	std::vector<SoundSource*> m_soundEmitters;
 	std::vector<SoundSource*> m_frameEmitters;
+	std::vector<SoundSource*> m_pauseableEmitters;
 
 	static AudioEngine* s_instance;
 };

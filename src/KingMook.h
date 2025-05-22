@@ -11,5 +11,5 @@ public:
 	virtual void Attack();
 	virtual void PlayEntranceSound();
 	virtual void PlayFootstepSound();
-	virtual void PlayPunchSound();
+	virtual void PlayAttackSound();
 };

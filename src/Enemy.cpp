@@ -49,12 +49,14 @@ Enemy::Enemy() :
 	m_vocalSoundSource(nullptr),
 	m_footStepSoundSource(nullptr),
 	m_attackSoundSource(nullptr),
+	m_impactSoundSource(nullptr),
 	m_stateChangeTimer(0.0f),
 	m_flashingTimer(0.0f),
 	m_isFlashing(false),
 	m_recentFootstepFrame(0),
 	m_startingState(nullptr),
-	m_npcManager(nullptr)
+	m_npcManager(nullptr),
+	m_impactSounds()
 {}
 
 Enemy::~Enemy()
@@ -64,10 +66,12 @@ Enemy::~Enemy()
 
 void Enemy::DeleteAll()
 {
+	AudioEngine::Instance()->RemoveSoundSource(m_impactSoundSource);
 	AudioEngine::Instance()->RemoveSoundSource(m_attackSoundSource);
 	AudioEngine::Instance()->RemoveSoundSource(m_footStepSoundSource);
 	AudioEngine::Instance()->RemoveSoundSource(m_vocalSoundSource);
 
+	delete m_impactSoundSource;
 	delete m_attackSoundSource;
 	delete m_footStepSoundSource;
 	delete m_vocalSoundSource;
@@ -80,6 +84,7 @@ void Enemy::DeleteAll()
 	delete m_spritesheet;
 
 	m_startingState = nullptr;
+	m_impactSoundSource = nullptr;
 	m_attackSoundSource = nullptr;
 	m_footStepSoundSource = nullptr;
 	m_vocalSoundSource = nullptr;
@@ -158,9 +163,26 @@ void Enemy::Init(Graphics* graphics,
 	m_attackSoundSource->SetLooping(false);
 	m_attackSoundSource->SetRelative(true);
 
-	AudioEngine::Instance()->AddSoundSource(m_vocalSoundSource);
-	AudioEngine::Instance()->AddSoundSource(m_footStepSoundSource);
-	AudioEngine::Instance()->AddSoundSource(m_attackSoundSource);
+	m_impactSoundSource = new SoundSource();
+	m_impactSoundSource->SetTarget(this);
+	m_impactSoundSource->SetLooping(false);
+	m_impactSoundSource->SetRelative(true);
+
+	AudioEngine::Instance()->AddSoundSource(m_vocalSoundSource, false);
+	AudioEngine::Instance()->AddSoundSource(m_footStepSoundSource, false);
+	AudioEngine::Instance()->AddSoundSource(m_attackSoundSource, true);
+	AudioEngine::Instance()->AddSoundSource(m_impactSoundSource, false);
+
+	m_impactSounds = {
+		"enemyImpact_001",
+		"enemyImpact_002",
+		"enemyImpact_003",
+		"enemyImpact_004",
+		"enemyImpact_005",
+		"enemyImpact_006",
+		"enemyImpact_007",
+		"enemyImpact_008"
+	};
 
 	ResetStateChangeTimer();
 
@@ -257,8 +279,10 @@ void Enemy::ApplyDamage(GameObject* source, const int& amount)
 
 	if(m_health < 0) m_health = 0;
 
+	if(m_health > 0) PlayImpactSound();
+
 	// true if health has gone or amount is high
-	if(m_health < 1 || amount > 50)
+	if(m_health > 0 || amount > 50)
 	{
 		// set knockback state
 		m_stateMachine->ChangeState(EnemyKnockbackState::Instance());
@@ -386,21 +410,14 @@ void Enemy::ShowEnemyHud()
 	}
 }
 
-void Enemy::PlayFootstepSound()
+void Enemy::PlayImpactSound()
 {
-	Sound* sound = AssetLoader::GetSound("mook_walk");
+	auto i = Randomiser::Instance()->GetRandNumUniform(0, (int)m_impactSounds.size() - 1);
+	Sound* sound = AssetLoader::GetSound(m_impactSounds[i]);
 
-	if(m_footStepSoundSource->GetSound() != sound)
-		m_footStepSoundSource->Play(sound);
-}
+	if(sound == nullptr) return;
 
-void Enemy::PlayPunchSound()
-{
-	Sound* sound = AssetLoader::GetSound("mook_punch_001");
-	
-	float randomPitch = Randomiser::Instance()->GetRandNumUniform(0.80f, 1.2f);
-	m_attackSoundSource->SetPitch(randomPitch);
-	m_attackSoundSource->Play(sound);
+	m_impactSoundSource->Play(sound);
 }
 
 void Enemy::PlayHurtSound()

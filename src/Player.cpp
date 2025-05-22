@@ -18,6 +18,7 @@
 #include "PlayerAttackState.h"
 #include "PlayerBlockState.h"
 #include "PlayerConstants.h"
+
 #include "PlayerDeadState.h"
 #include "PlayerDefinition.h"
 #include "PlayerGlobalState.h"
@@ -142,9 +143,9 @@ void Player::Init(ControlSystem* controlSystem)
 	m_vocalSoundSource->SetRelative(true);
 
 	AudioEngine::Instance()->SetListener(this);
-	AudioEngine::Instance()->AddSoundSource(m_attackSoundSource);
-	AudioEngine::Instance()->AddSoundSource(m_footStepSoundSource);
-	AudioEngine::Instance()->AddSoundSource(m_vocalSoundSource);
+	AudioEngine::Instance()->AddSoundSource(m_attackSoundSource, true);
+	AudioEngine::Instance()->AddSoundSource(m_footStepSoundSource, false);
+	AudioEngine::Instance()->AddSoundSource(m_vocalSoundSource, false);
 
 	InitStats();
 	RegisterAnimationEvents();
@@ -407,9 +408,13 @@ void Player::Knockback(const Vector2& direction, const float& force)
 	SetMovementSpeed(force);
 }
 
-void Player::PlayPunchSound(const std::string& name)
+void Player::PlayAttackSound(const std::string& id)
 {
-	m_attackSoundSource->Play(AssetLoader::GetSound(name));
+	Sound* sound = AssetLoader::GetSound(id);
+
+	if(sound == nullptr) return;
+
+	m_attackSoundSource->Play(sound);
 }
 
 PlayerDefinition Player::LoadPlayerDefinition()
@@ -552,9 +557,7 @@ void Player::MovePlayerEvent(float distance)
 
 void Player::PlaySound(const std::string& id)
 {
-	Sound* sound = AssetLoader::GetSound(id);
-
-	if(sound != nullptr) m_attackSoundSource->Play(sound);
+	PlayAttackSound(id);
 }
 
 void Player::PlayFootstepSound()

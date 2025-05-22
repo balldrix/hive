@@ -10,6 +10,8 @@
 #include "StateMachine.h"
 
 #include <directxtk/SimpleMath.h>
+#include <string>
+#include <vector>
 
 class Graphics;
 class NPCManager;
@@ -20,71 +22,72 @@ class SoundSource;
 class Enemy : public GameObject
 {
 public:
-							Enemy();
-	virtual					~Enemy();
+								Enemy();
+	virtual						~Enemy();
 
-	void					Init(Graphics* graphics,
-								Camera* camera,
-								Player* player,
-								const EnemyDefinition& definition,
-								NPCManager* npcManager,
-								Texture* shadowTexture,
-								State<Enemy>* globalEnemyState,
-								State<Enemy>* startingState);
+	void						Init(Graphics* graphics,
+									Camera* camera,
+									Player* player,
+									const EnemyDefinition& definition,
+									NPCManager* npcManager,
+									Texture* shadowTexture,
+									State<Enemy>* globalEnemyState,
+									State<Enemy>* startingState);
 
-	void					Update(float deltaTime);
-	void					Render(Graphics* graphics);
-	virtual void			Reset() {};
+	void						Update(float deltaTime);
+	void						Render(Graphics* graphics);
+	virtual void				Reset() override {};
 
-	void					Spawn(const Vector2& position);
+	void						Spawn(const Vector2& position);
 
-	void					SetDead(bool isDead);
-	void					SetPlayerTarget(Player* player);
-	void					ResetStateChangeTimer();
+	void						SetDead(bool isDead);
+	void						SetPlayerTarget(Player* player);
+	void						ResetStateChangeTimer();
 
-	Player*					GetPlayerTarget() const { return m_playerTarget; }
-	StateMachine<Enemy>*	GetStateMachine() const { return m_stateMachine; }
-	float					GetTimer() const { return m_stateChangeTimer; }
-	EnemyDefinition			GetData() const { return m_enemyDefinition; }
-	virtual DamageData		GetDamageData() const;
-	NPCManager*				GetManager() const { return m_npcManager; }
+	Player*						GetPlayerTarget() const { return m_playerTarget; }
+	StateMachine<Enemy>*		GetStateMachine() const { return m_stateMachine; }
+	float						GetTimer() const { return m_stateChangeTimer; }
+	EnemyDefinition				GetData() const { return m_enemyDefinition; }
+	DamageData					GetDamageData() const;
+	NPCManager*					GetManager() const { return m_npcManager; }
 
-	virtual void			ApplyDamage(GameObject* source, const int& amount);
-	void					Knockback(const Vector2& direction, const float& force);
+	virtual void				ApplyDamage(GameObject* source, const int& amount) override;
+	void						Knockback(const Vector2& direction, const float& force);
 		
-	virtual void			Attack();
-	void					Kill();
+	void						Attack();
+	void						Kill();
 
-	void					ShowEnemyHud();
-	void					DeleteAll();
+	void						ShowEnemyHud();
+	void						DeleteAll();
 
-	void					ProcessSteering();
-	void					Flash();
+	void						ProcessSteering();
+	void						Flash();
 
-	virtual void			PlayFootstepSound();
-	virtual void			PlayPunchSound();
-	void					PlayHurtSound();
-	void					PlayDeathSound();
+	virtual void				PlayImpactSound() override;
+	void						PlayHurtSound();
+	void						PlayDeathSound();
 
 protected:
-	StateMachine<Enemy>*	m_stateMachine;
-	SoundSource*			m_vocalSoundSource;
-	SoundSource*			m_footStepSoundSource;
-	SoundSource*			m_attackSoundSource;
-	int						m_recentFootstepFrame;
-	EnemyDefinition			m_enemyDefinition;
+	StateMachine<Enemy>*		m_stateMachine;
+	SoundSource*				m_footStepSoundSource;
+	SoundSource*				m_attackSoundSource;
+	SoundSource*				m_vocalSoundSource;
+	SoundSource*				m_impactSoundSource;
+	int							m_recentFootstepFrame;
+	EnemyDefinition				m_enemyDefinition;
 
 private:
-	Vector2					Seek() const;
-	Vector2					Avoid() const;
-	Vector2					Strafe() const;
+	Vector2						Seek() const;
+	Vector2						Avoid() const;
+	Vector2						Strafe() const;
 
-	Player*					m_playerTarget;
-	Sprite*					m_portraitSprite;
-	Sprite*					m_hitBoxSprite;
-	float					m_stateChangeTimer;
-	float					m_flashingTimer;
-	bool					m_isFlashing;
-	State<Enemy>*			m_startingState;
-	NPCManager*				m_npcManager;
+	Player*						m_playerTarget;
+	Sprite*						m_portraitSprite;
+	Sprite*						m_hitBoxSprite;
+	float						m_stateChangeTimer;
+	float						m_flashingTimer;
+	bool						m_isFlashing;
+	State<Enemy>*				m_startingState;
+	NPCManager*					m_npcManager;
+	std::vector<std::string>	m_impactSounds;
 };

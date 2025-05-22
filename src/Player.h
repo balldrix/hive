@@ -67,7 +67,7 @@ private:
 	void								RegisterAnimationEvents();
 	void								MovePlayerEvent(float distance);
 	void								PlaySound(const std::string& id);
-	void								PlayPunchSound(const std::string& name);
+	void								PlayAttackSound(const std::string& name);
 	void								PlayFootstepSound();
 	void								PlayHurtSound();
 	void								PlayDeathSound();

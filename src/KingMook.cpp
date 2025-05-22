@@ -52,7 +52,7 @@ void KingMook::PlayFootstepSound()
 	m_footStepSoundSource->Play(AssetLoader::GetSound(soundName));
 }
 
-void KingMook::PlayPunchSound()
+void KingMook::PlayAttackSound()
 {
 	uint32_t randomWalkIndex = Randomiser::Instance()->GetRandNumUniform(1, 4);
 
