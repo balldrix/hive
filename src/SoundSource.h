@@ -1,6 +1,7 @@
 #pragma once
 
 #include <directxtk/SimpleMath.h>
+#include <AL/al.h>
 
 using namespace DirectX::SimpleMath;
 
@@ -60,4 +61,5 @@ protected:
 	float m_timeLeft;
 	float m_pitch;
 	bool m_isRelative;
+	ALint m_offset;
 };

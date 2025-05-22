@@ -35,6 +35,7 @@ void SoundSource::Reset()
 	m_sound = nullptr;
 	m_pitch = 1.0f;
 	m_isRelative = false;
+	m_offset = 0;
 }
 
 SoundSource::~SoundSource()
@@ -74,6 +75,7 @@ void SoundSource::Pause()
 {
 	if (!m_currentSource) return;
 
+	alGetSourcei(m_currentSource->source, AL_SAMPLE_OFFSET, &m_offset);
 	alSourcePause(m_currentSource->source);
 }
 
@@ -81,6 +83,7 @@ void SoundSource::Resume()
 {
 	if (!m_currentSource || !m_currentSource->inUse) return;
 
+	alSourcei(m_currentSource->source, AL_SAMPLE_OFFSET, m_offset);
 	alSourcePlay(m_currentSource->source);
 }
 
