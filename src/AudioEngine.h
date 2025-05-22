@@ -42,6 +42,9 @@ public:
 		s_instance = nullptr;
 	}
 
+	void Pause();
+	void Resume();
+
 	void SetListener(GameObject* object) { m_listener = object; }
 	void SetMasterVolume(float volume);
 
@@ -63,6 +66,8 @@ protected:
 
 	void PlaySources(std::vector<SoundSource*>::iterator from, std::vector<SoundSource*>::iterator to);
 	void StopSources(std::vector<SoundSource*>::iterator from, std::vector<SoundSource*>::iterator to);
+	void PauseSources(std::vector<SoundSource*>::iterator from, std::vector<SoundSource*>::iterator to);
+	void ResumeSources(std::vector<SoundSource*>::iterator from, std::vector<SoundSource*>::iterator to);
 
 	void CullTargets();
 	OALSource* GetSource();

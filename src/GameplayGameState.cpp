@@ -64,6 +64,7 @@ GameplayGameState::GameplayGameState() :
 	m_particleSystem(nullptr),
 	m_collisionCooldown(0.0f),
 	m_isCollisionOnCooldown(false),
+	m_isHitStopRunning(false),
 	GameState("Gameplay")
 {}
 
@@ -333,8 +334,14 @@ void GameplayGameState::Tick(float deltaTime)
 
 	if(m_stopTimer > 0)
 	{
+		m_isHitStopRunning = true;
 		m_stopTimer -= deltaTime;
 		return;
+	} 
+	else if(m_isHitStopRunning)
+	{
+		m_isHitStopRunning = false;
+		AudioEngine::Instance()->Resume();
 	}
 
 	if(m_collisionCooldown > 0)
@@ -421,6 +428,7 @@ void GameplayGameState::ProcessCollisions()
 				if(enemy->GetHealth() <= 0.0f) m_player->AddKill();
 
 				m_stopTimer = damageData.hitStopDuration;
+				AudioEngine::Instance()->Pause();
 				m_isCollisionOnCooldown = true;
 				m_collisionCooldown = damageData.hitStopDuration;
 
@@ -466,6 +474,7 @@ void GameplayGameState::ProcessCollisions()
 				enemy->ShowEnemyHud();
 
 				m_stopTimer = damageData.hitStopDuration;
+				AudioEngine::Instance()->Pause();
 				m_isCollisionOnCooldown = true;
 				m_collisionCooldown = damageData.hitStopDuration;
 

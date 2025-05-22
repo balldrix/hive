@@ -78,6 +78,7 @@ private:
 	bool m_displayHitBoxes;
 	bool m_hidePlayerHud;
 	bool m_isCollisionOnCooldown;
+	bool m_isHitStopRunning;
 
 	ImpactFxPool* m_impactFxPool;
 	std::vector<SpriteFx*> m_activeImpacts;

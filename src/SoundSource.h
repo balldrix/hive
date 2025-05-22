@@ -42,6 +42,8 @@ public:
 
 	void Play(OALSource* source);
 	void Stop();
+	void Pause();
+	void Resume();
 
 	static bool CompareNodesByPriority(SoundSource* a, SoundSource* b);
 	virtual void Update(float deltaTime);

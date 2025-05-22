@@ -68,6 +68,16 @@ AudioEngine::~AudioEngine()
 	alcCloseDevice(m_alcDevice);
 }
 
+void AudioEngine::Pause()
+{
+	PauseSources(m_soundEmitters.begin(), m_soundEmitters.end());
+}
+
+void AudioEngine::Resume()
+{
+	ResumeSources(m_soundEmitters.begin(), m_soundEmitters.end());
+}
+
 void AudioEngine::SetMasterVolume(float volume)
 {
 	volume = std::max(0.0f, volume);
@@ -175,6 +185,22 @@ void AudioEngine::StopSources(std::vector<SoundSource*>::iterator from, std::vec
 	for(std::vector<SoundSource*>::iterator i = from; i != to; ++i)
 	{
 		(*i)->Stop();
+	}
+}
+
+void AudioEngine::PauseSources(std::vector<SoundSource*>::iterator from, std::vector<SoundSource*>::iterator to)
+{
+	for(std::vector<SoundSource*>::iterator i = from; i != to; ++i)
+	{
+		(*i)->Pause();
+	}
+}
+
+void AudioEngine::ResumeSources(std::vector<SoundSource*>::iterator from, std::vector<SoundSource*>::iterator to)
+{
+	for(std::vector<SoundSource*>::iterator i = from; i != to; ++i)
+	{
+		(*i)->Resume();
 	}
 }
 

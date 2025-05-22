@@ -46,8 +46,7 @@ void SoundSource::Play(OALSource* source)
 {
 	m_currentSource = source;
 
-	if(!m_currentSource)
-		return;
+	if(!m_currentSource) return;
 
 	m_currentSource->inUse = true;
 
@@ -61,8 +60,7 @@ void SoundSource::Play(OALSource* source)
 
 void SoundSource::Stop()
 {
-	if(!m_currentSource)
-		return;
+	if(!m_currentSource) return;
 
 	alSourcef(m_currentSource->source, AL_GAIN, 0.0f);
 	alSourceStop(m_currentSource->source);
@@ -70,6 +68,20 @@ void SoundSource::Stop()
 
 	m_currentSource->inUse = false;
 	m_currentSource = nullptr;
+}
+
+void SoundSource::Pause()
+{
+	if (!m_currentSource) return;
+
+	alSourcePause(m_currentSource->source);
+}
+
+void SoundSource::Resume()
+{
+	if (!m_currentSource || !m_currentSource->inUse) return;
+
+	alSourcePlay(m_currentSource->source);
 }
 
 bool SoundSource::CompareNodesByPriority(SoundSource* a, SoundSource* b)
