@@ -245,7 +245,7 @@
  ],
  "meta": {
   "app": "https://www.aseprite.org/",
-  "version": "1.3.13-x64",
+  "version": "1.3.14-beta1-x64",
   "format": "RGBA8888",
   "size": { "w": 240, "h": 110 },
   "scale": "1",
@@ -260,7 +260,7 @@
   ],
   "layers": [
    { "name": "bg legs", "opacity": 255, "blendMode": "normal" },
-   { "name": "body", "opacity": 255, "blendMode": "normal" },
+   { "name": "body", "opacity": 255, "blendMode": "normal", "cels": [{ "frame": 19, "data": "event:PlaySound, wasteDogAttack_001" }] },
    { "name": "tail", "opacity": 255, "blendMode": "normal" },
    { "name": "fg legs", "opacity": 255, "blendMode": "normal" },
    { "name": "head", "opacity": 255, "blendMode": "normal" }

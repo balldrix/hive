@@ -64,8 +64,7 @@ public:
 	void						Flash();
 
 	virtual void				PlayImpactSound() override;
-	void						PlayHurtSound();
-	void						PlayDeathSound();
+	void						PlaySound(const std::string& id);
 
 protected:
 	StateMachine<Enemy>*		m_stateMachine;

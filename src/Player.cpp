@@ -149,12 +149,12 @@ void Player::Init(ControlSystem* controlSystem)
 
 	InitStats();
 	RegisterAnimationEvents();
+	m_active = true;
 }
 
 void Player::Update(float deltaTime)
 {
-	if(m_dead == true)
-		return;
+	if(m_dead || !m_active) return;
 
 	m_stateMachine->Update();
 	GameObject::Update(deltaTime);

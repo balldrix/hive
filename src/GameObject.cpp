@@ -66,6 +66,8 @@ void GameObject::SetID(const std::string &id)
 
 void GameObject::Update(float deltaTime)
 {
+	if(!m_active) return;
+
 	if(m_grounded)
 	{
 		m_groundPosition.y = m_position.y;

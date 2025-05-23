@@ -33,10 +33,13 @@
 #include "UIPortraitView.h"
 #include "UnitVectors.h"
 
+#include "EventManager.h"
+#include "Logger.h"
 #include <cstdint>
 #include <directxtk/SimpleMath.h>
 #include <fmt/core.h>
 #include <string>
+#include <variant>
 #include <vector>
 
 using namespace GameplayConstants;
@@ -186,6 +189,16 @@ void Enemy::Init(Graphics* graphics,
 
 	ResetStateChangeTimer();
 
+	m_eventManager.RegisterEvent("PlaySound", [this](EventArgument arg) {
+		if(!std::holds_alternative<std::string>(arg))
+		{
+			Logger::LogError("[Enemy] [RegisterEvents] Incorrect argument for PlaySound, must be a string");
+			return;
+		}
+
+		PlaySound(std::get<std::string>(arg));
+	});
+
 	m_active = false;
 }
 
@@ -282,7 +295,7 @@ void Enemy::ApplyDamage(GameObject* source, const int& amount)
 	if(m_health > 0) PlayImpactSound();
 
 	//@TODO add knockback, stun or juggle states
-	if(m_health > 0)
+	if(m_health == 0)
 	{
 		// set knockback state
 		m_stateMachine->ChangeState(EnemyKnockbackState::Instance());
@@ -420,20 +433,13 @@ void Enemy::PlayImpactSound()
 	m_impactSoundSource->Play(sound);
 }
 
-void Enemy::PlayHurtSound()
+void Enemy::PlaySound(const std::string& id)
 {
-	uint32_t randomNumber = Randomiser::Instance()->GetRandNumUniform(1, 4);
+	Sound* sound = AssetLoader::GetSound(id);
 
-	std::string soundName = "mook_hit_00" + std::to_string(randomNumber);
-	m_vocalSoundSource->Play(AssetLoader::GetSound(soundName));
-}
+	if(sound == nullptr) return;
 
-void Enemy::PlayDeathSound()
-{
-	Sound* sound = AssetLoader::GetSound("mook_death");
-
-	if(m_vocalSoundSource->GetSound() != sound)
-		m_vocalSoundSource->Play(sound);
+	m_attackSoundSource->Play(sound);
 }
 
 DamageData Enemy::GetDamageData() const

@@ -252,6 +252,12 @@
     "tag": "gameplay_assets"
   },
   {
+    "id": "s_wasteDogAttack_001",
+    "path": "assets\\sounds\\wasteDogAttack_001.wav",
+    "type": "soundFX",
+    "tag": "gameplay_assets"
+  },
+  {
     "id": "t_portrait_frame",
     "path": "assets\\textures\\ui\\portrait_frame.png",
     "type": "texture",
