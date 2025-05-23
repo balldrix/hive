@@ -281,8 +281,8 @@ void Enemy::ApplyDamage(GameObject* source, const int& amount)
 
 	if(m_health > 0) PlayImpactSound();
 
-	// true if health has gone or amount is high
-	if(m_health > 0 || amount > 50)
+	//@TODO add knockback, stun or juggle states
+	if(m_health > 0)
 	{
 		// set knockback state
 		m_stateMachine->ChangeState(EnemyKnockbackState::Instance());
