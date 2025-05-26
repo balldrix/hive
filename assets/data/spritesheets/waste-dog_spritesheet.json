@@ -260,7 +260,7 @@
   ],
   "layers": [
    { "name": "bg legs", "opacity": 255, "blendMode": "normal" },
-   { "name": "body", "opacity": 255, "blendMode": "normal", "cels": [{ "frame": 19, "data": "event:PlaySound, wasteDogAttack_001" }] },
+   { "name": "body", "opacity": 255, "blendMode": "normal", "cels": [{ "frame": 20, "data": "event:PlaySound, wasteDogAttack_001" }] },
    { "name": "tail", "opacity": 255, "blendMode": "normal" },
    { "name": "fg legs", "opacity": 255, "blendMode": "normal" },
    { "name": "head", "opacity": 255, "blendMode": "normal" }
