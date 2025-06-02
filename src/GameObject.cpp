@@ -1,18 +1,19 @@
 #include "GameObject.h"
 
 #include "Animator.h"
+#include "AssetLoader.h"
 #include "Camera.h"
 #include "Collider.h"
 #include "DamageData.h"
 #include "GameplayConstants.h"
 #include "HitBoxManager.h"
 #include "LevelCollision.h"
+#include "Randomiser.h"
+#include "Sound.h"
 #include "SpriteFx.h"
 
 #include <directxtk/SimpleMath.h>
 #include <directxtk/SpriteBatch.h>
-#include <fstream>
-#include <iosfwd>
 #include <string>
 
 using namespace DirectX::SimpleMath;
@@ -33,6 +34,7 @@ GameObject::GameObject() :
 	m_animator(nullptr),
 	m_shadow(nullptr),
 	m_dustFx(nullptr),
+	m_impactSoundSource(nullptr),
 	m_eventManager(),
 	m_hitBoxManager(nullptr),
 	m_controlSystem(nullptr),
@@ -41,7 +43,8 @@ GameObject::GameObject() :
 	m_deathTimer(0.0f),
 	m_grounded(true),
 	m_dead(false),
-	m_active(false)
+	m_active(false),
+	m_impactSounds()
 {
 }
 
@@ -59,7 +62,7 @@ void GameObject::SetCamera(Camera* cam)
 	m_camera = cam;
 }
 
-void GameObject::SetID(const std::string &id)
+void GameObject::SetID(const std::string& id)
 {
 	m_id = id;
 }
@@ -129,12 +132,12 @@ void GameObject::Update(float deltaTime)
 		m_animator->Update(deltaTime);
 
 	Vector2 screenPosition = m_position;
-	
+
 	if(m_camera != nullptr)
 		screenPosition -= m_camera->GetPosition();
 
 	Vector2 screenGroundPosition = m_groundPosition;
-	
+
 	if(m_camera != nullptr)
 		screenGroundPosition -= m_camera->GetPosition();
 
@@ -148,7 +151,7 @@ void GameObject::Update(float deltaTime)
 		m_dustFx->Update(deltaTime);
 }
 
-void GameObject::Move(const Vector2 &direction)
+void GameObject::Move(const Vector2& direction)
 {
 }
 
@@ -195,7 +198,7 @@ void GameObject::FlipHorizontally(bool flip)
 	{
 		facingDirection = Vector3::Left;
 		spriteSheetEffects = SpriteEffects::SpriteEffects_FlipHorizontally;
-	}	
+	}
 
 	m_facingDirection = facingDirection;
 	m_spritesheet->SetFlipEffect(spriteSheetEffects);
@@ -323,6 +326,16 @@ void GameObject::Knockback(const Vector2& direction, const float& force)
 void GameObject::DisplayDust(const Vector2& position)
 {
 	m_dustFx->DisplayFx(position - m_camera->GetPosition());
+}
+
+void GameObject::PlayImpactSound()
+{
+	auto i = Randomiser::Instance()->GetRandNumUniform(0, (int)m_impactSounds.size() - 1);
+	Sound* sound = AssetLoader::GetSound(m_impactSounds[i]);
+
+	if(sound == nullptr) return;
+
+	m_impactSoundSource->Play(sound);
 }
 
 DamageData GameObject::GetDamageData() const

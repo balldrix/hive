@@ -204,6 +204,18 @@
     "tag": "gameplay_assets"
   },
   {
+    "id": "s_playerImpact_001",
+    "path": "assets\\sounds\\playerImpact_001.wav",
+    "type": "soundFX",
+    "tag": "gameplay_assets"
+  },
+  {
+    "id": "s_playerImpact_002",
+    "path": "assets\\sounds\\playerImpact_002.wav",
+    "type": "soundFX",
+    "tag": "gameplay_assets"
+  },
+  {
     "id": "s_enemyImpact_001",
     "path": "assets\\sounds\\enemyImpact_001.wav",
     "type": "soundFX",

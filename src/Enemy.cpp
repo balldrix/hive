@@ -11,12 +11,14 @@
 #include "EnemyHurtState.h"
 #include "EnemyIdleState.h"
 #include "EnemyKnockbackState.h"
+#include "EventManager.h"
 #include "GameDataManager.h"
 #include "GameObject.h"
 #include "GameplayConstants.h"
 #include "Graphics.h"
 #include "HitBoxData.h"
 #include "HitBoxManager.h"
+#include "Logger.h"
 #include "NPCManager.h"
 #include "Player.h"
 #include "Randomiser.h"
@@ -33,9 +35,6 @@
 #include "UIPortraitView.h"
 #include "UnitVectors.h"
 
-#include "EventManager.h"
-#include "Logger.h"
-#include <cstdint>
 #include <directxtk/SimpleMath.h>
 #include <fmt/core.h>
 #include <string>
@@ -52,14 +51,12 @@ Enemy::Enemy() :
 	m_vocalSoundSource(nullptr),
 	m_footStepSoundSource(nullptr),
 	m_attackSoundSource(nullptr),
-	m_impactSoundSource(nullptr),
 	m_stateChangeTimer(0.0f),
 	m_flashingTimer(0.0f),
 	m_isFlashing(false),
 	m_recentFootstepFrame(0),
 	m_startingState(nullptr),
-	m_npcManager(nullptr),
-	m_impactSounds()
+	m_npcManager(nullptr)
 {}
 
 Enemy::~Enemy()
@@ -421,16 +418,6 @@ void Enemy::ShowEnemyHud()
 		healthbar->SetCurrentValue(m_health, true);
 		healthbar->SetMaxValue(m_enemyDefinition.hp);
 	}
-}
-
-void Enemy::PlayImpactSound()
-{
-	auto i = Randomiser::Instance()->GetRandNumUniform(0, (int)m_impactSounds.size() - 1);
-	Sound* sound = AssetLoader::GetSound(m_impactSounds[i]);
-
-	if(sound == nullptr) return;
-
-	m_impactSoundSource->Play(sound);
 }
 
 void Enemy::PlaySound(const std::string& id)

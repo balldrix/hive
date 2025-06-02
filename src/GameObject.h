@@ -4,10 +4,12 @@
 #include "DamageData.h"
 #include "EventManager.h"
 #include "HitBoxManager.h"
+#include "SoundSource.h"
 #include "SpriteSheet.h"
 
 #include <directxtk/SimpleMath.h>
 #include <string>
+#include <vector>
 
 using namespace DirectX::SimpleMath;
 
@@ -91,7 +93,7 @@ public:
 	bool				IsActive() const { return m_active; }
 
 	void				DisplayDust(const Vector2& position);
-	virtual void		PlayImpactSound() {};
+	virtual void		PlayImpactSound();
 
 	virtual void		Reset() = 0;
 
@@ -113,6 +115,8 @@ protected:
 	Sprite*					m_shadow;
 	SpriteFx*				m_dustFx;
 
+	SoundSource*			m_impactSoundSource;
+
 	EventManager			m_eventManager;
 	HitBoxManager*			m_hitBoxManager;
 	ControlSystem*			m_controlSystem;
@@ -125,4 +129,6 @@ protected:
 	bool					m_grounded;
 	bool					m_dead;
 	bool					m_active;
+
+	std::vector<std::string>	m_impactSounds;
 };

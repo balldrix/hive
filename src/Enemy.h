@@ -63,7 +63,6 @@ public:
 	void						ProcessSteering();
 	void						Flash();
 
-	virtual void				PlayImpactSound() override;
 	void						PlaySound(const std::string& id);
 
 protected:
@@ -71,7 +70,6 @@ protected:
 	SoundSource*				m_footStepSoundSource;
 	SoundSource*				m_attackSoundSource;
 	SoundSource*				m_vocalSoundSource;
-	SoundSource*				m_impactSoundSource;
 	int							m_recentFootstepFrame;
 	EnemyDefinition				m_enemyDefinition;
 
@@ -88,5 +86,4 @@ private:
 	bool						m_isFlashing;
 	State<Enemy>*				m_startingState;
 	NPCManager*					m_npcManager;
-	std::vector<std::string>	m_impactSounds;
 };

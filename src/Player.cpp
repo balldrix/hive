@@ -18,7 +18,6 @@
 #include "PlayerAttackState.h"
 #include "PlayerBlockState.h"
 #include "PlayerConstants.h"
-
 #include "PlayerDeadState.h"
 #include "PlayerDefinition.h"
 #include "PlayerGlobalState.h"
@@ -66,10 +65,12 @@ Player::~Player()
 {
 	m_eventManager.UnRegisterEvent("MovePlayer");
 
+	AudioEngine::Instance()->RemoveSoundSource(m_impactSoundSource);
 	AudioEngine::Instance()->RemoveSoundSource(m_vocalSoundSource);
 	AudioEngine::Instance()->RemoveSoundSource(m_footStepSoundSource);
 	AudioEngine::Instance()->RemoveSoundSource(m_attackSoundSource);
 
+	delete m_impactSoundSource;
 	delete m_vocalSoundSource;
 	delete m_footStepSoundSource;
 	delete m_attackSoundSource;
@@ -77,6 +78,7 @@ Player::~Player()
 	delete m_stateMachine;
 	delete m_spritesheet;
 
+	m_impactSoundSource = nullptr;
 	m_vocalSoundSource = nullptr;
 	m_footStepSoundSource = nullptr;
 	m_attackSoundSource = nullptr;
@@ -142,10 +144,21 @@ void Player::Init(ControlSystem* controlSystem)
 	m_vocalSoundSource->SetLooping(false);
 	m_vocalSoundSource->SetRelative(true);
 
+	m_impactSoundSource = new SoundSource();
+	m_impactSoundSource->SetTarget(this);
+	m_impactSoundSource->SetLooping(false);
+	m_impactSoundSource->SetRelative(true);
+
 	AudioEngine::Instance()->SetListener(this);
 	AudioEngine::Instance()->AddSoundSource(m_attackSoundSource, true);
 	AudioEngine::Instance()->AddSoundSource(m_footStepSoundSource, false);
 	AudioEngine::Instance()->AddSoundSource(m_vocalSoundSource, false);
+	AudioEngine::Instance()->AddSoundSource(m_impactSoundSource, false);
+
+	m_impactSounds = {
+		"playerImpact_001",
+		"playerImpact_002"
+	};
 
 	InitStats();
 	RegisterAnimationEvents();
@@ -400,6 +413,8 @@ void Player::ApplyDamage(GameObject* source, const int& amount)
 
 	auto flash = UIManager::GetView("UI Screen Flash FX");
 	if(flash) flash->TransitionIn(true);
+	
+	PlayImpactSound();
 }
 
 void Player::Knockback(const Vector2& direction, const float& force)
