@@ -45,24 +45,6 @@ void NormalEnemyGlobalState::Execute(Enemy* enemy)
 		enemy->GetStateMachine()->ChangeState(EnemyRunningState::Instance());
 		enemy->ResetStateChangeTimer();
 	}
-
-	//if(currentState == EnemyFallingState::Instance() || currentState == EnemyLandingState::Instance()) return;
-
-	//if(distance <= enemy->GetData().hostileRange)
-	//{
-	//	if(enemy->IsHostile() == false && !enemy->GetStateMachine()->IsInState(*EnemyIdleState::Instance()))
-	//	{
-	//		enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
-	//	}
-
-	//	if(NPCManager::Instance()->GetAttackingEnemy() == nullptr)
-	//		NPCManager::Instance()->SetAttackingEnemy(enemy);
-	//}
-	//else
-	//{
-	//	if(NPCManager::Instance()->GetAttackingEnemy() == enemy)
-	//		NPCManager::Instance()->SetAttackingEnemy(nullptr);
-	//}
 }
 
 void NormalEnemyGlobalState::OnExit(Enemy* enemy)
