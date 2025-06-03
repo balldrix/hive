@@ -6,6 +6,7 @@
 class UIImageView;
 class UITitleScreenView;
 class UIMainMenuView;
+class UIOptionsView;
 
 class UIFrontEndView : UIView
 {
@@ -25,4 +26,5 @@ private:
 	UIImageView* m_background;
 	UITitleScreenView* m_titleScreenView;
 	UIMainMenuView* m_mainMenuView;
+	UIOptionsView* m_optionsView;
 };

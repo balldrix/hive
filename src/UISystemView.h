@@ -2,9 +2,12 @@
 
 #include "UIView.h"
 
+#include <string>
+
 class Graphics;
 class UIFadeOverlayView;
 class UILoadingView;
+class UIOptionsView;
 
 class UISystemView : UIView
 {
@@ -28,4 +31,5 @@ public:
 private:
 	UIFadeOverlayView* m_fadeOverlayView;
 	UILoadingView* m_loadingView;
+	UIOptionsView* m_optionsView;
 };

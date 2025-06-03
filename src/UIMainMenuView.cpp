@@ -4,6 +4,7 @@
 #include "GlobalConstants.h"
 #include "LoadingGameState.h"
 #include "Logger.h"
+#include "MainMenuGameState.h"
 #include "MenuSystem.h"
 #include "UIManager.h"
 #include "UIStackingView.h"
@@ -16,7 +17,7 @@
 #include <directxtk/SimpleMath.h>
 #include <fmt/core.h>
 #include <string>
-#include <WinUser.h>
+#include <Windows.h>
 
 using namespace GlobalConstants;
 
@@ -219,6 +220,7 @@ void UIMainMenuView::StartGame()
 
 void UIMainMenuView::ProceedToOptions()
 {
+	MainMenuGameState::ProceedToOptionsState();
 }
 
 void UIMainMenuView::QuitGame()

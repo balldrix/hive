@@ -1,15 +1,18 @@
 #include "UISystemView.h"
 
+#include "Graphics.h"
 #include "Logger.h"
 #include "UIFadeOverlayView.h"
 #include "UILoadingView.h"
+#include "UIOptionsView.h"
 #include "UIView.h"
 
 #include <string>
 
 UISystemView::UISystemView() :
 	m_fadeOverlayView(nullptr),
-	m_loadingView(nullptr)
+	m_loadingView(nullptr),
+	m_optionsView(nullptr)
 {
 }
 
@@ -32,6 +35,10 @@ void UISystemView::Init(std::string name)
 	m_loadingView->Init("UI Loading View");
 	m_loadingView->TransitionOut(false);
 
+	m_optionsView = new UIOptionsView();
+	m_optionsView->Init("Menu Options");
+	m_optionsView->TransitionOut(false);
+
 	m_isActive = true;
 }
 
@@ -39,7 +46,6 @@ void UISystemView::Render(Graphics* graphics)
 {
 	if(!m_isActive) return;
 
-	//m_loadingView->Render(graphics);
 	m_fadeOverlayView->Render(graphics);
 }
 
@@ -68,6 +74,9 @@ bool UISystemView::IsFading()
 void UISystemView::Shutdown()
 {
 	Logger::LogInfo("Shutting down UI System View.");
+
+	delete m_optionsView;
+	m_optionsView = nullptr;
 
 	delete m_loadingView;
 	m_loadingView = nullptr;
