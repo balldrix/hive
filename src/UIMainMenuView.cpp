@@ -175,7 +175,7 @@ void UIMainMenuView::DoTransition(float deltaTime)
 			uiView->SetColour(colour);
 		}
 		
-		m_transitionTimer -= deltaTime;		
+		m_transitionTimer -= deltaTime;
 		return;
 	}
 

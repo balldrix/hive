@@ -5,6 +5,7 @@
 #include "UIView.h"
 
 #include <string>
+#include <vector>
 
 class UIStackingView : public UIView
 {

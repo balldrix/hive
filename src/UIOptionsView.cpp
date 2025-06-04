@@ -1,7 +1,8 @@
 #include "UIOptionsView.h"
 
-#include <directxtk/SimpleMath.h>
 #include "Graphics.h"
+
+#include <directxtk/SimpleMath.h>
 #include <string>
 
 UIOptionsView::UIOptionsView()
@@ -10,6 +11,7 @@ UIOptionsView::UIOptionsView()
 
 UIOptionsView::~UIOptionsView()
 {
+	Shutdown();
 }
 
 void UIOptionsView::Init(std::string name)
@@ -42,5 +44,17 @@ bool UIOptionsView::IsMenuItemSelectionAllowed(Vector2 direction, int index)
 }
 
 void UIOptionsView::HandleMenuItemSelection(int index)
+{
+}
+
+void UIOptionsView::SetSFXVolume()
+{
+}
+
+void UIOptionsView::SetMusicVolume()
+{
+}
+
+void UIOptionsView::Back()
 {
 }
