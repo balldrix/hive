@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IMenuSystemInteraction.h"
+#include "UIStackingView.h"
 #include "UIView.h"
 
 #include <directxtk/SimpleMath.h>
@@ -19,12 +20,20 @@ public:
 	void Render(Graphics* graphics) override;
 	void Shutdown() override;
 
+	void TransitionIn(bool isAnimated) override;
+	void TransitionOut(bool isAnimated) override;
+
 	void OnConfirmPressed(int selectedIndex) override;
 	void OnCancelPressed() override;
 	bool IsMenuItemSelectionAllowed(Vector2 direction, int index) override;
 	void HandleMenuItemSelection(int index) override;
 
+protected:
+	void DoTransition(float deltaTime) override;
+
 private:
+	static constexpr int MaxOptions = 3;
+
 	enum class OptionType {
 		Normal,
 		Cycle,
@@ -41,4 +50,13 @@ private:
 	void SetSFXVolume();
 	void SetMusicVolume();
 	void Back();
+
+	MenuOption m_menuOptions[MaxOptions] =
+	{
+		{ "SFX Volume", OptionType::Slider },
+		{ "Music Volume", OptionType::Slider },
+		{ "Back", OptionType::Normal }
+	};
+
+	UIStackingView m_uiStackingView;
 };

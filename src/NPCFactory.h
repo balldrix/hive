@@ -5,7 +5,6 @@
 class Camera;
 class Enemy;
 class Graphics;
-class InGameHudManager;
 class Player;
 class Sprite;
 class Spritesheet;

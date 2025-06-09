@@ -1,10 +1,9 @@
 #pragma once
 
-#include "UIView.h"
 #include "GlobalConstants.h"
+#include "UIView.h"
 
 #include <DirectXTK/SimpleMath.h>
-#include <DirectXTK/DirectXHelpers.h>
 
 using namespace GlobalConstants;
 using namespace DirectX;

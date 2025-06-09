@@ -17,7 +17,6 @@ class Sprite;
 class Animator;
 class HitBoxManager;
 class NPCManager;
-class InGameHudManager;
 class GameOverScreenController;
 class SoundSource;
 class LevelRenderer;

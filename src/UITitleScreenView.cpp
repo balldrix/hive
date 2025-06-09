@@ -66,10 +66,6 @@ void UITitleScreenView::Update(float deltaTime)
 	switch (m_currentViewState)
 	{
 	case ViewStates::NotVisible:
-		m_startGameText->SetActive(false);
-		m_logoImage->SetActive(false);
-		m_isActive = false;
-		m_isAnimating = false;
 		break;
 	case ViewStates::AnimatingIn:
 		m_currentViewState = ViewStates::Visible;
@@ -103,6 +99,10 @@ void UITitleScreenView::DoTransition(float deltaTime)
 	}
 
 	m_currentViewState = ViewStates::NotVisible;
+	m_startGameText->SetActive(false);
+	m_logoImage->SetActive(false);
+	m_isActive = false;
+	m_isAnimating = false;
 }
 
 void UITitleScreenView::TransitionIn(bool isAnimating)

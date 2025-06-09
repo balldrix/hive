@@ -5,11 +5,17 @@
 #include "Logger.h"
 #include "UIManager.h"
 
+#include <string>
+
+GameStateManager* GameStateManager::s_instance = nullptr;
+
 GameStateManager::GameStateManager() :
+	m_previousState(nullptr),
 	m_currentState(nullptr),
 	m_graphics(nullptr),
 	m_input(nullptr)
 {
+	s_instance = this;
 }
 
 GameStateManager::~GameStateManager()
@@ -22,6 +28,18 @@ GameStateManager::~GameStateManager()
 		}
 		m_stateList.clear();
 	}
+
+	s_instance = nullptr;
+}
+
+GameStateManager* GameStateManager::Instance()
+{
+	if(s_instance == nullptr)
+	{
+		Logger::LogError("No instance of GameStateManager exists");
+	}
+
+	return s_instance;
 }
 
 void GameStateManager::Init(Graphics* graphics, Input* input)
@@ -46,6 +64,7 @@ void GameStateManager::SwitchState(std::string stateName)
 
 	if(m_currentState != nullptr)
 	{
+		m_previousState = m_currentState;
 		m_currentState->OnExit();
 		m_currentState = nullptr;
 	}
@@ -65,6 +84,11 @@ void GameStateManager::SwitchState(std::string stateName)
 	Logger::LogError(error);
 	MessageBox(m_graphics->GetHwnd(), L"Error loading GameState. See Logs/Log.txt", L"Error!", MB_OK);
 	PostQuitMessage(0);
+}
+
+void GameStateManager::ProceedToPreviousState()
+{
+	SwitchState(m_previousState->GetStateName());
 }
 
 GameState* GameStateManager::GetState(std::string stateName) const

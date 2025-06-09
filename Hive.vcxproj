@@ -26,7 +26,7 @@
     <ClCompile Include="src\EnemyLandingState.cpp" />
     <ClCompile Include="src\EnemySpawner.cpp" />
     <ClCompile Include="src\LevelCollision.cpp" />
-    <ClCompile Include="src\OptionsGameState.cpp" />
+    <ClCompile Include="src\FrontEndOptionsGameState.cpp" />
     <ClCompile Include="src\PlayerBuildSpecialState.cpp" />
     <ClCompile Include="src\ScreenShake.cpp" />
     <ClCompile Include="src\TilemapLoader.cpp" />
@@ -71,7 +71,7 @@
     <ClCompile Include="src\UIKillCount.cpp" />
     <ClCompile Include="src\Utils.h" />
     <ClCompile Include="src\UISprite.cpp" />
-    <ClInclude Include="src\OptionsGameState.h" />
+    <ClInclude Include="src\FrontEndOptionsGameState.h" />
     <ClInclude Include="src\EventManager.h" />
     <ClInclude Include="src\AnimationEventData.h" />
     <ClInclude Include="src\DamageData.h" />

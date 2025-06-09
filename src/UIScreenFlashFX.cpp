@@ -6,16 +6,16 @@
 #include "UIManager.h"
 #include "UIView.h"
 
+#include <cmath>
 #include <DirectXColors.h>
 #include <directxtk/SimpleMath.h>
 #include <string>
-#include <windef.h>
-#include <cmath>
 
 using namespace GlobalConstants;
 
 UIScreenFlashFX::UIScreenFlashFX() :
-	m_fullscreenImage(nullptr)
+	m_fullscreenImage(nullptr),
+	m_timer(0.0f)
 {
 }
 
@@ -56,7 +56,11 @@ void UIScreenFlashFX::Update(float deltaTime)
 	m_fullscreenImage->SetAlpha(alpha);
 	m_timer -= deltaTime;
 
-	if(t <= 0.0f) m_isActive = false;
+	if(t <= 0.0f)
+	{
+		m_isActive = false;
+		m_currentViewState = UIView::ViewStates::NotVisible;
+	}
 }
 
 void UIScreenFlashFX::Render(Graphics* graphics)
@@ -76,6 +80,7 @@ void UIScreenFlashFX::Shutdown()
 
 void UIScreenFlashFX::TransitionIn(bool isAnimating)
 {
+	m_currentViewState = UIView::ViewStates::Visible;
 	m_isActive = true;
 	m_fullscreenImage->SetAlpha(1.0);
 	m_timer = FlashDuration;

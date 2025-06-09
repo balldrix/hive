@@ -5,8 +5,6 @@
 #include "MenuSystem.h"
 #include "UIManager.h"
 
-MainMenuGameState* MainMenuGameState::s_instance = nullptr;
-
 MainMenuGameState::MainMenuGameState() :
 	GameState("MainMenu")
 {
@@ -14,13 +12,11 @@ MainMenuGameState::MainMenuGameState() :
 
 MainMenuGameState::MainMenuGameState(GameStateManager* gameStateManager) : MainMenuGameState()
 {
-	s_instance = this;
 	m_gameStateManager = gameStateManager;
 }
 
 MainMenuGameState::~MainMenuGameState()
 {
-	s_instance = nullptr;
 }
 
 void MainMenuGameState::Update(float deltaTime)
@@ -32,9 +28,4 @@ void MainMenuGameState::Update(float deltaTime)
 void MainMenuGameState::Render()
 {
 	UIManager::Render(m_gameStateManager->GetGraphics());
-}
-
-void MainMenuGameState::ProceedToOptionsState()
-{
-	s_instance->m_gameStateManager->SwitchState("OptionsState");
 }

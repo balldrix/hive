@@ -307,7 +307,9 @@
     <ClCompile Include="src\UIOptionsView.cpp">
       <Filter>UI\Shared\Options</Filter>
     </ClCompile>
-    <ClCompile Include="src\OptionsGameState.cpp" />
+    <ClCompile Include="src\FrontEndOptionsGameState.cpp">
+      <Filter>Game\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -798,7 +800,7 @@
     <ClInclude Include="src\UIOptionsView.h">
       <Filter>UI\Shared\Options</Filter>
     </ClInclude>
-    <ClInclude Include="src\OptionsGameState.h">
+    <ClInclude Include="src\FrontEndOptionsGameState.h">
       <Filter>Game\States</Filter>
     </ClInclude>
   </ItemGroup>

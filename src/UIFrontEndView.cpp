@@ -6,7 +6,6 @@
 #include "UIImageView.h"
 #include "UIMainMenuView.h"
 #include "UIManager.h"
-#include "UIOptionsView.h"
 #include "UITitleScreenView.h"
 #include "UIView.h"
 
@@ -17,8 +16,7 @@
 UIFrontEndView::UIFrontEndView() :
 	m_background(nullptr),
 	m_titleScreenView(nullptr),
-	m_mainMenuView(nullptr),
-	m_optionsView(nullptr)
+	m_mainMenuView(nullptr)
 {
 }
 
@@ -56,6 +54,7 @@ void UIFrontEndView::Init(std::string name)
 
 	AssignState("TitleScreen");
 	AssignState("MainMenu");
+	AssignState("FrontEndOptions");
 
 	m_isActive = false;
 }

@@ -6,8 +6,6 @@
 
 #include <string>
 
-const int MaxOptions = 3;
-
 class UIMainMenuView : public UIView, IMenuSystemInteraction
 {
 public:
@@ -20,7 +18,7 @@ public:
 	void Shutdown() override;
 
 	void TransitionIn(bool isAnimated) override;
-	void TransitionOut(bool isAnimated) override;	
+	void TransitionOut(bool isAnimated) override;
 
 	void OnConfirmPressed(int selectedIndex) override;
 	void OnCancelPressed() override;
@@ -31,6 +29,8 @@ protected:
 	void DoTransition(float deltaTime) override;
 
 private:
+	static constexpr int MaxOptions = 3;
+
 	struct MenuOption
 	{
 		std::string name;
@@ -49,6 +49,4 @@ private:
 	};
 
 	UIStackingView m_uiStackingView;
-	float m_startingAlpha;
-	float m_targetAlpha;
 };

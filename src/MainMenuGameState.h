@@ -13,9 +13,4 @@ public:
 
 	void Update(float deltaTime) override;
 	void Render() override;
-
-	static void ProceedToOptionsState();
-private:
-	static MainMenuGameState* s_instance;
 };
-

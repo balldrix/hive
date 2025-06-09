@@ -4,6 +4,7 @@
 
 #include "AudioEngine.h"
 #include "FadeTransitionGameState.h"
+#include "FrontEndOptionsGameState.h"
 #include "GameplayGameState.h"
 #include "GameStateManager.h"
 #include "GlobalConstants.h"
@@ -13,7 +14,6 @@
 #include "LoadingGameState.h"
 #include "Logger.h"
 #include "MainMenuGameState.h"
-#include "OptionsGameState.h"
 #include "Timer.h"
 #include "TitleScreenGameState.h"
 #include "Window.h"
@@ -64,7 +64,7 @@ void Game::Init(Window* window, Graphics* graphics)
 	m_gameStateManager->AddState(new FadeTransitionGameState(m_gameStateManager));
 	m_gameStateManager->AddState(new TitleScreenGameState(m_gameStateManager));
 	m_gameStateManager->AddState(new MainMenuGameState(m_gameStateManager));
-	m_gameStateManager->AddState(new OptionsGameState(m_gameStateManager));
+	m_gameStateManager->AddState(new FrontEndOptionsGameState(m_gameStateManager));
 	m_gameStateManager->AddState(new GameplayGameState(m_gameStateManager));
 	m_gameStateManager->SwitchState("InitialLoad");
 

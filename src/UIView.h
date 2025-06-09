@@ -10,6 +10,9 @@ using namespace SimpleMath;
 
 class Graphics;
 
+static const float TransitionInDuration = 0.6f;
+static const float TransitionOutDuration = 0.8f;
+
 class UIView
 {
 public:
@@ -60,4 +63,6 @@ protected:
 	float m_transitionTimer;
 	ViewStates m_currentViewState;
 	bool m_isForcedHidden;
+	float m_startingAlpha;
+	float m_targetAlpha;
 };

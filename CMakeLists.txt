@@ -27,7 +27,7 @@ add_executable(${PROJECT_NAME} src/main.cpp src/AABB.cpp src/Animator.cpp src/Au
 								src/Player.cpp src/PlayerAttackState.cpp src/PlayerBlockState.cpp src/PlayerDeadState.cpp src/PlayerGlobalState.cpp 
 								src/PlayerHurtState.cpp src/PlayerIdleState.cpp src/PlayerKnockbackState.cpp src/PlayerRunningState.cpp 
 								src/PlayerSprintingState.cpp src/Randomiser.cpp src/RunningEnemy.cpp src/RunningEnemyDeadState.cpp src/Sound.cpp 
-								src/SoundSource.cpp src/Sprite.cpp src/Spritesheet.cpp src/Texture.cpp src/Timer.cpp src/OptionsGameState.h src/OptionsGameState.cpp
+								src/SoundSource.cpp src/Sprite.cpp src/Spritesheet.cpp src/Texture.cpp src/Timer.cpp src/FrontEndOptionsGameState.h src/FrontEndOptionsGameState.cpp
 								src/Window.cpp src/AABB.h src/AnimationStateData.h src/Animator.h src/AnimationEventData.h
 								src/AnimatedSpriteData.h src/AudioConstants.h src/AudioEngine.h src/UIBarView.h src/Camera.h 
 								src/Collider.h src/ControlSystem.h src/DamageData.h src/Enemy.h src/EventManager src/EventManager.cpp

@@ -10,7 +10,6 @@ using namespace DirectX::SimpleMath;
 class Camera;
 class Enemy;
 class Graphics;
-class InGameHudManager;
 class NPCFactory;
 class Player;
 

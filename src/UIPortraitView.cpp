@@ -37,6 +37,8 @@ void UIPortraitView::Init(std::string name)
 	m_characterImage->SetOrigin(Vector2::Zero);
 	m_characterImage->SetDepth(0.0f);
 	m_characterImage->SetActive(true);
+
+	m_currentViewState = UIView::ViewStates::Visible;
 }
 
 void UIPortraitView::Render(Graphics* graphics)

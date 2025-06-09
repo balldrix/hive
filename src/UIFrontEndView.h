@@ -26,5 +26,4 @@ private:
 	UIImageView* m_background;
 	UITitleScreenView* m_titleScreenView;
 	UIMainMenuView* m_mainMenuView;
-	UIOptionsView* m_optionsView;
 };

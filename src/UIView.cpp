@@ -6,7 +6,9 @@ UIView::UIView() :
 	m_transitionTimer(0.0f),
 	m_isActive(false),
 	m_currentViewState(ViewStates::NotVisible),
-	m_isForcedHidden(false)
+	m_isForcedHidden(false),
+	m_startingAlpha(0.0f),
+	m_targetAlpha(0.0f)
 {
 }
 

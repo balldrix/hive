@@ -13,27 +13,32 @@ public:
 	GameStateManager();
 	~GameStateManager();
 
-	void							Init(Graphics* graphics, Input* input);		
+	static GameStateManager* Instance();
 
-	void							AddState(GameState* state);					
-	void							SwitchState(std::string stateName);		
-	
-	GameState*						GetState(std::string stateName) const;
-	GameState*						GetCurrentState() const;					
-	std::string						GetCurrentStateName() const;				
+	void Init(Graphics* graphics, Input* input);
 
-	void							ProcessInput();								
-	void							Update(float deltaTime);					
-	void							ProcessCollisions();						
-	void							Render();									
+	void AddState(GameState* state);
+	void SwitchState(std::string stateName);
+	void ProceedToPreviousState();
 
-	Graphics*						GetGraphics() const { return m_graphics; }	
-	Input*							GetInput() const { return m_input; }	
+	GameState* GetState(std::string stateName) const;
+	GameState* GetCurrentState() const;
+	std::string GetCurrentStateName() const;
+
+	void ProcessInput();
+	void Update(float deltaTime);
+	void ProcessCollisions();
+	void Render();
+
+	Graphics* GetGraphics() const { return m_graphics; }
+	Input* GetInput() const { return m_input; }
 
 private:
-	GameState*						m_currentState;								
-	std::vector<GameState*>			m_stateList;								
+	static GameStateManager* s_instance;
+	GameState* m_previousState;
+	GameState* m_currentState;
+	std::vector<GameState*> m_stateList;
 
-	Graphics*						m_graphics;									
-	Input*							m_input;									
+	Graphics* m_graphics;
+	Input* m_input;
 };

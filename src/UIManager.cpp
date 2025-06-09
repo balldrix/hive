@@ -68,6 +68,7 @@ void UIManager::UpdateUIViews(float deltaTime)
 {
 	for(auto it = s_instance->m_viewList.begin(); it != s_instance->m_viewList.end(); ++it)
 	{
+		if((*it)->GetCurrentUIViewState() != s_instance->m_currentViewState) continue;
 		(*it)->Update(deltaTime);
 	}
 }
@@ -77,6 +78,11 @@ void UIManager::SwitchState()
 	if(s_instance->AnyViewsInState(s_instance->m_currentViewState)) return;
 
 	m_currentViewState = m_targetViewState;
+
+	if(m_currentViewState == UIView::ViewStates::AnimatingIn)
+	{
+		m_targetViewState = UIView::ViewStates::Visible;
+	}
 }
 
 void UIManager::Render(Graphics* graphics)

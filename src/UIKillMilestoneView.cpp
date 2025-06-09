@@ -56,6 +56,7 @@ void UIKillMilestoneView::Render(Graphics* graphics)
 
 void UIKillMilestoneView::TransitionIn(bool isAnimating)
 {
+	m_currentViewState = UIView::ViewStates::Visible;
 	m_timer = 2.0f;
 	m_isActive = true;
 }

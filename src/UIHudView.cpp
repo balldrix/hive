@@ -45,11 +45,8 @@ void UIHudView::Init(std::string name)
 	m_killMilestoneView->Init("Kill Milestone");
 	m_killMilestoneView->TransitionOut(false);;
 
-	m_assignedStates.push_back("Gameplay");
-
-	UIManager::RegisterUIView(this);
-
 	m_isActive = true;
+	m_currentViewState = UIView::ViewStates::Visible;
 }
 
 void UIHudView::ForceHide(bool isForced)

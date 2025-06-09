@@ -31,6 +31,7 @@ void UIMainView::Init(std::string name)
 
 	m_screenFlashFX = new UIScreenFlashFX();
 	m_screenFlashFX->Init("UI Screen Flash FX");
+	m_screenFlashFX->TransitionOut(false);
 }
 
 void UIMainView::Render(Graphics* graphics)

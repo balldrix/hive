@@ -3,6 +3,7 @@
 #include "AssetLoader.h"
 #include "GameState.h"
 #include "GameStateManager.h"
+#include "MenuSystem.h"
 #include "UIConfig.h"
 #include "UIManager.h"
 

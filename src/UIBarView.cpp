@@ -41,6 +41,8 @@ void UIBarView::Init(std::string name)
 
 	m_frameImage = new UIImageView();
 	m_frameImage->Init(fmt::format("{} Frame", name));
+
+	m_currentViewState = UIView::ViewStates::Visible;
 }
 
 void UIBarView::Update(float deltaTime)

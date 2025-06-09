@@ -1,17 +1,17 @@
 #include "UIMainMenuView.h"
 
 #include "Frame.h"
+#include "GameStateManager.h"
 #include "GlobalConstants.h"
 #include "LoadingGameState.h"
 #include "Logger.h"
-#include "MainMenuGameState.h"
 #include "MenuSystem.h"
 #include "UIManager.h"
+#include "UIMenuItemView.h"
 #include "UIStackingView.h"
 #include "UITextMenuItemView.h"
-
-#include "UIMenuItemView.h"
 #include "UIView.h"
+
 #include <cmath>
 #include <DirectXColors.h>
 #include <directxtk/SimpleMath.h>
@@ -21,12 +21,7 @@
 
 using namespace GlobalConstants;
 
-static const float TransitionInDuration = 0.6f;
-static const float TransitionOutDuration = 0.8f;
-
-UIMainMenuView::UIMainMenuView() :
-	m_startingAlpha(0.0f),
-	m_targetAlpha(0.0f)
+UIMainMenuView::UIMainMenuView()
 {
 }
 
@@ -53,7 +48,7 @@ void UIMainMenuView::Init(std::string name)
 
 	auto options = m_uiStackingView.GetMenuItems();
 
-	for (int i = 0; i < options.size(); i++)
+	for(int i = 0; i < options.size(); i++)
 	{
 		int up = i == 0 ? -1 : i - 1;
 		int down = i + 1;
@@ -80,7 +75,6 @@ void UIMainMenuView::Init(std::string name)
 
 	m_uiStackingView.UpdateLayout(frame);
 
-	MenuSystem::SetMenuItems(this, m_uiStackingView.GetMenuItems());
 	UIManager::RegisterUIView(this);
 }
 
@@ -125,10 +119,13 @@ void UIMainMenuView::Shutdown()
 
 void UIMainMenuView::TransitionIn(bool isAnimated)
 {
+	MenuSystem::DisableInput();
+
 	if(m_currentViewState == ViewStates::AnimatingIn || 
 		m_currentViewState == ViewStates::Visible) return;
 
 	m_isActive = true;
+	m_isAnimating = true;
 	m_uiStackingView.SetActive(true);
 	m_currentViewState = ViewStates::AnimatingIn;
 	m_transitionTimer = TransitionInDuration;
@@ -138,9 +135,12 @@ void UIMainMenuView::TransitionIn(bool isAnimated)
 
 void UIMainMenuView::TransitionOut(bool isAnimated)
 {
+	MenuSystem::DisableInput();
+
 	if(m_currentViewState == ViewStates::AnimatingOut || 
 		m_currentViewState == ViewStates::NotVisible) return;
 
+	m_isAnimating = true;
 	m_currentViewState = ViewStates::AnimatingOut;
 	m_transitionTimer = TransitionOutDuration;
 	m_startingAlpha = 1.0f;
@@ -185,6 +185,7 @@ void UIMainMenuView::DoTransition(float deltaTime)
 		break;
 	case UIView::ViewStates::AnimatingIn:
 		m_currentViewState = ViewStates::Visible;
+		MenuSystem::SetMenuItems(this, m_uiStackingView.GetMenuItems());
 		MenuSystem::EnableInput();
 		break;
 	case UIView::ViewStates::Visible:
@@ -220,7 +221,7 @@ void UIMainMenuView::StartGame()
 
 void UIMainMenuView::ProceedToOptions()
 {
-	MainMenuGameState::ProceedToOptionsState();
+	GameStateManager::Instance()->SwitchState("FrontEndOptions");
 }
 
 void UIMainMenuView::QuitGame()

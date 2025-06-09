@@ -48,6 +48,8 @@ void UIKillCount::Init(std::string name)
 	m_countText->SetPosition(Vector2(countPos, 125.0f));
 	m_countText->SetAlignment(UISpriteText::Alignments::Right);
 	m_countText->SetActive(true);
+
+	m_currentViewState = UIView::ViewStates::Visible;
 }
 
 void UIKillCount::Update(float deltaTime)
