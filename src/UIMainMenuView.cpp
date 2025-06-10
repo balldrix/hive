@@ -43,6 +43,7 @@ void UIMainMenuView::Init(std::string name)
 		item->Init(name);
 		item->SetText(name);
 		item->SetSelectedStateColours(Colors::White.v, Colors::SlateGray.v, Colors::Black.v);
+		item->ChangeSelectionState(UIMenuItemView::SelectionStates::UnSelected);
 		m_uiStackingView.AddView(item);
 	}
 
@@ -135,6 +136,22 @@ void UIMainMenuView::TransitionIn(bool isAnimated)
 
 void UIMainMenuView::TransitionOut(bool isAnimated)
 {
+	if(!isAnimated)
+	{
+		m_isActive = false;
+		m_isAnimating = false;
+		m_uiStackingView.SetActive(false);
+
+		for(UIView* uiView : m_uiStackingView.GetMenuItems())
+		{
+			Color colour = uiView->GetColour();
+			colour.A(0.0f);
+			uiView->SetColour(colour);
+		}
+
+		return;
+	}
+
 	MenuSystem::DisableInput();
 
 	if(m_currentViewState == ViewStates::AnimatingOut || 

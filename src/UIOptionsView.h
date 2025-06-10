@@ -55,7 +55,7 @@ private:
 	{
 		{ "SFX Volume", OptionType::Slider },
 		{ "Music Volume", OptionType::Slider },
-		{ "Back", OptionType::Normal }
+		{ "Back", OptionType::Normal, &UIOptionsView::Back }
 	};
 
 	UIStackingView m_uiStackingView;

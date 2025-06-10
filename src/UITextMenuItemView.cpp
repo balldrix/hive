@@ -35,11 +35,6 @@ void UITextMenuItemView::Render(Graphics* graphics)
 {
 	if(!m_isActive) return;
 
-	auto it = m_selectionStateColours.find(m_selectionState);
-	{
-		m_uiSpriteText->SetColour(m_selectionStateColours[m_selectionState]);
-	}
-
 	m_uiSpriteText->Render(graphics);
 }
 
@@ -58,6 +53,11 @@ void UITextMenuItemView::ChangeSelectionState(SelectionStates selectionState)
 
 void UITextMenuItemView::HandleSelectionStateChanged(SelectionStates previousSelectionState, SelectionStates newSelectionState)
 {
+	auto it = m_selectionStateColours.find(newSelectionState);
+	if(it != m_selectionStateColours.end())
+	{
+		m_uiSpriteText->SetColour(it->second);
+	}
 }
 
 void UITextMenuItemView::SetActive(bool isActive)

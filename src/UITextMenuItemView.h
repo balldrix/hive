@@ -27,7 +27,7 @@ public:
 
 	int GetHeight() const override { return m_uiSpriteText->GetHeight(); }
 	int GetWidth() const override { return m_uiSpriteText->GetWidth(); }
-	Color GetColour() const { return m_uiSpriteText->GetColour(); }
+	Color GetColour() override { return m_uiSpriteText->GetColour(); }
 
 	void SetText(std::string text);
 	void SetSelectedStateColours(Color selected, Color unselected, Color disabled);
