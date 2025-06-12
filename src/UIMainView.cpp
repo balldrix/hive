@@ -2,7 +2,6 @@
 
 #include "Logger.h"
 #include "UIHudView.h"
-#include "UIManager.h"
 #include "UIScreenFlashFX.h"
 #include "UIView.h"
 

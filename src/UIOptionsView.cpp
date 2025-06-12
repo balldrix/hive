@@ -1,5 +1,6 @@
 #include "UIOptionsView.h"
 
+#include "Frame.h"
 #include "GameStateManager.h"
 #include "GlobalConstants.h"
 #include "Graphics.h"
@@ -14,6 +15,7 @@
 #include <cmath>
 #include <DirectXColors.h>
 #include <directxtk/SimpleMath.h>
+#include <fmt/core.h>
 #include <string>
 
 using namespace GlobalConstants;
@@ -138,6 +140,11 @@ void UIOptionsView::TransitionIn(bool isAnimated)
 
 void UIOptionsView::TransitionOut(bool isAnimated)
 {
+	for(UIMenuItemView* item : m_uiStackingView.GetMenuItems())
+	{
+		item->ChangeSelectionState(UIMenuItemView::SelectionStates::UnSelected);
+	}
+
 	if(!isAnimated)
 	{
 		m_isActive = false;
@@ -168,6 +175,15 @@ void UIOptionsView::TransitionOut(bool isAnimated)
 
 void UIOptionsView::OnConfirmPressed(int selectedIndex)
 {
+	if(selectedIndex >= 0 && selectedIndex < MaxOptions)
+	{
+		Logger::LogInfo(fmt::format("Calling OnConfirmPressed on {} functon", m_menuOptions[selectedIndex].name));
+
+		(this->*m_menuOptions[selectedIndex].function)();
+		return;
+	}
+
+	Logger::LogError(fmt::format("Calling OnConfirmPressed has no menu entry with index {}", selectedIndex));
 }
 
 void UIOptionsView::OnCancelPressed()

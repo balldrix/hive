@@ -136,6 +136,11 @@ void UIMainMenuView::TransitionIn(bool isAnimated)
 
 void UIMainMenuView::TransitionOut(bool isAnimated)
 {
+	for(UIMenuItemView* item : m_uiStackingView.GetMenuItems())
+	{
+		item->ChangeSelectionState(UIMenuItemView::SelectionStates::UnSelected);
+	}
+
 	if(!isAnimated)
 	{
 		m_isActive = false;
