@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Frame.h"
+#include "Graphics.h"
 #include "UIMenuItemView.h"
 #include "UIView.h"
 

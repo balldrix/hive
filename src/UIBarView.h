@@ -31,6 +31,7 @@ public:
 	void SetMaxValue(const int& value);
 	void SetPosition(const Vector2& position);
 	void SetWidth(const unsigned int& value);
+	void SetHeight(const unsigned int& value);
 	void SetBackgroundColour(Color colour);
 
 private:
@@ -38,6 +39,7 @@ private:
 	int m_targetValue;
 	int	m_maxValue;
 	unsigned int m_width;
+	unsigned int m_height;
 	bool m_isUpdating;
 	float m_updateTimer;
 

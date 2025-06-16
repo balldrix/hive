@@ -16,6 +16,7 @@ UIBarView::UIBarView() :
 	m_targetValue(0),
 	m_maxValue(0),
 	m_width(0U),
+	m_height(0U),
 	m_backgroundImage(nullptr),
 	m_fillImage(nullptr),
 	m_frameImage(nullptr),
@@ -43,6 +44,8 @@ void UIBarView::Init(std::string name)
 	m_frameImage->Init(fmt::format("{} Frame", name));
 
 	m_currentViewState = UIView::ViewStates::Visible;
+
+	m_height = m_fillImage->GetHeight();
 }
 
 void UIBarView::Update(float deltaTime)
@@ -52,7 +55,7 @@ void UIBarView::Update(float deltaTime)
 	RECT rect{};
 	rect.left = 0;
 	rect.top = 0;
-	rect.bottom = m_fillImage->GetHeight();
+	rect.bottom = m_height;
 	rect.right = static_cast<LONG>((m_width / static_cast<float>(m_maxValue)) * std::round(m_currentValue));
 
 	m_fillImage->GetSprite()->SetSourceRect(rect);
@@ -147,6 +150,11 @@ void UIBarView::SetPosition(const Vector2& position)
 void UIBarView::SetWidth(const unsigned int& value)
 {
 	m_width = value;
+}
+
+void UIBarView::SetHeight(const unsigned int& value)
+{
+	m_height = value;
 }
 
 void UIBarView::SetBackgroundColour(Color colour)

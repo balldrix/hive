@@ -310,6 +310,9 @@
     <ClCompile Include="src\FrontEndOptionsGameState.cpp">
       <Filter>Game\States</Filter>
     </ClCompile>
+    <ClCompile Include="src\UISliderMenuItemView.cpp">
+      <Filter>UI\Shared</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -802,6 +805,9 @@
     </ClInclude>
     <ClInclude Include="src\FrontEndOptionsGameState.h">
       <Filter>Game\States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UISliderMenuItemView.h">
+      <Filter>UI\Shared</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

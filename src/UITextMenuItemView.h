@@ -1,8 +1,8 @@
 #pragma once
 
+#include "Graphics.h"
 #include "UIMenuItemView.h"
 #include "UISpriteText.h"
-#include "UIView.h"
 
 #include <directxtk/SimpleMath.h>
 #include <map>

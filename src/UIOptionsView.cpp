@@ -8,6 +8,7 @@
 #include "MenuSystem.h"
 #include "UIManager.h"
 #include "UIMenuItemView.h"
+#include "UISliderMenuItemView.h"
 #include "UIStackingView.h"
 #include "UITextMenuItemView.h"
 #include "UIView.h"
@@ -40,12 +41,30 @@ void UIOptionsView::Init(std::string name)
 	for(const auto& option : m_menuOptions)
 	{
 		std::string name = option.name;
-		UITextMenuItemView* item = new UITextMenuItemView();
-		item->Init(name);
-		item->SetText(name);
-		item->SetSelectedStateColours(Colors::White.v, Colors::SlateGray.v, Colors::Black.v);
-		item->ChangeSelectionState(UIMenuItemView::SelectionStates::UnSelected);
-		m_uiStackingView.AddView(item);
+		UITextMenuItemView* item = nullptr;
+
+		switch(option.type)
+		{
+		case UIOptionsView::OptionType::Slider:
+		{
+			auto* sliderItem = new UISliderMenuItemView();
+			sliderItem->Init(name, 0.0f, 1.0f, 0.5f, Colors::White.v); // @TODO get default value from saved state
+			item = sliderItem;
+		}
+		break;
+		default:
+			item = new UITextMenuItemView();
+			item->Init(name);
+			break;
+		}
+
+		if(item)
+		{
+			item->SetText(name);
+			item->SetSelectedStateColours(Colors::White.v, Colors::SlateGray.v, Colors::Black.v);
+			item->ChangeSelectionState(UIMenuItemView::SelectionStates::UnSelected);
+			m_uiStackingView.AddView(item);
+		}
 	}
 
 	auto options = m_uiStackingView.GetMenuItems();
@@ -177,9 +196,12 @@ void UIOptionsView::OnConfirmPressed(int selectedIndex)
 {
 	if(selectedIndex >= 0 && selectedIndex < MaxOptions)
 	{
-		Logger::LogInfo(fmt::format("Calling OnConfirmPressed on {} functon", m_menuOptions[selectedIndex].name));
+		const auto& selectedOption = m_menuOptions[selectedIndex];
+		if(selectedOption.function == nullptr) return;
 
-		(this->*m_menuOptions[selectedIndex].function)();
+		Logger::LogInfo(fmt::format("Calling OnConfirmPressed on {} functon", selectedOption.name));
+
+		(this->*selectedOption.function)();
 		return;
 	}
 
