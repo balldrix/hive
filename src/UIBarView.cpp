@@ -13,8 +13,8 @@
 
 UIBarView::UIBarView() :
 	m_currentValue(0.0f),
-	m_targetValue(0),
-	m_maxValue(0),
+	m_targetValue(0.0f),
+	m_maxValue(0.0f),
 	m_width(0U),
 	m_height(0U),
 	m_backgroundImage(nullptr),
@@ -56,7 +56,7 @@ void UIBarView::Update(float deltaTime)
 	rect.left = 0;
 	rect.top = 0;
 	rect.bottom = m_height;
-	rect.right = static_cast<LONG>((m_width / static_cast<float>(m_maxValue)) * std::round(m_currentValue));
+	rect.right = static_cast<LONG>((m_width / m_maxValue) * m_currentValue);
 
 	m_fillImage->GetSprite()->SetSourceRect(rect);
 
@@ -126,7 +126,7 @@ void UIBarView::SetFrameTexture(Texture* texture)
 	m_frameImage->SetActive(true);
 }
 
-void UIBarView::SetCurrentValue(const int& value, bool animate)
+void UIBarView::SetCurrentValue(const float& value, bool animate)
 {
 	m_targetValue = value;
 
@@ -135,7 +135,7 @@ void UIBarView::SetCurrentValue(const int& value, bool animate)
 	m_currentValue = static_cast<float>(value);
 }
 
-void UIBarView::SetMaxValue(const int& value)
+void UIBarView::SetMaxValue(const float& value)
 {
 	m_maxValue = value;
 }
@@ -160,4 +160,11 @@ void UIBarView::SetHeight(const unsigned int& value)
 void UIBarView::SetBackgroundColour(Color colour)
 {
 	m_backgroundImage->SetColour(colour);
+}
+
+void UIBarView::SetDepth(const float& value)
+{
+	m_backgroundImage->SetDepth(value);
+	m_fillImage->SetDepth(value + 0.1f);
+	m_frameImage->SetDepth(value + 0.2f);
 }

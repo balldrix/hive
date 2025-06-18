@@ -48,7 +48,7 @@ void UIOptionsView::Init(std::string name)
 		case UIOptionsView::OptionType::Slider:
 		{
 			auto* sliderItem = new UISliderMenuItemView();
-			sliderItem->Init(name, 0.0f, 1.0f, 0.5f, Colors::White.v); // @TODO get default value from saved state
+			sliderItem->Init(name, 1.0f, 0.5f, Colors::White.v); // @TODO get default value from saved state
 			item = sliderItem;
 		}
 		break;
@@ -105,6 +105,11 @@ void UIOptionsView::Init(std::string name)
 void UIOptionsView::Update(float deltaTime)
 {
 	if(!m_isActive) return;
+
+	for(UIMenuItemView* item : m_uiStackingView.GetMenuItems())
+	{
+		item->Update(deltaTime);
+	}
 
 	switch(m_currentViewState)
 	{

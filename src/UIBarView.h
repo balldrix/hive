@@ -27,17 +27,18 @@ public:
 	void SetFillTexture(Texture* texture);
 	void SetFrameTexture(Texture* texture);
 
-	void SetCurrentValue(const int& value, bool animate = false);
-	void SetMaxValue(const int& value);
+	void SetCurrentValue(const float& value, bool animate = false);
+	void SetMaxValue(const float& value);
 	void SetPosition(const Vector2& position);
 	void SetWidth(const unsigned int& value);
 	void SetHeight(const unsigned int& value);
 	void SetBackgroundColour(Color colour);
+	void SetDepth(const float& value);
 
 private:
 	float m_currentValue;
-	int m_targetValue;
-	int	m_maxValue;
+	float m_targetValue;
+	float	m_maxValue;
 	unsigned int m_width;
 	unsigned int m_height;
 	bool m_isUpdating;

@@ -3,6 +3,7 @@
 #include "Frame.h"
 #include "GameStateManager.h"
 #include "GlobalConstants.h"
+#include "Graphics.h"
 #include "LoadingGameState.h"
 #include "Logger.h"
 #include "MenuSystem.h"
@@ -122,7 +123,7 @@ void UIMainMenuView::TransitionIn(bool isAnimated)
 {
 	MenuSystem::DisableInput();
 
-	if(m_currentViewState == ViewStates::AnimatingIn || 
+	if(m_currentViewState == ViewStates::AnimatingIn ||
 		m_currentViewState == ViewStates::Visible) return;
 
 	m_isActive = true;

@@ -504,8 +504,8 @@ void Player::InitStats()
 
 	if(healthbar)
 	{
-		healthbar->SetMaxValue(m_playerDefinition.hp);
-		healthbar->SetCurrentValue(m_health);
+		healthbar->SetMaxValue((float)m_playerDefinition.hp);
+		healthbar->SetCurrentValue((float)m_health);
 	}
 
 	UIBarView* specialbar = static_cast<UIBarView*>(UIManager::GetView("Player Special Bar"));
@@ -513,7 +513,7 @@ void Player::InitStats()
 	if(specialbar)
 	{
 		specialbar->SetMaxValue(MaxSpecial);
-		specialbar->SetCurrentValue((int)m_special);
+		specialbar->SetCurrentValue(m_special);
 	}
 }
 
@@ -523,8 +523,8 @@ void Player::UpdateStats()
 
 	if(healthbar)
 	{
-		healthbar->SetMaxValue(m_playerDefinition.hp);
-		healthbar->SetCurrentValue(m_health, true);
+		healthbar->SetMaxValue((float)m_playerDefinition.hp);
+		healthbar->SetCurrentValue((float)m_health, true);
 	}
 
 	UIBarView* specialbar = static_cast<UIBarView*>(UIManager::GetView("Player Special Bar"));
@@ -532,7 +532,7 @@ void Player::UpdateStats()
 	if(specialbar)
 	{
 		specialbar->SetMaxValue(MaxSpecial);
-		specialbar->SetCurrentValue((int)m_special, true);
+		specialbar->SetCurrentValue(m_special, true);
 	}
 }
 

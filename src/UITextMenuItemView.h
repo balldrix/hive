@@ -35,12 +35,19 @@ public:
 	void SetColour(Color colour);
 	void SetAlignment(UISpriteText::Alignments alignment);
 
-private:
-	UISpriteText* m_uiSpriteText;
-		
+protected:
+	virtual void SelectNextOption() {};
+	virtual void SelectPreviousOption() {};
+	virtual void HandleOptionChange(int index) {};
+
+
 	Color m_selectedTextColour;
 	Color m_unselectedTextColour;
 	Color m_disabledTextColour;
+	int m_selectedIndex;
+
+private:
+	UISpriteText* m_uiSpriteText;
 
 	typedef std::map<UIMenuItemView::SelectionStates, Color> SelectedStateColours;
 	SelectedStateColours m_selectionStateColours;

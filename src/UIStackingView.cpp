@@ -1,8 +1,8 @@
 #include "UIStackingView.h"
 
 #include "Frame.h"
-#include "UIMenuItemView.h"
 #include "Graphics.h"
+#include "UIMenuItemView.h"
 
 UIStackingView::UIStackingView() :
 	m_childViews(0),

@@ -9,7 +9,8 @@
 #include <string>
 
 UITextMenuItemView::UITextMenuItemView() :
-	m_uiSpriteText(nullptr)
+	m_uiSpriteText(nullptr),
+	m_selectedIndex(0)
 {
 }
 
