@@ -32,7 +32,7 @@ public:
 	void SetText(std::string text);
 	void SetSelectedStateColours(Color selected, Color unselected, Color disabled);
 	void SetPosition(const Vector2& position);
-	void SetColour(Color colour);
+	virtual void SetColour(Color colour);
 	void SetAlignment(UISpriteText::Alignments alignment);
 
 protected:

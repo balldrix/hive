@@ -38,7 +38,7 @@ void UISliderMenuItemView::Init(std::string name, float max, float defaultValue,
 	UITextMenuItemView::SetText(name);
 
 	m_maxValue = max;
-	m_selectedIndex = defaultValue * SliderScaler;
+	m_selectedIndex = (int)(defaultValue * SliderScaler);
 	m_sliderBar = new UIBarView();
 	m_sliderBar->Init(fmt::format("{}_slider", name));
 	m_sliderBar->SetCurrentValue(defaultValue);
@@ -56,6 +56,12 @@ void UISliderMenuItemView::SetPosition(const Vector2& position)
 {
 	UITextMenuItemView::SetPosition(position);
 	m_sliderBar->SetPosition(Vector2(104.0f, position.y));
+}
+
+void UISliderMenuItemView::SetColour(Color colour)
+{
+	UITextMenuItemView::SetColour(colour);
+	m_sliderBar->SetAlpha(colour.A());
 }
 
 void UISliderMenuItemView::Update(float deltaTime)

@@ -33,7 +33,10 @@ public:
 	void SetWidth(const unsigned int& value);
 	void SetHeight(const unsigned int& value);
 	void SetBackgroundColour(Color colour);
+	void SetFillColour(Color colour);
+	void SetFrameColour(Color colour);
 	void SetDepth(const float& value);
+	void SetAlpha(const float& value);
 
 private:
 	float m_currentValue;

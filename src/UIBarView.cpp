@@ -162,9 +162,26 @@ void UIBarView::SetBackgroundColour(Color colour)
 	m_backgroundImage->SetColour(colour);
 }
 
+void UIBarView::SetFillColour(Color colour)
+{
+	m_fillImage->SetColour(colour);
+}
+
+void UIBarView::SetFrameColour(Color colour)
+{
+	m_frameImage->SetColour(colour);
+}
+
 void UIBarView::SetDepth(const float& value)
 {
 	m_backgroundImage->SetDepth(value);
 	m_fillImage->SetDepth(value + 0.1f);
 	m_frameImage->SetDepth(value + 0.2f);
+}
+
+void UIBarView::SetAlpha(const float& value)
+{
+	m_backgroundImage->SetAlpha(value);
+	m_fillImage->SetAlpha(value);
+	m_frameImage->SetAlpha(value);
 }
