@@ -30,6 +30,7 @@ protected:
 private:
 	UIBarView* m_sliderBar;
 	float m_holdTimer;
+	float m_repeatTimer;
 	bool m_buttonPressed;
 	float m_maxValue;
 };

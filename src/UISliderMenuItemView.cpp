@@ -18,10 +18,12 @@
 
 static const float HoldDelay = 0.4f;
 static const float SliderScaler = 10.0f;
+static const float RepeatRate = 0.1f;
 
 UISliderMenuItemView::UISliderMenuItemView() :
 	m_sliderBar(nullptr),
 	m_holdTimer(0.0f),
+	m_repeatTimer(0.0f),
 	m_buttonPressed(false),
 	m_maxValue(0.0f)
 {
@@ -69,6 +71,8 @@ void UISliderMenuItemView::SetColour(Color colour)
 
 void UISliderMenuItemView::Update(float deltaTime)
 {
+	if(!m_isActive) return;
+
 	m_sliderBar->Update(deltaTime);
 
 	if(m_selectionState != SelectionStates::Selected || !MenuSystem::IsInputAllowed())
@@ -87,12 +91,14 @@ void UISliderMenuItemView::Update(float deltaTime)
 		SelectNextOption();
 		m_buttonPressed = true;
 		m_holdTimer = 0.0f;
+		m_repeatTimer = 0.0f;
 	}
 	else if(input->WasKeyPressed(PLAYER_LEFT_KEY) || input->WasGamePadButtonPressed(buttons.dpadLeft) || input->WasGamePadButtonPressed(buttons.leftStickLeft))
 	{
 		SelectPreviousOption();
 		m_buttonPressed = true;
 		m_holdTimer = 0.0f;
+		m_repeatTimer = 0.0f;
 	}
 	else if(m_buttonPressed && (input->IsKeyDown(PLAYER_RIGHT_KEY) || gamePadState.IsDPadRightPressed() || gamePadState.IsLeftThumbStickRight()))
 	{
@@ -102,7 +108,13 @@ void UISliderMenuItemView::Update(float deltaTime)
 		}
 		else
 		{
-			SelectNextOption();
+			m_repeatTimer += deltaTime;
+
+			if(m_repeatTimer >= RepeatRate)
+			{
+				SelectNextOption();
+				m_repeatTimer = 0.0f;
+			}
 		}
 	}
 	else if(m_buttonPressed && (input->IsKeyDown(PLAYER_LEFT_KEY) || gamePadState.IsDPadLeftPressed() || gamePadState.IsLeftThumbStickLeft()))
@@ -113,13 +125,20 @@ void UISliderMenuItemView::Update(float deltaTime)
 		}
 		else
 		{
-			SelectPreviousOption();
+			m_repeatTimer += deltaTime;
+
+			if(m_repeatTimer >= RepeatRate)
+			{
+				SelectPreviousOption();
+				m_repeatTimer = 0.0f;
+			}
 		}
 	}
 	else
 	{
 		m_buttonPressed = false;
 		m_holdTimer = 0.0f;
+		m_repeatTimer = 0.0f;
 	}
 }
 
@@ -147,6 +166,5 @@ void UISliderMenuItemView::HandleOptionChange(int index)
 	m_sliderBar->SetCurrentValue(m_maxValue / SliderScaler * m_selectedIndex);
 
 	if(onSliderChanged) onSliderChanged(m_selectedIndex / (m_maxValue * SliderScaler));
-
 	UIManager::PlaySelectSound();
 }
