@@ -43,7 +43,7 @@ public:
 	}
 
 	void SetListener(GameObject* object) { m_listener = object; }
-	void SetMasterVolume(float volume);
+	void SetSFXVolume(float volume);
 
 	Vector3 GetListenerPosition() const { return m_listenerPosition; }
 
@@ -72,7 +72,7 @@ protected:
 	OALSource* GetSource();
 
 	Vector3 m_listenerPosition;
-	float m_masterVolume;
+	float m_sfxVolume;
 	ALCdevice* m_alcDevice;
 	ALCcontext* m_alcContext;
 	GameObject* m_listener;

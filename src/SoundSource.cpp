@@ -36,6 +36,7 @@ void SoundSource::Reset()
 	m_pitch = 1.0f;
 	m_isRelative = false;
 	m_offset = 0;
+	m_target = nullptr;
 }
 
 SoundSource::~SoundSource()

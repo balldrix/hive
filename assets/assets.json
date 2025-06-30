@@ -42,6 +42,42 @@
     "tag": "initial_loading_assets"
   },
   {
+    "id": "s_uiNav",
+    "path": "assets\\sounds\\uiNav.wav",
+    "type": "soundFX",
+    "tag": "initial_loading_assets"
+  },
+  {
+    "id": "s_uiSelect",
+    "path": "assets\\sounds\\uiSelect.wav",
+    "type": "soundFX",
+    "tag": "initial_loading_assets"
+  },
+  {
+    "id": "s_uiLoad",
+    "path": "assets\\sounds\\uiLoad.wav",
+    "type": "soundFX",
+    "tag": "initial_loading_assets"
+  },
+  {
+    "id": "s_uiDelete",
+    "path": "assets\\sounds\\uiDelete.wav",
+    "type": "soundFX",
+    "tag": "initial_loading_assets"
+  },
+  {
+    "id": "s_uiOpen",
+    "path": "assets\\sounds\\uiOpen.wav",
+    "type": "soundFX",
+    "tag": "initial_loading_assets"
+  },
+  {
+    "id": "s_uiClose",
+    "path": "assets\\sounds\\uiClose.wav",
+    "type": "soundFX",
+    "tag": "initial_loading_assets"
+  },
+  {
     "id": "t_title_logo",
     "path": "assets\\textures\\ui\\title_logo.png",
     "type": "texture",

@@ -23,7 +23,7 @@ AudioEngine* AudioEngine::s_instance = nullptr;
 
 AudioEngine::AudioEngine(unsigned int channels) :
 	m_listener(nullptr),
-	m_masterVolume(1.0f)
+	m_sfxVolume(1.0f)
 {
 	m_alcDevice = alcOpenDevice(nullptr);
 	if(m_alcDevice == nullptr)
@@ -68,12 +68,13 @@ AudioEngine::~AudioEngine()
 	alcCloseDevice(m_alcDevice);
 }
 
-void AudioEngine::SetMasterVolume(float volume)
+void AudioEngine::SetSFXVolume(float volume)
 {
-	volume = std::max(0.0f, volume);
-	volume = std::min(1.0f, volume);
-	m_masterVolume = volume;
-	alListenerf(AL_GAIN, m_masterVolume);
+	volume = std::clamp(volume, 0.0f, 1.0f);
+	m_sfxVolume = volume;
+
+	for(auto* source : m_soundEmitters)
+		source->SetVolume(volume);
 }
 
 void AudioEngine::UpdateListener()

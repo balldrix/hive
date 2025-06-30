@@ -47,7 +47,7 @@ private:
 		void(UIOptionsView::* function)();
 	};
 
-	void SetSFXVolume();
+	static void SetSFXVolume(float value);
 	void SetMusicVolume();
 	void Back();
 

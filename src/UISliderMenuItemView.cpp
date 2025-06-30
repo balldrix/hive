@@ -6,6 +6,7 @@
 #include "Input.h"
 #include "MenuSystem.h"
 #include "UIBarView.h"
+#include "UIManager.h"
 #include "UIMenuItemView.h"
 #include "UITextMenuItemView.h"
 
@@ -32,7 +33,7 @@ UISliderMenuItemView::~UISliderMenuItemView()
 	m_sliderBar = nullptr;
 }
 
-void UISliderMenuItemView::Init(std::string name, float max, float defaultValue, Color colour)
+void UISliderMenuItemView::Init(std::string name, float max, float defaultValue, Color colour, void (*delegate)(float))
 {
 	UITextMenuItemView::Init(name);
 	UITextMenuItemView::SetText(name);
@@ -50,6 +51,8 @@ void UISliderMenuItemView::Init(std::string name, float max, float defaultValue,
 	m_sliderBar->SetHeight(GetHeight());
 	m_sliderBar->SetActive(true);
 	m_sliderBar->SetDepth(0.5f);
+	onSliderChanged = delegate;
+	onSliderChanged(defaultValue);
 }
 
 void UISliderMenuItemView::SetPosition(const Vector2& position)
@@ -140,8 +143,10 @@ void UISliderMenuItemView::SelectPreviousOption()
 
 void UISliderMenuItemView::HandleOptionChange(int index)
 {
-	m_selectedIndex = std::clamp(m_selectedIndex, 0, (int)m_maxValue * 10);
+	m_selectedIndex = std::clamp(index, 0, (int)(m_maxValue * SliderScaler));
 	m_sliderBar->SetCurrentValue(m_maxValue / SliderScaler * m_selectedIndex);
 
-	if(onSliderChanged) onSliderChanged(m_selectedIndex);
+	if(onSliderChanged) onSliderChanged(m_selectedIndex / (m_maxValue * SliderScaler));
+
+	UIManager::PlaySelectSound();
 }

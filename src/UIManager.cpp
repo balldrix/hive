@@ -1,5 +1,7 @@
 #include "UIManager.h"
 
+#include "AssetLoader.h"
+#include "AudioEngine.h"
 #include "Logger.h"
 #include "UIFrontEndView.h"
 #include "UIMainView.h"
@@ -15,8 +17,11 @@ UIManager::UIManager() :
 	m_uiSystemView(nullptr),
 	m_uiFrontEndView(nullptr),
 	m_uiMainView(nullptr),
-	m_viewList(0)
+	m_viewList(0),
+	m_uiSoundSource(nullptr)
 {
+	m_uiSoundSource = new SoundSource();
+	AudioEngine::Instance()->AddSoundSource(m_uiSoundSource);
 }
 
 UIManager::~UIManager()
@@ -62,6 +67,13 @@ UIView* UIManager::GetView(std::string name)
 
 	Logger::LogWarning(fmt::format("[UIManager] GetView: no view named {} found.", name));
 	return nullptr;
+}
+
+void UIManager::PlaySelectSound()
+{
+	Sound* sound = AssetLoader::GetSound("uiSelect");
+
+	if(sound) s_instance->m_uiSoundSource->Play(sound);
 }
 
 void UIManager::UpdateUIViews(float deltaTime)
@@ -216,6 +228,10 @@ void UIManager::Destroy()
 void UIManager::Shutdown()
 {
 	Logger::LogInfo("Shutting down UI Manager.");
+
+	AudioEngine::Instance()->RemoveSoundSource(m_uiSoundSource);
+	delete m_uiSoundSource;
+	m_uiSoundSource = nullptr;
 
 	DestroyUIFrontEndView();
 

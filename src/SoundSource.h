@@ -1,7 +1,7 @@
 #pragma once
 
-#include <directxtk/SimpleMath.h>
 #include <AL/al.h>
+#include <directxtk/SimpleMath.h>
 
 using namespace DirectX::SimpleMath;
 

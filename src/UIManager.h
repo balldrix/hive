@@ -6,6 +6,7 @@
 #include <vector>
 
 class Graphics;
+class SoundSource;
 class UISprite;
 class UISystemView;
 class UIFrontEndView;
@@ -39,6 +40,8 @@ public:
 
 	static UIView* GetView(std::string name);
 
+	static void PlaySelectSound();
+
 	static void Destroy();
 
 private:
@@ -58,4 +61,6 @@ private:
 	std::vector<UIView*> m_viewList;
 	UIView::ViewStates m_currentViewState = UIView::ViewStates::NotVisible;
 	UIView::ViewStates m_targetViewState = UIView::ViewStates::NotVisible;
+
+	SoundSource* m_uiSoundSource;
 };

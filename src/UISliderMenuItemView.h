@@ -14,13 +14,13 @@ public:
 	UISliderMenuItemView();
 	~UISliderMenuItemView();
 
-	void Init(std::string name, float max = 1.0f, float defaultValue = 0.0f, Color colour = Colors::White.v);
+	void Init(std::string name, float max = 1.0f, float defaultValue = 0.0f, Color colour = Colors::White.v, void (*delegate)(float) = nullptr);
 	void SetPosition(const Vector2& position);
 	void SetColour(Color colour) override;
 
 	void Update(float deltaTime) override;
 	void Render(Graphics* graphics) override;
-	void (*onSliderChanged)(int) = nullptr;
+	void (*onSliderChanged)(float) = nullptr;
 
 protected:
 	void SelectNextOption() override;
