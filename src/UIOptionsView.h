@@ -44,18 +44,19 @@ private:
 	{
 		std::string name;
 		OptionType type;
-		void(UIOptionsView::* function)();
+		void(*onIndexChange)(float) = nullptr;
+		void(*onConfirm)() = nullptr;
 	};
 
 	static void SetSFXVolume(float value);
-	void SetMusicVolume();
-	void Back();
+	static void SetMusicVolume(float value);
+	static void Back();
 
 	MenuOption m_menuOptions[MaxOptions] =
 	{
-		{ "SFX Volume", OptionType::Slider },
-		{ "Music Volume", OptionType::Slider },
-		{ "Back", OptionType::Normal, &UIOptionsView::Back }
+		{ "SFX Volume", OptionType::Slider, SetSFXVolume, nullptr },
+		{ "Music Volume", OptionType::Slider, SetMusicVolume, nullptr },
+		{ "Back", OptionType::Normal, nullptr, Back }
 	};
 
 	UIStackingView m_uiStackingView;

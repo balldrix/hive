@@ -54,7 +54,6 @@ void UISliderMenuItemView::Init(std::string name, float max, float defaultValue,
 	m_sliderBar->SetActive(true);
 	m_sliderBar->SetDepth(0.5f);
 	onSliderChanged = delegate;
-	onSliderChanged(defaultValue);
 }
 
 void UISliderMenuItemView::SetPosition(const Vector2& position)
@@ -166,5 +165,4 @@ void UISliderMenuItemView::HandleOptionChange(int index)
 	m_sliderBar->SetCurrentValue(m_maxValue / SliderScaler * m_selectedIndex);
 
 	if(onSliderChanged) onSliderChanged(m_selectedIndex / (m_maxValue * SliderScaler));
-	UIManager::PlaySelectSound();
 }

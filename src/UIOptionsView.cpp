@@ -49,7 +49,7 @@ void UIOptionsView::Init(std::string name)
 		case UIOptionsView::OptionType::Slider:
 		{
 			auto* sliderItem = new UISliderMenuItemView();
-			sliderItem->Init(name, 1.0f, 0.5f, Colors::White.v, SetSFXVolume); // @TODO get default value from saved state
+			sliderItem->Init(name, 1.0f, 0.5f, Colors::White.v, option.onIndexChange); // @TODO get default value from saved state
 			item = sliderItem;
 		}
 		break;
@@ -203,11 +203,11 @@ void UIOptionsView::OnConfirmPressed(int selectedIndex)
 	if(selectedIndex >= 0 && selectedIndex < MaxOptions)
 	{
 		const auto& selectedOption = m_menuOptions[selectedIndex];
-		if(selectedOption.function == nullptr) return;
+		if(selectedOption.onConfirm == nullptr) return;
 
 		Logger::LogInfo(fmt::format("Calling OnConfirmPressed on {} functon", selectedOption.name));
 
-		(this->*selectedOption.function)();
+		selectedOption.onConfirm();
 		return;
 	}
 
@@ -269,9 +269,10 @@ void UIOptionsView::DoTransition(float deltaTime)
 void UIOptionsView::SetSFXVolume(float value)
 {
 	AudioEngine::Instance()->SetSFXVolume(value);
+	UIManager::PlaySelectSound();
 }
 
-void UIOptionsView::SetMusicVolume()
+void UIOptionsView::SetMusicVolume(float value)
 {
 }
 
