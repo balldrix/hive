@@ -12,6 +12,7 @@
 #include <directxtk/SimpleMath.h>
 #include <fmt/core.h>
 #include <string>
+#include "AudioEngine.h"
 
 UIFrontEndView::UIFrontEndView() :
 	m_background(nullptr),
@@ -110,9 +111,13 @@ void UIFrontEndView::TransitionIn(bool isAnimating)
 {
 	Logger::LogInfo(fmt::format("Transition In: UI Front End View {} animation.", isAnimating ? "with" : "without"));
 
+	if(m_currentViewState == UIView::ViewStates::Visible || m_currentViewState == UIView::ViewStates::AnimatingIn) return;
+
 	m_currentViewState = UIView::ViewStates::AnimatingIn;
 	m_background->SetActive(true);
 	m_isActive = true;
+
+	AudioEngine::Instance()->PlayMusic(AssetLoader::GetSound("title"), true);
 }
 
 void UIFrontEndView::TransitionOut(bool isAnimating)

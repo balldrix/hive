@@ -5,7 +5,7 @@ AssetType::AssetTypeMap AssetType::s_assetTypeMap = {
 	{ "spritefont", Type::SpriteFontAsset },
 	{ "hitbox", Type::HitBoxData },
 	{ "spritesheet", Type::SpritesheetData },
-	{ "soundFX", Type::SoundFX }
+	{ "audio", Type::Audio }
 };
 
 AssetType::Type AssetType::GetMappedType(std::string key)

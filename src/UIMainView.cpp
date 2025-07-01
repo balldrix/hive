@@ -33,10 +33,6 @@ void UIMainView::Init(std::string name)
 	m_screenFlashFX->TransitionOut(false);
 }
 
-void UIMainView::Render(Graphics* graphics)
-{
-}
-
 void UIMainView::Shutdown()
 {
 	Logger::LogInfo("Shutting down UI Main View");

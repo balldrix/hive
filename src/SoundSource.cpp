@@ -124,7 +124,7 @@ void SoundSource::Update(float deltaTime)
 
 void SoundSource::Play(Sound* sound)
 {
-	Logger::LogInfo(fmt::format("Playing Sound", sound->GetFilename()));
+	Logger::LogInfo(fmt::format("Playing Sound {}", sound->GetFilename()));
 
 	m_sound = sound;
 	Stop();

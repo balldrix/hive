@@ -23,7 +23,10 @@ AudioEngine* AudioEngine::s_instance = nullptr;
 
 AudioEngine::AudioEngine(unsigned int channels) :
 	m_listener(nullptr),
-	m_sfxVolume(1.0f)
+	m_musicOALSource(nullptr),
+	m_musicSoundSource(nullptr),
+	m_sfxVolume(0.7f),
+	m_musicVolume(0.8f)
 {
 	m_alcDevice = alcOpenDevice(nullptr);
 	if(m_alcDevice == nullptr)
@@ -52,12 +55,26 @@ AudioEngine::AudioEngine(unsigned int channels) :
 	}
 
 	ALenum error = alGetError();
+
+	//@TODO set volumes from save data
+
+	ALuint musicSourceId;
+	alGenSources(1, &musicSourceId);
+	m_musicOALSource = new OALSource(musicSourceId);
+
+	m_musicSoundSource = new SoundSource();
 }
 
 AudioEngine::~AudioEngine()
 {
 	alcMakeContextCurrent(nullptr);
 	
+	delete m_musicOALSource;
+	delete m_musicSoundSource;
+
+	m_musicOALSource = nullptr;
+	m_musicSoundSource = nullptr;
+
 	for(std::vector<OALSource*>::iterator i = m_sources.begin(); i != m_sources.end(); ++i)
 	{
 		alDeleteSources(1, &(*i)->source);
@@ -68,6 +85,17 @@ AudioEngine::~AudioEngine()
 	alcCloseDevice(m_alcDevice);
 }
 
+void AudioEngine::PlayMusic(Sound* sound, bool loop)
+{
+	if(!sound || !m_musicOALSource || !m_musicSoundSource) return;
+
+	m_musicSoundSource->Stop();
+	m_musicSoundSource->SetLooping(loop);
+	m_musicSoundSource->SetVolume(m_musicVolume);
+	m_musicSoundSource->Play(sound);
+	m_musicSoundSource->Play(m_musicOALSource);
+}
+
 void AudioEngine::SetSFXVolume(float volume)
 {
 	volume = std::clamp(volume, 0.0f, 1.0f);
@@ -75,6 +103,13 @@ void AudioEngine::SetSFXVolume(float volume)
 
 	for(auto* source : m_soundEmitters)
 		source->SetVolume(volume);
+}
+
+void AudioEngine::SetMusicVolume(float volume)
+{
+	volume = std::clamp(volume, 0.0f, 1.0f);
+	m_musicVolume = volume;
+	m_musicSoundSource->SetVolume(volume);
 }
 
 void AudioEngine::UpdateListener()
@@ -179,6 +214,7 @@ void AudioEngine::Update(float deltaTime)
 	}
 
 	m_frameEmitters.clear();
+	m_musicSoundSource->Update(deltaTime);
 }
 
 void AudioEngine::Pause()

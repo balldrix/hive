@@ -290,6 +290,7 @@ void UIOptionsView::SetSFXVolume(float value)
 
 void UIOptionsView::SetMusicVolume(float value)
 {
+	AudioEngine::Instance()->SetMusicVolume(value);
 }
 
 void UIOptionsView::Back()

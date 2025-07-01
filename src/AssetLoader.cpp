@@ -97,7 +97,7 @@ void AssetLoader::LoadAllPrewarmedAssets()
 		s_assetLoader->LoadSpriteFont(asset);
 		s_assetLoader->m_assetsToLoad.pop_front();
 		break;
-	case AssetType::Type::SoundFX :
+	case AssetType::Type::Audio :
 		s_assetLoader->LoadSound(asset);
 		s_assetLoader->m_assetsToLoad.pop_front();
 		break;

@@ -15,8 +15,8 @@ public:
 	virtual ~UIMainView();
 
 	void Init(std::string name) override;
-	void Render(Graphics* graphics) override;
-		
+	void Render(Graphics* graphics) override {};
+
 	void Shutdown();
 
 private:

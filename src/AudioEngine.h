@@ -42,8 +42,11 @@ public:
 		s_instance = nullptr;
 	}
 
+	void PlayMusic(Sound* sound, bool loop);
+
 	void SetListener(GameObject* object) { m_listener = object; }
 	void SetSFXVolume(float volume);
+	void SetMusicVolume(float volume);
 
 	Vector3 GetListenerPosition() const { return m_listenerPosition; }
 
@@ -73,6 +76,7 @@ protected:
 
 	Vector3 m_listenerPosition;
 	float m_sfxVolume;
+	float m_musicVolume;
 	ALCdevice* m_alcDevice;
 	ALCcontext* m_alcContext;
 	GameObject* m_listener;
@@ -81,6 +85,8 @@ protected:
 	std::vector<SoundSource*> m_soundEmitters;
 	std::vector<SoundSource*> m_frameEmitters;
 	std::vector<SoundSource*> m_pauseableEmitters;
+	SoundSource* m_musicSoundSource;
+	OALSource* m_musicOALSource;
 
 	static AudioEngine* s_instance;
 };

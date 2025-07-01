@@ -33,7 +33,7 @@ void UITitleScreenView::Init(std::string name)
 	m_startGameText = new UISpriteText();
 	m_startGameText->Init(UIConfig::DespairFont8);
 
-	// TODO check inputs for controller 
+	// @TODO check inputs for controller 
 	m_startGameText->SetText("Press Enter To Start");
 	m_startGameText->SetPosition(StartGameTextStartPosition);
 	m_startGameText->SetActive(true);

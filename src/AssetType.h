@@ -13,7 +13,7 @@ public:
 		HitBoxData,
 		DamageData,
 		SpritesheetData,
-		SoundFX,
+		Audio,
 		None
 	};
 
