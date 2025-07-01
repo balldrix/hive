@@ -3,6 +3,7 @@
 #include "IMenuSystemInteraction.h"
 #include "Input.h"
 #include "Logger.h"
+#include "UIManager.h"
 #include "UIMenuItemView.h"
 
 #include <directxtk/SimpleMath.h>
@@ -40,6 +41,14 @@ void MenuSystem::Update(Input* input)
 	{
 		currentSelectedItem->OnConfirmPressed();
 		s_currentMenu->OnConfirmPressed(s_selectedItemIndex);
+		UIManager::PlayUISound(UISoundType::Select);
+		return;
+	}
+
+	if(input->WasKeyPressed(ESC_KEY) || input->WasGamePadButtonPressed(buttons.b))
+	{
+		s_currentMenu->OnCancelPressed();
+		UIManager::PlayUISound(UISoundType::Delete);
 		return;
 	}
 
@@ -88,6 +97,7 @@ void MenuSystem::SelectIndex(int index)
 		s_menuItems[index]->ChangeSelectionState(UIMenuItemView::SelectionStates::Selected);
 		s_currentMenu->HandleMenuItemSelection(index);
 		s_selectedItemIndex = index;
+		UIManager::PlayUISound(UISoundType::Navigate);
 	}
 }
 

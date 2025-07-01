@@ -8,7 +8,8 @@ UIView::UIView() :
 	m_currentViewState(ViewStates::NotVisible),
 	m_isForcedHidden(false),
 	m_startingAlpha(0.0f),
-	m_targetAlpha(0.0f)
+	m_targetAlpha(0.0f),
+	m_hasPlayedTransitionSound(false)
 {
 }
 

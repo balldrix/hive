@@ -1043,5 +1043,23 @@
     <Media Include="assets\sounds\swingStrong_007.wav">
       <Filter>Assets\Sounds</Filter>
     </Media>
+    <Media Include="assets\sounds\uiSelect.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\uiClose.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\uiDelete.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\uiLoad.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\uiNav.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
+    <Media Include="assets\sounds\uiOpen.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
   </ItemGroup>
 </Project>

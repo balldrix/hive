@@ -331,6 +331,12 @@
     <Media Include="assets\sounds\swingStrong_005.wav" />
     <Media Include="assets\sounds\swingStrong_006.wav" />
     <Media Include="assets\sounds\swingStrong_007.wav" />
+    <Media Include="assets\sounds\uiClose.wav" />
+    <Media Include="assets\sounds\uiDelete.wav" />
+    <Media Include="assets\sounds\uiLoad.wav" />
+    <Media Include="assets\sounds\uiNav.wav" />
+    <Media Include="assets\sounds\uiOpen.wav" />
+    <Media Include="assets\sounds\uiSelect.wav" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F07D24C5-CADD-4262-80F1-7370DF167E8E}</ProjectGuid>

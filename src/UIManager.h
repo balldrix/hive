@@ -12,6 +12,16 @@ class UISystemView;
 class UIFrontEndView;
 class UIMainView;
 
+enum class UISoundType
+{
+	Navigate,
+	Select,
+	Load,
+	Delete,
+	Open,
+	Close
+};
+
 class UIManager
 {
 public:
@@ -40,7 +50,7 @@ public:
 
 	static UIView* GetView(std::string name);
 
-	static void PlaySelectSound();
+	static void PlayUISound(UISoundType type);
 
 	static void Destroy();
 
@@ -63,4 +73,14 @@ private:
 	UIView::ViewStates m_targetViewState = UIView::ViewStates::NotVisible;
 
 	SoundSource* m_uiSoundSource;
+
+	std::unordered_map<UISoundType, std::string> m_uiSoundMap =
+	{
+		{ UISoundType::Navigate, "uiNav" },
+		{ UISoundType::Select, "uiSelect" },
+		{ UISoundType::Load, "uiLoad" },
+		{ UISoundType::Delete, "uiDelete" },
+		{ UISoundType::Open, "uiOpen" },
+		{ UISoundType::Close, "uiClose" }
+	};
 };

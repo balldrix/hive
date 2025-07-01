@@ -65,4 +65,5 @@ protected:
 	bool m_isForcedHidden;
 	float m_startingAlpha;
 	float m_targetAlpha;
+	bool m_hasPlayedTransitionSound;
 };

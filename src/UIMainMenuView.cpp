@@ -121,6 +121,8 @@ void UIMainMenuView::Shutdown()
 
 void UIMainMenuView::TransitionIn(bool isAnimated)
 {
+	m_hasPlayedTransitionSound = false;
+
 	MenuSystem::DisableInput();
 
 	if(m_currentViewState == ViewStates::AnimatingIn ||
@@ -137,6 +139,8 @@ void UIMainMenuView::TransitionIn(bool isAnimated)
 
 void UIMainMenuView::TransitionOut(bool isAnimated)
 {
+	m_hasPlayedTransitionSound = false;
+
 	for(UIMenuItemView* item : m_uiStackingView.GetMenuItems())
 	{
 		item->ChangeSelectionState(UIMenuItemView::SelectionStates::UnSelected);
@@ -185,6 +189,18 @@ void UIMainMenuView::OnConfirmPressed(int selectedIndex)
 
 void UIMainMenuView::DoTransition(float deltaTime)
 {
+	if(!m_hasPlayedTransitionSound && m_currentViewState == ViewStates::AnimatingIn)
+	{
+		UIManager::PlayUISound(UISoundType::Open);
+		m_hasPlayedTransitionSound = true;
+	}
+
+	if(!m_hasPlayedTransitionSound && m_currentViewState == ViewStates::AnimatingOut)
+	{
+		UIManager::PlayUISound(UISoundType::Close);
+		m_hasPlayedTransitionSound = true;
+	}
+
 	if(m_transitionTimer > 0)
 	{
 		float duration = m_currentViewState == ViewStates::AnimatingIn ? TransitionInDuration : TransitionOutDuration;

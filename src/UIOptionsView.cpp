@@ -149,6 +149,7 @@ void UIOptionsView::Shutdown()
 
 void UIOptionsView::TransitionIn(bool isAnimated)
 {
+	m_hasPlayedTransitionSound = false;
 	MenuSystem::DisableInput();
 
 	if(m_currentViewState == ViewStates::AnimatingIn ||
@@ -165,6 +166,7 @@ void UIOptionsView::TransitionIn(bool isAnimated)
 
 void UIOptionsView::TransitionOut(bool isAnimated)
 {
+	m_hasPlayedTransitionSound = false;
 	for(UIMenuItemView* item : m_uiStackingView.GetMenuItems())
 	{
 		item->ChangeSelectionState(UIMenuItemView::SelectionStates::UnSelected);
@@ -216,6 +218,7 @@ void UIOptionsView::OnConfirmPressed(int selectedIndex)
 
 void UIOptionsView::OnCancelPressed()
 {
+	Back();
 }
 
 bool UIOptionsView::IsMenuItemSelectionAllowed(Vector2 direction, int index)
@@ -229,11 +232,24 @@ void UIOptionsView::HandleMenuItemSelection(int index)
 
 void UIOptionsView::DoTransition(float deltaTime)
 {
+	if(!m_hasPlayedTransitionSound && m_currentViewState == ViewStates::AnimatingIn)
+	{
+		UIManager::PlayUISound(UISoundType::Open);
+		m_hasPlayedTransitionSound = true;
+	}
+
+	if(!m_hasPlayedTransitionSound && m_currentViewState == ViewStates::AnimatingOut)
+	{
+		UIManager::PlayUISound(UISoundType::Close);
+		m_hasPlayedTransitionSound = true;
+	}
+
 	if(m_transitionTimer > 0)
 	{
 		float duration = m_currentViewState == ViewStates::AnimatingIn ? TransitionInDuration : TransitionOutDuration;
 		float t = m_transitionTimer / duration;
 		float lerpedAlpha = std::lerp(m_startingAlpha, m_targetAlpha, 1 - t);
+
 
 		for(UIView* uiView : m_uiStackingView.GetMenuItems())
 		{
@@ -269,7 +285,7 @@ void UIOptionsView::DoTransition(float deltaTime)
 void UIOptionsView::SetSFXVolume(float value)
 {
 	AudioEngine::Instance()->SetSFXVolume(value);
-	UIManager::PlaySelectSound();
+	UIManager::PlayUISound(UISoundType::Select);
 }
 
 void UIOptionsView::SetMusicVolume(float value)

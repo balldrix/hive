@@ -69,9 +69,16 @@ UIView* UIManager::GetView(std::string name)
 	return nullptr;
 }
 
-void UIManager::PlaySelectSound()
+void UIManager::PlayUISound(UISoundType type)
 {
-	Sound* sound = AssetLoader::GetSound("uiSelect");
+	auto it = s_instance->m_uiSoundMap.find(type);
+	if(it == s_instance->m_uiSoundMap.end())
+	{
+		Logger::LogWarning("[UIManager] Sound not found");
+		return;
+	}
+
+	Sound* sound = AssetLoader::GetSound(it->second);
 
 	if(sound) s_instance->m_uiSoundSource->Play(sound);
 }
