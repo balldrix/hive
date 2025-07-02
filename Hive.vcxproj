@@ -29,6 +29,7 @@
     <ClCompile Include="src\FrontEndOptionsGameState.cpp" />
     <ClCompile Include="src\PlayerBuildSpecialState.cpp" />
     <ClCompile Include="src\ScreenShake.cpp" />
+    <ClCompile Include="src\SettingsManager.cpp" />
     <ClCompile Include="src\TilemapLoader.cpp" />
     <ClCompile Include="src\UIOptionsView.cpp" />
     <ClCompile Include="src\UIScreenFlashFX.cpp" />
@@ -88,6 +89,7 @@
     <ClInclude Include="src\AnimatedSpriteData.h" />
     <ClInclude Include="src\PlayerDefinition.h" />
     <ClInclude Include="src\ScreenShake.h" />
+    <ClInclude Include="src\SettingsManager.h" />
     <ClInclude Include="src\TilemapLoader.h" />
     <ClInclude Include="src\UIScreenFlashFX.h" />
     <ClInclude Include="src\GameDataManager.h" />

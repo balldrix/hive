@@ -1,9 +1,10 @@
 {
   "dependencies": [
     "directxtk",
+    "libsndfile",
     "nlohmann-json",
     "openal-soft",
-    "libsndfile",
-    "spdlog"
+    "spdlog",
+    "simpleini"
   ]
 }

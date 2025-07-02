@@ -1,5 +1,6 @@
 #pragma once
 
+#include "AudioEngine.h"
 #include "IMenuSystemInteraction.h"
 #include "UIStackingView.h"
 #include "UIView.h"
@@ -46,6 +47,7 @@ private:
 		OptionType type;
 		void(*onIndexChange)(float) = nullptr;
 		void(*onConfirm)() = nullptr;
+		float(*getDefaultValue)() = nullptr;
 	};
 
 	static void SetSFXVolume(float value);
@@ -54,9 +56,9 @@ private:
 
 	MenuOption m_menuOptions[MaxOptions] =
 	{
-		{ "SFX Volume", OptionType::Slider, SetSFXVolume, nullptr },
-		{ "Music Volume", OptionType::Slider, SetMusicVolume, nullptr },
-		{ "Back", OptionType::Normal, nullptr, Back }
+		{ "SFX Volume", OptionType::Slider, SetSFXVolume, nullptr, []() { return AudioEngine::Instance()->GetSFXVolume(); }},
+		{ "Music Volume", OptionType::Slider, SetMusicVolume, nullptr, []() { return AudioEngine::Instance()->GetMusicVolume(); }},
+		{ "Back", OptionType::Normal, nullptr, Back, nullptr }
 	};
 
 	UIStackingView m_uiStackingView;

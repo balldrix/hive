@@ -49,6 +49,8 @@ public:
 	void SetMusicVolume(float volume);
 
 	Vector3 GetListenerPosition() const { return m_listenerPosition; }
+	float GetSFXVolume() const { return m_sfxVolume; }
+	float GetMusicVolume() const { return m_musicVolume; }
 
 	void AddSoundSource(SoundSource* soundSource, bool pauseable = false);
 	void RemoveSoundSource(SoundSource* soundSource);

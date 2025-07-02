@@ -7,6 +7,7 @@
 #include "Graphics.h"
 #include "Logger.h"
 #include "MenuSystem.h"
+#include "SettingsManager.h"
 #include "UIManager.h"
 #include "UIMenuItemView.h"
 #include "UISliderMenuItemView.h"
@@ -49,7 +50,7 @@ void UIOptionsView::Init(std::string name)
 		case UIOptionsView::OptionType::Slider:
 		{
 			auto* sliderItem = new UISliderMenuItemView();
-			sliderItem->Init(name, 1.0f, 0.5f, Colors::White.v, option.onIndexChange); // @TODO get default value from saved state
+			sliderItem->Init(name, 1.0f, option.getDefaultValue(), Colors::White.v, option.onIndexChange); // @TODO get default value from saved state
 			item = sliderItem;
 		}
 		break;
@@ -285,15 +286,18 @@ void UIOptionsView::DoTransition(float deltaTime)
 void UIOptionsView::SetSFXVolume(float value)
 {
 	AudioEngine::Instance()->SetSFXVolume(value);
+	SettingsManager::Instance()->SetSFXVolume(value);
 	UIManager::PlayUISound(UISoundType::Select);
 }
 
 void UIOptionsView::SetMusicVolume(float value)
 {
 	AudioEngine::Instance()->SetMusicVolume(value);
+	SettingsManager::Instance()->SetMusicVolume(value);
 }
 
 void UIOptionsView::Back()
 {
+	SettingsManager::Instance()->Save();
 	GameStateManager::Instance()->ProceedToPreviousState();
 }

@@ -3,6 +3,7 @@
 #include "AudioEngine.h"
 
 #include "GameObject.h"
+#include "SettingsManager.h"
 #include "SoundSource.h"
 
 #include <AL/al.h>
@@ -56,13 +57,13 @@ AudioEngine::AudioEngine(unsigned int channels) :
 
 	ALenum error = alGetError();
 
-	//@TODO set volumes from save data
-
 	ALuint musicSourceId;
 	alGenSources(1, &musicSourceId);
 	m_musicOALSource = new OALSource(musicSourceId);
-
 	m_musicSoundSource = new SoundSource();
+
+	SetMusicVolume(SettingsManager::Instance()->GetMusicVolume());
+	SetSFXVolume(SettingsManager::Instance()->GetSFXVolume());
 }
 
 AudioEngine::~AudioEngine()

@@ -313,6 +313,9 @@
     <ClCompile Include="src\UISliderMenuItemView.cpp">
       <Filter>UI\Shared</Filter>
     </ClCompile>
+    <ClCompile Include="src\SettingsManager.cpp">
+      <Filter>UI\System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -808,6 +811,9 @@
     </ClInclude>
     <ClInclude Include="src\UISliderMenuItemView.h">
       <Filter>UI\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SettingsManager.h">
+      <Filter>UI\System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

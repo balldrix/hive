@@ -44,37 +44,43 @@
   {
     "id": "s_uiNav",
     "path": "assets\\sounds\\uiNav.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "initial_loading_assets"
   },
   {
     "id": "s_uiSelect",
     "path": "assets\\sounds\\uiSelect.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "initial_loading_assets"
   },
   {
     "id": "s_uiLoad",
     "path": "assets\\sounds\\uiLoad.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "initial_loading_assets"
   },
   {
     "id": "s_uiDelete",
     "path": "assets\\sounds\\uiDelete.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "initial_loading_assets"
   },
   {
     "id": "s_uiOpen",
     "path": "assets\\sounds\\uiOpen.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "initial_loading_assets"
   },
   {
     "id": "s_uiClose",
     "path": "assets\\sounds\\uiClose.wav",
-    "type": "soundFX",
+    "type": "audio",
+    "tag": "initial_loading_assets"
+  },
+  {
+    "id": "m_title",
+    "path": "assets\\music\\title.mp3",
+    "type": "audio",
     "tag": "initial_loading_assets"
   },
   {
@@ -158,151 +164,151 @@
   {
     "id": "s_playerSwing_001",
     "path": "assets\\sounds\\swingNormal_001.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "gameplay_assets"
   },
   {
     "id": "s_playerSwing_002",
     "path": "assets\\sounds\\swingNormal_002.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "gameplay_assets"
   },
   {
     "id": "s_playerSwing_003",
     "path": "assets\\sounds\\swingNormal_003.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "gameplay_assets"
   },
   {
     "id": "s_playerSwing_004",
     "path": "assets\\sounds\\swingNormal_004.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "gameplay_assets"
   },
   {
     "id": "s_playerSwing_005",
     "path": "assets\\sounds\\swingStrong_001.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "gameplay_assets"
   },
   {
     "id": "s_playerSwing_006",
     "path": "assets\\sounds\\swingStrong_002.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "gameplay_assets"
   },
   {
     "id": "s_playerSwing_007",
     "path": "assets\\sounds\\swingStrong_003.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "gameplay_assets"
   },
   {
     "id": "s_playerSwing_008",
     "path": "assets\\sounds\\swingStrong_004.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "gameplay_assets"
   },
   {
     "id": "s_playerSwing_009",
     "path": "assets\\sounds\\swingStrong_005.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "gameplay_assets"
   },
   {
     "id": "s_playerSwing_010",
     "path": "assets\\sounds\\swingStrong_006.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "gameplay_assets"
   },
   {
     "id": "s_playerSwing_011",
     "path": "assets\\sounds\\swingStrong_007.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "gameplay_assets"
   },
   {
     "id": "s_playerSwing_012",
     "path": "assets\\sounds\\swingSpecial_001.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "gameplay_assets"
   },
   {
     "id": "s_playerSwing_013",
     "path": "assets\\sounds\\swingSpecial_002.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "gameplay_assets"
   },
   {
     "id": "s_playerSwing_014",
     "path": "assets\\sounds\\swingSpecial_003.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "gameplay_assets"
   },
   {
     "id": "s_playerImpact_001",
     "path": "assets\\sounds\\playerImpact_001.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "gameplay_assets"
   },
   {
     "id": "s_playerImpact_002",
     "path": "assets\\sounds\\playerImpact_002.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "gameplay_assets"
   },
   {
     "id": "s_enemyImpact_001",
     "path": "assets\\sounds\\enemyImpact_001.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "gameplay_assets"
   },
   {
     "id": "s_enemyImpact_002",
     "path": "assets\\sounds\\enemyImpact_002.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "gameplay_assets"
   },
   {
     "id": "s_enemyImpact_003",
     "path": "assets\\sounds\\enemyImpact_003.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "gameplay_assets"
   },
   {
     "id": "s_enemyImpact_004",
     "path": "assets\\sounds\\enemyImpact_004.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "gameplay_assets"
   },
   {
     "id": "s_enemyImpact_005",
     "path": "assets\\sounds\\enemyImpact_005.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "gameplay_assets"
   },
   {
     "id": "s_enemyImpact_006",
     "path": "assets\\sounds\\enemyImpact_006.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "gameplay_assets"
   },
   {
     "id": "s_enemyImpact_007",
     "path": "assets\\sounds\\enemyImpact_007.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "gameplay_assets"
   },
   {
     "id": "s_enemyImpact_008",
     "path": "assets\\sounds\\enemyImpact_008.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "gameplay_assets"
   },
   {
     "id": "s_wasteDogAttack_001",
     "path": "assets\\sounds\\wasteDogAttack_001.wav",
-    "type": "soundFX",
+    "type": "audio",
     "tag": "gameplay_assets"
   },
   {

@@ -25,6 +25,8 @@ void Logger::Init()
 	
 	s_fileLogger = std::make_shared<spdlog::logger>("File logger", basic_file_sink_mt);
 	s_fileLogger->set_pattern("%^[%c] [%l] %v%$");
+
+	LogInfo("Initialised Logger.");
 }
 
 void Logger::LogInfo(std::string message)
