@@ -8,6 +8,7 @@
 #include "Logger.h"
 #include "MenuSystem.h"
 #include "SettingsManager.h"
+#include "UICycleMenuItemView.h"
 #include "UIManager.h"
 #include "UIMenuItemView.h"
 #include "UISliderMenuItemView.h"
@@ -42,18 +43,25 @@ void UIOptionsView::Init(std::string name)
 
 	for(const auto& option : m_menuOptions)
 	{
-		std::string name = option.name;
+		std::string name = option.label;
 		UITextMenuItemView* item = nullptr;
 
-		switch(option.type)
+		switch(option.selectionType)
 		{
-		case UIOptionsView::OptionType::Slider:
+		case UIOptionsView::SelectionType::Slider :
 		{
 			auto* sliderItem = new UISliderMenuItemView();
 			sliderItem->Init(name, 1.0f, option.getDefaultValue(), Colors::White.v, option.onIndexChange); // @TODO get default value from saved state
 			item = sliderItem;
 		}
-		break;
+			break;
+		case UIOptionsView::SelectionType::Cycle:
+		{
+			auto* cycleItem = new UICycleMenuItemView();
+			cycleItem->Init(name, GetOptionsForOptionType(option.optionType), option.getDefaultValue(), option.onIndexChange);
+			item = cycleItem;
+			break;
+		}
 		default:
 			item = new UITextMenuItemView();
 			item->Init(name);
@@ -208,7 +216,7 @@ void UIOptionsView::OnConfirmPressed(int selectedIndex)
 		const auto& selectedOption = m_menuOptions[selectedIndex];
 		if(selectedOption.onConfirm == nullptr) return;
 
-		Logger::LogInfo(fmt::format("Calling OnConfirmPressed on {} functon", selectedOption.name));
+		Logger::LogInfo(fmt::format("Calling OnConfirmPressed on {} functon", selectedOption.label));
 
 		selectedOption.onConfirm();
 		return;
@@ -310,6 +318,37 @@ void UIOptionsView::Back()
 {
 	SettingsManager::Instance()->Save();
 	GameStateManager::Instance()->ProceedToPreviousState();
+}
+
+std::vector<std::string> UIOptionsView::GetOptionsForOptionType(OptionType optionType)
+{
+	switch(optionType)
+	{
+	case UIOptionsView::OptionType::Resolution :
+	{
+		//@TODO get supported resolutions
+		std::vector<std::string> resolutions =
+		{
+			"1024 x 576",
+			"1280 x 720",
+			"1960 x 1080"
+		};
+		return resolutions;
+	}
+	case UIOptionsView::OptionType::Fullscreen :
+	{
+		std::vector<std::string> modes =
+		{
+			"fullscreen",
+			"windowed"
+		};
+		return modes;
+	}
+	default:
+		break;
+	}
+
+	return std::vector<std::string>();
 }
 
 int UIOptionsView::GetSFXVolumeIndex()

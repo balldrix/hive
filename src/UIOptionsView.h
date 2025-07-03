@@ -35,16 +35,27 @@ protected:
 private:
 	static constexpr int MaxOptions = 5;
 
-	enum class OptionType {
-		Normal,
+	enum class SelectionType
+	{
+		Fixed,
 		Cycle,
 		Slider
 	};
 
+	enum class OptionType
+	{
+		SFXVolume,
+		MusicVolume,
+		Resolution,
+		Fullscreen,
+		None
+	};
+
 	struct MenuOption
 	{
-		std::string name;
-		OptionType type;
+		std::string label;
+		OptionType optionType;
+		SelectionType selectionType;
 		void(*onIndexChange)(int) = nullptr;
 		void(*onConfirm)() = nullptr;
 		int(*getDefaultValue)() = nullptr;
@@ -62,20 +73,15 @@ private:
 
 	static void Back();
 
+	std::vector<std::string> GetOptionsForOptionType(OptionType optionType);
+
 	MenuOption m_menuOptions[MaxOptions] =
 	{
-		{ "SFX Volume", OptionType::Slider, SetSFXVolume, nullptr, GetSFXVolumeIndex },
-		{ "Music Volume", OptionType::Slider, SetMusicVolume, nullptr, GetMusicVolumeIndex },
-		{ "Resolution", OptionType::Cycle, SetScreenResolution, nullptr, GetScreenResolutionIndex },
-		{ "Fullscreen", OptionType::Cycle, SetFullscreen, nullptr, GetFullscreenIndex },
-		{ "Back", OptionType::Normal, nullptr, Back, nullptr }
-	};
-
-	Vector2 m_resolutions[3] =
-	{
-		Vector2(1024, 576),
-		Vector2(1280, 720),
-		Vector2(1960, 1080)
+		{ "SFX Volume", OptionType::SFXVolume, SelectionType::Slider, SetSFXVolume, nullptr, GetSFXVolumeIndex },
+		{ "Music Volume", OptionType::MusicVolume, SelectionType::Slider, SetMusicVolume, nullptr, GetMusicVolumeIndex },
+		{ "Resolution", OptionType::Resolution, SelectionType::Cycle, SetScreenResolution, nullptr, GetScreenResolutionIndex },
+		{ "Fullscreen", OptionType::Fullscreen, SelectionType::Cycle, SetFullscreen, nullptr, GetFullscreenIndex },
+		{ "Back", OptionType::None , SelectionType::Fixed, nullptr, Back, nullptr }
 	};
 
 	std::string m_fullscreenModes[2] =

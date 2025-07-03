@@ -40,7 +40,6 @@ protected:
 	virtual void SelectPreviousOption() {};
 	virtual void HandleOptionChange(int index) {};
 
-
 	Color m_selectedTextColour;
 	Color m_unselectedTextColour;
 	Color m_disabledTextColour;
