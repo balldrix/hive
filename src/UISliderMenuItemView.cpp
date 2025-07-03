@@ -17,7 +17,6 @@
 #include <string>
 
 static const float HoldDelay = 0.4f;
-static const float SliderScaler = 10.0f;
 static const float RepeatRate = 0.1f;
 
 UISliderMenuItemView::UISliderMenuItemView() :
@@ -35,16 +34,16 @@ UISliderMenuItemView::~UISliderMenuItemView()
 	m_sliderBar = nullptr;
 }
 
-void UISliderMenuItemView::Init(std::string name, float max, float defaultValue, Color colour, void (*delegate)(float))
+void UISliderMenuItemView::Init(std::string name, float max, int defaultValue, Color colour, void (*delegate)(int))
 {
 	UITextMenuItemView::Init(name);
 	UITextMenuItemView::SetText(name);
 
 	m_maxValue = max;
-	m_selectedIndex = (int)(defaultValue * SliderScaler);
+	m_selectedIndex = defaultValue;
 	m_sliderBar = new UIBarView();
 	m_sliderBar->Init(fmt::format("{}_slider", name));
-	m_sliderBar->SetCurrentValue(defaultValue);
+	m_sliderBar->SetCurrentValue(defaultValue / SliderScaler);
 	m_sliderBar->SetMaxValue(max);
 	m_sliderBar->SetFillTexture(AssetLoader::GetTexture("t_pixel"));
 	m_sliderBar->SetBackgroundTexture(AssetLoader::GetTexture("t_pixel"));
@@ -164,5 +163,5 @@ void UISliderMenuItemView::HandleOptionChange(int index)
 	m_selectedIndex = std::clamp(index, 0, (int)(m_maxValue * SliderScaler));
 	m_sliderBar->SetCurrentValue(m_maxValue / SliderScaler * m_selectedIndex);
 
-	if(onSliderChanged) onSliderChanged(m_selectedIndex / (m_maxValue * SliderScaler));
+	if(onSliderChanged) onSliderChanged(index);
 }

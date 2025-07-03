@@ -26,7 +26,7 @@ using VertexType = DirectX::VertexPositionColor;
 class Graphics
 {
 public:
-	Graphics();					
+	Graphics();
 	~Graphics();
 
 	Graphics(Graphics&&) = default;

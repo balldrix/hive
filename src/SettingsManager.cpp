@@ -2,6 +2,7 @@
 #include "Logger.h"
 
 #include <string>
+#include "UIOptionsView.h"
 
 static const std::string Filename = "config.cfg";
 

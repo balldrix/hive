@@ -283,21 +283,53 @@ void UIOptionsView::DoTransition(float deltaTime)
 	}
 }
 
-void UIOptionsView::SetSFXVolume(float value)
+void UIOptionsView::SetSFXVolume(int index)
 {
+	float value = index / SliderScaler;
 	AudioEngine::Instance()->SetSFXVolume(value);
 	SettingsManager::Instance()->SetSFXVolume(value);
 	UIManager::PlayUISound(UISoundType::Select);
 }
 
-void UIOptionsView::SetMusicVolume(float value)
+void UIOptionsView::SetMusicVolume(int index)
 {
+	float value = index / SliderScaler;
 	AudioEngine::Instance()->SetMusicVolume(value);
 	SettingsManager::Instance()->SetMusicVolume(value);
+}
+
+void UIOptionsView::SetScreenResolution(int index)
+{
+}
+
+void UIOptionsView::SetFullscreen(int index)
+{
 }
 
 void UIOptionsView::Back()
 {
 	SettingsManager::Instance()->Save();
 	GameStateManager::Instance()->ProceedToPreviousState();
+}
+
+int UIOptionsView::GetSFXVolumeIndex()
+{
+	float volume = AudioEngine::Instance()->GetSFXVolume();
+	return static_cast<int>(std::ceil (volume * SliderScaler));
+}
+
+int UIOptionsView::GetMusicVolumeIndex()
+{
+	float volume = AudioEngine::Instance()->GetMusicVolume();
+	return static_cast<int>(std::ceil(volume * SliderScaler));
+}
+
+int UIOptionsView::GetScreenResolutionIndex()
+{
+	return 0;
+}
+
+int UIOptionsView::GetFullscreenIndex()
+{
+	return 0;
 }

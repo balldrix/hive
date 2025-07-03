@@ -31,6 +31,7 @@
     <ClCompile Include="src\ScreenShake.cpp" />
     <ClCompile Include="src\SettingsManager.cpp" />
     <ClCompile Include="src\TilemapLoader.cpp" />
+    <ClCompile Include="src\UICycleMenuItemView.cpp" />
     <ClCompile Include="src\UIOptionsView.cpp" />
     <ClCompile Include="src\UIScreenFlashFX.cpp" />
     <ClCompile Include="src\GameDataManager.cpp" />
@@ -73,6 +74,7 @@
     <ClCompile Include="src\UIKillCount.cpp" />
     <ClCompile Include="src\Utils.h" />
     <ClCompile Include="src\UISprite.cpp" />
+    <ClCompile Include="src\UICycleMenuItemView.h" />
     <ClInclude Include="src\FrontEndOptionsGameState.h" />
     <ClInclude Include="src\EventManager.h" />
     <ClInclude Include="src\AnimationEventData.h" />

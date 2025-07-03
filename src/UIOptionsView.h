@@ -33,7 +33,7 @@ protected:
 	void DoTransition(float deltaTime) override;
 
 private:
-	static constexpr int MaxOptions = 3;
+	static constexpr int MaxOptions = 5;
 
 	enum class OptionType {
 		Normal,
@@ -45,20 +45,43 @@ private:
 	{
 		std::string name;
 		OptionType type;
-		void(*onIndexChange)(float) = nullptr;
+		void(*onIndexChange)(int) = nullptr;
 		void(*onConfirm)() = nullptr;
-		float(*getDefaultValue)() = nullptr;
+		int(*getDefaultValue)() = nullptr;
 	};
 
-	static void SetSFXVolume(float value);
-	static void SetMusicVolume(float value);
+	static void SetSFXVolume(int index);
+	static void SetMusicVolume(int index);
+	static void SetScreenResolution(int index);
+	static void SetFullscreen(int index);
+
+	static int GetSFXVolumeIndex();
+	static int GetMusicVolumeIndex();
+	static int GetScreenResolutionIndex();
+	static int GetFullscreenIndex();
+
 	static void Back();
 
 	MenuOption m_menuOptions[MaxOptions] =
 	{
-		{ "SFX Volume", OptionType::Slider, SetSFXVolume, nullptr, []() { return AudioEngine::Instance()->GetSFXVolume(); }},
-		{ "Music Volume", OptionType::Slider, SetMusicVolume, nullptr, []() { return AudioEngine::Instance()->GetMusicVolume(); }},
+		{ "SFX Volume", OptionType::Slider, SetSFXVolume, nullptr, GetSFXVolumeIndex },
+		{ "Music Volume", OptionType::Slider, SetMusicVolume, nullptr, GetMusicVolumeIndex },
+		{ "Resolution", OptionType::Cycle, SetScreenResolution, nullptr, GetScreenResolutionIndex },
+		{ "Fullscreen", OptionType::Cycle, SetFullscreen, nullptr, GetFullscreenIndex },
 		{ "Back", OptionType::Normal, nullptr, Back, nullptr }
+	};
+
+	Vector2 m_resolutions[3] =
+	{
+		Vector2(1024, 576),
+		Vector2(1280, 720),
+		Vector2(1960, 1080)
+	};
+
+	std::string m_fullscreenModes[2] =
+	{
+		"fullscreen",
+		"windowed"
 	};
 
 	UIStackingView m_uiStackingView;
