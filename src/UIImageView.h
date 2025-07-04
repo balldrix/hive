@@ -27,6 +27,7 @@ public:
 	void SetDepth(float depth);
 	void SetColour(Color colour) override;
 	void SetAlpha(float alpha);
+	void SetFlipped(float flipped);
 
 	void Shutdown();
 

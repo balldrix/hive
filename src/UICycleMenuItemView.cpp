@@ -1,5 +1,7 @@
 #include "UICycleMenuItemView.h"
 
+#include "AssetLoader.h"
+
 UICycleMenuItemView::UICycleMenuItemView() :
 	m_currentIndex(0),
 	m_options(),
@@ -32,6 +34,11 @@ void UICycleMenuItemView::Init(std::string name, std::vector<std::string> option
 	m_selectedIndex = defaultIndex;
 
 	m_leftArrow = new UIImageView();
+	m_leftArrow->Init("leftArrow");
+	m_leftArrow->GetSprite()->Init(AssetLoader::GetTexture("t_arrow"));
+	m_leftArrow->SetFlipped(true);
+	m_leftArrow->SetActive(true);
+
 	m_rightArrow = new UIImageView();
 	m_optionText = new UISpriteText();
 }
@@ -39,6 +46,9 @@ void UICycleMenuItemView::Init(std::string name, std::vector<std::string> option
 void UICycleMenuItemView::SetPosition(const Vector2& position)
 {
 	UITextMenuItemView::SetPosition(position);
+	m_leftArrow->SetPosition(Vector2(100, position.y));
+	m_leftArrow->SetOrigin(Vector2::Zero);
+	m_leftArrow->SetDepth(1.0f);
 }
 
 void UICycleMenuItemView::SetColour(Color colour)
@@ -53,6 +63,7 @@ void UICycleMenuItemView::Update(float deltaTime)
 void UICycleMenuItemView::Render(Graphics* graphics)
 {
 	UITextMenuItemView::Render(graphics);
+	m_leftArrow->Render(graphics);
 }
 
 void UICycleMenuItemView::SelectNextOption()

@@ -42,6 +42,12 @@
     "tag": "initial_loading_assets"
   },
   {
+    "id": "t_arrow",
+    "path": "assets\\textures\\ui\\arrow.png",
+    "type": "texture",
+    "tag": "initial_loading_assets"
+  },
+  {
     "id": "s_uiNav",
     "path": "assets\\sounds\\uiNav.wav",
     "type": "audio",

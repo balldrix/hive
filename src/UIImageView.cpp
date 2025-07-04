@@ -52,6 +52,22 @@ void UIImageView::SetAlpha(float alpha)
 	m_uiSprite->SetAlpha(alpha);
 }
 
+void UIImageView::SetFlipped(float flipped)
+{
+	SpriteEffects effects;
+
+	if(flipped)
+	{
+		effects = SpriteEffects::SpriteEffects_FlipHorizontally;
+	}
+	else
+	{
+		effects = SpriteEffects::SpriteEffects_None;
+	}
+	
+	m_uiSprite->SetFlipEffect(effects);
+}
+
 void UIImageView::Shutdown()
 {
 	delete m_uiSprite;
