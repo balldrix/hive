@@ -113,18 +113,18 @@ void UISpriteText::SetColour(const Color& colour)
 
 void UISpriteText::SetAlignment(Alignments alignment)
 {
-	XMVECTOR measure = m_spriteFont->MeasureString(m_text.c_str());
+	Vector2 measure = m_spriteFont->MeasureString(m_text.c_str());
 
 	switch(alignment)
 	{
 	case UISpriteText::Left:
-		m_origin = Vector2(0.0f, XMVectorGetY(measure) / 2.0f);
+		m_origin = Vector2(0.0f, 0.0f);
 		break;
 	case UISpriteText::Right:
-		m_origin = Vector2(XMVectorGetX(measure), XMVectorGetY(measure) / 2.0f);
+		m_origin = Vector2(measure.x, 0.0f);
 		break;
 	case UISpriteText::Centre:
-		m_origin = Vector2(XMVectorGetX(measure) / 2.0f, XMVectorGetY(measure) / 2.0f);
+		m_origin = Vector2(measure.x / 2.0f, 0.0f);
 		break;
 	default:
 		break;

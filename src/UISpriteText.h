@@ -40,6 +40,7 @@ public:
 	Color GetColour() const { return m_colour; }
 	int GetHeight() const;
 	int GetWidth() const;
+	SpriteFont* GetSpriteFont() const { return m_spriteFont; }
 
 private:
 	bool m_isActive;

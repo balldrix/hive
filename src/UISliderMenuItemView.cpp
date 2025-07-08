@@ -1,12 +1,8 @@
 #include "UISliderMenuItemView.h"
 
 #include "AssetLoader.h"
-#include "GameStateManager.h"
 #include "Graphics.h"
-#include "Input.h"
-#include "MenuSystem.h"
 #include "UIBarView.h"
-#include "UIManager.h"
 #include "UIMenuItemView.h"
 #include "UITextMenuItemView.h"
 
@@ -16,33 +12,29 @@
 #include <fmt/core.h>
 #include <string>
 
-static const float HoldDelay = 0.4f;
-static const float RepeatRate = 0.1f;
-
 UISliderMenuItemView::UISliderMenuItemView() :
 	m_sliderBar(nullptr),
-	m_holdTimer(0.0f),
-	m_repeatTimer(0.0f),
-	m_buttonPressed(false),
+	m_labelText(nullptr),
 	m_maxValue(0.0f)
 {
 }
 
 UISliderMenuItemView::~UISliderMenuItemView()
 {
-	delete m_sliderBar;
-	m_sliderBar = nullptr;
+	Shutdown();
 }
 
 void UISliderMenuItemView::Init(std::string name, float max, int defaultValue, Color colour, void (*delegate)(int))
 {
-	UITextMenuItemView::Init(name);
-	UITextMenuItemView::SetText(name);
-
 	m_maxValue = max;
 	m_selectedIndex = defaultValue;
+
+	m_labelText = new UITextMenuItemView();
+	m_labelText->Init(name);
+	m_labelText->SetText(name);
+
 	m_sliderBar = new UIBarView();
-	m_sliderBar->Init(fmt::format("{}_slider", name));
+	m_sliderBar->Init(fmt::format("{0}_slider", name));
 	m_sliderBar->SetCurrentValue(defaultValue / SliderScaler);
 	m_sliderBar->SetMaxValue(max);
 	m_sliderBar->SetFillTexture(AssetLoader::GetTexture("t_pixel"));
@@ -55,107 +47,43 @@ void UISliderMenuItemView::Init(std::string name, float max, int defaultValue, C
 	onSliderChanged = delegate;
 }
 
-void UISliderMenuItemView::SetPosition(const Vector2& position)
-{
-	UITextMenuItemView::SetPosition(position);
-	m_sliderBar->SetPosition(Vector2(104.0f, position.y));
-}
-
-void UISliderMenuItemView::SetColour(Color colour)
-{
-	UITextMenuItemView::SetColour(colour);
-	m_sliderBar->SetAlpha(colour.A());
-}
-
 void UISliderMenuItemView::Update(float deltaTime)
 {
 	if(!m_isActive) return;
 
 	m_sliderBar->Update(deltaTime);
+	UIMenuItemView::Update(deltaTime);
+}
 
-	if(m_selectionState != SelectionStates::Selected || !MenuSystem::IsInputAllowed())
-	{
-		m_buttonPressed = false;
-		m_holdTimer = 0.0f;
-		return;
-	}
+void UISliderMenuItemView::SetActive(bool isActive)
+{
+	m_isActive = isActive;
+	m_labelText->SetActive(isActive);
+	m_sliderBar->SetActive(isActive);
+}
 
-	Input* input = GameStateManager::Instance()->GetInput();
-	auto gamePadState = input->GetGamePadState();
-	auto buttons = input->GetGamePadButtons();
+void UISliderMenuItemView::SetPosition(const Vector2& position)
+{
+	m_labelText->SetPosition(position);
+	m_sliderBar->SetPosition(Vector2(104.0f, position.y));
+}
 
-	if(input->WasKeyPressed(PLAYER_RIGHT_KEY) || input->WasGamePadButtonPressed(buttons.dpadRight) || input->WasGamePadButtonPressed(buttons.leftStickRight))
-	{
-		SelectNextOption();
-		m_buttonPressed = true;
-		m_holdTimer = 0.0f;
-		m_repeatTimer = 0.0f;
-	}
-	else if(input->WasKeyPressed(PLAYER_LEFT_KEY) || input->WasGamePadButtonPressed(buttons.dpadLeft) || input->WasGamePadButtonPressed(buttons.leftStickLeft))
-	{
-		SelectPreviousOption();
-		m_buttonPressed = true;
-		m_holdTimer = 0.0f;
-		m_repeatTimer = 0.0f;
-	}
-	else if(m_buttonPressed && (input->IsKeyDown(PLAYER_RIGHT_KEY) || gamePadState.IsDPadRightPressed() || gamePadState.IsLeftThumbStickRight()))
-	{
-		if(m_holdTimer < HoldDelay)
-		{
-			m_holdTimer += deltaTime;
-		}
-		else
-		{
-			m_repeatTimer += deltaTime;
+void UISliderMenuItemView::SetColour(Color colour)
+{
+	m_labelText->SetColour(colour);
+	m_sliderBar->SetColour(colour);
+}
 
-			if(m_repeatTimer >= RepeatRate)
-			{
-				SelectNextOption();
-				m_repeatTimer = 0.0f;
-			}
-		}
-	}
-	else if(m_buttonPressed && (input->IsKeyDown(PLAYER_LEFT_KEY) || gamePadState.IsDPadLeftPressed() || gamePadState.IsLeftThumbStickLeft()))
-	{
-		if(m_holdTimer < HoldDelay)
-		{
-			m_holdTimer += deltaTime;
-		}
-		else
-		{
-			m_repeatTimer += deltaTime;
-
-			if(m_repeatTimer >= RepeatRate)
-			{
-				SelectPreviousOption();
-				m_repeatTimer = 0.0f;
-			}
-		}
-	}
-	else
-	{
-		m_buttonPressed = false;
-		m_holdTimer = 0.0f;
-		m_repeatTimer = 0.0f;
-	}
+void UISliderMenuItemView::SetAlpha(float alpha)
+{
+	m_labelText->SetAlpha(alpha);
+	m_sliderBar->SetAlpha(alpha);
 }
 
 void UISliderMenuItemView::Render(Graphics* graphics)
 {
-	UITextMenuItemView::Render(graphics);
+	m_labelText->Render(graphics);
 	m_sliderBar->Render(graphics);
-}
-
-void UISliderMenuItemView::SelectNextOption()
-{
-	m_selectedIndex++;
-	HandleOptionChange(m_selectedIndex);
-}
-
-void UISliderMenuItemView::SelectPreviousOption()
-{
-	m_selectedIndex--;
-	HandleOptionChange(m_selectedIndex);
 }
 
 void UISliderMenuItemView::HandleOptionChange(int index)
@@ -164,4 +92,22 @@ void UISliderMenuItemView::HandleOptionChange(int index)
 	m_sliderBar->SetCurrentValue(m_maxValue / SliderScaler * m_selectedIndex);
 
 	if(onSliderChanged) onSliderChanged(index);
+}
+
+void UISliderMenuItemView::HandleSelectionStateChanged(SelectionStates previousSelectionState, SelectionStates newSelectionState)
+{
+	auto it = m_selectionStateColours.find(newSelectionState);
+	if(it != m_selectionStateColours.end())
+	{
+		m_labelText->SetColour(it->second);
+	}
+}
+
+void UISliderMenuItemView::Shutdown()
+{
+	delete m_sliderBar;
+	m_sliderBar = nullptr;
+
+	delete m_labelText;
+	m_labelText = nullptr;
 }

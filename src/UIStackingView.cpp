@@ -4,6 +4,8 @@
 #include "Graphics.h"
 #include "UIMenuItemView.h"
 
+#include <directxtk/SimpleMath.h>
+
 UIStackingView::UIStackingView() :
 	m_childViews(0),
 	m_orientation(UIStackingView::Orientations::Horizontal),

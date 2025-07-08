@@ -1,5 +1,6 @@
 #include "UITextMenuItemView.h"
 
+#include "Graphics.h"
 #include "UIConfig.h"
 #include "UIMenuItemView.h"
 #include "UISpriteText.h"
@@ -9,8 +10,7 @@
 #include <string>
 
 UITextMenuItemView::UITextMenuItemView() :
-	m_uiSpriteText(nullptr),
-	m_selectedIndex(0)
+	m_uiSpriteText(nullptr)
 {
 }
 
@@ -45,13 +45,6 @@ void UITextMenuItemView::Shutdown()
 	m_uiSpriteText = nullptr;
 }
 
-void UITextMenuItemView::ChangeSelectionState(SelectionStates selectionState)
-{
-	SelectionStates previous = m_selectionState;
-	m_selectionState = selectionState;
-	HandleSelectionStateChanged(previous, selectionState);
-}
-
 void UITextMenuItemView::HandleSelectionStateChanged(SelectionStates previousSelectionState, SelectionStates newSelectionState)
 {
 	auto it = m_selectionStateColours.find(newSelectionState);
@@ -72,20 +65,6 @@ void UITextMenuItemView::SetText(std::string text)
 	m_uiSpriteText->SetText(text);
 }
 
-void UITextMenuItemView::SetSelectedStateColours(Color selected, Color unselected, Color disabled)
-{
-	m_selectedTextColour = selected;
-	m_unselectedTextColour = unselected;
-	m_disabledTextColour = disabled;
-
-	m_selectionStateColours =
-	{
-		{ UIMenuItemView::SelectionStates::Selected, m_selectedTextColour },
-		{ UIMenuItemView::SelectionStates::UnSelected, m_unselectedTextColour },
-		{ UIMenuItemView::SelectionStates::Disabled, m_disabledTextColour }
-	};
-}
-
 void UITextMenuItemView::SetPosition(const Vector2& position)
 {
 	m_uiSpriteText->SetPosition(position);
@@ -93,6 +72,13 @@ void UITextMenuItemView::SetPosition(const Vector2& position)
 
 void UITextMenuItemView::SetColour(Color colour)
 {
+	m_uiSpriteText->SetColour(colour);
+}
+
+void UITextMenuItemView::SetAlpha(float alpha)
+{
+	Color colour = m_uiSpriteText->GetColour();
+	colour.A(alpha);
 	m_uiSpriteText->SetColour(colour);
 }
 

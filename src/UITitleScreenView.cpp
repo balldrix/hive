@@ -2,6 +2,7 @@
 
 #include "AssetLoader.h"
 #include "GlobalConstants.h"
+#include "Graphics.h"
 #include "Logger.h"
 #include "UIConfig.h"
 #include "UIImageView.h"

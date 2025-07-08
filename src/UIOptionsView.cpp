@@ -21,6 +21,7 @@
 #include <directxtk/SimpleMath.h>
 #include <fmt/core.h>
 #include <string>
+#include <vector>
 
 using namespace GlobalConstants;
 
@@ -44,7 +45,7 @@ void UIOptionsView::Init(std::string name)
 	for(const auto& option : m_menuOptions)
 	{
 		std::string name = option.label;
-		UITextMenuItemView* item = nullptr;
+		UIMenuItemView* item = nullptr;
 
 		switch(option.selectionType)
 		{
@@ -63,14 +64,15 @@ void UIOptionsView::Init(std::string name)
 			break;
 		}
 		default:
-			item = new UITextMenuItemView();
-			item->Init(name);
+			auto* textMenuItem = new UITextMenuItemView();
+			textMenuItem->Init(name);
+			textMenuItem->SetText(name);
+			item = textMenuItem;
 			break;
 		}
 
 		if(item)
 		{
-			item->SetText(name);
 			item->SetSelectedStateColours(Colors::White.v, Colors::SlateGray.v, Colors::Black.v);
 			item->ChangeSelectionState(UIMenuItemView::SelectionStates::UnSelected);
 			m_uiStackingView.AddView(item);
@@ -189,9 +191,7 @@ void UIOptionsView::TransitionOut(bool isAnimated)
 
 		for(UIView* uiView : m_uiStackingView.GetMenuItems())
 		{
-			Color colour = uiView->GetColour();
-			colour.A(0.0f);
-			uiView->SetColour(colour);
+			uiView->SetAlpha(0.0f);
 		}
 
 		return;
@@ -262,9 +262,7 @@ void UIOptionsView::DoTransition(float deltaTime)
 
 		for(UIView* uiView : m_uiStackingView.GetMenuItems())
 		{
-			Color colour = uiView->GetColour();
-			colour.A(lerpedAlpha);
-			uiView->SetColour(colour);
+			uiView->SetAlpha(lerpedAlpha);
 		}
 
 		m_transitionTimer -= deltaTime;
@@ -329,9 +327,9 @@ std::vector<std::string> UIOptionsView::GetOptionsForOptionType(OptionType optio
 		//@TODO get supported resolutions
 		std::vector<std::string> resolutions =
 		{
-			"1024 x 576",
-			"1280 x 720",
-			"1960 x 1080"
+			" 1024 X 576 ",
+			" 1280 X 720 ",
+			"  1960 X 1080"
 		};
 		return resolutions;
 	}
@@ -339,8 +337,8 @@ std::vector<std::string> UIOptionsView::GetOptionsForOptionType(OptionType optio
 	{
 		std::vector<std::string> modes =
 		{
-			"fullscreen",
-			"windowed"
+			" FULLSCREEN ",
+			" WINDOWED "
 		};
 		return modes;
 	}

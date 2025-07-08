@@ -23,6 +23,8 @@ public:
 
 	void Shutdown();
 
+	int GetWidth() const override { return m_width; }
+
 	void SetBackgroundTexture(Texture* texture);
 	void SetFillTexture(Texture* texture);
 	void SetFrameTexture(Texture* texture);

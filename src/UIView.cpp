@@ -1,4 +1,5 @@
 #include "UIView.h"
+#include <string>
 
 UIView::UIView() :
 	m_assignedStates(0),
@@ -11,6 +12,11 @@ UIView::UIView() :
 	m_targetAlpha(0.0f),
 	m_hasPlayedTransitionSound(false)
 {
+}
+
+void UIView::Init(std::string name)
+{
+	m_name = name;
 }
 
 void UIView::SetActive(bool isActive)

@@ -27,7 +27,7 @@ public:
 	UIView();
 	virtual ~UIView() {};
 
-	virtual void Init(std::string name) = 0;
+	virtual void Init(std::string name);
 	virtual void Update(float deltaTime) {};
 	virtual void Render(Graphics* graphics) = 0;
 	
@@ -37,6 +37,7 @@ public:
 	virtual void SetActive(bool isActive);
 	virtual void SetPosition(const Vector2& position) {};
 	virtual void SetColour(Color colour) {};
+	virtual void SetAlpha(float alpha) {};
 
 	virtual void ForceHide(bool isForced);
 

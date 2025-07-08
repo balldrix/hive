@@ -154,9 +154,7 @@ void UIMainMenuView::TransitionOut(bool isAnimated)
 
 		for(UIView* uiView : m_uiStackingView.GetMenuItems())
 		{
-			Color colour = uiView->GetColour();
-			colour.A(0.0f);
-			uiView->SetColour(colour);
+			uiView->SetAlpha(0.0f);
 		}
 
 		return;
@@ -209,9 +207,7 @@ void UIMainMenuView::DoTransition(float deltaTime)
 		
 		for(UIView* uiView : m_uiStackingView.GetMenuItems())
 		{
-			Color colour = uiView->GetColour();
-			colour.A(lerpedAlpha);
-			uiView->SetColour(colour);
+			uiView->SetAlpha(lerpedAlpha);
 		}
 		
 		m_transitionTimer -= deltaTime;

@@ -1,12 +1,12 @@
 #pragma once
 
-#include "AudioEngine.h"
 #include "IMenuSystemInteraction.h"
 #include "UIStackingView.h"
 #include "UIView.h"
 
 #include <directxtk/SimpleMath.h>
 #include <string>
+#include <vector>
 
 class Graphics;
 
@@ -82,13 +82,7 @@ private:
 		{ "Resolution", OptionType::Resolution, SelectionType::Cycle, SetScreenResolution, nullptr, GetScreenResolutionIndex },
 		{ "Fullscreen", OptionType::Fullscreen, SelectionType::Cycle, SetFullscreen, nullptr, GetFullscreenIndex },
 		{ "Back", OptionType::None , SelectionType::Fixed, nullptr, Back, nullptr }
-	};
-
-	std::string m_fullscreenModes[2] =
-	{
-		"fullscreen",
-		"windowed"
-	};
+	};	
 
 	UIStackingView m_uiStackingView;
 };
