@@ -1,11 +1,15 @@
 #pragma once
 
+#include <d3d11.h>
 #include <d3d11_1.h>
 #include <d3dcommon.h>
 #include <directxtk/SpriteBatch.h>
 #include <directxtk/VertexTypes.h>
 #include <dxgi1_2.h>
+#include <exception>
 #include <memory>
+#include <vector>
+#include <windows.h>
 #include <wrl/client.h>
 
 namespace DX
@@ -20,7 +24,6 @@ namespace DX
 }
 
 using namespace DirectX;
-
 using VertexType = DirectX::VertexPositionColor;
 
 class Graphics
@@ -38,7 +41,7 @@ public:
 	void Init(HWND hWindow, HINSTANCE hInstance);
 	void CreateDevice();
 	void CreateResources();
-							
+
 	void Begin();
 	
 	void PresentBackBuffer();
@@ -53,20 +56,30 @@ public:
 
 	int GetWidth()	const { return m_backBufferWidth; }
 	int GetHeight()	const { return m_backbufferHeight; }
-	
-	HWND GetHwnd()	const { return m_window; }		
+
+	HWND GetHwnd() const { return m_window; }
 	HINSTANCE GetHInstance() const { return m_hInstance; }
 	bool GetFullscreen() const { return m_fullscreen; }
 
 	void SetWidth(int width);
 	void SetHeight(int height);
 
+	struct DisplayMode
+	{
+		int width;
+		int height;
+		int refreshRate;
+	};
+
+	std::vector<DisplayMode> GetSupportedResolutions() const {	return m_displayModes; };
+
 private:
+	void UpdateDisplayModes();
 	void TurnOnAlphaBlending();
 	void TurnOffAlphaBlending();
 
-	HWND m_window;				
-	HINSTANCE m_hInstance;		
+	HWND m_window;
+	HINSTANCE m_hInstance;
 	
 	D3D_FEATURE_LEVEL m_featureLevel;
 	Microsoft::WRL::ComPtr<ID3D11Device1> m_d3dDevice;
@@ -82,7 +95,8 @@ private:
 	std::shared_ptr<SpriteBatch> m_defaultSpriteBatch;
 	std::shared_ptr<SpriteBatch> m_uiSpriteBatch;
 	
-	bool m_fullscreen;		
-	int m_backBufferWidth;		
-	int m_backbufferHeight;		
+	bool m_fullscreen;
+	int m_backBufferWidth;
+	int m_backbufferHeight;
+	std::vector<DisplayMode> m_displayModes;
 };

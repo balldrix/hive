@@ -22,6 +22,7 @@
 #include <fmt/core.h>
 #include <string>
 #include <vector>
+#include <windows.h>
 
 using namespace GlobalConstants;
 
@@ -324,13 +325,17 @@ std::vector<std::string> UIOptionsView::GetOptionsForOptionType(OptionType optio
 	{
 	case UIOptionsView::OptionType::Resolution :
 	{
-		//@TODO get supported resolutions
-		std::vector<std::string> resolutions =
+		std::vector<Graphics::DisplayMode> modes = GameStateManager::Instance()->GetGraphics()->GetSupportedResolutions();
+		std::vector<std::string> resolutions;
+
+		for(auto& it : modes)
 		{
-			" 1024 X 576 ",
-			" 1280 X 720 ",
-			"  1960 X 1080"
-		};
+			std::string entry;
+			entry = fmt::format("  {0} x {1}  ", it.width, it.height);
+			if(entry.length() % 2 == 0) entry = " " + entry + "  ";
+			resolutions.push_back(entry);
+		}
+
 		return resolutions;
 	}
 	case UIOptionsView::OptionType::Fullscreen :

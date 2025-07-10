@@ -319,7 +319,9 @@
     <ClCompile Include="src\UICycleMenuItemView.h">
       <Filter>UI\Shared</Filter>
     </ClCompile>
-    <ClCompile Include="src\UICycleMenuItemView.cpp" />
+    <ClCompile Include="src\UICycleMenuItemView.cpp">
+      <Filter>UI\Shared</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">

@@ -4,6 +4,21 @@
 #include "GlobalConstants.h"
 #include "Logger.h"
 
+#include <d3dcommon.h>
+#include <vector>
+#include <wrl/client.h>
+#include <dxgi.h>
+#include <dxgi1_2.h>
+#include <dxgiformat.h>
+#include <combaseapi.h>
+#include <d3d11.h>
+#include <d3d11sdklayers.h>
+#include <minwinbase.h>
+#include <cstdlib>
+#include <memory>
+#include <directxtk/SpriteBatch.h>
+#include <windows.h>
+
 using namespace GlobalConstants;
 using namespace DirectX;
 
@@ -15,7 +30,8 @@ Graphics::Graphics() :
 	m_featureLevel(D3D_FEATURE_LEVEL_9_1),
 	m_fullscreen(false),
 	m_backBufferWidth(GameWidth),
-	m_backbufferHeight(GameHeight)
+	m_backbufferHeight(GameHeight),
+	m_displayModes()
 {
 }
 
@@ -192,7 +208,6 @@ void Graphics::CreateResources()
 
 	// Create an alpha enabled blend state description.
 	bsd.RenderTarget[0].BlendEnable = TRUE;
-	//bsd.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;
 	bsd.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
 	bsd.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
 	bsd.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
@@ -211,6 +226,8 @@ void Graphics::CreateResources()
 
 	m_defaultSpriteBatch = std::make_shared<SpriteBatch>(m_d3dDeviceContext.Get());
 	m_uiSpriteBatch = std::make_shared<SpriteBatch>(m_d3dDeviceContext.Get());
+
+	UpdateDisplayModes();
 }
 
 void Graphics::Begin()
@@ -270,6 +287,47 @@ void Graphics::SetWidth(int width)
 void Graphics::SetHeight(int height)
 {
 	m_backbufferHeight = height;
+}
+
+void Graphics::UpdateDisplayModes()
+{
+	std::vector<DisplayMode> tempModes;
+
+	DEVMODE dm = {};
+	dm.dmSize = sizeof(dm);
+	int i = 0;
+
+	while(EnumDisplaySettings(NULL, i++, &dm))
+	{
+		if(!(dm.dmFields & DM_PELSWIDTH) || !(dm.dmFields & DM_PELSHEIGHT)) continue;
+		if(dm.dmBitsPerPel != 32) continue;
+		if(dm.dmDisplayFrequency < 60) continue;
+
+		bool replaced = false;
+		for(auto& mode : tempModes) {
+			if(mode.width == dm.dmPelsWidth && mode.height == dm.dmPelsHeight) {
+				if(dm.dmDisplayFrequency > mode.refreshRate) {
+					mode.refreshRate = dm.dmDisplayFrequency;
+				}
+				replaced = true;
+				break;
+			}
+		}
+
+		if (!replaced) {
+			DisplayMode displayMode = { 0 };
+			displayMode.width = dm.dmPelsWidth;
+			displayMode.height = dm.dmPelsHeight;
+			displayMode.refreshRate = dm.dmDisplayFrequency;
+			tempModes.push_back(displayMode);
+		}
+
+		ZeroMemory(&dm, sizeof(dm));
+		dm.dmSize = sizeof(dm);
+	}
+
+	m_displayModes.clear();
+	m_displayModes = tempModes;
 }
 
 void Graphics::TurnOnAlphaBlending()
