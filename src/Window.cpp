@@ -8,8 +8,8 @@ using namespace GlobalConstants;
 Window::Window() :
 	m_hInst(nullptr),
 	m_hWindow(nullptr),
-	m_width(WindowWidth),
-	m_height(WindowHeight),
+	m_width(0),
+	m_height(0),
 	m_minimized(false),
 	m_maximized(false),
 	m_resizing(false)
@@ -23,8 +23,10 @@ Window::~Window()
 }
 
 
-int Window::Init(HINSTANCE hInstance, INT cmdShow, WNDPROC wndProc)
+int Window::Init(int width, int height, HINSTANCE hInstance, INT cmdShow, WNDPROC wndProc)
 {
+    m_width = width;
+    m_height = height;
 	m_hInst = hInstance;
 
     WNDCLASSEXW wcex = {};

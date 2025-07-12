@@ -4,20 +4,20 @@
 #include "GlobalConstants.h"
 #include "Logger.h"
 
+#include <combaseapi.h>
+#include <cstdlib>
+#include <d3d11.h>
+#include <d3d11sdklayers.h>
 #include <d3dcommon.h>
-#include <vector>
-#include <wrl/client.h>
+#include <directxtk/SpriteBatch.h>
 #include <dxgi.h>
 #include <dxgi1_2.h>
 #include <dxgiformat.h>
-#include <combaseapi.h>
-#include <d3d11.h>
-#include <d3d11sdklayers.h>
-#include <minwinbase.h>
-#include <cstdlib>
 #include <memory>
-#include <directxtk/SpriteBatch.h>
+#include <minwinbase.h>
+#include <vector>
 #include <windows.h>
+#include <wrl/client.h>
 
 using namespace GlobalConstants;
 using namespace DirectX;
@@ -279,14 +279,11 @@ void Graphics::OnDeviceLost()
 	CreateResources();
 }
 
-void Graphics::SetWidth(int width)
+void Graphics::SetResolution(int width, int height)
 {
-	m_backBufferWidth = width;
-}
+	/*DX::ThrowIfFailed(m_swapChain->ResizeBuffers(
 
-void Graphics::SetHeight(int height)
-{
-	m_backbufferHeight = height;
+	));*/
 }
 
 void Graphics::UpdateDisplayModes()

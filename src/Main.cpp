@@ -53,7 +53,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 		return 1;
 
 	window = new Window();
-	window->Init(hInstance, nCmdShow, WndProc);
+	window->Init(SettingsManager::Instance()->GetScreenWidth(), SettingsManager::Instance()->GetScreenHeight(), hInstance, nCmdShow, WndProc);
 
 	graphics = new Graphics();
 	graphics->Init(window->GetHwnd(), hInstance);

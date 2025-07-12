@@ -1,8 +1,11 @@
 #include "SettingsManager.h"
+
+#include "GlobalConstants.h"
 #include "Logger.h"
 
 #include <string>
-#include "UIOptionsView.h"
+
+using namespace GlobalConstants;
 
 static const std::string Filename = "config.cfg";
 
@@ -38,10 +41,10 @@ void SettingsManager::Load()
 		m_ini.SetDoubleValue("Audio", "SFXVolume", 0.6);
 
 	if(!m_ini.GetLongValue("Display", "ScreenWidth"))
-		m_ini.SetLongValue("Display", "ScreenWidth", 1280);
+		m_ini.SetLongValue("Display", "ScreenWidth", WindowWidth);
 
 	if(!m_ini.GetLongValue("Display", "ScreenHeight"))
-		m_ini.SetLongValue("Display", "ScreenHeight", 720);
+		m_ini.SetLongValue("Display", "ScreenHeight", WindowHeight);
 
 	if(!m_ini.GetBoolValue("Display", "Fullscreen"))
 		m_ini.SetBoolValue("Display", "Fullscreen", false);

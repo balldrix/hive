@@ -148,6 +148,8 @@ void UICycleMenuItemView::HandleOptionChange(int index)
 	std::string option = m_options[m_selectedIndex];
 	m_optionText->SetText(option);
 	m_optionText->SetAlignment(UISpriteText::Alignments::Centre);
+
+	if(onOptionChanged) onOptionChanged(index);
 }
 
 void UICycleMenuItemView::HandleSelectionStateChanged(SelectionStates previousSelectionState, SelectionStates newSelectionState)

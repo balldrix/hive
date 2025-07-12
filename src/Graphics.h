@@ -61,8 +61,7 @@ public:
 	HINSTANCE GetHInstance() const { return m_hInstance; }
 	bool GetFullscreen() const { return m_fullscreen; }
 
-	void SetWidth(int width);
-	void SetHeight(int height);
+	void SetResolution(int width, int height);
 
 	struct DisplayMode
 	{

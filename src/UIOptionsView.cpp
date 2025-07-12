@@ -53,7 +53,7 @@ void UIOptionsView::Init(std::string name)
 		case UIOptionsView::SelectionType::Slider :
 		{
 			auto* sliderItem = new UISliderMenuItemView();
-			sliderItem->Init(name, 1.0f, option.getDefaultValue(), Colors::White.v, option.onIndexChange); // @TODO get default value from saved state
+			sliderItem->Init(name, 1.0f, option.getDefaultValue(), Colors::White.v, option.onIndexChange);
 			item = sliderItem;
 		}
 			break;

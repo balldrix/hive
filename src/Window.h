@@ -7,7 +7,7 @@ class Window
 	public:
 		Window();
 		~Window();
-		int Init(HINSTANCE hInstance, INT cmdShow, WNDPROC wndProc);
+		int Init(int width, int height, HINSTANCE hInstance, INT cmdShow, WNDPROC wndProc);
 		HINSTANCE GetInstance() noexcept { return HINSTANCE(); }
 		HWND GetHwnd() const { return m_hWindow; }
 

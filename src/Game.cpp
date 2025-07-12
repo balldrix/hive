@@ -271,8 +271,8 @@ LRESULT Game::MessageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lPara
 				SetWindowLongPtr(hWindow, GWL_STYLE, WS_OVERLAPPEDWINDOW);
 				SetWindowLongPtr(hWindow, GWL_EXSTYLE, 0);
 
-				int width = WindowWidth;
-				int height = WindowHeight;
+				int width = m_window->GetWidth();
+				int height = m_window->GetHeight();
 
 				ShowWindow(hWindow, SW_SHOWNORMAL);
 
