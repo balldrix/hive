@@ -278,7 +278,7 @@ void Player::Render(Graphics* graphics)
 	if(m_spritesheet)
 	{
 		// set layer depth
-		m_spritesheet->SetDepth(m_groundPosition.y / graphics->GetHeight());
+		m_spritesheet->SetDepth(m_groundPosition.y / graphics->GetBackbufferHeight());
 
 		// render player sprite
 		if(m_animator)
@@ -293,7 +293,7 @@ void Player::Render(Graphics* graphics)
 
 	if(m_shadow)
 	{
-		m_shadow->SetDepth(m_groundPosition.y / graphics->GetHeight() - 0.1f);
+		m_shadow->SetDepth(m_groundPosition.y / graphics->GetBackbufferHeight() - 0.1f);
 		m_shadow->Render(graphics);
 	}
 

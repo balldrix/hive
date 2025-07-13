@@ -229,13 +229,13 @@ void Enemy::Render(Graphics* graphics)
 
 	if(m_shadow)
 	{
-		m_shadow->SetDepth(m_groundPosition.y / graphics->GetHeight() - 0.1f);
+		m_shadow->SetDepth(m_groundPosition.y / graphics->GetBackbufferHeight() - 0.1f);
 		m_shadow->Render(graphics);
 	}
 
 	if(m_spritesheet)
 	{
-		m_spritesheet->SetDepth(m_groundPosition.y / graphics->GetHeight());
+		m_spritesheet->SetDepth(m_groundPosition.y / graphics->GetBackbufferHeight());
 
 		if(m_animator)
 		{

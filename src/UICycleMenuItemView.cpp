@@ -96,7 +96,7 @@ void UICycleMenuItemView::SetPosition(const Vector2& position)
 	m_leftArrow->SetPosition(Vector2(100, position.y));
 	m_rightArrow->SetPosition(Vector2(200, position.y));
 	m_optionText->SetPosition(Vector2(150, position.y));
-}
+};
 
 void UICycleMenuItemView::SetColour(Color colour)
 {

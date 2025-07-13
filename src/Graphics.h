@@ -38,7 +38,7 @@ public:
 	Graphics(Graphics const&) = delete;
 	Graphics& operator= (Graphics const&) = delete;
 
-	void Init(HWND hWindow, HINSTANCE hInstance);
+	void Init(int windowWidth, int windowHeight, HWND hWindow, HINSTANCE hInstance);
 	void CreateDevice();
 	void CreateResources();
 
@@ -54,8 +54,10 @@ public:
 	std::shared_ptr<SpriteBatch> GetDefaultSpriteBatch() const { return m_defaultSpriteBatch; }
 	std::shared_ptr<SpriteBatch> GetUISpriteBatch() const { return m_uiSpriteBatch; }
 
-	int GetWidth()	const { return m_backBufferWidth; }
-	int GetHeight()	const { return m_backbufferHeight; }
+	int GetBackbufferWidth()	const { return m_backbufferWidth; }
+	int GetBackbufferHeight()	const { return m_backbufferHeight; }
+	int GetOutputWidth() const { return m_windowWidth; }
+	int GetOutputHeight() const { return m_windowHeight; }
 
 	HWND GetHwnd() const { return m_window; }
 	HINSTANCE GetHInstance() const { return m_hInstance; }
@@ -85,8 +87,11 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> m_d3dDeviceContext;
 	
 	Microsoft::WRL::ComPtr<IDXGISwapChain1> m_swapChain;
-	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> m_renderTargetView;
+	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> m_renderRTV;
+	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> m_presentRTV;
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> m_backbuffer;
+	Microsoft::WRL::ComPtr<ID3D11Texture2D> m_renderTexture;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_renderTextureSRV;
 	Microsoft::WRL::ComPtr<ID3D11SamplerState> m_samplerState;
 	Microsoft::WRL::ComPtr<ID3D11BlendState> m_alphaEnabledBlendState;
 	Microsoft::WRL::ComPtr<ID3D11BlendState> m_alphaDisabledBlendState;
@@ -95,7 +100,9 @@ private:
 	std::shared_ptr<SpriteBatch> m_uiSpriteBatch;
 	
 	bool m_fullscreen;
-	int m_backBufferWidth;
+	int m_backbufferWidth;
 	int m_backbufferHeight;
+	int m_windowWidth;
+	int m_windowHeight;
 	std::vector<DisplayMode> m_displayModes;
 };

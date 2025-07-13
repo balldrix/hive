@@ -52,11 +52,14 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	if(FAILED(hr))
 		return 1;
 
+	int width = SettingsManager::Instance()->GetScreenWidth();
+	int height = SettingsManager::Instance()->GetScreenHeight();
+
 	window = new Window();
-	window->Init(SettingsManager::Instance()->GetScreenWidth(), SettingsManager::Instance()->GetScreenHeight(), hInstance, nCmdShow, WndProc);
+	window->Init(width, height, hInstance, nCmdShow, WndProc);
 
 	graphics = new Graphics();
-	graphics->Init(window->GetHwnd(), hInstance);
+	graphics->Init(width, height, window->GetHwnd(), hInstance);
 	
 	AudioEngine::Init();
 	AssetLoader::Init(graphics, "assets\\assets.json");

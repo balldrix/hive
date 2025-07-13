@@ -149,7 +149,7 @@ void Game::OnWindowSizeChanged(int width, int height)
 {
 	m_window->SetWidth(width);
 	m_window->SetHeight(height);
-	m_graphics->CreateResources();
+	m_graphics->SetResolution(width, height);
 }
 
 void Game::Shutdown()
