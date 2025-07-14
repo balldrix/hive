@@ -296,31 +296,34 @@ void Graphics::PresentBackBuffer()
 
 	RECT rc;
 	GetClientRect(m_window, &rc);
-
-	float targetAspect = static_cast<float>(m_backbufferWidth) / m_backbufferHeight;
-	float windowAspect = static_cast<float>(m_windowWidth) / m_windowHeight;
-
-	float scale = (windowAspect > targetAspect)
-		? static_cast<float>(m_windowHeight) / m_backbufferHeight
-		: static_cast<float>(m_windowWidth) / m_backbufferWidth;
-
-	float drawWidth = m_backbufferWidth * scale;
-	float drawHeight = m_backbufferHeight * scale;
-	float offsetX = (m_windowWidth - drawWidth) * 0.5f;
-	float offsetY = (m_windowHeight - drawHeight) * 0.5f;
-
-	XMFLOAT2 drawPos(offsetX, offsetY);
-	XMFLOAT2 scaleVec(scale, scale);
+	float windowWidth = static_cast<float>(rc.right - rc.left);
+	float windowHeight = static_cast<float>(rc.bottom - rc.top);
 
 	D3D11_VIEWPORT vp = {};
-	vp.TopLeftX = offsetX;
-	vp.TopLeftY = offsetY;
-	vp.Width = static_cast<float>(drawWidth);
-	vp.Height = static_cast<float>(drawHeight);
+	vp.TopLeftX = 0;
+	vp.TopLeftY = 0;
+	vp.Width = static_cast<float>(windowWidth);
+	vp.Height = static_cast<float>(windowHeight);
 	vp.MinDepth = 0.0f;
 	vp.MaxDepth = 1.0f;
 
 	m_d3dDeviceContext->RSSetViewports(1, &vp);
+
+	float targetAspect = static_cast<float>(m_backbufferWidth) / m_backbufferHeight;
+	float windowAspect = static_cast<float>(windowWidth) / windowHeight;
+
+	float scale = (windowAspect > targetAspect)
+		? static_cast<float>(windowHeight) / m_backbufferHeight
+		: static_cast<float>(windowWidth) / m_backbufferWidth;
+
+	float drawWidth = m_backbufferWidth * scale;
+	float drawHeight = m_backbufferHeight * scale;
+	float offsetX = (windowWidth - drawWidth) * 0.5f;
+	float offsetY = (windowHeight - drawHeight) * 0.5f;
+
+	XMFLOAT2 drawPos(offsetX, offsetY);
+	XMFLOAT2 scaleVec(scale, scale);
+
 
 	m_defaultSpriteBatch->Begin(SpriteSortMode_Deferred, nullptr, m_samplerState.Get());
 	m_defaultSpriteBatch->Draw(m_renderTextureSRV.Get(), drawPos, nullptr, Colors::White, 0.0f, {}, scaleVec);
