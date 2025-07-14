@@ -16,6 +16,7 @@ class Window
 		bool GetResizing() const { return m_resizing; }
 		int GetWidth() const { return m_width; }
 		int GetHeight() const { return m_height; }
+		bool GetFullscreen() const { return m_fullscreen; }
 
 		void SetMinimized(bool value);
 		void SetMaximized(bool value);
@@ -23,6 +24,7 @@ class Window
 		void SetWidth(int width);
 		void SetHeight(int height);
 		void ResizeWindow(int width, int height);
+		void SetFullscreen(bool fullscreen);
 
 	private:
 		HINSTANCE m_hInst;
@@ -33,4 +35,5 @@ class Window
 		bool m_maximized;
 		bool m_resizing;
 		DWORD m_windowStyle;
+		bool m_fullscreen;
 };

@@ -2,6 +2,7 @@
 
 #include "GlobalConstants.h"
 #include "Logger.h"
+#include "SettingsManager.h"
 
 using namespace GlobalConstants;
 
@@ -13,7 +14,8 @@ Window::Window() :
 	m_minimized(false),
 	m_maximized(false),
 	m_resizing(false),
-	m_windowStyle(0)
+	m_windowStyle(0),
+	m_fullscreen(false)
 {
 }
 	
@@ -30,6 +32,7 @@ int Window::Init(int width, int height, HINSTANCE hInstance, INT cmdShow, WNDPRO
 	m_width = width;
 	m_height = height;
 	m_hInst = hInstance;
+	m_fullscreen = SettingsManager::Instance()->IsFullscreen();
 
 	WNDCLASSEXW wcex = {};
 	wcex.cbSize = sizeof(WNDCLASSEXW);
@@ -51,14 +54,11 @@ int Window::Init(int width, int height, HINSTANCE hInstance, INT cmdShow, WNDPRO
 	m_hWindow = CreateWindowExW(0, WndClassName, WindowName, m_windowStyle,
 								CW_USEDEFAULT, CW_USEDEFAULT, rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, hInstance,
 								nullptr);
-	// TODO: Change to CreateWindowExW(WS_EX_TOPMOST, L"Direct3D_Win32_Game1WindowClass", L"Direct3D Win32 Game1", WS_POPUP,
-	// to default to fullscreen.
 
 	if(!m_hWindow)
 		return 1;
 
-	ShowWindow(m_hWindow, cmdShow);
-	// TODO: Change nCmdShow to SW_SHOWMAXIMIZED to default to fullscreen.
+	SetFullscreen(m_fullscreen);
 
 	GetClientRect(m_hWindow, &rc);
 
@@ -103,5 +103,29 @@ void Window::ResizeWindow(int width, int height)
 	int windowHeight = rc.bottom - rc.top;
 
 	SetWindowPos(m_hWindow, nullptr, CW_USEDEFAULT, CW_USEDEFAULT, windowWidth, windowHeight, SWP_NOMOVE | SWP_NOZORDER);
+}
 
+void Window::SetFullscreen(bool fullscreen)
+{
+	m_fullscreen = fullscreen;
+
+	if(!fullscreen)
+	{
+		SetWindowLongPtr(m_hWindow, GWL_STYLE, m_windowStyle);
+		SetWindowLongPtr(m_hWindow, GWL_EXSTYLE, 0);
+
+		int width = SettingsManager::Instance()->GetScreenWidth();
+		int height = SettingsManager::Instance()->GetScreenHeight();
+
+		ShowWindow(m_hWindow, SW_SHOWNORMAL);
+		SetWindowPos(m_hWindow, HWND_TOP, CW_USEDEFAULT, CW_USEDEFAULT, width, height, SWP_NOMOVE | SWP_NOZORDER);
+	}
+	else
+	{
+		SetWindowLongPtr(m_hWindow, GWL_STYLE, 0);
+		SetWindowLongPtr(m_hWindow, GWL_EXSTYLE, WS_EX_TOPMOST);
+
+		SetWindowPos(m_hWindow, HWND_TOP, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOZORDER);
+		ShowWindow(m_hWindow, SW_SHOWMAXIMIZED);
+	}
 }

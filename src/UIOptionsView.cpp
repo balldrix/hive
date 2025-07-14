@@ -2,6 +2,7 @@
 
 #include "AudioEngine.h"
 #include "Frame.h"
+#include "Game.h"
 #include "GameStateManager.h"
 #include "GlobalConstants.h"
 #include "Graphics.h"
@@ -322,12 +323,15 @@ void UIOptionsView::SetScreenResolution(int index)
 	
 	SettingsManager::Instance()->SetScreenWidth(mode.width);
 	SettingsManager::Instance()->SetScreenHeight(mode.height);
+	GameStateManager::Instance()->GetWindow()->SetFullscreen(SettingsManager::Instance()->IsFullscreen());
 
 	UIManager::PlayUISound(UISoundType::Select);
 }
 
 void UIOptionsView::SetFullscreen(int index)
 {
+	GameStateManager::Instance()->GetWindow()->SetFullscreen(index);
+	SettingsManager::Instance()->SetFullscreen(index);
 }
 
 void UIOptionsView::Back()
@@ -407,5 +411,5 @@ int UIOptionsView::GetScreenResolutionIndex()
 
 int UIOptionsView::GetFullscreenIndex()
 {
-	return 0;
+	return GameStateManager::Instance()->GetWindow()->GetFullscreen();
 }

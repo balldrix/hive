@@ -7,23 +7,22 @@
 #include "FrontEndOptionsGameState.h"
 #include "GameplayGameState.h"
 #include "GameStateManager.h"
-#include "GlobalConstants.h"
 #include "Graphics.h"
 #include "InitialLoadGameState.h"
 #include "Input.h"
 #include "LoadingGameState.h"
 #include "Logger.h"
 #include "MainMenuGameState.h"
+#include "SettingsManager.h"
 #include "Timer.h"
 #include "TitleScreenGameState.h"
 #include "Window.h"
 
 #include <combaseapi.h>
+#include <fmt/core.h>
 #include <objbase.h>
 #include <synchapi.h>
 #include <windows.h>
-
-using namespace GlobalConstants;
 
 Game::Game() noexcept :
 	m_window(nullptr),
@@ -149,7 +148,7 @@ void Game::OnWindowSizeChanged(int width, int height)
 {
 	m_window->SetWidth(width);
 	m_window->SetHeight(height);
-	m_graphics->SetResolution(width, height);
+	//m_graphics->SetResolution(width, height);
 }
 
 void Game::Shutdown()
@@ -169,7 +168,6 @@ LRESULT Game::MessageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lPara
 	static bool s_in_sizemove = false;
 	static bool s_in_suspend = false;
 	static bool s_minimized = false;
-	static bool s_fullscreen = false;
 
 	// handle msg values in switch statement
 	switch(msg)
@@ -265,30 +263,7 @@ LRESULT Game::MessageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lPara
 
 		if(wParam == VK_RETURN && (lParam & 0x60000000) == 0x20000000)
 		{
-			// Implements the classic ALT+ENTER fullscreen toggle
-			if(s_fullscreen)
-			{
-				SetWindowLongPtr(hWindow, GWL_STYLE, WS_OVERLAPPEDWINDOW);
-				SetWindowLongPtr(hWindow, GWL_EXSTYLE, 0);
-
-				int width = m_window->GetWidth();
-				int height = m_window->GetHeight();
-
-				ShowWindow(hWindow, SW_SHOWNORMAL);
-
-				SetWindowPos(hWindow, HWND_TOP, 0, 0, width, height, SWP_NOMOVE | SWP_NOZORDER | SWP_FRAMECHANGED);
-			}
-			else
-			{
-				SetWindowLongPtr(hWindow, GWL_STYLE, 0);
-				SetWindowLongPtr(hWindow, GWL_EXSTYLE, WS_EX_TOPMOST);
-
-				SetWindowPos(hWindow, HWND_TOP, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
-
-				ShowWindow(hWindow, SW_SHOWMAXIMIZED);
-			}
-
-			s_fullscreen = !s_fullscreen;
+			m_window->SetFullscreen(!SettingsManager::Instance()->IsFullscreen());
 		}
 		break;
 	case WM_MENUCHAR:

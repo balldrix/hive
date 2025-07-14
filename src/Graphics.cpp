@@ -16,9 +16,9 @@
 #include <memory>
 #include <minwinbase.h>
 #include <vector>
+#include <windef.h>
 #include <windows.h>
 #include <wrl/client.h>
-#include <windef.h>
 
 using namespace GlobalConstants;
 using namespace DirectX;
@@ -29,9 +29,8 @@ Graphics::Graphics() :
 	m_window(nullptr),
 	m_hInstance(nullptr),
 	m_featureLevel(D3D_FEATURE_LEVEL_9_1),
-	m_fullscreen(false),
-	m_backbufferWidth(0),
-	m_backbufferHeight(0),
+	m_nativeGameWidth(0),
+	m_nativeGameHeight(0),
 	m_windowWidth(0),
 	m_windowHeight(0),
 	m_displayModes()
@@ -45,8 +44,8 @@ void Graphics::Init(int windowWidth, int windowHeight, HWND hWnd, HINSTANCE hIns
 	m_windowWidth = windowWidth;
 	m_windowHeight = windowHeight;
 
-	m_backbufferWidth = GameWidth;
-	m_backbufferHeight = GameHeight;
+	m_nativeGameWidth = GameWidth;
+	m_nativeGameHeight = GameHeight;
 
 	m_window = hWnd;
 	CreateDevice();
@@ -202,8 +201,8 @@ void Graphics::CreateResources()
 	}
 
 	D3D11_TEXTURE2D_DESC texDesc = {};
-	texDesc.Width = m_backbufferWidth;
-	texDesc.Height = m_backbufferHeight;
+	texDesc.Width = m_nativeGameWidth;
+	texDesc.Height = m_nativeGameHeight;
 	texDesc.MipLevels = 1;
 	texDesc.ArraySize = 1;
 	texDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
@@ -270,8 +269,8 @@ void Graphics::Begin()
 	D3D11_VIEWPORT vp = {};
 	vp.TopLeftX = 0;
 	vp.TopLeftY = 0;
-	vp.Width = static_cast<float>(m_backbufferWidth);
-	vp.Height = static_cast<float>(m_backbufferHeight);
+	vp.Width = static_cast<float>(m_nativeGameWidth);
+	vp.Height = static_cast<float>(m_nativeGameHeight);
 	vp.MinDepth = 0.0f;
 	vp.MaxDepth = 1.0f;
 
@@ -299,36 +298,33 @@ void Graphics::PresentBackBuffer()
 	const float black[4] = { 0, 0, 0, 1 };
 	m_d3dDeviceContext->ClearRenderTargetView(m_presentRTV.Get(), black);
 
-	RECT rc;
-	GetClientRect(m_window, &rc);
-	float windowWidth = static_cast<float>(rc.right - rc.left);
-	float windowHeight = static_cast<float>(rc.bottom - rc.top);
-
 	D3D11_VIEWPORT vp = {};
 	vp.TopLeftX = 0;
 	vp.TopLeftY = 0;
-	vp.Width = static_cast<float>(windowWidth);
-	vp.Height = static_cast<float>(windowHeight);
+	vp.Width = static_cast<float>(m_windowWidth);
+	vp.Height = static_cast<float>(m_windowHeight);
 	vp.MinDepth = 0.0f;
 	vp.MaxDepth = 1.0f;
 
 	m_d3dDeviceContext->RSSetViewports(1, &vp);
 
-	float targetAspect = static_cast<float>(m_backbufferWidth) / m_backbufferHeight;
-	float windowAspect = static_cast<float>(windowWidth) / windowHeight;
+	D3D11_TEXTURE2D_DESC renderDesc = {};
+	m_backbuffer->GetDesc(&renderDesc);
 
-	float scale = (windowAspect > targetAspect)
-		? static_cast<float>(windowHeight) / m_backbufferHeight
-		: static_cast<float>(windowWidth) / m_backbufferWidth;
+	float nativeAspect = static_cast<float>(m_nativeGameWidth) / m_nativeGameHeight;
+	float windowAspect = static_cast<float>(renderDesc.Width) / renderDesc.Height;
 
-	float drawWidth = m_backbufferWidth * scale;
-	float drawHeight = m_backbufferHeight * scale;
-	float offsetX = (windowWidth - drawWidth) * 0.5f;
-	float offsetY = (windowHeight - drawHeight) * 0.5f;
+	float scale = (windowAspect > nativeAspect)
+		? static_cast<float>(renderDesc.Height) / m_nativeGameHeight
+		: static_cast<float>(renderDesc.Width) / m_nativeGameWidth;
+
+	float drawWidth = m_nativeGameWidth * scale;
+	float drawHeight = m_nativeGameHeight * scale;
+	float offsetX = (renderDesc.Width - drawWidth) * 0.5f;
+	float offsetY = (renderDesc.Height - drawHeight) * 0.5f;
 
 	XMFLOAT2 drawPos(offsetX, offsetY);
 	XMFLOAT2 scaleVec(scale, scale);
-
 
 	m_defaultSpriteBatch->Begin(SpriteSortMode_Deferred, nullptr, m_samplerState.Get());
 	m_defaultSpriteBatch->Draw(m_renderTextureSRV.Get(), drawPos, nullptr, Colors::White, 0.0f, {}, scaleVec);
@@ -372,7 +368,6 @@ void Graphics::SetResolution(int width, int height)
 
 	CreateResources();
 }
-
 
 void Graphics::UpdateDisplayModes()
 {

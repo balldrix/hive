@@ -54,14 +54,13 @@ public:
 	std::shared_ptr<SpriteBatch> GetDefaultSpriteBatch() const { return m_defaultSpriteBatch; }
 	std::shared_ptr<SpriteBatch> GetUISpriteBatch() const { return m_uiSpriteBatch; }
 
-	int GetBackbufferWidth()	const { return m_backbufferWidth; }
-	int GetBackbufferHeight()	const { return m_backbufferHeight; }
+	int GetBackbufferWidth()	const { return m_nativeGameWidth; }
+	int GetBackbufferHeight()	const { return m_nativeGameHeight; }
 	int GetOutputWidth() const { return m_windowWidth; }
 	int GetOutputHeight() const { return m_windowHeight; }
 
 	HWND GetHwnd() const { return m_window; }
 	HINSTANCE GetHInstance() const { return m_hInstance; }
-	bool GetFullscreen() const { return m_fullscreen; }
 
 	void SetResolution(int width, int height);
 
@@ -98,10 +97,9 @@ private:
 
 	std::shared_ptr<SpriteBatch> m_defaultSpriteBatch;
 	std::shared_ptr<SpriteBatch> m_uiSpriteBatch;
-	
-	bool m_fullscreen;
-	int m_backbufferWidth;
-	int m_backbufferHeight;
+
+	int m_nativeGameWidth;
+	int m_nativeGameHeight;
 	int m_windowWidth;
 	int m_windowHeight;
 	std::vector<DisplayMode> m_displayModes;
