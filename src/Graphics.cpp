@@ -262,6 +262,8 @@ void Graphics::CreateResources()
 
 void Graphics::Begin()
 {
+	ID3D11ShaderResourceView* nullSRVs[8] = { nullptr };
+	m_d3dDeviceContext->PSSetShaderResources(0, 8, nullSRVs);
 	m_d3dDeviceContext->ClearRenderTargetView(m_renderRTV.Get(), BackColor);
 	m_d3dDeviceContext->OMSetRenderTargets(1, m_renderRTV.GetAddressOf(), nullptr);
 
@@ -287,6 +289,9 @@ void Graphics::PresentBackBuffer()
 
 	m_defaultSpriteBatch->End();
 	m_uiSpriteBatch->End();
+
+	ID3D11ShaderResourceView* nullSRVs[8] = { nullptr };
+	m_d3dDeviceContext->PSSetShaderResources(0, 8, nullSRVs);
 
 	m_d3dDeviceContext->OMSetRenderTargets(1, m_presentRTV.GetAddressOf(), nullptr);
 
