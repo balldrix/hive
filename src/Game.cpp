@@ -57,7 +57,7 @@ void Game::Init(Window* window, Graphics* graphics)
 	m_input->Init();
 
 	m_gameStateManager = new GameStateManager();
-	m_gameStateManager->Init(m_graphics, m_input);
+	m_gameStateManager->Init(m_window, m_graphics, m_input);
 
 	m_gameStateManager->AddState(new InitialLoadGameState(m_gameStateManager));
 	m_gameStateManager->AddState(new LoadingGameState(m_gameStateManager));

@@ -12,7 +12,8 @@ Window::Window() :
 	m_height(0),
 	m_minimized(false),
 	m_maximized(false),
-	m_resizing(false)
+	m_resizing(false),
+	m_windowStyle(0)
 {
 }
 	
@@ -25,44 +26,45 @@ Window::~Window()
 
 int Window::Init(int width, int height, HINSTANCE hInstance, INT cmdShow, WNDPROC wndProc)
 {
-    m_width = width;
-    m_height = height;
+	m_windowStyle = (WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX);
+	m_width = width;
+	m_height = height;
 	m_hInst = hInstance;
 
-    WNDCLASSEXW wcex = {};
-    wcex.cbSize = sizeof(WNDCLASSEXW);
-    wcex.style = CS_HREDRAW | CS_VREDRAW;
-    wcex.lpfnWndProc = wndProc;
-    wcex.hInstance = hInstance;
-    wcex.hIcon = LoadIconW(hInstance, L"IDI_ICON");
-    wcex.hCursor = LoadCursorW(nullptr, IDC_ARROW);
-    wcex.hbrBackground = reinterpret_cast<HBRUSH>(COLOR_WINDOW + 1);
-    wcex.lpszClassName = WndClassName;
-    wcex.hIconSm = LoadIconW(wcex.hInstance, L"IDI_ICON");
-    if(!RegisterClassExW(&wcex))
-        return 1;
+	WNDCLASSEXW wcex = {};
+	wcex.cbSize = sizeof(WNDCLASSEXW);
+	wcex.style = wcex.style = CS_HREDRAW | CS_VREDRAW;
+	wcex.lpfnWndProc = wndProc;
+	wcex.hInstance = hInstance;
+	wcex.hIcon = LoadIconW(hInstance, L"IDI_ICON");
+	wcex.hCursor = LoadCursorW(nullptr, IDC_ARROW);
+	wcex.hbrBackground = reinterpret_cast<HBRUSH>(COLOR_WINDOW + 1);
+	wcex.lpszClassName = WndClassName;
+	wcex.hIconSm = LoadIconW(wcex.hInstance, L"IDI_ICON");
+	if(!RegisterClassExW(&wcex))
+		return 1;
 
-    RECT rc = { 0, 0, static_cast<LONG>(m_width), static_cast<LONG>(m_height) };
+	RECT rc = { 0, 0, static_cast<LONG>(m_width), static_cast<LONG>(m_height) };
 
-    AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
+	AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
 
-    m_hWindow = CreateWindowExW(0, WndClassName, WindowName, WS_OVERLAPPEDWINDOW,
-                                CW_USEDEFAULT, CW_USEDEFAULT, rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, hInstance,
-                                nullptr);
-    // TODO: Change to CreateWindowExW(WS_EX_TOPMOST, L"Direct3D_Win32_Game1WindowClass", L"Direct3D Win32 Game1", WS_POPUP,
-    // to default to fullscreen.
+	m_hWindow = CreateWindowExW(0, WndClassName, WindowName, m_windowStyle,
+								CW_USEDEFAULT, CW_USEDEFAULT, rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, hInstance,
+								nullptr);
+	// TODO: Change to CreateWindowExW(WS_EX_TOPMOST, L"Direct3D_Win32_Game1WindowClass", L"Direct3D Win32 Game1", WS_POPUP,
+	// to default to fullscreen.
 
-    if(!m_hWindow)
-        return 1;
+	if(!m_hWindow)
+		return 1;
 
-    ShowWindow(m_hWindow, cmdShow);
-    // TODO: Change nCmdShow to SW_SHOWMAXIMIZED to default to fullscreen.
+	ShowWindow(m_hWindow, cmdShow);
+	// TODO: Change nCmdShow to SW_SHOWMAXIMIZED to default to fullscreen.
 
-    GetClientRect(m_hWindow, &rc);
+	GetClientRect(m_hWindow, &rc);
 
-    Logger::LogInfo("Initialised Window.");
+	Logger::LogInfo("Initialised Window.");
 
-    return 0;
+	return 0;
 }
 
 void Window::SetMinimized(bool value)
@@ -82,10 +84,24 @@ void Window::SetResizing(bool value)
 
 void Window::SetWidth(int width)
 {
-    m_width = width;
+	m_width = width;
 }
 
 void Window::SetHeight(int height)
 {
-    m_height = height;
+	m_height = height;
+}
+
+void Window::ResizeWindow(int width, int height)
+{
+	m_width = width;
+	m_height = height;
+
+	RECT rc = { 0, 0, m_width, m_height };
+	AdjustWindowRect(&rc, m_windowStyle, FALSE);
+	int windowWidth = rc.right - rc.left;
+	int windowHeight = rc.bottom - rc.top;
+
+	SetWindowPos(m_hWindow, nullptr, CW_USEDEFAULT, CW_USEDEFAULT, windowWidth, windowHeight, SWP_NOMOVE | SWP_NOZORDER);
+
 }

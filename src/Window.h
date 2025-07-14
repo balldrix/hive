@@ -22,6 +22,7 @@ class Window
 		void SetResizing(bool value);
 		void SetWidth(int width);
 		void SetHeight(int height);
+		void ResizeWindow(int width, int height);
 
 	private:
 		HINSTANCE m_hInst;
@@ -31,4 +32,5 @@ class Window
 		bool m_minimized;
 		bool m_maximized;
 		bool m_resizing;
+		DWORD m_windowStyle;
 };

@@ -137,7 +137,8 @@ void UICycleMenuItemView::Shutdown()
 
 void UICycleMenuItemView::HandleOptionChange(int index)
 {
-	if(index >= static_cast<int>(m_options.size())) {
+	if(index >= static_cast<int>(m_options.size())) 
+	{
 		m_selectedIndex = 0;
 	}
 	else if(index < 0)
@@ -149,7 +150,7 @@ void UICycleMenuItemView::HandleOptionChange(int index)
 	m_optionText->SetText(option);
 	m_optionText->SetAlignment(UISpriteText::Alignments::Centre);
 
-	if(onOptionChanged) onOptionChanged(index);
+	if(onOptionChanged) onOptionChanged(m_selectedIndex);
 }
 
 void UICycleMenuItemView::HandleSelectionStateChanged(SelectionStates previousSelectionState, SelectionStates newSelectionState)

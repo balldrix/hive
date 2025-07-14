@@ -15,6 +15,7 @@
 #include "UIStackingView.h"
 #include "UITextMenuItemView.h"
 #include "UIView.h"
+#include "Window.h"
 
 #include <cmath>
 #include <DirectXColors.h>
@@ -307,6 +308,22 @@ void UIOptionsView::SetMusicVolume(int index)
 
 void UIOptionsView::SetScreenResolution(int index)
 {
+	std::vector<Graphics::DisplayMode> modes;
+	Graphics::DisplayMode mode;
+
+	modes = GameStateManager::Instance()->GetGraphics()->GetSupportedResolutions();
+	mode = modes[index];
+	if(UIOptionsView::GetFullscreenIndex() == 0)
+	{
+		GameStateManager::Instance()->GetWindow()->ResizeWindow(mode.width, mode.height);
+	}
+
+	GameStateManager::Instance()->GetGraphics()->SetResolution(mode.width, mode.height);
+	
+	SettingsManager::Instance()->SetScreenWidth(mode.width);
+	SettingsManager::Instance()->SetScreenHeight(mode.height);
+
+	UIManager::PlayUISound(UISoundType::Select);
 }
 
 void UIOptionsView::SetFullscreen(int index)
@@ -342,8 +359,8 @@ std::vector<std::string> UIOptionsView::GetOptionsForOptionType(OptionType optio
 	{
 		std::vector<std::string> modes =
 		{
-			" FULLSCREEN ",
-			" WINDOWED "
+			" WINDOWED ",
+			" FULLSCREEN "
 		};
 		return modes;
 	}
@@ -368,6 +385,23 @@ int UIOptionsView::GetMusicVolumeIndex()
 
 int UIOptionsView::GetScreenResolutionIndex()
 {
+	Graphics* graphics;
+	int width;
+	int height;
+	std::vector<Graphics::DisplayMode> modes;
+
+	graphics = GameStateManager::Instance()->GetGraphics();
+	width = graphics->GetOutputWidth();
+	height = graphics->GetOutputHeight();
+	modes = graphics->GetSupportedResolutions();
+
+	for(int i = 0; i < modes.size(); i++)
+	{
+		Graphics::DisplayMode mode;
+		mode = modes[i];
+		if(mode.width == width && mode.height == height) return i;
+	}
+
 	return 0;
 }
 

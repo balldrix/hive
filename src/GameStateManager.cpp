@@ -42,10 +42,11 @@ GameStateManager* GameStateManager::Instance()
 	return s_instance;
 }
 
-void GameStateManager::Init(Graphics* graphics, Input* input)
+void GameStateManager::Init(Window* window, Graphics* graphics, Input* input)
 {
 	Logger::LogInfo("Initialising Gamestate manager.");
 
+	m_window = window;
 	m_graphics = graphics;
 	m_input = input;
 }
