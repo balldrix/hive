@@ -1,42 +1,42 @@
-#include "UIMainMenuView.h"
+#include "UIPauseMenuView.h"
 
 #include "Frame.h"
 #include "GameStateManager.h"
 #include "GlobalConstants.h"
-#include "LoadingGameState.h"
 #include "Logger.h"
 #include "UIManager.h"
 #include "UIMenuItemView.h"
 #include "UIMenuView.h"
 #include "UIStackingView.h"
 #include "UITextMenuItemView.h"
-#include "UIView.h"
 
 #include <DirectXColors.h>
 #include <string>
 #include <vector>
-#include <Windows.h>
 
 using namespace GlobalConstants;
 
-UIMainMenuView::UIMainMenuView()
+UIPauseMenuView::UIPauseMenuView()
 {
 }
 
-UIMainMenuView::~UIMainMenuView()
+UIPauseMenuView::~UIPauseMenuView()
 {
 	Shutdown();
 }
 
-void UIMainMenuView::Init(std::string name)
+void UIPauseMenuView::Init(std::string name)
 {
+	Logger::LogInfo("Initialising UI Pause Menu View.");
+
 	m_name = name;
-	m_uiStackingView.Init("Main Menu Stacking View");
+	m_uiStackingView.Init("Pause Menu Stacking View");
 	m_uiStackingView.SetOrientation(UIStackingView::Orientations::Vertical);
 
-	m_menuOptions.emplace_back(new MenuOptionBase("Start", &UIMainMenuView::StartGame));
-	m_menuOptions.emplace_back(new MenuOptionBase("Options", &UIMainMenuView::ProceedToOptions));
-	m_menuOptions.emplace_back(new MenuOptionBase("Quit", &UIMainMenuView::QuitGame));
+	m_menuOptions.emplace_back(new MenuOptionBase("Continue", Continue));
+	m_menuOptions.emplace_back(new MenuOptionBase("Options", ProceedToOptionsView));
+	m_menuOptions.emplace_back(new MenuOptionBase("Quit To Menu", ShowQuitToMenuPrompt));
+	m_menuOptions.emplace_back(new MenuOptionBase("Quit To Desktop", ShowQuitToDesktopPrompt));
 
 	for(const auto& option : m_menuOptions)
 	{
@@ -56,7 +56,7 @@ void UIMainMenuView::Init(std::string name)
 		int up = i == 0 ? -1 : i - 1;
 		int down = i + 1;
 
-		if (i == options.size() - 1)
+		if(i == options.size() - 1)
 		{
 			down = -1;
 		}
@@ -78,29 +78,38 @@ void UIMainMenuView::Init(std::string name)
 
 	m_uiStackingView.UpdateLayout(frame);
 
+	m_assignedStates.push_back("Pause");
+
 	UIManager::RegisterUIView(this);
 }
 
-void UIMainMenuView::Shutdown()
+void UIPauseMenuView::Shutdown()
 {
-	Logger::LogInfo("Shutting down UI Main Menu View");
-
+	Logger::LogInfo("Shutting down UI Pause Menu View.");
 	UIMenuView::Shutdown();
 }
 
-void UIMainMenuView::StartGame()
+void UIPauseMenuView::OnCancelPressed()
 {
-	Logger::LogInfo("Starting Game");
-
-	LoadingGameState::ProceedToGameplay();
+	Continue();
 }
 
-void UIMainMenuView::ProceedToOptions()
+void UIPauseMenuView::Continue()
 {
-	GameStateManager::Instance()->SwitchState("FrontEndOptions");
+	GameStateManager::Instance()->SwitchState("Gameplay");
 }
 
-void UIMainMenuView::QuitGame()
+void UIPauseMenuView::ProceedToOptionsView()
 {
-	PostQuitMessage(0);
+	GameStateManager::Instance()->SwitchState("SharedOptions");
+}
+
+void UIPauseMenuView::ShowQuitToMenuPrompt()
+{
+	// @TODO: Show Quit Prompt
+}
+
+void UIPauseMenuView::ShowQuitToDesktopPrompt()
+{
+	// @TODO Show Quit Prompt
 }

@@ -32,7 +32,9 @@
     <ClCompile Include="src\SettingsManager.cpp" />
     <ClCompile Include="src\TilemapLoader.cpp" />
     <ClCompile Include="src\UICycleMenuItemView.cpp" />
+    <ClCompile Include="src\UIMenuView.cpp" />
     <ClCompile Include="src\UIOptionsView.cpp" />
+    <ClCompile Include="src\UIPauseMenuView.cpp" />
     <ClCompile Include="src\UIScreenFlashFX.cpp" />
     <ClCompile Include="src\GameDataManager.cpp" />
     <ClCompile Include="src\MenuSystem.cpp" />
@@ -82,6 +84,8 @@
     <ClInclude Include="src\EnemyDefinition.h" />
     <ClInclude Include="src\EnemySpawnManager.h" />
     <ClInclude Include="src\ImpactFxPool.h" />
+    <ClInclude Include="src\UIMenuView.h" />
+    <ClInclude Include="src\UIPauseMenuView.h" />
     <ClInclude Include="src\ObjectPool.h" />
     <ClInclude Include="src\EnemyFallingState.h" />
     <ClInclude Include="src\EnemyLandingState.h" />

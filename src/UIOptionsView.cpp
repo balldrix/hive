@@ -2,16 +2,15 @@
 
 #include "AudioEngine.h"
 #include "Frame.h"
-#include "Game.h"
 #include "GameStateManager.h"
 #include "GlobalConstants.h"
 #include "Graphics.h"
 #include "Logger.h"
-#include "MenuSystem.h"
 #include "SettingsManager.h"
 #include "UICycleMenuItemView.h"
 #include "UIManager.h"
 #include "UIMenuItemView.h"
+#include "UIMenuView.h"
 #include "UISliderMenuItemView.h"
 #include "UIStackingView.h"
 #include "UITextMenuItemView.h"
@@ -20,11 +19,9 @@
 
 #include <cmath>
 #include <DirectXColors.h>
-#include <directxtk/SimpleMath.h>
 #include <fmt/core.h>
 #include <string>
 #include <vector>
-#include <windows.h>
 
 using namespace GlobalConstants;
 
@@ -39,39 +36,93 @@ UIOptionsView::~UIOptionsView()
 
 void UIOptionsView::Init(std::string name)
 {
-	Logger::LogInfo("Initialising UI Options View");
+	Logger::LogInfo("Initialising UI Options View.");
 
 	m_name = name;
 	m_uiStackingView.Init("Options Menu Stacking View");
 	m_uiStackingView.SetOrientation(UIStackingView::Orientations::Vertical);
 
-	for(const auto& option : m_menuOptions)
+	m_menuOptions.emplace_back(new OptionsMenuOption(
+		"SFX Volume",
+		nullptr,
+		OptionType::SFXVolume,
+		SelectionType::Slider,
+		SetSFXVolume,
+		GetSFXVolumeIndex));
+
+	m_menuOptions.emplace_back(new OptionsMenuOption(
+		"Music Volume",
+		nullptr,
+		OptionType::MusicVolume,
+		SelectionType::Slider,
+		SetMusicVolume,
+		GetMusicVolumeIndex));
+
+	m_menuOptions.emplace_back(new OptionsMenuOption(
+		"Resolution",
+		nullptr,
+		OptionType::Resolution,
+		SelectionType::Cycle,
+		SetScreenResolution,
+		GetScreenResolutionIndex));
+
+	m_menuOptions.emplace_back(new OptionsMenuOption(
+		"Fullscreen",
+		nullptr,
+		OptionType::Fullscreen,
+		SelectionType::Cycle,
+		SetFullscreen,
+		GetFullscreenIndex));
+
+	m_menuOptions.emplace_back(new OptionsMenuOption(
+		"Back",
+		Back,
+		OptionType::None,
+		SelectionType::Fixed,
+		nullptr,
+		nullptr));
+
+	for(const auto& optionBase : m_menuOptions)
 	{
-		std::string name = option.label;
+		std::string name = optionBase->label;
 		UIMenuItemView* item = nullptr;
 
-		switch(option.selectionType)
+		// Try to cast the base pointer to the richer OptionsMenuOption
+		if(auto* option = dynamic_cast<OptionsMenuOption*>(optionBase))
 		{
-		case UIOptionsView::SelectionType::Slider :
-		{
-			auto* sliderItem = new UISliderMenuItemView();
-			sliderItem->Init(name, 1.0f, option.getDefaultValue(), Colors::White.v, option.onIndexChange);
-			item = sliderItem;
+			switch(option->selectionType)
+			{
+				case SelectionType::Slider:
+				{
+					auto* sliderItem = new UISliderMenuItemView();
+					sliderItem->Init(name, 1.0f, option->getDefaultValue(), Colors::White.v, option->onIndexChange);
+					item = sliderItem;
+					break;
+				}
+				case SelectionType::Cycle:
+				{
+					auto* cycleItem = new UICycleMenuItemView();
+					cycleItem->Init(name, GetOptionsForOptionType(option->optionType), option->getDefaultValue(), option->onIndexChange);
+					item = cycleItem;
+					break;
+				}
+				default:
+				{
+					auto* textMenuItem = new UITextMenuItemView();
+					textMenuItem->Init(name);
+					textMenuItem->SetText(name);
+					item = textMenuItem;
+					break;
+				}
+			}
 		}
-			break;
-		case UIOptionsView::SelectionType::Cycle:
+		else
 		{
-			auto* cycleItem = new UICycleMenuItemView();
-			cycleItem->Init(name, GetOptionsForOptionType(option.optionType), option.getDefaultValue(), option.onIndexChange);
-			item = cycleItem;
-			break;
-		}
-		default:
+			// Fallback: basic text item for non-options menus
 			auto* textMenuItem = new UITextMenuItemView();
 			textMenuItem->Init(name);
 			textMenuItem->SetText(name);
 			item = textMenuItem;
-			break;
 		}
 
 		if(item)
@@ -117,179 +168,16 @@ void UIOptionsView::Init(std::string name)
 	UIManager::RegisterUIView(this);
 }
 
-void UIOptionsView::Update(float deltaTime)
-{
-	if(!m_isActive) return;
-
-	for(UIMenuItemView* item : m_uiStackingView.GetMenuItems())
-	{
-		item->Update(deltaTime);
-	}
-
-	switch(m_currentViewState)
-	{
-	case UIView::ViewStates::NotVisible:
-		m_uiStackingView.SetActive(false);
-		m_isActive = false;
-		m_isAnimating = false;
-		break;
-	case UIView::ViewStates::AnimatingIn:
-		DoTransition(deltaTime);
-		break;
-	case UIView::ViewStates::Visible:
-		m_isAnimating = false;
-		break;
-	case UIView::ViewStates::AnimatingOut:
-		DoTransition(deltaTime);
-		break;
-	default:
-		break;
-	}
-}
-
-void UIOptionsView::Render(Graphics* graphics)
-{
-	if(!m_isActive) return;
-
-	m_uiStackingView.Render(graphics);
-}
-
 void UIOptionsView::Shutdown()
 {
 	Logger::LogInfo("Shutting down UI Options View");
 
-	UIManager::UnregisterUIView(this);
-}
-
-void UIOptionsView::TransitionIn(bool isAnimated)
-{
-	m_hasPlayedTransitionSound = false;
-	MenuSystem::DisableInput();
-
-	if(m_currentViewState == ViewStates::AnimatingIn ||
-		m_currentViewState == ViewStates::Visible) return;
-
-	m_isActive = true;
-	m_isAnimating = true;
-	m_uiStackingView.SetActive(true);
-	m_currentViewState = ViewStates::AnimatingIn;
-	m_transitionTimer = TransitionInDuration;
-	m_startingAlpha = 0.0f;
-	m_targetAlpha = 1.0f;
-}
-
-void UIOptionsView::TransitionOut(bool isAnimated)
-{
-	m_hasPlayedTransitionSound = false;
-	for(UIMenuItemView* item : m_uiStackingView.GetMenuItems())
-	{
-		item->ChangeSelectionState(UIMenuItemView::SelectionStates::UnSelected);
-	}
-
-	if(!isAnimated)
-	{
-		m_isActive = false;
-		m_isAnimating = false;
-		m_uiStackingView.SetActive(false);
-
-		for(UIView* uiView : m_uiStackingView.GetMenuItems())
-		{
-			uiView->SetAlpha(0.0f);
-		}
-
-		return;
-	}
-
-	MenuSystem::DisableInput();
-
-	if(m_currentViewState == ViewStates::AnimatingOut ||
-		m_currentViewState == ViewStates::NotVisible) return;
-
-	m_isAnimating = true;
-	m_currentViewState = ViewStates::AnimatingOut;
-	m_transitionTimer = TransitionOutDuration;
-	m_startingAlpha = 1.0f;
-	m_targetAlpha = 0.0f;
-}
-
-void UIOptionsView::OnConfirmPressed(int selectedIndex)
-{
-	if(selectedIndex >= 0 && selectedIndex < MaxOptions)
-	{
-		const auto& selectedOption = m_menuOptions[selectedIndex];
-		if(selectedOption.onConfirm == nullptr) return;
-
-		Logger::LogInfo(fmt::format("Calling OnConfirmPressed on {} functon", selectedOption.label));
-
-		selectedOption.onConfirm();
-		return;
-	}
-
-	Logger::LogError(fmt::format("Calling OnConfirmPressed has no menu entry with index {}", selectedIndex));
+	UIMenuView::Shutdown();
 }
 
 void UIOptionsView::OnCancelPressed()
 {
 	Back();
-}
-
-bool UIOptionsView::IsMenuItemSelectionAllowed(Vector2 direction, int index)
-{
-	return m_uiStackingView.GetSelectionState(index) != UIMenuItemView::SelectionStates::Disabled;
-}
-
-void UIOptionsView::HandleMenuItemSelection(int index)
-{
-}
-
-void UIOptionsView::DoTransition(float deltaTime)
-{
-	if(!m_hasPlayedTransitionSound && m_currentViewState == ViewStates::AnimatingIn)
-	{
-		UIManager::PlayUISound(UISoundType::Open);
-		m_hasPlayedTransitionSound = true;
-	}
-
-	if(!m_hasPlayedTransitionSound && m_currentViewState == ViewStates::AnimatingOut)
-	{
-		UIManager::PlayUISound(UISoundType::Close);
-		m_hasPlayedTransitionSound = true;
-	}
-
-	if(m_transitionTimer > 0)
-	{
-		float duration = m_currentViewState == ViewStates::AnimatingIn ? TransitionInDuration : TransitionOutDuration;
-		float t = m_transitionTimer / duration;
-		float lerpedAlpha = std::lerp(m_startingAlpha, m_targetAlpha, 1 - t);
-
-
-		for(UIView* uiView : m_uiStackingView.GetMenuItems())
-		{
-			uiView->SetAlpha(lerpedAlpha);
-		}
-
-		m_transitionTimer -= deltaTime;
-		return;
-	}
-
-	switch(m_currentViewState)
-	{
-	case UIView::ViewStates::NotVisible:
-		break;
-	case UIView::ViewStates::AnimatingIn:
-		m_currentViewState = ViewStates::Visible;
-		MenuSystem::SetMenuItems(this, m_uiStackingView.GetMenuItems());
-		MenuSystem::EnableInput();
-		break;
-	case UIView::ViewStates::Visible:
-		break;
-	case UIView::ViewStates::AnimatingOut:
-		m_currentViewState = ViewStates::NotVisible;
-		m_isActive = false;
-		break;
-	default:
-		break;
-	}
 }
 
 void UIOptionsView::SetSFXVolume(int index)

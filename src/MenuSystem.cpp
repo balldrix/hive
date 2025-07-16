@@ -95,7 +95,6 @@ void MenuSystem::SelectIndex(int index)
 	{
 		s_menuItems[s_selectedItemIndex]->ChangeSelectionState(UIMenuItemView::SelectionStates::UnSelected);
 		s_menuItems[index]->ChangeSelectionState(UIMenuItemView::SelectionStates::Selected);
-		s_currentMenu->HandleMenuItemSelection(index);
 		s_selectedItemIndex = index;
 		UIManager::PlayUISound(UISoundType::Navigate);
 	}

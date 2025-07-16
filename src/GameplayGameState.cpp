@@ -167,7 +167,9 @@ void GameplayGameState::ProcessInput()
 	auto buttons = m_input->GetGamePadButtons();
 
 	if(m_input->IsKeyDown(ESC_KEY) || gamePadState.IsMenuPressed())
-		PostQuitMessage(0);
+	{
+		m_gameStateManager->SwitchState("Paused");
+	}
 
 #ifdef _DEBUG
 	if(m_input->IsKeyDown('R') || gamePadState.IsViewPressed())

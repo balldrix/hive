@@ -58,8 +58,8 @@ add_executable(${PROJECT_NAME} src/main.cpp src/AABB.cpp src/Animator.cpp src/Au
 								src/UIPlayerInfoView.cpp src/UIPortraitView.h src/UIPortraitView.cpp src/UIKillCount.h src/UIKillCount.cpp src/UIEnemyStatsView.h src/UIEnemyStatsView.cpp
 								src/UIComboCounterView.h src/UIComboCounterView.cpp src/UIKillMilestoneView.h src/UIKillMilestoneView.cpp src/UIScreenFlashFX.h src/UIScreenFlashFX.cpp
 								src/ScreenShake.h src/ScreenShake.cpp src/PlayerBuildSpecialState.h src/PlayerBuildSpecialState.cpp src/Utils.h src/LevelCollision.h src/LevelCollision.cpp
-								src/UISprite.h src/UISprite.cpp src/EnemySpawner.h src/EnemySpawer.cpp src/EnemyDefinition.h src/PlayerDefinition.h
-								src/EnemyFallingState.h src/EnemyFallingState.cpp src/EnemyLandingState.h src/EnemyLandingState.cpp
+								src/UISprite.h src/UISprite.cpp src/EnemySpawner.h src/EnemySpawer.cpp src/EnemyDefinition.h src/PlayerDefinition.h src/UIPauseMenuView.h src/UIPauseMenuView.cpp
+								src/EnemyFallingState.h src/EnemyFallingState.cpp src/EnemyLandingState.h src/EnemyLandingState.cpp src/UIMenuView.h src/UIMenuView.cpp
 								src/SettingsManager.h src/SettingsManager.cpp, src/UICycleMenuItemView.h src/UICycleMenuItemView.cpp
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Microsoft::DirectXTK)

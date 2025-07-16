@@ -322,6 +322,12 @@
     <ClCompile Include="src\UICycleMenuItemView.cpp">
       <Filter>UI\Shared</Filter>
     </ClCompile>
+    <ClCompile Include="src\UIPauseMenuView.cpp">
+      <Filter>UI\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenuView.cpp">
+      <Filter>UI\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -820,6 +826,12 @@
     </ClInclude>
     <ClInclude Include="src\SettingsManager.h">
       <Filter>UI\System</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIPauseMenuView.h">
+      <Filter>UI\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenuView.h">
+      <Filter>UI\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
