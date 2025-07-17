@@ -24,6 +24,7 @@ public:
 
 	GameState* GetState(std::string stateName) const;
 	GameState* GetCurrentState() const;
+	GameState* GetPreviousState() const;
 	std::string GetCurrentStateName() const;
 
 	void ProcessInput();

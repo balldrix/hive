@@ -13,6 +13,7 @@
 #include "LoadingGameState.h"
 #include "Logger.h"
 #include "MainMenuGameState.h"
+#include "PausedGameState.h"
 #include "SettingsManager.h"
 #include "Timer.h"
 #include "TitleScreenGameState.h"
@@ -65,7 +66,7 @@ void Game::Init(Window* window, Graphics* graphics)
 	m_gameStateManager->AddState(new MainMenuGameState(m_gameStateManager));
 	m_gameStateManager->AddState(new FrontEndOptionsGameState(m_gameStateManager));
 	m_gameStateManager->AddState(new GameplayGameState(m_gameStateManager));
-	//m_gameStateManager->AddState(new PausedGameState(m_gameStateManager));
+	m_gameStateManager->AddState(new PausedGameState(m_gameStateManager));
 	m_gameStateManager->SwitchState("InitialLoad");
 
 	m_timerFreq = m_timer.GetFrequency();

@@ -78,7 +78,7 @@ void UIPauseMenuView::Init(std::string name)
 
 	m_uiStackingView.UpdateLayout(frame);
 
-	m_assignedStates.push_back("Pause");
+	m_assignedStates.push_back("Paused");
 
 	UIManager::RegisterUIView(this);
 }

@@ -27,6 +27,7 @@
     <ClCompile Include="src\EnemySpawner.cpp" />
     <ClCompile Include="src\LevelCollision.cpp" />
     <ClCompile Include="src\FrontEndOptionsGameState.cpp" />
+    <ClCompile Include="src\PausedGameState.cpp" />
     <ClCompile Include="src\PlayerBuildSpecialState.cpp" />
     <ClCompile Include="src\ScreenShake.cpp" />
     <ClCompile Include="src\SettingsManager.cpp" />
@@ -77,6 +78,7 @@
     <ClCompile Include="src\Utils.h" />
     <ClCompile Include="src\UISprite.cpp" />
     <ClCompile Include="src\UICycleMenuItemView.h" />
+    <ClInclude Include="src\PausedGameState.h" />
     <ClInclude Include="src\FrontEndOptionsGameState.h" />
     <ClInclude Include="src\EventManager.h" />
     <ClInclude Include="src\AnimationEventData.h" />

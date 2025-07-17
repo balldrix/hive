@@ -108,6 +108,11 @@ GameState* GameStateManager::GetCurrentState() const
 	return m_currentState;
 }
 
+GameState* GameStateManager::GetPreviousState() const
+{
+	return m_previousState;
+}
+
 std::string GameStateManager::GetCurrentStateName() const
 {
 	if(m_currentState != nullptr)
