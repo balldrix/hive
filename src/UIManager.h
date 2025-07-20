@@ -3,6 +3,7 @@
 #include "UIView.h"
 
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 class Graphics;

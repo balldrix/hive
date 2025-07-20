@@ -2,6 +2,7 @@
 
 #include "GameObject.h"
 #include "Logger.h"
+#include "SoundSource.h"
 
 #include <AL/al.h>
 #include <DirectXTK/SimpleMath.h>

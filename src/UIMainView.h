@@ -4,9 +4,10 @@
 
 #include <string>
 
-class UIScreenFlashFX;
 class Graphics;
 class UIHudView;
+class UIPauseMenuView;
+class UIScreenFlashFX;
 
 class UIMainView : UIView
 {
@@ -22,4 +23,5 @@ public:
 private:
 	UIHudView* m_uiHudView;
 	UIScreenFlashFX* m_screenFlashFX;
+	UIPauseMenuView* m_uiPauseMenuView;
 };

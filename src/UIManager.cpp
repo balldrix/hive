@@ -3,6 +3,7 @@
 #include "AssetLoader.h"
 #include "AudioEngine.h"
 #include "Logger.h"
+#include "SoundSource.h"
 #include "UIFrontEndView.h"
 #include "UIMainView.h"
 #include "UISystemView.h"
@@ -21,6 +22,10 @@ UIManager::UIManager() :
 	m_uiSoundSource(nullptr)
 {
 	m_uiSoundSource = new SoundSource();
+	m_uiSoundSource->SetPriority(SoundPriority::Always);
+	m_uiSoundSource->SetRelative(true);
+	m_uiSoundSource->SetLooping(false);
+
 	AudioEngine::Instance()->AddSoundSource(m_uiSoundSource);
 }
 
