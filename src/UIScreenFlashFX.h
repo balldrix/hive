@@ -4,6 +4,7 @@
 
 #include <string>
 
+class Graphics;
 class UIImageView;
 
 class UIScreenFlashFX : public UIView {

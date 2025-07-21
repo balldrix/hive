@@ -97,7 +97,7 @@ void UIMainMenuView::StartGame()
 
 void UIMainMenuView::ProceedToOptions()
 {
-	GameStateManager::Instance()->SwitchState("FrontEndOptions");
+	GameStateManager::Instance()->SwitchState("SharedOptions");
 }
 
 void UIMainMenuView::QuitGame()

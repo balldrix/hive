@@ -13,6 +13,9 @@ class Graphics;
 class UIMenuView : public UIView, public IMenuSystemInteraction
 {
 public:
+	UIMenuView();
+	virtual ~UIMenuView() {};
+
 	virtual void Init(std::string name) {};
 	virtual void Update(float deltaTime) override;
 	virtual void Render(Graphics* graphics) override;
@@ -42,8 +45,9 @@ public:
 	};
 
 protected:
-	void DoTransition(float deltaTime) override;
+	virtual void DoTransition(float deltaTime) override;
 
 	UIStackingView m_uiStackingView;
 	std::vector<MenuOptionBase*> m_menuOptions;
+	float m_lerpedAlpha;
 };

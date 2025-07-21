@@ -16,6 +16,8 @@ public:
 	void Init(std::string name) override;
 	void Shutdown() override;
 
+	void TransitionIn(bool isAnimated) override;
+
 	void OnCancelPressed() override;
 
 private:

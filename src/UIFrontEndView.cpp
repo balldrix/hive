@@ -55,7 +55,7 @@ void UIFrontEndView::Init(std::string name)
 
 	AssignState("TitleScreen");
 	AssignState("MainMenu");
-	AssignState("FrontEndOptions");
+	AssignState("SharedOptions");
 
 	m_isActive = false;
 }

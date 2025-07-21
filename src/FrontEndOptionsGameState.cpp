@@ -6,7 +6,7 @@
 #include "UIManager.h"
 
 FrontEndOptionsGameState::FrontEndOptionsGameState() :
-	GameState("FrontEndOptions")
+	GameState("SharedOptions")
 {
 }
 
@@ -29,4 +29,11 @@ void FrontEndOptionsGameState::Update(float deltaTime)
 void FrontEndOptionsGameState::Render()
 {
 	UIManager::Render(m_gameStateManager->GetGraphics());
+
+	GameState* previousGameState = m_gameStateManager->GetPreviousState();
+
+	if(previousGameState->GetStateName() == "Paused")
+	{
+		previousGameState->Render();
+	}
 }

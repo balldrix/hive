@@ -2,6 +2,7 @@
 
 #include "AudioEngine.h"
 #include "Frame.h"
+#include "GameplayGameState.h"
 #include "GameStateManager.h"
 #include "GlobalConstants.h"
 #include "Graphics.h"
@@ -154,16 +155,7 @@ void UIOptionsView::Init(std::string name)
 		options[i]->SetNavigation(nav);
 	}
 
-	Frame frame{};
-	frame.x = 20;
-	frame.y = 40;
-	frame.width = (int)(GameWidth / 2.0f);
-	frame.height = GameHeight;
-
-	m_uiStackingView.UpdateLayout(frame);
-
-	m_assignedStates.push_back("FrontEndOptions");
-	m_assignedStates.push_back("IngameOptions");
+	m_assignedStates.push_back("SharedOptions");
 
 	UIManager::RegisterUIView(this);
 }
@@ -173,6 +165,24 @@ void UIOptionsView::Shutdown()
 	Logger::LogInfo("Shutting down UI Options View");
 
 	UIMenuView::Shutdown();
+}
+
+void UIOptionsView::TransitionIn(bool isAnimated)
+{
+	UIMenuView::TransitionIn(isAnimated);
+	Frame frame{};
+	frame.x = 20;
+	frame.y = 40;
+	frame.width = (int)(GameWidth / 2.0f);
+	frame.height = GameHeight;
+
+	if(GameStateManager::Instance()->GetCurrentState()->GetStateName() == "Paused")
+	{
+		frame.x = 50;
+		frame.y = 60;
+	}
+
+	m_uiStackingView.UpdateLayout(frame);
 }
 
 void UIOptionsView::OnCancelPressed()

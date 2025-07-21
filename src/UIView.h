@@ -10,8 +10,8 @@ using namespace SimpleMath;
 
 class Graphics;
 
-static const float TransitionInDuration = 0.6f;
-static const float TransitionOutDuration = 0.8f;
+static const float TransitionInDuration = 0.4f;
+static const float TransitionOutDuration = 0.6f;
 
 class UIView
 {

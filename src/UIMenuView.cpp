@@ -9,6 +9,11 @@
 #include <cmath>
 #include <fmt/core.h>
 
+UIMenuView::UIMenuView() :
+	m_lerpedAlpha(0.0f)
+{
+}
+
 void UIMenuView::Update(float deltaTime)
 {
 	if(!m_isActive) return;
@@ -144,11 +149,11 @@ void UIMenuView::DoTransition(float deltaTime)
 	{
 		float duration = m_currentViewState == ViewStates::AnimatingIn ? TransitionInDuration : TransitionOutDuration;
 		float t = m_transitionTimer / duration;
-		float lerpedAlpha = std::lerp(m_startingAlpha, m_targetAlpha, 1 - t);
+		m_lerpedAlpha = std::lerp(m_startingAlpha, m_targetAlpha, 1 - t);
 
 		for(UIView* uiView : m_uiStackingView.GetMenuItems())
 		{
-			uiView->SetAlpha(lerpedAlpha);
+			uiView->SetAlpha(m_lerpedAlpha);
 		}
 
 		m_transitionTimer -= deltaTime;
