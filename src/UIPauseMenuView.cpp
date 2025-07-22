@@ -1,21 +1,19 @@
 #include "UIPauseMenuView.h"
 
-#include "AssetLoader.h"
 #include "Frame.h"
 #include "GameStateManager.h"
 #include "GameStateNameLibrary.h"
 #include "GlobalConstants.h"
 #include "Graphics.h"
 #include "Logger.h"
-#include "UIImageView.h"
 #include "UIManager.h"
 #include "UIMenuItemView.h"
 #include "UIMenuView.h"
+#include "UIPanelContainer.h"
 #include "UIStackingView.h"
 #include "UITextMenuItemView.h"
 
 #include <DirectXColors.h>
-#include <directxtk/SimpleMath.h>
 #include <string>
 #include <vector>
 #include <Windows.h>
@@ -24,8 +22,7 @@ using namespace GameStateNameLibrary;
 using namespace GlobalConstants;
 
 UIPauseMenuView::UIPauseMenuView() :
-	m_backgroundOverlayImage(nullptr),
-	m_panelImage(nullptr),
+	m_panelContainer(nullptr),
 	m_titleText(nullptr)
 {
 }
@@ -39,25 +36,11 @@ void UIPauseMenuView::Init(std::string name)
 {
 	Logger::LogInfo("Initialising UI Pause Menu View.");
 
-	m_backgroundOverlayImage = new UIImageView();
-	m_backgroundOverlayImage->Init("Pause Overlay Image");
-	m_backgroundOverlayImage->GetSprite()->Init(AssetLoader::GetTexture("t_pixel"));
-	m_backgroundOverlayImage->GetSprite()->SetSourceRect(RECT{ 0, 0, GameWidth, GameHeight });
-	m_backgroundOverlayImage->SetAlpha(0.4f);
-	m_backgroundOverlayImage->SetOrigin(Vector2::Zero);
-	m_backgroundOverlayImage->SetColour(Colors::Black.v);
-	m_backgroundOverlayImage->SetDepth(0.9f);
-
-	m_panelImage = new UIImageView();
-	m_panelImage->Init("Panel Image");
-	m_panelImage->GetSprite()->Init(AssetLoader::GetTexture("t_pixel"));
-	m_panelImage->GetSprite()->SetSourceRect(RECT{0, 0, 180, 100});
-	m_panelImage->SetOrigin(Vector2(90.0f, 40.0f));
-	m_panelImage->SetPosition(Vector2(GameWidth / 2.0f, GameHeight / 2.0f));
-	m_panelImage->SetColour(Color(0.17f, 0.18f, 0.2f, 0.9f));
-	m_panelImage->SetDepth(0.5f);
-
 	m_name = name;
+
+	m_panelContainer = new UIPanelContainer();
+	m_panelContainer->Init("UI Panel", RECT{ 0, 0, 180, 100 });
+
 	m_uiStackingView.Init("Pause Menu Stacking View");
 	m_uiStackingView.SetOrientation(UIStackingView::Orientations::Vertical);
 
@@ -116,28 +99,21 @@ void UIPauseMenuView::Render(Graphics* graphics)
 	if(!m_isActive) return;
 
 	UIMenuView::Render(graphics);
-	m_backgroundOverlayImage->Render(graphics);
-	m_panelImage->Render(graphics);
+	m_panelContainer->Render(graphics);
 }
 
 void UIPauseMenuView::Shutdown()
 {
 	Logger::LogInfo("Shutting down UI Pause Menu View.");
+
 	UIMenuView::Shutdown();
-
-	delete m_panelImage;
-	m_panelImage = nullptr;
-
-	delete m_backgroundOverlayImage;
-	m_backgroundOverlayImage = nullptr;
 }
 
 void UIPauseMenuView::TransitionIn(bool isAnimated)
 {
 	UIMenuView::TransitionIn(isAnimated);
 
-	m_backgroundOverlayImage->SetActive(true);
-	m_panelImage->SetActive(true);
+	m_panelContainer->SetActive(true);
 }
 
 void UIPauseMenuView::TransitionOut(bool isAnimated)
@@ -146,8 +122,7 @@ void UIPauseMenuView::TransitionOut(bool isAnimated)
 
 	if(isAnimated) return;
 
-	m_backgroundOverlayImage->SetActive(false);
-	m_panelImage->SetActive(false);
+	m_panelContainer->SetActive(false);
 }
 
 void UIPauseMenuView::OnCancelPressed()
@@ -158,9 +133,6 @@ void UIPauseMenuView::OnCancelPressed()
 void UIPauseMenuView::DoTransition(float deltaTime)
 {
 	UIMenuView::DoTransition(deltaTime);
-
-	m_backgroundOverlayImage->SetAlpha(m_lerpedAlpha * 0.4f);
-	m_panelImage->SetAlpha(m_lerpedAlpha);
 }
 
 void UIPauseMenuView::Continue()

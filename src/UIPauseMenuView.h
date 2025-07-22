@@ -6,6 +6,7 @@
 
 class Graphics;
 class UIImageView;
+class UIPanelContainer;
 class UISpriteText;
 
 class UIPauseMenuView : public UIMenuView
@@ -32,7 +33,6 @@ private:
 	static void ShowQuitToMenuPrompt();
 	static void ShowQuitToDesktopPrompt();
 
-	UIImageView* m_backgroundOverlayImage;
-	UIImageView* m_panelImage;
+	UIPanelContainer* m_panelContainer;
 	UISpriteText* m_titleText;
 };

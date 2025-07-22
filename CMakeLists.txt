@@ -15,7 +15,7 @@ find_package(SndFile CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
 
 add_executable(${PROJECT_NAME} src/main.cpp src/AABB.cpp src/Animator.cpp src/AudioEngine.cpp src/UIBarView.cpp 
-								src/Camera.cpp src/Collider.cpp src/ControlSystem.cpp
+								src/Camera.cpp src/Collider.cpp src/ControlSystem.cpp src/UIPanelContainer.h src/UIPanelContainer.cpp
 								src/Enemy.cpp src/EnemyAttackRunState.cpp TilemapLoader.h TilemapLoader.cpp
 								src/EnemyAttackState.cpp src/EnemyDataContainer.cpp src/EnemyDeadState.cpp src/EnemyHurtState.cpp 
 								src/EnemyIdleState.cpp src/EnemyKnockbackState.cpp src/EnemyRunningState.cpp src/EnemyVictoryState.cpp 

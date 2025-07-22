@@ -6,6 +6,7 @@
 #include <vector>
 
 class Graphics;
+class UIPanelContainer;
 
 class UIOptionsView : public UIMenuView
 {
@@ -14,6 +15,7 @@ public:
 	virtual ~UIOptionsView();
 
 	void Init(std::string name) override;
+	void Render(Graphics* graphics) override;
 	void Shutdown() override;
 
 	void TransitionIn(bool isAnimated) override;
@@ -72,4 +74,6 @@ private:
 	static void Back();
 
 	std::vector<std::string> GetOptionsForOptionType(OptionType optionType);
+
+	UIPanelContainer* m_panelContainer;
 };

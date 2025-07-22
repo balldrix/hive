@@ -2,7 +2,7 @@
 
 #include "AudioEngine.h"
 #include "Frame.h"
-#include "GameplayGameState.h"
+#include "GameState.h"
 #include "GameStateManager.h"
 #include "GameStateNameLibrary.h"
 #include "GlobalConstants.h"
@@ -13,6 +13,7 @@
 #include "UIManager.h"
 #include "UIMenuItemView.h"
 #include "UIMenuView.h"
+#include "UIPanelContainer.h"
 #include "UISliderMenuItemView.h"
 #include "UIStackingView.h"
 #include "UITextMenuItemView.h"
@@ -24,11 +25,13 @@
 #include <fmt/core.h>
 #include <string>
 #include <vector>
+#include <Windows.h>
 
 using namespace GameStateNameLibrary;
 using namespace GlobalConstants;
 
-UIOptionsView::UIOptionsView()
+UIOptionsView::UIOptionsView() :
+	m_panelContainer(nullptr)
 {
 }
 
@@ -42,6 +45,10 @@ void UIOptionsView::Init(std::string name)
 	Logger::LogInfo("Initialising UI Options View.");
 
 	m_name = name;
+
+	m_panelContainer = new UIPanelContainer();
+	m_panelContainer->Init("UI Panel", RECT{ 0, 0, 180, 100 });
+
 	m_uiStackingView.Init("Options Menu Stacking View");
 	m_uiStackingView.SetOrientation(UIStackingView::Orientations::Vertical);
 
@@ -160,6 +167,18 @@ void UIOptionsView::Init(std::string name)
 	m_assignedStates.push_back("SharedOptions");
 
 	UIManager::RegisterUIView(this);
+}
+
+void UIOptionsView::Render(Graphics* graphics)
+{
+	if(!m_isActive) return;
+
+	UIMenuView::Render(graphics);
+
+	if(GameStateManager::Instance()->GetPreviousState()->GetStateName() == Paused)
+	{
+		m_panelContainer->Render(graphics);
+	}
 }
 
 void UIOptionsView::Shutdown()
