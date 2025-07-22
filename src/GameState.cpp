@@ -1,5 +1,6 @@
 #include "GameState.h"
-#include "string.h"
+
+#include <string>
 
 GameState::GameState() :
 	m_gameStateManager(nullptr),

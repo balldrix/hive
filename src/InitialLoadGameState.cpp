@@ -3,11 +3,14 @@
 #include "AssetLoader.h"
 #include "GameState.h"
 #include "GameStateManager.h"
+#include "GameStateNameLibrary.h"
 #include "LoadingGameState.h"
 #include "Logger.h"
 
+using namespace GameStateNameLibrary;
+
 InitialLoadGameState::InitialLoadGameState() : 
-	GameState("InitialLoad")
+	GameState(InitialLoad)
 {
 }
 

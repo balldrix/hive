@@ -2,12 +2,15 @@
 
 #include "GameState.h"
 #include "GameStateManager.h"
+#include "GameStateNameLibrary.h"
 #include "Input.h"
 #include "UIManager.h"
 
+using namespace GameStateNameLibrary;
+
 TitleScreenGameState::TitleScreenGameState() :
 	m_graphics(nullptr),
-	GameState("TitleScreen")
+	GameState(TitleScreen)
 {
 }
 
@@ -30,7 +33,7 @@ void TitleScreenGameState::Update(float deltaTime)
 
 	if(input->WasKeyPressed(ENTER_KEY) || input->WasGamePadButtonPressed(buttons.a))
 	{
-		m_gameStateManager->SwitchState("MainMenu");
+		m_gameStateManager->SwitchState(MainMenu);
 	}
 }
 

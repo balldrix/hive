@@ -2,6 +2,7 @@
 
 #include "Frame.h"
 #include "GameStateManager.h"
+#include "GameStateNameLibrary.h"
 #include "GlobalConstants.h"
 #include "LoadingGameState.h"
 #include "Logger.h"
@@ -17,6 +18,7 @@
 #include <vector>
 #include <Windows.h>
 
+using namespace GameStateNameLibrary;
 using namespace GlobalConstants;
 
 UIMainMenuView::UIMainMenuView()
@@ -97,7 +99,7 @@ void UIMainMenuView::StartGame()
 
 void UIMainMenuView::ProceedToOptions()
 {
-	GameStateManager::Instance()->SwitchState("SharedOptions");
+	GameStateManager::Instance()->SwitchState(SharedOptions);
 }
 
 void UIMainMenuView::QuitGame()

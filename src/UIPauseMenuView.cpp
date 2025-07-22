@@ -3,6 +3,7 @@
 #include "AssetLoader.h"
 #include "Frame.h"
 #include "GameStateManager.h"
+#include "GameStateNameLibrary.h"
 #include "GlobalConstants.h"
 #include "Graphics.h"
 #include "Logger.h"
@@ -10,7 +11,6 @@
 #include "UIManager.h"
 #include "UIMenuItemView.h"
 #include "UIMenuView.h"
-#include "UISpriteText.h"
 #include "UIStackingView.h"
 #include "UITextMenuItemView.h"
 
@@ -20,6 +20,7 @@
 #include <vector>
 #include <Windows.h>
 
+using namespace GameStateNameLibrary;
 using namespace GlobalConstants;
 
 UIPauseMenuView::UIPauseMenuView() :
@@ -164,12 +165,12 @@ void UIPauseMenuView::DoTransition(float deltaTime)
 
 void UIPauseMenuView::Continue()
 {
-	GameStateManager::Instance()->SwitchState("Gameplay");
+	GameStateManager::Instance()->SwitchState(Gameplay);
 }
 
 void UIPauseMenuView::ProceedToOptionsView()
 {
-	GameStateManager::Instance()->SwitchState("SharedOptions");
+	GameStateManager::Instance()->SwitchState(SharedOptions);
 }
 
 void UIPauseMenuView::ShowQuitToMenuPrompt()

@@ -4,9 +4,9 @@
 
 #include "AudioEngine.h"
 #include "FadeTransitionGameState.h"
-#include "FrontEndOptionsGameState.h"
 #include "GameplayGameState.h"
 #include "GameStateManager.h"
+#include "GameStateNameLibrary.h"
 #include "Graphics.h"
 #include "InitialLoadGameState.h"
 #include "Input.h"
@@ -15,6 +15,7 @@
 #include "MainMenuGameState.h"
 #include "PausedGameState.h"
 #include "SettingsManager.h"
+#include "SharedOptionsGameState.h"
 #include "Timer.h"
 #include "TitleScreenGameState.h"
 #include "Window.h"
@@ -24,6 +25,8 @@
 #include <objbase.h>
 #include <synchapi.h>
 #include <windows.h>
+
+using namespace GameStateNameLibrary;
 
 Game::Game() noexcept :
 	m_window(nullptr),
@@ -64,10 +67,10 @@ void Game::Init(Window* window, Graphics* graphics)
 	m_gameStateManager->AddState(new FadeTransitionGameState(m_gameStateManager));
 	m_gameStateManager->AddState(new TitleScreenGameState(m_gameStateManager));
 	m_gameStateManager->AddState(new MainMenuGameState(m_gameStateManager));
-	m_gameStateManager->AddState(new FrontEndOptionsGameState(m_gameStateManager));
+	m_gameStateManager->AddState(new SharedOptionsGameState(m_gameStateManager));
 	m_gameStateManager->AddState(new GameplayGameState(m_gameStateManager));
 	m_gameStateManager->AddState(new PausedGameState(m_gameStateManager));
-	m_gameStateManager->SwitchState("InitialLoad");
+	m_gameStateManager->SwitchState(InitialLoad);
 
 	m_timerFreq = m_timer.GetFrequency();
 	m_lastTime = m_timer.GetTicks();

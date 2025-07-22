@@ -3,7 +3,7 @@
 #include "AssetLoader.h"
 #include "GameState.h"
 #include "GameStateManager.h"
-#include "MenuSystem.h"
+#include "GameStateNameLibrary.h"
 #include "UIConfig.h"
 #include "UIManager.h"
 
@@ -12,11 +12,13 @@ GameState* LoadingGameState::s_targetGameState = nullptr;
 bool LoadingGameState::isloadingFromMainGameplayToFrontend = false;
 bool LoadingGameState::s_isLoadingToMainGameplay = false;
 
+using namespace GameStateNameLibrary;
+
 LoadingGameState::LoadingGameState() :
 	m_graphics(nullptr),
 	m_timer(0.0f),
 	m_isDone(false),
-	GameState("Loading")
+	GameState(Loading)
 {
 	s_instance = this;
 }
@@ -78,7 +80,7 @@ void LoadingGameState::Update(float deltaTime)
 		return;
 	}
 
-	m_gameStateManager->SwitchState("FadeTransition");
+	m_gameStateManager->SwitchState(FadeTransition);
 }
 
 void LoadingGameState::Render()
@@ -119,13 +121,13 @@ void LoadingGameState::ProceedToFrontEnd()
 	}
 
 	s_isLoadingToMainGameplay = false;
-	LoadingGameState::SetTargetGameState(s_instance->m_gameStateManager->GetState("TitleScreen"));
-	s_instance->m_gameStateManager->SwitchState("Loading");
+	LoadingGameState::SetTargetGameState(s_instance->m_gameStateManager->GetState(TitleScreen));
+	s_instance->m_gameStateManager->SwitchState(Loading);
 }
 
 void LoadingGameState::ProceedToGameplay()
 {
 	s_isLoadingToMainGameplay = true;
-	LoadingGameState::SetTargetGameState(s_instance->m_gameStateManager->GetState("Loading"));
-	s_instance->m_gameStateManager->SwitchState("FadeTransition");
+	LoadingGameState::SetTargetGameState(s_instance->m_gameStateManager->GetState(Loading));
+	s_instance->m_gameStateManager->SwitchState(FadeTransition);
 }

@@ -4,6 +4,7 @@
 #include "Frame.h"
 #include "GameplayGameState.h"
 #include "GameStateManager.h"
+#include "GameStateNameLibrary.h"
 #include "GlobalConstants.h"
 #include "Graphics.h"
 #include "Logger.h"
@@ -24,6 +25,7 @@
 #include <string>
 #include <vector>
 
+using namespace GameStateNameLibrary;
 using namespace GlobalConstants;
 
 UIOptionsView::UIOptionsView()
@@ -176,7 +178,7 @@ void UIOptionsView::TransitionIn(bool isAnimated)
 	frame.width = (int)(GameWidth / 2.0f);
 	frame.height = GameHeight;
 
-	if(GameStateManager::Instance()->GetCurrentState()->GetStateName() == "Paused")
+	if(GameStateManager::Instance()->GetCurrentState()->GetStateName() == Paused)
 	{
 		frame.x = 50;
 		frame.y = 60;

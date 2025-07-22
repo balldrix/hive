@@ -12,6 +12,7 @@
 #include "GameplayConstants.h"
 #include "GameState.h"
 #include "GameStateManager.h"
+#include "GameStateNameLibrary.h"
 #include "GlobalConstants.h"
 #include "HitBoxManager.h"
 #include "ImpactFxPool.h"
@@ -41,8 +42,9 @@
 #include <directxtk/SimpleMath.h>
 #include <vector>
 
-using namespace GlobalConstants;
+using namespace GameStateNameLibrary;
 using namespace GameplayConstants;
+using namespace GlobalConstants;
 
 GameplayGameState::GameplayGameState() :
 	m_graphics(nullptr),
@@ -65,7 +67,7 @@ GameplayGameState::GameplayGameState() :
 	m_collisionCooldown(0.0f),
 	m_isCollisionOnCooldown(false),
 	m_isHitStopRunning(false),
-	GameState("Gameplay")
+	GameState(Gameplay)
 {}
 
 GameplayGameState::GameplayGameState(GameStateManager* gameStateManager) : GameplayGameState()
@@ -168,7 +170,7 @@ void GameplayGameState::ProcessInput()
 
 	if(m_input->IsKeyDown(ESC_KEY) || gamePadState.IsMenuPressed())
 	{
-		m_gameStateManager->SwitchState("Paused");
+		m_gameStateManager->SwitchState(Paused);
 	}
 
 #ifdef _DEBUG

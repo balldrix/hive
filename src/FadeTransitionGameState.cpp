@@ -2,13 +2,16 @@
 
 #include "GameState.h"
 #include "GameStateManager.h"
+#include "GameStateNameLibrary.h"
 #include "LoadingGameState.h"
 #include "UIManager.h"
 #include "UIView.h"
 
+using namespace GameStateNameLibrary;
+
 FadeTransitionGameState::FadeTransitionGameState() :
 	m_graphics(nullptr),
-	GameState("FadeTransition")
+	GameState(FadeTransition)
 {
 }
 

@@ -2,11 +2,14 @@
 
 #include "GameState.h"
 #include "GameStateManager.h"
+#include "GameStateNameLibrary.h"
 #include "MenuSystem.h"
 #include "UIManager.h"
 
+using namespace GameStateNameLibrary;
+
 PausedGameState::PausedGameState() :
-	GameState("Paused")
+	GameState(Paused)
 {
 }
 
