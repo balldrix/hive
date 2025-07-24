@@ -40,7 +40,7 @@ void UIPauseMenuView::Init(std::string name)
 	m_name = name;
 
 	m_panelContainer = new UIPanelContainer();
-	m_panelContainer->Init("UI Panel", RECT{ 0, 0, 180, 100 });
+	m_panelContainer->Init("UI Panel", RECT{ 0, 0, 150, 70 });
 
 	m_uiStackingView.Init("Pause Menu Stacking View");
 	m_uiStackingView.SetOrientation(UIStackingView::Orientations::Vertical);
@@ -83,8 +83,8 @@ void UIPauseMenuView::Init(std::string name)
 	}
 
 	Frame frame{};
-	frame.x = 50;
-	frame.y = 60;
+	frame.x = 20;
+	frame.y = 40;
 	frame.width = (int)(GameWidth / 2.0f);
 	frame.height = GameHeight;
 
@@ -124,15 +124,10 @@ void UIPauseMenuView::TransitionOut(bool isAnimated)
 {
 	UIMenuView::TransitionOut(isAnimated);
 
-	if(isAnimated)
-	{
-		if(GameStateManager::Instance()->GetCurrentState()->GetStateName() == SharedOptions)
-			m_panelContainer->SetOverlayAlpha(0.0f);
+	if(GameStateManager::Instance()->GetCurrentState()->GetStateName() == SharedOptions)
+		m_panelContainer->SetOverlayAlpha(0.0f);
 
-		return;
-	}
-
-	m_panelContainer->SetActive(false);
+	if(!isAnimated)	m_panelContainer->SetActive(false);
 }
 
 void UIPauseMenuView::OnCancelPressed()

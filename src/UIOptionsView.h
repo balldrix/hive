@@ -18,8 +18,8 @@ public:
 	void Render(Graphics* graphics) override;
 	void Shutdown() override;
 
-	void TransitionOut(bool isAnimated) override;
 	void TransitionIn(bool isAnimated) override;
+	void TransitionOut(bool isAnimated) override;
 
 	void OnCancelPressed() override;
 

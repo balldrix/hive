@@ -35,16 +35,16 @@ void UIPanelContainer::Init(const std::string& name, const RECT& rect)
 	m_overlayImage->SetAlpha(0.4f);
 	m_overlayImage->SetOrigin(Vector2::Zero);
 	m_overlayImage->SetColour(Colors::Black.v);
-	m_overlayImage->SetDepth(0.9f);
+	m_overlayImage->SetDepth(0.3f);
 
 	m_panelImage = new UIImageView();
 	m_panelImage->Init("Panel Image");
 	m_panelImage->GetSprite()->Init(AssetLoader::GetTexture("t_pixel"));
 	m_panelImage->GetSprite()->SetSourceRect(rect);
-	m_panelImage->SetOrigin(Vector2(90.0f, 40.0f));
-	m_panelImage->SetPosition(Vector2(GameWidth / 2.0f, GameHeight / 2.0f));
+	m_panelImage->SetOrigin(Vector2::Zero);
+	m_panelImage->SetPosition(Vector2(10.0f, 30.0f));
 	m_panelImage->SetColour(Color(0.17f, 0.18f, 0.2f, 0.9f));
-	m_panelImage->SetDepth(0.5f);
+	m_panelImage->SetDepth(0.4f);
 }
 
 void UIPanelContainer::Render(Graphics* graphics)

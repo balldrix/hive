@@ -47,7 +47,7 @@ void UIOptionsView::Init(std::string name)
 	m_name = name;
 
 	m_panelContainer = new UIPanelContainer();
-	m_panelContainer->Init("UI Panel", RECT{ 0, 0, 180, 100 });
+	m_panelContainer->Init("UI Panel", RECT{ 0, 0, 220, 90 });
 	m_panelContainer->SetOverlayAlpha(1.0f);
 
 	m_uiStackingView.Init("Options Menu Stacking View");
@@ -197,6 +197,16 @@ void UIOptionsView::Shutdown()
 	UIMenuView::Shutdown();
 }
 
+void UIOptionsView::TransitionIn(bool isAnimated)
+{
+	UIMenuView::TransitionIn(isAnimated);
+
+	if(GameStateManager::Instance()->GetPreviousState()->GetStateName() == Paused)
+		m_panelContainer->SetOverlayAlpha(1.0f);
+
+	m_panelContainer->SetActive(true);
+}
+
 void UIOptionsView::TransitionOut(bool isAnimated)
 {
 	UIMenuView::TransitionOut(isAnimated);
@@ -204,20 +214,7 @@ void UIOptionsView::TransitionOut(bool isAnimated)
 	if(GameStateManager::Instance()->GetCurrentState()->GetStateName() == Paused)
 		m_panelContainer->SetOverlayAlpha(1.0f);
 
-	m_panelContainer->SetActive(true);
-}
-
-void UIOptionsView::TransitionIn(bool isAnimated)
-{
-	UIMenuView::TransitionIn(isAnimated);
-
-	if(isAnimated)
-	{
-		if(GameStateManager::Instance()->GetPreviousState()->GetStateName() == Paused)
-			m_panelContainer->SetOverlayAlpha(1.0f);
-	}
-
-	m_panelContainer->SetActive(isAnimated);
+	if(!isAnimated)	m_panelContainer->SetActive(false);
 }
 
 void UIOptionsView::OnCancelPressed()
@@ -229,8 +226,12 @@ void UIOptionsView::DoTransition(float deltaTime)
 {
 	UIMenuView::DoTransition(deltaTime);
 
-	if(GameStateManager::Instance()->GetCurrentState()->GetStateName() == Paused) return;
 	m_panelContainer->SetPanelAlpha(m_lerpedAlpha);
+
+	if(GameStateManager::Instance()->GetCurrentState()->GetStateName() == Paused||
+		GameStateManager::Instance()->GetPreviousState()->GetStateName() == Paused) return;
+
+	m_panelContainer->SetOverlayAlpha(m_lerpedAlpha);
 }
 
 void UIOptionsView::SetSFXVolume(int index)
