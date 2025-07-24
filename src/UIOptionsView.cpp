@@ -48,6 +48,7 @@ void UIOptionsView::Init(std::string name)
 
 	m_panelContainer = new UIPanelContainer();
 	m_panelContainer->Init("UI Panel", RECT{ 0, 0, 180, 100 });
+	m_panelContainer->SetOverlayAlpha(1.0f);
 
 	m_uiStackingView.Init("Options Menu Stacking View");
 	m_uiStackingView.SetOrientation(UIStackingView::Orientations::Vertical);
@@ -164,6 +165,14 @@ void UIOptionsView::Init(std::string name)
 		options[i]->SetNavigation(nav);
 	}
 
+	Frame frame{};
+	frame.x = 20;
+	frame.y = 40;
+	frame.width = (int)(GameWidth / 2.0f);
+	frame.height = GameHeight;
+
+	m_uiStackingView.UpdateLayout(frame);
+
 	m_assignedStates.push_back("SharedOptions");
 
 	UIManager::RegisterUIView(this);
@@ -188,27 +197,40 @@ void UIOptionsView::Shutdown()
 	UIMenuView::Shutdown();
 }
 
+void UIOptionsView::TransitionOut(bool isAnimated)
+{
+	UIMenuView::TransitionOut(isAnimated);
+
+	if(GameStateManager::Instance()->GetCurrentState()->GetStateName() == Paused)
+		m_panelContainer->SetOverlayAlpha(1.0f);
+
+	m_panelContainer->SetActive(true);
+}
+
 void UIOptionsView::TransitionIn(bool isAnimated)
 {
 	UIMenuView::TransitionIn(isAnimated);
-	Frame frame{};
-	frame.x = 20;
-	frame.y = 40;
-	frame.width = (int)(GameWidth / 2.0f);
-	frame.height = GameHeight;
 
-	if(GameStateManager::Instance()->GetCurrentState()->GetStateName() == Paused)
+	if(isAnimated)
 	{
-		frame.x = 50;
-		frame.y = 60;
+		if(GameStateManager::Instance()->GetPreviousState()->GetStateName() == Paused)
+			m_panelContainer->SetOverlayAlpha(1.0f);
 	}
 
-	m_uiStackingView.UpdateLayout(frame);
+	m_panelContainer->SetActive(isAnimated);
 }
 
 void UIOptionsView::OnCancelPressed()
 {
 	Back();
+}
+
+void UIOptionsView::DoTransition(float deltaTime)
+{
+	UIMenuView::DoTransition(deltaTime);
+
+	if(GameStateManager::Instance()->GetCurrentState()->GetStateName() == Paused) return;
+	m_panelContainer->SetPanelAlpha(m_lerpedAlpha);
 }
 
 void UIOptionsView::SetSFXVolume(int index)
@@ -233,6 +255,7 @@ void UIOptionsView::SetScreenResolution(int index)
 
 	modes = GameStateManager::Instance()->GetGraphics()->GetSupportedResolutions();
 	mode = modes[index];
+
 	if(UIOptionsView::GetFullscreenIndex() == 0)
 	{
 		GameStateManager::Instance()->GetWindow()->ResizeWindow(mode.width, mode.height);

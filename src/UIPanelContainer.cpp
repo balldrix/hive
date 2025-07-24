@@ -62,8 +62,18 @@ void UIPanelContainer::Shutdown()
 	m_overlayImage = nullptr;
 }
 
-void UIPanelContainer::SetAlpha(float alpha)
+void UIPanelContainer::SetActive(bool isActive)
+{
+	m_overlayImage->SetActive(isActive);
+	m_panelImage->SetActive(isActive);
+}
+
+void UIPanelContainer::SetOverlayAlpha(float alpha)
 {
 	m_overlayImage->SetAlpha(alpha * 0.4f);
+}
+
+void UIPanelContainer::SetPanelAlpha(float alpha)
+{
 	m_panelImage->SetAlpha(alpha);
 }

@@ -19,7 +19,9 @@ public:
 
 	void Shutdown() override;
 
-	void SetAlpha(float alpha);
+	void SetActive(bool isActive) override;
+	void SetOverlayAlpha(float alpha);
+	void SetPanelAlpha(float alpha);
 
 private:
 	UIImageView* m_overlayImage;

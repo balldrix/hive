@@ -1,6 +1,7 @@
 #include "UIPauseMenuView.h"
 
 #include "Frame.h"
+#include "GameState.h"
 #include "GameStateManager.h"
 #include "GameStateNameLibrary.h"
 #include "GlobalConstants.h"
@@ -113,6 +114,9 @@ void UIPauseMenuView::TransitionIn(bool isAnimated)
 {
 	UIMenuView::TransitionIn(isAnimated);
 
+	if(GameStateManager::Instance()->GetPreviousState()->GetStateName() == SharedOptions)
+		m_panelContainer->SetOverlayAlpha(1.0f);
+
 	m_panelContainer->SetActive(true);
 }
 
@@ -120,7 +124,13 @@ void UIPauseMenuView::TransitionOut(bool isAnimated)
 {
 	UIMenuView::TransitionOut(isAnimated);
 
-	if(isAnimated) return;
+	if(isAnimated)
+	{
+		if(GameStateManager::Instance()->GetCurrentState()->GetStateName() == SharedOptions)
+			m_panelContainer->SetOverlayAlpha(0.0f);
+
+		return;
+	}
 
 	m_panelContainer->SetActive(false);
 }
@@ -133,6 +143,12 @@ void UIPauseMenuView::OnCancelPressed()
 void UIPauseMenuView::DoTransition(float deltaTime)
 {
 	UIMenuView::DoTransition(deltaTime);
+
+	m_panelContainer->SetPanelAlpha(m_lerpedAlpha);
+
+	if(GameStateManager::Instance()->GetCurrentState()->GetStateName() == SharedOptions ||
+		GameStateManager::Instance()->GetPreviousState()->GetStateName() == SharedOptions) return;
+	m_panelContainer->SetOverlayAlpha(m_lerpedAlpha);
 }
 
 void UIPauseMenuView::Continue()

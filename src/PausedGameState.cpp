@@ -30,12 +30,9 @@ void PausedGameState::Update(float deltaTime)
 
 void PausedGameState::Render()
 {
-	GameState* gameplayState = m_gameStateManager->GetPreviousState();
+	GameState* gameplayState = m_gameStateManager->GetState(Gameplay);
 
-	if(gameplayState)
-	{
-		gameplayState->Render();
-	}
+	if(gameplayState) gameplayState->Render();
 
 	UIManager::Render(m_gameStateManager->GetGraphics());
 }
