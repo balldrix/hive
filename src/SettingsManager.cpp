@@ -34,19 +34,19 @@ void SettingsManager::Load()
 {
 	SI_Error rc = m_ini.LoadFile(Filename.c_str());
 
-	if(!m_ini.GetDoubleValue("Audio", "MusicVolume"))
+	if(!m_ini.KeyExists("Audio", "MusicVolume"))
 		m_ini.SetDoubleValue("Audio", "MusicVolume", 0.75);
 
-	if(!m_ini.GetDoubleValue("Audio", "SFXVolume"))
+	if(!m_ini.KeyExists("Audio", "SFXVolume"))
 		m_ini.SetDoubleValue("Audio", "SFXVolume", 0.6);
 
-	if(!m_ini.GetLongValue("Display", "ScreenWidth"))
+	if(!m_ini.KeyExists("Display", "ScreenWidth"))
 		m_ini.SetLongValue("Display", "ScreenWidth", WindowWidth);
 
-	if(!m_ini.GetLongValue("Display", "ScreenHeight"))
+	if(!m_ini.KeyExists("Display", "ScreenHeight"))
 		m_ini.SetLongValue("Display", "ScreenHeight", WindowHeight);
 
-	if(!m_ini.GetBoolValue("Display", "Fullscreen"))
+	if(!m_ini.KeyExists("Display", "Fullscreen"))
 		m_ini.SetBoolValue("Display", "Fullscreen", false);
 
 	m_ini.SaveFile(Filename.c_str());
@@ -57,34 +57,52 @@ void SettingsManager::Save()
 	m_ini.SaveFile(Filename.c_str());
 }
 
-float SettingsManager::GetMusicVolume() const {
+float SettingsManager::GetMusicVolume() const 
+{
 	return static_cast<float>(m_ini.GetDoubleValue("Audio", "MusicVolume", 0.75));
 }
-float SettingsManager::GetSFXVolume() const {
+
+float SettingsManager::GetSFXVolume() const 
+{
 	return static_cast<float>(m_ini.GetDoubleValue("Audio", "SFXVolume", 0.6));
 }
-int SettingsManager::GetScreenWidth() const {
+
+int SettingsManager::GetScreenWidth() const 
+{
 	return static_cast<int>(m_ini.GetLongValue("Graphics", "ScreenWidth", 1280));
 }
-int SettingsManager::GetScreenHeight() const {
+
+int SettingsManager::GetScreenHeight() const 
+{
 	return static_cast<int>(m_ini.GetLongValue("Graphics", "ScreenHeight", 720));
 }
-bool SettingsManager::IsFullscreen() const {
+
+bool SettingsManager::IsFullscreen() const 
+{
 	return m_ini.GetBoolValue("Graphics", "Fullscreen", false);
 }
 
-void SettingsManager::SetMusicVolume(float volume) {
+void SettingsManager::SetMusicVolume(float volume) 
+{
 	m_ini.SetDoubleValue("Audio", "MusicVolume", volume);
 }
-void SettingsManager::SetSFXVolume(float volume) {
+
+void SettingsManager::SetSFXVolume(float volume) 
+{
 	m_ini.SetDoubleValue("Audio", "SFXVolume", volume);
 }
-void SettingsManager::SetScreenWidth(int width) {
+
+void SettingsManager::SetScreenWidth(int width) 
+{
 	m_ini.SetLongValue("Graphics", "ScreenWidth", width);
 }
-void SettingsManager::SetScreenHeight(int height) {
+
+void SettingsManager::SetScreenHeight(int height) 
+{
 	m_ini.SetLongValue("Graphics", "ScreenHeight", height);
 }
-void SettingsManager::SetFullscreen(bool fullscreen) {
+
+void SettingsManager::SetFullscreen(bool fullscreen) 
+{
 	m_ini.SetBoolValue("Graphics", "Fullscreen", fullscreen);
 }

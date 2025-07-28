@@ -26,6 +26,7 @@
 #include <string>
 #include <vector>
 #include <Windows.h>
+#include <algorithm>
 
 using namespace GameStateNameLibrary;
 using namespace GlobalConstants;
@@ -244,7 +245,7 @@ void UIOptionsView::SetSFXVolume(int index)
 
 void UIOptionsView::SetMusicVolume(int index)
 {
-	float value = index / SliderScaler;
+	float value = std::clamp(index / SliderScaler, 0.0f, 1.0f);
 	AudioEngine::Instance()->SetMusicVolume(value);
 	SettingsManager::Instance()->SetMusicVolume(value);
 }
