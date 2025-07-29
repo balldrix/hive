@@ -26,8 +26,7 @@ void UIPortraitView::Init(std::string name)
 	m_name = name;
 
 	m_frame = new UIImageView();
-	m_frame->Init(fmt::format("{} Frame", name));
-	m_frame->GetSprite()->Init(AssetLoader::GetTexture("t_portrait_frame"));
+	m_frame->Init(fmt::format("{} Frame", name), AssetLoader::GetTexture("t_portrait_frame"));
 	m_frame->SetOrigin(Vector2::Zero);
 	m_frame->SetDepth(0.0f);
 	m_frame->SetActive(true);

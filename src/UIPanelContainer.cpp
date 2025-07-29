@@ -29,8 +29,7 @@ void UIPanelContainer::Init(const std::string& name, const RECT& rect)
 	UIView::Init(name);
 
 	m_overlayImage = new UIImageView();
-	m_overlayImage->Init("Pause Overlay Image");
-	m_overlayImage->GetSprite()->Init(AssetLoader::GetTexture("t_pixel"));
+	m_overlayImage->Init("Pause Overlay Image", AssetLoader::GetTexture("t_pixel"));
 	m_overlayImage->GetSprite()->SetSourceRect(RECT{ 0, 0, GameWidth, GameHeight });
 	m_overlayImage->SetAlpha(0.4f);
 	m_overlayImage->SetOrigin(Vector2::Zero);
@@ -38,8 +37,7 @@ void UIPanelContainer::Init(const std::string& name, const RECT& rect)
 	m_overlayImage->SetDepth(0.3f);
 
 	m_panelImage = new UIImageView();
-	m_panelImage->Init("Panel Image");
-	m_panelImage->GetSprite()->Init(AssetLoader::GetTexture("t_pixel"));
+	m_panelImage->Init("Panel Image", AssetLoader::GetTexture("t_pixel"));
 	m_panelImage->GetSprite()->SetSourceRect(rect);
 	m_panelImage->SetOrigin(Vector2::Zero);
 	m_panelImage->SetPosition(Vector2(10.0f, 30.0f));

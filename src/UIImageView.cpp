@@ -1,7 +1,9 @@
 #include "UIImageView.h"
 
 #include "Graphics.h"
+#include "Texture.h"
 #include "UISprite.h"
+#include "UIView.h"
 
 #include <directxtk/SimpleMath.h>
 #include <string>
@@ -18,8 +20,15 @@ UIImageView::~UIImageView()
 
 void UIImageView::Init(std::string name)
 {
-	m_name = name;
+	UIView::Init(name);
 	m_uiSprite = new UISprite();
+}
+
+void UIImageView::Init(std::string name, Texture* texture)
+{
+	UIView::Init(name);
+	m_uiSprite = new UISprite();
+	m_uiSprite->Init(texture);
 }
 
 void UIImageView::Render(Graphics* graphics)

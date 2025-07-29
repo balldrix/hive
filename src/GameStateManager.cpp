@@ -12,6 +12,7 @@ GameStateManager* GameStateManager::s_instance = nullptr;
 GameStateManager::GameStateManager() :
 	m_previousState(nullptr),
 	m_currentState(nullptr),
+	m_window(nullptr),
 	m_graphics(nullptr),
 	m_input(nullptr)
 {

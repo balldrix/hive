@@ -29,8 +29,7 @@ void UIScreenFlashFX::Init(std::string name)
 	m_name = name;
 
 	m_fullscreenImage = new UIImageView();
-	m_fullscreenImage->Init("Image");
-	m_fullscreenImage->GetSprite()->Init(AssetLoader::GetTexture("t_pixel"));
+	m_fullscreenImage->Init("Image", AssetLoader::GetTexture("t_pixel"));
 	
 	RECT rect {};
 	rect.left = 0;

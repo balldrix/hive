@@ -28,8 +28,7 @@ void UILoadingView::Init(std::string name)
 	Logger::LogInfo("Initialising UI Loading View.");
 
 	m_loadingBackground = new UIImageView();
-	m_loadingBackground->Init("Background Image");
-	m_loadingBackground->GetSprite()->Init(AssetLoader::GetTexture("t_loadingScreen_bg"));
+	m_loadingBackground->Init("Background Image", AssetLoader::GetTexture("t_loadingScreen_bg"));
 	m_loadingBackground->SetOrigin(Vector2::Zero);
 	m_loadingBackground->SetDepth(0.9f);
 

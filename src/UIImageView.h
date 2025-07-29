@@ -9,6 +9,7 @@
 using namespace DirectX::SimpleMath;
 
 class Graphics;
+class Texture;
 
 class UIImageView : public UIView
 {
@@ -16,7 +17,8 @@ public:
 	UIImageView();
 	virtual ~UIImageView();
 
-	void Init(std::string name) override;
+	void Init(std::string name);
+	void Init(std::string name, Texture* texture);
 	void Render(Graphics* graphics) override;
 
 	UISprite* GetSprite() const { return m_uiSprite; }

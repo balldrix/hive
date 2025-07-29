@@ -43,15 +43,13 @@ void UICycleMenuItemView::Init(std::string name, std::vector<std::string> option
 	m_selectedIndex = defaultIndex;
 
 	m_leftArrow = new UIImageView();
-	m_leftArrow->Init("Left Arrow");
-	m_leftArrow->GetSprite()->Init(AssetLoader::GetTexture("t_arrow"));
+	m_leftArrow->Init("Left Arrow", AssetLoader::GetTexture("t_arrow"));
 	m_leftArrow->SetFlipped(true);
 	m_leftArrow->SetOrigin(Vector2::Zero);
 	m_leftArrow->SetDepth(0.5f);
 
 	m_rightArrow = new UIImageView();
-	m_rightArrow->Init("Right Arrow");
-	m_rightArrow->GetSprite()->Init(AssetLoader::GetTexture("t_arrow"));
+	m_rightArrow->Init("Right Arrow", AssetLoader::GetTexture("t_arrow"));
 	m_rightArrow->SetOrigin(Vector2::Zero);
 	m_rightArrow->SetDepth(0.5f);
 

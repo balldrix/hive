@@ -42,8 +42,7 @@ void UITitleScreenView::Init(std::string name)
 	m_startGameText->SetDepth(0.5f);
 
 	m_logoImage = new UIImageView();
-	m_logoImage->Init("Title Logo");
-	m_logoImage->GetSprite()->Init(AssetLoader::GetTexture("t_title_logo"));
+	m_logoImage->Init("Title Logo", AssetLoader::GetTexture("t_title_logo"));
 	m_logoImage->SetPosition(LogoImageStartPosition);
 	m_logoImage->SetOrigin(Vector2((float)m_logoImage->GetSprite()->GetWidth(), 0.0f));
 	m_logoImage->SetDepth(0.5f);
