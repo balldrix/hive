@@ -255,6 +255,7 @@ void Graphics::CreateResources()
 
 	m_defaultSpriteBatch = std::make_shared<SpriteBatch>(m_d3dDeviceContext.Get());
 	m_uiSpriteBatch = std::make_shared<SpriteBatch>(m_d3dDeviceContext.Get());
+	m_postProcessSpriteBatch = std::make_shared<SpriteBatch>(m_d3dDeviceContext.Get());
 
 	UpdateDisplayModes();
 }
@@ -326,9 +327,9 @@ void Graphics::PresentBackBuffer()
 	XMFLOAT2 drawPos(offsetX, offsetY);
 	XMFLOAT2 scaleVec(scale, scale);
 
-	m_defaultSpriteBatch->Begin(SpriteSortMode_Deferred, nullptr, m_samplerState.Get());
-	m_defaultSpriteBatch->Draw(m_renderTextureSRV.Get(), drawPos, nullptr, Colors::White, 0.0f, {}, scaleVec);
-	m_defaultSpriteBatch->End();
+	m_postProcessSpriteBatch->Begin(SpriteSortMode_Deferred, nullptr, m_samplerState.Get());
+	m_postProcessSpriteBatch->Draw(m_renderTextureSRV.Get(), drawPos, nullptr, Colors::White, 0.0f, {}, scaleVec);
+	m_postProcessSpriteBatch->End();
 
 	HRESULT hr = m_swapChain->Present(1, 0);
 
@@ -386,7 +387,7 @@ void Graphics::UpdateDisplayModes()
 		bool replaced = false;
 		for(auto& mode : tempModes) {
 			if(mode.width == dm.dmPelsWidth && mode.height == dm.dmPelsHeight) {
-				if(dm.dmDisplayFrequency > mode.refreshRate) {
+				if(static_cast<int>(dm.dmDisplayFrequency) > mode.refreshRate) {
 					mode.refreshRate = dm.dmDisplayFrequency;
 				}
 				replaced = true;

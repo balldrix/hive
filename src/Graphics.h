@@ -97,6 +97,7 @@ private:
 
 	std::shared_ptr<SpriteBatch> m_defaultSpriteBatch;
 	std::shared_ptr<SpriteBatch> m_uiSpriteBatch;
+	std::shared_ptr<SpriteBatch> m_postProcessSpriteBatch;
 
 	int m_nativeGameWidth;
 	int m_nativeGameHeight;
