@@ -92,6 +92,7 @@ void Input::ClearAll()
 {
 	ClearKeysPressed();
 	ClearKeysDown();
+	GetGamePadButtons().Reset();
 }
 
 bool Input::IsKeyDown(UCHAR key) const

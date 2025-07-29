@@ -49,6 +49,7 @@ void MenuSystem::Update(Input* input)
 	{
 		s_currentMenu->OnCancelPressed();
 		UIManager::PlayUISound(UISoundType::Delete);
+		input->ClearAll();
 		return;
 	}
 
