@@ -30,13 +30,13 @@ NPCManager::~NPCManager()
 	DeleteAll();
 }
 
-void NPCManager::Init(Graphics* graphics, Camera* camera, Player* player)
+void NPCManager::Init(Camera* camera, Player* player)
 {
 	s_instance = this;
 
 	m_player = player;
 	m_NPCFactory = new NPCFactory();
-	m_NPCFactory->Init(graphics, camera, player);
+	m_NPCFactory->Init(camera, player);
 }
 
 void NPCManager::SpawnNPC(const Vector2& position, const EnemyDefinition& enemyDefinition, const Vector2& velocity, const Vector2& direction, float height)

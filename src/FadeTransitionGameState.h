@@ -2,7 +2,6 @@
 
 #include "GameState.h"
 
-class GameStateManager;
 class Graphics;
 
 class FadeTransitionGameState : public GameState
@@ -12,10 +11,8 @@ public:
 	FadeTransitionGameState(GameStateManager* gameStateManager);
 	virtual ~FadeTransitionGameState() {};
 
-	void OnEntry();
-	void Update(float deltaTime);
-	void Render();
-	void OnExit();
-private:
-	Graphics* m_graphics;
+	void OnEntry() override;
+	void Update(float deltaTime) override;
+	void Render(Graphics* graphics) override;
+	void OnExit() override;
 };

@@ -4,17 +4,18 @@
 
 class GameStateManager;
 class Graphics;
+class Input;
 
 class TitleScreenGameState : public GameState
 {
 public:
 	TitleScreenGameState();
-	TitleScreenGameState(GameStateManager* gameStateManager);
+	TitleScreenGameState(GameStateManager* gameStateManager, Input* input);
 	~TitleScreenGameState();
 
 	void Update(float deltaTime);
-	void Render();
+	void Render(Graphics* graphics);
 
 private:
-	Graphics* m_graphics;
+	Input* m_input;
 };

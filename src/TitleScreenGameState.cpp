@@ -3,21 +3,22 @@
 #include "GameState.h"
 #include "GameStateManager.h"
 #include "GameStateNameLibrary.h"
+#include "Graphics.h"
 #include "Input.h"
 #include "UIManager.h"
 
 using namespace GameStateNameLibrary;
 
 TitleScreenGameState::TitleScreenGameState() :
-	m_graphics(nullptr),
+	m_input(nullptr),
 	GameState(TitleScreen)
 {
 }
 
-TitleScreenGameState::TitleScreenGameState(GameStateManager* gameStateManager) : TitleScreenGameState()
+TitleScreenGameState::TitleScreenGameState(GameStateManager* gameStateManager, Input* input) : TitleScreenGameState()
 {
 	m_gameStateManager = gameStateManager;
-	m_graphics = gameStateManager->GetGraphics();
+	m_input = input;
 }
 
 TitleScreenGameState::~TitleScreenGameState()
@@ -28,16 +29,15 @@ void TitleScreenGameState::Update(float deltaTime)
 {
 	UIManager::Update(deltaTime);
 
-	auto input = m_gameStateManager->GetInput();
-	auto buttons = input->GetGamePadButtons();
+	auto buttons = m_input->GetGamePadButtons();
 
-	if(input->WasKeyPressed(ENTER_KEY) || input->WasGamePadButtonPressed(buttons.a))
+	if(m_input->WasKeyPressed(ENTER_KEY) || m_input->WasGamePadButtonPressed(buttons.a))
 	{
 		m_gameStateManager->SwitchState(MainMenu);
 	}
 }
 
-void TitleScreenGameState::Render()
+void TitleScreenGameState::Render(Graphics* graphics)
 {
-	UIManager::Render(m_graphics);
+	UIManager::Render(graphics);
 }

@@ -3,6 +3,7 @@
 #include <string>
 
 class GameStateManager;
+class Graphics;
 
 class GameState
 {
@@ -19,7 +20,7 @@ public:
 	virtual void	ProcessInput() {};
 	virtual void	Update(float deltaTime) {};
 	virtual void	ProcessCollisions() {};
-	virtual void	Render() {};
+	virtual void	Render(Graphics* graphics) {};
 
 	virtual std::string	GetStateName() const;
 

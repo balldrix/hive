@@ -10,7 +10,6 @@
 using namespace GameStateNameLibrary;
 
 FadeTransitionGameState::FadeTransitionGameState() :
-	m_graphics(nullptr),
 	GameState(FadeTransition)
 {
 }
@@ -18,7 +17,6 @@ FadeTransitionGameState::FadeTransitionGameState() :
 FadeTransitionGameState::FadeTransitionGameState(GameStateManager* gameStateManager) : FadeTransitionGameState()
 {
 	m_gameStateManager = gameStateManager;
-	m_graphics = m_gameStateManager->GetGraphics();
 }
 
 void FadeTransitionGameState::OnEntry()
@@ -35,9 +33,9 @@ void FadeTransitionGameState::Update(float deltaTime)
 	m_gameStateManager->SwitchState(LoadingGameState::GetTargetGameState()->GetStateName());
 }
 
-void FadeTransitionGameState::Render()
+void FadeTransitionGameState::Render(Graphics* graphics)
 {
-	UIManager::Render(m_graphics);
+	UIManager::Render(graphics);
 }
 
 void FadeTransitionGameState::OnExit()

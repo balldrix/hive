@@ -5,8 +5,11 @@
 #include <string>
 #include <vector>
 
+class GameStateManager;
 class Graphics;
+class Input;
 class UIPanelContainer;
+class Window;
 
 class UIOptionsView : public UIMenuView
 {
@@ -14,7 +17,7 @@ public:
 	UIOptionsView();
 	virtual ~UIOptionsView();
 
-	void Init(std::string name) override;
+	void Init(std::string name, Window* window, Graphics* graphics, Input* input);
 	void Render(Graphics* graphics) override;
 	void Shutdown() override;
 
@@ -47,16 +50,16 @@ private:
 	{
 		OptionType optionType;
 		SelectionType selectionType;
-		void(*onIndexChange)(int) = nullptr;
-		int(*getDefaultValue)() = nullptr;
+		void(*onIndexChange)(UIMenuView*, int) = nullptr;
+		int(*getDefaultValue)(UIMenuView* owner) = nullptr;
 
 		OptionsMenuOption(
 			const std::string& label,
 			void(*onConfirm)(),
 			OptionType optionType,
 			SelectionType selectionType,
-			void(*onIndexChange)(int),
-			int(*getDefaultValue)()) : MenuOptionBase(label, onConfirm)
+			void(*onIndexChange)(UIMenuView*, int),
+			int(*getDefaultValue)(UIMenuView*)) : MenuOptionBase(label, onConfirm)
 		{
 			this->optionType = optionType;
 			this->selectionType = selectionType;
@@ -65,15 +68,15 @@ private:
 		}
 	};
 
-	static void SetSFXVolume(int index);
-	static void SetMusicVolume(int index);
-	static void SetScreenResolution(int index);
-	static void SetFullscreen(int index);
+	static void SetSFXVolume(UIMenuView* owner, int index);
+	static void SetMusicVolume(UIMenuView* owner, int index);
+	static void SetScreenResolution(UIMenuView* owner, int index);
+	static void SetFullscreen(UIMenuView* owner, int index);
 
-	static int GetSFXVolumeIndex();
-	static int GetMusicVolumeIndex();
-	static int GetScreenResolutionIndex();
-	static int GetFullscreenIndex();
+	static int GetSFXVolumeIndex(UIMenuView* owner);
+	static int GetMusicVolumeIndex(UIMenuView* owner);
+	static int GetScreenResolutionIndex(UIMenuView* owner);
+	static int GetFullscreenIndex(UIMenuView* owner);
 
 	static void Back();
 

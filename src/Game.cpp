@@ -24,7 +24,7 @@
 #include <fmt/core.h>
 #include <objbase.h>
 #include <synchapi.h>
-#include <windows.h>
+#include <Windows.h>
 
 using namespace GameStateNameLibrary;
 
@@ -48,27 +48,23 @@ Game::~Game()
 	Shutdown();
 }
 
-void Game::Init(Window* window, Graphics* graphics)
+void Game::Init(Window* window, Graphics* graphics, Input* input, GameStateManager* gameStateManager)
 {
 	// allow multi threading
 	CoInitializeEx(NULL, COINIT_MULTITHREADED);
 
 	m_window = window;
 	m_graphics = graphics;
-
-	m_input = new Input();
-	m_input->Init();
-
-	m_gameStateManager = new GameStateManager();
-	m_gameStateManager->Init(m_window, m_graphics, m_input);
+	m_input = input;
+	m_gameStateManager = gameStateManager;
 
 	m_gameStateManager->AddState(new InitialLoadGameState(m_gameStateManager));
 	m_gameStateManager->AddState(new LoadingGameState(m_gameStateManager));
 	m_gameStateManager->AddState(new FadeTransitionGameState(m_gameStateManager));
-	m_gameStateManager->AddState(new TitleScreenGameState(m_gameStateManager));
+	m_gameStateManager->AddState(new TitleScreenGameState(m_gameStateManager, m_input));
 	m_gameStateManager->AddState(new MainMenuGameState(m_gameStateManager));
 	m_gameStateManager->AddState(new SharedOptionsGameState(m_gameStateManager));
-	m_gameStateManager->AddState(new GameplayGameState(m_gameStateManager));
+	m_gameStateManager->AddState(new GameplayGameState(m_gameStateManager, m_input));
 	m_gameStateManager->AddState(new PausedGameState(m_gameStateManager));
 	m_gameStateManager->SwitchState(InitialLoad);
 
@@ -135,7 +131,7 @@ void Game::ProcessCollisions()
 void Game::Render()
 {
 	m_graphics->Begin();
-	m_gameStateManager->Render();
+	m_gameStateManager->Render(m_graphics);
 	m_graphics->PresentBackBuffer();
 }
 
@@ -158,12 +154,8 @@ void Game::OnWindowSizeChanged(int width, int height)
 
 void Game::Shutdown()
 {
-	delete m_gameStateManager;
 	m_gameStateManager = nullptr;
-
-	delete m_input;
 	m_input = nullptr;
-
 	m_graphics = nullptr;
 	m_window = nullptr;
 }

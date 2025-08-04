@@ -7,6 +7,7 @@
 #include "GameStateNameLibrary.h"
 #include "GlobalConstants.h"
 #include "Graphics.h"
+#include "Input.h"
 #include "Logger.h"
 #include "SettingsManager.h"
 #include "UICycleMenuItemView.h"
@@ -20,13 +21,13 @@
 #include "UIView.h"
 #include "Window.h"
 
+#include <algorithm>
 #include <cmath>
 #include <DirectXColors.h>
 #include <fmt/core.h>
 #include <string>
 #include <vector>
 #include <Windows.h>
-#include <algorithm>
 
 using namespace GameStateNameLibrary;
 using namespace GlobalConstants;
@@ -41,10 +42,12 @@ UIOptionsView::~UIOptionsView()
 	Shutdown();
 }
 
-void UIOptionsView::Init(std::string name)
+void UIOptionsView::Init(std::string name, Window* window, Graphics* graphics, Input* input)
 {
 	Logger::LogInfo("Initialising UI Options View.");
 
+	m_window = window;
+	m_graphics = graphics;
 	m_name = name;
 
 	m_panelContainer = new UIPanelContainer();
@@ -107,21 +110,21 @@ void UIOptionsView::Init(std::string name)
 				case SelectionType::Slider:
 				{
 					auto* sliderItem = new UISliderMenuItemView();
-					sliderItem->Init(name, 1.0f, option->getDefaultValue(), Colors::White.v, option->onIndexChange);
+					sliderItem->Init(name, input, 1.0f, option->getDefaultValue(this), Colors::White.v, option->onIndexChange, this);
 					item = sliderItem;
 					break;
 				}
 				case SelectionType::Cycle:
 				{
 					auto* cycleItem = new UICycleMenuItemView();
-					cycleItem->Init(name, GetOptionsForOptionType(option->optionType), option->getDefaultValue(), option->onIndexChange);
+					cycleItem->Init(name, input, GetOptionsForOptionType(option->optionType), option->getDefaultValue(this), option->onIndexChange, this);
 					item = cycleItem;
 					break;
 				}
 				default:
 				{
 					auto* textMenuItem = new UITextMenuItemView();
-					textMenuItem->Init(name);
+					textMenuItem->Init(name, input);
 					textMenuItem->SetText(name);
 					item = textMenuItem;
 					break;
@@ -132,7 +135,7 @@ void UIOptionsView::Init(std::string name)
 		{
 			// Fallback: basic text item for non-options menus
 			auto* textMenuItem = new UITextMenuItemView();
-			textMenuItem->Init(name);
+			textMenuItem->Init(name, input);
 			textMenuItem->SetText(name);
 			item = textMenuItem;
 		}
@@ -235,7 +238,7 @@ void UIOptionsView::DoTransition(float deltaTime)
 	m_panelContainer->SetOverlayAlpha(m_lerpedAlpha);
 }
 
-void UIOptionsView::SetSFXVolume(int index)
+void UIOptionsView::SetSFXVolume(UIMenuView* owner, int index)
 {
 	float value = index / SliderScaler;
 	AudioEngine::Instance()->SetSFXVolume(value);
@@ -243,38 +246,38 @@ void UIOptionsView::SetSFXVolume(int index)
 	UIManager::PlayUISound(UISoundType::Select);
 }
 
-void UIOptionsView::SetMusicVolume(int index)
+void UIOptionsView::SetMusicVolume(UIMenuView* owner, int index)
 {
 	float value = std::clamp(index / SliderScaler, 0.0f, 1.0f);
 	AudioEngine::Instance()->SetMusicVolume(value);
 	SettingsManager::Instance()->SetMusicVolume(value);
 }
 
-void UIOptionsView::SetScreenResolution(int index)
+void UIOptionsView::SetScreenResolution(UIMenuView* owner, int index)
 {
 	std::vector<Graphics::DisplayMode> modes;
 	Graphics::DisplayMode mode;
 
-	modes = GameStateManager::Instance()->GetGraphics()->GetSupportedResolutions();
+	modes = owner->GetGraphics()->GetSupportedResolutions();
 	mode = modes[index];
 
-	if(UIOptionsView::GetFullscreenIndex() == 0)
+	if(UIOptionsView::GetFullscreenIndex(owner) == 0)
 	{
-		GameStateManager::Instance()->GetWindow()->ResizeWindow(mode.width, mode.height);
+		owner->GetWindow()->ResizeWindow(mode.width, mode.height);
 	}
 
-	GameStateManager::Instance()->GetGraphics()->SetResolution(mode.width, mode.height);
+	owner->GetGraphics()->SetResolution(mode.width, mode.height);
 	
 	SettingsManager::Instance()->SetScreenWidth(mode.width);
 	SettingsManager::Instance()->SetScreenHeight(mode.height);
-	GameStateManager::Instance()->GetWindow()->SetFullscreen(SettingsManager::Instance()->IsFullscreen());
+	owner->GetWindow()->SetFullscreen(SettingsManager::Instance()->IsFullscreen());
 
 	UIManager::PlayUISound(UISoundType::Select);
 }
 
-void UIOptionsView::SetFullscreen(int index)
+void UIOptionsView::SetFullscreen(UIMenuView* owner, int index)
 {
-	GameStateManager::Instance()->GetWindow()->SetFullscreen(index);
+	owner->GetWindow()->SetFullscreen(index);
 	SettingsManager::Instance()->SetFullscreen(index);
 }
 
@@ -290,7 +293,7 @@ std::vector<std::string> UIOptionsView::GetOptionsForOptionType(OptionType optio
 	{
 	case UIOptionsView::OptionType::Resolution :
 	{
-		std::vector<Graphics::DisplayMode> modes = GameStateManager::Instance()->GetGraphics()->GetSupportedResolutions();
+		std::vector<Graphics::DisplayMode> modes = m_graphics->GetSupportedResolutions();
 		std::vector<std::string> resolutions;
 
 		for(auto& it : modes)
@@ -319,29 +322,27 @@ std::vector<std::string> UIOptionsView::GetOptionsForOptionType(OptionType optio
 	return std::vector<std::string>();
 }
 
-int UIOptionsView::GetSFXVolumeIndex()
+int UIOptionsView::GetSFXVolumeIndex(UIMenuView* owner)
 {
 	float volume = AudioEngine::Instance()->GetSFXVolume();
 	return static_cast<int>(std::ceil (volume * SliderScaler));
 }
 
-int UIOptionsView::GetMusicVolumeIndex()
+int UIOptionsView::GetMusicVolumeIndex(UIMenuView* owner)
 {
 	float volume = AudioEngine::Instance()->GetMusicVolume();
 	return static_cast<int>(std::ceil(volume * SliderScaler));
 }
 
-int UIOptionsView::GetScreenResolutionIndex()
+int UIOptionsView::GetScreenResolutionIndex(UIMenuView* owner)
 {
-	Graphics* graphics;
 	int width;
 	int height;
 	std::vector<Graphics::DisplayMode> modes;
-
-	graphics = GameStateManager::Instance()->GetGraphics();
-	width = graphics->GetOutputWidth();
-	height = graphics->GetOutputHeight();
-	modes = graphics->GetSupportedResolutions();
+;
+	width = owner->GetGraphics()->GetOutputWidth();
+	height = owner->GetGraphics()->GetOutputHeight();
+	modes = owner->GetGraphics()->GetSupportedResolutions();
 
 	for(int i = 0; i < modes.size(); i++)
 	{
@@ -353,7 +354,7 @@ int UIOptionsView::GetScreenResolutionIndex()
 	return 0;
 }
 
-int UIOptionsView::GetFullscreenIndex()
+int UIOptionsView::GetFullscreenIndex(UIMenuView* owner)
 {
-	return GameStateManager::Instance()->GetWindow()->GetFullscreen();
+	return owner->GetWindow()->GetFullscreen();
 }

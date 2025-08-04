@@ -5,6 +5,9 @@
 #include <directxtk/SimpleMath.h>
 #include <map>
 
+class Input;
+class UIMenuView;
+
 class UIMenuItemView : public UIView
 {
 public:
@@ -26,6 +29,8 @@ public:
 
 	UIMenuItemView();
 	virtual ~UIMenuItemView() {};
+
+	void Init(Input* input);
 	virtual void Update(float deltaTime);
 	virtual void OnConfirmPressed() {};
 	virtual void ChangeSelectionState(SelectionStates selectedState);
@@ -56,6 +61,8 @@ protected:
 
 	typedef std::map<UIMenuItemView::SelectionStates, Color> SelectedStateColours;
 	SelectedStateColours m_selectionStateColours;
+	Input* m_input;
+	UIMenuView* m_owner;
 
 private:
 	float m_holdTimer;

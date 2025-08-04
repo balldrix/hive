@@ -5,6 +5,7 @@
 #include <string>
 
 class Graphics;
+class Input;
 class UIHudView;
 class UIPauseMenuView;
 class UIScreenFlashFX;
@@ -15,7 +16,7 @@ public:
 	UIMainView();
 	virtual ~UIMainView();
 
-	void Init(std::string name) override;
+	void Init(std::string name, Input* input);
 	void Render(Graphics* graphics) override {};
 
 	void Shutdown();

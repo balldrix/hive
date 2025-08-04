@@ -17,7 +17,9 @@
 #include "AudioEngine.h"
 #include "Game.h"
 #include "GameDataManager.h"
+#include "GameStateManager.h"
 #include "Graphics.h"
+#include "Input.h"
 #include "Logger.h"
 #include "MenuSystem.h"
 #include "SettingsManager.h"
@@ -31,6 +33,8 @@
 
 Graphics* graphics = nullptr;
 Window* window	= nullptr;
+Input* input = nullptr;
+GameStateManager* gameStateManager = nullptr;
 Game* game = nullptr;
 
 void Shutdown();
@@ -61,14 +65,19 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	graphics = new Graphics();
 	graphics->Init(width, height, window->GetHwnd(), hInstance);
 	
+	input = new Input();
+	input->Init();
+
 	AudioEngine::Init();
 	AssetLoader::Init(graphics, "assets\\assets.json");
 	GameDataManager::Init();
-	UIManager::Init();
-	MenuSystem::Init();
+	UIManager::Init(window, graphics, input);
+	MenuSystem::Init(input);
+
+	gameStateManager = new GameStateManager();
 
 	game = new Game();
-	game->Init(window, graphics);
+	game->Init(window, graphics, input, gameStateManager);
 
 	MSG msg = {0};
 	while(msg.message != WM_QUIT)
@@ -94,15 +103,19 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 void Shutdown()
 {
 	delete game;
+	delete gameStateManager;
 	MenuSystem::Destroy();
 	UIManager::Destroy();
 	GameDataManager::Destroy();
 	AssetLoader::Destroy();
 	AudioEngine::Destroy();
+	delete input;
 	delete graphics;
 	delete window;
 	
+	gameStateManager = nullptr;
 	game = nullptr;
+	input = nullptr;
 	graphics = nullptr;
 	window = nullptr;	
 

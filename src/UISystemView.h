@@ -5,9 +5,11 @@
 #include <string>
 
 class Graphics;
+class Input;
 class UIFadeOverlayView;
 class UILoadingView;
 class UIOptionsView;
+class Window;
 
 class UISystemView : UIView
 {
@@ -15,7 +17,7 @@ public:
 	UISystemView();
 	virtual ~UISystemView();
 
-	void Init(std::string name) override;
+	void Init(std::string name, Window* window, Graphics* graphics, Input* input);
 	void Update(float deltaTime);
 	void Render(Graphics* graphics) override;
 		

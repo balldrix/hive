@@ -15,7 +15,6 @@ bool LoadingGameState::s_isLoadingToMainGameplay = false;
 using namespace GameStateNameLibrary;
 
 LoadingGameState::LoadingGameState() :
-	m_graphics(nullptr),
 	m_timer(0.0f),
 	m_isDone(false),
 	GameState(Loading)
@@ -26,7 +25,6 @@ LoadingGameState::LoadingGameState() :
 LoadingGameState::LoadingGameState(GameStateManager* gameStateManager) : LoadingGameState()
 {
 	m_gameStateManager = gameStateManager;
-	m_graphics = gameStateManager->GetGraphics();
 }
 
 LoadingGameState::~LoadingGameState()
@@ -83,9 +81,9 @@ void LoadingGameState::Update(float deltaTime)
 	m_gameStateManager->SwitchState(FadeTransition);
 }
 
-void LoadingGameState::Render()
+void LoadingGameState::Render(Graphics* graphics)
 {
-	UIManager::Render(m_graphics);
+	UIManager::Render(graphics);
 }
 
 void LoadingGameState::OnExit()

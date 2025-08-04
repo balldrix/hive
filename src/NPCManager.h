@@ -20,7 +20,7 @@ public:
 	NPCManager();
 
 	static	NPCManager* Instance() { return s_instance; }
-	void	Init(Graphics* graphics, Camera* camera, Player* player);
+	void	Init(Camera* camera, Player* player);
 
 	void	SpawnNPC(const Vector2& position, const EnemyDefinition& enemyDefinition, const Vector2& velocity, const Vector2& direction, float height);
 

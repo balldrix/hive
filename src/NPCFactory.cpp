@@ -6,7 +6,6 @@
 #include "EnemyDefinition.h"
 #include "EnemyFallingState.h"
 #include "EnemyIdleState.h"
-#include "Graphics.h"
 #include "Logger.h"
 #include "NormalEnemyGlobalState.h"
 #include "NPCManager.h"
@@ -15,17 +14,13 @@
 #include <fmt/core.h>
 
 NPCFactory::NPCFactory() :
-	m_graphics(nullptr),
 	m_camera(nullptr),
 	m_player(nullptr)
 {
 }
 
-void NPCFactory::Init(Graphics* graphics,
-	Camera* camera,
-	Player* player)
+void NPCFactory::Init(Camera* camera, Player* player)
 {
-	m_graphics = graphics;
 	m_camera = camera;
 	m_player = player;
 }
@@ -45,7 +40,7 @@ Enemy* NPCFactory::GetEnemy(EnemyDefinition definition)
 Enemy* NPCFactory::CreateNormalEnemy(EnemyDefinition& definition)
 {
 	auto mook = new Enemy();
-	mook->Init(m_graphics, m_camera, m_player, definition,
+	mook->Init(m_camera, m_player, definition,
 				NPCManager::Instance(),
 				AssetLoader::GetTexture(definition.shadowId),
 				NormalEnemyGlobalState::Instance(),
@@ -57,7 +52,7 @@ Enemy* NPCFactory::CreateNormalEnemy(EnemyDefinition& definition)
 Enemy* NPCFactory::CreateFallingEnemy(EnemyDefinition& definition)
 {
 	auto spider = new Enemy();
-	spider->Init(m_graphics, m_camera, m_player, definition,
+	spider->Init(m_camera, m_player, definition,
 				NPCManager::Instance(),
 				AssetLoader::GetTexture(definition.shadowId),
 				NormalEnemyGlobalState::Instance(),

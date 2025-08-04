@@ -8,7 +8,9 @@
 #include <string>
 #include <vector>
 
+class GameStateManager;
 class Graphics;
+class Window;
 
 class UIMenuView : public UIView, public IMenuSystemInteraction
 {
@@ -16,7 +18,6 @@ public:
 	UIMenuView();
 	virtual ~UIMenuView() {};
 
-	virtual void Init(std::string name) {};
 	virtual void Update(float deltaTime) override;
 	virtual void Render(Graphics* graphics) override;
 	virtual void Shutdown() override;
@@ -27,6 +28,9 @@ public:
 	virtual void OnConfirmPressed(int selectedIndex) override;
 	virtual void OnCancelPressed() override {};
 	virtual bool IsMenuItemSelectionAllowed(Vector2 direction, int index) override;
+
+	Window* GetWindow() const { return m_window; }
+	Graphics* GetGraphics() const { return m_graphics; }
 
 	struct MenuOptionBase {
 		std::string label;
@@ -50,4 +54,7 @@ protected:
 	UIStackingView m_uiStackingView;
 	std::vector<MenuOptionBase*> m_menuOptions;
 	float m_lerpedAlpha;
+
+	Window* m_window;
+	Graphics* m_graphics;
 };

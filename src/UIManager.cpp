@@ -19,7 +19,10 @@ UIManager::UIManager() :
 	m_uiFrontEndView(nullptr),
 	m_uiMainView(nullptr),
 	m_viewList(0),
-	m_uiSoundSource(nullptr)
+	m_uiSoundSource(nullptr),
+	m_window(nullptr),
+	m_graphics(nullptr),
+	m_input(nullptr)
 {
 	m_uiSoundSource = new SoundSource();
 	m_uiSoundSource->SetPriority(SoundPriority::Always);
@@ -34,11 +37,14 @@ UIManager::~UIManager()
 	Shutdown();
 }
 
-void UIManager::Init()
+void UIManager::Init(Window* window, Graphics* graphics, Input* input)
 {
 	Logger::LogInfo("Initialising UI Manager.");
 
 	s_instance = new UIManager;
+	s_instance->m_window = window;
+	s_instance->m_graphics = graphics;
+	s_instance->m_input = input;
 }
 
 void UIManager::Update(float deltaTime)
@@ -122,13 +128,13 @@ void UIManager::Render(Graphics* graphics)
 void UIManager::CreateUISystemView()
 {
 	s_instance->m_uiSystemView = new UISystemView();
-	s_instance->m_uiSystemView->Init("UI System View");
+	s_instance->m_uiSystemView->Init("UI System View", s_instance->m_window, s_instance->m_graphics, s_instance->m_input);
 }
 
 void UIManager::CreateUIFrontEndView()
 {
 	s_instance->m_uiFrontEndView = new UIFrontEndView();
-	s_instance->m_uiFrontEndView->Init("UI Front End View");
+	s_instance->m_uiFrontEndView->Init("UI Front End View", s_instance->m_input);
 }
 
 void UIManager::DestroyUIFrontEndView()
@@ -140,7 +146,7 @@ void UIManager::DestroyUIFrontEndView()
 void UIManager::CreateUIMainView()
 {
 	s_instance->m_uiMainView = new UIMainView();
-	s_instance->m_uiMainView->Init("UI Main View");
+	s_instance->m_uiMainView->Init("UI Main View", s_instance->m_input);
 }
 
 void UIManager::DestroyUIMainView()

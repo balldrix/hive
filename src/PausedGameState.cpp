@@ -25,14 +25,14 @@ PausedGameState::~PausedGameState()
 void PausedGameState::Update(float deltaTime)
 {
 	UIManager::Update(deltaTime);
-	MenuSystem::Update(m_gameStateManager->GetInput());
+	MenuSystem::Update();
 }
 
-void PausedGameState::Render()
+void PausedGameState::Render(Graphics* graphics)
 {
 	GameState* gameplayState = m_gameStateManager->GetState(Gameplay);
 
-	if(gameplayState) gameplayState->Render();
+	if(gameplayState) gameplayState->Render(graphics);
 
-	UIManager::Render(m_gameStateManager->GetGraphics());
+	UIManager::Render(graphics);
 }

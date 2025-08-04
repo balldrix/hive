@@ -28,7 +28,7 @@ class GameplayGameState : public GameState
 {
 public:
 	GameplayGameState();
-	GameplayGameState(GameStateManager* gameStateManager);
+	GameplayGameState(GameStateManager* gameStateManager, Input* input);
 	virtual ~GameplayGameState();
 
 	float GetDeltaTime() const { return m_deltaTime; }
@@ -41,7 +41,7 @@ public:
 	void ProcessInput() override;
 	void Update(float deltaTime) override;
 	void ProcessCollisions() override;
-	void Render() override;
+	void Render(Graphics* graphics) override;
 
 	void UpdateGameBounds(float minX, float maxX);
 
@@ -57,7 +57,6 @@ private:
 	void ToggleHitBoxes();
 	void TogglePlayerHud();
 
-	Graphics* m_graphics;
 	Input* m_input;
 
 	Camera* m_camera;

@@ -1,6 +1,7 @@
 #include "UITextMenuItemView.h"
 
 #include "Graphics.h"
+#include "Input.h"
 #include "UIConfig.h"
 #include "UIMenuItemView.h"
 #include "UISpriteText.h"
@@ -19,9 +20,11 @@ UITextMenuItemView::~UITextMenuItemView()
 	Shutdown();
 }
 
-void UITextMenuItemView::Init(std::string name)
+void UITextMenuItemView::Init(std::string name, Input* input)
 {
 	m_name = name;
+	m_input = input;
+
 	m_uiSpriteText = new UISpriteText();
 	m_uiSpriteText->Init(UIConfig::DespairFont8);
 	m_uiSpriteText->SetAlignment(UISpriteText::Alignments::Left);

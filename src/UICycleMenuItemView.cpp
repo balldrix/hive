@@ -2,6 +2,7 @@
 
 #include "AssetLoader.h"
 #include "Graphics.h"
+#include "Input.h"
 #include "UIConfig.h"
 #include "UIImageView.h"
 #include "UIMenuItemView.h"
@@ -32,10 +33,12 @@ UICycleMenuItemView::~UICycleMenuItemView()
 	Shutdown();
 }
 
-void UICycleMenuItemView::Init(std::string name, std::vector<std::string> options, int defaultIndex, void(*delegate)(int))
+void UICycleMenuItemView::Init(std::string name, Input* input, std::vector<std::string> options, int defaultIndex, void(*delegate)(UIMenuView* owner, int), UIMenuView* owner)
 {
+	m_input = input;
+	m_owner = owner;
 	m_labelText = new UITextMenuItemView();
-	m_labelText ->Init(name);
+	m_labelText ->Init(name, input);
 	m_labelText ->SetText(name);
 
 	m_options = options;
@@ -148,7 +151,7 @@ void UICycleMenuItemView::HandleOptionChange(int index)
 	m_optionText->SetText(option);
 	m_optionText->SetAlignment(UISpriteText::Alignments::Centre);
 
-	if(onOptionChanged) onOptionChanged(m_selectedIndex);
+	if(onOptionChanged) onOptionChanged(m_owner, m_selectedIndex);
 }
 
 void UICycleMenuItemView::HandleSelectionStateChanged(SelectionStates previousSelectionState, SelectionStates newSelectionState)

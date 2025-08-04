@@ -29,7 +29,7 @@ public:
 	ParticleSystem();
 	~ParticleSystem() = default;
 	
-	void Init(Graphics* graphics);
+	void Init();
 
 	void Update(float deltaTime);
 	void Render(Graphics* graphics);

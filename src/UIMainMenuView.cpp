@@ -30,9 +30,10 @@ UIMainMenuView::~UIMainMenuView()
 	Shutdown();
 }
 
-void UIMainMenuView::Init(std::string name)
+void UIMainMenuView::Init(std::string name, Input* input)
 {
 	m_name = name;
+
 	m_uiStackingView.Init("Main Menu Stacking View");
 	m_uiStackingView.SetOrientation(UIStackingView::Orientations::Vertical);
 
@@ -44,7 +45,7 @@ void UIMainMenuView::Init(std::string name)
 	{
 		std::string name = option->label;
 		UITextMenuItemView* item = new UITextMenuItemView();
-		item->Init(name);
+		item->Init(name, input);
 		item->SetText(name);
 		item->SetSelectedStateColours(Colors::White.v, Colors::SlateGray.v, Colors::Black.v);
 		item->ChangeSelectionState(UIMenuItemView::SelectionStates::UnSelected);

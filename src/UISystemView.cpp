@@ -1,11 +1,13 @@
 #include "UISystemView.h"
 
 #include "Graphics.h"
+#include "Input.h"
 #include "Logger.h"
 #include "UIFadeOverlayView.h"
 #include "UILoadingView.h"
 #include "UIOptionsView.h"
 #include "UIView.h"
+#include "Window.h"
 
 #include <string>
 
@@ -21,7 +23,7 @@ UISystemView::~UISystemView()
 	Shutdown();
 }
 
-void UISystemView::Init(std::string name)
+void UISystemView::Init(std::string name, Window* window, Graphics* graphics, Input* input)
 {
 	m_name = name;
 
@@ -36,7 +38,7 @@ void UISystemView::Init(std::string name)
 	m_loadingView->TransitionOut(false);
 
 	m_optionsView = new UIOptionsView();
-	m_optionsView->Init("Menu Options");
+	m_optionsView->Init("Menu Options", window, graphics, input);
 	m_optionsView->TransitionOut(false);
 
 	m_isActive = true;

@@ -3,6 +3,7 @@
 #include "GameState.h"
 #include "GameStateManager.h"
 #include "GameStateNameLibrary.h"
+#include "Graphics.h"
 #include "MenuSystem.h"
 #include "UIManager.h"
 
@@ -26,17 +27,17 @@ SharedOptionsGameState::~SharedOptionsGameState()
 void SharedOptionsGameState::Update(float deltaTime)
 {
 	UIManager::Update(deltaTime);
-	MenuSystem::Update(m_gameStateManager->GetInput());
+	MenuSystem::Update();
 }
 
-void SharedOptionsGameState::Render()
+void SharedOptionsGameState::Render(Graphics* graphics)
 {
-	UIManager::Render(m_gameStateManager->GetGraphics());
+	UIManager::Render(graphics);
 
 	GameState* previousGameState = m_gameStateManager->GetPreviousState();
 
 	if(previousGameState->GetStateName() == Paused)
 	{
-		m_gameStateManager->GetState(Gameplay)->Render();
+		m_gameStateManager->GetState(Gameplay)->Render(graphics);
 	}
 }

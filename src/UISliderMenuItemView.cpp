@@ -2,8 +2,10 @@
 
 #include "AssetLoader.h"
 #include "Graphics.h"
+#include "Input.h"
 #include "UIBarView.h"
 #include "UIMenuItemView.h"
+#include "UIMenuView.h"
 #include "UITextMenuItemView.h"
 
 #include <algorithm>
@@ -24,13 +26,16 @@ UISliderMenuItemView::~UISliderMenuItemView()
 	Shutdown();
 }
 
-void UISliderMenuItemView::Init(std::string name, float max, int defaultValue, Color colour, void (*delegate)(int))
+void UISliderMenuItemView::Init(std::string name, Input* input, float max, int defaultValue, Color colour, void (*delegate)(UIMenuView* owner, int), UIMenuView* owner)
 {
+	m_name = name;
+	m_input = input;
+	m_owner = owner;
 	m_maxValue = max;
 	m_selectedIndex = defaultValue;
 
 	m_labelText = new UITextMenuItemView();
-	m_labelText->Init(name);
+	m_labelText->Init(name, input);
 	m_labelText->SetText(name);
 
 	m_sliderBar = new UIBarView();
@@ -91,7 +96,7 @@ void UISliderMenuItemView::HandleOptionChange(int index)
 	m_selectedIndex = std::clamp(index, 0, (int)(m_maxValue * SliderScaler));
 	m_sliderBar->SetCurrentValue(m_maxValue / SliderScaler * m_selectedIndex);
 
-	if(onSliderChanged) onSliderChanged(index);
+	if(onSliderChanged) onSliderChanged(m_owner, index);
 }
 
 void UISliderMenuItemView::HandleSelectionStateChanged(SelectionStates previousSelectionState, SelectionStates newSelectionState)

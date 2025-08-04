@@ -11,7 +11,6 @@
 
 #include <directxtk/SimpleMath.h>
 #include <string>
-#include <vector>
 
 class Graphics;
 class NPCManager;
@@ -25,8 +24,7 @@ public:
 								Enemy();
 	virtual						~Enemy();
 
-	void						Init(Graphics* graphics,
-									Camera* camera,
+	void						Init(Camera* camera,
 									Player* player,
 									const EnemyDefinition& definition,
 									NPCManager* npcManager,

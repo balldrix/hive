@@ -14,6 +14,7 @@
 #include "GameStateManager.h"
 #include "GameStateNameLibrary.h"
 #include "GlobalConstants.h"
+#include "Graphics.h"
 #include "HitBoxManager.h"
 #include "ImpactFxPool.h"
 #include "Input.h"
@@ -47,7 +48,6 @@ using namespace GameplayConstants;
 using namespace GlobalConstants;
 
 GameplayGameState::GameplayGameState() :
-	m_graphics(nullptr),
 	m_input(nullptr),
 	m_camera(nullptr),
 	m_controlSystem(nullptr),
@@ -70,11 +70,10 @@ GameplayGameState::GameplayGameState() :
 	GameState(Gameplay)
 {}
 
-GameplayGameState::GameplayGameState(GameStateManager* gameStateManager) : GameplayGameState()
+GameplayGameState::GameplayGameState(GameStateManager* gameStateManager, Input* input) : GameplayGameState()
 {
 	m_gameStateManager = gameStateManager;
-	m_graphics = m_gameStateManager->GetGraphics();
-	m_input = m_gameStateManager->GetInput();
+	m_input = input;
 }
 
 GameplayGameState::~GameplayGameState()
@@ -111,17 +110,17 @@ void GameplayGameState::LoadAssets()
 	m_player->SetCamera(m_camera);
 	m_camera->SetTarget(m_player);
 
-	m_levelRenderer->Init(m_graphics, m_camera);
+	m_levelRenderer->Init(m_camera);
 	m_enemySpawnManager->Init();
 	LevelCollision::CreateBounds(m_levelRenderer);
 
-	m_NPCManager->Init(m_graphics, m_camera, m_player);
+	m_NPCManager->Init(m_camera, m_player);
 	m_camera->Init(GameWidth);
 
 	m_impactFxPool = new ImpactFxPool();
 
 	m_particleSystem = new ParticleSystem();
-	m_particleSystem->Init(m_graphics);
+	m_particleSystem->Init();
 
 	m_running = true;
 }
@@ -520,18 +519,18 @@ void GameplayGameState::SpawnParticles(const Vector2& position, const Vector2& v
 	}
 }
 
-void GameplayGameState::Render()
+void GameplayGameState::Render(Graphics* graphics)
 {
-	m_levelRenderer->Render(m_graphics);
-	m_player->Render(m_graphics);
-	m_NPCManager->Render(m_graphics);
-	m_particleSystem->Render(m_graphics); 
-	UIManager::Render(m_graphics);
-	LevelCollision::Render(m_graphics);
+	m_levelRenderer->Render(graphics);
+	m_player->Render(graphics);
+	m_NPCManager->Render(graphics);
+	m_particleSystem->Render(graphics); 
+	UIManager::Render(graphics);
+	LevelCollision::Render(graphics);
 
 	for(auto* it : m_activeImpacts)
 	{
-		it->Render(m_graphics);
+		it->Render(graphics);
 	}
 }
 

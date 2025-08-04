@@ -1,6 +1,9 @@
 #include "UIFrontEndView.h"
 
 #include "AssetLoader.h"
+#include "AudioEngine.h"
+#include "Input.h"
+#include "Graphics.h"
 #include "Logger.h"
 #include "Sprite.h"
 #include "UIImageView.h"
@@ -12,7 +15,6 @@
 #include <directxtk/SimpleMath.h>
 #include <fmt/core.h>
 #include <string>
-#include "AudioEngine.h"
 
 UIFrontEndView::UIFrontEndView() :
 	m_background(nullptr),
@@ -26,7 +28,7 @@ UIFrontEndView::~UIFrontEndView()
 	Shutdown();
 }
 
-void UIFrontEndView::Init(std::string name)
+void UIFrontEndView::Init(std::string name, Input* input)
 {
 	m_name = name;
 
@@ -49,7 +51,7 @@ void UIFrontEndView::Init(std::string name)
 	m_titleScreenView->AssignState("TitleScreen");
 
 	m_mainMenuView = new UIMainMenuView();
-	m_mainMenuView->Init("Main Menu View");
+	m_mainMenuView->Init("Main Menu View", input);
 	m_mainMenuView->TransitionOut(false);
 	m_mainMenuView->AssignState("MainMenu");
 

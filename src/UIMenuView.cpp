@@ -10,6 +10,8 @@
 #include <fmt/core.h>
 
 UIMenuView::UIMenuView() :
+	m_window(nullptr),
+	m_graphics(nullptr),
 	m_lerpedAlpha(0.0f)
 {
 }

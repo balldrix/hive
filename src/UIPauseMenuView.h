@@ -5,6 +5,7 @@
 #include <string>
 
 class Graphics;
+class Input;
 class UIImageView;
 class UIPanelContainer;
 class UISpriteText;
@@ -15,7 +16,7 @@ public:
 	UIPauseMenuView();
 	virtual ~UIPauseMenuView();
 
-	void Init(std::string name) override;
+	void Init(std::string name, Input* input);
 	void Render(Graphics* graphcs) override;
 	void Shutdown() override;
 

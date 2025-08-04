@@ -6,6 +6,7 @@
 #include "GameStateNameLibrary.h"
 #include "GlobalConstants.h"
 #include "Graphics.h"
+#include "Input.h"
 #include "Logger.h"
 #include "UIManager.h"
 #include "UIMenuItemView.h"
@@ -33,7 +34,7 @@ UIPauseMenuView::~UIPauseMenuView()
 	Shutdown();
 }
 
-void UIPauseMenuView::Init(std::string name)
+void UIPauseMenuView::Init(std::string name, Input* input)
 {
 	Logger::LogInfo("Initialising UI Pause Menu View.");
 
@@ -54,7 +55,7 @@ void UIPauseMenuView::Init(std::string name)
 	{
 		std::string name = option->label;
 		UITextMenuItemView* item = new UITextMenuItemView();
-		item->Init(name);
+		item->Init(name, input);
 		item->SetText(name);
 		item->SetSelectedStateColours(Colors::White.v, Colors::SlateGray.v, Colors::Black.v);
 		item->ChangeSelectionState(UIMenuItemView::SelectionStates::UnSelected);

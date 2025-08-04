@@ -14,7 +14,7 @@ public:
 
 	void OnEntry();
 	void Update(float deltaTime);
-	void Render();
+	void Render(Graphics* graphics);
 	void OnExit();
 
 	static void SetTargetGameState(GameState* gamestate);
@@ -28,7 +28,6 @@ private:
 	static GameState* s_targetGameState;
 	static bool s_isLoadingToMainGameplay;
 	static bool isloadingFromMainGameplayToFrontend;
-	Graphics* m_graphics;
 	float m_timer;
 	float m_isDone;
 };

@@ -23,10 +23,14 @@ enum class UISoundType
 	Close
 };
 
+class Window;
+class Graphics;
+class Input;
+
 class UIManager
 {
 public:
-	static void Init();
+	static void Init(Window* window, Graphics* graphics, Input* input);
 	static void Update(float deltaTime);
 	static void Render(Graphics* graphics);
 
@@ -84,4 +88,8 @@ private:
 		{ UISoundType::Open, "uiOpen" },
 		{ UISoundType::Close, "uiClose" }
 	};
+
+	Window* m_window;
+	Graphics* m_graphics;
+	Input* m_input;
 };

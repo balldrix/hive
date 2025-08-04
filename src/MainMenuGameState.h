@@ -3,6 +3,7 @@
 #include "GameState.h"
 
 class GameStateManager;
+class Graphics;
 
 class MainMenuGameState : public GameState
 {
@@ -12,5 +13,5 @@ public:
 	~MainMenuGameState();
 
 	void Update(float deltaTime) override;
-	void Render() override;
+	void Render(Graphics* graphics) override;
 };

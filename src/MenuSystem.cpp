@@ -18,26 +18,32 @@ bool MenuSystem::s_isInputAllowed = false;
 int MenuSystem::s_selectedItemIndex = 0;
 IMenuSystemInteraction* MenuSystem::s_currentMenu = nullptr;
 
+MenuSystem::MenuSystem() :
+	m_input(nullptr)
+{
+}
+
 MenuSystem::~MenuSystem()
 {
 	Shutdown();
 }
 
-void MenuSystem::Init()
+void MenuSystem::Init(Input* input)
 {
 	Logger::LogInfo("Initialising Menu System.");
 
 	s_instance = new MenuSystem;
+	s_instance->m_input = input;
 }
 
-void MenuSystem::Update(Input* input)
+void MenuSystem::Update()
 {
 	if(!s_instance->s_isInputAllowed) return;
 
 	auto currentSelectedItem = s_instance->s_menuItems[s_selectedItemIndex];
-	auto buttons = input->GetGamePadButtons();
+	auto buttons = s_instance->m_input->GetGamePadButtons();
 
-	if(input->WasKeyPressed(ENTER_KEY) || input->WasGamePadButtonPressed(buttons.a))
+	if(s_instance->m_input->WasKeyPressed(ENTER_KEY) || s_instance->m_input->WasGamePadButtonPressed(buttons.a))
 	{
 		currentSelectedItem->OnConfirmPressed();
 		s_currentMenu->OnConfirmPressed(s_selectedItemIndex);
@@ -45,33 +51,33 @@ void MenuSystem::Update(Input* input)
 		return;
 	}
 
-	if(input->WasKeyPressed(ESC_KEY) || input->WasGamePadButtonPressed(buttons.b))
+	if(s_instance->m_input->WasKeyPressed(ESC_KEY) || s_instance->m_input->WasGamePadButtonPressed(buttons.b))
 	{
 		s_currentMenu->OnCancelPressed();
 		UIManager::PlayUISound(UISoundType::Delete);
-		input->ClearAll();
+		s_instance->m_input->ClearAll();
 		return;
 	}
 
 	int index = -1;
 	Vector2 direction = Vector2::Zero;
 
-	if(input->WasKeyPressed(PLAYER_UP_KEY) || input->WasGamePadButtonPressed(buttons.dpadUp) || input->WasGamePadButtonPressed(buttons.leftStickUp))
+	if(s_instance->m_input->WasKeyPressed(PLAYER_UP_KEY) || s_instance->m_input->WasGamePadButtonPressed(buttons.dpadUp) || s_instance->m_input->WasGamePadButtonPressed(buttons.leftStickUp))
 	{
 		index = currentSelectedItem->GetNavigation().up;
 		direction = Vector2::UnitY;
 	}
-	else if(input->WasKeyPressed(PLAYER_DOWN_KEY) || input->WasGamePadButtonPressed(buttons.dpadDown) || input->WasGamePadButtonPressed(buttons.leftStickDown))
+	else if(s_instance->m_input->WasKeyPressed(PLAYER_DOWN_KEY) || s_instance->m_input->WasGamePadButtonPressed(buttons.dpadDown) || s_instance->m_input->WasGamePadButtonPressed(buttons.leftStickDown))
 	{
 		index = currentSelectedItem->GetNavigation().down;
 		direction = -Vector2::UnitY;
 	}
-	else if(input->WasKeyPressed(PLAYER_LEFT_KEY) || input->WasGamePadButtonPressed(buttons.dpadLeft) || input->WasGamePadButtonPressed(buttons.leftStickLeft))
+	else if(s_instance->m_input->WasKeyPressed(PLAYER_LEFT_KEY) || s_instance->m_input->WasGamePadButtonPressed(buttons.dpadLeft) || s_instance->m_input->WasGamePadButtonPressed(buttons.leftStickLeft))
 	{
 		index = currentSelectedItem->GetNavigation().left;
 		direction = Vector2::UnitX;
 	}
-	else if(input->WasKeyPressed(PLAYER_RIGHT_KEY) || input->WasGamePadButtonPressed(buttons.dpadRight) || input->WasGamePadButtonPressed(buttons.leftStickRight))
+	else if(s_instance->m_input->WasKeyPressed(PLAYER_RIGHT_KEY) || s_instance->m_input->WasGamePadButtonPressed(buttons.dpadRight) || s_instance->m_input->WasGamePadButtonPressed(buttons.leftStickRight))
 	{
 		index = currentSelectedItem->GetNavigation().right;
 		direction = -Vector2::UnitX;

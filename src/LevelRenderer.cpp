@@ -35,7 +35,7 @@ LevelRenderer::~LevelRenderer()
 	DeleteAll();
 }
 
-void LevelRenderer::Init(Graphics* graphics, Camera* camera)
+void LevelRenderer::Init(Camera* camera)
 {
 	m_camera = camera;
 

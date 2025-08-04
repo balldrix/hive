@@ -97,8 +97,7 @@ void Enemy::DeleteAll()
 	m_spritesheet = nullptr;
 }
 
-void Enemy::Init(Graphics* graphics,
-				Camera* camera,
+void Enemy::Init(Camera* camera,
 				Player* player,
 				const EnemyDefinition& data,
 				NPCManager* npcManager,

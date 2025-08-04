@@ -1,5 +1,6 @@
 #include "UIMainView.h"
 
+#include "Input.h"
 #include "Logger.h"
 #include "UIHudView.h"
 #include "UIPauseMenuView.h"
@@ -20,7 +21,7 @@ UIMainView::~UIMainView()
 	Shutdown();
 }
 
-void UIMainView::Init(std::string name)
+void UIMainView::Init(std::string name, Input* input)
 {
 	Logger::LogInfo("Initialising UI Main View");
 
@@ -35,7 +36,7 @@ void UIMainView::Init(std::string name)
 	m_screenFlashFX->TransitionOut(false);
 
 	m_uiPauseMenuView = new UIPauseMenuView();
-	m_uiPauseMenuView->Init("UI Pause Menu View");
+	m_uiPauseMenuView->Init("UI Pause Menu View", input);
 	m_uiPauseMenuView->TransitionOut(false);
 }
 

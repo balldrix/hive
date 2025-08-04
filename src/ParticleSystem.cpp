@@ -8,7 +8,6 @@
 #include <cmath>
 #include <directxtk/SimpleMath.h>
 #include <directxtk/SpriteBatch.h>
-#include <windef.h>
 
 ParticleSystem::ParticleSystem() : 
 	m_texture(nullptr),
@@ -16,7 +15,7 @@ ParticleSystem::ParticleSystem() :
 {
 }
 
-void ParticleSystem::Init(Graphics* graphics)
+void ParticleSystem::Init()
 {
 	m_particlePool.resize(MAX_PARTICLES);
 

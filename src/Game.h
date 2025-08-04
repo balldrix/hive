@@ -2,9 +2,7 @@
 
 #include "Timer.h"
 
-#include <directxtk/SpriteBatch.h>
-
-using namespace DirectX;
+#include <Windows.h>
 
 class Window;
 class Graphics;
@@ -23,7 +21,7 @@ public:
 	Game(Game const&) = delete;
 	Game& operator= (Game const&) = delete;
 
-	void Init(Window* window, Graphics* graphics);
+	void Init(Window* window, Graphics* graphics, Input* input, GameStateManager* gameStateManager);
 
 	void Run();
 

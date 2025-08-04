@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Graphics.h"
 #include "UIMenuItemView.h"
 #include "UISpriteText.h"
 
@@ -11,13 +10,16 @@
 using namespace DirectX;
 using namespace SimpleMath;
 
+class Graphics;
+class Input;
+
 class UITextMenuItemView : public UIMenuItemView
 {
 public:
 	UITextMenuItemView();
 	~UITextMenuItemView();
 
-	void Init(std::string name) override;
+	void Init(std::string name, Input* input);
 	void Render(Graphics* graphics) override;
 	void Shutdown() override;
 	void HandleSelectionStateChanged(SelectionStates previousSelectionState, SelectionStates newSelectionState) override;

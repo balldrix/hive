@@ -3,10 +3,14 @@
 
 #include "UIView.h"
 
+#include <string>
+
 class UIImageView;
 class UITitleScreenView;
 class UIMainMenuView;
 class UIOptionsView;
+class Graphics;
+class Input;
 
 class UIFrontEndView : UIView
 {
@@ -14,7 +18,7 @@ public:
 	UIFrontEndView();
 	virtual ~UIFrontEndView();
 
-	void Init(std::string name);
+	void Init(std::string name, Input* input);
 	void Update(float deltaTime);
 	void Render(Graphics* graphics);
 	void Shutdown() override;

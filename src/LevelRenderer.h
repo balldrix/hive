@@ -12,7 +12,7 @@ public:
 	LevelRenderer();
 	~LevelRenderer();
 
-	void Init(Graphics* graphics, Camera* camera);
+	void Init(Camera* camera);
 	void Render(Graphics* graphics);
 	void Update(float deltaTime);
 

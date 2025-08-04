@@ -10,8 +10,8 @@ class IMenuSystemInteraction;
 class MenuSystem
 {
 public:
-	static void Init();
-	static void Update(Input* input);
+	static void Init(Input* input);
+	static void Update();
 	static void Destroy();
 	static void SetMenuItems(IMenuSystemInteraction* currentMenu, std::vector<UIMenuItemView*> menuItems);
 	static void EnableInput();
@@ -19,7 +19,7 @@ public:
 	static bool IsInputAllowed() { return s_isInputAllowed; }
 
 private:
-	MenuSystem() {};
+	MenuSystem();
 	~MenuSystem();
 
 	static void SelectIndex(int index);
@@ -32,5 +32,6 @@ private:
 	static bool s_isInputAllowed;
 	static int s_selectedItemIndex;
 	static IMenuSystemInteraction* s_currentMenu;
+	Input* m_input;
 };
 

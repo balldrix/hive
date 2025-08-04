@@ -11,10 +11,7 @@ GameStateManager* GameStateManager::s_instance = nullptr;
 
 GameStateManager::GameStateManager() :
 	m_previousState(nullptr),
-	m_currentState(nullptr),
-	m_window(nullptr),
-	m_graphics(nullptr),
-	m_input(nullptr)
+	m_currentState(nullptr)
 {
 	s_instance = this;
 }
@@ -41,15 +38,6 @@ GameStateManager* GameStateManager::Instance()
 	}
 
 	return s_instance;
-}
-
-void GameStateManager::Init(Window* window, Graphics* graphics, Input* input)
-{
-	Logger::LogInfo("Initialising Gamestate manager.");
-
-	m_window = window;
-	m_graphics = graphics;
-	m_input = input;
 }
 
 void GameStateManager::AddState(GameState* state)
@@ -84,7 +72,6 @@ void GameStateManager::SwitchState(std::string stateName)
 
 	std::string error = fmt::format("Error finding game state {} in SwitchState method GameStateManager.cpp line 60.", stateName);
 	Logger::LogError(error);
-	MessageBox(m_graphics->GetHwnd(), L"Error loading GameState. See Logs/Log.txt", L"Error!", MB_OK);
 	PostQuitMessage(0);
 }
 
@@ -147,10 +134,10 @@ void GameStateManager::ProcessCollisions()
 	}
 }
 
-void GameStateManager::Render()
+void GameStateManager::Render(Graphics* graphics)
 {
 	if(m_currentState != nullptr)
 	{
-		m_currentState->Render();
+		m_currentState->Render(graphics);
 	}
 }

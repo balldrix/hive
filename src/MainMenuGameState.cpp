@@ -3,6 +3,7 @@
 #include "GameState.h"
 #include "GameStateManager.h"
 #include "GameStateNameLibrary.h"
+#include "Graphics.h"
 #include "MenuSystem.h"
 #include "UIManager.h"
 
@@ -25,10 +26,10 @@ MainMenuGameState::~MainMenuGameState()
 void MainMenuGameState::Update(float deltaTime)
 {
 	UIManager::Update(deltaTime);
-	MenuSystem::Update(m_gameStateManager->GetInput());
+	MenuSystem::Update();
 }
 
-void MainMenuGameState::Render()
+void MainMenuGameState::Render(Graphics* graphics)
 {
-	UIManager::Render(m_gameStateManager->GetGraphics());
+	UIManager::Render(graphics);
 }
