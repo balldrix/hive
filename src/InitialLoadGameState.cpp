@@ -21,7 +21,7 @@ InitialLoadGameState::InitialLoadGameState(GameStateManager* gameStateManager) :
 
 void InitialLoadGameState::OnEntry()
 {
-	LoadAssets();
+	Setup();
 }
 
 void InitialLoadGameState::Update(float deltaTime)
@@ -36,7 +36,7 @@ void InitialLoadGameState::Update(float deltaTime)
 	}
 }
 
-void InitialLoadGameState::LoadAssets()
+void InitialLoadGameState::Setup()
 {
 	Logger::LogInfo("Loading Initial Game Assets.");
 	AssetLoader::PreWarmAssetsWithTag("initial_loading_assets");

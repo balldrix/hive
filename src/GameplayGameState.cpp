@@ -78,7 +78,7 @@ GameplayGameState::GameplayGameState(GameStateManager* gameStateManager, Input* 
 
 GameplayGameState::~GameplayGameState()
 {
-	DeleteAssets();
+	Cleanup();
 }
 
 void GameplayGameState::OnEntry()
@@ -89,7 +89,7 @@ void GameplayGameState::OnExit()
 {
 }
 
-void GameplayGameState::LoadAssets()
+void GameplayGameState::Setup()
 {
 	LevelCollision::Init();
 	TilemapLoader::Init();
@@ -125,7 +125,7 @@ void GameplayGameState::LoadAssets()
 	m_running = true;
 }
 
-void GameplayGameState::DeleteAssets()
+void GameplayGameState::Cleanup()
 {
 	m_activeImpacts.clear();
 

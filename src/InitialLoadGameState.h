@@ -15,5 +15,5 @@ public:
 	void Update(float deltaTime);
 
 private:
-	void LoadAssets();
+	void Setup();
 };

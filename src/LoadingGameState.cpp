@@ -43,6 +43,7 @@ void LoadingGameState::OnEntry()
 		{
 			AssetLoader::CleanupAssetsWithTag("ui_assets");
 			AssetLoader::CleanupAssetsWithTag("gameplay_assets");
+			GameStateManager::Instance()->GetState(Gameplay)->Cleanup();
 		}
 
 		AssetLoader::PreWarmAssetsWithTag("front_end_assets");
@@ -73,7 +74,7 @@ void LoadingGameState::Update(float deltaTime)
 	
 	if(!m_isDone)
 	{
-		m_gameStateManager->GetState(s_targetGameState->GetStateName())->LoadAssets();
+		m_gameStateManager->GetState(s_targetGameState->GetStateName())->Setup();
 		m_isDone = true;
 		return;
 	}

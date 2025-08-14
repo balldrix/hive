@@ -36,8 +36,8 @@ public:
 	void OnEntry() override;
 	void OnExit() override;
 
-	void LoadAssets() override;
-	void DeleteAssets() override;
+	void Setup() override;
+	void Cleanup() override;
 	void ProcessInput() override;
 	void Update(float deltaTime) override;
 	void ProcessCollisions() override;
