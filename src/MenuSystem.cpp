@@ -156,6 +156,11 @@ void MenuSystem::Destroy()
 	s_instance = nullptr;
 }
 
+void MenuSystem::SetSetSelectedIndex(int index)
+{
+	s_selectedItemIndex = index;
+}
+
 void MenuSystem::SetMenuItems(IMenuSystemInteraction* currentMenu, std::vector<UIMenuItemView*> menuItems)
 {
 	s_menuItems = menuItems;

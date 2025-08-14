@@ -37,9 +37,9 @@ void UIMainMenuView::Init(std::string name, Input* input)
 	m_uiStackingView.Init("Main Menu Stacking View");
 	m_uiStackingView.SetOrientation(UIStackingView::Orientations::Vertical);
 
-	m_menuOptions.emplace_back(new MenuOptionBase("Start", &UIMainMenuView::StartGame));
-	m_menuOptions.emplace_back(new MenuOptionBase("Options", &UIMainMenuView::ProceedToOptions));
-	m_menuOptions.emplace_back(new MenuOptionBase("Quit", &UIMainMenuView::QuitGame));
+	m_menuOptions.emplace_back(new MenuOptionBase("Start", StartGame));
+	m_menuOptions.emplace_back(new MenuOptionBase("Options", ProceedToOptions));
+	m_menuOptions.emplace_back(new MenuOptionBase("Quit", QuitGame));
 
 	for(const auto& option : m_menuOptions)
 	{
@@ -91,19 +91,19 @@ void UIMainMenuView::Shutdown()
 	UIMenuView::Shutdown();
 }
 
-void UIMainMenuView::StartGame()
+void UIMainMenuView::StartGame(UIMenuView* owner)
 {
 	Logger::LogInfo("Starting Game");
 
 	LoadingGameState::ProceedToGameplay();
 }
 
-void UIMainMenuView::ProceedToOptions()
+void UIMainMenuView::ProceedToOptions(UIMenuView* owner)
 {
 	GameStateManager::Instance()->SwitchState(SharedOptions);
 }
 
-void UIMainMenuView::QuitGame()
+void UIMainMenuView::QuitGame(UIMenuView* owner)
 {
 	PostQuitMessage(0);
 }

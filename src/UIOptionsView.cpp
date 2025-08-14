@@ -199,6 +199,9 @@ void UIOptionsView::Shutdown()
 	Logger::LogInfo("Shutting down UI Options View");
 
 	UIMenuView::Shutdown();
+
+	delete m_panelContainer;
+	m_panelContainer = nullptr;
 }
 
 void UIOptionsView::TransitionIn(bool isAnimated)
@@ -223,7 +226,7 @@ void UIOptionsView::TransitionOut(bool isAnimated)
 
 void UIOptionsView::OnCancelPressed()
 {
-	Back();
+	Back(this);
 }
 
 void UIOptionsView::DoTransition(float deltaTime)
@@ -281,7 +284,7 @@ void UIOptionsView::SetFullscreen(UIMenuView* owner, int index)
 	SettingsManager::Instance()->SetFullscreen(index);
 }
 
-void UIOptionsView::Back()
+void UIOptionsView::Back(UIMenuView* owner)
 {
 	SettingsManager::Instance()->Save();
 	GameStateManager::Instance()->ProceedToPreviousState();

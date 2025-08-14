@@ -55,7 +55,7 @@ private:
 
 		OptionsMenuOption(
 			const std::string& label,
-			void(*onConfirm)(),
+			void(*onConfirm)(UIMenuView*),
 			OptionType optionType,
 			SelectionType selectionType,
 			void(*onIndexChange)(UIMenuView*, int),
@@ -78,7 +78,7 @@ private:
 	static int GetScreenResolutionIndex(UIMenuView* owner);
 	static int GetFullscreenIndex(UIMenuView* owner);
 
-	static void Back();
+	static void Back(UIMenuView* owner);
 
 	std::vector<std::string> GetOptionsForOptionType(OptionType optionType);
 

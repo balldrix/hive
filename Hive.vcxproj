@@ -37,6 +37,7 @@
     <ClCompile Include="src\UIOptionsView.cpp" />
     <ClCompile Include="src\UIPanelContainer.cpp" />
     <ClCompile Include="src\UIPauseMenuView.cpp" />
+    <ClCompile Include="src\UIPromptView.cpp" />
     <ClCompile Include="src\UIScreenFlashFX.cpp" />
     <ClCompile Include="src\GameDataManager.cpp" />
     <ClCompile Include="src\MenuSystem.cpp" />
@@ -101,6 +102,7 @@
     <ClInclude Include="src\ScreenShake.h" />
     <ClInclude Include="src\SettingsManager.h" />
     <ClInclude Include="src\TilemapLoader.h" />
+    <ClInclude Include="src\UIPromptView.h" />
     <ClInclude Include="src\UIScreenFlashFX.h" />
     <ClInclude Include="src\GameDataManager.h" />
     <ClInclude Include="src\IMenuSystemInteraction.h" />

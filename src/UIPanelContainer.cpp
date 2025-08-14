@@ -60,6 +60,17 @@ void UIPanelContainer::Shutdown()
 	m_overlayImage = nullptr;
 }
 
+void UIPanelContainer::SetDepth(float depth)
+{
+	m_panelImage->SetDepth(depth);
+	m_overlayImage->SetDepth(depth - 0.1f);
+}
+
+void UIPanelContainer::SetPosition(const Vector2& position)
+{
+	m_panelImage->SetPosition(position);
+}
+
 void UIPanelContainer::SetActive(bool isActive)
 {
 	m_overlayImage->SetActive(isActive);

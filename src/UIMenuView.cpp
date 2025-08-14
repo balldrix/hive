@@ -7,12 +7,14 @@
 #include "UIMenuItemView.h"
 
 #include <cmath>
+#include <directxtk/SimpleMath.h>
 #include <fmt/core.h>
 
 UIMenuView::UIMenuView() :
 	m_window(nullptr),
 	m_graphics(nullptr),
-	m_lerpedAlpha(0.0f)
+	m_lerpedAlpha(0.0f),
+	m_previousSelectedIndex(0)
 {
 }
 
@@ -67,12 +69,12 @@ void UIMenuView::Shutdown()
 void UIMenuView::TransitionIn(bool isAnimated)
 {
 	m_hasPlayedTransitionSound = false;
+	m_isActive = true;
 	MenuSystem::DisableInput();
 
 	if(m_currentViewState == ViewStates::AnimatingIn ||
 		m_currentViewState == ViewStates::Visible) return;
 
-	m_isActive = true;
 	m_isAnimating = true;
 	m_uiStackingView.SetActive(true);
 	m_currentViewState = ViewStates::AnimatingIn;
@@ -100,6 +102,7 @@ void UIMenuView::TransitionOut(bool isAnimated)
 			uiView->SetAlpha(0.0f);
 		}
 
+		m_currentViewState = ViewStates::NotVisible;
 		return;
 	}
 
@@ -121,7 +124,7 @@ void UIMenuView::OnConfirmPressed(int selectedIndex)
 	{
 		const auto& selectedOption = m_menuOptions[selectedIndex];
 		Logger::LogInfo(fmt::format("Calling OnConfirmPressed on {} functon", selectedOption->label));
-		selectedOption->OnConfirm();
+		selectedOption->OnConfirm(this);
 		return;
 	}
 

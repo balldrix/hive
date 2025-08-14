@@ -32,19 +32,21 @@ public:
 	Window* GetWindow() const { return m_window; }
 	Graphics* GetGraphics() const { return m_graphics; }
 
+	virtual void Focus() {};
+
 	struct MenuOptionBase {
 		std::string label;
-		MenuOptionBase(const std::string& label, void(*onConfirm)())
+		MenuOptionBase(const std::string& label, void(*onConfirm)(UIMenuView*))
 		{
 			this->label = label;
 			this->onConfirm = onConfirm;
 		}
 
 		virtual ~MenuOptionBase() = default;
-		void(*onConfirm)() = nullptr;
+		void(*onConfirm)(UIMenuView*) = nullptr;
 
-		void OnConfirm() const {
-			if(onConfirm) onConfirm();
+		void OnConfirm(UIMenuView* owner) const {
+			if(onConfirm) onConfirm(owner);
 		}
 	};
 
@@ -57,4 +59,5 @@ protected:
 
 	Window* m_window;
 	Graphics* m_graphics;
+	int m_previousSelectedIndex;
 };

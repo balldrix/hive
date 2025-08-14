@@ -19,7 +19,7 @@ public:
 	void OnCancelPressed() override {};
 
 private:
-	static void StartGame();
-	static void ProceedToOptions();
-	static void QuitGame();
+	static void StartGame(UIMenuView* owner);
+	static void ProceedToOptions(UIMenuView* owner);
+	static void QuitGame(UIMenuView* owner);
 };

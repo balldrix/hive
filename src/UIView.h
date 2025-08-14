@@ -38,6 +38,7 @@ public:
 	virtual void SetPosition(const Vector2& position) {};
 	virtual void SetColour(Color colour) {};
 	virtual void SetAlpha(float alpha) {};
+	virtual void SetDepth(float depth) {};
 
 	virtual void ForceHide(bool isForced);
 

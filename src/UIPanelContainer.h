@@ -2,6 +2,7 @@
 
 #include "UIView.h"
 
+#include <directxtk/SimpleMath.h>
 #include <string>
 #include <Windows.h>
 
@@ -19,6 +20,8 @@ public:
 
 	void Shutdown() override;
 
+	void SetDepth(float depth);
+	void SetPosition(const Vector2& position) override;
 	void SetActive(bool isActive) override;
 	void SetOverlayAlpha(float alpha);
 	void SetPanelAlpha(float alpha);

@@ -36,6 +36,7 @@ public:
 	virtual void SetPosition(const Vector2& position) override;
 	virtual void SetColour(Color colour) override;
 	virtual void SetAlpha(float alpha) override;
+	virtual void SetDepth(float alpha) override;
 
 private:
 	UISpriteText* m_uiSpriteText;

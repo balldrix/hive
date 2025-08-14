@@ -16,7 +16,8 @@ UIKillCount::UIKillCount() :
 	m_countText(nullptr),
 	m_currentCountWidth(0),
 	m_previousCount(0),
-	m_targetCount(0)
+	m_targetCount(0),
+	m_updateTimer(0)
 {
 }
 

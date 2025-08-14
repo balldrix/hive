@@ -334,6 +334,7 @@
     <ClCompile Include="src\UIPanelContainer.cpp">
       <Filter>UI\Shared</Filter>
     </ClCompile>
+    <ClCompile Include="src\UIPromptView.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -846,6 +847,9 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="src\UIPanelContainer.h">
+      <Filter>UI\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIPromptView.h">
       <Filter>UI\Shared</Filter>
     </ClInclude>
   </ItemGroup>

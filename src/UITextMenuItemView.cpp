@@ -85,6 +85,11 @@ void UITextMenuItemView::SetAlpha(float alpha)
 	m_uiSpriteText->SetColour(colour);
 }
 
+void UITextMenuItemView::SetDepth(float depth)
+{
+	m_uiSpriteText->SetDepth(depth);
+}
+
 void UITextMenuItemView::SetAlignment(UISpriteText::Alignments alignment)
 {
 	m_uiSpriteText->SetAlignment(alignment);
