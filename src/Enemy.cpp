@@ -288,7 +288,7 @@ void Enemy::ApplyDamage(GameObject* source, const int& amount)
 
 	if(m_health < 0) m_health = 0;
 
-	if(m_health > 0) PlayImpactSound();
+	PlayImpactSound();
 
 	//@TODO add knockback, stun or juggle states
 	if(m_health == 0)
