@@ -80,6 +80,7 @@ public:
 	Animator*			GetAnimator() const { return m_animator; }
 	HitBoxManager*		GetHitBoxManager() const { return m_hitBoxManager; }
 
+	Camera*				GetCamera() const { return m_camera; }
 	int					GetHealth() const { return m_health; }
 	virtual int			GetMaxHealth() const;
 	int					GetKnockbackCount() const { return m_knockbackCount; }
@@ -99,7 +100,7 @@ public:
 
 protected:
 	std::string				m_id;
-	Camera* m_camera;
+	Camera*					m_camera;
 	Vector2					m_position;
 	Vector2					m_groundPosition;
 	Vector2					m_currentVelocity;

@@ -30,6 +30,7 @@ void EnemyKnockbackState::Execute(Enemy* enemy)
 	{
 		if(enemy->GetKnockbackCount() == 1)
 		{
+			enemy->GetCamera()->StartShake(2.0f, 3.0f);
 			enemy->DisplayDust(enemy->GetPosition());
 		}
 
