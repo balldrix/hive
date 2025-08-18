@@ -359,3 +359,6 @@ build/
 
 # logs folder
 logs/
+
+# config files
+*.cfg
