@@ -9,7 +9,7 @@
 
 LoadingGameState* LoadingGameState::s_instance = nullptr;
 GameState* LoadingGameState::s_targetGameState = nullptr;
-bool LoadingGameState::isloadingFromMainGameplayToFrontend = false;
+bool LoadingGameState::s_isloadingFromMainGameplayToFrontend = false;
 bool LoadingGameState::s_isLoadingToMainGameplay = false;
 
 using namespace GameStateNameLibrary;
@@ -39,7 +39,7 @@ void LoadingGameState::OnEntry()
 
 	if(!s_isLoadingToMainGameplay)
 	{
-		if(isloadingFromMainGameplayToFrontend)
+		if(s_isloadingFromMainGameplayToFrontend)
 		{
 			AssetLoader::CleanupAssetsWithTag("ui_assets");
 			AssetLoader::CleanupAssetsWithTag("gameplay_assets");
@@ -91,12 +91,7 @@ void LoadingGameState::OnExit()
 {
 	if(!s_isLoadingToMainGameplay)
 	{
-		if(isloadingFromMainGameplayToFrontend)
-		{
-			UIManager::DestroyUIMainView();
-		}
 
-		UIManager::DestroyUIMainView();
 		UIManager::CreateUIFrontEndView();
 	}
 	else
@@ -113,7 +108,11 @@ void LoadingGameState::SetTargetGameState(GameState* gamestate)
 
 void LoadingGameState::ProceedToFrontEnd()
 {
-	if(!isloadingFromMainGameplayToFrontend)
+	if(s_isloadingFromMainGameplayToFrontend)
+	{
+		UIManager::DestroyUIMainView();
+	}
+	else
 	{
 		UIConfig::Init();
 		UIManager::CreateUISystemView();
@@ -126,6 +125,7 @@ void LoadingGameState::ProceedToFrontEnd()
 
 void LoadingGameState::ProceedToGameplay()
 {
+	s_isloadingFromMainGameplayToFrontend = false;
 	s_isLoadingToMainGameplay = true;
 	LoadingGameState::SetTargetGameState(s_instance->m_gameStateManager->GetState(Loading));
 	s_instance->m_gameStateManager->SwitchState(FadeTransition);

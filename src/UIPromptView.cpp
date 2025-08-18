@@ -182,6 +182,7 @@ void UIPromptView::OnConfirm(UIMenuView* owner)
 
 	if(promptType == UIPromptView::PromptType::QuitToMenu)
 	{
+		LoadingGameState::s_isloadingFromMainGameplayToFrontend = true;
 		LoadingGameState::ProceedToFrontEnd();
 	}
 	else

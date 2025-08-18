@@ -23,11 +23,11 @@ public:
 	static void ProceedToFrontEnd();
 	static void ProceedToGameplay();
 
+	static bool s_isLoadingToMainGameplay;
+	static bool s_isloadingFromMainGameplayToFrontend;
 private:
 	static LoadingGameState* s_instance;
 	static GameState* s_targetGameState;
-	static bool s_isLoadingToMainGameplay;
-	static bool isloadingFromMainGameplayToFrontend;
 	float m_timer;
 	float m_isDone;
 };
