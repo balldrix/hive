@@ -95,8 +95,8 @@ void GameplayGameState::Setup()
 	TilemapLoader::Init();
 
 	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_lift.json");
-	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_trailer-level-showcase.json");
-	TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_demo.json");
+	TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_trailer-level-showcase.json");
+	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_demo.json");
 
 	GameDataManager::LoadAllEnemyDefinitions();
 	m_camera = new Camera();

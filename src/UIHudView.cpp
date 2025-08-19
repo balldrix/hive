@@ -47,6 +47,8 @@ void UIHudView::Init(std::string name)
 
 	m_isActive = true;
 	m_currentViewState = UIView::ViewStates::Visible;
+	
+	UIManager::RegisterUIView(this);
 }
 
 void UIHudView::ForceHide(bool isForced)
