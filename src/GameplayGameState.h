@@ -10,6 +10,7 @@
 class GameStateManager;
 class Graphics;
 class Input;
+class CutsceneManager;
 class Camera;
 class ControlSystem;
 class Spritesheet;
@@ -28,7 +29,7 @@ class GameplayGameState : public GameState
 {
 public:
 	GameplayGameState();
-	GameplayGameState(GameStateManager* gameStateManager, Input* input);
+	GameplayGameState(GameStateManager* gameStateManager, Input* input, CutsceneManager* cutsceneManager);
 	virtual ~GameplayGameState();
 
 	float GetDeltaTime() const { return m_deltaTime; }
@@ -58,6 +59,7 @@ private:
 	void TogglePlayerHud();
 
 	Input* m_input;
+	CutsceneManager* m_cutsceneManager;
 
 	Camera* m_camera;
 	ControlSystem* m_controlSystem;

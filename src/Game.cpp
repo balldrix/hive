@@ -3,6 +3,7 @@
 #include "Game.h"
 
 #include "AudioEngine.h"
+#include "CutsceneManager.h"
 #include "FadeTransitionGameState.h"
 #include "GameplayGameState.h"
 #include "GameStateManager.h"
@@ -48,7 +49,7 @@ Game::~Game()
 	Shutdown();
 }
 
-void Game::Init(Window* window, Graphics* graphics, Input* input, GameStateManager* gameStateManager)
+void Game::Init(Window* window, Graphics* graphics, Input* input, GameStateManager* gameStateManager, CutsceneManager* cutsceneManager)
 {
 	// allow multi threading
 	CoInitializeEx(NULL, COINIT_MULTITHREADED);
@@ -57,6 +58,7 @@ void Game::Init(Window* window, Graphics* graphics, Input* input, GameStateManag
 	m_graphics = graphics;
 	m_input = input;
 	m_gameStateManager = gameStateManager;
+	m_cutsceneManager = cutsceneManager;
 
 	m_gameStateManager->AddState(new InitialLoadGameState(m_gameStateManager));
 	m_gameStateManager->AddState(new LoadingGameState(m_gameStateManager));
@@ -64,7 +66,7 @@ void Game::Init(Window* window, Graphics* graphics, Input* input, GameStateManag
 	m_gameStateManager->AddState(new TitleScreenGameState(m_gameStateManager, m_input));
 	m_gameStateManager->AddState(new MainMenuGameState(m_gameStateManager));
 	m_gameStateManager->AddState(new SharedOptionsGameState(m_gameStateManager));
-	m_gameStateManager->AddState(new GameplayGameState(m_gameStateManager, m_input));
+	m_gameStateManager->AddState(new GameplayGameState(m_gameStateManager, m_input, m_cutsceneManager));
 	m_gameStateManager->AddState(new PausedGameState(m_gameStateManager));
 	m_gameStateManager->SwitchState(InitialLoad);
 
@@ -154,6 +156,7 @@ void Game::OnWindowSizeChanged(int width, int height)
 
 void Game::Shutdown()
 {
+	m_cutsceneManager = nullptr;
 	m_gameStateManager = nullptr;
 	m_input = nullptr;
 	m_graphics = nullptr;

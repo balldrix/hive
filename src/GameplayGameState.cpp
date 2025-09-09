@@ -6,6 +6,7 @@
 #include "Camera.h"
 #include "Collider.h"
 #include "ControlSystem.h"
+#include "CutsceneManager.h"
 #include "Enemy.h"
 #include "EnemySpawnManager.h"
 #include "GameDataManager.h"
@@ -70,10 +71,11 @@ GameplayGameState::GameplayGameState() :
 	GameState(Gameplay)
 {}
 
-GameplayGameState::GameplayGameState(GameStateManager* gameStateManager, Input* input) : GameplayGameState()
+GameplayGameState::GameplayGameState(GameStateManager* gameStateManager, Input* input, CutsceneManager* cutsceneManager) : GameplayGameState()
 {
 	m_gameStateManager = gameStateManager;
 	m_input = input;
+	m_cutsceneManager = cutsceneManager;
 }
 
 GameplayGameState::~GameplayGameState()
@@ -108,21 +110,23 @@ void GameplayGameState::Setup()
 
 	m_player->Init(m_controlSystem);
 	m_player->SetCamera(m_camera);
+	m_cutsceneManager->RegisterEventManager("Player", m_player->GetEventManager());
 	m_camera->SetTarget(m_player);
-
 	m_levelRenderer->Init(m_camera);
 	m_enemySpawnManager->Init();
 	LevelCollision::CreateBounds(m_levelRenderer);
 
 	m_NPCManager->Init(m_camera, m_player);
+	m_cutsceneManager->RegisterEventManager("NPC Manager", m_NPCManager->GetEventManager());
+
 	m_camera->Init(GameWidth);
 
 	m_impactFxPool = new ImpactFxPool();
-
 	m_particleSystem = new ParticleSystem();
 	m_particleSystem->Init();
 
 	m_running = true;
+	m_cutsceneManager->StartCutscene("intro");
 }
 
 void GameplayGameState::Cleanup()
@@ -159,6 +163,8 @@ void GameplayGameState::Cleanup()
 
 void GameplayGameState::ProcessInput()
 {
+	if(m_cutsceneManager->IsActive()) return;
+
 	if(m_player->GetStateMachine()->IsInState(*PlayerHurtState::Instance()) || 
 		m_player->GetStateMachine()->IsInState(*PlayerKnockbackState::Instance()) ||
 		m_player->GetStateMachine()->IsInState(*PlayerDeadState::Instance()))
@@ -331,6 +337,7 @@ void GameplayGameState::Update(float deltaTime)
 
 void GameplayGameState::Tick(float deltaTime)
 {
+	m_cutsceneManager->Update(deltaTime);
 	m_camera->Update(deltaTime);
 	m_levelRenderer->Update(deltaTime);
 	m_enemySpawnManager->Update(deltaTime);

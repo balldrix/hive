@@ -335,6 +335,7 @@
       <Filter>UI\Shared</Filter>
     </ClCompile>
     <ClCompile Include="src\UIPromptView.cpp" />
+    <ClCompile Include="src\CutsceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -456,6 +457,9 @@
     </Filter>
     <Filter Include="UI\Shared\Options">
       <UniqueIdentifier>{86740b24-e8ee-4079-b07f-cd8fb98684e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Data\cutscenes">
+      <UniqueIdentifier>{fd65fa64-0250-429a-9d05-af80380aa1d0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -852,6 +856,8 @@
     <ClInclude Include="src\UIPromptView.h">
       <Filter>UI\Shared</Filter>
     </ClInclude>
+    <ClInclude Include="src\CutsceneManager.h" />
+    <ClInclude Include="src\Cutscene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\fonts\goodbye_despair_8pt.spritefont">
@@ -932,6 +938,7 @@
     <None Include="assets\data\tilemaps\tm_demo.json">
       <Filter>Assets\Data\Tilemaps</Filter>
     </None>
+    <None Include="assets\data\cutscenes\cutsceneData.json" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\textures\mook_spritesheet.png">

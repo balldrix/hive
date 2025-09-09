@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\CutsceneManager.cpp" />
     <ClCompile Include="src\EventManager.cpp" />
     <ClCompile Include="src\EnemySpawnManager.cpp" />
     <ClCompile Include="src\ImpactFxPool.cpp" />
@@ -80,6 +81,8 @@
     <ClCompile Include="src\Utils.h" />
     <ClCompile Include="src\UISprite.cpp" />
     <ClCompile Include="src\UICycleMenuItemView.h" />
+    <ClInclude Include="src\Cutscene.h" />
+    <ClInclude Include="src\CutsceneManager.h" />
     <ClInclude Include="src\PausedGameState.h" />
     <ClInclude Include="src\SharedOptionsGameState.h" />
     <ClInclude Include="src\EventManager.h" />
@@ -292,6 +295,7 @@
     <None Include="assets\fonts\goodbye_despair_12pt.spritefont" />
     <None Include="assets\fonts\goodbye_despair_8pt.spritefont" />
     <None Include="assets\fonts\thaleah_12pt.spritefont" />
+    <None Include="assets\data\cutscenes\cutsceneData.json" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\textures\dustfx.png" />

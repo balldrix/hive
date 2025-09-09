@@ -2,7 +2,6 @@
 
 #include "Animator.h"
 #include "DamageData.h"
-#include "EventManager.h"
 #include "HitBoxManager.h"
 #include "SoundSource.h"
 #include "SpriteSheet.h"
@@ -18,6 +17,7 @@ class Sprite;
 class SpriteFx;
 class ControlSystem;
 class Camera;
+class EventManager;
 
 class GameObject
 {
@@ -73,6 +73,7 @@ public:
 	float				GetMovementSpeed()	const { return m_movementSpeed; }
 	virtual DamageData 	GetDamageData() const;
 	Vector3				GetFacingDirection() const { return m_facingDirection; };
+	EventManager*		GetEventManager() const { return m_eventManager; }
 
 	// pointers for important objects
 	ControlSystem*		GetControlSystem() const { return m_controlSystem; }
@@ -118,7 +119,7 @@ protected:
 
 	SoundSource*			m_impactSoundSource;
 
-	EventManager			m_eventManager;
+	EventManager*			m_eventManager;
 	HitBoxManager*			m_hitBoxManager;
 	ControlSystem*			m_controlSystem;
 

@@ -2,8 +2,10 @@
 
 #include "EventManager.h"
 
+#include "Utils.h"
+
 #include <nlohmann/json.hpp>
-#include <stdexcept>
+#include <nlohmann/json_fwd.hpp>
 #include <string>
 #include <variant>
 
@@ -40,15 +42,7 @@ namespace nlohmann
 		{
 			std::string argString = dataString.substr(commaPos + 1);
 			argString.erase(0, argString.find_first_not_of(" \t"));
-
-			try
-			{
-				eventData.argument = std::stof(argString);
-			}
-			catch(const std::invalid_argument&)
-			{
-				eventData.argument = argString;
-			}
+			eventData.argument = Utils::ParseEventArgument(argString);
 		}
 	}
 }

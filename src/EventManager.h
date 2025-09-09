@@ -1,11 +1,19 @@
 #pragma once
 
+#include <DirectXMath.h>
 #include <functional>
 #include <string>
 #include <unordered_map>
 #include <variant>
 
-using EventArgument = std::variant<float, std::string>;
+struct SpawnNPCArgument
+{
+	std::string id;
+	std::string definitionId;
+	DirectX::XMFLOAT2 position;
+};
+
+using EventArgument = std::variant<float, std::string, DirectX::XMFLOAT2, SpawnNPCArgument>;
 
 class EventManager
 {

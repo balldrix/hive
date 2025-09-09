@@ -3,6 +3,7 @@
 #include "Player.h"
 
 #include <directxtk/SimpleMath.h>
+#include <string>
 
 using namespace DirectX::SimpleMath;
 

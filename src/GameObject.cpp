@@ -35,7 +35,7 @@ GameObject::GameObject() :
 	m_shadow(nullptr),
 	m_dustFx(nullptr),
 	m_impactSoundSource(nullptr),
-	m_eventManager(),
+	m_eventManager(nullptr),
 	m_hitBoxManager(nullptr),
 	m_controlSystem(nullptr),
 	m_health(0),

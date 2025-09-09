@@ -64,7 +64,7 @@ private:
 	void								Attack(std::string attackName);
 	void								InitStats();
 	void								UpdateStats();
-	void								RegisterAnimationEvents();
+	void								RegisterEvents();
 	void								MovePlayerEvent(float distance);
 	void								PlaySound(const std::string& id);
 	void								PlayAttackSound(const std::string& name);

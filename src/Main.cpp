@@ -15,6 +15,7 @@
 
 #include "AssetLoader.h"
 #include "AudioEngine.h"
+#include "CutsceneManager.h"
 #include "Game.h"
 #include "GameDataManager.h"
 #include "GameStateManager.h"
@@ -35,6 +36,7 @@ Graphics* graphics = nullptr;
 Window* window	= nullptr;
 Input* input = nullptr;
 GameStateManager* gameStateManager = nullptr;
+CutsceneManager* cutsceneManager = nullptr;
 Game* game = nullptr;
 
 void Shutdown();
@@ -75,9 +77,11 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	MenuSystem::Init(input);
 
 	gameStateManager = new GameStateManager();
+	cutsceneManager = new CutsceneManager();
+	cutsceneManager->Init("assets\\data\\cutscenes\\cutsceneData.json");
 
 	game = new Game();
-	game->Init(window, graphics, input, gameStateManager);
+	game->Init(window, graphics, input, gameStateManager, cutsceneManager);
 
 	MSG msg = {0};
 	while(msg.message != WM_QUIT)
@@ -103,6 +107,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 void Shutdown()
 {
 	delete game;
+	delete cutsceneManager;
 	delete gameStateManager;
 	MenuSystem::Destroy();
 	UIManager::Destroy();
@@ -114,6 +119,7 @@ void Shutdown()
 	delete window;
 	
 	gameStateManager = nullptr;
+	cutsceneManager = nullptr;
 	game = nullptr;
 	input = nullptr;
 	graphics = nullptr;

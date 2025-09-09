@@ -1,7 +1,16 @@
-#include <directxtk/SimpleMath.h>
+#pragma once
 
+#include "EventManager.h"
+
+#include <DirectXMath.h>
+#include <directxtk/SimpleMath.h>
+#include <nlohmann/json.hpp>
+#include <optional>
+#include <sstream>
+#include <stdexcept>
 #include <string>
 #include <stringapiset.h>
+#include <vector>
 #include <WinNls.h>
 
 using namespace DirectX::SimpleMath;
@@ -51,5 +60,77 @@ namespace Utils
 		}
 
 		return narrow;
+	}
+
+	static std::optional<Vector2> TryParseVector2(const std::string& s)
+	{
+		std::stringstream ss(s);
+		std::string token;
+		std::vector<float> values;
+
+		while(std::getline(ss, token, ',')) 
+		{
+			try 
+			{
+				values.push_back(std::stof(token));
+			}
+			catch(...) 
+			{
+				return std::nullopt;
+			}
+		}
+
+		if(values.size() == 2) 
+		{
+			return Vector2{ values[0], values[1] };
+		}
+		return std::nullopt;
+	}
+
+	static std::optional<SpawnNPCArgument> TryParseNPCSpawn(const std::string& s)
+	{
+		try {
+			nlohmann::json j = nlohmann::json::parse(s);
+			if(!j.contains("id") || !j.contains("definitionId") || !j.contains("position"))
+				return std::nullopt;
+
+			SpawnNPCArgument arg;
+			arg.id = j.at("id").get<std::string>();
+			arg.definitionId = j.at("definitionId").get<std::string>();
+
+			const auto& pos = j.at("position");
+			if(pos.is_array() && pos.size() == 2) {
+				arg.position = DirectX::XMFLOAT2{ pos.at(0).get<float>(), pos.at(1).get<float>() };
+				return arg;
+			}
+		}
+		catch(...) {
+			return std::nullopt;
+		}
+
+		return std::nullopt;
+	}
+
+
+	static EventArgument ParseEventArgument(const std::string& s)
+	{
+		if(auto spawnNPC = TryParseNPCSpawn(s))
+		{
+			return *spawnNPC;
+		}
+
+		if(auto vec = TryParseVector2(s)) 
+		{
+			return DirectX::XMFLOAT2{ vec->x, vec->y };
+		}
+
+		try 
+		{
+			return std::stof(s);
+		}
+		catch(const std::invalid_argument&) 
+		{
+			return s;
+		}
 	}
 };

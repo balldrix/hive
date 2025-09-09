@@ -1,6 +1,7 @@
 #include "GameDataManager.h"
 
 #include "AnimatedSpriteData.h"
+#include "Cutscene.h"
 #include "EnemyDefinition.h"
 #include "HitBoxData.h"
 #include "Logger.h"
@@ -30,6 +31,31 @@ void GameDataManager::Destroy()
 {
 	delete s_instance;
 	s_instance = nullptr;
+}
+
+std::vector<Cutscene> GameDataManager::LoadAllCutscenes(const std::string path)
+{
+	Logger::LogInfo(fmt::format("Loading cutscenes: {}.", path));
+
+	std::ifstream file;
+	file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+
+	try
+	{
+		file.open(path);
+	}
+	catch (std::system_error& e)
+	{
+		std::string message = fmt::format("[GameDataManager] [Cutscene] Failed to load cutscene data at {0}: {1}.",
+			path,
+			e.code().message());
+
+		Logger::LogError(message);
+		return std::vector<Cutscene>();
+	}
+
+	json j = json::parse(file);
+	return j.get<std::vector<Cutscene>>();
 }
 
 AnimatedSpriteData GameDataManager::LoadAnimatedSpriteData(std::string path)

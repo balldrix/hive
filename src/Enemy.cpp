@@ -66,11 +66,14 @@ Enemy::~Enemy()
 
 void Enemy::DeleteAll()
 {
+	m_eventManager->UnRegisterEvent("PlaySound");
+
 	AudioEngine::Instance()->RemoveSoundSource(m_impactSoundSource);
 	AudioEngine::Instance()->RemoveSoundSource(m_attackSoundSource);
 	AudioEngine::Instance()->RemoveSoundSource(m_footStepSoundSource);
 	AudioEngine::Instance()->RemoveSoundSource(m_vocalSoundSource);
 
+	delete m_eventManager;
 	delete m_impactSoundSource;
 	delete m_attackSoundSource;
 	delete m_footStepSoundSource;
@@ -83,6 +86,7 @@ void Enemy::DeleteAll()
 	delete m_shadow;
 	delete m_spritesheet;
 
+	m_eventManager = nullptr;
 	m_startingState = nullptr;
 	m_impactSoundSource = nullptr;
 	m_attackSoundSource = nullptr;
@@ -123,7 +127,7 @@ void Enemy::Init(Camera* camera,
 	m_shadow->SetAlpha(0.7f);
 
 	m_animator = new Animator();
-	m_animator->Init(animatedSpriteData, &m_eventManager);
+	m_animator->Init(animatedSpriteData, m_eventManager);
 	m_animator->SetAnimation(0);
 	
 	std::vector<HitBoxData> hitboxData;
@@ -185,7 +189,8 @@ void Enemy::Init(Camera* camera,
 
 	ResetStateChangeTimer();
 
-	m_eventManager.RegisterEvent("PlaySound", [this](EventArgument arg) {
+	m_eventManager = new EventManager();
+	m_eventManager->RegisterEvent("PlaySound", [this](EventArgument arg) {
 		if(!std::holds_alternative<std::string>(arg))
 		{
 			Logger::LogError("[Enemy] [RegisterEvents] Incorrect argument for PlaySound, must be a string");

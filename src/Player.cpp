@@ -38,7 +38,6 @@
 
 #include <directxtk/SimpleMath.h>
 #include <fstream>
-#include <iosfwd>
 #include <string>
 #include <system_error>
 #include <variant>
@@ -63,13 +62,14 @@ Player::Player() :
 
 Player::~Player()
 {
-	m_eventManager.UnRegisterEvent("MovePlayer");
+	m_eventManager->UnRegisterEvent("MovePlayer");
 
 	AudioEngine::Instance()->RemoveSoundSource(m_impactSoundSource);
 	AudioEngine::Instance()->RemoveSoundSource(m_vocalSoundSource);
 	AudioEngine::Instance()->RemoveSoundSource(m_footStepSoundSource);
 	AudioEngine::Instance()->RemoveSoundSource(m_attackSoundSource);
 
+	delete m_eventManager;
 	delete m_impactSoundSource;
 	delete m_vocalSoundSource;
 	delete m_footStepSoundSource;
@@ -78,6 +78,7 @@ Player::~Player()
 	delete m_stateMachine;
 	delete m_spritesheet;
 
+	m_eventManager = nullptr;
 	m_impactSoundSource = nullptr;
 	m_vocalSoundSource = nullptr;
 	m_footStepSoundSource = nullptr;
@@ -107,7 +108,7 @@ void Player::Init(ControlSystem* controlSystem)
 	m_shadow->SetAlpha(0.7f);
 
 	m_animator = new Animator();
-	m_animator->Init(animatedSpriteData, &m_eventManager);
+	m_animator->Init(animatedSpriteData, m_eventManager);
 	m_animator->SetAnimation(0);
 
 	m_hitBoxManager = new HitBoxManager();
@@ -161,7 +162,7 @@ void Player::Init(ControlSystem* controlSystem)
 	};
 
 	InitStats();
-	RegisterAnimationEvents();
+	RegisterEvents();
 	m_active = true;
 }
 
@@ -536,9 +537,11 @@ void Player::UpdateStats()
 	}
 }
 
-void Player::RegisterAnimationEvents()
+void Player::RegisterEvents()
 {
-	m_eventManager.RegisterEvent("MovePlayer", [this](EventArgument arg) {
+	m_eventManager = new EventManager();
+	m_eventManager->RegisterEvent("MovePlayer", [this](EventArgument arg)
+	{
 		if(!std::holds_alternative<float>(arg))
 		{
 			Logger::LogError("[Player] [RegisterEvents] Incorrect argument for MovePlayer, must be a float");
@@ -548,7 +551,8 @@ void Player::RegisterAnimationEvents()
 		MovePlayerEvent(std::get<float>(arg));
 	});
 
-	m_eventManager.RegisterEvent("PlaySound", [this](EventArgument arg) {
+	m_eventManager->RegisterEvent("PlaySound", [this](EventArgument arg)
+	{
 		if(!std::holds_alternative<std::string>(arg))
 		{
 			Logger::LogError("[Player] [RegisterEvents] Incorrect argument for PlaySound, must be a string");
@@ -556,6 +560,19 @@ void Player::RegisterAnimationEvents()
 		}
 
 		PlaySound(std::get<std::string>(arg));
+	});
+
+	m_eventManager->RegisterEvent("PlayAnimation", [this](EventArgument arg)
+	{
+		if(!std::holds_alternative<std::string>(arg))
+		{
+			Logger::LogError("[Player] [RegisterEvents] Incorrect argument for PlayAnimation, must be a string");
+			return;
+		}
+		std::string stateName = std::get<std::string>(arg);
+		if(m_animator->GetAnimation().name == stateName) return;
+
+		m_animator->SetAnimation(stateName);
 	});
 }
 
