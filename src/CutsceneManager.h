@@ -24,15 +24,14 @@ public:
 	bool IsActive() const { return m_isActive; }
 
 private:
-	void PlayStep(int index);
-	void TriggerEvent(const CutsceneEvent& evt);
+	bool Wait(float duration) const;
 
 	bool m_isActive;
 	std::vector<Cutscene> m_cutscenes;
 	Cutscene* m_activeCutscene;
-	int m_currentStep;
+	int m_currentStepIndex;
 	float m_timer;
-	int m_pendingCompletions;
 	std::unordered_map<std::string, EventManager*> m_eventManagers;
 	std::unordered_map<std::string, int> m_cutsceneIndexByName;
+	EventManager* m_eventManager;
 };

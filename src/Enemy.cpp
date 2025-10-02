@@ -190,14 +190,16 @@ void Enemy::Init(Camera* camera,
 	ResetStateChangeTimer();
 
 	m_eventManager = new EventManager();
-	m_eventManager->RegisterEvent("PlaySound", [this](EventArgument arg) {
+	m_eventManager->RegisterEvent("PlaySound", [this](EventArgument arg)
+	{
 		if(!std::holds_alternative<std::string>(arg))
 		{
 			Logger::LogError("[Enemy] [RegisterEvents] Incorrect argument for PlaySound, must be a string");
-			return;
+			return true;
 		}
 
 		PlaySound(std::get<std::string>(arg));
+		return true;
 	});
 
 	m_active = false;

@@ -162,14 +162,14 @@ void NPCManager::RegisterEvents()
 {
 	m_eventManager->RegisterEvent("Spawn NPC", [this](EventArgument arg)
 	{
-		if(!std::holds_alternative<std::string>(arg))
+		if(!std::holds_alternative<SpawnNPCArgument>(arg))
 		{
 			Logger::LogError("[NPCManager] [RegisterEvents] Incorrect argument for Spawn NPC, must be a SpawnEventArgument");
-			return;
+			return true;
 		}
 
 		SpawnNPCArgument spawnArgument = std::get<SpawnNPCArgument>(arg);
-
 		SpawnNPC(spawnArgument.position, GameDataManager::GetEnemyDefinition(spawnArgument.definitionId));
+		return true;
 	});
 }

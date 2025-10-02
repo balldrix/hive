@@ -22,13 +22,13 @@ void EventManager::UnRegisterEvent(const std::string& name)
 	m_eventRegistry.erase(name);
 }
 
-void EventManager::TriggerEvent(const std::string& name, EventArgument arg)
+bool EventManager::TriggerEvent(const std::string& name, EventArgument arg)
 {
 	if(m_eventRegistry.find(name) == m_eventRegistry.end())
 	{
 		Logger::LogWarning(fmt::format("[EventManager] [TriggerEvent] Event with name {} not registered.", name));
-		return;
+		return true;
 	}
 
-	m_eventRegistry[name](arg);
+	return m_eventRegistry[name](arg);
 }

@@ -41,6 +41,7 @@
 #include <string>
 #include <system_error>
 #include <variant>
+#include "AnimationStateData.h"
 
 #undef PlaySound
 
@@ -545,10 +546,11 @@ void Player::RegisterEvents()
 		if(!std::holds_alternative<float>(arg))
 		{
 			Logger::LogError("[Player] [RegisterEvents] Incorrect argument for MovePlayer, must be a float");
-			return;
+			return true;
 		}
 
 		MovePlayerEvent(std::get<float>(arg));
+		return true;
 	});
 
 	m_eventManager->RegisterEvent("PlaySound", [this](EventArgument arg)
@@ -556,10 +558,11 @@ void Player::RegisterEvents()
 		if(!std::holds_alternative<std::string>(arg))
 		{
 			Logger::LogError("[Player] [RegisterEvents] Incorrect argument for PlaySound, must be a string");
-			return;
+			return true;
 		}
 
 		PlaySound(std::get<std::string>(arg));
+		return true;
 	});
 
 	m_eventManager->RegisterEvent("PlayAnimation", [this](EventArgument arg)
@@ -567,12 +570,25 @@ void Player::RegisterEvents()
 		if(!std::holds_alternative<std::string>(arg))
 		{
 			Logger::LogError("[Player] [RegisterEvents] Incorrect argument for PlayAnimation, must be a string");
-			return;
+			return true;
 		}
 		std::string stateName = std::get<std::string>(arg);
-		if(m_animator->GetAnimation().name == stateName) return;
+		AnimationStateData animation = m_animator->GetAnimation();
+
+		if(animation.name == stateName)
+		{
+			if(m_animator->IsDone())
+			{
+				return true;
+			} 
+			else
+			{ 
+				return false; 
+			}
+		}
 
 		m_animator->SetAnimation(stateName);
+		return animation.loop == true;
 	});
 }
 

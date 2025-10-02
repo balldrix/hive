@@ -131,6 +131,8 @@ void GameplayGameState::Setup()
 
 void GameplayGameState::Cleanup()
 {
+	m_cutsceneManager->UnregisterEventManager("NPC Manager");
+	m_cutsceneManager->UnregisterEventManager("Player");
 	m_activeImpacts.clear();
 
 	delete m_particleSystem;

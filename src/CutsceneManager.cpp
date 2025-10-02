@@ -7,16 +7,17 @@
 
 #include <fmt/core.h>
 #include <string>
+#include <variant>
 
 CutsceneManager::CutsceneManager() :
 	m_cutscenes(),
 	m_activeCutscene(),
-	m_currentStep(0),
+	m_currentStepIndex(0),
 	m_timer(0.0f),
-	m_pendingCompletions(0),
 	m_eventManagers(),
 	m_cutsceneIndexByName(),
-	m_isActive(false)
+	m_isActive(false),
+	m_eventManager(nullptr)
 {
 }
 
@@ -34,6 +35,20 @@ void CutsceneManager::Init(const std::string& filepath) {
 	{
 		m_cutsceneIndexByName[m_cutscenes[0].name] = i;
 	}
+
+	m_eventManager = new EventManager();
+	m_eventManager->RegisterEvent("Wait", [this](EventArgument arg)
+	{
+		if(!std::holds_alternative<float>(arg))
+		{
+			Logger::LogError("[CutsceneManager] [RegisterEvent] Incorrect arguement for Wait, must be float");
+			return true;
+		}
+
+		return Wait(std::get<float>(arg));
+	});
+
+	RegisterEventManager("CutsceneManager", m_eventManager);
 }
 
 void CutsceneManager::StartCutscene(std::string name)
@@ -55,9 +70,8 @@ void CutsceneManager::StartCutscene(std::string name)
 	}
 
 	m_activeCutscene = &m_cutscenes[index];
-	m_currentStep = 0;
+	m_currentStepIndex = 0;
 	m_timer = 0.0f;
-	m_pendingCompletions = 0;
 	m_isActive = true;
 
 	Logger::LogInfo(fmt::format("[CutsceneManager] Starting {} Cutscene", m_activeCutscene->name));
@@ -67,21 +81,23 @@ void CutsceneManager::Update(float deltaTime)
 {
 	if(!m_isActive) return;
 
-	if(m_currentStep < 0 || m_currentStep > m_activeCutscene->steps.size())
+	if(m_currentStepIndex < 0 || m_currentStepIndex >= m_activeCutscene->steps.size())
 	{
 		m_isActive = false;
 		return;
 	}
 
-	auto currentStep = m_activeCutscene->steps[m_currentStep];
+	CutsceneStep currentStep = m_activeCutscene->steps[m_currentStepIndex];
 	if(currentStep.stepCompleted)
 	{
-		m_currentStep++;
+		m_timer = 0;
+		m_currentStepIndex++;
 		return;
 	}
 	else
 	{
-		//bool stepComplete = true;
+		int pendingCompletions = 0;
+
 		for(size_t i = 0; i < currentStep.events.size(); i++)
 		{
 			auto& event = currentStep.events[i];
@@ -89,18 +105,15 @@ void CutsceneManager::Update(float deltaTime)
 			
 			if(manager != m_eventManagers.end())
 			{
-				manager->second->TriggerEvent(event.name, event.arg);
-				m_pendingCompletions++;
+				if(!manager->second->TriggerEvent(event.name, event.arg) && event.waitForCompletion) continue;
+				pendingCompletions++;
 			}
-
-			//if(event.waitForCompletion)
-			//{
-			//	stepComplete = m_eventManagers
-			//}
 		}
 
-		//currentStep.stepCompleted = stepComplete;
+		if(pendingCompletions == currentStep.events.size()) m_activeCutscene->steps[m_currentStepIndex].stepCompleted = true;
 	}
+
+	m_timer += deltaTime;
 }
 
 void CutsceneManager::Shutdown()
@@ -129,10 +142,8 @@ void CutsceneManager::UnregisterEventManager(std::string target)
 	m_eventManagers.erase(target);
 }
 
-void CutsceneManager::PlayStep(int index)
+bool CutsceneManager::Wait(float duration) const
 {
-}
-
-void CutsceneManager::TriggerEvent(const CutsceneEvent& evt)
-{
+	if(m_timer >= duration) return true;
+	return false;
 }
