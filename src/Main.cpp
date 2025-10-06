@@ -76,9 +76,10 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	UIManager::Init(window, graphics, input);
 	MenuSystem::Init(input);
 
-	gameStateManager = new GameStateManager();
 	cutsceneManager = new CutsceneManager();
 	cutsceneManager->Init("assets\\data\\cutscenes\\cutsceneData.json");
+
+	gameStateManager = new GameStateManager();
 
 	game = new Game();
 	game->Init(window, graphics, input, gameStateManager, cutsceneManager);
@@ -107,23 +108,29 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 void Shutdown()
 {
 	delete game;
-	delete cutsceneManager;
+	game = nullptr;
+
 	delete gameStateManager;
+	gameStateManager = nullptr;
+
+	delete cutsceneManager;
+	cutsceneManager = nullptr;
+
 	MenuSystem::Destroy();
 	UIManager::Destroy();
 	GameDataManager::Destroy();
 	AssetLoader::Destroy();
 	AudioEngine::Destroy();
+
 	delete input;
-	delete graphics;
-	delete window;
-	
-	gameStateManager = nullptr;
-	cutsceneManager = nullptr;
-	game = nullptr;
+
 	input = nullptr;
+
+	delete graphics;
 	graphics = nullptr;
-	window = nullptr;	
+
+	delete window;
+	window = nullptr;
 
 	SettingsManager::Destroy();
 	Logger::LogInfo("Destroy Game.");
