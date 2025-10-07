@@ -12,6 +12,7 @@
 #include <directxtk/SimpleMath.h>
 #include <string>
 
+class CutsceneManager;
 class Graphics;
 class NPCManager;
 class Texture;
@@ -26,6 +27,7 @@ public:
 
 	void						Init(Camera* camera,
 									Player* player,
+									CutsceneManager* cutsceneManager,
 									const EnemyDefinition& definition,
 									NPCManager* npcManager,
 									Texture* shadowTexture,
@@ -62,6 +64,7 @@ public:
 	void						Flash();
 
 	void						PlaySound(const std::string& id);
+	void						ApplyFacingDirection();
 
 protected:
 	StateMachine<Enemy>*		m_stateMachine;
@@ -75,6 +78,7 @@ private:
 	Vector2						Seek() const;
 	Vector2						Avoid() const;
 	Vector2						Strafe() const;
+	bool						MoveNPC(const Vector2& position);
 
 	Player*						m_playerTarget;
 	Sprite*						m_portraitSprite;
@@ -84,4 +88,5 @@ private:
 	bool						m_isFlashing;
 	State<Enemy>*				m_startingState;
 	NPCManager*					m_npcManager;
+	CutsceneManager*			m_cutsceneManager;
 };

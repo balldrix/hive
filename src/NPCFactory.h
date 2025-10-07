@@ -3,6 +3,7 @@
 #include "EnemyDefinition.h"
 
 class Camera;
+class CutsceneManager;
 class Enemy;
 class Graphics;
 class Player;
@@ -15,8 +16,9 @@ public:
 	NPCFactory();
 	~NPCFactory() {};
 
-	void Init(Camera* camera, 
-			  Player* player);
+	void Init(Camera* camera,
+				Player* player,
+				CutsceneManager* cutsceneManager);
 	
 	Enemy* GetEnemy(EnemyDefinition definition);
 
@@ -26,4 +28,5 @@ private:
 
 	Camera* m_camera;
 	Player* m_player;
+	CutsceneManager* m_cutsceneManager;
 };

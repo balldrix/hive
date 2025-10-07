@@ -2,6 +2,7 @@
 
 #include "AssetLoader.h"
 #include "Camera.h"
+#include "CutsceneManager.h"
 #include "Enemy.h"
 #include "EnemyDefinition.h"
 #include "EnemyFallingState.h"
@@ -19,10 +20,11 @@ NPCFactory::NPCFactory() :
 {
 }
 
-void NPCFactory::Init(Camera* camera, Player* player)
+void NPCFactory::Init(Camera* camera, Player* player, CutsceneManager* cutsceneManager)
 {
 	m_camera = camera;
 	m_player = player;
+	m_cutsceneManager = cutsceneManager;
 }
 
 Enemy* NPCFactory::GetEnemy(EnemyDefinition definition)
@@ -40,7 +42,7 @@ Enemy* NPCFactory::GetEnemy(EnemyDefinition definition)
 Enemy* NPCFactory::CreateNormalEnemy(EnemyDefinition& definition)
 {
 	auto mook = new Enemy();
-	mook->Init(m_camera, m_player, definition,
+	mook->Init(m_camera, m_player, m_cutsceneManager, definition,
 				NPCManager::Instance(),
 				AssetLoader::GetTexture(definition.shadowId),
 				NormalEnemyGlobalState::Instance(),
@@ -52,7 +54,7 @@ Enemy* NPCFactory::CreateNormalEnemy(EnemyDefinition& definition)
 Enemy* NPCFactory::CreateFallingEnemy(EnemyDefinition& definition)
 {
 	auto spider = new Enemy();
-	spider->Init(m_camera, m_player, definition,
+	spider->Init(m_camera, m_player, m_cutsceneManager, definition,
 				NPCManager::Instance(),
 				AssetLoader::GetTexture(definition.shadowId),
 				NormalEnemyGlobalState::Instance(),

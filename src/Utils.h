@@ -89,7 +89,8 @@ namespace Utils
 
 	static std::optional<SpawnNPCArgument> TryParseNPCSpawn(const std::string& s)
 	{
-		try {
+		try
+		{
 			nlohmann::json j = nlohmann::json::parse(s);
 			if(!j.contains("id") || !j.contains("definitionId") || !j.contains("position"))
 				return std::nullopt;
@@ -102,7 +103,28 @@ namespace Utils
 			arg.position = DirectX::XMFLOAT2{ pos.at("x"), pos.at("y") };
 			return arg;
 		}
-		catch(...) {
+		catch(...)
+		{
+			return std::nullopt;
+		}
+
+		return std::nullopt;
+	}
+
+	static std::optional<Vector2> TryParsePosition(const std::string& s)
+	{
+		try
+		{
+			nlohmann::json j = nlohmann::json::parse(s);
+			if(!j.contains("position")) return std::nullopt;
+
+			Vector2 position;
+			position.x = j.at("position").at("x");
+			position.y = j.at("position").at("y");
+			return position;
+		}
+		catch(...)
+		{
 			return std::nullopt;
 		}
 
@@ -119,6 +141,11 @@ namespace Utils
 		if(auto vec = TryParseVector2(s)) 
 		{
 			return DirectX::XMFLOAT2{ vec->x, vec->y };
+		}
+
+		if(auto pos = TryParsePosition(s))
+		{
+			return *pos;
 		}
 
 		try 

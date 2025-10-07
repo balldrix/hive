@@ -3,6 +3,8 @@
 #include "Logger.h"
 #include "NPCManager.h"
 
+#include <fmt/core.h>
+
 const float seconds = 60.0f;
 
 EnemySpawner::EnemySpawner() :
@@ -43,6 +45,7 @@ void EnemySpawner::Update(float deltaTime)
 void EnemySpawner::Spawn()
 {
 	NPCManager::Instance()->SpawnNPC(
+		fmt::format("{0}_{1}", m_enemyDefinition.id, m_spawnCount),
 		m_spawnPosition,
 		m_enemyDefinition,
 		m_startingVelocity,

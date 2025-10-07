@@ -1,6 +1,7 @@
 #include "NPCManager.h"
 
 #include "Camera.h"
+#include "CutsceneManager.h"
 #include "Enemy.h"
 #include "EnemyDefinition.h"
 #include "EventManager.h"
@@ -25,7 +26,8 @@ NPCManager::NPCManager() :
 	m_NPCFactory(nullptr),
 	m_hostileEnemy(nullptr),
 	m_player(nullptr),
-	m_eventManager(nullptr)
+	m_eventManager(nullptr),
+	m_cutsceneManager(nullptr)
 {
 	m_enemyList.clear();
 }
@@ -37,18 +39,19 @@ NPCManager::~NPCManager()
 	DeleteAll();
 }
 
-void NPCManager::Init(Camera* camera, Player* player)
+void NPCManager::Init(Camera* camera, Player* player, CutsceneManager* cutsceneManager)
 {
 	s_instance = this;
 
 	m_player = player;
 	m_NPCFactory = new NPCFactory();
-	m_NPCFactory->Init(camera, player);
+	m_NPCFactory->Init(camera, player, cutsceneManager);
 	m_eventManager = new EventManager();
+	m_cutsceneManager = cutsceneManager;
 	RegisterEvents();
 }
 
-void NPCManager::SpawnNPC(const Vector2& position, const EnemyDefinition& enemyDefinition, const Vector2& velocity, const Vector2& direction, float height)
+void NPCManager::SpawnNPC(std::string id, const Vector2& position, const EnemyDefinition& enemyDefinition, const Vector2& velocity, const Vector2& direction, float height)
 {
 	Enemy* enemy = nullptr;
 
@@ -79,6 +82,9 @@ void NPCManager::SpawnNPC(const Vector2& position, const EnemyDefinition& enemyD
 		enemy->SetPositionY(-height);
 		enemy->SetGrounded(false);
 	}
+
+	enemy->SetID(id);
+	m_cutsceneManager->RegisterEventManager(enemy->GetID(), enemy->GetEventManager());
 }
 
 void NPCManager::Render(Graphics* graphics)
@@ -150,7 +156,6 @@ void NPCManager::SetNextAttackingEnemy()
 
 		m_hostileEnemy = newHostile;
 	}
-
 }
 
 void NPCManager::SetAttackingEnemy(Enemy* enemy)
@@ -164,12 +169,12 @@ void NPCManager::RegisterEvents()
 	{
 		if(!std::holds_alternative<SpawnNPCArgument>(arg))
 		{
-			Logger::LogError("[NPCManager] [RegisterEvents] Incorrect argument for Spawn NPC, must be a SpawnEventArgument");
+			Logger::LogError("[NPCManager] [RegisterEvents] Incorrect argument for SpawnNPC, must be a SpawnEventArgument");
 			return true;
 		}
 
 		SpawnNPCArgument spawnArgument = std::get<SpawnNPCArgument>(arg);
-		SpawnNPC(spawnArgument.position, GameDataManager::GetEnemyDefinition(spawnArgument.definitionId));
+		SpawnNPC(spawnArgument.id, spawnArgument.position, GameDataManager::GetEnemyDefinition(spawnArgument.definitionId));
 		return true;
 	});
 }

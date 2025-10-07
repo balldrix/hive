@@ -5,6 +5,7 @@
 #include "AssetLoader.h"
 #include "AudioEngine.h"
 #include "Camera.h"
+#include "CutsceneManager.h"
 #include "DamageData.h"
 #include "EnemyAttackState.h"
 #include "EnemyDefinition.h"
@@ -40,6 +41,7 @@
 #include <string>
 #include <variant>
 #include <vector>
+#include <DirectXMath.h>
 
 using namespace GameplayConstants;
 
@@ -56,7 +58,8 @@ Enemy::Enemy() :
 	m_isFlashing(false),
 	m_recentFootstepFrame(0),
 	m_startingState(nullptr),
-	m_npcManager(nullptr)
+	m_npcManager(nullptr),
+	m_cutsceneManager(nullptr)
 {}
 
 Enemy::~Enemy()
@@ -103,6 +106,7 @@ void Enemy::DeleteAll()
 
 void Enemy::Init(Camera* camera,
 				Player* player,
+				CutsceneManager* cutsceneManager,
 				const EnemyDefinition& data,
 				NPCManager* npcManager,
 				Texture* shadowTexture,
@@ -111,6 +115,7 @@ void Enemy::Init(Camera* camera,
 {
 	m_camera = camera;
 	m_playerTarget = player;
+	m_cutsceneManager = cutsceneManager;
 	m_enemyDefinition = data;
 	m_npcManager = npcManager;
 	m_grounded = true;
@@ -203,14 +208,26 @@ void Enemy::Init(Camera* camera,
 		return true;
 	});
 
+	m_eventManager->RegisterEvent("MoveNPC", [this](EventArgument arg)
+	{
+		if(!std::holds_alternative<DirectX::XMFLOAT2>(arg))
+		{
+			Logger::LogError("[NPCManager] [RegisterEvent] Incorrect argument for MoveNPC, must be a Vector2");
+			return true;
+		}
+
+		Vector2 position = std::get<DirectX::XMFLOAT2>(arg);
+		return MoveNPC(position);
+	});
+
 	m_active = false;
 }
 
 void Enemy::Update(float deltaTime)
 {
 	if(!m_active) return;
+	if(!m_cutsceneManager->IsActive()) m_stateMachine->Update();
 
-	m_stateMachine->Update();
 	GameObject::Update(deltaTime);
 
 	if(m_stateChangeTimer > 0.0f) m_stateChangeTimer -= deltaTime;
@@ -277,6 +294,7 @@ void Enemy::Spawn(const Vector2& position)
 
 void Enemy::SetDead(bool isDead)
 {
+	m_cutsceneManager->UnregisterEventManager(m_id);
 	m_dead = isDead;
 }
 
@@ -407,6 +425,32 @@ Vector2 Enemy::Strafe() const
 	return crossProduct;
 }
 
+bool Enemy::MoveNPC(const Vector2& position)
+{
+	auto animationName = m_animator->GetAnimation().name;
+	if((position - m_groundPosition).Length() < 1.0f) {
+		m_currentVelocity = Vector2::Zero;
+		if(animationName != "idle")
+		{
+			m_animator->SetAnimation("idle");
+		}
+		return true;
+	}
+
+	auto direction = position - m_groundPosition;
+	direction.Normalize();
+	m_targetVelocity = direction * m_movementSpeed;
+
+	ApplyFacingDirection();
+
+	if(animationName != "walk")
+	{
+		m_animator->SetAnimation("walk");
+	}
+
+	return false;
+}
+
 void Enemy::ShowEnemyHud()
 {
 	UIPortraitView* portraitView = static_cast<UIPortraitView*>(UIManager::GetView("Enemy Portrait"));
@@ -434,6 +478,23 @@ void Enemy::PlaySound(const std::string& id)
 	if(sound == nullptr) return;
 
 	m_attackSoundSource->Play(sound);
+}
+
+void Enemy::ApplyFacingDirection()
+{
+	auto isInKnockbackState = m_stateMachine->IsInState(*EnemyKnockbackState::Instance());
+
+	// true if moving to the left
+	if(m_currentVelocity.x < 0)
+	{
+		FlipHorizontally(!isInKnockbackState);
+	}
+
+	// true if moving to the right
+	if(m_currentVelocity.x > 0)
+	{
+		FlipHorizontally(isInKnockbackState);
+	}
 }
 
 DamageData Enemy::GetDamageData() const

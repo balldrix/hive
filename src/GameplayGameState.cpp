@@ -116,7 +116,7 @@ void GameplayGameState::Setup()
 	m_enemySpawnManager->Init();
 	LevelCollision::CreateBounds(m_levelRenderer);
 
-	m_NPCManager->Init(m_camera, m_player);
+	m_NPCManager->Init(m_camera, m_player, m_cutsceneManager);
 	m_cutsceneManager->RegisterEventManager("NPC Manager", m_NPCManager->GetEventManager());
 
 	m_camera->Init(GameWidth);
