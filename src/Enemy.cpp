@@ -73,7 +73,6 @@ void Enemy::DeleteAll()
 	AudioEngine::Instance()->RemoveSoundSource(m_footStepSoundSource);
 	AudioEngine::Instance()->RemoveSoundSource(m_vocalSoundSource);
 
-	delete m_eventManager;
 	delete m_impactSoundSource;
 	delete m_attackSoundSource;
 	delete m_footStepSoundSource;
@@ -83,10 +82,10 @@ void Enemy::DeleteAll()
 	delete m_hitBoxManager;
 	delete m_hitBoxSprite;
 	delete m_animator;
+	delete m_eventManager;
 	delete m_shadow;
 	delete m_spritesheet;
 
-	m_eventManager = nullptr;
 	m_startingState = nullptr;
 	m_impactSoundSource = nullptr;
 	m_attackSoundSource = nullptr;
@@ -97,6 +96,7 @@ void Enemy::DeleteAll()
 	m_hitBoxManager = nullptr;
 	m_hitBoxSprite = nullptr;
 	m_animator = nullptr;
+	m_eventManager = nullptr;
 	m_shadow = nullptr;
 	m_spritesheet = nullptr;
 }
@@ -125,6 +125,8 @@ void Enemy::Init(Camera* camera,
 	m_shadow = new Sprite();
 	m_shadow->Init(shadowTexture);
 	m_shadow->SetAlpha(0.7f);
+
+	m_eventManager = new EventManager();
 
 	m_animator = new Animator();
 	m_animator->Init(animatedSpriteData, m_eventManager);
@@ -189,7 +191,6 @@ void Enemy::Init(Camera* camera,
 
 	ResetStateChangeTimer();
 
-	m_eventManager = new EventManager();
 	m_eventManager->RegisterEvent("PlaySound", [this](EventArgument arg)
 	{
 		if(!std::holds_alternative<std::string>(arg))

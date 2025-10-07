@@ -14,9 +14,34 @@
           {
             "name": "Wait",
             "target": "CutsceneManager",
-            "arg": "5.0",
+            "arg": 5.0,
             "delay": 0.0,
             "waitForCompletion": true
+          }
+        ]
+      },
+      {
+        "events": [
+          {
+            "name": "SpawnNPC",
+            "target": "NPC Manager",
+            "arg": {
+              "id": "intro_npc",
+              "definitionId": "waste-dog",
+              "position": {
+                "x": 250,
+                "y": 85
+              }
+            },
+            "delay": 0.0,
+            "waitForCompletion": false
+          },
+          {
+            "name": "PlayAnimation",
+            "target": "Player",
+            "arg": "idle",
+            "delay": 0.0,
+            "waitForCompletion": false
           }
         ]
       }

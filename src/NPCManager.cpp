@@ -4,6 +4,7 @@
 #include "Enemy.h"
 #include "EnemyDefinition.h"
 #include "EventManager.h"
+#include "GameDataManager.h"
 #include "GameObject.h"
 #include "Graphics.h"
 #include "Logger.h"
@@ -15,7 +16,6 @@
 #include <string>
 #include <variant>
 #include <vector>
-#include "GameDataManager.h"
 
 using namespace DirectX::SimpleMath;
 
@@ -160,7 +160,7 @@ void NPCManager::SetAttackingEnemy(Enemy* enemy)
 
 void NPCManager::RegisterEvents()
 {
-	m_eventManager->RegisterEvent("Spawn NPC", [this](EventArgument arg)
+	m_eventManager->RegisterEvent("SpawnNPC", [this](EventArgument arg)
 	{
 		if(!std::holds_alternative<SpawnNPCArgument>(arg))
 		{

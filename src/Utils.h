@@ -99,10 +99,8 @@ namespace Utils
 			arg.definitionId = j.at("definitionId").get<std::string>();
 
 			const auto& pos = j.at("position");
-			if(pos.is_array() && pos.size() == 2) {
-				arg.position = DirectX::XMFLOAT2{ pos.at(0).get<float>(), pos.at(1).get<float>() };
-				return arg;
-			}
+			arg.position = DirectX::XMFLOAT2{ pos.at("x"), pos.at("y") };
+			return arg;
 		}
 		catch(...) {
 			return std::nullopt;
@@ -110,7 +108,6 @@ namespace Utils
 
 		return std::nullopt;
 	}
-
 
 	static EventArgument ParseEventArgument(const std::string& s)
 	{

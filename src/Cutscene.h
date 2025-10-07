@@ -36,7 +36,18 @@ namespace nlohmann
 		j.at("delay").get_to(e.delay);
 		j.at("waitForCompletion").get_to(e.waitForCompletion);
 
-		std::string argString = j.at("arg");
+		std::string argString;
+
+		if(j.at("arg").is_string()) {
+			argString = j.at("arg");
+		}
+		else if(j.at("arg").is_number()) {
+			argString = std::to_string(j.at("arg").get<float>());
+		}
+		else {
+			argString = j.at("arg").dump();
+		}
+
 		e.arg = Utils::ParseEventArgument(argString);
 	}
 	

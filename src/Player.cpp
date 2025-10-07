@@ -1,6 +1,7 @@
 #include "Player.h"
 
 #include "AnimatedSpriteData.h"
+#include "AnimationStateData.h"
 #include "Animator.h"
 #include "AssetLoader.h"
 #include "AudioEngine.h"
@@ -41,7 +42,6 @@
 #include <string>
 #include <system_error>
 #include <variant>
-#include "AnimationStateData.h"
 
 #undef PlaySound
 
@@ -70,7 +70,6 @@ Player::~Player()
 	AudioEngine::Instance()->RemoveSoundSource(m_footStepSoundSource);
 	AudioEngine::Instance()->RemoveSoundSource(m_attackSoundSource);
 
-	delete m_eventManager;
 	delete m_impactSoundSource;
 	delete m_vocalSoundSource;
 	delete m_footStepSoundSource;
@@ -78,8 +77,8 @@ Player::~Player()
 	delete m_dustFx;
 	delete m_stateMachine;
 	delete m_spritesheet;
+	delete m_eventManager;
 
-	m_eventManager = nullptr;
 	m_impactSoundSource = nullptr;
 	m_vocalSoundSource = nullptr;
 	m_footStepSoundSource = nullptr;
@@ -87,6 +86,7 @@ Player::~Player()
 	m_dustFx = nullptr;
 	m_stateMachine = nullptr;
 	m_spritesheet = nullptr;
+	m_eventManager = nullptr;
 }
 
 void Player::Init(ControlSystem* controlSystem)
@@ -94,8 +94,9 @@ void Player::Init(ControlSystem* controlSystem)
 	Logger::LogInfo("Initialising Player.");
 
 	m_controlSystem = controlSystem;
-
 	m_playerDefinition = LoadPlayerDefinition();
+
+	m_eventManager = new EventManager();
 
 	AnimatedSpriteData animatedSpriteData;
 	animatedSpriteData = GameDataManager::LoadAnimatedSpriteData(m_playerDefinition.spritesheetDataPath);
@@ -540,7 +541,6 @@ void Player::UpdateStats()
 
 void Player::RegisterEvents()
 {
-	m_eventManager = new EventManager();
 	m_eventManager->RegisterEvent("MovePlayer", [this](EventArgument arg)
 	{
 		if(!std::holds_alternative<float>(arg))
