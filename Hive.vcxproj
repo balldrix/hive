@@ -22,11 +22,13 @@
     <ClCompile Include="src\CutsceneManager.cpp" />
     <ClCompile Include="src\EventManager.cpp" />
     <ClCompile Include="src\EnemySpawnManager.cpp" />
+    <ClCompile Include="src\IEvent.h" />
     <ClCompile Include="src\ImpactFxPool.cpp" />
     <ClCompile Include="src\EnemyFallingState.cpp" />
     <ClCompile Include="src\EnemyLandingState.cpp" />
     <ClCompile Include="src\EnemySpawner.cpp" />
     <ClCompile Include="src\LevelCollision.cpp" />
+    <ClCompile Include="src\MovePlayerEvent.cpp" />
     <ClCompile Include="src\SharedOptionsGameState.cpp" />
     <ClCompile Include="src\PausedGameState.cpp" />
     <ClCompile Include="src\PlayerBuildSpecialState.cpp" />
@@ -81,8 +83,9 @@
     <ClCompile Include="src\Utils.h" />
     <ClCompile Include="src\UISprite.cpp" />
     <ClCompile Include="src\UICycleMenuItemView.h" />
-    <ClInclude Include="src\Cutscene.h" />
+    <ClInclude Include="src\CutsceneData.h" />
     <ClInclude Include="src\CutsceneManager.h" />
+    <ClInclude Include="src\MovePlayerEvent.h" />
     <ClInclude Include="src\PausedGameState.h" />
     <ClInclude Include="src\SharedOptionsGameState.h" />
     <ClInclude Include="src\EventManager.h" />
@@ -192,6 +195,8 @@
     <ClCompile Include="src\UIManager.cpp" />
     <ClCompile Include="src\UISystemView.cpp" />
     <ClCompile Include="src\UIView.cpp" />
+    <ClCompile Include="src\WaitEvent.cpp" />
+    <ClCompile Include="src\WaitEvent.h" />
     <ClCompile Include="src\Window.cpp" />
     <ClInclude Include="src\UIConfig.h" />
     <ClInclude Include="src\UIPlayerStatsView.h" />

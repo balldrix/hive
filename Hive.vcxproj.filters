@@ -340,6 +340,18 @@
     <ClCompile Include="src\CutsceneManager.cpp">
       <Filter>System</Filter>
     </ClCompile>
+    <ClCompile Include="src\IEvent.h">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WaitEvent.h">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WaitEvent.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MovePlayerEvent.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -462,7 +474,10 @@
     <Filter Include="UI\Shared\Options">
       <UniqueIdentifier>{86740b24-e8ee-4079-b07f-cd8fb98684e5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Assets\Data\cutscenes">
+    <Filter Include="Events">
+      <UniqueIdentifier>{bb31358c-cbc3-47e9-b965-4b83fbe37a3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Data\Cutscenes">
       <UniqueIdentifier>{fd65fa64-0250-429a-9d05-af80380aa1d0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -863,8 +878,11 @@
     <ClInclude Include="src\CutsceneManager.h">
       <Filter>System</Filter>
     </ClInclude>
-    <ClInclude Include="src\Cutscene.h">
+    <ClInclude Include="src\CutsceneData.h">
       <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MovePlayerEvent.h">
+      <Filter>Events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -947,7 +965,7 @@
       <Filter>Assets\Data\Tilemaps</Filter>
     </None>
     <None Include="assets\data\cutscenes\cutsceneData.json">
-      <Filter>Assets\Data\cutscenes</Filter>
+      <Filter>Assets\Data\Cutscenes</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

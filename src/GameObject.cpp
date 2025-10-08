@@ -229,6 +229,11 @@ void GameObject::SetPosition(const Vector2& position)
 	m_position = position;
 }
 
+void GameObject::SetGroundPosition(const Vector2& position)
+{
+	m_groundPosition = position;
+}
+
 void GameObject::SetMovementSpeed(float speed)
 {
 	m_movementSpeed = speed;

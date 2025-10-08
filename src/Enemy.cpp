@@ -36,12 +36,12 @@
 #include "UIPortraitView.h"
 #include "UnitVectors.h"
 
+#include <DirectXMath.h>
 #include <directxtk/SimpleMath.h>
 #include <fmt/core.h>
 #include <string>
 #include <variant>
 #include <vector>
-#include <DirectXMath.h>
 
 using namespace GameplayConstants;
 
@@ -196,7 +196,7 @@ void Enemy::Init(Camera* camera,
 
 	ResetStateChangeTimer();
 
-	m_eventManager->RegisterEvent("PlaySound", [this](EventArgument arg)
+	/*m_eventManager->RegisterEvent("PlaySound", [this](EventArgument arg)
 	{
 		if(!std::holds_alternative<std::string>(arg))
 		{
@@ -218,7 +218,7 @@ void Enemy::Init(Camera* camera,
 
 		Vector2 position = std::get<DirectX::XMFLOAT2>(arg);
 		return MoveNPC(position);
-	});
+	});*/
 
 	m_active = false;
 }

@@ -7,7 +7,7 @@
 #include <string>
 #include <vector>
 
-struct CutsceneEvent
+struct CutsceneEventData
 {
 	std::string name;
 	std::string target;
@@ -16,21 +16,22 @@ struct CutsceneEvent
 	bool waitForCompletion = false;
 };
 
-struct CutsceneStep
+struct CutsceneStepData
 {
-	std::vector<CutsceneEvent> events;
+	std::vector<CutsceneEventData> events;
+	std::vector<bool> started;
 	bool stepCompleted = false;
 };
 
-struct Cutscene
+struct CutsceneData
 {
 	std::string name;
-	std::vector<CutsceneStep> steps;
+	std::vector<CutsceneStepData> steps;
 };
 
 namespace nlohmann
 {
-	static inline void from_json(const json& j, CutsceneEvent& e) {
+	static inline void from_json(const json& j, CutsceneEventData& e) {
 		j.at("name").get_to(e.name);
 		j.at("target").get_to(e.target);
 		j.at("delay").get_to(e.delay);
@@ -51,11 +52,11 @@ namespace nlohmann
 		e.arg = Utils::ParseEventArgument(argString);
 	}
 	
-	static inline void from_json(const json& j, CutsceneStep& s) {
+	static inline void from_json(const json& j, CutsceneStepData& s) {
 		j.at("events").get_to(s.events);
 	}
 
-	static inline void from_json(const json& j, Cutscene& c)
+	static inline void from_json(const json& j, CutsceneData& c)
 	{
 		j.at("name").get_to(c.name);
 		j.at("steps").get_to(c.steps);

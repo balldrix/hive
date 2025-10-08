@@ -165,7 +165,7 @@ void NPCManager::SetAttackingEnemy(Enemy* enemy)
 
 void NPCManager::RegisterEvents()
 {
-	m_eventManager->RegisterEvent("SpawnNPC", [this](EventArgument arg)
+	/*m_eventManager->RegisterEvent("SpawnNPC", [this](EventArgument arg)
 	{
 		if(!std::holds_alternative<SpawnNPCArgument>(arg))
 		{
@@ -176,5 +176,5 @@ void NPCManager::RegisterEvents()
 		SpawnNPCArgument spawnArgument = std::get<SpawnNPCArgument>(arg);
 		SpawnNPC(spawnArgument.id, spawnArgument.position, GameDataManager::GetEnemyDefinition(spawnArgument.definitionId));
 		return true;
-	});
+	});*/
 }

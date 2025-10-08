@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AnimatedSpriteData.h"
-#include "Cutscene.h"
+#include "CutsceneData.h"
 #include "EnemyDefinition.h"
 #include "HitBoxData.h"
 
@@ -14,7 +14,7 @@ public:
 	static void Init();
 	static void Destroy();
 	
-	static std::vector<Cutscene> LoadAllCutscenes(const std::string path);
+	static std::vector<CutsceneData> LoadAllCutscenes(const std::string path);
 	static AnimatedSpriteData LoadAnimatedSpriteData(std::string path);
 	static std::vector<HitBoxData> LoadHitboxData(std::string path);
 	static void LoadAllEnemyDefinitions();

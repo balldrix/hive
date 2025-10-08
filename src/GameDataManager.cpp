@@ -1,14 +1,13 @@
 #include "GameDataManager.h"
 
 #include "AnimatedSpriteData.h"
-#include "Cutscene.h"
+#include "CutsceneData.h"
 #include "EnemyDefinition.h"
 #include "HitBoxData.h"
 #include "Logger.h"
 
 #include <fmt/core.h>
 #include <fstream>
-#include <iosfwd>
 #include <nlohmann/json.hpp>
 #include <nlohmann/json_fwd.hpp>
 #include <stdexcept>
@@ -33,7 +32,7 @@ void GameDataManager::Destroy()
 	s_instance = nullptr;
 }
 
-std::vector<Cutscene> GameDataManager::LoadAllCutscenes(const std::string path)
+std::vector<CutsceneData> GameDataManager::LoadAllCutscenes(const std::string path)
 {
 	Logger::LogInfo(fmt::format("Loading cutscenes: {}.", path));
 
@@ -51,11 +50,11 @@ std::vector<Cutscene> GameDataManager::LoadAllCutscenes(const std::string path)
 			e.code().message());
 
 		Logger::LogError(message);
-		return std::vector<Cutscene>();
+		return std::vector<CutsceneData>();
 	}
 
 	json j = json::parse(file);
-	return j.get<std::vector<Cutscene>>();
+	return j.get<std::vector<CutsceneData>>();
 }
 
 AnimatedSpriteData GameDataManager::LoadAnimatedSpriteData(std::string path)

@@ -1,19 +1,10 @@
 #pragma once
 
 #include <DirectXMath.h>
-#include <functional>
 #include <string>
 #include <unordered_map>
-#include <variant>
 
-struct SpawnNPCArgument
-{
-	std::string id;
-	std::string definitionId;
-	DirectX::XMFLOAT2 position = DirectX::XMFLOAT2(0,0);
-};
-
-using EventArgument = std::variant<float, std::string, DirectX::XMFLOAT2, SpawnNPCArgument>;
+#include "IEvent.h"
 
 class EventManager
 {
@@ -21,12 +12,10 @@ public:
 	EventManager() {};
 	~EventManager() {};
 
-	using EventCallback = std::function<bool(EventArgument)>;
-
-	void RegisterEvent(const std::string& name, EventCallback callback);
+	void RegisterEvent(const std::string& name, IEvent* event);
 	void UnRegisterEvent(const std::string& name);
-	bool TriggerEvent(const std::string& name, EventArgument arg);
+	IEvent* GetEvent(const std::string& name);
 
 private:
-	std::unordered_map<std::string, EventCallback> m_eventRegistry;
+	std::unordered_map<std::string, IEvent*> m_eventRegistry;
 };

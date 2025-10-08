@@ -65,7 +65,6 @@ private:
 	void								InitStats();
 	void								UpdateStats();
 	void								RegisterEvents();
-	void								MovePlayerEvent(float distance);
 	void								PlaySound(const std::string& id);
 	void								PlayAttackSound(const std::string& name);
 	void								PlayFootstepSound();

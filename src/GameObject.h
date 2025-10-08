@@ -46,6 +46,7 @@ public:
 	void				SetPositionY(float y);
 	void				SetPosition(float x, float y);
 	void				SetPosition(const Vector2& position);
+	void				SetGroundPosition(const Vector2& position);
 	void				SetMovementSpeed(float speed);
 	void				SetAcceleration(float accel);
 	void				SetDeceleration(float decel);

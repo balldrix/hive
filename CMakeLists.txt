@@ -61,7 +61,8 @@ add_executable(${PROJECT_NAME} src/main.cpp src/AABB.cpp src/Animator.cpp src/Au
 								src/UISprite.h src/UISprite.cpp src/EnemySpawner.h src/EnemySpawer.cpp src/EnemyDefinition.h src/PlayerDefinition.h src/UIPauseMenuView.h src/UIPauseMenuView.cpp
 								src/EnemyFallingState.h src/EnemyFallingState.cpp src/EnemyLandingState.h src/EnemyLandingState.cpp src/UIMenuView.h src/UIMenuView.cpp
 								src/SettingsManager.h src/SettingsManager.cpp, src/UICycleMenuItemView.h src/UICycleMenuItemView.cpp src/PausedGameState.h src/PausedGameState.cpp
-								src/GameStateNameLibrary.h src/UIPromptView.h src/UIPromptView.cpp src/CutsceneManager.h src/CutsceneManager.cpp src/Cutscene.h
+								src/GameStateNameLibrary.h src/UIPromptView.h src/UIPromptView.cpp src/CutsceneManager.h src/CutsceneManager.cpp src/CutsceneData.h IEvent.h WaitEvent.h WaitEvent.cpp
+								src/MovePlayerEvent.h src/MovePlayerEvent.cpp
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Microsoft::DirectXTK)
 target_link_libraries(${PROJECT_NAME} PRIVATE nlohmann_json::nlohmann_json)

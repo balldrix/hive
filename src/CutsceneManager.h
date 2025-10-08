@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Cutscene.h"
+#include "CutsceneData.h"
 #include "EventManager.h"
 
 #include <string>
@@ -24,11 +24,9 @@ public:
 	bool IsActive() const { return m_isActive; }
 
 private:
-	bool Wait(float duration) const;
-
 	bool m_isActive;
-	std::vector<Cutscene> m_cutscenes;
-	Cutscene* m_activeCutscene;
+	std::vector<CutsceneData> m_cutscenes;
+	CutsceneData* m_activeCutscene;
 	int m_currentStepIndex;
 	float m_timer;
 	std::unordered_map<std::string, EventManager*> m_eventManagers;

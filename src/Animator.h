@@ -29,7 +29,7 @@ public:
 	void Reset();
 
 private:
-	void TriggerEvents();
+	void TriggerEvents(float deltaTime);
 
 	EventManager* m_eventManager;
 	AnimationStateData m_currentAnimation;

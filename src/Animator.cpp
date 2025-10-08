@@ -57,7 +57,7 @@ void Animator::Update(float deltaTime)
 				m_animDone = true;
 			}
 
-			TriggerEvents();
+			TriggerEvents(deltaTime);
 		}
 	}
 }
@@ -67,7 +67,7 @@ void Animator::SetAnimation(unsigned int index)
 	m_currentAnimation = m_animatedSpriteData.animationStateData[index];
 	m_animDone = false;
 	m_currentFrame = 0;
-	TriggerEvents();
+	TriggerEvents(0.0f);
 }
 
 void Animator::SetAnimation(const std::string& name)
@@ -81,7 +81,7 @@ void Animator::SetAnimation(const std::string& name)
 			m_currentAnimation = data;
 			m_animDone = false;
 			m_currentFrame = 0;
-			TriggerEvents();
+			TriggerEvents(0.0f);
 			return;
 		}
 	}
@@ -97,13 +97,19 @@ void Animator::Reset()
 	m_currentFrame = 0;
 }
 
-void Animator::TriggerEvents()
+void Animator::TriggerEvents(float deltaTime)
 {
 	int targetFrame = m_currentAnimation.from + m_currentFrame;
 
-	for(const auto& event : m_animatedSpriteData.animationEventData) {
-		if(event.frameNumber == targetFrame) {
-			m_eventManager->TriggerEvent(event.eventName, event.argument);
+	for(const auto& data : m_animatedSpriteData.animationEventData) {
+		if(data.frameNumber == targetFrame) {
+			auto event = m_eventManager->GetEvent(data.eventName);
+			if(event == nullptr) continue;
+
+			event->Reset();
+			event->OnStart(data.argument);
+			event->OnUpdate(deltaTime);
+			event->OnComplete();
 		}
 	}
 }

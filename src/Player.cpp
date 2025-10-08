@@ -14,6 +14,7 @@
 #include "GlobalConstants.h"
 #include "Graphics.h"
 #include "HitBoxManager.h"
+#include "MovePlayerEvent.h"
 #include "LevelCollision.h"
 #include "Logger.h"
 #include "PlayerAttackState.h"
@@ -541,19 +542,9 @@ void Player::UpdateStats()
 
 void Player::RegisterEvents()
 {
-	m_eventManager->RegisterEvent("MovePlayer", [this](EventArgument arg)
-	{
-		if(!std::holds_alternative<float>(arg))
-		{
-			Logger::LogError("[Player] [RegisterEvents] Incorrect argument for MovePlayer, must be a float");
-			return true;
-		}
-
-		MovePlayerEvent(std::get<float>(arg));
-		return true;
-	});
-
-	m_eventManager->RegisterEvent("PlaySound", [this](EventArgument arg)
+	m_eventManager->RegisterEvent("MovePlayer", new MovePlayerEvent(this));
+	
+	/*m_eventManager->RegisterEvent("PlaySound", [this](EventArgument arg)
 	{
 		if(!std::holds_alternative<std::string>(arg))
 		{
@@ -589,18 +580,7 @@ void Player::RegisterEvents()
 
 		m_animator->SetAnimation(stateName);
 		return animation.loop == true;
-	});
-}
-
-void Player::MovePlayerEvent(float distance)
-{
-	Vector2 offset = m_facingDirection == Vector3::Right ? Vector2(distance, 0.0f) : Vector2(-distance, 0.0f);
-	Vector2 newPosition = m_position += offset;
-	Vector2 newGroundPosition = m_groundPosition += offset;
-	if(LevelCollision::IsCollision(newPosition) || LevelCollision::IsCollision(newGroundPosition)) return;
-
-	m_position = newPosition;
-	m_groundPosition = newGroundPosition;
+	});*/
 }
 
 void Player::PlaySound(const std::string& id)
