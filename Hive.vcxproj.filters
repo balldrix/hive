@@ -352,6 +352,13 @@
     <ClCompile Include="src\MovePlayerEvent.cpp">
       <Filter>Events</Filter>
     </ClCompile>
+    <ClCompile Include="src\PlaySoundEvent.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PlayAnimationEvent.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MoveNPCEvent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -882,6 +889,15 @@
       <Filter>System</Filter>
     </ClInclude>
     <ClInclude Include="src\MovePlayerEvent.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PlaySoundEvent.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PlayAnimationEvent.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MoveNPCEvent.h">
       <Filter>Events</Filter>
     </ClInclude>
   </ItemGroup>

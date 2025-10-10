@@ -16,6 +16,7 @@
 using namespace PlayerConstants;
 
 class ControlSystem;
+class CutsceneManager;
 template<class T> class StateMachine;
 class SoundSource;
 
@@ -25,7 +26,7 @@ public:
 	Player();
 	virtual								~Player();
 
-	void								Init(ControlSystem* controlSystem);
+	void								Init(ControlSystem* controlSystem, CutsceneManager* cutsceneManager);
 	void								Update(float deltaTime);
 	void								Render(Graphics* graphics);
 	void								Reset();
@@ -81,4 +82,5 @@ private:
 	int									m_recentFootstepFrame;
 	int									m_kills;
 	float								m_special;
+	CutsceneManager*					m_cutsceneManager;
 };

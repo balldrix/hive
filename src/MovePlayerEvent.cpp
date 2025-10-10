@@ -8,9 +8,11 @@
 #include <directxtk/SimpleMath.h>
 #include <variant>
 
-MovePlayerEvent::MovePlayerEvent(Player* player)
+MovePlayerEvent::MovePlayerEvent(Player* player) :
+	IEvent(),
+	m_player(player),
+	m_distance(0.0f)
 {
-	m_player = player;
 }
 
 MovePlayerEvent::~MovePlayerEvent()
@@ -21,7 +23,7 @@ void MovePlayerEvent::OnStart(EventArgument arg)
 {
 	if(!std::holds_alternative<float>(arg))
 	{
-		Logger::LogError("[MovePlayerEvent] [OnStart] Incorrect argument for MovePlayerEvent, must be a float");
+		Logger::LogError("[MovePlayerEvent] [OnStart] Incorrect argument, must be a float");
 		return;
 	}
 
@@ -43,7 +45,6 @@ void MovePlayerEvent::OnUpdate(float deltaTime)
 
 void MovePlayerEvent::Reset()
 {
+	IEvent::Reset();
 	m_distance = 0.0f;
-	m_isComplete = false;
-	m_hasStarted = false;
 }

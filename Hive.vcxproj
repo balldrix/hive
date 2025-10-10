@@ -28,7 +28,10 @@
     <ClCompile Include="src\EnemyLandingState.cpp" />
     <ClCompile Include="src\EnemySpawner.cpp" />
     <ClCompile Include="src\LevelCollision.cpp" />
+    <ClCompile Include="src\MoveNPCEvent.cpp" />
     <ClCompile Include="src\MovePlayerEvent.cpp" />
+    <ClCompile Include="src\PlayAnimationEvent.cpp" />
+    <ClCompile Include="src\PlaySoundEvent.cpp" />
     <ClCompile Include="src\SharedOptionsGameState.cpp" />
     <ClCompile Include="src\PausedGameState.cpp" />
     <ClCompile Include="src\PlayerBuildSpecialState.cpp" />
@@ -83,10 +86,13 @@
     <ClCompile Include="src\Utils.h" />
     <ClCompile Include="src\UISprite.cpp" />
     <ClCompile Include="src\UICycleMenuItemView.h" />
+    <ClInclude Include="src\MoveNPCEvent.h" />
     <ClInclude Include="src\CutsceneData.h" />
     <ClInclude Include="src\CutsceneManager.h" />
     <ClInclude Include="src\MovePlayerEvent.h" />
     <ClInclude Include="src\PausedGameState.h" />
+    <ClInclude Include="src\PlayAnimationEvent.h" />
+    <ClInclude Include="src\PlaySoundEvent.h" />
     <ClInclude Include="src\SharedOptionsGameState.h" />
     <ClInclude Include="src\EventManager.h" />
     <ClInclude Include="src\AnimationEventData.h" />

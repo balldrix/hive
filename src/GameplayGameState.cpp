@@ -108,7 +108,7 @@ void GameplayGameState::Setup()
 	m_levelRenderer = new LevelRenderer();
 	m_enemySpawnManager = new EnemySpawnManager();
 
-	m_player->Init(m_controlSystem);
+	m_player->Init(m_controlSystem, m_cutsceneManager);
 	m_player->SetCamera(m_camera);
 	m_cutsceneManager->RegisterEventManager("Player", m_player->GetEventManager());
 	m_camera->SetTarget(m_player);

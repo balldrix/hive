@@ -19,9 +19,10 @@
 #include "Graphics.h"
 #include "HitBoxData.h"
 #include "HitBoxManager.h"
-#include "Logger.h"
+#include "MoveNPCEvent.h"
 #include "NPCManager.h"
 #include "Player.h"
+#include "PlaySoundEvent.h"
 #include "Randomiser.h"
 #include "Sound.h"
 #include "SoundSource.h"
@@ -40,7 +41,6 @@
 #include <directxtk/SimpleMath.h>
 #include <fmt/core.h>
 #include <string>
-#include <variant>
 #include <vector>
 
 using namespace GameplayConstants;
@@ -196,29 +196,8 @@ void Enemy::Init(Camera* camera,
 
 	ResetStateChangeTimer();
 
-	/*m_eventManager->RegisterEvent("PlaySound", [this](EventArgument arg)
-	{
-		if(!std::holds_alternative<std::string>(arg))
-		{
-			Logger::LogError("[Enemy] [RegisterEvents] Incorrect argument for PlaySound, must be a string");
-			return true;
-		}
-
-		PlaySound(std::get<std::string>(arg));
-		return true;
-	});
-
-	m_eventManager->RegisterEvent("MoveNPC", [this](EventArgument arg)
-	{
-		if(!std::holds_alternative<DirectX::XMFLOAT2>(arg))
-		{
-			Logger::LogError("[NPCManager] [RegisterEvent] Incorrect argument for MoveNPC, must be a Vector2");
-			return true;
-		}
-
-		Vector2 position = std::get<DirectX::XMFLOAT2>(arg);
-		return MoveNPC(position);
-	});*/
+	m_eventManager->RegisterEvent("PlaySound", new PlaySoundEvent(m_attackSoundSource));
+	m_eventManager->RegisterEvent("MoveNPC", new MoveNPCEvent(this));
 
 	m_active = false;
 }

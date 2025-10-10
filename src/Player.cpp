@@ -7,6 +7,7 @@
 #include "AudioEngine.h"
 #include "Camera.h"
 #include "ControlSystem.h"
+#include "CutsceneManager.h"
 #include "DamageData.h"
 #include "EventManager.h"
 #include "GameDataManager.h"
@@ -14,9 +15,9 @@
 #include "GlobalConstants.h"
 #include "Graphics.h"
 #include "HitBoxManager.h"
-#include "MovePlayerEvent.h"
-#include "LevelCollision.h"
 #include "Logger.h"
+#include "MovePlayerEvent.h"
+#include "PlayAnimationEvent.h"
 #include "PlayerAttackState.h"
 #include "PlayerBlockState.h"
 #include "PlayerConstants.h"
@@ -26,6 +27,7 @@
 #include "PlayerHurtState.h"
 #include "PlayerIdleState.h"
 #include "PlayerKnockbackState.h"
+#include "PlaySoundEvent.h"
 #include "Sound.h"
 #include "SoundSource.h"
 #include "Sprite.h"
@@ -42,7 +44,6 @@
 #include <fstream>
 #include <string>
 #include <system_error>
-#include <variant>
 
 #undef PlaySound
 
@@ -58,7 +59,8 @@ Player::Player() :
 	m_recentFootstepFrame(0),
 	m_hurtTimer(0.0f),
 	m_kills(0),
-	m_special(100)
+	m_special(100),
+	m_cutsceneManager(nullptr)
 {
 }
 
@@ -90,11 +92,12 @@ Player::~Player()
 	m_eventManager = nullptr;
 }
 
-void Player::Init(ControlSystem* controlSystem)
+void Player::Init(ControlSystem* controlSystem, CutsceneManager* cutsceneManager)
 {
 	Logger::LogInfo("Initialising Player.");
 
 	m_controlSystem = controlSystem;
+	m_cutsceneManager = cutsceneManager;
 	m_playerDefinition = LoadPlayerDefinition();
 
 	m_eventManager = new EventManager();
@@ -173,7 +176,7 @@ void Player::Update(float deltaTime)
 {
 	if(m_dead || !m_active) return;
 
-	m_stateMachine->Update();
+	if(!m_cutsceneManager->IsActive()) m_stateMachine->Update();
 	GameObject::Update(deltaTime);
 
 	m_hitBoxManager->Update(m_animator->GetCurrentFrame());
@@ -543,44 +546,8 @@ void Player::UpdateStats()
 void Player::RegisterEvents()
 {
 	m_eventManager->RegisterEvent("MovePlayer", new MovePlayerEvent(this));
-	
-	/*m_eventManager->RegisterEvent("PlaySound", [this](EventArgument arg)
-	{
-		if(!std::holds_alternative<std::string>(arg))
-		{
-			Logger::LogError("[Player] [RegisterEvents] Incorrect argument for PlaySound, must be a string");
-			return true;
-		}
-
-		PlaySound(std::get<std::string>(arg));
-		return true;
-	});
-
-	m_eventManager->RegisterEvent("PlayAnimation", [this](EventArgument arg)
-	{
-		if(!std::holds_alternative<std::string>(arg))
-		{
-			Logger::LogError("[Player] [RegisterEvents] Incorrect argument for PlayAnimation, must be a string");
-			return true;
-		}
-		std::string stateName = std::get<std::string>(arg);
-		AnimationStateData animation = m_animator->GetAnimation();
-
-		if(animation.name == stateName)
-		{
-			if(m_animator->IsDone())
-			{
-				return true;
-			} 
-			else
-			{ 
-				return false; 
-			}
-		}
-
-		m_animator->SetAnimation(stateName);
-		return animation.loop == true;
-	});*/
+	m_eventManager->RegisterEvent("PlaySound", new PlaySoundEvent(m_attackSoundSource));
+	m_eventManager->RegisterEvent("PlayAnimation", new PlayAnimationEvent(m_animator));
 }
 
 void Player::PlaySound(const std::string& id)

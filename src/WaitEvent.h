@@ -1,3 +1,5 @@
+#pragma once
+
 #include "IEvent.h"
 
 class WaitEvent : public IEvent

@@ -21,7 +21,11 @@ public:
 	virtual void OnStart(EventArgument arg) = 0;
 	virtual void OnUpdate(float deltaTime) = 0;
 	virtual void OnComplete() = 0;
-	virtual void Reset() = 0;
+	virtual void Reset()
+	{
+		m_hasStarted = false;
+		m_isComplete = false;
+	}
 	virtual bool HasStarted() const { return m_hasStarted; }
 	virtual bool IsComplete() const { return m_isComplete; }
 

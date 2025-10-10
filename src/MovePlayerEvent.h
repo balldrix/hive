@@ -1,7 +1,8 @@
 #pragma once
 
 #include "IEvent.h"
-#include "Player.h"
+
+class Player;
 
 class MovePlayerEvent : public IEvent
 {

@@ -1,6 +1,5 @@
 #pragma once
 
-#include <DirectXMath.h>
 #include <string>
 #include <unordered_map>
 

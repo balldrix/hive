@@ -6,10 +6,7 @@
 #include "HitBoxManager.h"
 #include "Player.h"
 #include "PlayerIdleState.h"
-#include "Sprite.h"
 #include "StateMachine.h"
-#include "Logger.h"
-#include "SpriteSheet.h"
 
 PlayerAttackState* PlayerAttackState::Instance()
 {
