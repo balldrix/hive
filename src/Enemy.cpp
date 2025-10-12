@@ -404,32 +404,6 @@ Vector2 Enemy::Strafe() const
 	return crossProduct;
 }
 
-bool Enemy::MoveNPC(const Vector2& position)
-{
-	auto animationName = m_animator->GetAnimation().name;
-	if((position - m_groundPosition).Length() < 1.0f) {
-		m_currentVelocity = Vector2::Zero;
-		if(animationName != "idle")
-		{
-			m_animator->SetAnimation("idle");
-		}
-		return true;
-	}
-
-	auto direction = position - m_groundPosition;
-	direction.Normalize();
-	m_targetVelocity = direction * m_movementSpeed;
-
-	ApplyFacingDirection();
-
-	if(animationName != "walk")
-	{
-		m_animator->SetAnimation("walk");
-	}
-
-	return false;
-}
-
 void Enemy::ShowEnemyHud()
 {
 	UIPortraitView* portraitView = static_cast<UIPortraitView*>(UIManager::GetView("Enemy Portrait"));

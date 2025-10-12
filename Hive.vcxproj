@@ -37,6 +37,7 @@
     <ClCompile Include="src\PlayerBuildSpecialState.cpp" />
     <ClCompile Include="src\ScreenShake.cpp" />
     <ClCompile Include="src\SettingsManager.cpp" />
+    <ClCompile Include="src\SpawnNPCEvent.cpp" />
     <ClCompile Include="src\TilemapLoader.cpp" />
     <ClCompile Include="src\UICycleMenuItemView.cpp" />
     <ClCompile Include="src\UIMenuView.cpp" />
@@ -86,6 +87,7 @@
     <ClCompile Include="src\Utils.h" />
     <ClCompile Include="src\UISprite.cpp" />
     <ClCompile Include="src\UICycleMenuItemView.h" />
+    <ClInclude Include="src\SpawnNPCEvent.h" />
     <ClInclude Include="src\MoveNPCEvent.h" />
     <ClInclude Include="src\CutsceneData.h" />
     <ClInclude Include="src\CutsceneManager.h" />

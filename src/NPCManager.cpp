@@ -8,14 +8,14 @@
 #include "GameDataManager.h"
 #include "GameObject.h"
 #include "Graphics.h"
-#include "Logger.h"
+#include "IEvent.h"
 #include "NPCFactory.h"
 #include "Player.h"
+#include "SpawnNPCEvent.h"
 
 #include <directxtk/SimpleMath.h>
 #include <limits>
 #include <string>
-#include <variant>
 #include <vector>
 
 using namespace DirectX::SimpleMath;
@@ -85,6 +85,11 @@ void NPCManager::SpawnNPC(std::string id, const Vector2& position, const EnemyDe
 
 	enemy->SetID(id);
 	m_cutsceneManager->RegisterEventManager(enemy->GetID(), enemy->GetEventManager());
+}
+
+void NPCManager::SpawnNPC(SpawnNPCArgument argument)
+{
+	SpawnNPC(argument.id, argument.position, GameDataManager::GetEnemyDefinition(argument.definitionId));
 }
 
 void NPCManager::Render(Graphics* graphics)
@@ -165,16 +170,5 @@ void NPCManager::SetAttackingEnemy(Enemy* enemy)
 
 void NPCManager::RegisterEvents()
 {
-	/*m_eventManager->RegisterEvent("SpawnNPC", [this](EventArgument arg)
-	{
-		if(!std::holds_alternative<SpawnNPCArgument>(arg))
-		{
-			Logger::LogError("[NPCManager] [RegisterEvents] Incorrect argument for SpawnNPC, must be a SpawnEventArgument");
-			return true;
-		}
-
-		SpawnNPCArgument spawnArgument = std::get<SpawnNPCArgument>(arg);
-		SpawnNPC(spawnArgument.id, spawnArgument.position, GameDataManager::GetEnemyDefinition(spawnArgument.definitionId));
-		return true;
-	});*/
+	m_eventManager->RegisterEvent("SpawnNPC", new SpawnNPCEvent(this));
 }

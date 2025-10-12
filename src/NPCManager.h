@@ -1,6 +1,7 @@
 #pragma once
 
 #include "EnemyDefinition.h"
+#include "IEvent.h"
 
 #include <directxtk/SimpleMath.h>
 #include <string>
@@ -26,6 +27,7 @@ public:
 	void	Init(Camera* camera, Player* player, CutsceneManager* cutsceneManager);
 
 	void	SpawnNPC(std::string id, const Vector2& position, const EnemyDefinition& enemyDefinition, const Vector2& velocity = Vector2::Zero, const Vector2& direction = Vector2(-1.0f, 0.0f), float height = 0.0f);
+	void	SpawnNPC(SpawnNPCArgument argument);
 
 	void	Render(Graphics* graphics);
 	void	Update(float deltaTime);
