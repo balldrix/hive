@@ -1160,7 +1160,7 @@
    { "name": "special", "from": 88, "to": 115, "direction": "forward", "repeat": "1", "color": "#000000ff", "data": "endXPos=32" },
    { "name": "buildSpecial", "from": 90, "to": 99, "direction": "forward", "color": "#000000ff" },
    { "name": "fixing", "from": 116, "to": 117, "direction": "forward", "color": "#000000ff" },
-   { "name": "surprise", "from": 118, "to": 125, "direction": "forward", "color": "#000000ff" }
+   { "name": "surprise", "from": 118, "to": 125, "direction": "forward", "repeat": "1", "color": "#000000ff" }
   ],
   "layers": [
    { "name": "left leg", "opacity": 255, "blendMode": "normal", "cels": [{ "frame": 46, "data": "event:MovePlayer, 1" }] },

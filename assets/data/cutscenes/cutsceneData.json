@@ -51,11 +51,37 @@
             },
             "delay": 0.0,
             "waitForCompletion": true
-          },
+          }
+        ]
+      },
+      {
+        "events": [
           {
-            "name": "Wait",
-            "target": "CutsceneManager",
-            "arg": 5.0,
+            "name": "PlayAnimation",
+            "target": "intro_npc",
+            "arg": "attackNormal",
+            "delay": 0.0,
+            "waitForCompletion": true
+          }
+        ]
+      },
+      {
+        "events": [
+          {
+            "name": "PlayAnimation",
+            "target": "intro_npc",
+            "arg": "idle",
+            "delay": 0.0,
+            "waitForCompletion": false
+          }
+        ]
+      },
+      {
+        "events": [
+          {
+            "name": "PlayAnimation",
+            "target": "Player",
+            "arg": "surprise",
             "delay": 0.0,
             "waitForCompletion": true
           }

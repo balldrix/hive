@@ -28,7 +28,7 @@ void SoundSource::Reset()
 	m_priority = SoundPriority::Low;
 	m_position = Vector3::Zero;
 	m_volume = 1.0f;
-	m_radius = 120.0f;
+	m_radius = 300.0f;
 	m_timeLeft = 0.0f;
 	m_isLooping = false;
 	m_currentSource = nullptr;
@@ -129,7 +129,6 @@ void SoundSource::Update(float deltaTime)
 		// Spatialized sound—use world space
 		alSourcefv(m_currentSource->source, AL_POSITION, (float*)&relativePosition);
 	}
-
 }
 
 void SoundSource::Play(Sound* sound)

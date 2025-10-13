@@ -21,6 +21,7 @@
 #include "HitBoxManager.h"
 #include "MoveNPCEvent.h"
 #include "NPCManager.h"
+#include "PlayAnimationEvent.h"
 #include "Player.h"
 #include "PlaySoundEvent.h"
 #include "Randomiser.h"
@@ -70,6 +71,8 @@ Enemy::~Enemy()
 void Enemy::DeleteAll()
 {
 	m_eventManager->UnRegisterEvent("PlaySound");
+	m_eventManager->UnRegisterEvent("PlayAnimation");
+	m_eventManager->UnRegisterEvent("MoveNPC");
 
 	AudioEngine::Instance()->RemoveSoundSource(m_impactSoundSource);
 	AudioEngine::Instance()->RemoveSoundSource(m_attackSoundSource);
@@ -198,6 +201,7 @@ void Enemy::Init(Camera* camera,
 
 	m_eventManager->RegisterEvent("PlaySound", new PlaySoundEvent(m_attackSoundSource));
 	m_eventManager->RegisterEvent("MoveNPC", new MoveNPCEvent(this));
+	m_eventManager->RegisterEvent("PlayAnimation", new PlayAnimationEvent(m_animator));
 
 	m_active = false;
 }

@@ -40,7 +40,8 @@ Game::Game() noexcept :
 	m_retryAudio(false),
 	m_clientWidth(0),
 	m_clientHeight(0),
-	m_paused(false)
+	m_paused(false),
+	m_cutsceneManager(nullptr)
 {
 }
 
