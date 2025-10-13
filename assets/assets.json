@@ -168,6 +168,12 @@
     "tag": "gameplay_assets"
   },
   {
+    "id": "s_unsheatheSword_001",
+    "path": "assets\\sounds\\unsheatheSword_001.wav",
+    "type": "audio",
+    "tag": "gameplay_assets"
+  },
+  {
     "id": "s_playerSwing_001",
     "path": "assets\\sounds\\swingNormal_001.wav",
     "type": "audio",
