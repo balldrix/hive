@@ -33,7 +33,3 @@ void SpawnNPCEvent::OnStart(EventArgument arg)
 void SpawnNPCEvent::OnUpdate(float deltaTime)
 {
 }
-
-void SpawnNPCEvent::OnComplete()
-{
-}

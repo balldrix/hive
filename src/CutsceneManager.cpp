@@ -96,6 +96,21 @@ void CutsceneManager::Update(float deltaTime)
 	{
 		m_timer = 0;
 		m_currentStepIndex++;
+
+		if(m_currentStepIndex < m_activeCutscene->steps.size())
+		{
+			auto& nextStep = m_activeCutscene->steps[m_currentStepIndex];
+			for(auto& data : nextStep.events)
+			{
+				auto manager = m_eventManagers.find(data.target);
+				if(manager != m_eventManagers.end())
+				{
+					auto event = manager->second->GetEvent(data.name);
+					if(event) event->Reset();
+				}
+			}
+		}
+
 		return;
 	}
 	else
@@ -121,10 +136,6 @@ void CutsceneManager::Update(float deltaTime)
 				{
 					event->OnUpdate(deltaTime);
 					if(data.waitForCompletion) allEventsCompleted = false;
-				}
-				else
-				{
-					event->OnComplete();
 				}
 			}
 		}

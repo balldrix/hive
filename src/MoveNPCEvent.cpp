@@ -4,9 +4,9 @@
 #include "IEvent.h"
 #include "Logger.h"
 
+#include <DirectXMath.h>
 #include <directxtk/SimpleMath.h>
 #include <variant>
-#include <DirectXMath.h>
 
 MoveNPCEvent::MoveNPCEvent(Enemy* enemy) :
 	IEvent(),
@@ -42,10 +42,6 @@ void MoveNPCEvent::OnUpdate(float deltaTime)
 	if((m_destination - groundPosition).Length() > 1.0f) return;
 
 	m_isComplete = true;
-}
-
-void MoveNPCEvent::OnComplete()
-{
 	m_enemy->SetVelocity(Vector2::Zero);
 	m_enemy->GetAnimator()->SetAnimation("idle");
 }

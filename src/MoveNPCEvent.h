@@ -14,7 +14,6 @@ public:
 	~MoveNPCEvent();
 	void OnStart(EventArgument arg) override;
 	void OnUpdate(float deltaTime) override;
-	void OnComplete() override;
 
 private:
 	Enemy* m_enemy;

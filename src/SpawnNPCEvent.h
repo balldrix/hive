@@ -11,7 +11,7 @@ public:
 	~SpawnNPCEvent();
 	void OnStart(EventArgument arg) override;
 	void OnUpdate(float deltaTime) override;
-	void OnComplete() override;
+
 private:
 	NPCManager* m_npcManager;
 };

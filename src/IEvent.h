@@ -20,7 +20,6 @@ public:
 	virtual ~IEvent() {};
 	virtual void OnStart(EventArgument arg) = 0;
 	virtual void OnUpdate(float deltaTime) = 0;
-	virtual void OnComplete() = 0;
 	virtual void Reset()
 	{
 		m_hasStarted = false;

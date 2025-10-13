@@ -9,7 +9,6 @@ public:
 	~WaitEvent() = default;
 	void OnStart(EventArgument arg) override;
 	void OnUpdate(float deltaTime) override;
-	void OnComplete() override {};
 	void Reset() override;
 private:
 	float m_timer;

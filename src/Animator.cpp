@@ -109,7 +109,6 @@ void Animator::TriggerEvents(float deltaTime)
 			event->Reset();
 			event->OnStart(data.argument);
 			event->OnUpdate(deltaTime);
-			event->OnComplete();
 		}
 	}
 }

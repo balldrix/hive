@@ -11,7 +11,6 @@ public:
 	~PlaySoundEvent();
 	void OnStart(EventArgument arg) override;
 	void OnUpdate(float deltaTime) override;
-	void OnComplete() override;
 
 private:
 	SoundSource* m_soundSource;

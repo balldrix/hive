@@ -358,7 +358,12 @@
     <ClCompile Include="src\PlayAnimationEvent.cpp">
       <Filter>Events</Filter>
     </ClCompile>
-    <ClCompile Include="src\MoveNPCEvent.cpp" />
+    <ClCompile Include="src\MoveNPCEvent.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SpawnNPCEvent.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -898,6 +903,9 @@
       <Filter>Events</Filter>
     </ClInclude>
     <ClInclude Include="src\MoveNPCEvent.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SpawnNPCEvent.h">
       <Filter>Events</Filter>
     </ClInclude>
   </ItemGroup>

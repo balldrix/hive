@@ -11,7 +11,6 @@ public:
 	~MovePlayerEvent();
 	void OnStart(EventArgument arg) override;
 	void OnUpdate(float deltaTime) override;
-	void OnComplete() override {};
 	void Reset() override;
 private:
 	Player* m_player;

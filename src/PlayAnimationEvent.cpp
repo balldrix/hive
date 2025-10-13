@@ -34,7 +34,3 @@ void PlayAnimationEvent::OnUpdate(float deltaTime)
 {
 	if(m_animator->IsDone()) m_isComplete = true;
 }
-
-void PlayAnimationEvent::OnComplete()
-{
-}

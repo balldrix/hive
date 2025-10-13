@@ -21,7 +21,7 @@ PlaySoundEvent::~PlaySoundEvent()
 
 void PlaySoundEvent::OnStart(EventArgument arg)
 {
-	if(!std::holds_alternative<float>(arg))
+	if(!std::holds_alternative<std::string>(arg))
 	{
 		Logger::LogError("[PlaySoundEvent] [OnStart] Incorrect argument for PlaySoundEvent, needs string");
 		return;
@@ -41,8 +41,4 @@ void PlaySoundEvent::OnUpdate(float deltaTime)
 	if(m_soundSource->GetTimeLeft() > 0.0f) return;
 
 	m_isComplete = true;
-}
-
-void PlaySoundEvent::OnComplete()
-{
 }
