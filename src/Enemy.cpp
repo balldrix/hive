@@ -70,9 +70,7 @@ Enemy::~Enemy()
 
 void Enemy::DeleteAll()
 {
-	m_eventManager->UnRegisterEvent("PlaySound");
-	m_eventManager->UnRegisterEvent("PlayAnimation");
-	m_eventManager->UnRegisterEvent("MoveNPC");
+	m_eventManager->UnRegisterAllForTarget(m_id);
 
 	AudioEngine::Instance()->RemoveSoundSource(m_impactSoundSource);
 	AudioEngine::Instance()->RemoveSoundSource(m_attackSoundSource);
@@ -107,18 +105,19 @@ void Enemy::DeleteAll()
 	m_spritesheet = nullptr;
 }
 
-void Enemy::Init(Camera* camera,
-				Player* player,
-				CutsceneManager* cutsceneManager,
-				const EnemyDefinition& data,
-				NPCManager* npcManager,
-				Texture* shadowTexture,
-				State<Enemy>* globalEnemyState,
-				State<Enemy>* startingState)
+void Enemy::Init(const std::string& id,
+	Camera* camera,
+	Player* player,
+	CutsceneManager* cutsceneManager, EventManager* eventManager,
+	const EnemyDefinition& data,
+	NPCManager* npcManager,
+	Texture* shadowTexture, State<Enemy>* globalEnemyState, State<Enemy>* startingState)
 {
+	m_id = id;
 	m_camera = camera;
 	m_playerTarget = player;
 	m_cutsceneManager = cutsceneManager;
+	m_eventManager = eventManager;
 	m_enemyDefinition = data;
 	m_npcManager = npcManager;
 	m_grounded = true;
@@ -134,10 +133,8 @@ void Enemy::Init(Camera* camera,
 	m_shadow->Init(shadowTexture);
 	m_shadow->SetAlpha(0.7f);
 
-	m_eventManager = new EventManager();
-
 	m_animator = new Animator();
-	m_animator->Init(animatedSpriteData, m_eventManager);
+	m_animator->Init(m_id, animatedSpriteData, m_eventManager);
 	m_animator->SetAnimation(0);
 	
 	std::vector<HitBoxData> hitboxData;
@@ -145,7 +142,7 @@ void Enemy::Init(Camera* camera,
 
 	m_hitBoxManager = new HitBoxManager();
 	m_hitBoxManager->Init(this, hitboxData);
-	
+
 	m_movementSpeed = data.walkSpeed;
 	m_acceleration = data.acceleration;
 	m_deceleration = data.deceleration;
@@ -155,7 +152,6 @@ void Enemy::Init(Camera* camera,
 	m_stateMachine->Init(EnemyIdleState::Instance(), nullptr, globalEnemyState);
 	m_stateMachine->ChangeState(startingState);
 
-	m_id = m_enemyDefinition.id;
 	m_health = m_enemyDefinition.hp;
 
 	m_dustFx = new SpriteFx();
@@ -198,10 +194,6 @@ void Enemy::Init(Camera* camera,
 	};
 
 	ResetStateChangeTimer();
-
-	m_eventManager->RegisterEvent("PlaySound", new PlaySoundEvent(m_attackSoundSource));
-	m_eventManager->RegisterEvent("MoveNPC", new MoveNPCEvent(this));
-	m_eventManager->RegisterEvent("PlayAnimation", new PlayAnimationEvent(m_animator));
 
 	m_active = false;
 }
@@ -262,6 +254,16 @@ void Enemy::Render(Graphics* graphics)
 		m_dustFx->Render(graphics);
 }
 
+void Enemy::Reset(const std::string& id)
+{
+	if (m_eventManager != nullptr && !m_id.empty())
+	{
+		m_eventManager->UnRegisterAllForTarget(m_id);
+	}
+
+	m_id = id;
+}
+
 void Enemy::Spawn(const Vector2& position)
 {
 	m_position = position;
@@ -273,11 +275,11 @@ void Enemy::Spawn(const Vector2& position)
 
 	GetSprite()->EnableSprite();
 	m_stateMachine->ChangeState(m_startingState);
+	RegisterEvents();
 }
 
 void Enemy::SetDead(bool isDead)
 {
-	m_cutsceneManager->UnregisterEventManager(m_id);
 	m_dead = isDead;
 }
 
@@ -452,6 +454,13 @@ void Enemy::ApplyFacingDirection()
 	{
 		FlipHorizontally(isInKnockbackState);
 	}
+}
+
+void Enemy::RegisterEvents()
+{
+	m_eventManager->RegisterEvent("PlaySound", m_id, new PlaySoundEvent(m_attackSoundSource));
+	m_eventManager->RegisterEvent("MoveNPC", m_id, new MoveNPCEvent(this));
+	m_eventManager->RegisterEvent("PlayAnimation", m_id, new PlayAnimationEvent(m_animator));
 }
 
 DamageData Enemy::GetDamageData() const

@@ -24,7 +24,7 @@
         "events": [
           {
             "name": "SpawnNPC",
-            "target": "NPC Manager",
+            "target": "NPCManager",
             "arg": {
               "id": "intro_npc",
               "definitionId": "waste-dog",

@@ -39,14 +39,14 @@ NPCManager::~NPCManager()
 	DeleteAll();
 }
 
-void NPCManager::Init(Camera* camera, Player* player, CutsceneManager* cutsceneManager)
+void NPCManager::Init(Camera* camera, Player* player, CutsceneManager* cutsceneManager, EventManager* eventManager)
 {
 	s_instance = this;
 
 	m_player = player;
 	m_NPCFactory = new NPCFactory();
-	m_NPCFactory->Init(camera, player, cutsceneManager);
-	m_eventManager = new EventManager();
+	m_NPCFactory->Init(camera, player, cutsceneManager, eventManager);
+	m_eventManager = eventManager;
 	m_cutsceneManager = cutsceneManager;
 	RegisterEvents();
 }
@@ -58,9 +58,9 @@ void NPCManager::SpawnNPC(std::string id, const Vector2& position, const EnemyDe
 	auto& enemyList = s_instance->m_enemyList;
 	for(auto it = enemyList.begin(); it != enemyList.end(); ++it)
 	{
-		std::string id = (*it)->GetData().id;
+		std::string definitionId = (*it)->GetData().id;
 		bool isActive = (*it)->IsActive();
-		if(id != enemyDefinition.id || isActive) continue;
+		if(definitionId != enemyDefinition.id || isActive) continue;
 
 		enemy = (*it);
 		break;
@@ -68,10 +68,11 @@ void NPCManager::SpawnNPC(std::string id, const Vector2& position, const EnemyDe
 
 	if(enemy == nullptr)
 	{
-		enemy = s_instance->m_NPCFactory->GetEnemy(enemyDefinition);
+		enemy = s_instance->m_NPCFactory->GetEnemy(id, enemyDefinition);
 		s_instance->m_enemyList.push_back(enemy);
 	}
 
+	enemy->Reset(id);
 	enemy->Spawn(position);
 	enemy->SetPlayerTarget(m_player);
 	enemy->SetVelocity(velocity);
@@ -82,9 +83,6 @@ void NPCManager::SpawnNPC(std::string id, const Vector2& position, const EnemyDe
 		enemy->SetPositionY(-height);
 		enemy->SetGrounded(false);
 	}
-
-	enemy->SetID(id);
-	m_cutsceneManager->RegisterEventManager(enemy->GetID(), enemy->GetEventManager());
 }
 
 void NPCManager::SpawnNPC(SpawnNPCArgument argument)
@@ -112,7 +110,8 @@ void NPCManager::Reset()
 {
 	for(size_t i = 0; i < m_enemyList.size(); i++)
 	{
-		m_enemyList[i]->Reset();
+		Enemy* enemy = m_enemyList[i];
+		enemy->Reset(enemy->GetID());
 	}
 }
 
@@ -170,5 +169,5 @@ void NPCManager::SetAttackingEnemy(Enemy* enemy)
 
 void NPCManager::RegisterEvents()
 {
-	m_eventManager->RegisterEvent("SpawnNPC", new SpawnNPCEvent(this));
+	m_eventManager->RegisterEvent("SpawnNPC", "NPCManager", new SpawnNPCEvent(this));
 }

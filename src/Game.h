@@ -9,6 +9,7 @@ class Graphics;
 class Input;
 class GameStateManager;
 class CutsceneManager;
+class EventManager;
 
 class Game
 {
@@ -22,7 +23,7 @@ public:
 	Game(Game const&) = delete;
 	Game& operator= (Game const&) = delete;
 
-	void Init(Window* window, Graphics* graphics, Input* input, GameStateManager* gameStateManager, CutsceneManager* cutsceneManager);
+	void Init(Window* window, Graphics* graphics, Input* input, GameStateManager* gameStateManager, CutsceneManager* cutsceneManager, EventManager* eventManager);
 
 	void Run();
 
@@ -45,6 +46,7 @@ private:
 	Input* m_input;
 	GameStateManager* m_gameStateManager;
 	CutsceneManager* m_cutsceneManager;
+	EventManager* m_eventManager;
 
 	Timer m_timer;
 	unsigned __int64 m_timerFreq;

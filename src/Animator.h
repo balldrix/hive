@@ -12,9 +12,10 @@ public:
 	Animator();
 	~Animator() {};
 
-	void Init(AnimatedSpriteData animatedSpriteData, EventManager* eventManager);
+	void Init(const std::string& ownerId, AnimatedSpriteData animatedSpriteData, EventManager* eventManager);
 	void Update(float deltaTime);
 
+	void SetOwnerId(const std::string& id);
 	void SetAnimation(unsigned int index);
 	void SetAnimation(const std::string& name);
 
@@ -31,6 +32,7 @@ public:
 private:
 	void TriggerEvents(float deltaTime);
 
+	std::string m_ownerId;
 	EventManager* m_eventManager;
 	AnimationStateData m_currentAnimation;
 	AnimatedSpriteData m_animatedSpriteData;

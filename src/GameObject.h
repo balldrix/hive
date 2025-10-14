@@ -98,8 +98,6 @@ public:
 	void				DisplayDust(const Vector2& position);
 	virtual void		PlayImpactSound();
 
-	virtual void		Reset() = 0;
-
 protected:
 	std::string				m_id;
 	Camera*					m_camera;

@@ -21,7 +21,7 @@ void RunningEnemy::ApplyDamage(GameObject* source, const int& amount)
 
 void RunningEnemy::Reset()
 {
-	Enemy::Reset();
+	Enemy::Reset(m_id);
 
 	m_movementSpeed = m_enemyDefinition.runningSpeed;
 }

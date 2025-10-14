@@ -66,7 +66,7 @@ Player::Player() :
 
 Player::~Player()
 {
-	m_eventManager->UnRegisterEvent("MovePlayer");
+	m_eventManager->UnRegisterAllForTarget("Player");
 
 	AudioEngine::Instance()->RemoveSoundSource(m_impactSoundSource);
 	AudioEngine::Instance()->RemoveSoundSource(m_vocalSoundSource);
@@ -92,15 +92,15 @@ Player::~Player()
 	m_eventManager = nullptr;
 }
 
-void Player::Init(ControlSystem* controlSystem, CutsceneManager* cutsceneManager)
+void Player::Init(ControlSystem* controlSystem, CutsceneManager* cutsceneManager, EventManager* eventManager)
 {
 	Logger::LogInfo("Initialising Player.");
 
+	m_id = "Player";
 	m_controlSystem = controlSystem;
 	m_cutsceneManager = cutsceneManager;
+	m_eventManager = eventManager;
 	m_playerDefinition = LoadPlayerDefinition();
-
-	m_eventManager = new EventManager();
 
 	AnimatedSpriteData animatedSpriteData;
 	animatedSpriteData = GameDataManager::LoadAnimatedSpriteData(m_playerDefinition.spritesheetDataPath);
@@ -114,7 +114,7 @@ void Player::Init(ControlSystem* controlSystem, CutsceneManager* cutsceneManager
 	m_shadow->SetAlpha(0.7f);
 
 	m_animator = new Animator();
-	m_animator->Init(animatedSpriteData, m_eventManager);
+	m_animator->Init(m_id, animatedSpriteData, m_eventManager);
 	m_animator->SetAnimation(0);
 
 	m_hitBoxManager = new HitBoxManager();
@@ -545,9 +545,10 @@ void Player::UpdateStats()
 
 void Player::RegisterEvents()
 {
-	m_eventManager->RegisterEvent("MovePlayer", new MovePlayerEvent(this));
-	m_eventManager->RegisterEvent("PlaySound", new PlaySoundEvent(m_attackSoundSource));
-	m_eventManager->RegisterEvent("PlayAnimation", new PlayAnimationEvent(m_animator));
+	m_eventManager->UnRegisterAllForTarget(m_id);
+	m_eventManager->RegisterEvent("MovePlayer", m_id, new MovePlayerEvent(this));
+	m_eventManager->RegisterEvent("PlaySound", m_id, new PlaySoundEvent(m_attackSoundSource));
+	m_eventManager->RegisterEvent("PlayAnimation", m_id, new PlayAnimationEvent(m_animator));
 }
 
 void Player::PlaySound(const std::string& id)

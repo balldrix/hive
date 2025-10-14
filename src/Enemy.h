@@ -25,18 +25,17 @@ public:
 								Enemy();
 	virtual						~Enemy();
 
-	void						Init(Camera* camera,
+	void						Init(const std::string& id,
+									Camera* camera,
 									Player* player,
-									CutsceneManager* cutsceneManager,
+									CutsceneManager* cutsceneManager, EventManager* eventManager,
 									const EnemyDefinition& definition,
 									NPCManager* npcManager,
-									Texture* shadowTexture,
-									State<Enemy>* globalEnemyState,
-									State<Enemy>* startingState);
+									Texture* shadowTexture, State<Enemy>* globalEnemyState, State<Enemy>* startingState);
 
 	void						Update(float deltaTime);
 	void						Render(Graphics* graphics);
-	virtual void				Reset() override {};
+	virtual void				Reset(const std::string& id);
 
 	void						Spawn(const Vector2& position);
 
@@ -65,6 +64,7 @@ public:
 
 	void						PlaySound(const std::string& id);
 	void						ApplyFacingDirection();
+	void						RegisterEvents();
 
 protected:
 	StateMachine<Enemy>*		m_stateMachine;
@@ -78,7 +78,6 @@ private:
 	Vector2						Seek() const;
 	Vector2						Avoid() const;
 	Vector2						Strafe() const;
-	bool						MoveNPC(const Vector2& position);
 
 	Player*						m_playerTarget;
 	Sprite*						m_portraitSprite;

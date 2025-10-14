@@ -26,7 +26,7 @@ public:
 	Player();
 	virtual								~Player();
 
-	void								Init(ControlSystem* controlSystem, CutsceneManager* cutsceneManager);
+	void								Init(ControlSystem* controlSystem, CutsceneManager* cutsceneManager, EventManager* eventManager);
 	void								Update(float deltaTime);
 	void								Render(Graphics* graphics);
 	void								Reset();

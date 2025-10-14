@@ -3,18 +3,19 @@
 #include "CutsceneData.h"
 #include "EventManager.h"
 #include "GameDataManager.h"
+#include "IEvent.h"
 #include "Logger.h"
 #include "WaitEvent.h"
 
 #include <fmt/core.h>
 #include <string>
+#include <vector>
 
 CutsceneManager::CutsceneManager() :
 	m_cutscenes(),
 	m_activeCutscene(),
 	m_currentStepIndex(0),
 	m_timer(0.0f),
-	m_eventManagers(),
 	m_cutsceneIndexByName(),
 	m_isActive(false),
 	m_eventManager(nullptr)
@@ -26,9 +27,10 @@ CutsceneManager::~CutsceneManager()
 	Shutdown();
 }
 
-void CutsceneManager::Init(const std::string& filepath) {
+void CutsceneManager::Init(const std::string& filepath, EventManager* eventManager) {
 	Logger::LogInfo("Initialising CutsceneManager.");
 
+	m_eventManager = eventManager;
 	m_cutscenes = GameDataManager::LoadAllCutscenes(filepath);
 
 	for(int i = 0; i < m_cutscenes.size(); i++)
@@ -36,10 +38,7 @@ void CutsceneManager::Init(const std::string& filepath) {
 		m_cutsceneIndexByName[m_cutscenes[0].name] = i;
 	}
 
-	m_eventManager = new EventManager();
-	m_eventManager->RegisterEvent("Wait", new WaitEvent());
-
-	RegisterEventManager("CutsceneManager", m_eventManager);
+	m_eventManager->RegisterEvent("Wait", "CutsceneManager", new WaitEvent());
 }
 
 void CutsceneManager::StartCutscene(std::string name)
@@ -69,12 +68,9 @@ void CutsceneManager::StartCutscene(std::string name)
 	{
 		for(auto& eventData : steps.events)
 		{
-			auto manager = m_eventManagers.find(eventData.target);
-			if(manager != m_eventManagers.end())
-			{
-				auto event = manager->second->GetEvent(eventData.name);
-				if(event != nullptr) event->Reset();
-			}
+			EventKey key = { eventData.name, eventData.target };
+			IEvent* event = m_eventManager->GetEvent(key);
+			if(event != nullptr) event->Reset();
 		}
 	}
 
@@ -102,12 +98,9 @@ void CutsceneManager::Update(float deltaTime)
 			auto& nextStep = m_activeCutscene->steps[m_currentStepIndex];
 			for(auto& data : nextStep.events)
 			{
-				auto manager = m_eventManagers.find(data.target);
-				if(manager != m_eventManagers.end())
-				{
-					auto event = manager->second->GetEvent(data.name);
-					if(event) event->Reset();
-				}
+				EventKey key = { data.name, data.target };
+				IEvent* event = m_eventManager->GetEvent(key);
+				if(event) event->Reset();
 			}
 		}
 
@@ -119,24 +112,20 @@ void CutsceneManager::Update(float deltaTime)
 
 		for(size_t i = 0; i < currentStep.events.size(); i++)
 		{
-			auto& data = currentStep.events[i];
-			auto manager = m_eventManagers.find(data.target);
-			
-			if(manager != m_eventManagers.end())
+			CutsceneEventData data = currentStep.events[i];
+			EventKey key = { data.name, data.target };
+			IEvent* event = m_eventManager->GetEvent(key);
+
+			if(event == nullptr) continue;
+
+			if(!event->HasStarted())
 			{
-				auto event = manager->second->GetEvent(data.name);
-
-				if(event == nullptr) continue;
-
-				if(!event->HasStarted())
-				{
-					event->OnStart(data.arg);
-				}
-				if(!event->IsComplete())
-				{
-					event->OnUpdate(deltaTime);
-					if(data.waitForCompletion) allEventsCompleted = false;
-				}
+				event->OnStart(data.arg);
+			}
+			if(!event->IsComplete())
+			{
+				event->OnUpdate(deltaTime);
+				if(data.waitForCompletion) allEventsCompleted = false;
 			}
 		}
 
@@ -148,27 +137,5 @@ void CutsceneManager::Update(float deltaTime)
 
 void CutsceneManager::Shutdown()
 {
-	m_eventManager->UnRegisterEvent("Wait");
-	m_eventManagers.clear();
-}
-
-void CutsceneManager::RegisterEventManager(std::string target, EventManager* eventManager)
-{
-	if(m_eventManagers.find(target) != m_eventManagers.end())
-	{
-		Logger::LogWarning(fmt::format("[CutsceneManager] Event with target {0} already registered.", target));
-		return;
-	}
-
-	m_eventManagers[target] = eventManager;
-}
-
-void CutsceneManager::UnregisterEventManager(std::string target)
-{
-	if(m_eventManagers.find(target) == m_eventManagers.end())
-	{
-		Logger::LogWarning(fmt::format("[CutsceneManager] Event attempt to erase event manager with target {0} failed.", target));
-	}
-
-	m_eventManagers.erase(target);
+	m_eventManager->UnRegisterEvent({ "Wait", "CutsceneManager" });
 }

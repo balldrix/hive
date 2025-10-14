@@ -29,7 +29,7 @@ class GameplayGameState : public GameState
 {
 public:
 	GameplayGameState();
-	GameplayGameState(GameStateManager* gameStateManager, Input* input, CutsceneManager* cutsceneManager);
+	GameplayGameState(GameStateManager* gameStateManager, Input* input, CutsceneManager* cutsceneManager, EventManager* eventManager);
 	virtual ~GameplayGameState();
 
 	float GetDeltaTime() const { return m_deltaTime; }
@@ -60,6 +60,7 @@ private:
 
 	Input* m_input;
 	CutsceneManager* m_cutsceneManager;
+	EventManager* m_eventManager;
 
 	Camera* m_camera;
 	ControlSystem* m_controlSystem;

@@ -65,6 +65,7 @@ void GameObject::SetCamera(Camera* cam)
 void GameObject::SetID(const std::string& id)
 {
 	m_id = id;
+	if(m_animator) m_animator->SetOwnerId(id);
 }
 
 void GameObject::Update(float deltaTime)

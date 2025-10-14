@@ -4,12 +4,14 @@
 #include "AnimationEventData.h"
 #include "AnimationStateData.h"
 #include "EventManager.h"
+#include "IEvent.h"
 #include "Logger.h"
 #include "SpriteFrameData.h"
 
 #include <string>
 
 Animator::Animator() :
+	m_ownerId(),
 	m_currentAnimation(),
 	m_animatedSpriteData(),
 	m_paused(false),
@@ -20,8 +22,9 @@ Animator::Animator() :
 {
 }
 
-void Animator::Init(AnimatedSpriteData animatedSpriteData, EventManager* eventManager)
+void Animator::Init(const std::string& ownerId, AnimatedSpriteData animatedSpriteData, EventManager* eventManager)
 {
+	m_ownerId = ownerId;
 	m_animatedSpriteData = animatedSpriteData;
 	m_eventManager = eventManager;
 	SetAnimation(0);
@@ -60,6 +63,11 @@ void Animator::Update(float deltaTime)
 			TriggerEvents(deltaTime);
 		}
 	}
+}
+
+void Animator::SetOwnerId(const std::string& id)
+{
+	m_ownerId = id;
 }
 
 void Animator::SetAnimation(unsigned int index)
@@ -103,7 +111,8 @@ void Animator::TriggerEvents(float deltaTime)
 
 	for(const auto& data : m_animatedSpriteData.animationEventData) {
 		if(data.frameNumber == targetFrame) {
-			auto event = m_eventManager->GetEvent(data.eventName);
+			EventKey key = { data.eventName, m_ownerId };
+			IEvent* event = m_eventManager->GetEvent(key);
 			if(event == nullptr) continue;
 
 			event->Reset();

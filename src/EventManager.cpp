@@ -6,37 +6,60 @@
 #include <fmt/core.h>
 #include <string>
 #include <unordered_map>
+#include <utility>
 
-void EventManager::RegisterEvent(const std::string& name, IEvent* event)
+EventManager::~EventManager()
 {
-	if(m_eventRegistry.contains(name))
+	for(auto& [key, event] : m_eventRegistry) {
+		delete event;
+	}
+	m_eventRegistry.clear();
+}
+
+void EventManager::RegisterEvent(const std::string& eventName, const std::string& targetId, IEvent* event)
+{
+	EventKey key = { eventName, targetId };
+	if(HasKey(key))
 	{
-		Logger::LogWarning(fmt::format("[EventManager] [RegisterEvent] Event with name {} already registered", name));
+		Logger::LogWarning(fmt::format("[EventManager] [RegisterEvent] Event {0} for owner {1} already registered", eventName, targetId));
 		return;
 	}
 
-	m_eventRegistry[name] = event;
+	m_eventRegistry[key] = event;
 }
 
-void EventManager::UnRegisterEvent(const std::string& name)
+void EventManager::UnRegisterEvent(EventKey key)
 {
-	if(m_eventRegistry.find(name) == m_eventRegistry.end())
+	if(!HasKey(key))
 	{
-		Logger::LogWarning(fmt::format("[EventManager] [GetEvent] Event with name {} not registered.", name));
+		Logger::LogWarning(fmt::format("[EventManager] [UnregisterEvent] Event {0} for owner {1} not registered.", key.first, key.second));
+		return;
 	}
 
-	delete m_eventRegistry[name];
-	m_eventRegistry[name] = nullptr;
-	m_eventRegistry.erase(name);
+	delete m_eventRegistry[key];
+	m_eventRegistry.erase(key);
 }
 
-IEvent* EventManager::GetEvent(const std::string& name)
+void EventManager::UnRegisterAllForTarget(const std::string& targetId)
 {
-	if(m_eventRegistry.find(name) == m_eventRegistry.end())
+	for(auto it = m_eventRegistry.begin(); it != m_eventRegistry.end(); ) {
+		if(it->first.second == targetId) {
+			delete it->second;
+			it = m_eventRegistry.erase(it);
+		}
+		else {
+			++it;
+		}
+	}
+}
+
+IEvent* EventManager::GetEvent(EventKey key)
+{
+	if(!HasKey(key))
 	{
-		Logger::LogWarning(fmt::format("[EventManager] [GetEvent] Event with name {} not registered.", name));
+		Logger::LogWarning(fmt::format("[EventManager] [GetEvent] Event {0} for owner {1} not registered.", key.first, key.second));
 		return nullptr;
 	}
 
-	return m_eventRegistry[name];
+	return m_eventRegistry[key];
 }

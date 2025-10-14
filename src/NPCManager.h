@@ -24,7 +24,7 @@ public:
 	NPCManager();
 
 	static	NPCManager* Instance() { return s_instance; }
-	void	Init(Camera* camera, Player* player, CutsceneManager* cutsceneManager);
+	void	Init(Camera* camera, Player* player, CutsceneManager* cutsceneManager, EventManager* eventManager);
 
 	void	SpawnNPC(std::string id, const Vector2& position, const EnemyDefinition& enemyDefinition, const Vector2& velocity = Vector2::Zero, const Vector2& direction = Vector2(-1.0f, 0.0f), float height = 0.0f);
 	void	SpawnNPC(SpawnNPCArgument argument);
