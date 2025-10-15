@@ -87,7 +87,6 @@ void Enemy::DeleteAll()
 	delete m_hitBoxManager;
 	delete m_hitBoxSprite;
 	delete m_animator;
-	delete m_eventManager;
 	delete m_shadow;
 	delete m_spritesheet;
 
@@ -101,7 +100,6 @@ void Enemy::DeleteAll()
 	m_hitBoxManager = nullptr;
 	m_hitBoxSprite = nullptr;
 	m_animator = nullptr;
-	m_eventManager = nullptr;
 	m_shadow = nullptr;
 	m_spritesheet = nullptr;
 }

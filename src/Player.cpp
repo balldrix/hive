@@ -80,7 +80,6 @@ Player::~Player()
 	delete m_dustFx;
 	delete m_stateMachine;
 	delete m_spritesheet;
-	delete m_eventManager;
 
 	m_impactSoundSource = nullptr;
 	m_vocalSoundSource = nullptr;
@@ -89,7 +88,6 @@ Player::~Player()
 	m_dustFx = nullptr;
 	m_stateMachine = nullptr;
 	m_spritesheet = nullptr;
-	m_eventManager = nullptr;
 }
 
 void Player::Init(ControlSystem* controlSystem, CutsceneManager* cutsceneManager, EventManager* eventManager)
