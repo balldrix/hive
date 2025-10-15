@@ -73,6 +73,13 @@
             "arg": "",
             "delay": 0.0,
             "waitForCompletion": true
+          },
+          {
+            "name": "ScreenShake",
+            "target": "Camera",
+            "arg": "3.0, 5.0",
+            "delay": 0.0,
+            "waitForCompletion": true
           }
         ]
       },

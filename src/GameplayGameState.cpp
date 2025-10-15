@@ -119,7 +119,7 @@ void GameplayGameState::Setup()
 	LevelCollision::CreateBounds(m_levelRenderer);
 
 	m_NPCManager->Init(m_camera, m_player, m_cutsceneManager, m_eventManager);
-	m_camera->Init(GameWidth);
+	m_camera->Init(m_eventManager, GameWidth);
 
 	m_impactFxPool = new ImpactFxPool();
 	m_particleSystem = new ParticleSystem();

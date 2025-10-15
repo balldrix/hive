@@ -1,6 +1,9 @@
 #include "Camera.h"
 
+#include "EventManager.h"
 #include "GameObject.h"
+#include "ScreenShakeEvent.h"
+
 #include <directxtk/SimpleMath.h>
 
 const float CameraThresholdMod = 3.0f;
@@ -11,15 +14,17 @@ Camera::Camera() :
 	m_position(Vector2::Zero),
 	m_width(0.0f),
 	m_boundary(0.0f),
-	m_threshold(0.0f)
+	m_threshold(0.0f),
+	m_eventManager(nullptr)
 {
 }
 
 Camera::~Camera()
 {
+	m_eventManager->UnRegisterAllForTarget("Camera");
 }
 
-void Camera::Init(float width)
+void Camera::Init(EventManager* eventManager, float width)
 {
 	m_width = width;
 	m_threshold = m_width / CameraThresholdMod;
@@ -27,6 +32,8 @@ void Camera::Init(float width)
 	m_position = Vector2::Zero;
 
 	m_screenShake.Init(this);
+	m_eventManager = eventManager;
+	m_eventManager->RegisterEvent("ScreenShake", "Camera", new ScreenShakeEvent(&m_screenShake));
 }
 
 void Camera::Update(float deltaTime)

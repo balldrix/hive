@@ -5,6 +5,7 @@
 
 using namespace DirectX::SimpleMath;
 
+class EventManager;
 class GameObject;
 
 class Camera
@@ -13,7 +14,7 @@ public:
 	Camera();
 	~Camera();
 
-	void			Init(float width);
+	void			Init(EventManager* eventManager, float width);
 
 	void			Update(float deltaTime);
 
@@ -44,4 +45,5 @@ private:
 	float			m_boundary;
 	float			m_threshold;
 	ScreenShake		m_screenShake;
+	EventManager*	m_eventManager;
 };

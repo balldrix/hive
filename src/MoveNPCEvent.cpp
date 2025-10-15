@@ -22,7 +22,7 @@ void MoveNPCEvent::OnStart(EventArgument arg)
 {
 	if(!std::holds_alternative<DirectX::XMFLOAT2>(arg))
 	{
-		Logger::LogError("[MoveNPCEvent] [OnStart] Incorrect argument , needs XMFLOAT2");
+		Logger::LogError("[MoveNPCEvent] [OnStart] Incorrect argument, needs XMFLOAT2");
 		return;
 	}
 
