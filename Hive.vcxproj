@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CutsceneManager.cpp" />
+    <ClCompile Include="src\DustFXEvent.cpp" />
     <ClCompile Include="src\EventManager.cpp" />
     <ClCompile Include="src\EnemySpawnManager.cpp" />
     <ClCompile Include="src\IEvent.h" />
@@ -87,6 +88,7 @@
     <ClCompile Include="src\Utils.h" />
     <ClCompile Include="src\UISprite.cpp" />
     <ClCompile Include="src\UICycleMenuItemView.h" />
+    <ClInclude Include="src\DustFXEvent.h" />
     <ClInclude Include="src\SpawnNPCEvent.h" />
     <ClInclude Include="src\MoveNPCEvent.h" />
     <ClInclude Include="src\CutsceneData.h" />

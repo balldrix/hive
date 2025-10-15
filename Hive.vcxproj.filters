@@ -364,6 +364,7 @@
     <ClCompile Include="src\SpawnNPCEvent.cpp">
       <Filter>Events</Filter>
     </ClCompile>
+    <ClCompile Include="src\DustFXEvent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -906,6 +907,9 @@
       <Filter>Events</Filter>
     </ClInclude>
     <ClInclude Include="src\SpawnNPCEvent.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DustFXEvent.h">
       <Filter>Events</Filter>
     </ClInclude>
   </ItemGroup>

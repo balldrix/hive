@@ -87,6 +87,7 @@ public:
 	virtual int			GetMaxHealth() const;
 	int					GetKnockbackCount() const { return m_knockbackCount; }
 	float				GetDeathTimer() const { return m_deathTimer; }
+	SpriteFx*			GetDustFX() const { return m_dustFx; }
 
 	virtual void		ApplyDamage(GameObject* source, const int& amount);
 	virtual void		Knockback(const Vector2& direction, const float& force);

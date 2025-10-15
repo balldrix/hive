@@ -68,6 +68,17 @@
       {
         "events": [
           {
+            "name": "PlayDustFX",
+            "target": "intro_npc",
+            "arg": "",
+            "delay": 0.0,
+            "waitForCompletion": true
+          }
+        ]
+      },
+      {
+        "events": [
+          {
             "name": "PlayAnimation",
             "target": "intro_npc",
             "arg": "idle",

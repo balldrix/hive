@@ -7,6 +7,7 @@
 #include "Camera.h"
 #include "CutsceneManager.h"
 #include "DamageData.h"
+#include "DustFXEvent.h"
 #include "EnemyAttackState.h"
 #include "EnemyDefinition.h"
 #include "EnemyHurtState.h"
@@ -461,6 +462,7 @@ void Enemy::RegisterEvents()
 	m_eventManager->RegisterEvent("PlaySound", m_id, new PlaySoundEvent(m_attackSoundSource));
 	m_eventManager->RegisterEvent("MoveNPC", m_id, new MoveNPCEvent(this));
 	m_eventManager->RegisterEvent("PlayAnimation", m_id, new PlayAnimationEvent(m_animator));
+	m_eventManager->RegisterEvent("PlayDustFX", m_id, new DustFXEvent(this));
 }
 
 DamageData Enemy::GetDamageData() const
