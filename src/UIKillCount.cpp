@@ -35,7 +35,7 @@ void UIKillCount::Init(std::string name)
 	m_labelText->SetColour(Color(0.96f, 0.91f, 0.91f));
 	m_labelText->SetOutline(true, Color(0.65f, 0.145f, 0.145f));
 	m_labelText->SetText("KO'S");
-	m_labelText->SetPosition(Vector2(236.0f, 128.0f));
+	m_labelText->SetPosition(Vector2(236.0f, 122.0f));
 	m_labelText->SetAlignment(UISpriteText::Alignments::Right);
 	m_labelText->SetActive(true);
 
@@ -46,7 +46,7 @@ void UIKillCount::Init(std::string name)
 	m_countText->SetText("0");
 
 	float countPos = (float)GameWidth - m_labelText->GetWidth() - 4;
-	m_countText->SetPosition(Vector2(countPos, 125.0f));
+	m_countText->SetPosition(Vector2(countPos, 113.0f));
 	m_countText->SetAlignment(UISpriteText::Alignments::Right);
 	m_countText->SetActive(true);
 
