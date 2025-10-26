@@ -5,6 +5,7 @@
 #include "MenuSystem.h"
 #include "UIManager.h"
 #include "UIMenuItemView.h"
+#include "UIView.h"
 
 #include <cmath>
 #include <directxtk/SimpleMath.h>

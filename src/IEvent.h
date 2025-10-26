@@ -11,7 +11,7 @@ struct SpawnNPCArgument
 	DirectX::XMFLOAT2 position = DirectX::XMFLOAT2(0, 0);
 };
 
-using EventArgument = std::variant<float, std::string, DirectX::XMFLOAT2, SpawnNPCArgument>;
+using EventArgument = std::variant<float, std::string, DirectX::XMFLOAT2, SpawnNPCArgument, bool>;
 
 class IEvent
 {

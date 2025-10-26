@@ -40,7 +40,38 @@ void UIEnemyStatsView::Init(std::string name)
 	m_healthBar->SetPosition(Vector2(24.0f, 3.0f));
 
 	UIManager::RegisterUIView(m_healthBar);
+}/*
+
+void UIEnemyStatsView::Update(float deltatime)
+{
 }
+
+void UIEnemyStatsView::TransitionIn(bool isAnimating)
+{
+	m_isActive = true;
+
+	if (m_currentViewState == ViewStates::AnimatingIn ||
+		m_currentViewState == ViewStates::Visible) return;
+
+	if (isAnimating)
+	{
+		m_isAnimating = true;
+		m_currentViewState = ViewStates::AnimatingIn;
+		m_transitionTimer = TransitionInDuration;
+		m_offsetPosition = Vector2::Zero;
+		m_targetOffsetPosition = Vector2(0.0f, 20.0f);
+	}
+	else
+	{
+		m_currentViewState = ViewStates::Visible;
+		m_offsetPosition = Vector2::Zero;
+		m_targetOffsetPosition = Vector2::Zero;
+	}
+}
+
+void UIEnemyStatsView::TransitionOut(bool isAnimating)
+{
+}*/
 
 void UIEnemyStatsView::ForceHide(bool isForced)
 {
@@ -59,3 +90,7 @@ void UIEnemyStatsView::Shutdown()
 	delete m_portraitView;
 	m_portraitView = nullptr;
 }
+
+//void UIEnemyStatsView::DoTransition(float deltaTime)
+//{
+//}

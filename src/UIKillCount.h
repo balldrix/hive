@@ -18,6 +18,7 @@ public:
 	void Render(Graphics* graphics) override;
 	void Shutdown() override;
 
+	void SetPosition(const Vector2& position) override;
 	void SetValue(int count);
 	void UpdateKills(int count);
 

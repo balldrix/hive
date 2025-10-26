@@ -5,6 +5,17 @@
       {
         "events": [
           {
+            "name": "ShowUI",
+            "target": "UIManager",
+            "arg": false,
+            "delay": 0.0,
+            "waitForCompletion": false
+          }
+        ]
+      },
+      {
+        "events": [
+          {
             "name": "PlayAnimation",
             "target": "Player",
             "arg": "fixing",
@@ -121,6 +132,17 @@
             "name": "PlayAnimation",
             "target": "Player",
             "arg": "surprise",
+            "delay": 0.0,
+            "waitForCompletion": true
+          }
+        ]
+      },
+      {
+        "events": [
+          {
+            "name": "ShowUI",
+            "target": "UIManager",
+            "arg": true,
             "delay": 0.0,
             "waitForCompletion": true
           }

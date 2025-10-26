@@ -18,7 +18,7 @@ public:
 
 	void Init(std::string name, Input* input);
 	void Render(Graphics* graphics) override {};
-
+	UIHudView* GetUIHudView() const { return m_uiHudView; }
 	void Shutdown();
 
 private:

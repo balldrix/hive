@@ -1,4 +1,6 @@
 #include "UIView.h"
+
+#include <directxtk/SimpleMath.h>
 #include <string>
 
 UIView::UIView() :

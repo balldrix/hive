@@ -10,7 +10,7 @@
 
 #include <string>
 
-UIHudView::UIHudView() : 
+UIHudView::UIHudView() :
 	m_playerStatsView(nullptr),
 	m_enemyStatsView(nullptr),
 	m_comboCounterView(nullptr),
@@ -51,13 +51,37 @@ void UIHudView::Init(std::string name)
 	UIManager::RegisterUIView(this);
 }
 
+void UIHudView::Update(float deltaTime)
+{
+	if(!m_isActive) return;
+
+	m_isAnimating = m_playerStatsView->IsAnimating() || m_enemyStatsView->IsAnimating();
+}
+
 void UIHudView::ForceHide(bool isForced)
 {
-	m_playerStatsView->ForceHide(isForced);
 	m_playerStatsView->ForceHide(isForced);
 	m_enemyStatsView->ForceHide(isForced);
 	m_comboCounterView->ForceHide(isForced);
 	m_killMilestoneView->ForceHide(isForced);
+}
+
+void UIHudView::TransitionOut(bool isAnimated)
+{
+	if(isAnimated) m_currentViewState = UIView::ViewStates::AnimatingOut;
+	else m_currentViewState = UIView::ViewStates::NotVisible;
+
+	m_playerStatsView->TransitionOut(isAnimated);
+	m_enemyStatsView->TransitionOut(isAnimated);
+}
+
+void UIHudView::TransitionIn(bool isAnimated)
+{
+	if(isAnimated) m_currentViewState = UIView::ViewStates::AnimatingIn;
+	else m_currentViewState = UIView::ViewStates::Visible;
+
+	m_playerStatsView->TransitionIn(isAnimated);
+	m_enemyStatsView->TransitionIn(isAnimated);
 }
 
 void UIHudView::Shutdown()

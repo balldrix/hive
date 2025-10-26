@@ -2,9 +2,12 @@
 
 #include "AssetLoader.h"
 #include "AudioEngine.h"
+#include "EventManager.h"
 #include "Logger.h"
+#include "ShowUIEvent.h"
 #include "SoundSource.h"
 #include "UIFrontEndView.h"
+#include "UIHudView.h"
 #include "UIMainView.h"
 #include "UISystemView.h"
 #include "UIView.h"
@@ -22,7 +25,8 @@ UIManager::UIManager() :
 	m_uiSoundSource(nullptr),
 	m_window(nullptr),
 	m_graphics(nullptr),
-	m_input(nullptr)
+	m_input(nullptr),
+	m_eventManager(nullptr)
 {
 	m_uiSoundSource = new SoundSource();
 	m_uiSoundSource->SetPriority(SoundPriority::Always);
@@ -37,7 +41,7 @@ UIManager::~UIManager()
 	Shutdown();
 }
 
-void UIManager::Init(Window* window, Graphics* graphics, Input* input)
+void UIManager::Init(Window* window, Graphics* graphics, Input* input, EventManager* eventManager)
 {
 	Logger::LogInfo("Initialising UI Manager.");
 
@@ -45,6 +49,9 @@ void UIManager::Init(Window* window, Graphics* graphics, Input* input)
 	s_instance->m_window = window;
 	s_instance->m_graphics = graphics;
 	s_instance->m_input = input;
+	s_instance->m_eventManager = eventManager;
+
+	eventManager->RegisterEvent("ShowUI", "UIManager", new ShowUIEvent(s_instance));
 }
 
 void UIManager::Update(float deltaTime)
@@ -98,7 +105,7 @@ void UIManager::UpdateUIViews(float deltaTime)
 {
 	for(auto it = s_instance->m_viewList.begin(); it != s_instance->m_viewList.end(); ++it)
 	{
-		if((*it)->GetCurrentUIViewState() != s_instance->m_currentViewState) continue;
+		//if((*it)->GetCurrentUIViewState() != s_instance->m_currentViewState) continue;
 		(*it)->Update(deltaTime);
 	}
 }
@@ -243,9 +250,18 @@ void UIManager::Destroy()
 	s_instance = nullptr;
 }
 
+void UIManager::ShowUI(bool show)
+{
+	UIHudView* uiHudView = m_uiMainView->GetUIHudView();
+	if(show) uiHudView->TransitionIn(true);
+	else uiHudView->TransitionOut(true);
+}
+
 void UIManager::Shutdown()
 {
 	Logger::LogInfo("Shutting down UI Manager.");
+
+	m_eventManager->UnRegisterAllForTarget("UIManager");
 
 	AudioEngine::Instance()->RemoveSoundSource(m_uiSoundSource);
 	delete m_uiSoundSource;

@@ -69,8 +69,6 @@ void UITitleScreenView::Update(float deltaTime)
 		break;
 	case ViewStates::AnimatingIn:
 		m_currentViewState = ViewStates::Visible;
-		m_startGameText->SetActive(true);
-		m_logoImage->SetActive(true);
 		break;
 	case ViewStates::Visible:
 		break;
@@ -82,27 +80,14 @@ void UITitleScreenView::Update(float deltaTime)
 	}
 }
 
-void UITitleScreenView::DoTransition(float deltaTime)
+void UITitleScreenView::Shutdown()
 {
-	if(m_transitionTimer > 0)
-	{
-		float t = m_transitionTimer / TransitionDuration;
-		float logoImageXPos = (float)(std::lerp(LogoImageStartPosition.x, GameWidth + m_logoImage->GetSprite()->GetWidth(), 1 - t));
-		float lerpedAlpha = std::lerp(1.0f, 0.0f, 1 - t);
-		Color colour = m_startGameText->GetColour();
-		colour.A(lerpedAlpha);
+	Logger::LogInfo("Shutting down UI Title Screen View");
 
-		m_logoImage->SetPosition(Vector2(logoImageXPos, LogoImageStartPosition.y));
-		m_startGameText->SetColour(colour);
-		m_transitionTimer -= deltaTime;
-		return;
-	}
+	UIManager::UnregisterUIView(this);
 
-	m_currentViewState = ViewStates::NotVisible;
-	m_startGameText->SetActive(false);
-	m_logoImage->SetActive(false);
-	m_isActive = false;
-	m_isAnimating = false;
+	delete m_startGameText;
+	m_startGameText = nullptr;
 }
 
 void UITitleScreenView::TransitionIn(bool isAnimating)
@@ -122,7 +107,7 @@ void UITitleScreenView::TransitionOut(bool isAnimating)
 
 	if (isAnimating)
 	{
-		m_transitionTimer = TransitionDuration;
+		m_transitionTimer = TransitionOutDuration;
 		m_currentViewState = ViewStates::AnimatingOut;
 		return;
 	}
@@ -132,12 +117,26 @@ void UITitleScreenView::TransitionOut(bool isAnimating)
 	m_isActive = false;
 }
 
-void UITitleScreenView::Shutdown()
+void UITitleScreenView::DoTransition(float deltaTime)
 {
-	Logger::LogInfo("Shutting down UI Title Screen View");
+	if(m_transitionTimer > 0)
+	{
+		float duration = m_currentViewState == ViewStates::AnimatingIn ? TransitionInDuration : TransitionOutDuration;
+		float t = m_transitionTimer / duration;
+		float logoImageXPos = (float)(std::lerp(LogoImageStartPosition.x, GameWidth + m_logoImage->GetSprite()->GetWidth(), 1 - t));
+		float lerpedAlpha = std::lerp(1.0f, 0.0f, 1 - t);
+		Color colour = m_startGameText->GetColour();
+		colour.A(lerpedAlpha);
 
-	UIManager::UnregisterUIView(this);
+		m_logoImage->SetPosition(Vector2(logoImageXPos, LogoImageStartPosition.y));
+		m_startGameText->SetColour(colour);
+		m_transitionTimer -= deltaTime;
+		return;
+	}
 
-	delete m_startGameText;
-	m_startGameText = nullptr;
+	m_currentViewState = ViewStates::NotVisible;
+	m_startGameText->SetActive(false);
+	m_logoImage->SetActive(false);
+	m_isActive = false;
+	m_isAnimating = false;
 }

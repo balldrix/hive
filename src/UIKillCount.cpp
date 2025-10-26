@@ -35,18 +35,14 @@ void UIKillCount::Init(std::string name)
 	m_labelText->SetColour(Color(0.96f, 0.91f, 0.91f));
 	m_labelText->SetOutline(true, Color(0.65f, 0.145f, 0.145f));
 	m_labelText->SetText("KO'S");
-	m_labelText->SetPosition(Vector2(236.0f, 122.0f));
 	m_labelText->SetAlignment(UISpriteText::Alignments::Right);
 	m_labelText->SetActive(true);
 
 	m_countText = new UISpriteText();
 	m_countText->Init(UIConfig::GamerFont34);
 	m_countText->SetColour(Color(0.96f, 0.91f, 0.91f));
-	m_countText->SetOutline(true, Color(0.65f, 0.145f, 0.145f));	
+	m_countText->SetOutline(true, Color(0.65f, 0.145f, 0.145f));
 	m_countText->SetText("0");
-
-	float countPos = (float)GameWidth - m_labelText->GetWidth() - 4;
-	m_countText->SetPosition(Vector2(countPos, 113.0f));
 	m_countText->SetAlignment(UISpriteText::Alignments::Right);
 	m_countText->SetActive(true);
 
@@ -88,6 +84,14 @@ void UIKillCount::Shutdown()
 
 	delete m_countText;
 	m_countText = nullptr;
+}
+
+void UIKillCount::SetPosition(const Vector2& position)
+{
+	float countPosX = (float)GameWidth - m_labelText->GetWidth() - 4;
+	float countPosY = position.y - 9;
+	m_labelText->SetPosition(position);
+	m_countText->SetPosition(Vector2(countPosX, countPosY));
 }
 
 void UIKillCount::SetValue(int count)

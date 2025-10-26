@@ -77,7 +77,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	AudioEngine::Init();
 	AssetLoader::Init(graphics, "assets\\assets.json");
 	GameDataManager::Init();
-	UIManager::Init(window, graphics, input);
+	UIManager::Init(window, graphics, input, eventManager);
 	MenuSystem::Init(input); 
 
 	cutsceneManager = new CutsceneManager();
@@ -120,14 +120,14 @@ void Shutdown()
 	delete cutsceneManager;
 	cutsceneManager = nullptr;
 
-	delete eventManager;
-	eventManager = nullptr;
-
 	MenuSystem::Destroy();
 	UIManager::Destroy();
 	GameDataManager::Destroy();
 	AssetLoader::Destroy();
 	AudioEngine::Destroy();
+
+	delete eventManager;
+	eventManager = nullptr;
 
 	delete input;
 

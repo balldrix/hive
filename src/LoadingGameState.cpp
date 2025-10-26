@@ -118,9 +118,10 @@ void LoadingGameState::ProceedToFrontEnd()
 		UIManager::CreateUISystemView();
 	}
 
-	s_isLoadingToMainGameplay = false;
-	LoadingGameState::SetTargetGameState(s_instance->m_gameStateManager->GetState(TitleScreen));
-	s_instance->m_gameStateManager->SwitchState(Loading);
+	//s_isLoadingToMainGameplay = false;
+	//LoadingGameState::SetTargetGameState(s_instance->m_gameStateManager->GetState(TitleScreen));
+	//s_instance->m_gameStateManager->SwitchState(Loading);
+	ProceedToGameplay();
 }
 
 void LoadingGameState::ProceedToGameplay()

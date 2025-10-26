@@ -17,8 +17,11 @@ public:
 
 	void Init(std::string name) override;
 	void Render(Graphics* graphics) override {}
-	void ForceHide(bool isForced) override;
+	void Update(float deltaTime) override;
 
+	void ForceHide(bool isForced) override;
+	void TransitionOut(bool isAnimated) override;
+	void TransitionIn(bool isAnimated) override;
 	void Shutdown();
 
 private:

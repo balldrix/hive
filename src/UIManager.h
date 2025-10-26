@@ -6,6 +6,7 @@
 #include <unordered_map>
 #include <vector>
 
+class EventManager;
 class Graphics;
 class SoundSource;
 class UISprite;
@@ -30,7 +31,7 @@ class Input;
 class UIManager
 {
 public:
-	static void Init(Window* window, Graphics* graphics, Input* input);
+	static void Init(Window* window, Graphics* graphics, Input* input, EventManager* eventManager);
 	static void Update(float deltaTime);
 	static void Render(Graphics* graphics);
 
@@ -58,6 +59,8 @@ public:
 	static void PlayUISound(UISoundType type);
 
 	static void Destroy();
+
+	void ShowUI(bool show);
 
 private:
 	UIManager();
@@ -92,4 +95,5 @@ private:
 	Window* m_window;
 	Graphics* m_graphics;
 	Input* m_input;
+	EventManager* m_eventManager;
 };
