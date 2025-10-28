@@ -3,6 +3,8 @@
 #include "AABB.h"
 #include "Sprite.h"
 
+#include <directxtk/SimpleMath.h>
+
 class Graphics;
 
 class Collider

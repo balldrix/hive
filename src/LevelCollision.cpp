@@ -14,6 +14,7 @@
 
 #include <DirectXColors.h>
 #include <directxtk/SimpleMath.h>
+#include <fmt/core.h>
 #include <fmt/format.h>
 #include <string>
 
@@ -25,7 +26,8 @@ LevelCollision* LevelCollision::s_instance = nullptr;
 LevelCollision::LevelCollision() :
 	m_colliders(),
 	m_sprite(nullptr),
-	m_isVisible(false)
+	m_isVisible(false),
+	m_camera(nullptr)
 {
 }
 
@@ -33,11 +35,12 @@ LevelCollision::~LevelCollision()
 {
 }
 
-void LevelCollision::Init()
+void LevelCollision::Init(Camera* camera)
 {
 	s_instance = new LevelCollision;
 	s_instance->m_sprite = new Sprite();
 	s_instance->m_sprite->Init(AssetLoader::GetTexture("t_pixel"));
+	s_instance->m_camera = camera;
 }
 
 void LevelCollision::Shutdown()
@@ -51,17 +54,6 @@ void LevelCollision::Shutdown()
 	s_instance = nullptr;
 }
 
-void LevelCollision::Update(Camera* camera)
-{
-	auto& colliders = s_instance->m_colliders;
-
-	for(auto it = colliders.begin(); it != colliders.end(); ++it)
-	{
-		auto& collider = it->second;
-		collider.Update(camera->GetPosition());
-	}
-}
-
 void LevelCollision::Render(Graphics* graphics)
 {
 	if(!s_instance->m_isVisible) return;
@@ -71,7 +63,7 @@ void LevelCollision::Render(Graphics* graphics)
 	for(auto it = colliders.begin(); it != colliders.end(); ++it)
 	{
 		auto& collider = it->second;
-		collider.Render(graphics);
+		collider.Render(graphics, -s_instance->m_camera->GetPosition());
 	}
 }
 
@@ -83,34 +75,39 @@ void LevelCollision::CreateBounds(LevelRenderer* levelRenderer)
 	Collider upperBounds;
 	upperBounds.Init(sprite, colliderColour);
 	upperBounds.SetAABB(AABB(Vector2(0, 0), Vector2((float)levelRenderer->GetLevelPixelWidth(), GameplayBoundsUpperY)));
+	upperBounds.Update(Vector2::Zero);
 	LevelCollision::AddCollider(UpperBoundsId, upperBounds);
 
 	Collider lowerBounds;
 	lowerBounds.Init(sprite, Colors::Orange.v);
 	lowerBounds.SetAABB(AABB(Vector2(0, GameplayBoundsLowerY), Vector2((float)levelRenderer->GetLevelPixelWidth(), GameHeight)));
+	lowerBounds.Update(Vector2::Zero);
 	LevelCollision::AddCollider(LowerBoundsId, lowerBounds);
 
 	Collider leftBounds;
 	leftBounds.Init(sprite, Colors::Orange.v);
 	leftBounds.SetAABB(AABB(Vector2(-10, 0), Vector2(0, GameHeight)));
+	leftBounds.Update(Vector2::Zero);
 	LevelCollision::AddCollider(LeftBoundsId, leftBounds);
 
 	Collider rightBounds;
 	rightBounds.Init(sprite, Colors::Orange.v);
 	rightBounds.SetAABB(AABB(Vector2((float)levelRenderer->GetLevelPixelWidth()), Vector2((float)levelRenderer->GetLevelPixelWidth() + 10)));
+	rightBounds.Update(Vector2::Zero);
 	LevelCollision::AddCollider(RightBoundsId, rightBounds);
 
 	auto currentMap = TilemapLoader::GetCurrentMap();
 
 	for(auto i = currentMap.layers.begin(); i != currentMap.layers.end(); i++)
 	{
-		if(i->name == "bounds")
+		if(i->name == "bounds" || i->name == "props")
 		{
 			for(auto j = i->objectData.begin(); j != i->objectData.end(); j++)
 			{
 				Collider collider;
+				Vector2 position = Vector2(j->x, j->y);
 				collider.Init(sprite, colliderColour);
-				collider.SetAABB(AABB(Vector2(j->x, j->y), Vector2(j->x + j->width, j->y + j->height)));
+				collider.SetAABB(AABB(position, Vector2(position.x + j->width, position.y + j->height)));
 				LevelCollision::AddCollider(fmt::to_string(j->id), collider);
 			}
 		}

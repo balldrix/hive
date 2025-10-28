@@ -17,10 +17,9 @@ public:
 	LevelCollision();
 	~LevelCollision();
 
-	static void Init();
+	static void Init(Camera* camera);
 	static void Shutdown();
 
-	static void Update(Camera* camera);
 	static void Render(Graphics* graphics);
 
 	static void CreateBounds(LevelRenderer* levelrenderer);
@@ -40,4 +39,5 @@ private:
 	ColliderMap m_colliders;
 	Sprite* m_sprite;
 	bool m_isVisible;
+	Camera* m_camera;
 };

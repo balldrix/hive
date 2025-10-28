@@ -1009,6 +1009,9 @@
     <None Include="assets\data\cutscenes\cutsceneData.json">
       <Filter>Assets\Data\Cutscenes</Filter>
     </None>
+    <None Include="assets\data\spritesheets\broken-gadget_spritesheet.json">
+      <Filter>Assets\Data\Spritesheets</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\textures\mook_spritesheet.png">
@@ -1118,6 +1121,12 @@
     </Image>
     <Image Include="assets\textures\ui\lift-spider_portrait.png">
       <Filter>Assets\Textures\UI</Filter>
+    </Image>
+    <Image Include="assets\textures\ship-crashed.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="assets\textures\broken-gadget_spritesheet.png">
+      <Filter>Assets\Textures</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

@@ -43,6 +43,13 @@ void Collider::Render(Graphics* graphics)
 {
 	AABB box = m_boundingBox;
 
+	if(m_flipped)
+	{
+		box = FlipAABB();
+	}
+
+	box.OffSetAABB(m_position);
+
 	RECT rect;
 	rect.left = (LONG)box.GetMin().x;
 	rect.top = (LONG)box.GetMin().y;
@@ -50,7 +57,7 @@ void Collider::Render(Graphics* graphics)
 	rect.bottom = (LONG)box.GetMax().y;
 
 	m_sprite->SetDepth(1.0f);
-	m_sprite->Render(graphics, m_sprite->GetPosition(), rect);
+	m_sprite->Render(graphics, m_position, rect);
 }
 
 void Collider::Render(Graphics* graphics, const Vector2& position)
@@ -72,7 +79,7 @@ void Collider::Render(Graphics* graphics, const Vector2& position)
 	rect.bottom = (LONG)box.GetMax().y;
 
 	m_sprite->SetDepth(1.0f);
-	m_sprite->Render(graphics, m_sprite->GetPosition(), rect);
+	m_sprite->Render(graphics, position, rect);
 }
 
 float Collider::GetLeft()

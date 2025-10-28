@@ -33,8 +33,8 @@ public:
 private:
 	void			TrackTarget(float deltaTime);
 	void			ClampCameraToBoundary();
-	bool			TargetIsRightOfLeftThreshold(float targetX);
-	bool			TargetIsLeftOfRightThreshold(float targetX);
+	bool			TargetIsRightOfLeftThreshold(float targetX) const;
+	bool			TargetIsLeftOfRightThreshold(float targetX) const;
 	bool			TargetIsMovingLeft(float targetVx);
 	bool			TargetIsMovingRight(float targetVx);
 	void			UpdatePosition(float deltaTime);

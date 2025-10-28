@@ -296,6 +296,7 @@
     <None Include="assets\data\hitboxes\waste-dog_hitbox.json" />
     <None Include="assets\data\hitboxes\waste-lobster_hitbox.json" />
     <None Include="assets\data\player\playerDefinition.json" />
+    <None Include="assets\data\spritesheets\broken-gadget_spritesheet.json" />
     <None Include="assets\data\spritesheets\dustfx_spritesheet.json" />
     <None Include="assets\data\spritesheets\impactfx_spritesheet.json" />
     <None Include="assets\data\spritesheets\jungle-ape_spritesheet.json" />
@@ -317,6 +318,7 @@
     <None Include="assets\data\cutscenes\cutsceneData.json" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="assets\textures\broken-gadget_spritesheet.png" />
     <Image Include="assets\textures\dustfx.png" />
     <Image Include="assets\textures\impactfx.png" />
     <Image Include="assets\textures\jungle-ape_spritesheet.png" />
@@ -327,6 +329,7 @@
     <Image Include="assets\textures\shadow.png" />
     <Image Include="assets\textures\shadow_large.png" />
     <Image Include="assets\textures\shadow_standard.png" />
+    <Image Include="assets\textures\ship-crashed.png" />
     <Image Include="assets\textures\ui\bar-fill-green-dark.png" />
     <Image Include="assets\textures\ui\bar-fill-red-dark.png" />
     <Image Include="assets\textures\ui\bar-fill-yellow-dark.png" />

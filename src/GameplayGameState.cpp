@@ -96,15 +96,15 @@ void GameplayGameState::OnExit()
 
 void GameplayGameState::Setup()
 {
-	LevelCollision::Init();
 	TilemapLoader::Init();
 
 	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_lift.json");
-	TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_trailer-level-showcase.json");
-	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_demo.json");
+	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_trailer-level-showcase.json");
+	TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_demo.json");
 
 	GameDataManager::LoadAllEnemyDefinitions();
 	m_camera = new Camera();
+	LevelCollision::Init(m_camera);
 	m_controlSystem = new ControlSystem();
 	m_NPCManager = new NPCManager();
 	m_player = new Player();
@@ -126,7 +126,7 @@ void GameplayGameState::Setup()
 	m_particleSystem->Init();
 
 	m_running = true;
-	m_cutsceneManager->StartCutscene("intro");
+	//m_cutsceneManager->StartCutscene("intro");
 }
 
 void GameplayGameState::Cleanup()
@@ -154,10 +154,11 @@ void GameplayGameState::Cleanup()
 	delete m_controlSystem;
 	m_controlSystem = nullptr;
 
+	LevelCollision::Shutdown();
+
 	delete m_camera;
 	m_camera = nullptr;
 
-	LevelCollision::Shutdown();
 	TilemapLoader::Shutdown();
 }
 
@@ -386,7 +387,6 @@ void GameplayGameState::Tick(float deltaTime)
 	}
 
 	m_particleSystem->Update(deltaTime);
-	LevelCollision::Update(m_camera);
 }
 
 void GameplayGameState::ProcessCollisions()

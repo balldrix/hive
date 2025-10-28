@@ -53,7 +53,7 @@ void Camera::TrackTarget(float deltaTime)
 	float targetVx = m_trackingTarget->GetTargetVelocity().x;
 
 	if((TargetIsLeftOfRightThreshold(targetX) && TargetIsMovingRight(targetVx)) ||
-	   TargetIsRightOfLeftThreshold(targetX) && TargetIsMovingLeft(targetVx))
+		TargetIsRightOfLeftThreshold(targetX) && TargetIsMovingLeft(targetVx))
 		return;
 
 	UpdatePosition(deltaTime);
@@ -65,12 +65,12 @@ void Camera::ClampCameraToBoundary()
 		m_position.x = m_boundary;
 }
 
-bool Camera::TargetIsRightOfLeftThreshold(float targetX)
+bool Camera::TargetIsRightOfLeftThreshold(float targetX) const
 {
 	return targetX > m_position.x + m_threshold;
 }
 
-bool Camera::TargetIsLeftOfRightThreshold(float targetX)
+bool Camera::TargetIsLeftOfRightThreshold(float targetX) const
 {
 	return targetX < m_position.x + m_width - m_threshold;
 }

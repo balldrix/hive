@@ -168,6 +168,18 @@
     "tag": "gameplay_assets"
   },
   {
+    "id": "t_ship-crashed",
+    "path": "assets\\textures\\ship-crashed.png",
+    "type": "texture",
+    "tag": "gameplay_assets"
+  },
+  {
+    "id": "t_broken-gadget",
+    "path": "assets\\textures\\broken-gadget_spritesheet.png",
+    "type": "texture",
+    "tag": "gameplay_assets"
+  },
+  {
     "id": "s_unsheatheSword_001",
     "path": "assets\\sounds\\unsheatheSword_001.wav",
     "type": "audio",

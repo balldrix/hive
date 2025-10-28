@@ -258,7 +258,150 @@
          "id":33,
          "name":"spawners",
          "objects":[
-
+                {
+                 "height":0,
+                 "id":7,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"enemyDefinitionId",
+                         "type":"string",
+                         "value":"waste-dog"
+                        }, 
+                        {
+                         "name":"facing",
+                         "type":"string",
+                         "value":"left"
+                        }, 
+                        {
+                         "name":"height",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"maxSpawns",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"spawnRate",
+                         "type":"float",
+                         "value":-1
+                        }, 
+                        {
+                         "name":"startingVelocityX",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"startingVelocityY",
+                         "type":"float",
+                         "value":0
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":264.363,
+                 "y":95.6538
+                }, 
+                {
+                 "height":0,
+                 "id":9,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"enemyDefinitionId",
+                         "type":"string",
+                         "value":"waste-dog"
+                        }, 
+                        {
+                         "name":"facing",
+                         "type":"string",
+                         "value":"left"
+                        }, 
+                        {
+                         "name":"height",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"maxSpawns",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"spawnRate",
+                         "type":"float",
+                         "value":-1
+                        }, 
+                        {
+                         "name":"startingVelocityX",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"startingVelocityY",
+                         "type":"float",
+                         "value":0
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":270.082,
+                 "y":102.988
+                }, 
+                {
+                 "height":0,
+                 "id":10,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"enemyDefinitionId",
+                         "type":"string",
+                         "value":"waste-dog"
+                        }, 
+                        {
+                         "name":"facing",
+                         "type":"string",
+                         "value":"left"
+                        }, 
+                        {
+                         "name":"height",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"maxSpawns",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"spawnRate",
+                         "type":"float",
+                         "value":-1
+                        }, 
+                        {
+                         "name":"startingVelocityX",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"startingVelocityY",
+                         "type":"float",
+                         "value":0
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":264.747,
+                 "y":82.4758
+                }, 
                 {
                  "height":0,
                  "id":11,
@@ -304,8 +447,43 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":227.91250986443,
-                 "y":77.6198160210127
+                 "x":273.11,
+                 "y":78
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":34,
+         "name":"props",
+         "objects":[
+                {
+                 "gid":2051,
+                 "height":27,
+                 "id":18,
+                 "name":"ship_crashed",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":47,
+                 "x":0,
+                 "y":82
+                }, 
+                {
+                 "gid":2052,
+                 "height":11,
+                 "id":19,
+                 "name":"broken_gadget",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":20,
+                 "x":72,
+                 "y":74
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -313,8 +491,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":34,
- "nextobjectid":12,
+ "nextlayerid":35,
+ "nextobjectid":20,
  "orientation":"orthogonal",
  "renderorder":"left-up",
  "tiledversion":"1.11.2",
@@ -322,10 +500,14 @@
  "tilesets":[
         {
          "firstgid":1,
-         "source":"..\/..\/..\/..\/..\/..\/My Drive\/Gamedev\/Projects\/Hive\/Tilemaps\/hive_master.tsx"
+         "source":"D:\/Google Drive\/Gamedev\/Projects\/Hive\/Tilemaps\/hive_master.tsx"
+        }, 
+        {
+         "firstgid":2049,
+         "source":"D:\/Google Drive\/Gamedev\/Projects\/Hive\/Tilemaps\/props.tsx"
         }],
  "tilewidth":8,
  "type":"map",
- "version":"1.10",
+ "version":"1.11",
  "width":100
 }
