@@ -373,6 +373,8 @@
     <ClCompile Include="src\ShowUIEvent.cpp">
       <Filter>Events</Filter>
     </ClCompile>
+    <ClCompile Include="src\Prop.cpp" />
+    <ClCompile Include="src\PropManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -500,6 +502,9 @@
     </Filter>
     <Filter Include="Assets\Data\Cutscenes">
       <UniqueIdentifier>{fd65fa64-0250-429a-9d05-af80380aa1d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Props">
+      <UniqueIdentifier>{a7f0c430-a269-4806-8ca4-7b9200658e53}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -925,6 +930,12 @@
     </ClInclude>
     <ClInclude Include="src\ShowUIEvent.h">
       <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PropManager.h">
+      <Filter>Game\Props</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Prop.h">
+      <Filter>Game\Props</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

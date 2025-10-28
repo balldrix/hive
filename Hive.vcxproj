@@ -33,6 +33,8 @@
     <ClCompile Include="src\MovePlayerEvent.cpp" />
     <ClCompile Include="src\PlayAnimationEvent.cpp" />
     <ClCompile Include="src\PlaySoundEvent.cpp" />
+    <ClCompile Include="src\Prop.cpp" />
+    <ClCompile Include="src\PropManager.cpp" />
     <ClCompile Include="src\ScreenShakeEvent.cpp" />
     <ClCompile Include="src\SharedOptionsGameState.cpp" />
     <ClCompile Include="src\PausedGameState.cpp" />
@@ -90,6 +92,8 @@
     <ClCompile Include="src\Utils.h" />
     <ClCompile Include="src\UISprite.cpp" />
     <ClCompile Include="src\UICycleMenuItemView.h" />
+    <ClInclude Include="src\Prop.h" />
+    <ClInclude Include="src\PropManager.h" />
     <ClInclude Include="src\DustFXEvent.h" />
     <ClInclude Include="src\ShowUIEvent.h" />
     <ClInclude Include="src\ScreenShakeEvent.h" />
