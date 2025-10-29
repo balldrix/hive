@@ -100,7 +100,7 @@ void LevelCollision::CreateBounds(LevelRenderer* levelRenderer)
 
 	for(auto i = currentMap.layers.begin(); i != currentMap.layers.end(); i++)
 	{
-		if(i->name == "bounds" || i->name == "props")
+		if(i->name == "bounds")
 		{
 			for(auto j = i->objectData.begin(); j != i->objectData.end(); j++)
 			{

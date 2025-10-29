@@ -237,7 +237,8 @@ void Enemy::Render(Graphics* graphics)
 
 		if(m_animator)
 		{
-			m_spritesheet->Render(graphics, m_animator->GetCurrentFrame() + m_animator->GetAnimation().from);
+			int frameNum = m_animator->GetCurrentFrame() + m_animator->GetAnimation().from;
+			m_spritesheet->Render(graphics, frameNum);
 		}
 		else
 		{

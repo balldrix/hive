@@ -373,8 +373,12 @@
     <ClCompile Include="src\ShowUIEvent.cpp">
       <Filter>Events</Filter>
     </ClCompile>
-    <ClCompile Include="src\Prop.cpp" />
-    <ClCompile Include="src\PropManager.cpp" />
+    <ClCompile Include="src\Prop.cpp">
+      <Filter>Game\Props</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PropManager.cpp">
+      <Filter>Game\Props</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">

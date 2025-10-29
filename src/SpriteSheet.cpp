@@ -5,6 +5,7 @@
 #include "SpriteFrameData.h"
 #include "Texture.h"
 
+#include <directxtk/SimpleMath.h>
 #include <directxtk/SpriteBatch.h>
 #include <vector>
 

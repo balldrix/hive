@@ -462,28 +462,34 @@
          "name":"props",
          "objects":[
                 {
-                 "gid":2051,
-                 "height":27,
-                 "id":18,
-                 "name":"ship_crashed",
+                 "gid":2052,
+                 "height":32,
+                 "id":19,
+                 "name":"broken-gadget",
+                 "properties":[
+                        {
+                         "name":"isAnimated",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":47,
-                 "x":0,
-                 "y":82
+                 "width":32,
+                 "x":56,
+                 "y":64
                 }, 
                 {
-                 "gid":2052,
-                 "height":11,
-                 "id":19,
-                 "name":"broken_gadget",
+                 "gid":2051,
+                 "height":64,
+                 "id":21,
+                 "name":"ship-crashed",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":20,
-                 "x":72,
-                 "y":74
+                 "width":64,
+                 "x":0,
+                 "y":40
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -492,7 +498,7 @@
          "y":0
         }],
  "nextlayerid":35,
- "nextobjectid":20,
+ "nextobjectid":22,
  "orientation":"orthogonal",
  "renderorder":"left-up",
  "tiledversion":"1.11.2",
@@ -500,14 +506,14 @@
  "tilesets":[
         {
          "firstgid":1,
-         "source":"D:\/Google Drive\/Gamedev\/Projects\/Hive\/Tilemaps\/hive_master.tsx"
+         "source":"..\/..\/..\/..\/..\/..\/My Drive\/Gamedev\/Projects\/Hive\/Tilemaps\/hive_master.tsx"
         }, 
         {
          "firstgid":2049,
-         "source":"D:\/Google Drive\/Gamedev\/Projects\/Hive\/Tilemaps\/props.tsx"
+         "source":"..\/..\/..\/..\/..\/..\/My Drive\/Gamedev\/Projects\/Hive\/Tilemaps\/props.tsx"
         }],
  "tilewidth":8,
  "type":"map",
- "version":"1.11",
+ "version":"1.10",
  "width":100
 }

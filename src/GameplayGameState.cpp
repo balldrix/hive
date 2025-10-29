@@ -32,6 +32,7 @@
 #include "PlayerHurtState.h"
 #include "PlayerIdleState.h"
 #include "PlayerKnockbackState.h"
+#include "PropManager.h"
 #include "Randomiser.h"
 #include "SpriteSheet.h"
 #include "StateMachine.h"
@@ -58,6 +59,7 @@ GameplayGameState::GameplayGameState() :
 	m_player(nullptr),
 	m_levelRenderer(nullptr),
 	m_enemySpawnManager(nullptr),
+	m_propManager(nullptr),
 	m_canAttack(true),
 	m_running(false),
 	m_deltaTime(0.0f),
@@ -110,12 +112,14 @@ void GameplayGameState::Setup()
 	m_player = new Player();
 	m_levelRenderer = new LevelRenderer();
 	m_enemySpawnManager = new EnemySpawnManager();
+	m_propManager = new PropManager();
 
 	m_player->Init(m_controlSystem, m_cutsceneManager, m_eventManager);
 	m_player->SetCamera(m_camera);
 	m_camera->SetTarget(m_player);
 	m_levelRenderer->Init(m_camera);
 	m_enemySpawnManager->Init();
+	m_propManager->Init(m_camera);
 	LevelCollision::CreateBounds(m_levelRenderer);
 
 	m_NPCManager->Init(m_camera, m_player, m_cutsceneManager, m_eventManager);
@@ -138,6 +142,9 @@ void GameplayGameState::Cleanup()
 
 	delete m_impactFxPool;
 	m_impactFxPool = nullptr;
+
+	delete m_propManager;
+	m_propManager = nullptr;
 
 	delete m_enemySpawnManager;
 	m_enemySpawnManager = nullptr;
@@ -342,6 +349,7 @@ void GameplayGameState::Tick(float deltaTime)
 	m_camera->Update(deltaTime);
 	m_levelRenderer->Update(deltaTime);
 	m_enemySpawnManager->Update(deltaTime);
+	m_propManager->Update(deltaTime);
 
 	if(m_stopTimer > 0)
 	{
@@ -532,13 +540,15 @@ void GameplayGameState::Render(Graphics* graphics)
 	m_player->Render(graphics);
 	m_NPCManager->Render(graphics);
 	m_particleSystem->Render(graphics); 
-	UIManager::Render(graphics);
+	m_propManager->Render(graphics);
 	LevelCollision::Render(graphics);
 
 	for(auto* it : m_activeImpacts)
 	{
 		it->Render(graphics);
 	}
+
+	UIManager::Render(graphics);
 }
 
 void GameplayGameState::ResetGame()

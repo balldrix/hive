@@ -24,6 +24,7 @@ class LevelRenderer;
 class ImpactFxPool;
 class SpriteFx;
 class EnemySpawnManager;
+class PropManager;
 
 class GameplayGameState : public GameState
 {
@@ -69,6 +70,7 @@ private:
 
 	LevelRenderer* m_levelRenderer;
 	EnemySpawnManager* m_enemySpawnManager;
+	PropManager* m_propManager;
 
 	bool m_canAttack;
 	bool m_running;

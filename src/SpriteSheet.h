@@ -17,6 +17,7 @@ public:
 	Spritesheet();
 	~Spritesheet();
 	void Init(Texture* texture, std::vector<SpriteFrameData> spriteFrameData);
+	using Sprite::Render;
 	void Render(Graphics* graphics, int frameNum);
 	void Render(Graphics* graphics, Vector2 position, int frameNum);
 	SpriteFrameData GetFrameData(int index) const { return m_frames.at(index); }

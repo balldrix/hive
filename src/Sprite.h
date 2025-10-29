@@ -17,7 +17,7 @@ public:
 	void				Init(Texture* texture);
 	virtual void		Render(Graphics* graphics);
 	void				Render(Graphics* graphics, float alpha);
-	void				Render(Graphics* graphics, const Vector2& position);
+	virtual void		Render(Graphics* graphics, const Vector2& position);
 	void				Render(Graphics* graphics, const Vector2& position, const RECT& destination);
 
 	void				EnableSprite();
