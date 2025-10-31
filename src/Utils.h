@@ -2,6 +2,7 @@
 
 #include "EventManager.h"
 
+#include "AABB.h"
 #include <DirectXMath.h>
 #include <directxtk/SimpleMath.h>
 #include <nlohmann/json.hpp>
@@ -155,6 +156,29 @@ namespace Utils
 		catch(const std::invalid_argument&) 
 		{
 			return s;
+		}
+	}
+
+	static AABB ParseAABB(const std::string& s)
+	{
+		try
+		{
+			nlohmann::json j = nlohmann::json::parse(s);
+			AABB aabb;
+
+			float x = j.at("x");
+			float y = j.at("y");
+			float width = j.at("width");
+			float height = j.at("height");
+
+			aabb.SetMin(Vector2(x, y));
+			aabb.SetMax(Vector2(x + width, y + height)); // Assuming width/height are extents
+
+			return aabb;
+		}
+		catch(...)
+		{
+			return AABB(); // Default or empty AABB
 		}
 	}
 };

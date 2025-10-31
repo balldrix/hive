@@ -14,7 +14,7 @@ public:
 	Prop();
 	~Prop();
 
-	void Init(const std::string& id, Camera* camera, const Vector2& position, const Vector2& size, bool isAnimated);
+	void Init(const std::string& id, Camera* camera, const Vector2& position, Collider collider, bool isAnimated);
 	void Update(float deltaTime) override;
 	void Render(Graphics* graphics) override;
 

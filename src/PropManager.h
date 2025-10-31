@@ -5,6 +5,7 @@
 class Camera;
 class Graphics;
 class Prop;
+class Sprite;
 
 class PropManager
 {
@@ -18,4 +19,5 @@ public:
 private:
 	void Shutdown();
 	std::vector<Prop*> m_propList;
+	Sprite* m_debugSprite;
 };

@@ -29,13 +29,13 @@ Prop::~Prop()
 	Shutdown();
 }
 
-void Prop::Init(const std::string& id, Camera* camera, const Vector2& position, const Vector2& size, bool isAnimated)
+void Prop::Init(const std::string& id, Camera* camera, const Vector2& position, Collider collider, bool isAnimated)
 {
 	m_id = id;
 	m_camera = camera;
 	m_position = position;
+	m_collider = collider;
 	m_isAnimated = isAnimated;
-	m_collider.SetAABB(AABB(Vector2(position.x, position.y), Vector2(position.x + size.x, position.y + size.y)));
 
 	std::vector<SpriteFrameData> spriteFrameData;
 

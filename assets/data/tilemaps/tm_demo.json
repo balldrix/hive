@@ -468,6 +468,11 @@
                  "name":"broken-gadget",
                  "properties":[
                         {
+                         "name":"collider",
+                         "type":"string",
+                         "value":"{ \"x\": 6, \"y\": 11, \"width\": 20, \"height\": 11 }"
+                        }, 
+                        {
                          "name":"isAnimated",
                          "type":"bool",
                          "value":true
@@ -484,6 +489,12 @@
                  "height":64,
                  "id":21,
                  "name":"ship-crashed",
+                 "properties":[
+                        {
+                         "name":"collider",
+                         "type":"string",
+                         "value":"{ \"x\": 0, \"y\": 37, \"width\": 47, \"height\": 27 }"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
