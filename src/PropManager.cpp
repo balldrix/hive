@@ -1,6 +1,7 @@
 #include "PropManager.h"
 
 #include "AABB.h"
+#include "AssetLoader.h"
 #include "Collider.h"
 #include "LevelCollision.h"
 #include "Prop.h"
@@ -8,9 +9,9 @@
 #include "TilemapLoader.h"
 #include "Utils.h"
 
-#include <directxtk/SimpleMath.h>
-#include "AssetLoader.h"
+#include <algorithm>
 #include <DirectXColors.h>
+#include <directxtk/SimpleMath.h>
 
 using namespace Utils;
 
@@ -43,6 +44,7 @@ void PropManager::Init(Camera* camera)
 				Vector2 position;
 				Collider collider;
 				bool isAnimated;
+				bool isBreakable;
 
 				position = Vector2(j->x, j->y);
 
@@ -56,8 +58,10 @@ void PropManager::Init(Camera* camera)
 				}
 
 				isAnimated = j->customProperties.contains("isAnimated") && j->customProperties.at("isAnimated") == "true";
+				isBreakable = j->customProperties.contains("isBreakable") && j->customProperties.at("isBreakable") == "true";
+
 				prop = new Prop();
-				prop->Init(j->name, camera, Vector2(j->x, j->y), collider, isAnimated);
+				prop->Init(j->name, camera, Vector2(j->x, j->y), collider, isAnimated, isBreakable, this);
 				m_propList.push_back(prop);
 			}
 		}
@@ -78,6 +82,13 @@ void PropManager::Render(Graphics* graphics)
 	{
 		prop->Render(graphics);
 	}
+}
+
+void PropManager::Remove(Prop* prop)
+{
+	m_propList.erase(find(m_propList.begin(), m_propList.end(), prop));
+	delete prop;
+	prop = nullptr;
 }
 
 void PropManager::Shutdown()

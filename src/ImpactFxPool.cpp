@@ -15,7 +15,7 @@ SpriteFx* ImpactFxPool::Get()
 	if(m_pool.empty()) 
 	{
 		SpriteFx* spriteFx = new SpriteFx();
-		spriteFx->Init("t_impact", "impactfx", Vector2(12.0f, 12.0f));
+		spriteFx->Init("t_impact", "impactfx", Vector2(11.0f, 10.0f));
 		return spriteFx;
 	}
 

@@ -501,6 +501,29 @@
                  "width":64,
                  "x":0,
                  "y":40
+                }, 
+                {
+                 "gid":2053,
+                 "height":32,
+                 "id":22,
+                 "name":"waste-box",
+                 "properties":[
+                        {
+                         "name":"collider",
+                         "type":"string",
+                         "value":"{ \"x\": 11, \"y\": 10, \"width\": 11, \"height\": 14 }"
+                        }, 
+                        {
+                         "name":"isBreakable",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":112,
+                 "y":56
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -509,7 +532,7 @@
          "y":0
         }],
  "nextlayerid":35,
- "nextobjectid":22,
+ "nextobjectid":23,
  "orientation":"orthogonal",
  "renderorder":"left-up",
  "tiledversion":"1.11.2",

@@ -180,6 +180,12 @@
     "tag": "gameplay_assets"
   },
   {
+    "id": "t_waste-box",
+    "path": "assets\\textures\\waste-box.png",
+    "type": "texture",
+    "tag": "gameplay_assets"
+  },
+  {
     "id": "s_unsheatheSword_001",
     "path": "assets\\sounds\\unsheatheSword_001.wav",
     "type": "audio",

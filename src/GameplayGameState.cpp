@@ -32,6 +32,7 @@
 #include "PlayerHurtState.h"
 #include "PlayerIdleState.h"
 #include "PlayerKnockbackState.h"
+#include "Prop.h"
 #include "PropManager.h"
 #include "Randomiser.h"
 #include "SpriteSheet.h"
@@ -402,6 +403,7 @@ void GameplayGameState::ProcessCollisions()
 	if(m_stopTimer > 0 || m_isCollisionOnCooldown)	return;
 
 	std::vector<Enemy*> enemyList = m_NPCManager->GetEnemyList();
+	std::vector<Prop*> propList = m_propManager->GetPropList();
 
 	auto isPlayerHitBoxActive = m_player->GetHitBoxManager()->IsHitBoxActive();
 	auto playerGroundPositionX = m_player->GetGroundPosition().x;
@@ -412,57 +414,6 @@ void GameplayGameState::ProcessCollisions()
 		Enemy* enemy = enemyList[i];
 
 		if(!enemy->IsActive() || enemy->IsDead()) continue;
-
-		auto playerHitBox = m_player->GetHitBoxManager()->GetHitBox();
-		auto playerVerticalRange = VerticalHitRange;
-
-		if(m_player->GetStateMachine()->GetCurrentState()->GetName() == "special")
-			playerVerticalRange = GameHeight;
-
-		// true if player hitbox is active and enemy is in vertical range
-		if(isPlayerHitBoxActive && fabs(enemy->GetGroundPosition().y - playerGroundPositionY) < playerVerticalRange)
-		{
-			// check player has hit an enemy
-			if(playerHitBox.OnCollision(
-				enemy->GetHitBoxManager()->GetHurtBox()))
-			{
-				auto damageData = m_player->GetDamageData();
-				auto groundPosition = enemy->GetGroundPosition();
-				auto frameData = enemy->GetSprite()->GetFrameData(enemy->GetAnimator()->GetCurrentFrame());
-				auto spriteHeight = frameData.spriteSourceSize.bottom;
-				auto normalDirection = Vector2(enemy->GetGroundPosition() - m_player->GetGroundPosition());
-				normalDirection.Normalize();
-
-				enemy->ApplyDamage(m_player, damageData.amount);
-				enemy->ShowEnemyHud();
-
-				auto animation = m_player->GetAnimator()->GetAnimation();
-				if(animation.name.contains("Strong") || animation.name.contains("special"))
-					m_camera->StartShake(2.0f, 3.0f);
-
-				m_player->IncreaseSpecial();
-				m_player->GetControlSystem()->IncrementHitComboCount();
-
-				if(enemy->GetHealth() <= 0.0f) m_player->AddKill();
-
-				m_stopTimer = damageData.hitStopDuration;
-				AudioEngine::Instance()->Pause();
-				m_isCollisionOnCooldown = true;
-				m_collisionCooldown = damageData.hitStopDuration;
-
-				auto impactFx = m_impactFxPool->Get();
-				m_activeImpacts.push_back(impactFx);
-				impactFx->DisplayFx(Vector2(groundPosition.x, groundPosition.y - spriteHeight * 0.5f) - m_camera->GetPosition());
-				SpawnParticles(impactFx->Position(), normalDirection, (Color)Colors::Green, (Color)Colors::DarkGreen, 1.0f, 200);
-			}
-		}
-	}
-
-	for(size_t i = 0; i < enemyList.size(); i++)
-	{
-		Enemy* enemy = enemyList[i];
-
-		if(!enemy->IsActive() || enemy->IsDead()) return;
 
 		// true if enemy hitbox is active and player is in vertical range
 		if(enemy->GetHitBoxManager()->IsHitBoxActive() &&
@@ -511,6 +462,80 @@ void GameplayGameState::ProcessCollisions()
 
 				return;
 			}
+		}
+	}
+
+	if(!isPlayerHitBoxActive) return;
+
+	auto playerHitBox = m_player->GetHitBoxManager()->GetHitBox();
+
+	for(size_t i = 0; i < enemyList.size(); i++)
+	{
+		Enemy* enemy = enemyList[i];
+
+		if(!enemy->IsActive() || enemy->IsDead()) continue;
+
+		auto playerVerticalRange = VerticalHitRange;
+
+		if(m_player->GetStateMachine()->GetCurrentState()->GetName() == "special")
+			playerVerticalRange = GameHeight;
+
+		if(fabs(enemy->GetGroundPosition().y - playerGroundPositionY) < playerVerticalRange)
+		{
+			// check player has hit an enemy
+			if(playerHitBox.OnCollision(
+				enemy->GetHitBoxManager()->GetHurtBox()))
+			{
+				auto damageData = m_player->GetDamageData();
+				auto groundPosition = enemy->GetGroundPosition();
+				auto frameData = enemy->GetSprite()->GetFrameData(enemy->GetAnimator()->GetCurrentFrame());
+				auto spriteHeight = frameData.spriteSourceSize.bottom;
+				auto normalDirection = Vector2(enemy->GetGroundPosition() - m_player->GetGroundPosition());
+				normalDirection.Normalize();
+
+				enemy->ApplyDamage(m_player, damageData.amount);
+				enemy->ShowEnemyHud();
+
+				auto animation = m_player->GetAnimator()->GetAnimation();
+				if(animation.name.contains("Strong") || animation.name.contains("special"))
+					m_camera->StartShake(2.0f, 3.0f);
+
+				m_player->IncreaseSpecial();
+				m_player->GetControlSystem()->IncrementHitComboCount();
+
+				if(enemy->GetHealth() <= 0.0f) m_player->AddKill();
+
+				m_stopTimer = damageData.hitStopDuration;
+				AudioEngine::Instance()->Pause();
+				m_isCollisionOnCooldown = true;
+				m_collisionCooldown = damageData.hitStopDuration;
+
+				auto impactFx = m_impactFxPool->Get();
+				m_activeImpacts.push_back(impactFx);
+				impactFx->DisplayFx(Vector2(groundPosition.x, groundPosition.y - spriteHeight * 0.5f) - m_camera->GetPosition());
+				SpawnParticles(impactFx->Position(), normalDirection, (Color)Colors::Green, (Color)Colors::DarkGreen, 1.0f, 200);
+			}
+		}
+	}
+
+	for(size_t i = 0; i < propList.size(); i++)
+	{
+		Prop* prop = propList[i];
+		Collider propCollider = prop->GetCollider();
+		if(!prop->IsBreakable()) continue;
+
+		if(playerHitBox.OnCollision(propCollider))
+		{
+			prop->Break();
+
+			m_stopTimer = 0.2f;
+			AudioEngine::Instance()->Pause();
+			m_isCollisionOnCooldown = true;
+			m_collisionCooldown = 0.2f;
+
+			auto impactFx = m_impactFxPool->Get();
+			m_activeImpacts.push_back(impactFx);
+			impactFx->DisplayFx(Vector2(prop->GetPositionX() + propCollider.GetWidth(), prop->GetPositionY() + propCollider.GetHeight() * 0.5f) - m_camera->GetPosition());
 		}
 	}
 }
