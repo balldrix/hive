@@ -1,6 +1,5 @@
 #include "Prop.h"
 
-#include "AABB.h"
 #include "AnimatedSpriteData.h"
 #include "Animator.h"
 #include "AssetLoader.h"
@@ -23,7 +22,8 @@ Prop::Prop() :
 	m_collider(),
 	m_isAnimated(false),
 	m_isBreakable(false),
-	m_hasBroken(false)
+	m_hasBroken(false),
+	m_propManager(nullptr)
 {
 }
 
@@ -32,7 +32,7 @@ Prop::~Prop()
 	Shutdown();
 }
 
-void Prop::Init(const std::string& id, Camera* camera, const Vector2& position, Collider collider, bool isAnimated, bool isBreakable, PropManager* propManager)
+void Prop::Init(const std::string& id, const std::string& name, Camera* camera, const Vector2& position, Collider collider, bool isAnimated, bool isBreakable, PropManager* propManager)
 {
 	m_id = id;
 	m_camera = camera;
@@ -46,14 +46,14 @@ void Prop::Init(const std::string& id, Camera* camera, const Vector2& position, 
 
 	if(isAnimated || isBreakable)
 	{
-		AnimatedSpriteData animatedSpriteData = GameDataManager::LoadAnimatedSpriteData(fmt::format("assets\\data\\spritesheets\\{0}_spritesheet.json", id));
+		AnimatedSpriteData animatedSpriteData = GameDataManager::LoadAnimatedSpriteData(fmt::format("assets\\data\\spritesheets\\{0}_spritesheet.json", name));
 		spriteFrameData = animatedSpriteData.spriteFrameData;
 		m_animator = new Animator();
 		m_animator->Init(m_id, animatedSpriteData, nullptr);
 	}
 
 	m_spritesheet = new Spritesheet();
-	m_spritesheet->Init(AssetLoader::GetTexture(fmt::format("t_{0}", id)), spriteFrameData);
+	m_spritesheet->Init(AssetLoader::GetTexture(fmt::format("t_{0}", name)), spriteFrameData);
 	m_spritesheet->SetOrigin(Vector2::Zero);
 }
 

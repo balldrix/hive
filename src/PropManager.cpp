@@ -12,6 +12,8 @@
 #include <algorithm>
 #include <DirectXColors.h>
 #include <directxtk/SimpleMath.h>
+#include <fmt/core.h>
+#include <string>
 
 using namespace Utils;
 
@@ -45,8 +47,10 @@ void PropManager::Init(Camera* camera)
 				Collider collider;
 				bool isAnimated;
 				bool isBreakable;
+				std::string id;
 
 				position = Vector2(j->x, j->y);
+				id = fmt::format("{0}_{1}", j->name, j->id);
 
 				if(j->customProperties.contains("collider"))
 				{
@@ -54,14 +58,14 @@ void PropManager::Init(Camera* camera)
 					aabb.OffSetAABB(position);
 					collider.Init(m_debugSprite, Colors::Orange.v);
 					collider.SetAABB(aabb);
-					LevelCollision::AddCollider(j->name, collider);
+					LevelCollision::AddCollider(id, collider);
 				}
 
 				isAnimated = j->customProperties.contains("isAnimated") && j->customProperties.at("isAnimated") == "true";
 				isBreakable = j->customProperties.contains("isBreakable") && j->customProperties.at("isBreakable") == "true";
 
 				prop = new Prop();
-				prop->Init(j->name, camera, Vector2(j->x, j->y), collider, isAnimated, isBreakable, this);
+				prop->Init(id, j->name, camera, Vector2(j->x, j->y), collider, isAnimated, isBreakable, this);
 				m_propList.push_back(prop);
 			}
 		}

@@ -527,6 +527,7 @@ void GameplayGameState::ProcessCollisions()
 		if(playerHitBox.OnCollision(propCollider))
 		{
 			prop->Break();
+			LevelCollision::RemoveCollider(prop->GetID());
 
 			m_stopTimer = 0.2f;
 			AudioEngine::Instance()->Pause();
