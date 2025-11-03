@@ -74,7 +74,7 @@ void PropManager::Init(Camera* camera)
 
 void PropManager::Update(float deltaTime)
 {
-	for(auto prop : m_propList)
+	for(const auto& prop : m_propList)
 	{
 		prop->Update(deltaTime);
 	}
@@ -82,7 +82,7 @@ void PropManager::Update(float deltaTime)
 
 void PropManager::Render(Graphics* graphics)
 {
-	for(auto prop : m_propList)
+	for(const auto& prop : m_propList)
 	{
 		prop->Render(graphics);
 	}

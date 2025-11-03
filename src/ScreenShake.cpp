@@ -29,8 +29,8 @@ void ScreenShake::Update(float deltaTime)
 	if(m_timer > 0.0f)
 	{
 		m_positionOffset = Vector2::Zero;
-		m_positionOffset.x += Randomiser::Instance()->GetRandNumUniform(-1.0f, 1.0f) * m_intensity;
-		m_positionOffset.y += Randomiser::Instance()->GetRandNumUniform(-1.0f, 1.0f) * m_intensity;
+		m_positionOffset.x += Randomiser::GetRandNumUniform(-1.0f, 1.0f) * m_intensity;
+		m_positionOffset.y += Randomiser::GetRandNumUniform(-1.0f, 1.0f) * m_intensity;
 		m_timer -= deltaTime;
 		m_intensity = std::lerp(m_intensity, 0.0f, 1 - m_timer / m_duration);
 		return;

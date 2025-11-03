@@ -12,6 +12,7 @@
 #include <directxtk/SimpleMath.h>
 #include <string>
 
+class EventManager;
 class CutsceneManager;
 class Graphics;
 class NPCManager;

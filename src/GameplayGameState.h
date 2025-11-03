@@ -13,6 +13,7 @@ class Input;
 class CutsceneManager;
 class Camera;
 class ControlSystem;
+class EventManager;
 class Spritesheet;
 class Sprite;
 class Animator;
@@ -25,6 +26,7 @@ class ImpactFxPool;
 class SpriteFx;
 class EnemySpawnManager;
 class PropManager;
+class PickupManager;
 
 class GameplayGameState : public GameState
 {
@@ -58,6 +60,7 @@ private:
 	void ResetGame();
 	void ToggleHitBoxes();
 	void TogglePlayerHud();
+	bool TryPickup();
 
 	Input* m_input;
 	CutsceneManager* m_cutsceneManager;
@@ -71,6 +74,7 @@ private:
 	LevelRenderer* m_levelRenderer;
 	EnemySpawnManager* m_enemySpawnManager;
 	PropManager* m_propManager;
+	PickupManager* m_pickupManager;
 
 	bool m_canAttack;
 	bool m_running;

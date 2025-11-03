@@ -186,6 +186,12 @@
     "tag": "gameplay_assets"
   },
   {
+    "id": "t_pickup",
+    "path": "assets\\textures\\pickup.png",
+    "type": "texture",
+    "tag": "gameplay_assets"
+  },
+  {
     "id": "s_unsheatheSword_001",
     "path": "assets\\sounds\\unsheatheSword_001.wav",
     "type": "audio",

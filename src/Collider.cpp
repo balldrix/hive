@@ -72,7 +72,7 @@ void Collider::Render(Graphics* graphics, const Vector2& position)
 	box.OffSetAABB(position);
 
 	// set sprite rect
-	RECT rect;
+	RECT rect = {};
 	rect.left = (LONG)box.GetMin().x;
 	rect.top = (LONG)box.GetMin().y;
 	rect.right = (LONG)box.GetMax().x;

@@ -379,6 +379,12 @@
     <ClCompile Include="src\PropManager.cpp">
       <Filter>Game\Props</Filter>
     </ClCompile>
+    <ClCompile Include="src\PickupManager.cpp">
+      <Filter>Game\Pickups</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HealthPickup.cpp">
+      <Filter>Game\Pickups</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -509,6 +515,9 @@
     </Filter>
     <Filter Include="Game\Props">
       <UniqueIdentifier>{a7f0c430-a269-4806-8ca4-7b9200658e53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Pickups">
+      <UniqueIdentifier>{4f09cada-1d7c-472f-9c73-df2e9c291d2d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -941,6 +950,15 @@
     <ClInclude Include="src\Prop.h">
       <Filter>Game\Props</Filter>
     </ClInclude>
+    <ClInclude Include="src\Pickup.h">
+      <Filter>Game\Pickups</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HealthPickup.h">
+      <Filter>Game\Pickups</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PickupManager.h">
+      <Filter>Game\Pickups</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\fonts\goodbye_despair_8pt.spritefont">
@@ -1027,6 +1045,8 @@
     <None Include="assets\data\spritesheets\broken-gadget_spritesheet.json">
       <Filter>Assets\Data\Spritesheets</Filter>
     </None>
+    <None Include="assets\data\spritesheets\waste-box_spritesheet.json" />
+    <None Include="assets\data\hitboxes\jungle-ape_hitbox.json" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\textures\mook_spritesheet.png">
@@ -1143,6 +1163,9 @@
     <Image Include="assets\textures\broken-gadget_spritesheet.png">
       <Filter>Assets\Textures</Filter>
     </Image>
+    <Image Include="assets\textures\waste-box.png" />
+    <Image Include="assets\textures\health-pickup.png" />
+    <Image Include="assets\textures\pickup.png" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\sounds\swingNormal_001.wav">

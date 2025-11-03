@@ -90,12 +90,12 @@ void EnemyIdleState::Execute(Enemy* enemy)
 	//	if(distance > enemy->GetData().hostileRange)
 	//	{
 	//		enemy->GetStateMachine()->ChangeState(EnemyRunningState::Instance());
-	//		enemy->ResetStateChangeTimer(Randomiser::Instance()->GetRandNumUniform(0.4f, 1.0f));
+	//		enemy->ResetStateChangeTimer(Randomiser::GetRandNumUniform(0.4f, 1.0f));
 	//	}
 	//	else if(distance > enemy->GetData().fightRange || (NPCManager::Instance()->GetAttackingEnemy() == enemy && distance > enemy->GetData().attackRange))
 	//	{
 	//		enemy->GetStateMachine()->ChangeState(EnemyWalkingState::Instance());
-	//		enemy->ResetStateChangeTimer(Randomiser::Instance()->GetRandNumUniform(0.4f, 1.0f));
+	//		enemy->ResetStateChangeTimer(Randomiser::GetRandNumUniform(0.4f, 1.0f));
 	//	}
 	//}
 
@@ -108,7 +108,7 @@ void EnemyIdleState::Execute(Enemy* enemy)
 	//	&& verticalDistance < VerticalHitRange
 	//	&& NPCManager::Instance()->GetAttackingEnemy() == enemy)
 	//{
-	//	double randnum = Randomiser::Instance()->GetRandNumUniform(0.02, 1.8);
+	//	double randnum = Randomiser::GetRandNumUniform(0.02, 1.8);
 	//
 	//	enemy->Stop();
 	//	enemy->ResetStateChangeTimer((float)randnum);

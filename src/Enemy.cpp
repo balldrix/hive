@@ -290,7 +290,7 @@ void Enemy::SetPlayerTarget(Player* player)
 
 void Enemy::ResetStateChangeTimer()
 {
-	m_stateChangeTimer = Randomiser::Instance()->GetRandNumNormal(m_enemyDefinition.minStateChangeTime, m_enemyDefinition.maxStateChangeTime);
+	m_stateChangeTimer = Randomiser::GetRandNumNormal(m_enemyDefinition.minStateChangeTime, m_enemyDefinition.maxStateChangeTime);
 }
 
 void Enemy::ApplyDamage(GameObject* source, const int& amount)
@@ -336,7 +336,7 @@ void Enemy::Knockback(const Vector2& direction, const float& force)
 
 void Enemy::Attack()
 {
-	int attackNum = Randomiser::Instance()->GetRandNumUniform(0, (int)m_enemyDefinition.damageData.size() - 1);
+	int attackNum = Randomiser::GetRandNumUniform(0, (int)m_enemyDefinition.damageData.size() - 1);
 	EnemyAttackState::Instance()->SetAttack(m_enemyDefinition.damageData[attackNum].name);
 	m_stateMachine->ChangeState(EnemyAttackState::Instance());
 	NPCManager::Instance()->SetNextAttackingEnemy();

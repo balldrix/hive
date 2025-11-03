@@ -1,5 +1,6 @@
 #pragma once
 
+#include "AABB.h"
 #include "Collider.h"
 #include "GameObject.h"
 
@@ -9,6 +10,7 @@
 class Camera;
 class Graphics;
 class PropManager;
+class SoundSource;
 
 class Prop : public GameObject
 {
@@ -20,7 +22,7 @@ public:
 	void Update(float deltaTime) override;
 	void Render(Graphics* graphics) override;
 
-	Collider GetCollider() const { return m_collider; }
+	Collider GetCollider() const;
 	void Break();
 
 	bool IsBreakable() const { return m_isBreakable; }

@@ -8,6 +8,7 @@
 #include <cmath>
 #include <directxtk/SimpleMath.h>
 #include <directxtk/SpriteBatch.h>
+#include <Windows.h>
 
 ParticleSystem::ParticleSystem() : 
 	m_texture(nullptr),
@@ -48,7 +49,7 @@ void ParticleSystem::Render(Graphics* graphics)
 		
 		float size = std::lerp(particle.SizeBegin, particle.SizeEnd, life);
 		
-		RECT rect;
+		RECT rect = {};
 		rect.top = 0;
 		rect.left = 0;
 		rect.right = 1;
@@ -71,11 +72,11 @@ void ParticleSystem::Emit(const ParticleData& particleData)
 	Particle& particle = m_particlePool[m_poolIndex];
 
 	// position
-	auto randomOffset = Randomiser::Instance()->GetRandNumUniform(-1.0f, 1.0f);
-	auto positionOffset = Vector2(Randomiser::Instance()->GetRandNumUniform(-1.0f, 1.0f), Randomiser::Instance()->GetRandNumUniform(-1.0f, 1.0f));
+	auto randomOffset = Randomiser::GetRandNumUniform(-1.0f, 1.0f);
+	auto positionOffset = Vector2(Randomiser::GetRandNumUniform(-1.0f, 1.0f), Randomiser::GetRandNumUniform(-1.0f, 1.0f));
 	positionOffset.Normalize();
 
-	auto randomDistance = Randomiser::Instance()->GetRandNumUniform(0.0f, 2.0f);
+	auto randomDistance = Randomiser::GetRandNumUniform(0.0f, 2.0f);
 
 	particle.Position = particleData.Position + positionOffset * randomDistance;
 	particle.Rotation = 0;

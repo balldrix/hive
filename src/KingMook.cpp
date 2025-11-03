@@ -16,7 +16,7 @@ KingMook::~KingMook()
 
 void KingMook::Attack()
 {
-	int randomNum = Randomiser::Instance()->GetRandNumUniform(0, 1);
+	int randomNum = Randomiser::GetRandNumUniform(0, 1);
 	switch(randomNum)
 	{
 	case 0:
@@ -46,7 +46,7 @@ void KingMook::PlayFootstepSound()
 
 	m_recentFootstepFrame = m_animator->GetCurrentFrame();
 
-	uint32_t randomWalkIndex = Randomiser::Instance()->GetRandNumUniform(1, 3);
+	uint32_t randomWalkIndex = Randomiser::GetRandNumUniform(1, 3);
 
 	std::string soundName = "boss_walk_00" + std::to_string(randomWalkIndex);
 	m_footStepSoundSource->Play(AssetLoader::GetSound(soundName));
@@ -54,7 +54,7 @@ void KingMook::PlayFootstepSound()
 
 void KingMook::PlayAttackSound()
 {
-	uint32_t randomWalkIndex = Randomiser::Instance()->GetRandNumUniform(1, 4);
+	uint32_t randomWalkIndex = Randomiser::GetRandNumUniform(1, 4);
 
 	std::string soundName = "boss_punch_00" + std::to_string(randomWalkIndex);
 	m_attackSoundSource->Play(AssetLoader::GetSound(soundName));

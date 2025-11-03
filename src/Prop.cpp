@@ -16,6 +16,7 @@
 #include <fmt/core.h>
 #include <string>
 #include <vector>
+#include "AABB.h"
 
 Prop::Prop() :
 	GameObject(),
@@ -78,6 +79,15 @@ void Prop::Render(Graphics* graphics)
 	}
 
 	m_spritesheet->Render(graphics, m_position - m_camera->GetPosition());
+}
+
+Collider Prop::GetCollider() const
+{
+	if(!m_hasBroken) return m_collider;
+
+	Collider empty;
+	empty.SetAABB(AABB());
+	return empty;
 }
 
 void Prop::Break()

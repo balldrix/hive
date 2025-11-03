@@ -64,7 +64,7 @@ add_executable(${PROJECT_NAME} src/main.cpp src/AABB.cpp src/Animator.cpp src/Au
 								src/GameStateNameLibrary.h src/UIPromptView.h src/UIPromptView.cpp src/CutsceneManager.h src/CutsceneManager.cpp src/CutsceneData.h IEvent.h WaitEvent.h WaitEvent.cpp
 								src/MovePlayerEvent.h src/MovePlayerEvent.cpp src/PlayAnimationEvent.h src/PlayAnimationEvent.cpp src/MoveNPCEvent.h src/MoveNPCEvent.cpp
 								src/SpawnNPCEvent.h src/SpawnNPCEvent.cpp src/DustFXEvent.h src/DustFXEvent.cpp src/ShowUIEvent.h src/ShowUIEvent.cpp
-								src/PropManager.h src/PropManager.cpp src/Prop.h src/Prop.cpp
+								src/PropManager.h src/PropManager.cpp src/Prop.h src/Prop.cpp src/Pickup.h src/HealthPickup.h src/HealthPickup.cpp src/PickupManager.h src/PickupManager.cpp
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Microsoft::DirectXTK)
 target_link_libraries(${PROJECT_NAME} PRIVATE nlohmann_json::nlohmann_json)

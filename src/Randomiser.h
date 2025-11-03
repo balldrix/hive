@@ -5,17 +5,12 @@
 class Randomiser
 {
 public:
-	~Randomiser();
 
-	static Randomiser* Instance();
-	
-	double GetRandNumUniform(double min, double max);
-	float GetRandNumUniform(float min, float max);
-	int GetRandNumUniform(int min, int max);
-
-	float GetRandNumNormal(float min, float max);
+	static double GetRandNumUniform(double min, double max);
+	static float GetRandNumUniform(float min, float max);
+	static int GetRandNumUniform(int min, int max);
+	static float GetRandNumNormal(float min, float max);
 
 private:
-	std::mt19937 m_generator;
-	Randomiser();
+	static std::mt19937 s_generator;
 };

@@ -336,7 +336,7 @@ void GameObject::DisplayDust(const Vector2& position)
 
 void GameObject::PlayImpactSound()
 {
-	auto i = Randomiser::Instance()->GetRandNumUniform(0, (int)m_impactSounds.size() - 1);
+	auto i = Randomiser::GetRandNumUniform(0, (int)m_impactSounds.size() - 1);
 	Sound* sound = AssetLoader::GetSound(m_impactSounds[i]);
 
 	if(sound == nullptr) return;

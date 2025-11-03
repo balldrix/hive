@@ -9,6 +9,7 @@
 #include "CutsceneManager.h"
 #include "Enemy.h"
 #include "EnemySpawnManager.h"
+#include "EventManager.h"
 #include "GameDataManager.h"
 #include "GameplayConstants.h"
 #include "GameState.h"
@@ -23,6 +24,8 @@
 #include "LevelRenderer.h"
 #include "NPCManager.h"
 #include "ParticleSystem.h"
+#include "Pickup.h"
+#include "PickupManager.h"
 #include "Player.h"
 #include "PlayerAttackState.h"
 #include "PlayerBlockState.h"
@@ -61,6 +64,7 @@ GameplayGameState::GameplayGameState() :
 	m_levelRenderer(nullptr),
 	m_enemySpawnManager(nullptr),
 	m_propManager(nullptr),
+	m_pickupManager(nullptr),
 	m_canAttack(true),
 	m_running(false),
 	m_deltaTime(0.0f),
@@ -103,7 +107,8 @@ void GameplayGameState::Setup()
 
 	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_lift.json");
 	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_trailer-level-showcase.json");
-	TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_demo.json");
+	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_demo.json");
+	TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_playground.json");
 
 	GameDataManager::LoadAllEnemyDefinitions();
 	m_camera = new Camera();
@@ -114,6 +119,7 @@ void GameplayGameState::Setup()
 	m_levelRenderer = new LevelRenderer();
 	m_enemySpawnManager = new EnemySpawnManager();
 	m_propManager = new PropManager();
+	m_pickupManager = new PickupManager();
 
 	m_player->Init(m_controlSystem, m_cutsceneManager, m_eventManager);
 	m_player->SetCamera(m_camera);
@@ -121,6 +127,7 @@ void GameplayGameState::Setup()
 	m_levelRenderer->Init(m_camera);
 	m_enemySpawnManager->Init();
 	m_propManager->Init(m_camera);
+	m_pickupManager->Init(m_camera);
 	LevelCollision::CreateBounds(m_levelRenderer);
 
 	m_NPCManager->Init(m_camera, m_player, m_cutsceneManager, m_eventManager);
@@ -143,6 +150,9 @@ void GameplayGameState::Cleanup()
 
 	delete m_impactFxPool;
 	m_impactFxPool = nullptr;
+
+	delete m_pickupManager;
+	m_pickupManager = nullptr;
 
 	delete m_propManager;
 	m_propManager = nullptr;
@@ -292,6 +302,8 @@ void GameplayGameState::ProcessInput()
 
 	if(m_input->WasKeyPressed(PLAYER_X_KEY) || m_input->WasGamePadButtonPressed(buttons.x))
 	{
+		if(TryPickup()) return;
+
 		m_controlSystem->SetControlsPressed(Controls::NormalAttack);
 		m_controlSystem->ResetComboTimer();
 		return;
@@ -351,6 +363,7 @@ void GameplayGameState::Tick(float deltaTime)
 	m_levelRenderer->Update(deltaTime);
 	m_enemySpawnManager->Update(deltaTime);
 	m_propManager->Update(deltaTime);
+	m_pickupManager->Update(deltaTime);
 
 	if(m_stopTimer > 0)
 	{
@@ -529,6 +542,11 @@ void GameplayGameState::ProcessCollisions()
 			prop->Break();
 			LevelCollision::RemoveCollider(prop->GetID());
 
+			Vector2 dropPosition = Vector2(propCollider.GetLeft() + propCollider.GetWidth() * 0.5f,
+				propCollider.GetTop() + propCollider.GetHeight());
+
+			m_pickupManager->TrySpawnPickup(dropPosition);
+
 			m_stopTimer = 0.2f;
 			AudioEngine::Instance()->Pause();
 			m_isCollisionOnCooldown = true;
@@ -551,10 +569,10 @@ void GameplayGameState::SpawnParticles(const Vector2& position, const Vector2& v
 
 	for (unsigned int i = 0; i < number; i++)
 	{
-		m_particleData.VelocityVariation.x = (Randomiser::Instance()->GetRandNumUniform(1.0f, 5.0f));
-		m_particleData.VelocityVariation.y = (Randomiser::Instance()->GetRandNumUniform(-10.0f, 1.0f));
+		m_particleData.VelocityVariation.x = (Randomiser::GetRandNumUniform(1.0f, 5.0f));
+		m_particleData.VelocityVariation.y = (Randomiser::GetRandNumUniform(-10.0f, 1.0f));
 		m_particleData.VelocityVariation.Normalize();
-		m_particleData.VelocityVariation *= Randomiser::Instance()->GetRandNumUniform(1.0f, 40.0f);
+		m_particleData.VelocityVariation *= Randomiser::GetRandNumUniform(1.0f, 40.0f);
 
 		m_particleSystem->Emit(m_particleData);
 	}
@@ -567,6 +585,7 @@ void GameplayGameState::Render(Graphics* graphics)
 	m_NPCManager->Render(graphics);
 	m_particleSystem->Render(graphics); 
 	m_propManager->Render(graphics);
+	m_pickupManager->Render(graphics);
 	LevelCollision::Render(graphics);
 
 	for(auto* it : m_activeImpacts)
@@ -625,4 +644,25 @@ void GameplayGameState::TogglePlayerHud()
 	if(hud == nullptr) return;
 
 	hud->ForceHide(m_hidePlayerHud);
+}
+
+bool GameplayGameState::TryPickup()
+{
+	std::vector<Pickup*> pickups = m_pickupManager->GetPickupList();
+	for(size_t i = 0; i < pickups.size();)
+	{
+		auto pickup = pickups[i];
+
+		if(!m_player->GetHitBoxManager()->GetPushBox().OnCollision(pickup->GetPosition()))
+		{
+			i++;
+			continue;
+		}
+
+		pickup->ApplyEffect();
+		m_pickupManager->RemovePickup(pickup);
+		return true;
+	}
+
+	return false;
 }
