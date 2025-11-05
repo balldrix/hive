@@ -64,8 +64,7 @@ private:
 	void								StrongAttack();
 	void								SpecialAttack();
 	void								Attack(std::string attackName);
-	void								InitStats();
-	void								UpdateStats();
+	void								UpdateStats(bool animate);
 	void								RegisterEvents();
 	void								PlaySound(const std::string& id);
 	void								PlayAttackSound(const std::string& name);

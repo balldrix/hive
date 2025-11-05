@@ -74,7 +74,6 @@ void LoadingGameState::Update(float deltaTime)
 	
 	if(!m_isDone)
 	{
-		m_gameStateManager->GetState(s_targetGameState->GetStateName())->Setup();
 		m_isDone = true;
 		return;
 	}

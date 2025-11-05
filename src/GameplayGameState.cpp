@@ -95,6 +95,9 @@ GameplayGameState::~GameplayGameState()
 
 void GameplayGameState::OnEntry()
 {
+	Setup();
+
+	// @TODO remove these test calls
 	m_player->SetHealth(50);
 	UIManager::ShowUI(true);
 }
@@ -107,6 +110,8 @@ void GameplayGameState::Setup()
 {
 	TilemapLoader::Init();
 
+	// @TOOD use level system to choose which map to load, including save states
+	//
 	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_lift.json");
 	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_trailer-level-showcase.json");
 	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_demo.json");

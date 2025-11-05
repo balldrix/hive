@@ -166,7 +166,7 @@ void Player::Init(ControlSystem* controlSystem, CutsceneManager* cutsceneManager
 		"playerImpact_002"
 	};
 
-	InitStats();
+	UpdateStats(false);
 	RegisterEvents();
 	m_active = true;
 }
@@ -220,7 +220,7 @@ void Player::Update(float deltaTime)
 		IncreaseSpecial(CriticalHealthSpecialRate * deltaTime);
 	}
 
-	UpdateStats();
+	UpdateStats(true);
 }
 
 void Player::Kill()
@@ -510,14 +510,14 @@ void Player::Attack(std::string attackName)
 	m_stateMachine->ChangeState(PlayerAttackState::Instance());
 }
 
-void Player::InitStats()
+void Player::UpdateStats(bool animate)
 {
 	UIBarView* healthbar = static_cast<UIBarView*>(UIManager::GetView("Player Health Bar"));
 
 	if(healthbar)
 	{
 		healthbar->SetMaxValue((float)m_playerDefinition.hp);
-		healthbar->SetCurrentValue((float)m_health);
+		healthbar->SetCurrentValue((float)m_health, animate);
 	}
 
 	UIBarView* specialbar = static_cast<UIBarView*>(UIManager::GetView("Player Special Bar"));
@@ -525,26 +525,7 @@ void Player::InitStats()
 	if(specialbar)
 	{
 		specialbar->SetMaxValue(MaxSpecial);
-		specialbar->SetCurrentValue(m_special);
-	}
-}
-
-void Player::UpdateStats()
-{
-	UIBarView* healthbar = static_cast<UIBarView*>(UIManager::GetView("Player Health Bar"));
-
-	if(healthbar)
-	{
-		healthbar->SetMaxValue((float)m_playerDefinition.hp);
-		healthbar->SetCurrentValue((float)m_health, false);
-	}
-
-	UIBarView* specialbar = static_cast<UIBarView*>(UIManager::GetView("Player Special Bar"));
-
-	if(specialbar)
-	{
-		specialbar->SetMaxValue(MaxSpecial);
-		specialbar->SetCurrentValue(m_special, true);
+		specialbar->SetCurrentValue(m_special, animate);
 	}
 }
 

@@ -43,7 +43,7 @@ public:
 private:
 	float m_currentValue;
 	float m_targetValue;
-	float	m_maxValue;
+	float m_maxValue;
 	unsigned int m_width;
 	unsigned int m_height;
 	bool m_isUpdating;
