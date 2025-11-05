@@ -28,7 +28,7 @@ PropManager::~PropManager()
 	Shutdown();
 }
 
-void PropManager::Init(Camera* camera)
+void PropManager::Init(Camera* camera, Player* player)
 {
 	m_debugSprite = new Sprite();
 	m_debugSprite->Init(AssetLoader::GetTexture("t_pixel"));
@@ -65,7 +65,7 @@ void PropManager::Init(Camera* camera)
 				isBreakable = j->customProperties.contains("isBreakable") && j->customProperties.at("isBreakable") == "true";
 
 				prop = new Prop();
-				prop->Init(id, j->name, camera, Vector2(j->x, j->y), collider, isAnimated, isBreakable, this);
+				prop->Init(id, j->name, camera, player, Vector2(j->x, j->y), collider, isAnimated, isBreakable, this);
 				m_propList.push_back(prop);
 			}
 		}

@@ -102,10 +102,12 @@ void GameObject::Update(float deltaTime)
 
 	if(velocity.x > 0 && LevelCollision::IsCollision(Vector2(newPosition.x + pushBox.GetWidth(), m_groundPosition.y)))
 	{
+		FlipHorizontally(false);
 		velocity.x = 0;
 	}
 	else if(velocity.x < 0 && LevelCollision::IsCollision(Vector2(newPosition.x - pushBox.GetWidth(), m_groundPosition.y)))
 	{
+		FlipHorizontally(true);
 		velocity.x = 0;
 	}
 

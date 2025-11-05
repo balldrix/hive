@@ -82,7 +82,6 @@ private:
 
 	Player*						m_playerTarget;
 	Sprite*						m_portraitSprite;
-	Sprite*						m_hitBoxSprite;
 	float						m_stateChangeTimer;
 	float						m_flashingTimer;
 	bool						m_isFlashing;

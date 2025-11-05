@@ -156,29 +156,30 @@ void Enemy::Init(const std::string& id,
 	m_vocalSoundSource = new SoundSource();
 	m_vocalSoundSource->SetTarget(this);
 	m_vocalSoundSource->SetLooping(false);
-	m_vocalSoundSource->SetRelative(true);
+	m_vocalSoundSource->SetRelative(false);
 
 	m_footStepSoundSource = new SoundSource();
 	m_footStepSoundSource->SetTarget(this);
 	m_footStepSoundSource->SetLooping(true);
-	m_footStepSoundSource->SetRelative(true);
+	m_footStepSoundSource->SetRelative(false);
 
 	m_attackSoundSource = new SoundSource();
 	m_attackSoundSource->SetTarget(this);
 	m_attackSoundSource->SetLooping(false);
-	m_attackSoundSource->SetRelative(true);
+	m_attackSoundSource->SetRelative(false);
 
 	m_impactSoundSource = new SoundSource();
 	m_impactSoundSource->SetTarget(this);
 	m_impactSoundSource->SetLooping(false);
-	m_impactSoundSource->SetRelative(true);
+	m_impactSoundSource->SetRelative(false);
 
 	AudioEngine::Instance()->AddSoundSource(m_vocalSoundSource, false);
 	AudioEngine::Instance()->AddSoundSource(m_footStepSoundSource, false);
 	AudioEngine::Instance()->AddSoundSource(m_attackSoundSource, true);
 	AudioEngine::Instance()->AddSoundSource(m_impactSoundSource, false);
 
-	m_impactSounds = {
+	m_impactSounds =
+	{
 		"enemyImpact_001",
 		"enemyImpact_002",
 		"enemyImpact_003",

@@ -4,7 +4,7 @@
 
 namespace GameplayConstants
 {
-	const float VerticalHitRange = 8.0f;
+	const float VerticalHitRange = 5.0f;
 	const float	Gravity = 4.0f;
 	const int GameplayBoundsUpperY = 72;
 	const int GameplayBoundsLowerY = 115;

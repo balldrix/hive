@@ -5,6 +5,7 @@
 #include "EventManager.h"
 #include "Logger.h"
 #include "ShowUIEvent.h"
+#include "Sound.h"
 #include "SoundSource.h"
 #include "UIFrontEndView.h"
 #include "UIHudView.h"
@@ -12,6 +13,7 @@
 #include "UISystemView.h"
 #include "UIView.h"
 
+#include <algorithm>
 #include <fmt/core.h>
 #include <string>
 

@@ -5,7 +5,9 @@
 #include "Logger.h"
 #include "UIManager.h"
 
+#include <fmt/core.h>
 #include <string>
+#include <Windows.h>
 
 GameStateManager* GameStateManager::s_instance = nullptr;
 

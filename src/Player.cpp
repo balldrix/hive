@@ -42,6 +42,7 @@
 
 #include <algorithm>
 #include <directxtk/SimpleMath.h>
+#include <fmt/core.h>
 #include <fstream>
 #include <string>
 #include <system_error>
@@ -167,7 +168,8 @@ void Player::Init(ControlSystem* controlSystem, CutsceneManager* cutsceneManager
 	AudioEngine::Instance()->AddSoundSource(m_vocalSoundSource, false);
 	AudioEngine::Instance()->AddSoundSource(m_impactSoundSource, false);
 
-	m_impactSounds = {
+	m_impactSounds =
+	{
 		"playerImpact_001",
 		"playerImpact_002"
 	};

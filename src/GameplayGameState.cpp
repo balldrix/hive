@@ -95,6 +95,8 @@ GameplayGameState::~GameplayGameState()
 
 void GameplayGameState::OnEntry()
 {
+	if(m_gameStateManager->GetPreviousState()->GetStateName() != "FadeTransition") return;
+
 	Setup();
 
 	// @TODO remove these test calls
@@ -133,7 +135,7 @@ void GameplayGameState::Setup()
 	m_camera->SetTarget(m_player);
 	m_levelRenderer->Init(m_camera);
 	m_enemySpawnManager->Init();
-	m_propManager->Init(m_camera);
+	m_propManager->Init(m_camera, m_player	);
 	m_pickupManager->Init(m_camera);
 	LevelCollision::CreateBounds(m_levelRenderer);
 
@@ -544,13 +546,17 @@ void GameplayGameState::ProcessCollisions()
 		Collider propCollider = prop->GetCollider();
 		if(!prop->IsBreakable()) continue;
 
+		Vector2 dropPosition = Vector2(propCollider.GetLeft() + propCollider.GetWidth() * 0.5f,
+			propCollider.GetTop() + propCollider.GetHeight());
+		float propYPosition = dropPosition.y;
+		float range = fabs(propYPosition - playerGroundPositionY);
+
+		if(range > VerticalHitRange) continue;
+
 		if(playerHitBox.OnCollision(propCollider))
 		{
 			prop->Break();
 			LevelCollision::RemoveCollider(prop->GetID());
-
-			Vector2 dropPosition = Vector2(propCollider.GetLeft() + propCollider.GetWidth() * 0.5f,
-				propCollider.GetTop() + propCollider.GetHeight());
 
 			m_pickupManager->TrySpawnPickup(dropPosition);
 

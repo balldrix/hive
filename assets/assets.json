@@ -348,6 +348,30 @@
     "tag": "gameplay_assets"
   },
   {
+    "id": "s_breakBox_001",
+    "path": "assets\\sounds\\breakBox_001.wav",
+    "type": "audio",
+    "tag": "gameplay_assets"
+  },
+  {
+    "id": "s_breakBox_002",
+    "path": "assets\\sounds\\breakBox_002.wav",
+    "type": "audio",
+    "tag": "gameplay_assets"
+  },
+  {
+    "id": "s_breakBox_003",
+    "path": "assets\\sounds\\breakBox_003.wav",
+    "type": "audio",
+    "tag": "gameplay_assets"
+  },
+  {
+    "id": "s_breakBox_004",
+    "path": "assets\\sounds\\breakBox_004.wav",
+    "type": "audio",
+    "tag": "gameplay_assets"
+  },
+  {
     "id": "t_portrait_frame",
     "path": "assets\\textures\\ui\\portrait_frame.png",
     "type": "texture",

@@ -6,6 +6,7 @@ class Camera;
 class Graphics;
 class Prop;
 class Sprite;
+class Player;
 
 class PropManager
 {
@@ -13,7 +14,7 @@ public:
 	PropManager();
 	~PropManager();
 
-	void Init(Camera* camera);
+	void Init(Camera* camera, Player* player);
 	void Update(float deltaTime);
 	void Render(Graphics* graphics);
 	void Remove(Prop* prop);

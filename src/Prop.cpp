@@ -4,12 +4,15 @@
 #include "AnimatedSpriteData.h"
 #include "Animator.h"
 #include "AssetLoader.h"
+#include "AudioEngine.h"
 #include "Camera.h"
 #include "Collider.h"
 #include "GameDataManager.h"
 #include "GameObject.h"
 #include "Graphics.h"
+#include "Player.h"
 #include "PropManager.h"
+#include "SoundSource.h"
 #include "SpriteFrameData.h"
 #include "SpriteSheet.h"
 
@@ -33,7 +36,7 @@ Prop::~Prop()
 	Shutdown();
 }
 
-void Prop::Init(const std::string& id, const std::string& name, Camera* camera, const Vector2& position, Collider collider, bool isAnimated, bool isBreakable, PropManager* propManager)
+void Prop::Init(const std::string& id, const std::string& name, Camera* camera, Player* player, const Vector2& position, Collider collider, bool isAnimated, bool isBreakable, PropManager* propManager)
 {
 	m_id = id;
 	m_camera = camera;
@@ -56,6 +59,23 @@ void Prop::Init(const std::string& id, const std::string& name, Camera* camera, 
 	m_spritesheet = new Spritesheet();
 	m_spritesheet->Init(AssetLoader::GetTexture(fmt::format("t_{0}", name)), spriteFrameData);
 	m_spritesheet->SetOrigin(Vector2::Zero);
+
+	if(!isBreakable) return;
+
+	m_impactSoundSource = new SoundSource();
+	m_impactSoundSource->SetTarget(player);
+	m_impactSoundSource->SetLooping(false);
+	m_impactSoundSource->SetRelative(false);
+
+	AudioEngine::Instance()->AddSoundSource(m_impactSoundSource, false);
+
+	m_impactSounds =
+	{
+		"breakBox_001",
+		"breakBox_002",
+		"breakBox_003",
+		"breakBox_004",
+	};
 }
 
 void Prop::Update(float deltaTime)
@@ -94,10 +114,16 @@ void Prop::Break()
 {
 	m_hasBroken = true;
 	m_animator->SetAnimation("break");
+	PlayImpactSound();
 }
 
 void Prop::Shutdown()
 {
+	AudioEngine::Instance()->RemoveSoundSource(m_impactSoundSource);
+
+	delete m_impactSoundSource;
+	m_impactSoundSource = nullptr;
+
 	delete m_spritesheet;
 	m_spritesheet = nullptr;
 
