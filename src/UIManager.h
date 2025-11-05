@@ -60,7 +60,7 @@ public:
 
 	static void Destroy();
 
-	void ShowUI(bool show);
+	static void ShowUI(bool show);
 
 private:
 	UIManager();

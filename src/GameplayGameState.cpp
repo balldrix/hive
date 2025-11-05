@@ -95,6 +95,8 @@ GameplayGameState::~GameplayGameState()
 
 void GameplayGameState::OnEntry()
 {
+	m_player->SetHealth(50);
+	UIManager::ShowUI(true);
 }
 
 void GameplayGameState::OnExit()
@@ -659,7 +661,7 @@ bool GameplayGameState::TryPickup()
 			continue;
 		}
 
-		pickup->ApplyEffect();
+		pickup->ApplyEffect(m_player);
 		m_pickupManager->RemovePickup(pickup);
 		return true;
 	}

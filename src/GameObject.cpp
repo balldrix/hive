@@ -12,6 +12,7 @@
 #include "Sound.h"
 #include "SpriteFx.h"
 
+#include <algorithm>
 #include <directxtk/SimpleMath.h>
 #include <directxtk/SpriteBatch.h>
 #include <string>
@@ -299,6 +300,11 @@ void GameObject::SetDeceleration(float decel)
 void GameObject::SetHealth(int health)
 {
 	m_health = health;
+}
+
+void GameObject::IncreaseHealth(int amount)
+{
+	m_health = std::clamp(m_health + amount, 0, GetMaxHealth());
 }
 
 void GameObject::SetGrounded(bool grounded)

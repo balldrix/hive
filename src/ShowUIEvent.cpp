@@ -27,7 +27,7 @@ void ShowUIEvent::OnStart(EventArgument arg)
 	}
 
 	m_show = std::get<bool>(arg);
-	m_uiManager->ShowUI(m_show);
+	UIManager::ShowUI(m_show);
 	m_hasStarted = true;
 	m_isComplete = false;
 }

@@ -4,11 +4,11 @@
 
 class Player;
 
-class HealthPickup : public Pickup
+class FullSpecialPickup : public Pickup
 {
 public:
-	HealthPickup();
-	~HealthPickup() {};
+	FullSpecialPickup();
+	~FullSpecialPickup() {};
 
 	void ApplyEffect(Player* player) override;
 };

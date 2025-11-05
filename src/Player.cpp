@@ -40,6 +40,7 @@
 #include "UIManager.h"
 #include "UnitVectors.h"
 
+#include <algorithm>
 #include <directxtk/SimpleMath.h>
 #include <fstream>
 #include <string>
@@ -269,6 +270,11 @@ void Player::AddKill()
 
 	if(milestoneView)
 		milestoneView->SetValue(m_kills);
+}
+
+void Player::SetSpecial(float amount)
+{
+	m_special = std::clamp(amount, 0.0f, static_cast<float>(MaxSpecial));
 }
 
 void Player::IncreaseSpecial(float value)
@@ -530,7 +536,7 @@ void Player::UpdateStats()
 	if(healthbar)
 	{
 		healthbar->SetMaxValue((float)m_playerDefinition.hp);
-		healthbar->SetCurrentValue((float)m_health, true);
+		healthbar->SetCurrentValue((float)m_health, false);
 	}
 
 	UIBarView* specialbar = static_cast<UIBarView*>(UIManager::GetView("Player Special Bar"));

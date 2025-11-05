@@ -54,6 +54,7 @@ public:
 	void								Respawn();
 	void								ResetKnockoutTimer();
 	void								AddKill();
+	void								SetSpecial(float amount);
 	void								IncreaseSpecial(float value = 1.0f);
 	bool								IsSpecialReady() const { return m_special == MaxSpecial; }
 

@@ -23,6 +23,8 @@
     <ClCompile Include="src\DustFXEvent.cpp" />
     <ClCompile Include="src\EventManager.cpp" />
     <ClCompile Include="src\EnemySpawnManager.cpp" />
+    <ClCompile Include="src\FullHealthPickup.cpp" />
+    <ClCompile Include="src\FullSpecialPickup.cpp" />
     <ClCompile Include="src\HealthPickup.cpp" />
     <ClCompile Include="src\IEvent.h" />
     <ClCompile Include="src\ImpactFxPool.cpp" />
@@ -32,6 +34,7 @@
     <ClCompile Include="src\LevelCollision.cpp" />
     <ClCompile Include="src\MoveNPCEvent.cpp" />
     <ClCompile Include="src\MovePlayerEvent.cpp" />
+    <ClCompile Include="src\Pickup.cpp" />
     <ClCompile Include="src\PickupManager.cpp" />
     <ClCompile Include="src\PlayAnimationEvent.cpp" />
     <ClCompile Include="src\PlaySoundEvent.cpp" />
@@ -45,6 +48,7 @@
     <ClCompile Include="src\SettingsManager.cpp" />
     <ClCompile Include="src\ShowUIEvent.cpp" />
     <ClCompile Include="src\SpawnNPCEvent.cpp" />
+    <ClCompile Include="src\SpecialPickup.cpp" />
     <ClCompile Include="src\TilemapLoader.cpp" />
     <ClCompile Include="src\UICycleMenuItemView.cpp" />
     <ClCompile Include="src\UIMenuView.cpp" />
@@ -94,6 +98,8 @@
     <ClCompile Include="src\Utils.h" />
     <ClCompile Include="src\UISprite.cpp" />
     <ClCompile Include="src\UICycleMenuItemView.h" />
+    <ClInclude Include="src\FullHealthPickup.h" />
+    <ClInclude Include="src\FullSpecialPickup.h" />
     <ClInclude Include="src\HealthPickup.h" />
     <ClInclude Include="src\Pickup.h" />
     <ClInclude Include="src\PickupManager.h" />
@@ -117,6 +123,7 @@
     <ClInclude Include="src\EnemyDefinition.h" />
     <ClInclude Include="src\EnemySpawnManager.h" />
     <ClInclude Include="src\ImpactFxPool.h" />
+    <ClInclude Include="src\SpecialPickup.h" />
     <ClInclude Include="src\UIMenuView.h" />
     <ClInclude Include="src\UIPanelContainer.h" />
     <ClInclude Include="src\UIPauseMenuView.h" />

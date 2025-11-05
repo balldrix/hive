@@ -252,7 +252,7 @@ void UIManager::Destroy()
 
 void UIManager::ShowUI(bool show)
 {
-	UIHudView* uiHudView = m_uiMainView->GetUIHudView();
+	UIHudView* uiHudView = s_instance->m_uiMainView->GetUIHudView();
 	if(show) uiHudView->TransitionIn(true);
 	else uiHudView->TransitionOut(true);
 }

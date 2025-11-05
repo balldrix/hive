@@ -8,10 +8,10 @@
 #include "UIPortraitView.h"
 #include "UIView.h"
 
+#include <algorithm>
 #include <cmath>
 #include <directxtk/SimpleMath.h>
 #include <string>
-#include <algorithm>
 
 UIPlayerStatsView::UIPlayerStatsView() :
 	m_portraitView(nullptr),
@@ -44,10 +44,10 @@ void UIPlayerStatsView::Init(std::string name)
 	m_healthBar = new UIBarView();
 	m_healthBar->SetWidth(95);
 	m_healthBar->Init("Player Health Bar");
+	m_healthBar->SetFrameTexture(AssetLoader::GetTexture("t_bar_frame_player_health"));
 	m_healthBar->SetBackgroundTexture(AssetLoader::GetTexture("t_pixel"));
 	m_healthBar->SetBackgroundColour(BackgroundColour);
 	m_healthBar->SetFillTexture(AssetLoader::GetTexture("t_bar_fill_green"));
-	m_healthBar->SetFrameTexture(AssetLoader::GetTexture("t_bar_frame_player_health"));
 	m_healthBar->SetPosition(m_healthBarStartPosition);
 	m_healthBar->SetActive(true);
 	
@@ -55,12 +55,13 @@ void UIPlayerStatsView::Init(std::string name)
 
 	m_specialBarStartPosition = Vector2(24.0f, 125.0f);
 	m_specialBar = new UIBarView();
+	m_specialBar->SetHeight(10);
 	m_specialBar->SetWidth(63);
 	m_specialBar->Init("Player Special Bar");
+	m_specialBar->SetFrameTexture(AssetLoader::GetTexture("t_bar_frame_player_special"));
 	m_specialBar->SetBackgroundTexture(AssetLoader::GetTexture("t_pixel"));
 	m_specialBar->SetBackgroundColour(BackgroundColour);
 	m_specialBar->SetFillTexture(AssetLoader::GetTexture("t_bar_fill_yellow"));
-	m_specialBar->SetFrameTexture(AssetLoader::GetTexture("t_bar_frame_player_special"));
 	m_specialBar->SetPosition(m_specialBarStartPosition);
 	m_specialBar->SetActive(true);
 

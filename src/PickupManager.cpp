@@ -1,11 +1,16 @@
 #include "PickupManager.h"
 
 #include "AssetLoader.h"
+#include "FullHealthPickup.h"
+#include "FullSpecialPickup.h"
 #include "HealthPickup.h"
 #include "Pickup.h"
 #include "Randomiser.h"
+#include "SpecialPickup.h"
+#include "Texture.h"
 
 #include <algorithm>
+#include <DirectXColors.h>
 #include <directxtk/SimpleMath.h>
 #include <fmt/core.h>
 
@@ -54,12 +59,6 @@ void PickupManager::Render(Graphics* graphics)
 
 void PickupManager::TrySpawnPickup(const Vector2& position)
 {
-	HealthPickup* healthPickup = new HealthPickup();
-	healthPickup->Init(fmt::format("health_pickup_{0}", m_spawnCount), position, m_camera, AssetLoader::GetTexture("t_pickup"));
-	m_pickupList.push_back(healthPickup);
-	m_spawnCount++;
-	return;
-
 	float totalWeight = 0.0f;
 	for(const auto& wp : m_weightedList)
 		totalWeight += wp.weight;
@@ -75,25 +74,41 @@ void PickupManager::TrySpawnPickup(const Vector2& position)
 		cumulative += wp.weight;
 		if(roll <= cumulative)
 		{
+			Texture* texture = AssetLoader::GetTexture("t_pickup");
+
 			switch(wp.type)
 			{
-			case PickupType::None:
-				// No pickup spawned
-				return;
-			case PickupType::Health:
-				HealthPickup* healthPickup = new HealthPickup();
-				healthPickup->Init(fmt::format("health_pickup_{0}", m_spawnCount), position, m_camera, AssetLoader::GetTexture("t_pickup"));
-				m_pickupList.push_back(healthPickup);
-				break;
-			//case PickupType::Special:
-			//	// Spawn special pickup
-			//	break;
-			//case PickupType::FullHealth:
-			//	// Spawn full health pickup
-			//	break;
-			//case PickupType::FullSpecial:
-			//	// Spawn full special pickup
-			//	break;
+				case PickupType::None:
+					// No pickup spawned
+					return;
+				case PickupType::Health:
+				{
+					HealthPickup* healthPickup = new HealthPickup();
+					healthPickup->Init(fmt::format("health_pickup_{0}", m_spawnCount), position, m_camera, texture, Colors::LightBlue.v);
+					m_pickupList.push_back(healthPickup);
+					break;
+				}
+				case PickupType::Special:
+				{
+					SpecialPickup* specialPickup = new SpecialPickup();
+					specialPickup->Init(fmt::format("special_pickup_{0}", m_spawnCount), position, m_camera, texture, Colors::Yellow.v);
+					m_pickupList.push_back(specialPickup);
+					break;
+				}
+				case PickupType::FullHealth:
+				{
+					FullHealthPickup* fullHealthPickup = new FullHealthPickup();
+					fullHealthPickup->Init(fmt::format("fullhealth_pickup_{0}", m_spawnCount), position, m_camera, texture, Colors::DarkBlue.v);
+					m_pickupList.push_back(fullHealthPickup);
+					break;
+				}
+				case PickupType::FullSpecial:
+				{
+					FullSpecialPickup* fullSpecialPickup = new FullSpecialPickup();
+					fullSpecialPickup->Init(fmt::format("fullspecial_pickup{0}", m_spawnCount), position, m_camera, texture, Colors::Orange.v);
+					m_pickupList.push_back(fullSpecialPickup);
+					break;
+				}
 			}
 			break;
 		}

@@ -59,6 +59,7 @@ public:
 	void				SetTargetVelocityX(float x);
 	void				SetTargetVelocityY(float y);
 	void				SetHealth(int health);
+	void				IncreaseHealth(int amount);
 	void				SetKnockbackCount(int count);
 	void				SetGrounded(bool grounded);
 	void				SetActive(bool active);
