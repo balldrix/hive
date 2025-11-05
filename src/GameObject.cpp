@@ -51,11 +51,6 @@ GameObject::GameObject() :
 
 GameObject::~GameObject()
 {
-	if(m_hitBoxManager)
-	{
-		delete m_hitBoxManager;
-		m_hitBoxManager = nullptr;
-	}
 }
 
 void GameObject::SetCamera(Camera* cam)

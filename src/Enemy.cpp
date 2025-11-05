@@ -51,7 +51,6 @@ Enemy::Enemy() :
 	m_playerTarget(nullptr),
 	m_stateMachine(nullptr),
 	m_portraitSprite(nullptr),
-	m_hitBoxSprite(nullptr),
 	m_vocalSoundSource(nullptr),
 	m_footStepSoundSource(nullptr),
 	m_attackSoundSource(nullptr),
@@ -85,7 +84,6 @@ void Enemy::DeleteAll()
 	delete m_dustFx;
 	delete m_stateMachine;
 	delete m_hitBoxManager;
-	delete m_hitBoxSprite;
 	delete m_animator;
 	delete m_shadow;
 	delete m_spritesheet;
@@ -98,7 +96,6 @@ void Enemy::DeleteAll()
 	m_dustFx = nullptr;
 	m_stateMachine = nullptr;
 	m_hitBoxManager = nullptr;
-	m_hitBoxSprite = nullptr;
 	m_animator = nullptr;
 	m_shadow = nullptr;
 	m_spritesheet = nullptr;

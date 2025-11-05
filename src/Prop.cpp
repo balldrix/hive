@@ -1,5 +1,6 @@
 #include "Prop.h"
 
+#include "AABB.h"
 #include "AnimatedSpriteData.h"
 #include "Animator.h"
 #include "AssetLoader.h"
@@ -16,7 +17,6 @@
 #include <fmt/core.h>
 #include <string>
 #include <vector>
-#include "AABB.h"
 
 Prop::Prop() :
 	GameObject(),

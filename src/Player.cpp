@@ -80,6 +80,9 @@ Player::~Player()
 	delete m_attackSoundSource;
 	delete m_dustFx;
 	delete m_stateMachine;
+	delete m_hitBoxManager;
+	delete m_animator;
+	delete m_shadow;
 	delete m_spritesheet;
 
 	m_impactSoundSource = nullptr;
@@ -88,6 +91,9 @@ Player::~Player()
 	m_attackSoundSource = nullptr;
 	m_dustFx = nullptr;
 	m_stateMachine = nullptr;
+	m_hitBoxManager = nullptr;
+	m_animator = nullptr;
+	m_shadow = nullptr;
 	m_spritesheet = nullptr;
 }
 
