@@ -98,7 +98,7 @@
     <ClCompile Include="src\Utils.h" />
     <ClCompile Include="src\UISprite.cpp" />
     <ClCompile Include="src\UICycleMenuItemView.h" />
-    <ClInclude Include="PlayerPickupState.h" />
+    <ClInclude Include="src\PlayerPickupState.h" />
     <ClInclude Include="src\FullHealthPickup.h" />
     <ClInclude Include="src\FullSpecialPickup.h" />
     <ClInclude Include="src\HealthPickup.h" />

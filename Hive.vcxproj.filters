@@ -980,7 +980,7 @@
     <ClInclude Include="src\FullSpecialPickup.h">
       <Filter>Game\Pickups</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerPickupState.h">
+    <ClInclude Include="src\PlayerPickupState.h">
       <Filter>Game\Player\States</Filter>
     </ClInclude>
   </ItemGroup>
