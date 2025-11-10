@@ -66,7 +66,7 @@ add_executable(${PROJECT_NAME} src/main.cpp src/AABB.cpp src/Animator.cpp src/Au
 								src/SpawnNPCEvent.h src/SpawnNPCEvent.cpp src/DustFXEvent.h src/DustFXEvent.cpp src/ShowUIEvent.h src/ShowUIEvent.cpp
 								src/PropManager.h src/PropManager.cpp src/Prop.h src/Prop.cpp src/Pickup.h src/HealthPickup.h src/HealthPickup.cpp src/PickupManager.h src/PickupManager.cpp
 								src/FullHealthPickup.h src/FullHealthPickup.cpp src/SpecialPickup.h src/SpecialPickup.cpp src/FullSpecialPickup.h src/FullSpecialPickup.cpp
-								src/Pickup.cpp
+								src/Pickup.cpp PlayerPickupState.h PlayerPickupState.cpp
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Microsoft::DirectXTK)
 target_link_libraries(${PROJECT_NAME} PRIVATE nlohmann_json::nlohmann_json)

@@ -391,8 +391,12 @@
     <ClCompile Include="src\FullHealthPickup.cpp">
       <Filter>Game\Pickups</Filter>
     </ClCompile>
-    <ClCompile Include="src\SpecialPickup.cpp" />
-    <ClCompile Include="src\FullSpecialPickup.cpp" />
+    <ClCompile Include="src\FullSpecialPickup.cpp">
+      <Filter>Game\Pickups</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SpecialPickup.cpp">
+      <Filter>Game\Pickups</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -975,6 +979,9 @@
     </ClInclude>
     <ClInclude Include="src\FullSpecialPickup.h">
       <Filter>Game\Pickups</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerPickupState.h">
+      <Filter>Game\Player\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

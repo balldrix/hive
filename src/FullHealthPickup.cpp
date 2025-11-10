@@ -15,6 +15,6 @@ void FullHealthPickup::ApplyEffect(Player* player)
 
 void FullHealthPickup::Shutdown()
 {
-	delete m_sprite;
-	m_sprite = nullptr;
+	delete m_spritesheet;
+	m_spritesheet = nullptr;
 }

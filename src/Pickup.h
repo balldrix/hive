@@ -6,10 +6,11 @@
 using namespace DirectX::SimpleMath;
 
 class Camera;
-class Graphics;
-class Sprite;
 class Texture;
+class Graphics;
 class Player;
+class Spritesheet;
+class Animator;
 
 class Pickup
 {
@@ -30,5 +31,6 @@ protected:
 
 	Vector2 m_position;
 	Camera* m_camera;
-	Sprite* m_sprite;
+	Spritesheet* m_spritesheet;
+	Animator* m_animator;
 };
