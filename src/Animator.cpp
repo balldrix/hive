@@ -32,8 +32,7 @@ void Animator::Init(const std::string& ownerId, AnimatedSpriteData animatedSprit
 
 void Animator::Update(float deltaTime)
 {
-	if(m_paused)
-		return;
+	if(m_paused) return;
 
 	m_animationTimer += deltaTime;
 

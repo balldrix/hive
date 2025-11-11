@@ -180,8 +180,8 @@
     "tag": "gameplay_assets"
   },
   {
-    "id": "t_waste-box",
-    "path": "assets\\textures\\waste-box.png",
+    "id": "t_crate",
+    "path": "assets\\textures\\crate_spritesheet.png",
     "type": "texture",
     "tag": "gameplay_assets"
   },

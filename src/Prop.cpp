@@ -82,7 +82,7 @@ void Prop::Update(float deltaTime)
 {
 	if(m_animator) m_animator->Update(deltaTime);
 
-	if(m_hasBroken && m_animator && m_animator->IsDone())
+	if(m_hasBroken && m_animator && m_animator->IsDone() && m_impactSoundSource->GetSource() == nullptr)
 	{
 		m_propManager->Remove(this);
 	}
@@ -94,7 +94,8 @@ void Prop::Render(Graphics* graphics)
 
 	if(m_isAnimated || m_isBreakable)
 	{
-		m_spritesheet->Render(graphics, m_position - m_camera->GetPosition(), m_animator->GetCurrentFrame());
+		int frameNum = m_animator->GetCurrentFrame() + m_animator->GetAnimation().from;
+		m_spritesheet->Render(graphics, m_position - m_camera->GetPosition(), frameNum);
 		return;
 	}
 

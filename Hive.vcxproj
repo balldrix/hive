@@ -315,6 +315,7 @@
     <None Include="assets\data\hitboxes\waste-lobster_hitbox.json" />
     <None Include="assets\data\player\playerDefinition.json" />
     <None Include="assets\data\spritesheets\broken-gadget_spritesheet.json" />
+    <None Include="assets\data\spritesheets\crate_spritesheet.json" />
     <None Include="assets\data\spritesheets\dustfx_spritesheet.json" />
     <None Include="assets\data\spritesheets\impactfx_spritesheet.json" />
     <None Include="assets\data\spritesheets\jungle-ape_spritesheet.json" />
@@ -338,6 +339,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\textures\broken-gadget_spritesheet.png" />
+    <Image Include="assets\textures\crate_spritesheet.png" />
     <Image Include="assets\textures\dustfx.png" />
     <Image Include="assets\textures\health-pickup.png" />
     <Image Include="assets\textures\impactfx.png" />

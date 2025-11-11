@@ -1075,6 +1075,7 @@
     <None Include="assets\data\hitboxes\jungle-ape_hitbox.json">
       <Filter>Assets\Data\Spritesheets</Filter>
     </None>
+    <None Include="assets\data\spritesheets\crate_spritesheet.json" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\textures\mook_spritesheet.png">
@@ -1200,6 +1201,7 @@
     <Image Include="assets\textures\waste-box.png">
       <Filter>Assets\Textures</Filter>
     </Image>
+    <Image Include="assets\textures\crate_spritesheet.png" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\sounds\swingNormal_001.wav">

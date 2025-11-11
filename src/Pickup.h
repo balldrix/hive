@@ -9,8 +9,7 @@ class Camera;
 class Texture;
 class Graphics;
 class Player;
-class Spritesheet;
-class Animator;
+class Sprite;
 
 class Pickup
 {
@@ -31,6 +30,5 @@ protected:
 
 	Vector2 m_position;
 	Camera* m_camera;
-	Spritesheet* m_spritesheet;
-	Animator* m_animator;
+	Sprite* m_sprite;
 };

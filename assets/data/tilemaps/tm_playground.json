@@ -313,13 +313,18 @@
                 {
                  "gid":2053,
                  "height":32,
-                 "id":22,
-                 "name":"waste-box",
+                 "id":27,
+                 "name":"crate",
                  "properties":[
                         {
                          "name":"collider",
                          "type":"string",
-                         "value":"{ \"x\": 11, \"y\": 10, \"width\": 11, \"height\": 14 }"
+                         "value":"{ \"x\": 23, \"y\": 17, \"width\": 20, \"height\": 14 }"
+                        }, 
+                        {
+                         "name":"isAnimated",
+                         "type":"bool",
+                         "value":true
                         }, 
                         {
                          "name":"isBreakable",
@@ -329,20 +334,25 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":32,
-                 "x":104,
-                 "y":52
+                 "width":64,
+                 "x":112,
+                 "y":48
                 }, 
                 {
                  "gid":2053,
                  "height":32,
-                 "id":23,
-                 "name":"waste-box",
+                 "id":28,
+                 "name":"crate",
                  "properties":[
                         {
                          "name":"collider",
                          "type":"string",
-                         "value":"{ \"x\": 11, \"y\": 10, \"width\": 11, \"height\": 14 }"
+                         "value":"{ \"x\": 23, \"y\": 17, \"width\": 20, \"height\": 14 }"
+                        }, 
+                        {
+                         "name":"isAnimated",
+                         "type":"bool",
+                         "value":true
                         }, 
                         {
                          "name":"isBreakable",
@@ -352,20 +362,25 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":32,
-                 "x":92,
-                 "y":52
+                 "width":64,
+                 "x":136,
+                 "y":48
                 }, 
                 {
                  "gid":2053,
                  "height":32,
-                 "id":24,
-                 "name":"waste-box",
+                 "id":29,
+                 "name":"crate",
                  "properties":[
                         {
                          "name":"collider",
                          "type":"string",
-                         "value":"{ \"x\": 11, \"y\": 10, \"width\": 11, \"height\": 14 }"
+                         "value":"{ \"x\": 23, \"y\": 17, \"width\": 20, \"height\": 14 }"
+                        }, 
+                        {
+                         "name":"isAnimated",
+                         "type":"bool",
+                         "value":true
                         }, 
                         {
                          "name":"isBreakable",
@@ -375,20 +390,25 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":32,
-                 "x":116,
-                 "y":52
+                 "width":64,
+                 "x":160,
+                 "y":48
                 }, 
                 {
                  "gid":2053,
                  "height":32,
-                 "id":25,
-                 "name":"waste-box",
+                 "id":30,
+                 "name":"crate",
                  "properties":[
                         {
                          "name":"collider",
                          "type":"string",
-                         "value":"{ \"x\": 11, \"y\": 10, \"width\": 11, \"height\": 14 }"
+                         "value":"{ \"x\": 23, \"y\": 17, \"width\": 20, \"height\": 14 }"
+                        }, 
+                        {
+                         "name":"isAnimated",
+                         "type":"bool",
+                         "value":true
                         }, 
                         {
                          "name":"isBreakable",
@@ -398,9 +418,93 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":32,
-                 "x":128,
-                 "y":52
+                 "width":64,
+                 "x":168,
+                 "y":80
+                }, 
+                {
+                 "gid":2053,
+                 "height":32,
+                 "id":31,
+                 "name":"crate",
+                 "properties":[
+                        {
+                         "name":"collider",
+                         "type":"string",
+                         "value":"{ \"x\": 23, \"y\": 17, \"width\": 20, \"height\": 14 }"
+                        }, 
+                        {
+                         "name":"isAnimated",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"isBreakable",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":144,
+                 "y":80
+                }, 
+                {
+                 "gid":2053,
+                 "height":32,
+                 "id":32,
+                 "name":"crate",
+                 "properties":[
+                        {
+                         "name":"collider",
+                         "type":"string",
+                         "value":"{ \"x\": 23, \"y\": 17, \"width\": 20, \"height\": 14 }"
+                        }, 
+                        {
+                         "name":"isAnimated",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"isBreakable",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":120,
+                 "y":80
+                }, 
+                {
+                 "gid":2053,
+                 "height":32,
+                 "id":33,
+                 "name":"crate",
+                 "properties":[
+                        {
+                         "name":"collider",
+                         "type":"string",
+                         "value":"{ \"x\": 23, \"y\": 17, \"width\": 20, \"height\": 14 }"
+                        }, 
+                        {
+                         "name":"isAnimated",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"isBreakable",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":96,
+                 "y":80
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -409,7 +513,7 @@
          "y":0
         }],
  "nextlayerid":35,
- "nextobjectid":27,
+ "nextobjectid":35,
  "orientation":"orthogonal",
  "renderorder":"left-up",
  "tiledversion":"1.11.2",
