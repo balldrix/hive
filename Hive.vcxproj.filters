@@ -397,6 +397,9 @@
     <ClCompile Include="src\SpecialPickup.cpp">
       <Filter>Game\Pickups</Filter>
     </ClCompile>
+    <ClCompile Include="src\PlayerPickupState.cpp">
+      <Filter>Game\Player\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -1075,7 +1078,9 @@
     <None Include="assets\data\hitboxes\jungle-ape_hitbox.json">
       <Filter>Assets\Data\Spritesheets</Filter>
     </None>
-    <None Include="assets\data\spritesheets\crate_spritesheet.json" />
+    <None Include="assets\data\spritesheets\crate_spritesheet.json">
+      <Filter>Assets\Data\Spritesheets</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\textures\mook_spritesheet.png">
@@ -1201,7 +1206,9 @@
     <Image Include="assets\textures\waste-box.png">
       <Filter>Assets\Textures</Filter>
     </Image>
-    <Image Include="assets\textures\crate_spritesheet.png" />
+    <Image Include="assets\textures\crate_spritesheet.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\sounds\swingNormal_001.wav">

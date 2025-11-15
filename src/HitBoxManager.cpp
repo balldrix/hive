@@ -9,9 +9,9 @@
 #include "Graphics.h"
 #include "HitBoxData.h"
 #include "Sprite.h"
-#include "Spritesheet.h"
 
 #include <directxtk/SimpleMath.h>
+#include <string>
 #include <vector>
 
 using namespace GameplayConstants;

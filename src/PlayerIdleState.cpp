@@ -8,6 +8,9 @@
 #include "PlayerSprintingState.h"
 #include "StateMachine.h"
 
+#include <directxtk/SimpleMath.h>
+#include <string>
+
 PlayerIdleState::PlayerIdleState(const std::string &name)
 {
 	m_name = name;

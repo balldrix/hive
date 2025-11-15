@@ -19,6 +19,6 @@ public:
 private:
 	PlayerIdleState() {}
 	~PlayerIdleState() {}
-	PlayerIdleState(const std::string &name);
+	PlayerIdleState(const std::string& name);
 	PlayerIdleState(const PlayerIdleState&);
 };

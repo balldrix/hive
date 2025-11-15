@@ -34,6 +34,7 @@
 #include "PlayerDeadState.h"
 #include "PlayerHurtState.h"
 #include "PlayerIdleState.h"
+#include "PlayerPickupState.h"
 #include "PlayerKnockbackState.h"
 #include "Prop.h"
 #include "PropManager.h"
@@ -674,6 +675,7 @@ bool GameplayGameState::TryPickup()
 
 		pickup->ApplyEffect(m_player);
 		m_pickupManager->RemovePickup(pickup);
+		m_player->GetStateMachine()->ChangeState(PlayerPickupState::Instance());
 		return true;
 	}
 
