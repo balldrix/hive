@@ -1271,5 +1271,8 @@
     <Media Include="assets\sounds\uiOpen.wav">
       <Filter>Assets\Sounds</Filter>
     </Media>
+    <Media Include="assets\sounds\pickup_001.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
   </ItemGroup>
 </Project>

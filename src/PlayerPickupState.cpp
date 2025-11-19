@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "PlayerIdleState.h"
 
+#include <directxtk/SimpleMath.h>
 #include <string>
 
 PlayerPickupState::PlayerPickupState(const std::string& name)
@@ -22,6 +23,8 @@ void PlayerPickupState::OnEnter(Player* player)
 	player->GetAnimator()->Reset();
 	player->GetAnimator()->SetAnimation(m_name);
 	player->GetHitBoxManager()->SetCollidersUsingTag(m_name);
+	player->PlaySound("pickup_001");
+	player->SetTargetVelocity(Vector2::Zero);
 }
 
 void PlayerPickupState::Execute(Player* player)

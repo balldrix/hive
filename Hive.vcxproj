@@ -383,6 +383,7 @@
     <Image Include="assets\tilesets\ts_master.png" />
   </ItemGroup>
   <ItemGroup>
+    <Media Include="assets\sounds\pickup_001.wav" />
     <Media Include="assets\sounds\swingNormal_001.wav" />
     <Media Include="assets\sounds\swingNormal_002.wav" />
     <Media Include="assets\sounds\swingNormal_003.wav" />

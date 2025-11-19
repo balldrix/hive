@@ -57,6 +57,7 @@ public:
 	void								SetSpecial(float amount);
 	void								IncreaseSpecial(float value = 1.0f);
 	bool								IsSpecialReady() const { return m_special == MaxSpecial; }
+	void								PlaySound(const std::string& id);
 
 private:
 	PlayerDefinition					LoadPlayerDefinition();
@@ -66,7 +67,6 @@ private:
 	void								Attack(std::string attackName);
 	void								UpdateStats(bool animate);
 	void								RegisterEvents();
-	void								PlaySound(const std::string& id);
 	void								PlayAttackSound(const std::string& name);
 	void								PlayFootstepSound();
 	void								PlayHurtSound();
