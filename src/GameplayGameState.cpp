@@ -102,6 +102,7 @@ void GameplayGameState::OnEntry()
 
 	// @TODO remove these test calls
 	m_player->SetHealth(50);
+	m_player->SetSpecial(40);
 	UIManager::ShowUI(true);
 }
 

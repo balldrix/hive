@@ -33,11 +33,11 @@ void PickupManager::Init(Camera* camera)
 
 	m_weightedList = 
 	{
-		{ 0.25f, PickupType::None },
-		{ 0.4f, PickupType::Health },
-		{ 0.25f, PickupType::Special },
-		{ 0.05f, PickupType::FullHealth },
-		{ 0.05f, PickupType::FullSpecial }
+		{ 0.6f, PickupType::None },
+		{ 0.20f, PickupType::Health },
+		{ 0.16f, PickupType::Special },
+		{ 0.02f, PickupType::FullHealth },
+		{ 0.02f, PickupType::FullSpecial }
 	};
 }
 

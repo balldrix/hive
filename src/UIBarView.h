@@ -48,6 +48,7 @@ private:
 	unsigned int m_height;
 	bool m_isUpdating;
 	float m_updateTimer;
+	float m_startValue;
 
 	UIImageView* m_backgroundImage;
 	UIImageView* m_fillImage;

@@ -5,6 +5,7 @@
 #include "UIImageView.h"
 #include "UIView.h"
 
+#include <algorithm>
 #include <cmath>
 #include <directxtk/SimpleMath.h>
 #include <fmt/core.h>
@@ -21,7 +22,8 @@ UIBarView::UIBarView() :
 	m_fillImage(nullptr),
 	m_frameImage(nullptr),
 	m_isUpdating(false),
-	m_updateTimer(0.0f)
+	m_updateTimer(0.0f),
+	m_startValue(0.0f)
 {
 }
 
@@ -62,21 +64,26 @@ void UIBarView::Update(float deltaTime)
 	rect.right = m_width;
 	m_backgroundImage->GetSprite()->SetSourceRect(rect);
 
-	if(m_currentValue != m_targetValue)
+	if(m_currentValue != m_targetValue && !m_isUpdating)
 	{
 		m_isUpdating = true;
 		m_updateTimer = 0.0f;
+		m_startValue = m_currentValue;
 	}
-	
+
 	if(m_isUpdating)
 	{
-		const float UpdateDuration = 0.2f;
+		const float UpdateDuration = 0.5f;
 		m_updateTimer += deltaTime;
-		float newValue = std::lerp(m_currentValue, (float)m_targetValue, m_updateTimer / UpdateDuration);
-		m_currentValue = newValue;
 
-		if(m_updateTimer >= UpdateDuration) 
+		const float t = std::clamp(m_updateTimer / UpdateDuration, 0.0f, 1.0f);
+		m_currentValue = std::lerp(m_startValue, static_cast<float>(m_targetValue), t);
+
+		if(m_updateTimer >= UpdateDuration)
+		{
+			m_currentValue = static_cast<float>(m_targetValue);
 			m_isUpdating = false;
+		}
 	}
 }
 
