@@ -40,19 +40,21 @@ void UIPromptView::Init(std::string name, UIMenuView* parent, Input* input)
 {
 	m_parent = parent;
 	Logger::LogInfo("Initialising UI Prompt View");
-	float x = (GameWidth / 2.0f) - 50.0f;
-	float y = (GameHeight / 2.0f) - 25.0f;
+	int x = static_cast<int>(GameWidth / 2.0f) - 55.0f;
+	int y = static_cast<int>(GameHeight / 2.0f) - 25.0f;
 
 	m_name = name;
 	m_panelContainer = new UIPanelContainer();
-	m_panelContainer->Init("Prompt Panel", RECT{ 0, 0, 100, 50 });
+	m_panelContainer->Init("Prompt Panel", RECT{ 0, 0, 110, 50 });
 	m_panelContainer->SetPosition(Vector2(x, y));
 	m_panelContainer->SetDepth(0.8f);
 
-	m_message = new UISpriteText;
+	m_message = new UISpriteText();
 	m_message->Init(UIConfig::DespairFont8);
-	m_message->SetDepth(0.9f);
-	m_message->SetPosition(Vector2(x + 50, y + 10));
+	m_message->SetAlignment(UISpriteText::Alignments::Centre);
+	m_message->SetText("Quit To Menu?");
+	m_message->SetDepth(0.95f);
+	m_message->SetPosition(Vector2(static_cast<int>(GameWidth / 2.0f), y + 10));
 
 	m_uiStackingView.Init("Quit Prompt Stacking View");
 	m_uiStackingView.SetOrientation(UIStackingView::Orientations::Horizontal);
@@ -108,9 +110,9 @@ void UIPromptView::Render(Graphics* graphics)
 {
 	if(!m_isActive) return;
 
+	m_message->Render(graphics);
 	UIMenuView::Render(graphics);
 	m_panelContainer->Render(graphics);
-	m_message->Render(graphics);
 }
 
 void UIPromptView::Shutdown()

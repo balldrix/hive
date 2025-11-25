@@ -121,10 +121,10 @@ void UISpriteText::SetAlignment(Alignments alignment)
 		m_origin = Vector2(0.0f, 0.0f);
 		break;
 	case UISpriteText::Right:
-		m_origin = Vector2(measure.x, 0.0f);
+		m_origin = Vector2(static_cast<int>(measure.x), 0.0f);
 		break;
 	case UISpriteText::Centre:
-		m_origin = Vector2(measure.x / 2.0f, 0.0f);
+		m_origin = Vector2(static_cast<int>(measure.x / 2.0f), 0.0f);
 		break;
 	default:
 		break;
