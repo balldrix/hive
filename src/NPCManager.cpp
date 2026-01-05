@@ -51,7 +51,7 @@ void NPCManager::Init(Camera* camera, Player* player, CutsceneManager* cutsceneM
 	RegisterEvents();
 }
 
-void NPCManager::SpawnNPC(std::string id, const Vector2& position, const EnemyDefinition& enemyDefinition, const Vector2& velocity, const Vector2& direction, float height)
+void NPCManager::SpawnNPC(std::string id, std::string waveId, const Vector2& position, const EnemyDefinition& enemyDefinition, const Vector2& velocity, const Vector2& direction, float height)
 {
 	Enemy* enemy = nullptr;
 
@@ -73,7 +73,7 @@ void NPCManager::SpawnNPC(std::string id, const Vector2& position, const EnemyDe
 	}
 
 	enemy->Reset(id);
-	enemy->Spawn(position);
+	enemy->Spawn(position, waveId);
 	enemy->SetPlayerTarget(m_player);
 	enemy->SetVelocity(velocity);
 	enemy->FlipHorizontally(direction != Vector2::UnitX);
@@ -87,7 +87,7 @@ void NPCManager::SpawnNPC(std::string id, const Vector2& position, const EnemyDe
 
 void NPCManager::SpawnNPC(SpawnNPCArgument argument)
 {
-	SpawnNPC(argument.id, argument.position, GameDataManager::GetEnemyDefinition(argument.definitionId));
+	SpawnNPC(argument.id, "", argument.position, GameDataManager::GetEnemyDefinition(argument.definitionId));
 }
 
 void NPCManager::Render(Graphics* graphics)
@@ -165,6 +165,16 @@ void NPCManager::SetNextAttackingEnemy()
 void NPCManager::SetAttackingEnemy(Enemy* enemy)
 {
 	m_hostileEnemy = enemy;
+}
+
+bool NPCManager::IsWaveDead(std::string waveId)
+{
+	for(auto& enemy : m_enemyList)
+	{
+		if(enemy->GetWaveId() == waveId && !enemy->IsDead()) return false;
+	}
+
+	return true;
 }
 
 void NPCManager::RegisterEvents()

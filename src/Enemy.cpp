@@ -48,6 +48,7 @@
 using namespace GameplayConstants;
 
 Enemy::Enemy() :
+	m_waveId(""),
 	m_playerTarget(nullptr),
 	m_stateMachine(nullptr),
 	m_portraitSprite(nullptr),
@@ -262,8 +263,9 @@ void Enemy::Reset(const std::string& id)
 	m_id = id;
 }
 
-void Enemy::Spawn(const Vector2& position)
+void Enemy::Spawn(const Vector2& position, std::string waveId)
 {
+	m_waveId = waveId;
 	m_position = position;
 	m_groundPosition = position;
 	m_dead = false;

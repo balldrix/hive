@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\CombatZone.cpp" />
+    <ClCompile Include="src\CombatZoneManager.cpp" />
     <ClCompile Include="src\CutsceneManager.cpp" />
     <ClCompile Include="src\DustFXEvent.cpp" />
     <ClCompile Include="src\EventManager.cpp" />
@@ -99,6 +101,8 @@
     <ClCompile Include="src\Utils.h" />
     <ClCompile Include="src\UISprite.cpp" />
     <ClCompile Include="src\UICycleMenuItemView.h" />
+    <ClInclude Include="src\CombatZone.h" />
+    <ClInclude Include="src\CombatZoneManager.h" />
     <ClInclude Include="src\PlayerPickupState.h" />
     <ClInclude Include="src\FullHealthPickup.h" />
     <ClInclude Include="src\FullSpecialPickup.h" />

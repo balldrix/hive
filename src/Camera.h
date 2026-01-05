@@ -27,7 +27,6 @@ public:
 	void			SetBoundary(float x);
 
 	void			StartShake(float intensity, float duration);
-
 	void			Reset();
 
 private:

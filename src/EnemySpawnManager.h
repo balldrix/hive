@@ -3,6 +3,7 @@
 #include "TilemapData.h"
 
 #include <list>
+#include <string>
 #include <vector>
 
 class EnemySpawner;
@@ -15,6 +16,7 @@ public:
 
 	void Init();
 	void Update(float deltaTime);
+	EnemySpawner* GetSpawner(std::string id);
 
 private:
 	void CreateSpawners(const std::vector<MapObjectData>& mapObjectData);

@@ -400,6 +400,12 @@
     <ClCompile Include="src\PlayerPickupState.cpp">
       <Filter>Game\Player\States</Filter>
     </ClCompile>
+    <ClCompile Include="src\CombatZoneManager.cpp">
+      <Filter>System\CombatZone</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CombatZone.cpp">
+      <Filter>System\CombatZone</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -533,6 +539,9 @@
     </Filter>
     <Filter Include="Game\Pickups">
       <UniqueIdentifier>{4f09cada-1d7c-472f-9c73-df2e9c291d2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\CombatZone">
+      <UniqueIdentifier>{833193dd-2a14-4e63-b61d-fdf9b3920174}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -985,6 +994,12 @@
     </ClInclude>
     <ClInclude Include="src\PlayerPickupState.h">
       <Filter>Game\Player\States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CombatZoneManager.h">
+      <Filter>System\CombatZone</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CombatZone.h">
+      <Filter>System\CombatZone</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,7 @@
 #include "EnemyDefinition.h"
 #include "EnemySpawner.h"
 #include "GameDataManager.h"
+#include "Logger.h"
 #include "TilemapData.h"
 #include "TilemapLoader.h"
 
@@ -27,6 +28,8 @@ EnemySpawnManager::~EnemySpawnManager()
 
 void EnemySpawnManager::Init()
 {
+	Logger::LogInfo("Initialising Enemy Spawn Manager");
+
 	auto currentMap = TilemapLoader::GetCurrentMap();
 
 	for(auto i = currentMap.layers.begin(); i != currentMap.layers.end(); i++)
@@ -46,6 +49,16 @@ void EnemySpawnManager::Update(float deltaTime)
 	}
 }
 
+EnemySpawner* EnemySpawnManager::GetSpawner(std::string id)
+{
+	for(auto* spawner : m_spawners)
+	{
+		if(spawner->GetId() == id) return spawner;
+	}
+
+	return nullptr;
+}
+
 void EnemySpawnManager::CreateSpawners(const std::vector<MapObjectData>& mapObjectData)
 {
 	for(const auto& mapObj : mapObjectData)
@@ -55,6 +68,8 @@ void EnemySpawnManager::CreateSpawners(const std::vector<MapObjectData>& mapObje
 		std::string defId = mapObj.customProperties.at("enemyDefinitionId");
 
 		SpawnData data;
+		data.id = mapObj.name;
+		data.type = mapObj.type;
 		data.enemyDefinition = GameDataManager::GetEnemyDefinition(defId);
 		data.spawnRate = std::stof(mapObj.customProperties.at("spawnRate"));
 		data.spawnPosition = Vector2(mapObj.x, mapObj.y);

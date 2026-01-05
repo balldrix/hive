@@ -38,7 +38,7 @@ public:
 	void						Render(Graphics* graphics);
 	virtual void				Reset(const std::string& id);
 
-	void						Spawn(const Vector2& position);
+	void						Spawn(const Vector2& position, std::string waveId);
 
 	void						SetDead(bool isDead);
 	void						SetPlayerTarget(Player* player);
@@ -50,6 +50,7 @@ public:
 	EnemyDefinition				GetData() const { return m_enemyDefinition; }
 	DamageData					GetDamageData() const;
 	NPCManager*					GetManager() const { return m_npcManager; }
+	std::string					GetWaveId() const { return m_waveId; }
 
 	virtual void				ApplyDamage(GameObject* source, const int& amount) override;
 	void						Knockback(const Vector2& direction, const float& force);
@@ -80,6 +81,7 @@ private:
 	Vector2						Avoid() const;
 	Vector2						Strafe() const;
 
+	std::string					m_waveId;
 	Player*						m_playerTarget;
 	Sprite*						m_portraitSprite;
 	float						m_stateChangeTimer;

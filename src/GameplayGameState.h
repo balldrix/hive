@@ -27,6 +27,7 @@ class SpriteFx;
 class EnemySpawnManager;
 class PropManager;
 class PickupManager;
+class CombatZoneManager;
 
 class GameplayGameState : public GameState
 {
@@ -75,6 +76,7 @@ private:
 	EnemySpawnManager* m_enemySpawnManager;
 	PropManager* m_propManager;
 	PickupManager* m_pickupManager;
+	CombatZoneManager* m_combatZoneManager;
 
 	bool m_canAttack;
 	bool m_running;
