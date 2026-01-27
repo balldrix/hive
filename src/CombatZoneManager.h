@@ -10,13 +10,14 @@ class CombatZone;
 class EnemySpawnManager;
 class NPCManager;
 class Player;
+class LevelRenderer;
 
 class CombatZoneManager
 {
 public :
 	CombatZoneManager();
 	~CombatZoneManager();
-	void Init(Camera* camera, Player* player, EnemySpawnManager* spawnManager, NPCManager* npcManager);
+	void Init(Camera* camera, Player* player, EnemySpawnManager* spawnManager, NPCManager* npcManager, LevelRenderer* m_levelRenderer);
 	void ActivateZone(std::string id);
 	void Update(float deltaTime);
 
@@ -29,4 +30,5 @@ private:
 	std::vector<CombatZone*> m_combatZones;
 	EnemySpawnManager* m_spawnManager;
 	NPCManager* m_NPCManager;
+	LevelRenderer* m_levelRenderer;
 };

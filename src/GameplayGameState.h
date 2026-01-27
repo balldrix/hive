@@ -48,8 +48,6 @@ public:
 	void ProcessCollisions() override;
 	void Render(Graphics* graphics) override;
 
-	void UpdateGameBounds(float minX, float maxX);
-
 	Camera* GetCamera() const { return m_camera; }
 	Player* GetPlayer() const { return m_player; }
 	NPCManager* GetNPCManager() const { return m_NPCManager; }

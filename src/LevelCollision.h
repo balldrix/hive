@@ -33,6 +33,8 @@ public:
 
 	static void SetVisible(bool isVisible);
 
+	static void UpdateGameBounds(float minX, float maxX);
+
 private:
 	static LevelCollision* s_instance;
 	typedef std::map<std::string, Collider> ColliderMap;

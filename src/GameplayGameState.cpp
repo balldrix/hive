@@ -143,7 +143,7 @@ void GameplayGameState::Setup()
 	m_propManager->Init(m_camera, m_player);
 	m_pickupManager->Init(m_camera);
 	m_NPCManager->Init(m_camera, m_player, m_cutsceneManager, m_eventManager);
-	m_combatZoneManager->Init(m_camera, m_player, m_enemySpawnManager, m_NPCManager);
+	m_combatZoneManager->Init(m_camera, m_player, m_enemySpawnManager, m_NPCManager, m_levelRenderer);
 	LevelCollision::CreateBounds(m_levelRenderer);
 
 	m_camera->Init(m_eventManager, GameWidth);
@@ -627,20 +627,7 @@ void GameplayGameState::ResetGame()
 	m_NPCManager->Reset();
 	m_camera->Reset();
 	//m_camera->SetTarget(m_player);
-	UpdateGameBounds(0, (float)m_levelRenderer->GetLevelPixelWidth());
-}
-
-void GameplayGameState::UpdateGameBounds(float minX, float maxX)
-{
-	Collider* upperBounds = LevelCollision::GetCollider(UpperBoundsId);
-	Collider* lowerBounds = LevelCollision::GetCollider(LowerBoundsId);
-	Collider* leftBounds = LevelCollision::GetCollider(LeftBoundsId);
-	Collider* rightBounds = LevelCollision::GetCollider(RightBoundsId);
-
-	upperBounds->SetAABB(AABB(Vector2(minX, upperBounds->GetAABB().GetMin().y), Vector2(maxX, upperBounds->GetAABB().GetMax().y)));
-	lowerBounds->SetAABB(AABB(Vector2(minX, lowerBounds->GetAABB().GetMin().y), Vector2(maxX, lowerBounds->GetAABB().GetMax().y)));
-	leftBounds->SetAABB(AABB(Vector2(minX - 10, 0), Vector2(minX, GameHeight)));
-	rightBounds->SetAABB(AABB(Vector2(maxX, 0), Vector2(maxX + 10, GameHeight)));
+	LevelCollision::UpdateGameBounds(0, (float)m_levelRenderer->GetLevelPixelWidth());
 }
 
 void GameplayGameState::ToggleHitBoxes()

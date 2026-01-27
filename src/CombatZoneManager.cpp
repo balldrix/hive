@@ -3,6 +3,8 @@
 #include "Camera.h"
 #include "CombatZone.h"
 #include "EnemySpawnManager.h"
+#include "GlobalConstants.h"
+#include "LevelCollision.h"
 #include "Logger.h"
 #include "Player.h"
 #include "TilemapData.h"
@@ -12,12 +14,15 @@
 #include <sstream>
 #include <string>
 
+using namespace GlobalConstants;
+
 CombatZoneManager::CombatZoneManager() :
 	m_camera(nullptr),
 	m_player(nullptr),
 	m_combatZones(),
 	m_spawnManager(nullptr),
-	m_NPCManager(nullptr)
+	m_NPCManager(nullptr),
+	m_levelRenderer(nullptr)
 {
 }
 
@@ -26,7 +31,7 @@ CombatZoneManager::~CombatZoneManager()
 	CleanUp();
 }
 
-void CombatZoneManager::Init(Camera* camera, Player* player, EnemySpawnManager* spawnManager, NPCManager* npcManager)
+void CombatZoneManager::Init(Camera* camera, Player* player, EnemySpawnManager* spawnManager, NPCManager* npcManager, LevelRenderer* levelRenderer)
 {
 	Logger::LogInfo("Initialising Combat Zone Manager");
 
@@ -34,6 +39,7 @@ void CombatZoneManager::Init(Camera* camera, Player* player, EnemySpawnManager* 
 	m_player = player;
 	m_spawnManager = spawnManager;
 	m_NPCManager = npcManager;
+	m_levelRenderer = levelRenderer;
 
 	auto currentMap = TilemapLoader::GetCurrentMap();
 
@@ -98,7 +104,7 @@ void CombatZoneManager::ActivateZone(std::string id)
 
 		zone->Activate();
 		m_camera->SetTarget(nullptr);
-		
+		LevelCollision::UpdateGameBounds(m_camera->GetPosition().x, m_camera->GetPosition().x + GameWidth);
 		return;
 	}
 }
@@ -117,6 +123,7 @@ void CombatZoneManager::Update(float deltaTime)
 		}
 
 		zone->Deactivate();
+		LevelCollision::UpdateGameBounds(0, (float)m_levelRenderer->GetLevelPixelWidth());
 	}
 
 	if(!anyZoneActive) m_camera->SetTarget(m_player);
