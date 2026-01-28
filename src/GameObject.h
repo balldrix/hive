@@ -6,6 +6,7 @@
 #include "SoundSource.h"
 #include "SpriteSheet.h"
 
+#include <cstdint>
 #include <directxtk/SimpleMath.h>
 #include <string>
 #include <vector>
@@ -134,4 +135,5 @@ protected:
 	bool					m_active;
 
 	std::vector<std::string>	m_impactSounds;
+	uint32_t m_collisionMask;
 };

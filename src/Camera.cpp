@@ -2,9 +2,13 @@
 
 #include "EventManager.h"
 #include "GameObject.h"
+#include "GlobalConstants.h"
 #include "ScreenShakeEvent.h"
 
 #include <directxtk/SimpleMath.h>
+#include <Windows.h>
+
+using namespace GlobalConstants;
 
 const float CameraThresholdMod = 3.0f;
 const float CameraSpeedMod = 0.2f;
@@ -91,6 +95,14 @@ void Camera::UpdatePosition(float deltaTime)
 	float velocityX = m_trackingTarget->GetCurrentVelocity().x;
 	
 	m_position.x += velocityX * speed * deltaTime;
+}
+
+RECT Camera::GetWorldRect() const
+{
+	RECT rect = {};
+	rect.left = m_position.x;
+	rect.right = m_position.x + GameWidth;
+	return rect;
 }
 
 void Camera::SetTarget(GameObject* target)

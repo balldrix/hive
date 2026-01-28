@@ -233,3 +233,11 @@ void Collider::Delete()
 	delete m_sprite;
 	m_sprite = nullptr;
 }
+
+AABB Collider::GetWorldAABBAt(const Vector2& worldPos)
+{
+	AABB box = m_boundingBox;
+	if(m_flipped) box = FlipAABB();
+	box.OffSetAABB(worldPos);
+	return box;
+}

@@ -627,7 +627,6 @@ void GameplayGameState::ResetGame()
 	m_NPCManager->Reset();
 	m_camera->Reset();
 	//m_camera->SetTarget(m_player);
-	LevelCollision::UpdateGameBounds(0, (float)m_levelRenderer->GetLevelPixelWidth());
 }
 
 void GameplayGameState::ToggleHitBoxes()

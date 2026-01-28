@@ -2,6 +2,7 @@
 
 #include "ScreenShake.h"
 #include <directxtk/SimpleMath.h>
+#include <Windows.h>
 
 using namespace DirectX::SimpleMath;
 
@@ -20,6 +21,7 @@ public:
 
 	float			GetWidth() const { return m_width; }
 	Vector2			GetPosition() const { return m_position + m_screenShake.GetPositionOffset(); }
+	RECT			GetWorldRect() const;
 
 	void			SetTarget(GameObject* target);
 	void			SetPosition(const Vector2& position);

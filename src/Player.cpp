@@ -15,6 +15,7 @@
 #include "GlobalConstants.h"
 #include "Graphics.h"
 #include "HitBoxManager.h"
+#include "LevelCollision.h"
 #include "Logger.h"
 #include "MovePlayerEvent.h"
 #include "PlayAnimationEvent.h"
@@ -103,6 +104,7 @@ void Player::Init(ControlSystem* controlSystem, CutsceneManager* cutsceneManager
 	Logger::LogInfo("Initialising Player.");
 
 	m_id = "Player";
+	m_collisionMask = WorldAndObjects | CameraBounds;
 	m_controlSystem = controlSystem;
 	m_cutsceneManager = cutsceneManager;
 	m_eventManager = eventManager;

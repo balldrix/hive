@@ -3,6 +3,7 @@
 #include "DamageData.h"
 #include "GameObject.h"
 #include "Graphics.h"
+#include "LevelCollision.h"
 #include "PlayerConstants.h"
 #include "PlayerDefinition.h"
 #include "Sprite.h"

@@ -4,12 +4,19 @@
 #include "LevelRenderer.h"
 #include "Sprite.h"
 
+#include <cstdint>
 #include <directxtk/SimpleMath.h>
 #include <map>
 #include <string>
 
 class Camera;
 class Graphics;
+
+enum CollisionMask : uint32_t
+{
+	WorldAndObjects = 1 << 0,
+	CameraBounds = 1 << 1
+};
 
 class LevelCollision
 {
@@ -32,8 +39,6 @@ public:
 	static bool IsCollision(Vector2 position);
 
 	static void SetVisible(bool isVisible);
-
-	static void UpdateGameBounds(float minX, float maxX);
 
 private:
 	static LevelCollision* s_instance;

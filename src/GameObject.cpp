@@ -16,6 +16,8 @@
 #include <directxtk/SimpleMath.h>
 #include <directxtk/SpriteBatch.h>
 #include <string>
+#include "AABB.h"
+#include <Windows.h>
 
 using namespace DirectX::SimpleMath;
 using namespace GameplayConstants;
@@ -98,7 +100,33 @@ void GameObject::Update(float deltaTime)
 
 	Vector2 velocity = (m_currentVelocity * m_movementSpeed) * deltaTime;
 	Vector2 newPosition = m_position + velocity;
+	bool clampedToCameraX = false;
+
 	Collider pushBox = m_hitBoxManager->GetPushBox();
+
+	if(m_collisionMask & CameraBounds)
+	{
+		RECT cam = m_camera->GetWorldRect();
+
+		AABB nextBox = pushBox.GetWorldAABBAt(Vector2(newPosition.x, m_position.y));
+		if(nextBox.GetMin().x < cam.left)
+		{
+			float dx = cam.left - nextBox.GetMin().x;
+			newPosition.x += dx;
+			clampedToCameraX = true;
+		}
+		else if(nextBox.GetMax().x > cam.right)
+		{
+			float dx = cam.right - nextBox.GetMax().x;
+			newPosition.x += dx;
+			clampedToCameraX = true;
+		}
+	}
+
+	if(clampedToCameraX)
+	{
+		velocity.x = newPosition.x - m_position.x;
+	}
 
 	if(velocity.x > 0 && LevelCollision::IsCollision(Vector2(newPosition.x + pushBox.GetWidth(), m_groundPosition.y)))
 	{
@@ -126,6 +154,12 @@ void GameObject::Update(float deltaTime)
 	m_position += velocity;
 	m_currentVelocity = (velocity / m_movementSpeed) / deltaTime;
 	m_groundPosition.x = m_position.x;
+
+	if(clampedToCameraX)
+	{
+		m_currentVelocity.x = 0.0f;
+		m_targetVelocity.x = 0.0f;
+	}
 
 	if(m_animator != nullptr)
 		m_animator->Update(deltaTime);

@@ -12,6 +12,7 @@
 #include "Sprite.h"
 #include "TilemapLoader.h"
 
+#include <cstdint>
 #include <DirectXColors.h>
 #include <directxtk/SimpleMath.h>
 #include <fmt/core.h>
@@ -149,7 +150,7 @@ void LevelCollision::ClearAll()
 bool LevelCollision::IsCollision(Collider box)
 {
 	for(auto it = s_instance->m_colliders.begin(); it != s_instance->m_colliders.end(); it++)
-	{ 
+	{
 		if(!(*it).second.OnCollision(box)) continue;
 
 		return true;
@@ -173,17 +174,4 @@ bool LevelCollision::IsCollision(Vector2 position)
 void LevelCollision::SetVisible(bool isVisible)
 {
 	s_instance->m_isVisible = isVisible;
-}
-
-void LevelCollision::UpdateGameBounds(float minX, float maxX)
-{
-	Collider* upperBounds = GetCollider(UpperBoundsId);
-	Collider* lowerBounds = GetCollider(LowerBoundsId);
-	Collider* leftBounds = GetCollider(LeftBoundsId);
-	Collider* rightBounds = GetCollider(RightBoundsId);
-
-	upperBounds->SetAABB(AABB(Vector2(minX, upperBounds->GetAABB().GetMin().y), Vector2(maxX, upperBounds->GetAABB().GetMax().y)));
-	lowerBounds->SetAABB(AABB(Vector2(minX, lowerBounds->GetAABB().GetMin().y), Vector2(maxX, lowerBounds->GetAABB().GetMax().y)));
-	leftBounds->SetAABB(AABB(Vector2(minX - 10, 0), Vector2(minX, GameHeight)));
-	rightBounds->SetAABB(AABB(Vector2(maxX, 0), Vector2(maxX + 10, GameHeight)));
 }

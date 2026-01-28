@@ -23,6 +23,7 @@ public:
 	float GetWidth();
 	float GetTop();
 	float GetHeight();
+	AABB GetWorldAABBAt(const Vector2& worldPos);
 
 	void SetAABB(const AABB& boundingBox);
 	void SetFlipped(bool flipped);

@@ -22,6 +22,7 @@
 #include "HitBoxManager.h"
 #include "MoveNPCEvent.h"
 #include "NPCManager.h"
+#include "LevelCollision.h"
 #include "PlayAnimationEvent.h"
 #include "Player.h"
 #include "PlaySoundEvent.h"
@@ -118,6 +119,8 @@ void Enemy::Init(const std::string& id,
 	m_enemyDefinition = data;
 	m_npcManager = npcManager;
 	m_grounded = true;
+
+	m_collisionMask = WorldAndObjects;
 
 	AnimatedSpriteData animatedSpriteData;
 	animatedSpriteData = GameDataManager::LoadAnimatedSpriteData(data.spritesheetDataPath);

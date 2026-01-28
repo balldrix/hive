@@ -104,7 +104,6 @@ void CombatZoneManager::ActivateZone(std::string id)
 
 		zone->Activate();
 		m_camera->SetTarget(nullptr);
-		LevelCollision::UpdateGameBounds(m_camera->GetPosition().x, m_camera->GetPosition().x + GameWidth);
 		return;
 	}
 }
@@ -123,7 +122,6 @@ void CombatZoneManager::Update(float deltaTime)
 		}
 
 		zone->Deactivate();
-		LevelCollision::UpdateGameBounds(0, (float)m_levelRenderer->GetLevelPixelWidth());
 	}
 
 	if(!anyZoneActive) m_camera->SetTarget(m_player);
