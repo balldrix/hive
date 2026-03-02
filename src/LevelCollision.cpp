@@ -12,7 +12,6 @@
 #include "Sprite.h"
 #include "TilemapLoader.h"
 
-#include <cstdint>
 #include <DirectXColors.h>
 #include <directxtk/SimpleMath.h>
 #include <fmt/core.h>

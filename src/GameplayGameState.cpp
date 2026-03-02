@@ -1,12 +1,11 @@
 #include "GameplayGameState.h"
 
-#include "AABB.h"
 #include "Animator.h"
 #include "AudioEngine.h"
 #include "Camera.h"
 #include "Collider.h"
-#include "ControlSystem.h"
 #include "CombatZoneManager.h"
+#include "ControlSystem.h"
 #include "CutsceneManager.h"
 #include "Enemy.h"
 #include "EnemySpawnManager.h"
@@ -35,14 +34,15 @@
 #include "PlayerDeadState.h"
 #include "PlayerHurtState.h"
 #include "PlayerIdleState.h"
-#include "PlayerPickupState.h"
 #include "PlayerKnockbackState.h"
+#include "PlayerPickupState.h"
 #include "Prop.h"
 #include "PropManager.h"
 #include "Randomiser.h"
 #include "SpriteSheet.h"
 #include "StateMachine.h"
 #include "TilemapLoader.h"
+#include "TriggerManager.h"
 #include "UIManager.h"
 #include "UnitVectors.h"
 
@@ -68,6 +68,7 @@ GameplayGameState::GameplayGameState() :
 	m_propManager(nullptr),
 	m_pickupManager(nullptr),
 	m_combatZoneManager(nullptr),
+	m_triggerManager(nullptr),
 	m_canAttack(true),
 	m_running(false),
 	m_deltaTime(0.0f),
@@ -120,8 +121,8 @@ void GameplayGameState::Setup()
 	//
 	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_lift.json");
 	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_trailer-level-showcase.json");
-	TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_demo.json");
-	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_playground.json");
+	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_demo.json");
+	TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_playground.json");
 
 	GameDataManager::LoadAllEnemyDefinitions();
 	m_camera = new Camera();
@@ -134,6 +135,7 @@ void GameplayGameState::Setup()
 	m_propManager = new PropManager();
 	m_pickupManager = new PickupManager();
 	m_combatZoneManager = new CombatZoneManager();
+	m_triggerManager = new TriggerManager();
 
 	m_player->Init(m_controlSystem, m_cutsceneManager, m_eventManager);
 	m_player->SetCamera(m_camera);
@@ -144,6 +146,7 @@ void GameplayGameState::Setup()
 	m_pickupManager->Init(m_camera);
 	m_NPCManager->Init(m_camera, m_player, m_cutsceneManager, m_eventManager);
 	m_combatZoneManager->Init(m_camera, m_player, m_enemySpawnManager, m_NPCManager, m_levelRenderer);
+	m_triggerManager->Init(m_combatZoneManager, m_enemySpawnManager);
 	LevelCollision::CreateBounds(m_levelRenderer);
 
 	m_camera->Init(m_eventManager, GameWidth);
@@ -166,6 +169,9 @@ void GameplayGameState::Cleanup()
 
 	delete m_impactFxPool;
 	m_impactFxPool = nullptr;
+
+	delete m_triggerManager;
+	m_triggerManager = nullptr;
 
 	delete m_combatZoneManager;
 	m_combatZoneManager = nullptr;
@@ -384,6 +390,7 @@ void GameplayGameState::Tick(float deltaTime)
 	m_propManager->Update(deltaTime);
 	m_pickupManager->Update(deltaTime);
 	m_combatZoneManager->Update(deltaTime);
+	m_triggerManager->Update(m_player->GetGroundPosition());
 
 	if(m_stopTimer > 0)
 	{

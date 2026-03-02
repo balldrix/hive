@@ -406,6 +406,12 @@
     <ClCompile Include="src\CombatZone.cpp">
       <Filter>System\CombatZone</Filter>
     </ClCompile>
+    <ClCompile Include="src\TriggerManager.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TriggerCollider.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -1000,6 +1006,12 @@
     </ClInclude>
     <ClInclude Include="src\CombatZone.h">
       <Filter>System\CombatZone</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TriggerManager.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TriggerCollider.h">
+      <Filter>Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

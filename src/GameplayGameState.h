@@ -28,6 +28,7 @@ class EnemySpawnManager;
 class PropManager;
 class PickupManager;
 class CombatZoneManager;
+class TriggerManager;
 
 class GameplayGameState : public GameState
 {
@@ -75,6 +76,7 @@ private:
 	PropManager* m_propManager;
 	PickupManager* m_pickupManager;
 	CombatZoneManager* m_combatZoneManager;
+	TriggerManager* m_triggerManager;
 
 	bool m_canAttack;
 	bool m_running;

@@ -53,6 +53,8 @@
     <ClCompile Include="src\SpawnNPCEvent.cpp" />
     <ClCompile Include="src\SpecialPickup.cpp" />
     <ClCompile Include="src\TilemapLoader.cpp" />
+    <ClCompile Include="src\TriggerCollider.cpp" />
+    <ClCompile Include="src\TriggerManager.cpp" />
     <ClCompile Include="src\UICycleMenuItemView.cpp" />
     <ClCompile Include="src\UIMenuView.cpp" />
     <ClCompile Include="src\UIOptionsView.cpp" />
@@ -130,6 +132,8 @@
     <ClInclude Include="src\EnemySpawnManager.h" />
     <ClInclude Include="src\ImpactFxPool.h" />
     <ClInclude Include="src\SpecialPickup.h" />
+    <ClInclude Include="src\TriggerCollider.h" />
+    <ClInclude Include="src\TriggerManager.h" />
     <ClInclude Include="src\UIMenuView.h" />
     <ClInclude Include="src\UIPanelContainer.h" />
     <ClInclude Include="src\UIPauseMenuView.h" />

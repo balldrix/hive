@@ -3,8 +3,7 @@
 #include "Camera.h"
 #include "CombatZone.h"
 #include "EnemySpawnManager.h"
-#include "GlobalConstants.h"
-#include "LevelCollision.h"
+#include "LevelRenderer.h"
 #include "Logger.h"
 #include "Player.h"
 #include "TilemapData.h"
@@ -13,8 +12,7 @@
 #include <fmt/core.h>
 #include <sstream>
 #include <string>
-
-using namespace GlobalConstants;
+#include <vector>
 
 CombatZoneManager::CombatZoneManager() :
 	m_camera(nullptr),
