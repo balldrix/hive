@@ -75,6 +75,7 @@ GameplayGameState::GameplayGameState() :
 	m_stopTimer(0.0f),
 	m_displayHitBoxes(false),
 	m_hidePlayerHud(false),
+	m_pendingHudTransition(false),
 	m_impactFxPool(nullptr),
 	m_activeImpacts(0),
 	m_particleSystem(nullptr),
@@ -106,7 +107,7 @@ void GameplayGameState::OnEntry()
 	// @TODO remove these test calls
 	m_player->SetHealth(50);
 	m_player->SetSpecial(40);
-	UIManager::ShowUI(true);
+	m_pendingHudTransition = true;
 }
 
 void GameplayGameState::OnExit()
@@ -376,6 +377,11 @@ void GameplayGameState::ProcessInput()
 void GameplayGameState::Update(float deltaTime)
 {
 	UIManager::Update(deltaTime);
+	if(m_pendingHudTransition && !UIManager::IsFading())
+	{
+		UIManager::ShowUI(true);
+		m_pendingHudTransition = false;
+	}
 
 	m_deltaTime = deltaTime;
 	Tick(deltaTime);

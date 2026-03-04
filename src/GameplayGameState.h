@@ -86,6 +86,7 @@ private:
 	float m_collisionCooldown;
 	bool m_displayHitBoxes;
 	bool m_hidePlayerHud;
+	bool m_pendingHudTransition;
 	bool m_isCollisionOnCooldown;
 	bool m_isHitStopRunning;
 

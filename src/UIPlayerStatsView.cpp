@@ -122,23 +122,31 @@ void UIPlayerStatsView::Shutdown()
 
 void UIPlayerStatsView::TransitionIn(bool isAnimating)
 {
-	m_isActive = true;
-	m_portraitView->SetActive(true);
-	m_healthBar->SetActive(true);
-	m_specialBar->SetActive(true);
-	m_killCount->SetActive(true);
-
 	if(m_currentViewState == ViewStates::AnimatingIn ||
 		m_currentViewState == ViewStates::Visible) return;
 
 	if(isAnimating)
 	{
+		SetYOffset(20.0f);
+		m_isActive = true;
+		m_portraitView->SetActive(true);
+		m_healthBar->SetActive(true);
+		m_specialBar->SetActive(true);
+		m_killCount->SetActive(true);
+
 		m_isAnimating = true;
 		m_currentViewState = ViewStates::AnimatingIn;
 		m_transitionTimer = TransitionInDuration;
 	}
 	else
 	{
+		SetYOffset(0.0f);
+		m_isActive = true;
+		m_portraitView->SetActive(true);
+		m_healthBar->SetActive(true);
+		m_specialBar->SetActive(true);
+		m_killCount->SetActive(true);
+
 		m_currentViewState = ViewStates::Visible;
 	}
 }
@@ -171,27 +179,12 @@ void UIPlayerStatsView::DoTransition(float deltaTime)
 
 	if(m_transitionTimer > 0)
 	{
-		float duration = 1.0f + (isAnimatingIn ? TransitionInDuration : TransitionOutDuration);
+		float duration = isAnimatingIn ? TransitionInDuration : TransitionOutDuration;
 		float t = std::clamp(m_transitionTimer / duration, 0.0f, 1.0f);
 		if(!isAnimatingIn) t = 1 - t;
 
 		float yOffset = std::lerp(0.0f, 20.0f, t);
-
-		Vector2 portraitViewPosition = m_portraitViewStartPosition;
-		portraitViewPosition.y = m_portraitViewStartPosition.y + yOffset;
-		m_portraitView->SetPosition(portraitViewPosition);
-
-		Vector2 healthBarPosition = m_healthBarStartPosition;
-		healthBarPosition.y = m_healthBarStartPosition.y + yOffset;
-		m_healthBar->SetPosition(healthBarPosition);
-
-		Vector2 specialBarPosition = m_specialBarStartPosition;
-		specialBarPosition.y = m_specialBarStartPosition.y + yOffset;
-		m_specialBar->SetPosition(specialBarPosition);
-
-		Vector2 killCountPosition = m_killCountStartPosition;
-		killCountPosition.y = m_killCountStartPosition.y + yOffset;
-		m_killCount->SetPosition(killCountPosition);
+		SetYOffset(yOffset);
 
 		m_transitionTimer -= deltaTime;
 		return;
@@ -204,4 +197,23 @@ void UIPlayerStatsView::DoTransition(float deltaTime)
 	m_killCount->SetActive(isAnimatingIn);
 	m_isActive = isAnimatingIn;
 	m_isAnimating = false;
+}
+
+void UIPlayerStatsView::SetYOffset(float yOffset)
+{
+	Vector2 portraitViewPosition = m_portraitViewStartPosition;
+	portraitViewPosition.y = m_portraitViewStartPosition.y + yOffset;
+	m_portraitView->SetPosition(portraitViewPosition);
+
+	Vector2 healthBarPosition = m_healthBarStartPosition;
+	healthBarPosition.y = m_healthBarStartPosition.y + yOffset;
+	m_healthBar->SetPosition(healthBarPosition);
+
+	Vector2 specialBarPosition = m_specialBarStartPosition;
+	specialBarPosition.y = m_specialBarStartPosition.y + yOffset;
+	m_specialBar->SetPosition(specialBarPosition);
+
+	Vector2 killCountPosition = m_killCountStartPosition;
+	killCountPosition.y = m_killCountStartPosition.y + yOffset;
+	m_killCount->SetPosition(killCountPosition);
 }

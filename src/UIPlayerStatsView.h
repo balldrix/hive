@@ -27,6 +27,7 @@ public:
 
 private:
 	void DoTransition(float deltaTime);
+	void SetYOffset(float yOffset);
 
 	UIPortraitView* m_portraitView;
 	UIBarView* m_healthBar;
