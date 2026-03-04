@@ -15,6 +15,27 @@ using namespace GlobalConstants;
 const float CameraThresholdMod = 3.0f;
 const float CameraTrackingResponsiveness = 10.0f;
 
+namespace
+{
+	float EaseInOut(float t)
+	{
+		return t * t * (3.0f - 2.0f * t);
+	}
+
+	bool UpdateBoundsTransition(float deltaTime, float duration, float& elapsed, CameraLock& lock)
+	{
+		elapsed += deltaTime;
+		float safeDuration = (std::max)(duration, 0.001f);
+		float t = (std::min)(elapsed / safeDuration, 1.0f);
+		t = EaseInOut(t);
+
+		lock.minX = std::lerp(lock.fromMinX, lock.toMinX, t);
+		lock.maxX = std::lerp(lock.fromMaxX, lock.toMaxX, t);
+
+		return t >= 1.0f;
+	}
+}
+
 Camera::Camera() :
 	m_trackingTarget(nullptr),
 	m_position(Vector2::Zero),
@@ -51,17 +72,19 @@ void Camera::Update(float deltaTime)
 
 	if(m_lock.releasing)
 	{
-		m_lock.releaseT += deltaTime;
-		float t = (std::min)(m_lock.releaseT / m_lock.releaseDuration, 1.0f);
-		t = t * t * (3 - 2 * t);
-
-		m_lock.minX = std::lerp(m_lock.fromMinX, m_lock.toMinX, t);
-		m_lock.maxX = std::lerp(m_lock.fromMaxX, m_lock.toMaxX, t);
-
-		if(t >= 1.0f)
+		if(UpdateBoundsTransition(deltaTime, m_lock.releaseDuration, m_lock.releaseT, m_lock))
 		{
 			m_lock.releasing = false;
 			m_lock.active = false;
+		}
+	}
+	else if(m_lock.locking)
+	{
+		if(UpdateBoundsTransition(deltaTime, m_lock.lockDuration, m_lock.lockT, m_lock))
+		{
+			m_lock.locking = false;
+			m_lock.minX = m_lock.toMinX;
+			m_lock.maxX = m_lock.toMaxX;
 		}
 	}
 
@@ -156,16 +179,26 @@ void Camera::StartShake(float intensity, float duration)
 
 void Camera::LockBounds(float min, float max)
 {
+	float zoneMin = min;
+	float zoneMax = (std::max)(max, zoneMin + m_width);
+
 	m_lock.active = true;
 	m_lock.releasing = false;
-	m_lock.minX = min;
-	m_lock.maxX = max;
+	m_lock.locking = true;
+	m_lock.lockT = 0.0f;
+	m_lock.fromMinX = m_position.x;
+	m_lock.fromMaxX = m_position.x + m_width;
+	m_lock.toMinX = zoneMin;
+	m_lock.toMaxX = zoneMax;
+	m_lock.minX = m_lock.fromMinX;
+	m_lock.maxX = m_lock.fromMaxX;
 }
 
 void Camera::ReleaseBoundsSmooth(float duration, float min, float max)
 {
 	m_lock.active = true;
 	m_lock.releasing = true;
+	m_lock.locking = false;
 	m_lock.releaseT = 0.0f;
 	m_lock.releaseDuration = (std::max)(duration, 0.001f);
 	m_lock.fromMinX = m_lock.minX;

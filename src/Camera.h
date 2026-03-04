@@ -22,6 +22,11 @@ struct CameraLock {
 	float releaseT = 0;
 	float releaseDuration = 0.35f;
 
+	// for smooth lock-in
+	bool locking = false;
+	float lockT = 0;
+	float lockDuration = 0.2f;
+
 	float fromMinX = 0, fromMaxX = 0;
 	float toMinX = 0, toMaxX = 0;
 };
