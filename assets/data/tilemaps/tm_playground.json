@@ -687,8 +687,8 @@
                  "type":"combat",
                  "visible":true,
                  "width":0,
-                 "x":257.53717163967,
-                 "y":99.549509008241
+                 "x":257.537,
+                 "y":99.5495
                 }, 
                 {
                  "height":0,
@@ -735,8 +735,8 @@
                  "type":"combat",
                  "visible":true,
                  "width":0,
-                 "x":263.25617163967,
-                 "y":106.883709008241
+                 "x":263.256,
+                 "y":106.884
                 }, 
                 {
                  "height":0,
@@ -783,8 +783,8 @@
                  "type":"combat",
                  "visible":true,
                  "width":0,
-                 "x":257.92117163967,
-                 "y":86.371509008241
+                 "x":257.921,
+                 "y":86.3715
                 }, 
                 {
                  "height":0,
@@ -831,8 +831,8 @@
                  "type":"combat",
                  "visible":true,
                  "width":0,
-                 "x":266.28417163967,
-                 "y":81.895709008241
+                 "x":266.284,
+                 "y":81.8957
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -864,7 +864,7 @@
                  "type":"trigger",
                  "visible":true,
                  "width":8,
-                 "x":152,
+                 "x":120,
                  "y":0
                 }, 
                 {
@@ -977,15 +977,177 @@
  "tileheight":8,
  "tilesets":[
         {
+         "columns":32,
          "firstgid":1,
-         "source":"..\/..\/..\/..\/..\/..\/My Drive\/Gamedev\/Projects\/Hive\/Tilemaps\/hive_master.tsx"
+         "image":"D:\/Google Drive\/Gamedev\/Projects\/Hive\/Tilemaps\/master_tileset.png",
+         "imageheight":512,
+         "imagewidth":256,
+         "margin":0,
+         "name":"hive_master",
+         "spacing":0,
+         "tilecount":2048,
+         "tileheight":8,
+         "tilewidth":8
         }, 
         {
+         "columns":0,
          "firstgid":2049,
-         "source":"..\/..\/..\/..\/..\/..\/My Drive\/Gamedev\/Projects\/Hive\/Tilemaps\/props.tsx"
+         "grid":
+            {
+             "height":1,
+             "orientation":"orthogonal",
+             "width":1
+            },
+         "margin":0,
+         "name":"props",
+         "objectalignment":"topleft",
+         "spacing":0,
+         "tilecount":4,
+         "tileheight":64,
+         "tiles":[
+                {
+                 "id":2,
+                 "image":"D:\/Google Drive\/Gamedev\/Projects\/Hive\/Tilemaps\/ship-crashed.png",
+                 "imageheight":64,
+                 "imagewidth":64,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":27,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":47,
+                             "x":0,
+                             "y":37
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    }
+                }, 
+                {
+                 "height":32,
+                 "id":3,
+                 "image":"D:\/Google Drive\/Gamedev\/Projects\/Hive\/Tilemaps\/broken-gadge.png",
+                 "imageheight":96,
+                 "imagewidth":96,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":11,
+                             "id":3,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":20,
+                             "x":6,
+                             "y":11
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    },
+                 "width":32,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "height":32,
+                 "id":4,
+                 "image":"D:\/Google Drive\/Gamedev\/Projects\/Hive\/Tilemaps\/crate.png",
+                 "imageheight":64,
+                 "imagewidth":192,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":14,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":20,
+                             "x":23,
+                             "y":17
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    },
+                 "width":64,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "height":64,
+                 "id":5,
+                 "image":"D:\/Google Drive\/Gamedev\/Projects\/Hive\/Tilemaps\/pickup.png",
+                 "imageheight":64,
+                 "imagewidth":128,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":5,
+                             "id":2,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":12,
+                             "x":32.125,
+                             "y":32.125
+                            }, 
+                            {
+                             "height":5,
+                             "id":3,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":12,
+                             "x":32.125,
+                             "y":32.125
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    },
+                 "width":64,
+                 "x":0,
+                 "y":0
+                }],
+         "tilewidth":64
         }],
  "tilewidth":8,
  "type":"map",
- "version":"1.10",
+ "version":"1.11",
  "width":215
 }

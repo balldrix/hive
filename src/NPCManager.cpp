@@ -169,8 +169,11 @@ void NPCManager::SetAttackingEnemy(Enemy* enemy)
 
 bool NPCManager::IsWaveDead(std::string waveId)
 {
+	if(waveId.empty()) return true;
+
 	for(auto& enemy : m_enemyList)
 	{
+		if(!enemy->IsActive()) continue;
 		if(enemy->GetWaveId() == waveId && !enemy->IsDead()) return false;
 	}
 

@@ -4,12 +4,14 @@
 #include "EnemySpawnManager.h"
 #include "NPCManager.h"
 
+#include <directxtk/SimpleMath.h>
 #include <string>
 #include <utility>
 #include <vector>
 
 CombatZone::CombatZone() :
 	m_id(),
+	m_position(DirectX::SimpleMath::Vector2::Zero),
 	m_spawnerIDs(),
 	m_enemySpawnManager(nullptr),
 	m_isActive(false)
@@ -22,11 +24,13 @@ CombatZone::~CombatZone()
 
 void CombatZone::Init(
 	std::string id,
+	const DirectX::SimpleMath::Vector2& position,
 	std::vector<std::string> spawners,
 	EnemySpawnManager* enemySpawnManager,
 	NPCManager* npcManager)
 {
 	m_id = id;
+	m_position = position;
 	m_spawnerIDs = std::move(spawners);
 	m_enemySpawnManager = enemySpawnManager;
 	m_NPCManager = npcManager;

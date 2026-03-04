@@ -3,16 +3,21 @@
 #include "Camera.h"
 #include "CombatZone.h"
 #include "EnemySpawnManager.h"
+#include "GlobalConstants.h"
 #include "LevelRenderer.h"
 #include "Logger.h"
 #include "Player.h"
 #include "TilemapData.h"
 #include "TilemapLoader.h"
 
+#include <algorithm>
+#include <directxtk/SimpleMath.h>
 #include <fmt/core.h>
 #include <sstream>
 #include <string>
 #include <vector>
+
+using namespace GlobalConstants;
 
 CombatZoneManager::CombatZoneManager() :
 	m_camera(nullptr),
@@ -63,6 +68,7 @@ void CombatZoneManager::CreateCombatZones(const std::vector<MapObjectData>& mapO
 {
 	for(const auto& obj : mapObjectData)
 	{
+		auto position = Vector2(obj.x, obj.y);
 		auto typeIt = obj.customProperties.find("type");
 		if(typeIt == obj.customProperties.end() || typeIt->second != "combatZone")
 			continue;
@@ -87,21 +93,31 @@ void CombatZoneManager::CreateCombatZones(const std::vector<MapObjectData>& mapO
 		Logger::LogInfo(fmt::format("Adding combat zone: {}", obj.name));
 
 		CombatZone* zone = new CombatZone();
-		zone->Init(obj.name, result, m_spawnManager, m_NPCManager);
+		zone->Init(obj.name, position, result, m_spawnManager, m_NPCManager);
 		m_combatZones.push_back(zone);
 	}
+
+	std::sort(m_combatZones.begin(), m_combatZones.end(),
+		[](const CombatZone* a, const CombatZone* b)
+		{
+			return a->GetPosition().x < b->GetPosition().x;
+		});
 }
 
 void CombatZoneManager::ActivateZone(std::string id)
 {
 	Logger::LogInfo(fmt::format("Activating combat zone: {}", id));
 
-	for(const auto& zone : m_combatZones)
+	for(size_t i = 0; i < m_combatZones.size(); i++)
 	{
+		auto* zone = m_combatZones[i];
 		if(zone->GetId() != id) continue;
 
 		zone->Activate();
-		m_camera->SetTarget(nullptr);
+		const float halfWidth = GameWidth * 0.5f;
+		const float zoneMinX = zone->GetPosition().x - halfWidth;
+		const float zoneMaxX = zone->GetPosition().x + halfWidth;
+		m_camera->LockBounds(zoneMinX, zoneMaxX);
 		return;
 	}
 }
@@ -120,6 +136,9 @@ void CombatZoneManager::Update(float deltaTime)
 		}
 
 		zone->Deactivate();
+		const float worldMinX = 0.0f;
+		const float worldMaxX = static_cast<float>(m_levelRenderer->GetLevelPixelWidth());
+		m_camera->ReleaseBoundsSmooth(0.35f, worldMinX, worldMaxX);
 	}
 
 	if(!anyZoneActive) m_camera->SetTarget(m_player);

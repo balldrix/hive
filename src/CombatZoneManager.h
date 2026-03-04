@@ -17,7 +17,7 @@ class CombatZoneManager
 public :
 	CombatZoneManager();
 	~CombatZoneManager();
-	void Init(Camera* camera, Player* player, EnemySpawnManager* spawnManager, NPCManager* npcManager, LevelRenderer* m_levelRenderer);
+	void Init(Camera* camera, Player* player, EnemySpawnManager* spawnManager, NPCManager* npcManager, LevelRenderer* levelRenderer);
 	void ActivateZone(std::string id);
 	void Update(float deltaTime);
 
