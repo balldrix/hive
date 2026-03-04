@@ -221,6 +221,10 @@ void Enemy::Update(float deltaTime)
 	if(!m_dead) return;
 
 	m_deathTimer -= deltaTime;
+	if(m_deathTimer <= 0.0f)
+	{
+		m_active = false;
+	}
 }
 
 void Enemy::Render(Graphics* graphics)
@@ -356,7 +360,14 @@ void Enemy::ProcessSteering()
 	m_targetVelocity = Vector2::Zero;
 	m_targetVelocity += Seek() * 2.0f;
 	m_targetVelocity += Avoid();
-	m_targetVelocity.Normalize();
+	if(m_targetVelocity.LengthSquared() > 0.0001f)
+	{
+		m_targetVelocity.Normalize();
+	}
+	else
+	{
+		m_targetVelocity = Vector2::Zero;
+	}
 }
 
 void Enemy::Flash()
@@ -375,7 +386,14 @@ Vector2 Enemy::Seek() const
 	if(direction.Length() < m_enemyDefinition.attackRange)
 		direction = -direction;
 
-	direction.Normalize();
+	if(direction.LengthSquared() > 0.0001f)
+	{
+		direction.Normalize();
+	}
+	else
+	{
+		direction = Vector2::Zero;
+	}
 
 	return direction;
 }
@@ -393,11 +411,12 @@ Vector2 Enemy::Avoid() const
 		if(*it == this || !(*it)->IsActive()) continue;
 
 		auto toOther = m_position - (*it)->GetPosition();
+		float distance = toOther.Length();
 
-		if(toOther.Length() > MinEnemyAvoidDistance) continue;
+		if(distance > MinEnemyAvoidDistance) continue;
+		if(distance <= 0.0001f) continue;
 
-		toOther.Normalize();
-		force += toOther / toOther.Length();
+		force += toOther / distance;
 	}
 
 	return force;
@@ -409,7 +428,14 @@ Vector2 Enemy::Strafe() const
 
 	auto toTarget = m_playerTarget->GetPosition() - GetPosition();
 	auto crossProduct = Vector2(toTarget.y, -toTarget.x);
-	crossProduct.Normalize();
+	if(crossProduct.LengthSquared() > 0.0001f)
+	{
+		crossProduct.Normalize();
+	}
+	else
+	{
+		return Vector2::Zero;
+	}
 	return crossProduct;
 }
 

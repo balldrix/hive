@@ -66,7 +66,8 @@ void TriggerManager::Init(CombatZoneManager* combatZoneManager, EnemySpawnManage
 
 					data.spawnerIds = result;
 				}
-				else
+
+				if(type == TriggerType::CombatZoneSpawner)
 				{
 					data.combatZoneId = obj.name;
 				}

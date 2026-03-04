@@ -17,6 +17,7 @@ EnemySpawner::EnemySpawner() :
 	m_height(0.0f),
 	m_maxSpawns(0),
 	m_spawnCount(0),
+	m_isOneShot(false),
 	m_active(false)
 {
 }
@@ -28,9 +29,10 @@ void EnemySpawner::Init(const SpawnData& spawnData)
 	m_spawnPosition = spawnData.spawnPosition;
 	m_enemyDefinition = spawnData.enemyDefinition;
 	m_spawnRate = spawnData.spawnRate;
+	m_isOneShot = m_spawnRate <= 0.0f;
 	m_height = spawnData.height;
 	m_startingVelocity = spawnData.startingVelocity;
-	m_timer = m_spawnRate == -1 ? 0 : seconds / m_spawnRate;
+	m_timer = m_isOneShot ? 0.0f : seconds / m_spawnRate;
 	m_maxSpawns = spawnData.maxSpawns;
 	if(m_type == "ambient") m_active = true;
 }
@@ -39,6 +41,14 @@ void EnemySpawner::Update(float deltaTime)
 {
 	if(!m_active) return;
 	if(m_spawnCount >= m_maxSpawns) return;
+
+	if(m_isOneShot)
+	{
+		Spawn();
+		if(m_spawnCount >= m_maxSpawns)
+			m_active = false;
+		return;
+	}
 
 	m_timer -= deltaTime;
 

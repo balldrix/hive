@@ -303,8 +303,8 @@
                  "type":"combat",
                  "visible":true,
                  "width":0,
-                 "x":490.363,
-                 "y":95.6538
+                 "x":848,
+                 "y":97.6538
                 }, 
                 {
                  "height":0,
@@ -351,8 +351,8 @@
                  "type":"combat",
                  "visible":true,
                  "width":0,
-                 "x":496.082,
-                 "y":102.988
+                 "x":853.719,
+                 "y":104.988
                 }, 
                 {
                  "height":0,
@@ -399,8 +399,8 @@
                  "type":"combat",
                  "visible":true,
                  "width":0,
-                 "x":490.747,
-                 "y":82.4758
+                 "x":848.384,
+                 "y":84.4758
                 }, 
                 {
                  "height":0,
@@ -447,8 +447,8 @@
                  "type":"combat",
                  "visible":true,
                  "width":0,
-                 "x":499.11,
-                 "y":78
+                 "x":856.747,
+                 "y":80
                 }, 
                 {
                  "height":0,
@@ -474,12 +474,12 @@
                         {
                          "name":"maxSpawns",
                          "type":"float",
-                         "value":1
+                         "value":999999
                         }, 
                         {
                          "name":"spawnRate",
                          "type":"float",
-                         "value":-1
+                         "value":24
                         }, 
                         {
                          "name":"startingVelocityX",
@@ -492,11 +492,11 @@
                          "value":0
                         }],
                  "rotation":0,
-                 "type":"combat",
+                 "type":"ambient",
                  "visible":true,
                  "width":0,
-                 "x":852.874,
-                 "y":105.289
+                 "x":498,
+                 "y":99.6543
                 }, 
                 {
                  "height":0,
@@ -521,13 +521,13 @@
                         }, 
                         {
                          "name":"maxSpawns",
-                         "type":"string",
-                         "value":"1.0"
+                         "type":"float",
+                         "value":999999
                         }, 
                         {
                          "name":"spawnRate",
                          "type":"float",
-                         "value":-1
+                         "value":24
                         }, 
                         {
                          "name":"startingVelocityX",
@@ -540,11 +540,11 @@
                          "value":0
                         }],
                  "rotation":0,
-                 "type":"combat",
+                 "type":"ambient",
                  "visible":true,
                  "width":0,
-                 "x":858.593,
-                 "y":112.623
+                 "x":503.719,
+                 "y":106.9883
                 }, 
                 {
                  "height":0,
@@ -570,12 +570,12 @@
                         {
                          "name":"maxSpawns",
                          "type":"float",
-                         "value":1
+                         "value":999999
                         }, 
                         {
                          "name":"spawnRate",
                          "type":"float",
-                         "value":-1
+                         "value":24
                         }, 
                         {
                          "name":"startingVelocityX",
@@ -588,11 +588,11 @@
                          "value":0
                         }],
                  "rotation":0,
-                 "type":"combat",
+                 "type":"ambient",
                  "visible":true,
                  "width":0,
-                 "x":853.258,
-                 "y":92.1105
+                 "x":498.384,
+                 "y":86.4758
                 }, 
                 {
                  "height":0,
@@ -618,12 +618,12 @@
                         {
                          "name":"maxSpawns",
                          "type":"float",
-                         "value":1
+                         "value":999999
                         }, 
                         {
                          "name":"spawnRate",
                          "type":"float",
-                         "value":-1
+                         "value":24
                         }, 
                         {
                          "name":"startingVelocityX",
@@ -636,11 +636,11 @@
                          "value":0
                         }],
                  "rotation":0,
-                 "type":"combat",
+                 "type":"ambient",
                  "visible":true,
                  "width":0,
-                 "x":861.621,
-                 "y":87.6347
+                 "x":506.747,
+                 "y":82
                 }, 
                 {
                  "height":0,

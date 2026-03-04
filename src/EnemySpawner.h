@@ -51,5 +51,6 @@ private:
 	float m_timer;
 	int m_maxSpawns;
 	int m_spawnCount;
+	bool m_isOneShot;
 	bool m_active;
 };
