@@ -43,6 +43,7 @@
     <ClCompile Include="src\PlaySoundEvent.cpp" />
     <ClCompile Include="src\Prop.cpp" />
     <ClCompile Include="src\PropManager.cpp" />
+    <ClCompile Include="src\RangedEnemy.cpp" />
     <ClCompile Include="src\ScreenShakeEvent.cpp" />
     <ClCompile Include="src\SharedOptionsGameState.cpp" />
     <ClCompile Include="src\PausedGameState.cpp" />
@@ -114,6 +115,7 @@
     <ClInclude Include="src\Prop.h" />
     <ClInclude Include="src\PropManager.h" />
     <ClInclude Include="src\DustFXEvent.h" />
+    <ClInclude Include="src\RangedEnemy.h" />
     <ClInclude Include="src\ShowUIEvent.h" />
     <ClInclude Include="src\ScreenShakeEvent.h" />
     <ClInclude Include="src\SpawnNPCEvent.h" />

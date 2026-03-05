@@ -143,9 +143,9 @@
     "deceleration": 4,
     "minStateChangeTime": 1,
     "maxStateChangeTime": 2.5,
-    "hostileRange": 70,
-    "fightRange": 50,
-    "attackRange": 50,
+    "hostileRange": 120,
+    "fightRange": 100,
+    "attackRange": 100,
     "chargeRange": 0,
     "chargeSpeed": 0
   }

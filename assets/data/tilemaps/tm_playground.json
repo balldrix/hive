@@ -301,7 +301,7 @@
                         }],
                  "rotation":0,
                  "type":"combat",
-                 "visible":true,
+                 "visible":false,
                  "width":0,
                  "x":848,
                  "y":97.6538
@@ -349,7 +349,7 @@
                         }],
                  "rotation":0,
                  "type":"combat",
-                 "visible":true,
+                 "visible":false,
                  "width":0,
                  "x":853.719,
                  "y":104.988
@@ -397,7 +397,7 @@
                         }],
                  "rotation":0,
                  "type":"combat",
-                 "visible":true,
+                 "visible":false,
                  "width":0,
                  "x":848.384,
                  "y":84.4758
@@ -445,7 +445,7 @@
                         }],
                  "rotation":0,
                  "type":"combat",
-                 "visible":true,
+                 "visible":false,
                  "width":0,
                  "x":856.747,
                  "y":80
@@ -493,7 +493,7 @@
                         }],
                  "rotation":0,
                  "type":"ambient",
-                 "visible":true,
+                 "visible":false,
                  "width":0,
                  "x":498,
                  "y":99.6543
@@ -541,10 +541,10 @@
                         }],
                  "rotation":0,
                  "type":"ambient",
-                 "visible":true,
+                 "visible":false,
                  "width":0,
                  "x":503.719,
-                 "y":106.9883
+                 "y":106.988
                 }, 
                 {
                  "height":0,
@@ -589,7 +589,7 @@
                         }],
                  "rotation":0,
                  "type":"ambient",
-                 "visible":true,
+                 "visible":false,
                  "width":0,
                  "x":498.384,
                  "y":86.4758
@@ -637,7 +637,7 @@
                         }],
                  "rotation":0,
                  "type":"ambient",
-                 "visible":true,
+                 "visible":false,
                  "width":0,
                  "x":506.747,
                  "y":82
@@ -685,7 +685,7 @@
                         }],
                  "rotation":0,
                  "type":"combat",
-                 "visible":true,
+                 "visible":false,
                  "width":0,
                  "x":257.537,
                  "y":99.5495
@@ -733,7 +733,7 @@
                         }],
                  "rotation":0,
                  "type":"combat",
-                 "visible":true,
+                 "visible":false,
                  "width":0,
                  "x":263.256,
                  "y":106.884
@@ -781,7 +781,7 @@
                         }],
                  "rotation":0,
                  "type":"combat",
-                 "visible":true,
+                 "visible":false,
                  "width":0,
                  "x":257.921,
                  "y":86.3715
@@ -829,10 +829,202 @@
                         }],
                  "rotation":0,
                  "type":"combat",
-                 "visible":true,
+                 "visible":false,
                  "width":0,
                  "x":266.284,
                  "y":81.8957
+                }, 
+                {
+                 "height":0,
+                 "id":36,
+                 "name":"spawner_A2_3",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"enemyDefinitionId",
+                         "type":"string",
+                         "value":"waste-lobster"
+                        }, 
+                        {
+                         "name":"facing",
+                         "type":"string",
+                         "value":"left"
+                        }, 
+                        {
+                         "name":"height",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"maxSpawns",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"spawnRate",
+                         "type":"float",
+                         "value":-1
+                        }, 
+                        {
+                         "name":"startingVelocityX",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"startingVelocityY",
+                         "type":"float",
+                         "value":0
+                        }],
+                 "rotation":0,
+                 "type":"ambient",
+                 "visible":true,
+                 "width":0,
+                 "x":158,
+                 "y":97.6543
+                }, 
+                {
+                 "height":0,
+                 "id":37,
+                 "name":"spawner_A2_4",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"enemyDefinitionId",
+                         "type":"string",
+                         "value":"waste-lobster"
+                        }, 
+                        {
+                         "name":"facing",
+                         "type":"string",
+                         "value":"left"
+                        }, 
+                        {
+                         "name":"height",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"maxSpawns",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"spawnRate",
+                         "type":"float",
+                         "value":-1
+                        }, 
+                        {
+                         "name":"startingVelocityX",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"startingVelocityY",
+                         "type":"float",
+                         "value":0
+                        }],
+                 "rotation":0,
+                 "type":"ambient",
+                 "visible":true,
+                 "width":0,
+                 "x":163.719,
+                 "y":104.988
+                }, 
+                {
+                 "height":0,
+                 "id":38,
+                 "name":"spawner_A2_2",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"enemyDefinitionId",
+                         "type":"string",
+                         "value":"waste-lobster"
+                        }, 
+                        {
+                         "name":"facing",
+                         "type":"string",
+                         "value":"left"
+                        }, 
+                        {
+                         "name":"height",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"maxSpawns",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"spawnRate",
+                         "type":"float",
+                         "value":-1
+                        }, 
+                        {
+                         "name":"startingVelocityX",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"startingVelocityY",
+                         "type":"float",
+                         "value":0
+                        }],
+                 "rotation":0,
+                 "type":"ambient",
+                 "visible":true,
+                 "width":0,
+                 "x":158.384,
+                 "y":84.4758
+                }, 
+                {
+                 "height":0,
+                 "id":39,
+                 "name":"spawner_A2_1",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"enemyDefinitionId",
+                         "type":"string",
+                         "value":"waste-lobster"
+                        }, 
+                        {
+                         "name":"facing",
+                         "type":"string",
+                         "value":"left"
+                        }, 
+                        {
+                         "name":"height",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"maxSpawns",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"spawnRate",
+                         "type":"float",
+                         "value":-1
+                        }, 
+                        {
+                         "name":"startingVelocityX",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"startingVelocityY",
+                         "type":"float",
+                         "value":0
+                        }],
+                 "rotation":0,
+                 "type":"ambient",
+                 "visible":true,
+                 "width":0,
+                 "x":166.747,
+                 "y":80
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -862,7 +1054,7 @@
                         }],
                  "rotation":0,
                  "type":"trigger",
-                 "visible":true,
+                 "visible":false,
                  "width":8,
                  "x":120,
                  "y":0
@@ -884,7 +1076,7 @@
                         }],
                  "rotation":0,
                  "type":"trigger",
-                 "visible":true,
+                 "visible":false,
                  "width":8,
                  "x":352.184,
                  "y":0
@@ -906,7 +1098,7 @@
                         }],
                  "rotation":0,
                  "type":"trigger",
-                 "visible":true,
+                 "visible":false,
                  "width":8,
                  "x":699.09,
                  "y":0
@@ -970,7 +1162,7 @@
          "y":0
         }],
  "nextlayerid":36,
- "nextobjectid":36,
+ "nextobjectid":40,
  "orientation":"orthogonal",
  "renderorder":"left-up",
  "tiledversion":"1.11.2",

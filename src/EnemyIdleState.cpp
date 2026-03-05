@@ -72,60 +72,6 @@ void EnemyIdleState::Execute(Enemy* enemy)
 		enemy->Attack();
 		return;
 	}
-
-	//if(enemy->GetPlayerTarget()->GetKnockbackCount() < 1 && enemy->GetPlayerTarget()->GetHealth() < 1)
-	//	return;
-
-	//if((enemy->GetPlayerTarget()->GetStateMachine()->GetCurrentState() == PlayerKnockbackState::Instance() ||
-	//	enemy->GetPlayerTarget()->GetStateMachine()->GetCurrentState() == PlayerDeadState::Instance())) return;
-
-	//if(enemy->GetTimer() > 0 ||
-	//	enemy->GetHealth() < 0)
-	//	return;
-
-	//if((enemy->GetPlayerTarget()->GetStateMachine()->GetCurrentState() != PlayerKnockbackState::Instance() &&
-	//	enemy->GetPlayerTarget()->GetStateMachine()->GetCurrentState() != PlayerDeadState::Instance()))
-	//{
-	//	// true if enemy is outside hostile range
-	//	if(distance > enemy->GetData().hostileRange)
-	//	{
-	//		enemy->GetStateMachine()->ChangeState(EnemyRunningState::Instance());
-	//		enemy->ResetStateChangeTimer(Randomiser::GetRandNumUniform(0.4f, 1.0f));
-	//	}
-	//	else if(distance > enemy->GetData().fightRange || (NPCManager::Instance()->GetAttackingEnemy() == enemy && distance > enemy->GetData().attackRange))
-	//	{
-	//		enemy->GetStateMachine()->ChangeState(EnemyWalkingState::Instance());
-	//		enemy->ResetStateChangeTimer(Randomiser::GetRandNumUniform(0.4f, 1.0f));
-	//	}
-	//}
-
-	//if(enemy->IsHostile() == false)
-	//	return;
-
-	//auto enemies = enemy->GetManager()->GetEnemyList();
-
-	//if(distance < enemy->GetData().fightRange
-	//	&& verticalDistance < VerticalHitRange
-	//	&& NPCManager::Instance()->GetAttackingEnemy() == enemy)
-	//{
-	//	double randnum = Randomiser::GetRandNumUniform(0.02, 1.8);
-	//
-	//	enemy->Stop();
-	//	enemy->ResetStateChangeTimer((float)randnum);
-	//	enemy->Attack();
-	//	return;
-	//}
-
-	//for(auto it = enemies.begin(); it != enemies.end(); it++)
-	//{
-	//	if(*it == enemy) continue;
-
-	//	auto toOther = enemy->GetPosition() - (*it)->GetPosition();
-
-	//	if(toOther.Length() > MinEnemyAvoidDistance) continue;
-
-	//	enemy->GetStateMachine()->ChangeState(EnemyWalkingState::Instance());
-	//}
 }
 
 void EnemyIdleState::OnExit(Enemy* enemy)

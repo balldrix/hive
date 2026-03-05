@@ -9,6 +9,10 @@ RunningEnemy::RunningEnemy()
 {
 }
 
+RunningEnemy::~RunningEnemy()
+{
+}
+
 void RunningEnemy::ApplyDamage(GameObject* source, const int& amount)
 {
 	m_health -= amount;

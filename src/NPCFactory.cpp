@@ -11,6 +11,7 @@
 #include "NormalEnemyGlobalState.h"
 #include "NPCManager.h"
 #include "Player.h"
+#include "RangedEnemy.h"
 
 #include <fmt/core.h>
 #include <string>
@@ -33,11 +34,14 @@ void NPCFactory::Init(Camera* camera, Player* player, CutsceneManager* cutsceneM
 
 Enemy* NPCFactory::GetEnemy(const std::string& id, EnemyDefinition definition)
 {
-	if (definition.enemyType == EnemyType::Normal)
+	if(definition.enemyType == EnemyType::Normal)
 		return CreateNormalEnemy(id, definition);
 
-	if (definition.enemyType == EnemyType::Falling)
+	if(definition.enemyType == EnemyType::Falling)
 		return CreateFallingEnemy(id, definition);
+
+	if(definition.enemyType == EnemyType::Ranged)
+		return CreateRangedEnemy(id, definition);
 
 	Logger::LogWarning(fmt::format("[NPCFactory] No Enemy type {0} found.", EnemyTypeToString(definition.enemyType)));
 	return nullptr;
@@ -63,4 +67,14 @@ Enemy* NPCFactory::CreateFallingEnemy(const std::string& id, EnemyDefinition& de
 				AssetLoader::GetTexture(definition.shadowId), NormalEnemyGlobalState::Instance(), EnemyFallingState::Instance());
 
 	return spider;
+}
+
+Enemy* NPCFactory::CreateRangedEnemy(const std::string& id, EnemyDefinition& definition)
+{
+	auto ranged = new RangedEnemy();
+	ranged->Init(id, m_camera, m_player, m_cutsceneManager, m_eventManager,
+				definition,
+				NPCManager::Instance(),
+				AssetLoader::GetTexture(definition.shadowId), NormalEnemyGlobalState::Instance(), EnemyIdleState::Instance());
+	return ranged;
 }

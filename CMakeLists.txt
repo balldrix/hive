@@ -68,6 +68,7 @@ add_executable(${PROJECT_NAME} src/main.cpp src/AABB.cpp src/Animator.cpp src/Au
 								src/FullHealthPickup.h src/FullHealthPickup.cpp src/SpecialPickup.h src/SpecialPickup.cpp src/FullSpecialPickup.h src/FullSpecialPickup.cpp
 								src/Pickup.cpp src/PlayerPickupState.h src/PlayerPickupState.cpp src/CombatZoneManager.h src/CombatZoneManager.cpp
 								src/CombatZone.h src/CombatZone.cpp src/TriggerManager.h src/TriggerManager.cpp src/TriggerCollider.h src/TriggerCollider.cpp
+								src/RangedEnemy.h src/RangedEnemy.h
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Microsoft::DirectXTK)
 target_link_libraries(${PROJECT_NAME} PRIVATE nlohmann_json::nlohmann_json)

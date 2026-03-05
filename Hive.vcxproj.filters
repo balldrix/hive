@@ -412,6 +412,7 @@
     <ClCompile Include="src\TriggerCollider.cpp">
       <Filter>Collision</Filter>
     </ClCompile>
+    <ClCompile Include="src\RangedEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -1012,6 +1013,9 @@
     </ClInclude>
     <ClInclude Include="src\TriggerCollider.h">
       <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RangedEnemy.h">
+      <Filter>Game\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
