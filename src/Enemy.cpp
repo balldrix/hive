@@ -360,6 +360,8 @@ void Enemy::ProcessSteering()
 	m_targetVelocity = Vector2::Zero;
 	m_targetVelocity += Seek() * 2.0f;
 	m_targetVelocity += Avoid();
+	m_targetVelocity += Strafe() * 0.5f;
+
 	if(m_targetVelocity.LengthSquared() > 0.0001f)
 	{
 		m_targetVelocity.Normalize();
@@ -408,7 +410,7 @@ Vector2 Enemy::Avoid() const
 
 	for(auto it = enemyList.begin(); it != enemyList.end(); it++)
 	{
-		if(*it == this || !(*it)->IsActive()) continue;
+		if(*it == this || !(*it)->IsActive() || (*it)->GetWaveId() != m_waveId) continue;
 
 		auto toOther = m_position - (*it)->GetPosition();
 		float distance = toOther.Length();
