@@ -107,9 +107,13 @@ inline void ParseLayers(TilemapData& t, const json& layers)
 
 		if(layer.contains("objects"))
 		{
+			const bool filterInvisibleObjects = tilemapLayer.name == "spawners" || tilemapLayer.name == "triggers";
+
 			for(const auto& objects : layer.at("objects"))
 			{
-				static unsigned int id = 0;
+				const bool isVisible = objects.value("visible", true);
+				if(filterInvisibleObjects && !isVisible) continue;
+
 				MapObjectData objectData;
 				objectData.id = objects.at("id");
 				objectData.name = objects.at("name");
