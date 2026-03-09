@@ -36,6 +36,8 @@
 #include "PlayerIdleState.h"
 #include "PlayerKnockbackState.h"
 #include "PlayerPickupState.h"
+#include "Projectile.h"
+#include "ProjectileManager.h"
 #include "Prop.h"
 #include "PropManager.h"
 #include "Randomiser.h"
@@ -55,6 +57,11 @@ using namespace GameStateNameLibrary;
 using namespace GameplayConstants;
 using namespace GlobalConstants;
 
+namespace
+{
+	constexpr float ProjectileHitStopDuration = 0.1f;
+}
+
 GameplayGameState::GameplayGameState() :
 	m_input(nullptr),
 	m_cutsceneManager(nullptr),
@@ -69,6 +76,7 @@ GameplayGameState::GameplayGameState() :
 	m_pickupManager(nullptr),
 	m_combatZoneManager(nullptr),
 	m_triggerManager(nullptr),
+	m_projectileManager(nullptr),
 	m_canAttack(true),
 	m_running(false),
 	m_deltaTime(0.0f),
@@ -137,6 +145,7 @@ void GameplayGameState::Setup()
 	m_pickupManager = new PickupManager();
 	m_combatZoneManager = new CombatZoneManager();
 	m_triggerManager = new TriggerManager();
+	m_projectileManager = new ProjectileManager();
 
 	m_player->Init(m_controlSystem, m_cutsceneManager, m_eventManager);
 	m_player->SetCamera(m_camera);
@@ -145,10 +154,11 @@ void GameplayGameState::Setup()
 	m_enemySpawnManager->Init();
 	m_propManager->Init(m_camera, m_player);
 	m_pickupManager->Init(m_camera);
-	m_NPCManager->Init(m_camera, m_player, m_cutsceneManager, m_eventManager);
+	m_NPCManager->Init(m_camera, m_player, m_cutsceneManager, m_eventManager, m_projectileManager);
 	m_combatZoneManager->Init(m_camera, m_player, m_enemySpawnManager, m_NPCManager, m_levelRenderer);
 	m_triggerManager->Init(m_combatZoneManager, m_enemySpawnManager);
 	LevelCollision::CreateBounds(m_levelRenderer);
+	m_projectileManager->Init(m_camera);
 
 	m_camera->Init(m_eventManager, GameWidth);
 
@@ -170,6 +180,9 @@ void GameplayGameState::Cleanup()
 
 	delete m_impactFxPool;
 	m_impactFxPool = nullptr;
+
+	delete m_projectileManager;
+	m_projectileManager = nullptr;
 
 	delete m_triggerManager;
 	m_triggerManager = nullptr;
@@ -419,6 +432,7 @@ void GameplayGameState::Tick(float deltaTime)
 	m_controlSystem->Update(deltaTime);
 	m_player->Update(deltaTime);
 	m_NPCManager->Update(deltaTime);
+	m_projectileManager->Update(deltaTime);
 
 	if(m_player->IsDead())
 	{
@@ -450,10 +464,40 @@ void GameplayGameState::ProcessCollisions()
 
 	std::vector<Enemy*> enemyList = m_NPCManager->GetEnemyList();
 	std::vector<Prop*> propList = m_propManager->GetPropList();
+	std::vector<Projectile>& projectiles = m_projectileManager->GetProjectiles();
 
 	auto isPlayerHitBoxActive = m_player->GetHitBoxManager()->IsHitBoxActive();
 	auto playerGroundPositionX = m_player->GetGroundPosition().x;
 	auto playerGroundPositionY = m_player->GetGroundPosition().y;
+	Collider playerHurtBox = m_player->GetHitBoxManager()->GetHurtBox();
+
+	for(auto& projectile : projectiles)
+	{
+		if(!projectile.active) continue;
+		if(projectile.owner == nullptr)
+		{
+			m_projectileManager->DisableProjectile(projectile);
+			continue;
+		}
+
+		if(!m_projectileManager->IsSweptHit(projectile, playerHurtBox)) continue;
+
+		m_player->ApplyDamage(projectile.owner, projectile.damage);
+		m_player->IncreaseSpecial();
+		m_camera->StartShake(1.0f, 2.0f);
+
+		m_stopTimer = ProjectileHitStopDuration;
+		AudioEngine::Instance()->Pause();
+		m_isCollisionOnCooldown = true;
+		m_collisionCooldown = ProjectileHitStopDuration;
+
+		auto impactFx = m_impactFxPool->Get();
+		m_activeImpacts.push_back(impactFx);
+		impactFx->DisplayFx(projectile.position - m_camera->GetPosition());
+		m_projectileManager->DisableProjectile(projectile);
+
+		return;
+	}
 
 	for(size_t i = 0; i < enemyList.size(); i++)
 	{
@@ -620,6 +664,7 @@ void GameplayGameState::Render(Graphics* graphics)
 	m_levelRenderer->Render(graphics);
 	m_player->Render(graphics);
 	m_NPCManager->Render(graphics);
+	m_projectileManager->Render(graphics);
 	m_particleSystem->Render(graphics); 
 	m_propManager->Render(graphics);
 	m_pickupManager->Render(graphics);

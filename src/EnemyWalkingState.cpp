@@ -29,11 +29,13 @@ void EnemyWalkingState::Execute(Enemy* enemy)
 {
 	enemy->ProcessSteering();
 
+	const bool isRanged = enemy->GetData().enemyType == EnemyType::Ranged;
 	auto distance = (enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length();
 
 	if(enemy->GetTimer() > 0) return;
 
-	if(distance < enemy->GetData().fightRange && distance > enemy->GetData().attackRange && NPCManager::Instance()->GetAttackingEnemy() != enemy)
+	if(distance < enemy->GetData().fightRange && distance > enemy->GetData().attackRange &&
+		(isRanged || NPCManager::Instance()->GetAttackingEnemy() != enemy))
 	{
 		enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
 		enemy->ResetStateChangeTimer();

@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ProjectileManager.cpp" />
     <ClCompile Include="src\CombatZone.cpp" />
     <ClCompile Include="src\CombatZoneManager.cpp" />
     <ClCompile Include="src\CutsceneManager.cpp" />
@@ -104,6 +105,8 @@
     <ClCompile Include="src\Utils.h" />
     <ClCompile Include="src\UISprite.cpp" />
     <ClCompile Include="src\UICycleMenuItemView.h" />
+    <ClInclude Include="src\Projectile.h" />
+    <ClInclude Include="src\ProjectileManager.h" />
     <ClInclude Include="src\CombatZone.h" />
     <ClInclude Include="src\CombatZoneManager.h" />
     <ClInclude Include="src\PlayerPickupState.h" />
@@ -347,6 +350,7 @@
     <None Include="assets\fonts\goodbye_despair_8pt.spritefont" />
     <None Include="assets\fonts\thaleah_12pt.spritefont" />
     <None Include="assets\data\cutscenes\cutsceneData.json" />
+    <None Include="src\Projectile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\textures\broken-gadget_spritesheet.png" />

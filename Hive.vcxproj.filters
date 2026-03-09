@@ -412,7 +412,12 @@
     <ClCompile Include="src\TriggerCollider.cpp">
       <Filter>Collision</Filter>
     </ClCompile>
-    <ClCompile Include="src\RangedEnemy.cpp" />
+    <ClCompile Include="src\RangedEnemy.cpp">
+      <Filter>Game\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ProjectileManager.cpp">
+      <Filter>Game\Projectiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -549,6 +554,9 @@
     </Filter>
     <Filter Include="System\CombatZone">
       <UniqueIdentifier>{833193dd-2a14-4e63-b61d-fdf9b3920174}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Projectiles">
+      <UniqueIdentifier>{f734bfc0-27b3-43d7-8658-4bfd0c2f7654}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1017,6 +1025,12 @@
     <ClInclude Include="src\RangedEnemy.h">
       <Filter>Game\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="src\ProjectileManager.h">
+      <Filter>Game\Projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Projectile.h">
+      <Filter>Game\Projectiles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\fonts\goodbye_despair_8pt.spritefont">
@@ -1111,6 +1125,9 @@
     </None>
     <None Include="assets\data\spritesheets\crate_spritesheet.json">
       <Filter>Assets\Data\Spritesheets</Filter>
+    </None>
+    <None Include="src\Projectile.cpp">
+      <Filter>Game\Projectiles</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

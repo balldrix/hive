@@ -360,7 +360,12 @@ void Enemy::ProcessSteering()
 	m_targetVelocity = Vector2::Zero;
 	m_targetVelocity += Seek() * 2.0f;
 	m_targetVelocity += Avoid();
-	m_targetVelocity += Strafe() * 0.5f;
+
+	// Ranged enemies should hold lanes and shoot rather than orbiting the player.
+	if(m_enemyDefinition.enemyType != EnemyType::Ranged)
+	{
+		m_targetVelocity += Strafe() * 0.5f;
+	}
 
 	if(m_targetVelocity.LengthSquared() > 0.0001f)
 	{

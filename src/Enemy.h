@@ -75,6 +75,7 @@ protected:
 	SoundSource*				m_vocalSoundSource;
 	int							m_recentFootstepFrame;
 	EnemyDefinition				m_enemyDefinition;
+	Player*						m_playerTarget;
 
 private:
 	Vector2						Seek() const;
@@ -82,7 +83,6 @@ private:
 	Vector2						Strafe() const;
 
 	std::string					m_waveId;
-	Player*						m_playerTarget;
 	Sprite*						m_portraitSprite;
 	float						m_stateChangeTimer;
 	float						m_flashingTimer;

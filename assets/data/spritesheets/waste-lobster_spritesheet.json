@@ -226,6 +226,7 @@
         "from": 12,
         "to": 15,
         "direction": "forward",
+        "repeat": "1",
         "color": "#000000ff"
       },
       {

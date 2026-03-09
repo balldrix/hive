@@ -36,12 +36,21 @@ void EnemyIdleState::Execute(Enemy* enemy)
 	if(enemy->GetTimer() > 0 || enemy->GetHealth() < 0)
 		return;
 
+	const bool isRanged = enemy->GetData().enemyType == EnemyType::Ranged;
 	auto verticalDistance = fabs(enemy->GetPositionY() - enemy->GetPlayerTarget()->GetPositionY());
 	auto distance = (enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length();
 
 	if(distance > enemy->GetData().fightRange)
 	{
 		enemy->GetStateMachine()->ChangeState(EnemyWalkingState::Instance());
+		return;
+	}
+
+	if(isRanged)
+	{
+		enemy->Stop();
+		enemy->ResetStateChangeTimer();
+		enemy->Attack();
 		return;
 	}
 

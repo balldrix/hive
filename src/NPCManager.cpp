@@ -39,13 +39,13 @@ NPCManager::~NPCManager()
 	DeleteAll();
 }
 
-void NPCManager::Init(Camera* camera, Player* player, CutsceneManager* cutsceneManager, EventManager* eventManager)
+void NPCManager::Init(Camera* camera, Player* player, CutsceneManager* cutsceneManager, EventManager* eventManager, ProjectileManager* projectileManager)
 {
 	s_instance = this;
 
 	m_player = player;
 	m_NPCFactory = new NPCFactory();
-	m_NPCFactory->Init(camera, player, cutsceneManager, eventManager);
+	m_NPCFactory->Init(camera, player, cutsceneManager, eventManager, projectileManager);
 	m_eventManager = eventManager;
 	m_cutsceneManager = cutsceneManager;
 	RegisterEvents();
