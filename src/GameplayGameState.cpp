@@ -473,8 +473,8 @@ void GameplayGameState::ProcessCollisions()
 
 	for(auto& projectile : projectiles)
 	{
-		if(!projectile.active) continue;
-		if(projectile.owner == nullptr)
+		if(!projectile.IsActive()) continue;
+		if(projectile.GetOwner() == nullptr)
 		{
 			m_projectileManager->DisableProjectile(projectile);
 			continue;
@@ -482,7 +482,7 @@ void GameplayGameState::ProcessCollisions()
 
 		if(!m_projectileManager->IsSweptHit(projectile, playerHurtBox)) continue;
 
-		m_player->ApplyDamage(projectile.owner, projectile.damage);
+		m_player->ApplyDamage(projectile.GetOwner(), projectile.GetDamage());
 		m_player->IncreaseSpecial();
 		m_camera->StartShake(1.0f, 2.0f);
 
@@ -493,7 +493,7 @@ void GameplayGameState::ProcessCollisions()
 
 		auto impactFx = m_impactFxPool->Get();
 		m_activeImpacts.push_back(impactFx);
-		impactFx->DisplayFx(projectile.position - m_camera->GetPosition());
+		impactFx->DisplayFx(projectile.GetPosition() - m_camera->GetPosition());
 		m_projectileManager->DisableProjectile(projectile);
 
 		return;

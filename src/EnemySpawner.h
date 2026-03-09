@@ -38,6 +38,7 @@ public:
 private:
 	void Spawn();
 	std::string ExtractSpawnId(const std::string& spawnerId);
+	std::string ExtractSpawnerId(const std::string& spawnerId);
 
 	std::string m_id;
 	std::string m_type;

@@ -9,6 +9,7 @@
 
 #include <cmath>
 #include <DirectXColors.h>
+#include <directxtk/SimpleMath.h>
 
 using namespace DirectX;
 
@@ -27,7 +28,7 @@ ProjectileManager::~ProjectileManager()
 {
 	for(auto& projectile : m_projectiles)
 	{
-		projectile.collider.Delete();
+		projectile.DeleteCollider();
 	}
 }
 
@@ -39,7 +40,7 @@ void ProjectileManager::Init(Camera* camera)
 
 	for(auto& projectile : m_projectiles)
 	{
-		projectile.collider.Delete();
+		projectile.DeleteCollider();
 	}
 
 	m_projectiles.clear();
@@ -50,9 +51,8 @@ void ProjectileManager::Init(Camera* camera)
 
 	for(auto& projectile : m_projectiles)
 	{
-		projectile.collider.Init(&sprite, Colors::OrangeRed.v);
-		projectile.collider.SetAABB(AABB(Vector2(-2.0f, -2.0f), Vector2(2.0f, 2.0f)));
-		projectile.collider.Update(Vector2::Zero);
+		projectile.InitCollider(&sprite, AABB(Vector2(-2.0f, -2.0f), Vector2(2.0f, 2.0f)), Colors::OrangeRed.v);
+		projectile.Init();
 	}
 }
 
@@ -60,17 +60,8 @@ void ProjectileManager::Update(float deltaTime)
 {
 	for(auto& projectile : m_projectiles)
 	{
-		if(!projectile.active) continue;
-
-		projectile.previousPosition = projectile.position;
-		projectile.position += projectile.direction * projectile.speed * deltaTime;
-		projectile.lifetimeRemaining -= deltaTime;
-		projectile.collider.Update(projectile.position);
-
-		if(projectile.lifetimeRemaining <= 0.0f)
-		{
-			DisableProjectile(projectile);
-		}
+		if(!projectile.IsActive()) continue;
+		projectile.Update(deltaTime);
 	}
 }
 
@@ -78,15 +69,15 @@ void ProjectileManager::Render(Graphics* graphics)
 {
 	for(auto& projectile : m_projectiles)
 	{
-		if(!projectile.active) continue;
+		if(!projectile.IsActive()) continue;
 
-		Vector2 renderPosition = projectile.position;
+		Vector2 renderPosition = projectile.GetPosition();
 		if(m_camera != nullptr)
 		{
 			renderPosition -= m_camera->GetPosition();
 		}
 
-		projectile.collider.Render(graphics, renderPosition);
+		projectile.Render(graphics, renderPosition);
 	}
 }
 
@@ -94,54 +85,28 @@ void ProjectileManager::SpawnProjectile(const Vector2& position, const Vector2& 
 {
 	for(auto& projectile : m_projectiles)
 	{
-		if(projectile.active) continue;
+		if(projectile.IsActive()) continue;
 
-		Vector2 normalizedDirection = direction;
-		if(normalizedDirection.LengthSquared() > 0.0001f)
-		{
-			normalizedDirection.Normalize();
-		}
-		else
-		{
-			normalizedDirection = Vector2::UnitX;
-		}
-
-		projectile.active = true;
-		projectile.position = position;
-		projectile.previousPosition = position;
-		projectile.direction = normalizedDirection;
-		projectile.speed = speed;
-		projectile.lifetimeRemaining = lifetime;
-		projectile.damage = damage;
-		projectile.owner = owner;
-		projectile.collider.Update(position);
+		projectile.Activate(position, direction, speed, damage, lifetime, owner);
 		return;
 	}
 }
 
 void ProjectileManager::DisableProjectile(Projectile& projectile)
 {
-	projectile.active = false;
-	projectile.position = Vector2::Zero;
-	projectile.previousPosition = Vector2::Zero;
-	projectile.direction = Vector2::UnitX;
-	projectile.speed = 0.0f;
-	projectile.lifetimeRemaining = 0.0f;
-	projectile.damage = 0;
-	projectile.owner = nullptr;
-	projectile.collider.Update(Vector2::Zero);
+	projectile.Deactivate();
 }
 
 bool ProjectileManager::IsSweptHit(const Projectile& projectile, const Collider& hurtBox) const
 {
 	Collider hurtBoxCopy = hurtBox;
 
-	if(hurtBoxCopy.OnCollision(projectile.position))
+	if(hurtBoxCopy.OnCollision(projectile.GetPosition()))
 	{
 		return true;
 	}
 
-	auto delta = projectile.position - projectile.previousPosition;
+	auto delta = projectile.GetPosition() - projectile.GetPreviousPosition();
 	float distance = delta.Length();
 
 	if(distance <= 0.001f)
@@ -154,7 +119,7 @@ bool ProjectileManager::IsSweptHit(const Projectile& projectile, const Collider&
 	for(int i = 1; i <= steps; i++)
 	{
 		float t = static_cast<float>(i) / static_cast<float>(steps);
-		Vector2 samplePoint = projectile.previousPosition + (delta * t);
+		Vector2 samplePoint = projectile.GetPreviousPosition() + (delta * t);
 		if(hurtBoxCopy.OnCollision(samplePoint))
 		{
 			return true;

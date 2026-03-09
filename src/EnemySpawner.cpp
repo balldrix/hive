@@ -61,8 +61,9 @@ void EnemySpawner::Update(float deltaTime)
 
 void EnemySpawner::Spawn()
 {
-	std::string npcId = fmt::format("{0}_{1}", m_enemyDefinition.id, m_spawnCount);
 	std::string spawnId = ExtractSpawnId(m_id);
+	std::string uniqueId = ExtractSpawnerId(m_id);
+	std::string npcId = fmt::format("{0}-{1}_{2}", m_enemyDefinition.id, uniqueId, m_spawnCount);
 	m_currentWaveId = fmt::format("{0}_{1}", spawnId, m_spawnCount);
 	NPCManager::Instance()->SpawnNPC(npcId,
 		m_currentWaveId,
@@ -80,4 +81,11 @@ std::string EnemySpawner::ExtractSpawnId(const std::string& spawnerId)
 	const size_t start = strlen(prefix);
 	const size_t lastUnderscore = spawnerId.find_last_of('_');
 	return spawnerId.substr(start, lastUnderscore - start);
+}
+
+std::string EnemySpawner::ExtractSpawnerId(const std::string& spawnerId)
+{
+	constexpr const char* prefix = "spawner_";
+	const size_t start = strlen(prefix);
+	return spawnerId.substr(start);
 }

@@ -27,8 +27,10 @@ public:
 		NPCManager* npcManager,
 		Texture* shadowTexture, State<Enemy>* globalEnemyState, State<Enemy>* startingState,
 		ProjectileManager* projectileManager);
+	void Reset(const std::string& id) override;
 
 	void Attack() override;
+	void FireProjectile();
 
 private:
 	ProjectileManager* m_projectileManager;

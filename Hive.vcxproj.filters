@@ -373,6 +373,9 @@
     <ClCompile Include="src\ShowUIEvent.cpp">
       <Filter>Events</Filter>
     </ClCompile>
+    <ClCompile Include="src\FireProjectileEvent.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
     <ClCompile Include="src\Prop.cpp">
       <Filter>Game\Props</Filter>
     </ClCompile>
@@ -418,6 +421,7 @@
     <ClCompile Include="src\ProjectileManager.cpp">
       <Filter>Game\Projectiles</Filter>
     </ClCompile>
+    <ClCompile Include="src\Projectile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -1031,6 +1035,9 @@
     <ClInclude Include="src\Projectile.h">
       <Filter>Game\Projectiles</Filter>
     </ClInclude>
+    <ClInclude Include="src\FireProjectileEvent.h">
+      <Filter>Events</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\fonts\goodbye_despair_8pt.spritefont">
@@ -1125,9 +1132,6 @@
     </None>
     <None Include="assets\data\spritesheets\crate_spritesheet.json">
       <Filter>Assets\Data\Spritesheets</Filter>
-    </None>
-    <None Include="src\Projectile.cpp">
-      <Filter>Game\Projectiles</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -1257,6 +1261,7 @@
     <Image Include="assets\textures\crate_spritesheet.png">
       <Filter>Assets\Textures</Filter>
     </Image>
+    <Image Include="assets\textures\lobster-spit_spritesheet.png" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\sounds\swingNormal_001.wav">

@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\FireProjectileEvent.cpp" />
     <ClCompile Include="src\ProjectileManager.cpp" />
     <ClCompile Include="src\CombatZone.cpp" />
     <ClCompile Include="src\CombatZoneManager.cpp" />
@@ -105,6 +106,7 @@
     <ClCompile Include="src\Utils.h" />
     <ClCompile Include="src\UISprite.cpp" />
     <ClCompile Include="src\UICycleMenuItemView.h" />
+    <ClInclude Include="src\FireProjectileEvent.h" />
     <ClInclude Include="src\Projectile.h" />
     <ClInclude Include="src\ProjectileManager.h" />
     <ClInclude Include="src\CombatZone.h" />
@@ -334,6 +336,7 @@
     <None Include="assets\data\spritesheets\impactfx_spritesheet.json" />
     <None Include="assets\data\spritesheets\jungle-ape_spritesheet.json" />
     <None Include="assets\data\spritesheets\lift-spider_spritesheet.json" />
+    <None Include="assets\data\spritesheets\lobster-spit_spritesheet.json" />
     <None Include="assets\data\spritesheets\mook_spritesheet.json" />
     <None Include="assets\data\spritesheets\player_spritesheet.json" />
     <None Include="assets\data\spritesheets\waste-box_spritesheet.json" />
@@ -350,7 +353,7 @@
     <None Include="assets\fonts\goodbye_despair_8pt.spritefont" />
     <None Include="assets\fonts\thaleah_12pt.spritefont" />
     <None Include="assets\data\cutscenes\cutsceneData.json" />
-    <None Include="src\Projectile.cpp" />
+    <ClCompile Include="src\Projectile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\textures\broken-gadget_spritesheet.png" />
@@ -360,6 +363,7 @@
     <Image Include="assets\textures\impactfx.png" />
     <Image Include="assets\textures\jungle-ape_spritesheet.png" />
     <Image Include="assets\textures\lift-spider_spritesheet.png" />
+    <Image Include="assets\textures\lobster-spit_spritesheet.png" />
     <Image Include="assets\textures\mook_spritesheet.png" />
     <Image Include="assets\textures\pickup.png" />
     <Image Include="assets\textures\pixel.png" />
@@ -521,11 +525,13 @@
       <PreprocessorDefinitions>_AMD64_; UNICODE</PreprocessorDefinitions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>xaudio2.lib;Winmm.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>vcpkg_installed\x64-windows\debug\lib\DirectXTK.lib;vcpkg_installed\x64-windows\debug\lib\OpenAL32.lib;vcpkg_installed\x64-windows\debug\lib\sndfile.lib;vcpkg_installed\x64-windows\debug\lib\fmtd.lib;xaudio2.lib;Winmm.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -537,11 +543,13 @@
       <PreprocessorDefinitions>_AMD64_; UNICODE</PreprocessorDefinitions>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>xaudio2.lib;Winmm.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>vcpkg_installed\x64-windows\debug\lib\DirectXTK.lib;vcpkg_installed\x64-windows\debug\lib\OpenAL32.lib;vcpkg_installed\x64-windows\debug\lib\sndfile.lib;vcpkg_installed\x64-windows\debug\lib\fmtd.lib;xaudio2.lib;Winmm.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AssemblyDebug>true</AssemblyDebug>
     </Link>
   </ItemDefinitionGroup>
@@ -555,13 +563,15 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>_AMD64_; UNICODE</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>xaudio2.lib;Winmm.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>vcpkg_installed\x64-windows\lib\DirectXTK.lib;vcpkg_installed\x64-windows\lib\OpenAL32.lib;vcpkg_installed\x64-windows\lib\sndfile.lib;vcpkg_installed\x64-windows\lib\fmt.lib;xaudio2.lib;Winmm.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -575,13 +585,15 @@
       <PreprocessorDefinitions>_AMD64_; UNICODE</PreprocessorDefinitions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>xaudio2.lib;Winmm.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>vcpkg_installed\x64-windows\lib\DirectXTK.lib;vcpkg_installed\x64-windows\lib\OpenAL32.lib;vcpkg_installed\x64-windows\lib\sndfile.lib;vcpkg_installed\x64-windows\lib\fmt.lib;xaudio2.lib;Winmm.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

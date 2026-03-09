@@ -267,7 +267,8 @@ void Enemy::Reset(const std::string& id)
 		m_eventManager->UnRegisterAllForTarget(m_id);
 	}
 
-	m_id = id;
+	// Keep the animator's event owner id aligned with pooled enemy ids.
+	SetID(id);
 }
 
 void Enemy::Spawn(const Vector2& position, std::string waveId)
