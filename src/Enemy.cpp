@@ -298,7 +298,7 @@ void Enemy::SetPlayerTarget(Player* player)
 
 void Enemy::ResetStateChangeTimer()
 {
-	m_stateChangeTimer = Randomiser::GetRandNumNormal(m_enemyDefinition.minStateChangeTime, m_enemyDefinition.maxStateChangeTime);
+	m_stateChangeTimer = Randomiser::GetRandNumUniform(m_enemyDefinition.minStateChangeTime, m_enemyDefinition.maxStateChangeTime);
 }
 
 void Enemy::ApplyDamage(GameObject* source, const int& amount)
