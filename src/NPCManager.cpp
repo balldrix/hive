@@ -13,6 +13,7 @@
 #include "Player.h"
 #include "SpawnNPCEvent.h"
 
+#include <algorithm>
 #include <directxtk/SimpleMath.h>
 #include <limits>
 #include <string>
@@ -24,7 +25,6 @@ NPCManager* NPCManager::s_instance = nullptr;
 
 NPCManager::NPCManager() :
 	m_NPCFactory(nullptr),
-	m_hostileEnemy(nullptr),
 	m_player(nullptr),
 	m_eventManager(nullptr),
 	m_cutsceneManager(nullptr)
@@ -113,6 +113,9 @@ void NPCManager::Reset()
 		Enemy* enemy = m_enemyList[i];
 		enemy->Reset(enemy->GetID());
 	}
+
+	m_hostileEnemyList.clear();
+	m_previousHostilesByWave.clear();
 }
 
 void NPCManager::DeleteAll()
@@ -124,25 +127,38 @@ void NPCManager::DeleteAll()
 	}
 
 	m_enemyList.clear();
+	m_hostileEnemyList.clear();
+	m_previousHostilesByWave.clear();
 	
 	delete m_NPCFactory;
 
 	m_NPCFactory = nullptr;
 }
 
-void NPCManager::SetNextAttackingEnemy()
+void NPCManager::SetNextAttackingEnemy(const std::string& waveId)
 {
-	static std::vector<Enemy*> previousHostiles;
+	if(waveId.empty())
+	{
+		return;
+	}
+
+	CleanupHostileEnemyList();
 
 	float closestDistance = std::numeric_limits<float>::max();
 	Enemy* newHostile = nullptr;
+	WaveHostileHistory& waveHistory = GetOrCreateWaveHistory(waveId);
 
 	for(Enemy* enemy : m_enemyList)
 	{
-		if(enemy == m_hostileEnemy || enemy->IsDead() || !enemy->IsActive()) continue;
-
-		if(std::find(previousHostiles.begin(), previousHostiles.end(), enemy) != previousHostiles.end())
+		if(!IsEligibleHostileEnemy(enemy) || enemy->GetWaveId() != waveId)
+		{
 			continue;
+		}
+
+		if(std::find(waveHistory.recentHostiles.begin(), waveHistory.recentHostiles.end(), enemy) != waveHistory.recentHostiles.end())
+		{
+			continue;
+		}
 
 		float distance = Vector2::DistanceSquared(enemy->GetPosition(), m_player->GetPosition());
 
@@ -154,17 +170,108 @@ void NPCManager::SetNextAttackingEnemy()
 
 	if(newHostile)
 	{
-		previousHostiles.push_back(newHostile);
-		if(previousHostiles.size() > 3)
-			previousHostiles.erase(previousHostiles.begin());
+		waveHistory.recentHostiles.push_back(newHostile);
+		if(waveHistory.recentHostiles.size() > 3)
+		{
+			waveHistory.recentHostiles.erase(waveHistory.recentHostiles.begin());
+		}
 
-		m_hostileEnemy = newHostile;
+		SetAttackingEnemy(newHostile);
+		return;
 	}
+
+	waveHistory.recentHostiles.clear();
+
+	for(Enemy* enemy : m_enemyList)
+	{
+		if(!IsEligibleHostileEnemy(enemy) || enemy->GetWaveId() != waveId)
+		{
+			continue;
+		}
+
+		float distance = Vector2::DistanceSquared(enemy->GetPosition(), m_player->GetPosition());
+
+		if(distance >= closestDistance)
+		{
+			continue;
+		}
+
+		closestDistance = distance;
+		newHostile = enemy;
+	}
+
+	if(newHostile != nullptr)
+	{
+		waveHistory.recentHostiles.push_back(newHostile);
+		SetAttackingEnemy(newHostile);
+		return;
+	}
+
+	ClearAttackingEnemy(waveId);
 }
 
 void NPCManager::SetAttackingEnemy(Enemy* enemy)
 {
-	m_hostileEnemy = enemy;
+	if(!IsEligibleHostileEnemy(enemy))
+	{
+		return;
+	}
+
+	CleanupHostileEnemyList();
+
+	for(auto it = m_hostileEnemyList.begin(); it != m_hostileEnemyList.end(); ++it)
+	{
+		if((*it)->GetWaveId() == enemy->GetWaveId())
+		{
+			*it = enemy;
+			return;
+		}
+	}
+
+	m_hostileEnemyList.push_back(enemy);
+}
+
+void NPCManager::SetNextAttackingEnemy(Enemy* enemy)
+{
+	if(enemy == nullptr)
+	{
+		return;
+	}
+
+	SetNextAttackingEnemy(enemy->GetWaveId());
+}
+
+Enemy* NPCManager::GetAttackingEnemy(const std::string& waveId) const
+{
+	if(waveId.empty())
+	{
+		return nullptr;
+	}
+
+	for(Enemy* enemy : m_hostileEnemyList)
+	{
+		if(enemy == nullptr || enemy->GetWaveId() != waveId)
+		{
+			continue;
+		}
+
+		if(IsEligibleHostileEnemy(enemy))
+		{
+			return enemy;
+		}
+	}
+
+	return nullptr;
+}
+
+bool NPCManager::IsAttackingEnemy(const Enemy* enemy) const
+{
+	if(enemy == nullptr)
+	{
+		return false;
+	}
+
+	return GetAttackingEnemy(enemy->GetWaveId()) == enemy;
 }
 
 bool NPCManager::IsWaveDead(std::string waveId)
@@ -183,4 +290,107 @@ bool NPCManager::IsWaveDead(std::string waveId)
 void NPCManager::RegisterEvents()
 {
 	m_eventManager->RegisterEvent("SpawnNPC", "NPCManager", new SpawnNPCEvent(this));
+}
+
+void NPCManager::CleanupHostileEnemyList()
+{
+	m_hostileEnemyList.erase(
+		std::remove_if(m_hostileEnemyList.begin(), m_hostileEnemyList.end(),
+			[this](Enemy* enemy)
+			{
+				return !IsEligibleHostileEnemy(enemy);
+			}),
+		m_hostileEnemyList.end());
+
+	CleanupWaveHistory();
+}
+
+bool NPCManager::IsEligibleHostileEnemy(const Enemy* enemy) const
+{
+	if(enemy == nullptr || enemy->IsDead() || !enemy->IsActive())
+	{
+		return false;
+	}
+
+	const EnemyType enemyType = enemy->GetData().enemyType;
+	if(enemyType == EnemyType::Ranged || enemyType == EnemyType::Boss)
+	{
+		return false;
+	}
+
+	return !enemy->GetWaveId().empty();
+}
+
+NPCManager::WaveHostileHistory* NPCManager::FindWaveHistory(const std::string& waveId)
+{
+	for(auto& history : m_previousHostilesByWave)
+	{
+		if(history.waveId == waveId)
+		{
+			return &history;
+		}
+	}
+
+	return nullptr;
+}
+
+const NPCManager::WaveHostileHistory* NPCManager::FindWaveHistory(const std::string& waveId) const
+{
+	for(const auto& history : m_previousHostilesByWave)
+	{
+		if(history.waveId == waveId)
+		{
+			return &history;
+		}
+	}
+
+	return nullptr;
+}
+
+NPCManager::WaveHostileHistory& NPCManager::GetOrCreateWaveHistory(const std::string& waveId)
+{
+	WaveHostileHistory* history = FindWaveHistory(waveId);
+	if(history != nullptr)
+	{
+		return *history;
+	}
+
+	m_previousHostilesByWave.push_back({ waveId, {} });
+	return m_previousHostilesByWave.back();
+}
+
+void NPCManager::CleanupWaveHistory()
+{
+	for(auto historyIt = m_previousHostilesByWave.begin(); historyIt != m_previousHostilesByWave.end();)
+	{
+		auto& recentHostiles = historyIt->recentHostiles;
+		recentHostiles.erase(
+			std::remove_if(recentHostiles.begin(), recentHostiles.end(),
+				[this](Enemy* enemy)
+				{
+					return std::find(m_enemyList.begin(), m_enemyList.end(), enemy) == m_enemyList.end() ||
+						!IsEligibleHostileEnemy(enemy);
+				}),
+			recentHostiles.end());
+
+		if(historyIt->waveId.empty() || recentHostiles.empty())
+		{
+			historyIt = m_previousHostilesByWave.erase(historyIt);
+			continue;
+		}
+
+		++historyIt;
+	}
+}
+
+void NPCManager::ClearAttackingEnemy(const std::string& waveId)
+{
+	for(auto it = m_hostileEnemyList.begin(); it != m_hostileEnemyList.end(); ++it)
+	{
+		if((*it)->GetWaveId() == waveId)
+		{
+			m_hostileEnemyList.erase(it);
+			break;
+		}
+	}
 }

@@ -53,6 +53,7 @@ void CombatZone::Deactivate()
 	for(std::string id : m_spawnerIDs)
 	{
 		EnemySpawner* spawner = m_enemySpawnManager->GetSpawner(id);
+		if(spawner == nullptr) continue;
 		spawner->SetActive(false);
 	}
 

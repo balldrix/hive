@@ -301,7 +301,7 @@
                         }],
                  "rotation":0,
                  "type":"combat",
-                 "visible":false,
+                 "visible":true,
                  "width":0,
                  "x":848,
                  "y":97.6538
@@ -397,7 +397,7 @@
                         }],
                  "rotation":0,
                  "type":"combat",
-                 "visible":false,
+                 "visible":true,
                  "width":0,
                  "x":848.384,
                  "y":84.4758
@@ -445,7 +445,7 @@
                         }],
                  "rotation":0,
                  "type":"combat",
-                 "visible":false,
+                 "visible":true,
                  "width":0,
                  "x":856.747,
                  "y":80
@@ -541,7 +541,7 @@
                         }],
                  "rotation":0,
                  "type":"ambient",
-                 "visible":false,
+                 "visible":true,
                  "width":0,
                  "x":503.719,
                  "y":106.988
@@ -589,7 +589,7 @@
                         }],
                  "rotation":0,
                  "type":"ambient",
-                 "visible":false,
+                 "visible":true,
                  "width":0,
                  "x":498.384,
                  "y":86.4758
@@ -637,7 +637,7 @@
                         }],
                  "rotation":0,
                  "type":"ambient",
-                 "visible":false,
+                 "visible":true,
                  "width":0,
                  "x":506.747,
                  "y":82
@@ -733,7 +733,7 @@
                         }],
                  "rotation":0,
                  "type":"combat",
-                 "visible":false,
+                 "visible":true,
                  "width":0,
                  "x":263.256,
                  "y":106.884
@@ -781,7 +781,7 @@
                         }],
                  "rotation":0,
                  "type":"combat",
-                 "visible":false,
+                 "visible":true,
                  "width":0,
                  "x":257.921,
                  "y":86.3715
@@ -829,7 +829,7 @@
                         }],
                  "rotation":0,
                  "type":"combat",
-                 "visible":false,
+                 "visible":true,
                  "width":0,
                  "x":266.284,
                  "y":81.8957
@@ -877,10 +877,10 @@
                         }],
                  "rotation":0,
                  "type":"ambient",
-                 "visible":true,
+                 "visible":false,
                  "width":0,
-                 "x":158,
-                 "y":97.6543
+                 "x":636,
+                 "y":99.6543
                 }, 
                 {
                  "height":0,
@@ -925,10 +925,10 @@
                         }],
                  "rotation":0,
                  "type":"ambient",
-                 "visible":true,
+                 "visible":false,
                  "width":0,
-                 "x":163.719,
-                 "y":104.988
+                 "x":641.719,
+                 "y":106.988
                 }, 
                 {
                  "height":0,
@@ -975,8 +975,8 @@
                  "type":"ambient",
                  "visible":true,
                  "width":0,
-                 "x":158.384,
-                 "y":84.4758
+                 "x":636.384,
+                 "y":86.4758
                 }, 
                 {
                  "height":0,
@@ -1023,8 +1023,8 @@
                  "type":"ambient",
                  "visible":true,
                  "width":0,
-                 "x":166.747,
-                 "y":80
+                 "x":644.747,
+                 "y":82
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1054,7 +1054,7 @@
                         }],
                  "rotation":0,
                  "type":"trigger",
-                 "visible":false,
+                 "visible":true,
                  "width":8,
                  "x":120,
                  "y":0
@@ -1076,7 +1076,7 @@
                         }],
                  "rotation":0,
                  "type":"trigger",
-                 "visible":false,
+                 "visible":true,
                  "width":8,
                  "x":352.184,
                  "y":0
@@ -1098,7 +1098,7 @@
                         }],
                  "rotation":0,
                  "type":"trigger",
-                 "visible":false,
+                 "visible":true,
                  "width":8,
                  "x":699.09,
                  "y":0

@@ -2,7 +2,10 @@ cmake_minimum_required(VERSION 3.29)
 project(Hive)
 
 set(CMAKE_CXX_STANDARD 20)
-add_compile_options($<$<CXX_COMPILER_ID:MSVC>:/MP;/utf-8>)
+add_compile_options(
+	$<$<CXX_COMPILER_ID:MSVC>:/MP>
+	$<$<CXX_COMPILER_ID:MSVC>:/utf-8>
+)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin/${CMAKE_VS_PLATFORM_NAME}\${VS_CONFIGURATION_TYPE})
 
@@ -14,7 +17,7 @@ find_package(OpenAL CONFIG REQUIRED)
 find_package(SndFile CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
 
-add_executable(${PROJECT_NAME} src/main.cpp src/AABB.cpp src/Animator.cpp src/AudioEngine.cpp src/UIBarView.cpp 
+add_executable(${PROJECT_NAME} WIN32 src/Main.cpp src/AABB.cpp src/Animator.cpp src/AudioEngine.cpp src/UIBarView.cpp 
 								src/Camera.cpp src/Collider.cpp src/ControlSystem.cpp src/UIPanelContainer.h src/UIPanelContainer.cpp
 								src/Enemy.cpp src/EnemyAttackRunState.cpp src/TilemapLoader.h src/TilemapLoader.cpp
 								src/EnemyAttackState.cpp src/EnemyDeadState.cpp src/EnemyHurtState.cpp 
@@ -52,7 +55,7 @@ add_executable(${PROJECT_NAME} src/main.cpp src/AABB.cpp src/Animator.cpp src/Au
 								src/UIStackingView.cpp src/UISpriteText.h src/UISpriteText.cpp src/UIConfig.h src/UIConfig.cpp src/MainMenuGameState.h
 								src/MainMenuGameState.cpp src/UIMainMenuView.h src/UIMainMenuView.cpp src/UIMenuItemView.h src/UIMenuItemView.cpp
 								src/UITextMenuItemView.h src/UITextMenuItemView.cpp src/Frame.h src/MenuSystem.h src/MenuSystem.cpp src/IMenuSystemInteraction.h
-								src/GameDataManager.h src/GameDataManager.cpp src/UIMainView.h src/UIMainView.cpp src/UIHudView.h src/UIHudView.cpp src/UIPortraitView.h src/UIPortraitView.cpp
+								src/GameDataManager.h src/GameDataManager.cpp src/UIMainView.h src/UIMainView.cpp src/UIHudView.h src/UIHudView.cpp src/UIPlayerStatsView.h src/UIPlayerStatsView.cpp src/UIPortraitView.h src/UIPortraitView.cpp
 								src/UIKillCount.h src/UIKillCount.cpp src/UIEnemyStatsView.h src/UIEnemyStatsView.cpp
 								src/UIComboCounterView.h src/UIComboCounterView.cpp src/UIKillMilestoneView.h src/UIKillMilestoneView.cpp src/UIScreenFlashFX.h src/UIScreenFlashFX.cpp
 								src/ScreenShake.h src/ScreenShake.cpp src/PlayerBuildSpecialState.h src/PlayerBuildSpecialState.cpp src/Utils.h src/LevelCollision.h src/LevelCollision.cpp
@@ -61,12 +64,13 @@ add_executable(${PROJECT_NAME} src/main.cpp src/AABB.cpp src/Animator.cpp src/Au
 								src/SettingsManager.h src/SettingsManager.cpp src/UICycleMenuItemView.h src/UICycleMenuItemView.cpp src/PausedGameState.h src/PausedGameState.cpp
 								src/GameStateNameLibrary.h src/UIPromptView.h src/UIPromptView.cpp src/CutsceneManager.h src/CutsceneManager.cpp src/CutsceneData.h src/IEvent.h src/WaitEvent.h src/WaitEvent.cpp
 								src/MovePlayerEvent.h src/MovePlayerEvent.cpp src/PlayAnimationEvent.h src/PlayAnimationEvent.cpp src/MoveNPCEvent.h src/MoveNPCEvent.cpp
+								src/PlaySoundEvent.h src/PlaySoundEvent.cpp src/ScreenShakeEvent.h src/ScreenShakeEvent.cpp
 								src/SpawnNPCEvent.h src/SpawnNPCEvent.cpp src/DustFXEvent.h src/DustFXEvent.cpp src/ShowUIEvent.h src/ShowUIEvent.cpp
 								src/PropManager.h src/PropManager.cpp src/Prop.h src/Prop.cpp src/Pickup.h src/HealthPickup.h src/HealthPickup.cpp src/PickupManager.h src/PickupManager.cpp
 								src/FullHealthPickup.h src/FullHealthPickup.cpp src/SpecialPickup.h src/SpecialPickup.cpp src/FullSpecialPickup.h src/FullSpecialPickup.cpp
 								src/Pickup.cpp src/PlayerPickupState.h src/PlayerPickupState.cpp src/CombatZoneManager.h src/CombatZoneManager.cpp
 								src/CombatZone.h src/CombatZone.cpp src/TriggerManager.h src/TriggerManager.cpp src/TriggerCollider.h src/TriggerCollider.cpp
-								src/RangedEnemy.h src/RangedEnemy.h src/Projectile.h src/Projectile.cpp src/ProjectileManager.h src/ProjectileManager.cpp
+								src/RangedEnemy.h src/RangedEnemy.cpp src/Projectile.h src/Projectile.cpp src/ProjectileManager.h src/ProjectileManager.cpp
 								src/FireProjectileEvent.h src/FireProjectileEvent.cpp)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Microsoft::DirectXTK)
@@ -74,3 +78,4 @@ target_link_libraries(${PROJECT_NAME} PRIVATE nlohmann_json::nlohmann_json)
 target_link_libraries(${PROJECT_NAME} PRIVATE OpenAL::OpenAL)
 target_link_libraries(${PROJECT_NAME} PRIVATE SndFile::sndfile)
 target_link_libraries(${PROJECT_NAME} PRIVATE spdlog::spdlog_header_only)
+target_link_libraries(${PROJECT_NAME} PRIVATE d3d11 winmm)

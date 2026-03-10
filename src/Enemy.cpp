@@ -347,7 +347,7 @@ void Enemy::Attack()
 	int attackNum = Randomiser::GetRandNumUniform(0, (int)m_enemyDefinition.damageData.size() - 1);
 	EnemyAttackState::Instance()->SetAttack(m_enemyDefinition.damageData[attackNum].name);
 	m_stateMachine->ChangeState(EnemyAttackState::Instance());
-	NPCManager::Instance()->SetNextAttackingEnemy();
+	NPCManager::Instance()->SetNextAttackingEnemy(this);
 }
 
 void Enemy::Kill()
@@ -410,7 +410,7 @@ Vector2 Enemy::Avoid() const
 {
 	Vector2 force = Vector2::Zero;
 
-	if(this == NPCManager::Instance()->GetAttackingEnemy()) return force;
+	if(NPCManager::Instance()->IsAttackingEnemy(this)) return force;
 
 	auto enemyList = m_npcManager->GetEnemyList();
 
@@ -432,7 +432,7 @@ Vector2 Enemy::Avoid() const
 
 Vector2 Enemy::Strafe() const
 {
-	if(NPCManager::Instance()->GetAttackingEnemy() == this) return Vector2::Zero;
+	if(NPCManager::Instance()->IsAttackingEnemy(this)) return Vector2::Zero;
 
 	auto toTarget = m_playerTarget->GetPosition() - GetPosition();
 	auto crossProduct = Vector2(toTarget.y, -toTarget.x);

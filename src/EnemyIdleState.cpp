@@ -54,7 +54,7 @@ void EnemyIdleState::Execute(Enemy* enemy)
 		return;
 	}
 
-	Enemy* attackingEnemy = NPCManager::Instance()->GetAttackingEnemy();
+	Enemy* attackingEnemy = NPCManager::Instance()->GetAttackingEnemy(enemy->GetWaveId());
 
 	if(attackingEnemy != enemy)
 	{

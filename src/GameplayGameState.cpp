@@ -587,7 +587,7 @@ void GameplayGameState::ProcessCollisions()
 				enemy->ShowEnemyHud();
 
 				auto animation = m_player->GetAnimator()->GetAnimation();
-				if(animation.name.contains("Strong") || animation.name.contains("special"))
+				if(animation.name.find("Strong") != std::string::npos || animation.name.find("special") != std::string::npos)
 					m_camera->StartShake(2.0f, 3.0f);
 
 				m_player->IncreaseSpecial();

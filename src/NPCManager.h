@@ -36,22 +36,39 @@ public:
 	void	Reset();
 	void	DeleteAll();
 
-	void	SetNextAttackingEnemy();
+	void	SetNextAttackingEnemy(const std::string& waveId);
+	void	SetNextAttackingEnemy(Enemy* enemy);
 	void	SetAttackingEnemy(Enemy* enemy);
-	Enemy*	GetAttackingEnemy() const { return m_hostileEnemy; }
+	Enemy*	GetAttackingEnemy(const std::string& waveId) const;
+	bool	IsAttackingEnemy(const Enemy* enemy) const;
+	std::vector<Enemy*>	GetAttackingEnemyList() const { return m_hostileEnemyList; }
 	EventManager* GetEventManager() const { return m_eventManager; }
 	bool IsWaveDead(std::string waveId);
 
 	std::vector<Enemy*> GetEnemyList() const { return m_enemyList; }
 
 private:
+	struct WaveHostileHistory
+	{
+		std::string waveId;
+		std::vector<Enemy*> recentHostiles;
+	};
+
 	void RegisterEvents();
+	void CleanupHostileEnemyList();
+	bool IsEligibleHostileEnemy(const Enemy* enemy) const;
+	WaveHostileHistory* FindWaveHistory(const std::string& waveId);
+	const WaveHostileHistory* FindWaveHistory(const std::string& waveId) const;
+	WaveHostileHistory& GetOrCreateWaveHistory(const std::string& waveId);
+	void CleanupWaveHistory();
+	void ClearAttackingEnemy(const std::string& waveId);
 
 	static  NPCManager* s_instance;
 
 	NPCFactory* m_NPCFactory;
 	std::vector<Enemy*> m_enemyList;
-	Enemy* m_hostileEnemy;
+	std::vector<Enemy*> m_hostileEnemyList;
+	std::vector<WaveHostileHistory> m_previousHostilesByWave;
 	Player* m_player;
 	EventManager* m_eventManager;
 	CutsceneManager* m_cutsceneManager;

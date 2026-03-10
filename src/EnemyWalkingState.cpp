@@ -35,7 +35,7 @@ void EnemyWalkingState::Execute(Enemy* enemy)
 	if(enemy->GetTimer() > 0) return;
 
 	if(distance < enemy->GetData().fightRange && distance > enemy->GetData().attackRange &&
-		(isRanged || NPCManager::Instance()->GetAttackingEnemy() != enemy))
+		(isRanged || !NPCManager::Instance()->IsAttackingEnemy(enemy)))
 	{
 		enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
 		enemy->ResetStateChangeTimer();
