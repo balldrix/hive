@@ -1,6 +1,7 @@
 #define NOMINMAX
 #include "RangedEnemy.h"
 
+#include "AssetLoader.h"
 #include "Camera.h"
 #include "DamageData.h"
 #include "Enemy.h"
@@ -11,6 +12,9 @@
 #include "NPCManager.h"
 #include "Player.h"
 #include "ProjectileManager.h"
+#include "Randomiser.h"
+#include "Sound.h"
+#include "SoundSource.h"
 #include "State.h"
 #include "StateMachine.h"
 #include "Texture.h"
@@ -24,6 +28,15 @@ using namespace DirectX;
 namespace
 {
 	constexpr float ProjectileAimHeightOffset = 2.0f;
+
+	void FillAttackSounds(std::string (&attackSounds)[5])
+	{
+		attackSounds[0] = "wasteLobsterAttack_001";
+		attackSounds[1] = "wasteLobsterAttack_002";
+		attackSounds[2] = "wasteLobsterAttack_003";
+		attackSounds[3] = "wasteLobsterAttack_004";
+		attackSounds[4] = "wasteLobsterAttack_005";
+	}
 }
 
 RangedEnemy::RangedEnemy() :
@@ -39,6 +52,7 @@ void RangedEnemy::Init(const std::string& id, Camera* camera, Player* player, Cu
 {
 	Enemy::Init(id, camera, player, cutsceneManager, eventManager, definition, npcManager, shadowTexture, globalEnemyState, startingState);
 	m_projectileManager = projectileManager;
+	FillAttackSounds(m_attackSounds);
 
 	eventManager->RegisterEvent("FireProjectile", id, new FireProjectileEvent(this));
 }
@@ -46,6 +60,7 @@ void RangedEnemy::Init(const std::string& id, Camera* camera, Player* player, Cu
 void RangedEnemy::Reset(const std::string& id)
 {
 	Enemy::Reset(id);
+	FillAttackSounds(m_attackSounds);
 
 	if(m_eventManager == nullptr)
 	{
@@ -95,4 +110,11 @@ void RangedEnemy::FireProjectile()
 	float horizontalOffset = GetFacingDirection().x < 0.0f ? -24.0f : 24.0f;
 	Vector2 spawnPosition = m_position + Vector2(horizontalOffset, -20.0f);
 	m_projectileManager->SpawnProjectile(spawnPosition, direction, projectileSpeed, damageData.amount, 2.0f, this);
+
+	const int randomSoundIndex = Randomiser::GetRandNumUniform(0, 4);
+	Sound* sound = AssetLoader::GetSound(m_attackSounds[randomSoundIndex]);
+	if(sound != nullptr)
+	{
+		m_attackSoundSource->Play(sound);
+	}
 }

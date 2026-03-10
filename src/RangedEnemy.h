@@ -34,4 +34,5 @@ public:
 
 private:
 	ProjectileManager* m_projectileManager;
+	std::string m_attackSounds[5];
 };
