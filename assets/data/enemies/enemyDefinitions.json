@@ -132,8 +132,8 @@
     "damageData": [
       {
         "name": "attackNormal",
-        "value": 5,
-        "hitStop": 0.2
+        "value": 2,
+        "hitStop": 0.1
       }
     ],
     "hp": 100,
@@ -141,8 +141,8 @@
     "runningSpeed": 35,
     "acceleration": 1.2,
     "deceleration": 4,
-    "minStateChangeTime": 3,
-    "maxStateChangeTime": 5.5,
+    "minStateChangeTime": 5,
+    "maxStateChangeTime": 8,
     "hostileRange": 120,
     "fightRange": 100,
     "attackRange": 100,
