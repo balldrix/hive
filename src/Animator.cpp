@@ -45,13 +45,17 @@ void Animator::Update(float deltaTime)
 
 		if(!m_animDone)
 		{
+			bool frameChanged = false;
+
 			if(m_currentFrame + 1 < m_currentAnimation.frameCount)
 			{
 				m_currentFrame++;
+				frameChanged = true;
 			}
 			else if(m_currentAnimation.loop)
 			{
 				m_currentFrame = 0;
+				frameChanged = true;
 			}
 			else
 			{
@@ -59,7 +63,10 @@ void Animator::Update(float deltaTime)
 				m_animDone = true;
 			}
 
-			TriggerEvents(deltaTime);
+			if(frameChanged)
+			{
+				TriggerEvents(deltaTime);
+			}
 		}
 	}
 }
