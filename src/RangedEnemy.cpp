@@ -2,6 +2,7 @@
 #include "RangedEnemy.h"
 
 #include "Camera.h"
+#include "DamageData.h"
 #include "Enemy.h"
 #include "EnemyAttackState.h"
 #include "EnemyDefinition.h"
@@ -19,6 +20,11 @@
 #include <string>
 
 using namespace DirectX;
+
+namespace
+{
+	constexpr float ProjectileAimHeightOffset = 2.0f;
+}
 
 RangedEnemy::RangedEnemy() :
 	m_projectileManager(nullptr)
@@ -57,7 +63,6 @@ void RangedEnemy::Attack()
 	}
 
 	const auto& damageData = m_enemyDefinition.damageData.front();
-
 	EnemyAttackState::Instance()->SetAttack(damageData.name);
 	m_stateMachine->ChangeState(EnemyAttackState::Instance());
 }
@@ -69,8 +74,14 @@ void RangedEnemy::FireProjectile()
 		return;
 	}
 
+	auto directionToTarget = GetPlayerTarget()->GetPosition().x - m_position.x;
+	FlipHorizontally(directionToTarget < 0);
+
 	DamageData damageData = GetDamageData();
-	Vector2 direction = m_playerTarget->GetGroundPosition() - m_groundPosition;
+	Vector2 targetPosition = m_playerTarget->GetGroundPosition();
+	targetPosition.y -= ProjectileAimHeightOffset;
+
+	Vector2 direction = targetPosition - m_groundPosition;
 	if(direction.LengthSquared() > 0.0001f)
 	{
 		direction.Normalize();
