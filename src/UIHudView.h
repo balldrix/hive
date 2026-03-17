@@ -4,6 +4,7 @@
 #include <string>
 
 class Graphics;
+class UICombatZoneGoView;
 class UIComboCounterView;
 class UIEnemyStatsView;
 class UIKillMilestoneView;
@@ -29,4 +30,5 @@ private:
 	UIEnemyStatsView* m_enemyStatsView;
 	UIComboCounterView* m_comboCounterView;
 	UIKillMilestoneView* m_killMilestoneView;
+	UICombatZoneGoView* m_combatZoneGoView;
 };

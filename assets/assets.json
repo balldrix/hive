@@ -456,6 +456,12 @@
     "tag": "ui_assets"
   },
   {
+    "id": "t_go_sign",
+    "path": "assets\\textures\\ui\\go_sign.png",
+    "type": "texture",
+    "tag": "ui_assets"
+  },
+  {
     "id": "t_bar_fill_red",
     "path": "assets\\textures\\ui\\bar_fill_red.png",
     "type": "texture",

@@ -1,6 +1,7 @@
 #include "UIHudView.h"
 
 #include "Logger.h"
+#include "UICombatZoneGoView.h"
 #include "UIComboCounterView.h"
 #include "UIEnemyStatsView.h"
 #include "UIKillMilestoneView.h"
@@ -14,7 +15,8 @@ UIHudView::UIHudView() :
 	m_playerStatsView(nullptr),
 	m_enemyStatsView(nullptr),
 	m_comboCounterView(nullptr),
-	m_killMilestoneView(nullptr)
+	m_killMilestoneView(nullptr),
+	m_combatZoneGoView(nullptr)
 {
 }
 
@@ -43,11 +45,15 @@ void UIHudView::Init(std::string name)
 
 	m_killMilestoneView = new UIKillMilestoneView();
 	m_killMilestoneView->Init("Kill Milestone");
-	m_killMilestoneView->TransitionOut(false);;
+	m_killMilestoneView->TransitionOut(false);
+
+	m_combatZoneGoView = new UICombatZoneGoView();
+	m_combatZoneGoView->Init("Combat Zone Go View");
+	m_combatZoneGoView->TransitionOut(false);
 
 	m_isActive = true;
 	m_currentViewState = UIView::ViewStates::Visible;
-	
+
 	UIManager::RegisterUIView(this);
 }
 
@@ -64,6 +70,7 @@ void UIHudView::ForceHide(bool isForced)
 	m_enemyStatsView->ForceHide(isForced);
 	m_comboCounterView->ForceHide(isForced);
 	m_killMilestoneView->ForceHide(isForced);
+	m_combatZoneGoView->ForceHide(isForced);
 }
 
 void UIHudView::TransitionOut(bool isAnimated)
@@ -73,6 +80,7 @@ void UIHudView::TransitionOut(bool isAnimated)
 
 	m_playerStatsView->TransitionOut(isAnimated);
 	m_enemyStatsView->TransitionOut(isAnimated);
+	m_combatZoneGoView->TransitionOut(false);
 }
 
 void UIHudView::TransitionIn(bool isAnimated)
@@ -92,6 +100,9 @@ void UIHudView::Shutdown()
 
 	delete m_killMilestoneView;
 	m_killMilestoneView = nullptr;
+
+	delete m_combatZoneGoView;
+	m_combatZoneGoView = nullptr;
 
 	delete m_comboCounterView;
 	m_comboCounterView = nullptr;

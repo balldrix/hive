@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -68,6 +68,7 @@
     <ClCompile Include="src\GameDataManager.cpp" />
     <ClCompile Include="src\MenuSystem.cpp" />
     <ClCompile Include="src\UIComboCounterView.cpp" />
+    <ClCompile Include="src\UICombatZoneGoView.cpp" />
     <ClCompile Include="src\UIEnemyStatsView.cpp" />
     <ClCompile Include="src\UIKillMilestoneView.cpp" />
     <ClCompile Include="src\UIMainMenuView.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="src\MenuSystem.h" />
     <ClInclude Include="src\Frame.h" />
     <ClInclude Include="src\UIComboCounterView.h" />
+    <ClInclude Include="src\UICombatZoneGoView.h" />
     <ClInclude Include="src\UIEnemyStatsView.h" />
     <ClInclude Include="src\UIMainMenuView.h" />
     <ClInclude Include="src\MainMenuGameState.h" />
@@ -603,3 +605,5 @@
     </VisualStudio>
   </ProjectExtensions>
 </Project>
+
+

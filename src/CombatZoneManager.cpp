@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "TilemapData.h"
 #include "TilemapLoader.h"
+#include "UIManager.h"
 
 #include <algorithm>
 #include <directxtk/SimpleMath.h>
@@ -136,6 +137,11 @@ void CombatZoneManager::Update(float deltaTime)
 		}
 
 		zone->Deactivate();
+		if(auto* goView = UIManager::GetView("Combat Zone Go View"))
+		{
+			goView->TransitionIn(true);
+		}
+
 		const float worldMinX = 0.0f;
 		const float worldMaxX = static_cast<float>(m_levelRenderer->GetLevelPixelWidth());
 		m_camera->ReleaseBoundsSmooth(0.35f, worldMinX, worldMaxX);
