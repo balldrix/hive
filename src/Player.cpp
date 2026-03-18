@@ -413,6 +413,12 @@ void Player::ApplyDamage(GameObject* source, const int& amount)
 {
 	if(m_stateMachine->IsInState(*PlayerBlockState::Instance()))
 	{
+		if(source != nullptr)
+		{
+			const bool attackerIsLeft = source->GetPositionX() < GetPositionX();
+			FlipHorizontally(attackerIsLeft);
+		}
+
 		m_health -= 1;
 		PlayBlockSound();
 		return;
