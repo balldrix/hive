@@ -11,6 +11,7 @@
 
 #include <directxtk/SimpleMath.h>
 #include <string>
+#include <vector>
 
 #undef PlaySound
 
@@ -69,6 +70,7 @@ private:
 	void								UpdateStats(bool animate);
 	void								RegisterEvents();
 	void								PlayAttackSound(const std::string& name);
+	void								PlayBlockSound();
 	void								PlayFootstepSound();
 	void								PlayHurtSound();
 	void								PlayDeathSound();
@@ -83,5 +85,6 @@ private:
 	int									m_recentFootstepFrame;
 	int									m_kills;
 	float								m_special;
+	std::vector<std::string>			m_blockSounds;
 	CutsceneManager*					m_cutsceneManager;
 };

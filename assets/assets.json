@@ -300,6 +300,30 @@
     "tag": "gameplay_assets"
   },
   {
+    "id": "s_block_001",
+    "path": "assets\\sounds\\block_001.wav",
+    "type": "audio",
+    "tag": "gameplay_assets"
+  },
+  {
+    "id": "s_block_002",
+    "path": "assets\\sounds\\block_002.wav",
+    "type": "audio",
+    "tag": "gameplay_assets"
+  },
+  {
+    "id": "s_block_003",
+    "path": "assets\\sounds\\block_003.wav",
+    "type": "audio",
+    "tag": "gameplay_assets"
+  },
+  {
+    "id": "s_block_004",
+    "path": "assets\\sounds\\block_004.wav",
+    "type": "audio",
+    "tag": "gameplay_assets"
+  },
+  {
     "id": "s_enemyImpact_001",
     "path": "assets\\sounds\\enemyImpact_001.wav",
     "type": "audio",

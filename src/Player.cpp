@@ -29,6 +29,7 @@
 #include "PlayerIdleState.h"
 #include "PlayerKnockbackState.h"
 #include "PlaySoundEvent.h"
+#include "Randomiser.h"
 #include "Sound.h"
 #include "SoundSource.h"
 #include "Sprite.h"
@@ -174,6 +175,14 @@ void Player::Init(ControlSystem* controlSystem, CutsceneManager* cutsceneManager
 	{
 		"playerImpact_001",
 		"playerImpact_002"
+	};
+
+	m_blockSounds =
+	{
+		"block_001",
+		"block_002",
+		"block_003",
+		"block_004"
 	};
 
 	UpdateStats(false);
@@ -405,6 +414,7 @@ void Player::ApplyDamage(GameObject* source, const int& amount)
 	if(m_stateMachine->IsInState(*PlayerBlockState::Instance()))
 	{
 		m_health -= 1;
+		PlayBlockSound();
 		return;
 	}
 
@@ -452,6 +462,18 @@ void Player::PlayAttackSound(const std::string& id)
 	if(sound == nullptr) return;
 
 	m_attackSoundSource->Play(sound);
+}
+
+void Player::PlayBlockSound()
+{
+	if(m_blockSounds.empty()) return;
+
+	auto randomSoundIndex = Randomiser::GetRandNumUniform(0, (int)m_blockSounds.size() - 1);
+	Sound* sound = AssetLoader::GetSound(m_blockSounds[randomSoundIndex]);
+
+	if(sound == nullptr) return;
+
+	m_impactSoundSource->Play(sound);
 }
 
 PlayerDefinition Player::LoadPlayerDefinition()
