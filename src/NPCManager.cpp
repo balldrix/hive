@@ -39,6 +39,11 @@ NPCManager::~NPCManager()
 	DeleteAll();
 }
 
+bool NPCManager::HasWavePrefix(const std::string& waveId, char wavePrefix)
+{
+	return !waveId.empty() && waveId.front() == wavePrefix;
+}
+
 void NPCManager::Init(Camera* camera, Player* player, CutsceneManager* cutsceneManager, EventManager* eventManager, ProjectileManager* projectileManager)
 {
 	s_instance = this;
@@ -285,6 +290,33 @@ bool NPCManager::IsWaveDead(std::string waveId)
 	}
 
 	return true;
+}
+
+int NPCManager::GetAliveEnemyCountByWavePrefix(char wavePrefix, EnemyType enemyType) const
+{
+	int count = 0;
+
+	for(const Enemy* enemy : m_enemyList)
+	{
+		if(enemy == nullptr || !enemy->IsActive() || enemy->IsDead())
+		{
+			continue;
+		}
+
+		if(enemy->GetData().enemyType != enemyType)
+		{
+			continue;
+		}
+
+		if(!HasWavePrefix(enemy->GetWaveId(), wavePrefix))
+		{
+			continue;
+		}
+
+		count++;
+	}
+
+	return count;
 }
 
 void NPCManager::RegisterEvents()

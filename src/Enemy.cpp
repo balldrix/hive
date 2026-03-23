@@ -43,13 +43,28 @@
 #include <DirectXMath.h>
 #include <directxtk/SimpleMath.h>
 #include <fmt/core.h>
+#include <cmath>
 #include <string>
 #include <vector>
 
 using namespace GameplayConstants;
 
+namespace
+{
+	constexpr float IdleAvoidDistance = 24.0f;
+	constexpr float IdleSeparationSpeedMultiplier = 0.5f;
+	constexpr float AttackPreviewStep = 1.0f;
+	constexpr float AttackSideBuffer = 1.0f;
+	constexpr float RangedRetreatRangeMultiplier = 0.6f;
+	constexpr float RangedPreferredRangeMultiplier = 0.8f;
+	constexpr float RangedVerticalCorrectionWeight = 0.35f;
+	constexpr float RangedAvoidDistance = 20.0f;
+	constexpr float RangedAvoidWeight = 1.25f;
+}
+
 Enemy::Enemy() :
 	m_waveId(""),
+	m_preparedAttackName(""),
 	m_playerTarget(nullptr),
 	m_stateMachine(nullptr),
 	m_portraitSprite(nullptr),
@@ -267,6 +282,8 @@ void Enemy::Reset(const std::string& id)
 		m_eventManager->UnRegisterAllForTarget(m_id);
 	}
 
+	ClearPreparedAttack();
+
 	// Keep the animator's event owner id aligned with pooled enemy ids.
 	SetID(id);
 }
@@ -280,6 +297,7 @@ void Enemy::Spawn(const Vector2& position, std::string waveId)
 	m_active = true;
 	m_isFlashing = false;
 	m_health = m_enemyDefinition.hp;
+	ClearPreparedAttack();
 
 	GetSprite()->EnableSprite();
 	m_stateMachine->ChangeState(m_startingState);
@@ -344,9 +362,15 @@ void Enemy::Knockback(const Vector2& direction, const float& force)
 
 void Enemy::Attack()
 {
-	int attackNum = Randomiser::GetRandNumUniform(0, (int)m_enemyDefinition.damageData.size() - 1);
-	EnemyAttackState::Instance()->SetAttack(m_enemyDefinition.damageData[attackNum].name);
+	if(m_enemyDefinition.damageData.empty())
+	{
+		return;
+	}
+
+	const std::string attackName = GetPreparedAttackName();
+	EnemyAttackState::Instance()->SetAttack(attackName);
 	m_stateMachine->ChangeState(EnemyAttackState::Instance());
+	ClearPreparedAttack();
 	NPCManager::Instance()->SetNextAttackingEnemy(this);
 }
 
@@ -358,9 +382,26 @@ void Enemy::Kill()
 
 void Enemy::ProcessSteering()
 {
+	if(IsRangedEnemy())
+	{
+		ProcessRangedSteering();
+		return;
+	}
+
+	if(IsNormalMeleeEnemy() && IsCurrentWaveAttacker())
+	{
+		const float distance = (GetPosition() - GetPlayerTarget()->GetPosition()).Length();
+
+		if(distance <= m_enemyDefinition.fightRange)
+		{
+			m_targetVelocity = GetAttackApproachVelocity();
+			return;
+		}
+	}
+
 	m_targetVelocity = Vector2::Zero;
 	m_targetVelocity += Seek() * 2.0f;
-	m_targetVelocity += Avoid();
+	m_targetVelocity += Avoid(MinEnemyAvoidDistance, true);
 
 	// Ranged enemies should hold lanes and shoot rather than orbiting the player.
 	if(m_enemyDefinition.enemyType != EnemyType::Ranged)
@@ -378,9 +419,134 @@ void Enemy::ProcessSteering()
 	}
 }
 
+void Enemy::ProcessRunningSteering()
+{
+	if(!IsNormalMeleeEnemy())
+	{
+		ProcessSteering();
+		return;
+	}
+
+	Vector2 direction = Vector2::Zero;
+	const float deltaX = m_playerTarget->GetPositionX() - GetPositionX();
+
+	if(fabs(deltaX) > 0.5f)
+	{
+		direction.x = deltaX > 0.0f ? 1.0f : -1.0f;
+	}
+
+	direction += Avoid(MinEnemyAvoidDistance, false);
+
+	if(direction.LengthSquared() > 0.0001f)
+	{
+		direction.Normalize();
+	}
+
+	m_targetVelocity = direction;
+}
+
+void Enemy::ProcessRangedSteering()
+{
+	const float distance = (GetPosition() - GetPlayerTarget()->GetPosition()).Length();
+	const bool shouldRetreat = ShouldRangedRetreat(distance);
+	Vector2 direction = GetRangedPositioningVelocity(distance);
+	direction += Avoid(RangedAvoidDistance, false) * RangedAvoidWeight;
+
+	SetMovementSpeed(shouldRetreat ? m_enemyDefinition.runningSpeed : m_enemyDefinition.walkSpeed);
+
+	if(direction.LengthSquared() > 0.0001f)
+	{
+		direction.Normalize();
+	}
+
+	m_targetVelocity = direction;
+}
+
+void Enemy::ProcessIdleSeparation()
+{
+	Vector2 separation = Avoid(IdleAvoidDistance, false);
+
+	SetMovementSpeed(m_enemyDefinition.walkSpeed * IdleSeparationSpeedMultiplier);
+
+	if(separation.LengthSquared() > 0.0001f)
+	{
+		separation.Normalize();
+		SetTargetVelocity(separation);
+		return;
+	}
+
+	Stop();
+}
+
 void Enemy::Flash()
 {
 	if(!m_isFlashing) m_isFlashing = true;
+}
+
+bool Enemy::IsNormalMeleeEnemy() const
+{
+	return m_enemyDefinition.enemyType == EnemyType::Normal;
+}
+
+bool Enemy::IsRangedEnemy() const
+{
+	return m_enemyDefinition.enemyType == EnemyType::Ranged;
+}
+
+bool Enemy::IsCurrentWaveAttacker() const
+{
+	return NPCManager::Instance()->IsAttackingEnemy(this);
+}
+
+bool Enemy::IsWithinAttackVerticalRange() const
+{
+	return fabs(m_groundPosition.y - m_playerTarget->GetGroundPosition().y) < VerticalHitRange;
+}
+
+bool Enemy::CanPreparedAttackHitPlayer()
+{
+	return CanPreparedAttackHitPlayerAt(GetPosition());
+}
+
+bool Enemy::CanPreparedAttackHitPlayerAt(const Vector2& position)
+{
+	if(m_playerTarget == nullptr || m_hitBoxManager == nullptr || m_spritesheet == nullptr)
+	{
+		return false;
+	}
+
+	const std::string attackName = GetPreparedAttackName();
+	if(attackName.empty())
+	{
+		return false;
+	}
+
+	return m_hitBoxManager->WouldHitTarget(
+		attackName,
+		m_playerTarget->GetHitBoxManager()->GetHurtBox(),
+		position,
+		m_spritesheet->GetOrigin(),
+		ShouldFaceLeftAt(position));
+}
+
+void Enemy::ClearPreparedAttack()
+{
+	m_preparedAttackName.clear();
+}
+
+float Enemy::GetRangedRetreatRange() const
+{
+	return m_enemyDefinition.attackRange * RangedRetreatRangeMultiplier;
+}
+
+float Enemy::GetRangedPreferredRange() const
+{
+	return m_enemyDefinition.attackRange * RangedPreferredRangeMultiplier;
+}
+
+bool Enemy::ShouldRangedRetreat(float distanceToPlayer) const
+{
+	return distanceToPlayer < GetRangedRetreatRange();
 }
 
 Vector2 Enemy::Seek() const
@@ -406,22 +572,32 @@ Vector2 Enemy::Seek() const
 	return direction;
 }
 
-Vector2 Enemy::Avoid() const
+Vector2 Enemy::Avoid(float minDistance, bool ignoreIfAttackingEnemy) const
 {
 	Vector2 force = Vector2::Zero;
+	const bool isRangedSelf = IsRangedEnemy();
 
-	if(NPCManager::Instance()->IsAttackingEnemy(this)) return force;
+	if(ignoreIfAttackingEnemy && NPCManager::Instance()->IsAttackingEnemy(this)) return force;
 
 	auto enemyList = m_npcManager->GetEnemyList();
 
 	for(auto it = enemyList.begin(); it != enemyList.end(); it++)
 	{
-		if(*it == this || !(*it)->IsActive() || (*it)->GetWaveId() != m_waveId) continue;
+		if(*it == this || !(*it)->IsActive()) continue;
+
+		if(isRangedSelf)
+		{
+			if((*it)->GetData().enemyType != EnemyType::Ranged) continue;
+		}
+		else if((*it)->GetWaveId() != m_waveId)
+		{
+			continue;
+		}
 
 		auto toOther = m_position - (*it)->GetPosition();
 		float distance = toOther.Length();
 
-		if(distance > MinEnemyAvoidDistance) continue;
+		if(distance > minDistance) continue;
 		if(distance <= 0.0001f) continue;
 
 		force += toOther / distance;
@@ -445,6 +621,117 @@ Vector2 Enemy::Strafe() const
 		return Vector2::Zero;
 	}
 	return crossProduct;
+}
+
+Vector2 Enemy::GetRangedPositioningVelocity(float distanceToPlayer) const
+{
+	Vector2 direction = Vector2::Zero;
+	const Vector2 toPlayer = m_playerTarget->GetPosition() - GetPosition();
+	const float verticalDistance = m_playerTarget->GetPositionY() - GetPositionY();
+
+	if(distanceToPlayer < GetRangedPreferredRange())
+	{
+		direction.x = toPlayer.x < 0.0f ? 1.0f : -1.0f;
+	}
+	else if(distanceToPlayer > m_enemyDefinition.attackRange)
+	{
+		direction.x = toPlayer.x < 0.0f ? -1.0f : 1.0f;
+	}
+
+	if(fabs(verticalDistance) > VerticalHitRange)
+	{
+		direction.y = (verticalDistance > 0.0f ? 1.0f : -1.0f) * RangedVerticalCorrectionWeight;
+	}
+
+	if(direction.LengthSquared() > 0.0001f)
+	{
+		direction.Normalize();
+	}
+
+	return direction;
+}
+
+Vector2 Enemy::GetAttackApproachVelocity()
+{
+	Vector2 direction = Vector2::Zero;
+	const Vector2 currentPosition = GetPosition();
+	const float playerX = m_playerTarget->GetPositionX();
+	const float playerY = m_playerTarget->GetPositionY();
+	const bool isLeftSide = currentPosition.x <= playerX;
+	const float boundaryX = playerX + (isLeftSide ? -AttackSideBuffer : AttackSideBuffer);
+	const float sideLimitX = playerX + (isLeftSide ? -m_enemyDefinition.fightRange : m_enemyDefinition.fightRange);
+	const float maxSearchDistance = fabs(sideLimitX - boundaryX);
+
+	float targetX = currentPosition.x;
+	bool foundTargetX = CanPreparedAttackHitPlayerAt(currentPosition);
+
+	if(!foundTargetX)
+	{
+		for(float offset = AttackPreviewStep; offset <= maxSearchDistance; offset += AttackPreviewStep)
+		{
+			const float towardPlayerX = currentPosition.x + (isLeftSide ? offset : -offset);
+			const bool isTowardPlayerCandidateValid = isLeftSide ? towardPlayerX <= boundaryX : towardPlayerX >= boundaryX;
+
+			if(isTowardPlayerCandidateValid &&
+				CanPreparedAttackHitPlayerAt(Vector2(towardPlayerX, currentPosition.y)))
+			{
+				targetX = towardPlayerX;
+				foundTargetX = true;
+				break;
+			}
+
+			const float awayFromPlayerX = currentPosition.x + (isLeftSide ? -offset : offset);
+			const bool isAwayCandidateValid = isLeftSide ? awayFromPlayerX >= sideLimitX : awayFromPlayerX <= sideLimitX;
+
+			if(isAwayCandidateValid &&
+				CanPreparedAttackHitPlayerAt(Vector2(awayFromPlayerX, currentPosition.y)))
+			{
+				targetX = awayFromPlayerX;
+				foundTargetX = true;
+				break;
+			}
+		}
+	}
+
+	const float deltaX = targetX - currentPosition.x;
+	const float deltaY = playerY - currentPosition.y;
+
+	if(fabs(deltaX) > 0.5f)
+	{
+		direction.x = deltaX > 0.0f ? 1.0f : -1.0f;
+	}
+	else if(!foundTargetX)
+	{
+		direction.x = isLeftSide ? -1.0f : 1.0f;
+	}
+
+	if(fabs(deltaY) > VerticalHitRange)
+	{
+		direction.y = deltaY > 0.0f ? 1.0f : -1.0f;
+	}
+
+	if(direction.LengthSquared() > 0.0001f)
+	{
+		direction.Normalize();
+	}
+
+	return direction;
+}
+
+std::string Enemy::GetPreparedAttackName()
+{
+	if(m_preparedAttackName.empty() && !m_enemyDefinition.damageData.empty())
+	{
+		const int attackNum = Randomiser::GetRandNumUniform(0, (int)m_enemyDefinition.damageData.size() - 1);
+		m_preparedAttackName = m_enemyDefinition.damageData[attackNum].name;
+	}
+
+	return m_preparedAttackName;
+}
+
+bool Enemy::ShouldFaceLeftAt(const Vector2& position) const
+{
+	return m_playerTarget != nullptr && m_playerTarget->GetPositionX() < position.x;
 }
 
 void Enemy::ShowEnemyHud()

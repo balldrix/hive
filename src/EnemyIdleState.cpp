@@ -27,13 +27,16 @@ void EnemyIdleState::OnEnter(Enemy* enemy)
 	enemy->GetAnimator()->Reset();
 	enemy->GetAnimator()->SetAnimation(m_name);
 	enemy->GetHitBoxManager()->SetCollidersUsingTag(m_name);
-	enemy->ResetStateChangeTimer();
+	if(!enemy->IsRangedEnemy())
+	{
+		enemy->ResetStateChangeTimer();
+	}
 	enemy->SetTargetVelocity(Vector2::Zero);
 }
 
 void EnemyIdleState::Execute(Enemy* enemy)
 {
-	if(enemy->GetTimer() > 0 || enemy->GetHealth() < 0)
+	if(enemy->GetHealth() < 0)
 		return;
 
 	const bool isRanged = enemy->GetData().enemyType == EnemyType::Ranged;
@@ -48,9 +51,65 @@ void EnemyIdleState::Execute(Enemy* enemy)
 
 	if(isRanged)
 	{
+		if(enemy->ShouldRangedRetreat(distance))
+		{
+			enemy->GetStateMachine()->ChangeState(EnemyWalkingState::Instance());
+			return;
+		}
+
+		if(enemy->GetTimer() > 0)
+		{
+			enemy->Stop();
+			return;
+		}
+
 		enemy->Stop();
 		enemy->ResetStateChangeTimer();
 		enemy->Attack();
+		return;
+	}
+
+	if(enemy->IsNormalMeleeEnemy())
+	{
+		Enemy* attackingEnemy = NPCManager::Instance()->GetAttackingEnemy(enemy->GetWaveId());
+
+		if(attackingEnemy != enemy)
+		{
+			enemy->ClearPreparedAttack();
+			enemy->ResetStateChangeTimer();
+
+			if(attackingEnemy == nullptr)
+			{
+				NPCManager::Instance()->SetAttackingEnemy(enemy);
+			}
+			else
+			{
+				enemy->ProcessIdleSeparation();
+			}
+
+			return;
+		}
+
+		if(!enemy->IsWithinAttackVerticalRange() || !enemy->CanPreparedAttackHitPlayer())
+		{
+			enemy->GetStateMachine()->ChangeState(EnemyWalkingState::Instance());
+			return;
+		}
+
+		enemy->Stop();
+
+		if(enemy->GetTimer() > 0)
+		{
+			return;
+		}
+
+		enemy->ResetStateChangeTimer();
+		enemy->Attack();
+		return;
+	}
+
+	if(enemy->GetTimer() > 0)
+	{
 		return;
 	}
 

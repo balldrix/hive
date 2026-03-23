@@ -44,6 +44,7 @@ public:
 	std::vector<Enemy*>	GetAttackingEnemyList() const { return m_hostileEnemyList; }
 	EventManager* GetEventManager() const { return m_eventManager; }
 	bool IsWaveDead(std::string waveId);
+	int GetAliveEnemyCountByWavePrefix(char wavePrefix, EnemyType enemyType) const;
 
 	std::vector<Enemy*> GetEnemyList() const { return m_enemyList; }
 
@@ -57,6 +58,7 @@ private:
 	void RegisterEvents();
 	void CleanupHostileEnemyList();
 	bool IsEligibleHostileEnemy(const Enemy* enemy) const;
+	static bool HasWavePrefix(const std::string& waveId, char wavePrefix);
 	WaveHostileHistory* FindWaveHistory(const std::string& waveId);
 	const WaveHostileHistory* FindWaveHistory(const std::string& waveId) const;
 	WaveHostileHistory& GetOrCreateWaveHistory(const std::string& waveId);

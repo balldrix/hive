@@ -62,7 +62,20 @@ public:
 	void						DeleteAll();
 
 	void						ProcessSteering();
+	void						ProcessRunningSteering();
+	void						ProcessIdleSeparation();
+	void						ProcessRangedSteering();
 	void						Flash();
+	bool						IsNormalMeleeEnemy() const;
+	bool						IsRangedEnemy() const;
+	bool						IsCurrentWaveAttacker() const;
+	bool						IsWithinAttackVerticalRange() const;
+	bool						CanPreparedAttackHitPlayer();
+	bool						CanPreparedAttackHitPlayerAt(const Vector2& position);
+	void						ClearPreparedAttack();
+	float						GetRangedRetreatRange() const;
+	float						GetRangedPreferredRange() const;
+	bool						ShouldRangedRetreat(float distanceToPlayer) const;
 
 	void						PlaySound(const std::string& id);
 	void						ApplyFacingDirection();
@@ -79,10 +92,15 @@ protected:
 
 private:
 	Vector2						Seek() const;
-	Vector2						Avoid() const;
+	Vector2						Avoid(float minDistance, bool ignoreIfAttackingEnemy) const;
 	Vector2						Strafe() const;
+	Vector2						GetRangedPositioningVelocity(float distanceToPlayer) const;
+	Vector2						GetAttackApproachVelocity();
+	std::string					GetPreparedAttackName();
+	bool						ShouldFaceLeftAt(const Vector2& position) const;
 
 	std::string					m_waveId;
+	std::string					m_preparedAttackName;
 	Sprite*						m_portraitSprite;
 	float						m_stateChangeTimer;
 	float						m_flashingTimer;

@@ -46,7 +46,7 @@ void EnemyRunningState::OnEnter(Enemy* enemy)
 
 void EnemyRunningState::Execute(Enemy* enemy)
 {
-	enemy->ProcessSteering();
+	enemy->ProcessRunningSteering();
 
 	auto distance = (enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length();
 

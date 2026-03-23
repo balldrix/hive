@@ -20,7 +20,7 @@ struct FrameData
 	unsigned int frameIndex;
 	Bounds bounds;
 
-	static FrameData GetFrameData(const int frameIndex, std::vector<FrameData>& frameData)
+	static FrameData GetFrameData(const int frameIndex, const std::vector<FrameData>& frameData)
 	{
 		auto it = std::find_if(frameData.begin(), frameData.end(),
 			[&frameIndex](const FrameData& obj) { return obj.frameIndex == frameIndex; });
@@ -38,7 +38,7 @@ struct TagData
 	std::string name;
 	std::vector<FrameData> frameData;
 
-	static TagData GetTagData(const std::string tagName, std::vector<TagData>& tagData)
+	static TagData GetTagData(const std::string tagName, const std::vector<TagData>& tagData)
 	{
 		auto it = std::find_if(tagData.begin(), tagData.end(),
 			[&tagName](const TagData& obj) { return obj.name == tagName; });
@@ -56,7 +56,7 @@ struct HitBoxData
 	std::string name;
 	std::vector<TagData> tagData;
 
-	static HitBoxData GetHitboxData(const std::string hitBoxName, std::vector<HitBoxData>& hitBoxData)
+	static HitBoxData GetHitboxData(const std::string hitBoxName, const std::vector<HitBoxData>& hitBoxData)
 	{
 		auto it = std::find_if(hitBoxData.begin(), hitBoxData.end(),
 			[&hitBoxName](const HitBoxData& obj) { return obj.name == hitBoxName; });

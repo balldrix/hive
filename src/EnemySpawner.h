@@ -36,7 +36,7 @@ public:
 	bool IsDoneSpawning() const { return m_spawnCount >= m_maxSpawns; }
 
 private:
-	void Spawn();
+	bool Spawn();
 	std::string ExtractSpawnId(const std::string& spawnerId);
 	std::string ExtractSpawnerId(const std::string& spawnerId);
 

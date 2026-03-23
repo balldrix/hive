@@ -33,6 +33,8 @@ public:
 	Collider GetPushBox() const { return m_pushBox; }
 	Collider GetHurtBox() const { return m_hurtBox; }
 	Collider GetHitBox() const { return m_hitBox; }
+	bool WouldHitTarget(const std::string& tagName, const Collider& targetCollider,
+		const Vector2& ownerPosition, const Vector2& origin, bool flipped) const;
 
 	bool IsHitBoxActive();
 

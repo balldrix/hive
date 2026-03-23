@@ -126,6 +126,32 @@ void HitBoxManager::SetFlipped(bool flip)
 	m_hurtBox.SetFlipped(flip);
 }
 
+bool HitBoxManager::WouldHitTarget(const std::string& tagName, const Collider& targetCollider,
+	const Vector2& ownerPosition, const Vector2& origin, bool flipped) const
+{
+	const HitBoxData hitBoxData = HitBoxData::GetHitboxData(HitBoxName, m_hitBoxDataList);
+	const TagData tagData = TagData::GetTagData(tagName, hitBoxData.tagData);
+
+	for(const FrameData& frame : tagData.frameData)
+	{
+		AABB aabb;
+		aabb.SetMin(Vector2(frame.bounds.x - origin.x, frame.bounds.y - origin.y));
+		aabb.SetMax(Vector2(aabb.GetMin().x + frame.bounds.width, aabb.GetMin().y + frame.bounds.height));
+
+		Collider previewCollider;
+		previewCollider.SetAABB(aabb);
+		previewCollider.SetFlipped(flipped);
+		previewCollider.Update(ownerPosition);
+
+		if(previewCollider.OnCollision(targetCollider))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 bool HitBoxManager::IsHitBoxActive()
 {
 	return m_hitBox.GetAABB().GetMin().x != m_hitBox.GetAABB().GetMax().x &&
