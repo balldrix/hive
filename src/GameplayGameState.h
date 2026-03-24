@@ -1,5 +1,9 @@
 #pragma once
 
+#ifndef NOMINMAX
+#define NOMINMAX
+#endif
+
 #include "GameState.h"
 #include "ParticleSystem.h"
 #include "Player.h"

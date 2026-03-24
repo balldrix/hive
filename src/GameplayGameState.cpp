@@ -48,6 +48,7 @@
 #include "UIManager.h"
 #include "UnitVectors.h"
 
+#include <algorithm>
 #include <cmath>
 #include <DirectXColors.h>
 #include <directxtk/SimpleMath.h>
@@ -60,6 +61,33 @@ using namespace GlobalConstants;
 namespace
 {
 	constexpr float ProjectileHitStopDuration = 0.1f;
+
+	Vector2 GetAABBCenter(const AABB& box)
+	{
+		return Vector2(
+			(box.GetMin().x + box.GetMax().x) * 0.5f,
+			(box.GetMin().y + box.GetMax().y) * 0.5f);
+	}
+
+	Vector2 GetImpactPosition(Collider hitCollider, const Vector2& hitPosition, Collider hurtCollider, const Vector2& hurtPosition)
+	{
+		AABB hitBox = hitCollider.GetWorldAABBAt(hitPosition);
+		AABB hurtBox = hurtCollider.GetWorldAABBAt(hurtPosition);
+
+		const Vector2 overlapMin(
+			std::max(hitBox.GetMin().x, hurtBox.GetMin().x),
+			std::max(hitBox.GetMin().y, hurtBox.GetMin().y));
+		const Vector2 overlapMax(
+			std::min(hitBox.GetMax().x, hurtBox.GetMax().x),
+			std::min(hitBox.GetMax().y, hurtBox.GetMax().y));
+
+		if(overlapMin.x <= overlapMax.x && overlapMin.y <= overlapMax.y)
+		{
+			return GetAABBCenter(AABB(overlapMin, overlapMax));
+		}
+
+		return Vector2::Lerp(GetAABBCenter(hitBox), GetAABBCenter(hurtBox), 0.5f);
+	}
 }
 
 GameplayGameState::GameplayGameState() :
@@ -519,8 +547,11 @@ void GameplayGameState::ProcessCollisions()
 				auto normalDirection = m_player->GetGroundPosition() - enemy->GetGroundPosition();
 				normalDirection.Normalize();
 
-				auto frameData = m_player->GetSprite()->GetFrameData(m_player->GetAnimator()->GetCurrentFrame());
-				auto spriteHeight = frameData.spriteSourceSize.bottom;
+				auto impactPosition = GetImpactPosition(
+					enemy->GetHitBoxManager()->GetHitBox(),
+					enemy->GetPosition(),
+					m_player->GetHitBoxManager()->GetHurtBox(),
+					m_player->GetPosition());
 
 				m_player->ApplyDamage(enemy, damageData.amount);
 				m_player->SetPositionX(m_player->GetPositionX() + enemyVelocity.x);
@@ -539,7 +570,7 @@ void GameplayGameState::ProcessCollisions()
 
 				auto impactFx = m_impactFxPool->Get();
 				m_activeImpacts.push_back(impactFx);
-				impactFx->DisplayFx(Vector2(playerGroundPositionX, playerGroundPositionY - spriteHeight * 0.5f) - m_camera->GetPosition());
+				impactFx->DisplayFx(impactPosition - m_camera->GetPosition());
 
 				if(m_player->GetStateMachine()->IsInState(*PlayerBlockState::Instance()))
 				{
@@ -577,11 +608,13 @@ void GameplayGameState::ProcessCollisions()
 				enemy->GetHitBoxManager()->GetHurtBox()))
 			{
 				auto damageData = m_player->GetDamageData();
-				auto groundPosition = enemy->GetGroundPosition();
-				auto frameData = enemy->GetSprite()->GetFrameData(enemy->GetAnimator()->GetCurrentFrame());
-				auto spriteHeight = frameData.spriteSourceSize.bottom;
 				auto normalDirection = Vector2(enemy->GetGroundPosition() - m_player->GetGroundPosition());
 				normalDirection.Normalize();
+				auto impactPosition = GetImpactPosition(
+					playerHitBox,
+					m_player->GetPosition(),
+					enemy->GetHitBoxManager()->GetHurtBox(),
+					enemy->GetPosition());
 
 				enemy->ApplyDamage(m_player, damageData);
 				enemy->ShowEnemyHud();
@@ -602,7 +635,7 @@ void GameplayGameState::ProcessCollisions()
 
 				auto impactFx = m_impactFxPool->Get();
 				m_activeImpacts.push_back(impactFx);
-				impactFx->DisplayFx(Vector2(groundPosition.x, groundPosition.y - spriteHeight * 0.5f) - m_camera->GetPosition());
+				impactFx->DisplayFx(impactPosition - m_camera->GetPosition());
 				SpawnParticles(impactFx->Position(), normalDirection, (Color)Colors::Green, (Color)Colors::DarkGreen, 1.0f, 200);
 			}
 		}
@@ -625,6 +658,7 @@ void GameplayGameState::ProcessCollisions()
 		{
 			prop->Break();
 			LevelCollision::RemoveCollider(prop->GetID());
+			auto impactPosition = GetImpactPosition(playerHitBox, m_player->GetPosition(), propCollider, prop->GetPosition());
 
 			m_pickupManager->TrySpawnPickup(dropPosition);
 
@@ -635,7 +669,7 @@ void GameplayGameState::ProcessCollisions()
 
 			auto impactFx = m_impactFxPool->Get();
 			m_activeImpacts.push_back(impactFx);
-			impactFx->DisplayFx(Vector2(prop->GetPositionX() + propCollider.GetWidth(), prop->GetPositionY() + propCollider.GetHeight() * 0.5f) - m_camera->GetPosition());
+			impactFx->DisplayFx(impactPosition - m_camera->GetPosition());
 		}
 	}
 }
@@ -735,3 +769,4 @@ bool GameplayGameState::TryPickup()
 
 	return false;
 }
+
