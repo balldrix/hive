@@ -3,6 +3,7 @@
 #include "Enemy.h"
 #include "EnemyKnockbackState.h"
 #include "EnemyRunningState.h"
+#include "EnemyStunnedState.h"
 #include "StateMachine.h"
 
 NormalEnemyGlobalState* NormalEnemyGlobalState::Instance()
@@ -18,6 +19,11 @@ void NormalEnemyGlobalState::OnEnter(Enemy* enemy)
 void NormalEnemyGlobalState::Execute(Enemy* enemy)
 {
 	if(enemy->GetHealth() < 1)
+	{
+		return;
+	}
+
+	if(enemy->GetStateMachine()->GetCurrentState() == EnemyStunnedState::Instance())
 	{
 		return;
 	}

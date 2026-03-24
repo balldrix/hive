@@ -3,6 +3,7 @@
 #include "Animator.h"
 #include "Enemy.h"
 #include "EnemyDeadState.h"
+#include "EnemyIdleState.h"
 #include "HitBoxManager.h"
 #include "StateMachine.h"
 #include "UnitVectors.h"
@@ -26,42 +27,34 @@ void EnemyKnockbackState::OnEnter(Enemy* enemy)
 
 void EnemyKnockbackState::Execute(Enemy* enemy)
 {
-	if(enemy->IsGrounded())
+	if(!enemy->IsGrounded())
 	{
-		if(enemy->GetKnockbackCount() == 1)
-		{
-			enemy->GetCamera()->StartShake(2.0f, 3.0f);
-			enemy->DisplayDust(enemy->GetPosition());
-		}
-
-		if(enemy->GetKnockbackCount() == 0)
-		{
-			enemy->Kill();
-		}
-
-		if(enemy->IsDead())
-		{
-			enemy->GetStateMachine()->ChangeState(EnemyDeadState::Instance());
-		}
-		else
-		{
-			Vector2 direction = Vector2::Zero;
-
-			if(enemy->GetCurrentVelocity().x > 0)
-			{
-				direction = UnitVectors::UpRight;
-			}
-			else
-			{
-				direction = UnitVectors::UpLeft;
-			}
-
-			enemy->Knockback(direction, 50.0f);
-			enemy->SetKnockbackCount(enemy->GetKnockbackCount() - 1);
-			enemy->GetAnimator()->Reset();
-			enemy->SetGrounded(false);
-		}
+		return;
 	}
+
+	enemy->GetCamera()->StartShake(2.0f, 3.0f);
+	enemy->DisplayDust(enemy->GetPosition());
+
+	if(enemy->GetKnockbackCount() > 0)
+	{
+		Vector2 direction = enemy->GetCurrentVelocity().x > 0.0f ? UnitVectors::UpRight : UnitVectors::UpLeft;
+		enemy->Knockback(direction, 50.0f);
+		enemy->SetKnockbackCount(enemy->GetKnockbackCount() - 1);
+		enemy->GetAnimator()->Reset();
+		enemy->SetGrounded(false);
+		return;
+	}
+
+	if(enemy->ShouldRecoverAfterKnockback())
+	{
+		enemy->SetRecoverAfterKnockback(false);
+		enemy->ResetStateChangeTimer();
+		enemy->GetStateMachine()->ChangeState(EnemyIdleState::Instance());
+		return;
+	}
+
+	enemy->Kill();
+	enemy->GetStateMachine()->ChangeState(EnemyDeadState::Instance());
 }
 
 void EnemyKnockbackState::OnExit(Enemy* enemy)

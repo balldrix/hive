@@ -4,6 +4,7 @@
 #include "EnemyDeadState.h"
 #include "EnemyIdleState.h"
 #include "EnemyKnockbackState.h"
+#include "EnemyStunnedState.h"
 #include "EnemyRunningState.h"
 #include "EnemyWalkingState.h"
 #include "KingMookChargeState.h"
@@ -29,6 +30,11 @@ void KingMookEnemyGlobalState::Execute(Enemy* enemy)
 {
 	if(enemy->GetHealth() < 1)
 		return;
+
+	if(enemy->GetStateMachine()->GetCurrentState() == EnemyStunnedState::Instance())
+	{
+		return;
+	}
 
 	Vector2 toPlayerTarget = enemy->GetPlayerTarget()->GetPosition() - enemy->GetPosition();
 

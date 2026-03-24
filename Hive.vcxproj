@@ -211,6 +211,7 @@
     <ClCompile Include="src\NormalEnemyGlobalState.cpp" />
     <ClCompile Include="src\EnemyHurtState.cpp" />
     <ClCompile Include="src\EnemyKnockbackState.cpp" />
+    <ClCompile Include="src\EnemyStunnedState.cpp" />
     <ClCompile Include="src\EnemyRunningState.cpp" />
     <ClCompile Include="src\EnemyWalkingState.cpp" />
     <ClCompile Include="src\Game.cpp" />
@@ -281,6 +282,7 @@
     <ClInclude Include="src\NormalEnemyGlobalState.h" />
     <ClInclude Include="src\EnemyHurtState.h" />
     <ClInclude Include="src\EnemyKnockbackState.h" />
+    <ClInclude Include="src\EnemyStunnedState.h" />
     <ClInclude Include="src\EnemyRunningState.h" />
     <ClInclude Include="src\EnemyWalkingState.h" />
     <ClInclude Include="src\Game.h" />

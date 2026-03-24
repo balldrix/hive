@@ -44,7 +44,6 @@
 
 #include <algorithm>
 #include <directxtk/SimpleMath.h>
-#include <fmt/core.h>
 #include <fstream>
 #include <string>
 #include <system_error>

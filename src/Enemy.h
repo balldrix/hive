@@ -53,7 +53,13 @@ public:
 	std::string					GetWaveId() const { return m_waveId; }
 
 	virtual void				ApplyDamage(GameObject* source, const int& amount) override;
+	virtual void				ApplyDamage(GameObject* source, const DamageData& damageData);
 	void						Knockback(const Vector2& direction, const float& force);
+	void						Stun(float duration);
+	void						SetStunTimer(float duration) { m_stunTimer = duration; }
+	float						GetStunTimer() const { return m_stunTimer; }
+	void						SetRecoverAfterKnockback(bool shouldRecover) { m_recoverAfterKnockback = shouldRecover; }
+	bool						ShouldRecoverAfterKnockback() const { return m_recoverAfterKnockback; }
 		
 	virtual void				Attack();
 	void						Kill();
@@ -96,6 +102,7 @@ private:
 	Vector2						Strafe() const;
 	Vector2						GetRangedPositioningVelocity(float distanceToPlayer) const;
 	Vector2						GetAttackApproachVelocity();
+	Vector2						GetKnockbackDirectionFromSource(GameObject* source) const;
 	std::string					GetPreparedAttackName();
 	bool						ShouldFaceLeftAt(const Vector2& position) const;
 
@@ -103,8 +110,10 @@ private:
 	std::string					m_preparedAttackName;
 	Sprite*						m_portraitSprite;
 	float						m_stateChangeTimer;
+	float						m_stunTimer;
 	float						m_flashingTimer;
 	bool						m_isFlashing;
+	bool						m_recoverAfterKnockback;
 	State<Enemy>*				m_startingState;
 	NPCManager*					m_npcManager;
 	CutsceneManager*			m_cutsceneManager;

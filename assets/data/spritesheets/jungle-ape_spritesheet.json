@@ -1,6 +1,6 @@
 { "frames": [
    {
-    "filename": "mook-0",
+    "filename": "idle.0",
     "frame": { "x": 0, "y": 0, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -9,7 +9,7 @@
     "duration": 200
    },
    {
-    "filename": "mook-1",
+    "filename": "idle.1",
     "frame": { "x": 53, "y": 0, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -18,7 +18,7 @@
     "duration": 200
    },
    {
-    "filename": "mook-2",
+    "filename": "idle.2",
     "frame": { "x": 106, "y": 0, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -27,7 +27,7 @@
     "duration": 200
    },
    {
-    "filename": "mook-3",
+    "filename": "idle.3",
     "frame": { "x": 159, "y": 0, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -36,7 +36,7 @@
     "duration": 200
    },
    {
-    "filename": "mook-4",
+    "filename": "idle.4",
     "frame": { "x": 212, "y": 0, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -45,7 +45,7 @@
     "duration": 200
    },
    {
-    "filename": "mook-5",
+    "filename": "idle.5",
     "frame": { "x": 265, "y": 0, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -54,7 +54,7 @@
     "duration": 200
    },
    {
-    "filename": "mook-6",
+    "filename": "run.6",
     "frame": { "x": 318, "y": 0, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -63,7 +63,7 @@
     "duration": 80
    },
    {
-    "filename": "mook-7",
+    "filename": "run.7",
     "frame": { "x": 0, "y": 41, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -72,7 +72,7 @@
     "duration": 80
    },
    {
-    "filename": "mook-8",
+    "filename": "run.8",
     "frame": { "x": 53, "y": 41, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -81,7 +81,7 @@
     "duration": 80
    },
    {
-    "filename": "mook-9",
+    "filename": "run.9",
     "frame": { "x": 106, "y": 41, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -90,7 +90,7 @@
     "duration": 80
    },
    {
-    "filename": "mook-10",
+    "filename": "run.10",
     "frame": { "x": 159, "y": 41, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -99,7 +99,7 @@
     "duration": 80
    },
    {
-    "filename": "mook-11",
+    "filename": "run.11",
     "frame": { "x": 212, "y": 41, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -108,7 +108,7 @@
     "duration": 80
    },
    {
-    "filename": "mook-12",
+    "filename": "run.12",
     "frame": { "x": 265, "y": 41, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -117,7 +117,7 @@
     "duration": 80
    },
    {
-    "filename": "mook-13",
+    "filename": "run.13",
     "frame": { "x": 318, "y": 41, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -126,7 +126,7 @@
     "duration": 80
    },
    {
-    "filename": "mook-14",
+    "filename": "walk.14",
     "frame": { "x": 0, "y": 82, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -135,7 +135,7 @@
     "duration": 100
    },
    {
-    "filename": "mook-15",
+    "filename": "walk.15",
     "frame": { "x": 53, "y": 82, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -144,7 +144,7 @@
     "duration": 100
    },
    {
-    "filename": "mook-16",
+    "filename": "walk.16",
     "frame": { "x": 106, "y": 82, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -153,7 +153,7 @@
     "duration": 100
    },
    {
-    "filename": "mook-17",
+    "filename": "walk.17",
     "frame": { "x": 159, "y": 82, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -162,7 +162,7 @@
     "duration": 100
    },
    {
-    "filename": "mook-18",
+    "filename": "walk.18",
     "frame": { "x": 212, "y": 82, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -171,7 +171,7 @@
     "duration": 100
    },
    {
-    "filename": "mook-19",
+    "filename": "walk.19",
     "frame": { "x": 265, "y": 82, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -180,7 +180,7 @@
     "duration": 100
    },
    {
-    "filename": "mook-20",
+    "filename": "walk.20",
     "frame": { "x": 318, "y": 82, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -189,7 +189,7 @@
     "duration": 100
    },
    {
-    "filename": "mook-21",
+    "filename": "walk.21",
     "frame": { "x": 0, "y": 123, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -198,7 +198,7 @@
     "duration": 100
    },
    {
-    "filename": "mook-22",
+    "filename": "hurt.22",
     "frame": { "x": 53, "y": 123, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -207,35 +207,44 @@
     "duration": 400
    },
    {
-    "filename": "mook-23",
+    "filename": "stunned.23",
     "frame": { "x": 106, "y": 123, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 53, "h": 41 },
     "sourceSize": { "w": 53, "h": 41 },
-    "duration": 100
+    "duration": 300
    },
    {
-    "filename": "mook-24",
+    "filename": "stunned.24",
     "frame": { "x": 159, "y": 123, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 53, "h": 41 },
     "sourceSize": { "w": 53, "h": 41 },
-    "duration": 100
+    "duration": 300
    },
    {
-    "filename": "mook-25",
+    "filename": "stunned.25",
     "frame": { "x": 212, "y": 123, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 53, "h": 41 },
     "sourceSize": { "w": 53, "h": 41 },
-    "duration": 100
+    "duration": 300
    },
    {
-    "filename": "mook-26",
+    "filename": "stunned.26",
     "frame": { "x": 265, "y": 123, "w": 53, "h": 41 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 53, "h": 41 },
+    "sourceSize": { "w": 53, "h": 41 },
+    "duration": 300
+   },
+   {
+    "filename": "attackNormal.27",
+    "frame": { "x": 318, "y": 123, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 53, "h": 41 },
@@ -243,7 +252,34 @@
     "duration": 100
    },
    {
-    "filename": "mook-27",
+    "filename": "attackNormal.28",
+    "frame": { "x": 0, "y": 164, "w": 53, "h": 41 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 53, "h": 41 },
+    "sourceSize": { "w": 53, "h": 41 },
+    "duration": 100
+   },
+   {
+    "filename": "attackNormal.29",
+    "frame": { "x": 53, "y": 164, "w": 53, "h": 41 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 53, "h": 41 },
+    "sourceSize": { "w": 53, "h": 41 },
+    "duration": 100
+   },
+   {
+    "filename": "attackNormal.30",
+    "frame": { "x": 106, "y": 164, "w": 53, "h": 41 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 53, "h": 41 },
+    "sourceSize": { "w": 53, "h": 41 },
+    "duration": 100
+   },
+   {
+    "filename": "attackRun.31",
     "frame": { "x": 318, "y": 41, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -252,43 +288,7 @@
     "duration": 80
    },
    {
-    "filename": "mook-28",
-    "frame": { "x": 318, "y": 123, "w": 53, "h": 41 },
-    "rotated": false,
-    "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 53, "h": 41 },
-    "sourceSize": { "w": 53, "h": 41 },
-    "duration": 120
-   },
-   {
-    "filename": "mook-29",
-    "frame": { "x": 0, "y": 164, "w": 53, "h": 41 },
-    "rotated": false,
-    "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 53, "h": 41 },
-    "sourceSize": { "w": 53, "h": 41 },
-    "duration": 120
-   },
-   {
-    "filename": "mook-30",
-    "frame": { "x": 53, "y": 164, "w": 53, "h": 41 },
-    "rotated": false,
-    "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 53, "h": 41 },
-    "sourceSize": { "w": 53, "h": 41 },
-    "duration": 120
-   },
-   {
-    "filename": "mook-31",
-    "frame": { "x": 106, "y": 164, "w": 53, "h": 41 },
-    "rotated": false,
-    "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 53, "h": 41 },
-    "sourceSize": { "w": 53, "h": 41 },
-    "duration": 120
-   },
-   {
-    "filename": "mook-32",
+    "filename": "attackRun.32",
     "frame": { "x": 159, "y": 164, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -297,7 +297,7 @@
     "duration": 120
    },
    {
-    "filename": "mook-33",
+    "filename": "attackRun.33",
     "frame": { "x": 212, "y": 164, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -306,7 +306,7 @@
     "duration": 120
    },
    {
-    "filename": "mook-34",
+    "filename": "attackRun.34",
     "frame": { "x": 265, "y": 164, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -315,7 +315,7 @@
     "duration": 120
    },
    {
-    "filename": "mook-35",
+    "filename": "attackRun.35",
     "frame": { "x": 318, "y": 164, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -324,8 +324,44 @@
     "duration": 120
    },
    {
-    "filename": "mook-36",
+    "filename": "attackRun.36",
     "frame": { "x": 0, "y": 205, "w": 53, "h": 41 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 53, "h": 41 },
+    "sourceSize": { "w": 53, "h": 41 },
+    "duration": 120
+   },
+   {
+    "filename": "attackRun.37",
+    "frame": { "x": 53, "y": 205, "w": 53, "h": 41 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 53, "h": 41 },
+    "sourceSize": { "w": 53, "h": 41 },
+    "duration": 120
+   },
+   {
+    "filename": "attackRun.38",
+    "frame": { "x": 106, "y": 205, "w": 53, "h": 41 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 53, "h": 41 },
+    "sourceSize": { "w": 53, "h": 41 },
+    "duration": 120
+   },
+   {
+    "filename": "attackRun.39",
+    "frame": { "x": 159, "y": 205, "w": 53, "h": 41 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 53, "h": 41 },
+    "sourceSize": { "w": 53, "h": 41 },
+    "duration": 120
+   },
+   {
+    "filename": "hurtRun.40",
+    "frame": { "x": 212, "y": 205, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 53, "h": 41 },
@@ -333,43 +369,7 @@
     "duration": 400
    },
    {
-    "filename": "mook-37",
-    "frame": { "x": 0, "y": 205, "w": 53, "h": 41 },
-    "rotated": false,
-    "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 53, "h": 41 },
-    "sourceSize": { "w": 53, "h": 41 },
-    "duration": 100
-   },
-   {
-    "filename": "mook-38",
-    "frame": { "x": 53, "y": 205, "w": 53, "h": 41 },
-    "rotated": false,
-    "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 53, "h": 41 },
-    "sourceSize": { "w": 53, "h": 41 },
-    "duration": 100
-   },
-   {
-    "filename": "mook-39",
-    "frame": { "x": 106, "y": 205, "w": 53, "h": 41 },
-    "rotated": false,
-    "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 53, "h": 41 },
-    "sourceSize": { "w": 53, "h": 41 },
-    "duration": 100
-   },
-   {
-    "filename": "mook-40",
-    "frame": { "x": 159, "y": 205, "w": 53, "h": 41 },
-    "rotated": false,
-    "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 53, "h": 41 },
-    "sourceSize": { "w": 53, "h": 41 },
-    "duration": 100
-   },
-   {
-    "filename": "mook-41",
+    "filename": "deadRun.41",
     "frame": { "x": 212, "y": 205, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -378,7 +378,7 @@
     "duration": 100
    },
    {
-    "filename": "mook-42",
+    "filename": "deadRun.42",
     "frame": { "x": 265, "y": 205, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -387,7 +387,7 @@
     "duration": 100
    },
    {
-    "filename": "mook-43",
+    "filename": "deadRun.43",
     "frame": { "x": 318, "y": 205, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -396,7 +396,7 @@
     "duration": 100
    },
    {
-    "filename": "mook-44",
+    "filename": "deadRun.44",
     "frame": { "x": 0, "y": 246, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
@@ -405,8 +405,44 @@
     "duration": 100
    },
    {
-    "filename": "mook-45",
+    "filename": "knockback.45",
     "frame": { "x": 53, "y": 246, "w": 53, "h": 41 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 53, "h": 41 },
+    "sourceSize": { "w": 53, "h": 41 },
+    "duration": 100
+   },
+   {
+    "filename": "knockback.46",
+    "frame": { "x": 106, "y": 246, "w": 53, "h": 41 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 53, "h": 41 },
+    "sourceSize": { "w": 53, "h": 41 },
+    "duration": 100
+   },
+   {
+    "filename": "dead.47",
+    "frame": { "x": 159, "y": 246, "w": 53, "h": 41 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 53, "h": 41 },
+    "sourceSize": { "w": 53, "h": 41 },
+    "duration": 100
+   },
+   {
+    "filename": "dead.48",
+    "frame": { "x": 212, "y": 246, "w": 53, "h": 41 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 53, "h": 41 },
+    "sourceSize": { "w": 53, "h": 41 },
+    "duration": 100
+   },
+   {
+    "filename": "dead.49",
+    "frame": { "x": 265, "y": 246, "w": 53, "h": 41 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 53, "h": 41 },
@@ -414,94 +450,36 @@
     "duration": 100
    }
  ],
-  "meta": {
-    "app": "https://www.aseprite.org/",
-    "version": "1.3.13-beta1-x64",
-    "image": "mook_spritesheet.png",
-    "format": "I8",
-    "size": {
-      "w": 371,
-      "h": 287
-    },
-    "scale": "1",
-    "frameTags": [
-      {
-        "name": "idle",
-        "from": 0,
-        "to": 5,
-        "direction": "forward",
-        "color": "#000000ff"
-      },
-      {
-        "name": "run",
-        "from": 6,
-        "to": 13,
-        "direction": "forward",
-        "color": "#000000ff"
-      },
-      {
-        "name": "walk",
-        "from": 14,
-        "to": 21,
-        "direction": "forward",
-        "color": "#000000ff"
-      },
-      {
-        "name": "hurt",
-        "from": 22,
-        "to": 22,
-        "direction": "forward",
-        "repeat": "1",
-        "color": "#000000ff"
-      },
-      {
-        "name": "attackNormal",
-        "from": 23,
-        "to": 26,
-        "direction": "forward",
-        "repeat": "1",
-        "color": "#000000ff"
-      },
-      {
-        "name": "attackRun",
-        "from": 27,
-        "to": 35,
-        "direction": "forward",
-        "repeat": "1",
-        "color": "#000000ff"
-      },
-      {
-        "name": "hurtRun",
-        "from": 36,
-        "to": 36,
-        "direction": "forward",
-        "repeat": "1",
-        "color": "#000000ff"
-      },
-      {
-        "name": "deadRun",
-        "from": 37,
-        "to": 40,
-        "direction": "forward",
-        "repeat": "1",
-        "color": "#000000ff"
-      },
-      {
-        "name": "knockback",
-        "from": 41,
-        "to": 42,
-        "direction": "forward",
-        "repeat": "1",
-        "color": "#000000ff"
-      },
-      {
-        "name": "dead",
-        "from": 43,
-        "to": 45,
-        "direction": "forward",
-        "repeat": "1",
-        "color": "#000000ff"
-      }
-    ]
-  }
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.18-beta1-x64",
+  "image": "jungle-ape_spritesheet.png",
+  "format": "I8",
+  "size": { "w": 371, "h": 287 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "idle", "from": 0, "to": 5, "direction": "forward" },
+   { "name": "run", "from": 6, "to": 13, "direction": "forward" },
+   { "name": "walk", "from": 14, "to": 21, "direction": "forward" },
+   { "name": "hurt", "from": 22, "to": 22, "direction": "forward", "repeat": "1" },
+   { "name": "stunned", "from": 23, "to": 26, "direction": "forward", "color": "#000000ff" },
+   { "name": "attackNormal", "from": 27, "to": 30, "direction": "forward", "repeat": "1" },
+   { "name": "attackRun", "from": 31, "to": 39, "direction": "forward", "repeat": "1" },
+   { "name": "hurtRun", "from": 40, "to": 40, "direction": "forward", "repeat": "1" },
+   { "name": "deadRun", "from": 41, "to": 44, "direction": "forward", "repeat": "1" },
+   { "name": "knockback", "from": 45, "to": 46, "direction": "forward", "repeat": "1" },
+   { "name": "dead", "from": 47, "to": 49, "direction": "forward", "repeat": "1" }
+  ],
+  "layers": [
+   { "name": "shadow", "opacity": 179, "blendMode": "normal" },
+   { "name": "sprite frames" },
+   { "name": "back arms", "group": "sprite frames", "opacity": 255, "blendMode": "normal" },
+   { "name": "back leg", "group": "sprite frames", "opacity": 255, "blendMode": "normal" },
+   { "name": "body", "group": "sprite frames", "opacity": 255, "blendMode": "normal" },
+   { "name": "front leg", "group": "sprite frames", "opacity": 255, "blendMode": "normal" },
+   { "name": "head", "group": "sprite frames", "opacity": 255, "blendMode": "normal" },
+   { "name": "front arms", "group": "sprite frames", "opacity": 255, "blendMode": "normal" },
+   { "name": "stun fx", "group": "sprite frames", "opacity": 255, "blendMode": "normal" }
+  ]
+ }
 }

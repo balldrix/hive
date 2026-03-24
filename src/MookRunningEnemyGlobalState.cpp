@@ -6,6 +6,7 @@
 #include "EnemyIdleState.h"
 #include "EnemyKnockbackState.h"
 #include "EnemyRunningState.h"
+#include "EnemyStunnedState.h"
 #include "GameplayConstants.h"
 #include "StateMachine.h"
 
@@ -34,6 +35,11 @@ void MookRunningEnemyGlobalState::Execute(Enemy* enemy)
 
 	auto currentState = enemy->GetStateMachine()->GetCurrentState();
 	auto distance = (enemy->GetPosition() - enemy->GetPlayerTarget()->GetPosition()).Length();
+
+	if(currentState == EnemyStunnedState::Instance())
+	{
+		return;
+	}
 
 	if(enemy->GetTimer() < 0.0f)
 	{

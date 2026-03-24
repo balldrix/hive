@@ -3,6 +3,7 @@
 #include "Collider.h"
 #include "HitBoxData.h"
 
+#include <directxtk/SimpleMath.h>
 #include <string>
 #include <vector>
 

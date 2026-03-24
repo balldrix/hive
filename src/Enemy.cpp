@@ -13,6 +13,7 @@
 #include "EnemyHurtState.h"
 #include "EnemyIdleState.h"
 #include "EnemyKnockbackState.h"
+#include "EnemyStunnedState.h"
 #include "EventManager.h"
 #include "GameDataManager.h"
 #include "GameObject.h"
@@ -60,6 +61,8 @@ namespace
 	constexpr float RangedVerticalCorrectionWeight = 0.35f;
 	constexpr float RangedAvoidDistance = 20.0f;
 	constexpr float RangedAvoidWeight = 1.25f;
+	constexpr float DefaultStunDuration = 2.0f;
+	constexpr float DefaultKnockbackForce = 80.0f;
 }
 
 Enemy::Enemy() :
@@ -72,8 +75,10 @@ Enemy::Enemy() :
 	m_footStepSoundSource(nullptr),
 	m_attackSoundSource(nullptr),
 	m_stateChangeTimer(0.0f),
+	m_stunTimer(0.0f),
 	m_flashingTimer(0.0f),
 	m_isFlashing(false),
+	m_recoverAfterKnockback(false),
 	m_recentFootstepFrame(0),
 	m_startingState(nullptr),
 	m_npcManager(nullptr),
@@ -222,6 +227,7 @@ void Enemy::Update(float deltaTime)
 	GameObject::Update(deltaTime);
 
 	if(m_stateChangeTimer > 0.0f) m_stateChangeTimer -= deltaTime;
+	if(m_stunTimer > 0.0f) m_stunTimer -= deltaTime;
 	if(m_flashingTimer > 0.0f) m_flashingTimer -= deltaTime;
 
 	if(m_isFlashing && m_flashingTimer <= 0.0f)
@@ -283,6 +289,8 @@ void Enemy::Reset(const std::string& id)
 	}
 
 	ClearPreparedAttack();
+	m_stunTimer = 0.0f;
+	m_recoverAfterKnockback = false;
 
 	// Keep the animator's event owner id aligned with pooled enemy ids.
 	SetID(id);
@@ -298,6 +306,8 @@ void Enemy::Spawn(const Vector2& position, std::string waveId)
 	m_isFlashing = false;
 	m_health = m_enemyDefinition.hp;
 	ClearPreparedAttack();
+	m_stunTimer = 0.0f;
+	m_recoverAfterKnockback = false;
 
 	GetSprite()->EnableSprite();
 	m_stateMachine->ChangeState(m_startingState);
@@ -321,43 +331,74 @@ void Enemy::ResetStateChangeTimer()
 
 void Enemy::ApplyDamage(GameObject* source, const int& amount)
 {
-	m_health -= amount;
+	DamageData damageData;
+	damageData.amount = amount;
+	ApplyDamage(source, damageData);
+}
+
+void Enemy::ApplyDamage(GameObject* source, const DamageData& damageData)
+{
+	m_health -= damageData.amount;
 
 	if(m_health < 0) m_health = 0;
 
 	PlayImpactSound();
+	ClearPreparedAttack();
 
-	//@TODO add knockback, stun or juggle states
 	if(m_health == 0)
 	{
-		// set knockback state
+		if(IsCurrentWaveAttacker())
+		{
+			NPCManager::Instance()->SetNextAttackingEnemy(this);
+		}
+
+		m_recoverAfterKnockback = false;
 		m_stateMachine->ChangeState(EnemyKnockbackState::Instance());
-
-		Vector2 direction = Vector2::Zero;
-
-		// calculate direction to knockback
-		if(this->GetPositionX() < source->GetPositionX())
-		{
-			direction = UnitVectors::UpLeft;
-		}
-		else
-		{
-			direction = UnitVectors::UpRight;
-		}
-
-		Knockback(direction, 100.0f);
+		Knockback(GetKnockbackDirectionFromSource(source), 100.0f);
 		SetKnockbackCount(1);
+		return;
 	}
-	else
+
+	if(damageData.attackEffect == AttackEffect::Knockback)
 	{
-		m_stateMachine->ChangeState(EnemyHurtState::Instance());
+		if(IsCurrentWaveAttacker())
+		{
+			NPCManager::Instance()->SetNextAttackingEnemy(this);
+		}
+
+		m_recoverAfterKnockback = true;
+		m_stateMachine->ChangeState(EnemyKnockbackState::Instance());
+		Knockback(
+			GetKnockbackDirectionFromSource(source),
+			damageData.knockbackForce > 0.0f ? damageData.knockbackForce : DefaultKnockbackForce);
+		SetKnockbackCount(damageData.knockbackCount);
+		return;
 	}
+
+	if(damageData.attackEffect == AttackEffect::Stun)
+	{
+		Stun(damageData.effectDuration);
+		return;
+	}
+
+	m_stateMachine->ChangeState(EnemyHurtState::Instance());
 }
 
 void Enemy::Knockback(const Vector2& direction, const float& force)
 {
 	SetVelocity(direction);
 	SetMovementSpeed(force);
+}
+
+void Enemy::Stun(float duration)
+{
+	if(IsCurrentWaveAttacker())
+	{
+		NPCManager::Instance()->SetNextAttackingEnemy(this);
+	}
+
+	m_stunTimer = duration > 0.0f ? duration : DefaultStunDuration;
+	m_stateMachine->ChangeState(EnemyStunnedState::Instance());
 }
 
 void Enemy::Attack()
@@ -716,6 +757,21 @@ Vector2 Enemy::GetAttackApproachVelocity()
 	}
 
 	return direction;
+}
+
+Vector2 Enemy::GetKnockbackDirectionFromSource(GameObject* source) const
+{
+	if(source == nullptr)
+	{
+		return GetFacingDirection().x < 0.0f ? UnitVectors::UpRight : UnitVectors::UpLeft;
+	}
+
+	if(GetPositionX() < source->GetPositionX())
+	{
+		return UnitVectors::UpLeft;
+	}
+
+	return UnitVectors::UpRight;
 }
 
 std::string Enemy::GetPreparedAttackName()

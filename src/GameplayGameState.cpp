@@ -583,7 +583,7 @@ void GameplayGameState::ProcessCollisions()
 				auto normalDirection = Vector2(enemy->GetGroundPosition() - m_player->GetGroundPosition());
 				normalDirection.Normalize();
 
-				enemy->ApplyDamage(m_player, damageData.amount);
+				enemy->ApplyDamage(m_player, damageData);
 				enemy->ShowEnemyHud();
 
 				auto animation = m_player->GetAnimator()->GetAnimation();

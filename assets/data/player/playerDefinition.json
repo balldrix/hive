@@ -41,7 +41,9 @@
       {
         "name": "attackStrong_2",
         "value": 60,
-        "hitStop": 0.4
+        "hitStop": 0.4,
+        "effect": "stun",
+        "effectDuration": 2.0
       },
       {
         "name": "attackStrong_3",
@@ -51,7 +53,10 @@
       {
         "name": "attackStrong_4",
         "value": 30,
-        "hitStop": 0.4
+        "hitStop": 0.4,
+        "effect": "knockback",
+        "knockbackForce": 80.0,
+        "knockbackCount": 0
       },
       {
         "name": "attackStrong_5",
