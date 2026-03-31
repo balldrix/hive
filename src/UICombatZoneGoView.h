@@ -6,6 +6,7 @@
 
 class Graphics;
 class UIImageView;
+class SoundSource;
 
 class UICombatZoneGoView : public UIView
 {
@@ -16,6 +17,7 @@ public:
 	void Init(std::string name) override;
 	void Update(float deltaTime) override;
 	void Render(Graphics* graphics) override;
+	void ForceHide(bool isForced) override;
 
 	void TransitionIn(bool isAnimating) override;
 	void TransitionOut(bool isAnimating) override;
@@ -28,5 +30,6 @@ private:
 	static constexpr float MaxPulseScale = 1.12f;
 
 	UIImageView* m_goImage;
+	SoundSource* m_loopingSoundSource;
 	float m_timer;
 };

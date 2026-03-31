@@ -9,8 +9,6 @@
 
 #include <AL/al.h>
 #include <directxtk/SimpleMath.h>
-#include <fmt/core.h>
-#include <utility>
 
 SoundSource::SoundSource()
 {
@@ -62,14 +60,19 @@ void SoundSource::Play(OALSource* source)
 
 void SoundSource::Stop()
 {
-	if(!m_currentSource) return;
+	if(m_currentSource)
+	{
+		alSourcef(m_currentSource->source, AL_GAIN, 0.0f);
+		alSourceStop(m_currentSource->source);
+		alSourcei(m_currentSource->source, AL_BUFFER, 0);
 
-	alSourcef(m_currentSource->source, AL_GAIN, 0.0f);
-	alSourceStop(m_currentSource->source);
-	alSourcei(m_currentSource->source, AL_BUFFER, 0);
+		m_currentSource->inUse = false;
+		m_currentSource = nullptr;
+	}
 
-	m_currentSource->inUse = false;
-	m_currentSource = nullptr;
+	m_sound = nullptr;
+	m_timeLeft = 0.0f;
+	m_offset = 0;
 }
 
 void SoundSource::Pause()
@@ -135,8 +138,8 @@ void SoundSource::Play(Sound* sound)
 {
 	Logger::LogInfo(fmt::format("Playing Sound {}", sound->GetFilename()));
 
-	m_sound = sound;
 	Stop();
+	m_sound = sound;
 
 	if(sound != nullptr)
 		m_timeLeft = sound->GetLength();
@@ -147,32 +150,32 @@ void SoundSource::SetVolume(float volume)
 	m_volume = std::min(1.0f, std::max(0.0f, volume));
 }
 
-void SoundSource::SetPriority(SoundPriority priority) 
-{ 
-	m_priority = priority; 
-}
-
-void SoundSource::SetLooping(bool state) 
-{ 
-	m_isLooping = state; 
-}
-
-void SoundSource::SetRadius(float value) 
-{ 
-	m_radius = std::max(0.0f, value); 
-}
-
-void SoundSource::SetTarget(GameObject* target) 
+void SoundSource::SetPriority(SoundPriority priority)
 {
-	m_target = target; 
+	m_priority = priority;
 }
 
-void SoundSource::SetPitch(float value) 
-{ 
-	m_pitch = value; 
+void SoundSource::SetLooping(bool state)
+{
+	m_isLooping = state;
 }
 
-void SoundSource::SetRelative(bool value) 
-{ 
-	m_isRelative = value; 
+void SoundSource::SetRadius(float value)
+{
+	m_radius = std::max(0.0f, value);
+}
+
+void SoundSource::SetTarget(GameObject* target)
+{
+	m_target = target;
+}
+
+void SoundSource::SetPitch(float value)
+{
+	m_pitch = value;
+}
+
+void SoundSource::SetRelative(bool value)
+{
+	m_isRelative = value;
 }

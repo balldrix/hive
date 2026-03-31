@@ -1333,6 +1333,9 @@
     <Media Include="assets\sounds\uiNav.wav">
       <Filter>Assets\Sounds</Filter>
     </Media>
+    <Media Include="assets\sounds\uiGo.wav">
+      <Filter>Assets\Sounds</Filter>
+    </Media>
     <Media Include="assets\sounds\uiOpen.wav">
       <Filter>Assets\Sounds</Filter>
     </Media>

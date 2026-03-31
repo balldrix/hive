@@ -5,6 +5,9 @@
 #include "UICombatZoneGoView.h"
 
 #include "AssetLoader.h"
+#include "AudioEngine.h"
+#include "Sound.h"
+#include "SoundSource.h"
 #include "UIImageView.h"
 #include "UIManager.h"
 
@@ -15,8 +18,15 @@
 
 UICombatZoneGoView::UICombatZoneGoView() :
 	m_goImage(nullptr),
+	m_loopingSoundSource(nullptr),
 	m_timer(0.0f)
 {
+	m_loopingSoundSource = new SoundSource();
+	m_loopingSoundSource->SetPriority(SoundPriority::Always);
+	m_loopingSoundSource->SetRelative(true);
+	m_loopingSoundSource->SetLooping(true);
+
+	AudioEngine::Instance()->AddSoundSource(m_loopingSoundSource);
 }
 
 UICombatZoneGoView::~UICombatZoneGoView()
@@ -74,6 +84,28 @@ void UICombatZoneGoView::Render(Graphics* graphics)
 	m_goImage->Render(graphics);
 }
 
+void UICombatZoneGoView::ForceHide(bool isForced)
+{
+	UIView::ForceHide(isForced);
+
+	if(isForced && m_loopingSoundSource != nullptr)
+	{
+		m_loopingSoundSource->Stop();
+	}
+	else if(!isForced && m_isActive)
+	{
+		Sound* goSound = AssetLoader::GetSound("uiGo");
+		if(goSound != nullptr && m_loopingSoundSource->GetSound() != goSound)
+		{
+			m_loopingSoundSource->Play(goSound);
+		}
+		else if(goSound != nullptr && m_loopingSoundSource->GetSource() == nullptr)
+		{
+			m_loopingSoundSource->Play(goSound);
+		}
+	}
+}
+
 void UICombatZoneGoView::TransitionIn(bool isAnimating)
 {
 	m_currentViewState = UIView::ViewStates::Visible;
@@ -81,12 +113,22 @@ void UICombatZoneGoView::TransitionIn(bool isAnimating)
 	m_timer = DisplayDuration;
 	m_goImage->SetAlpha(1.0f);
 	m_goImage->GetSprite()->SetScale(1.0f);
+
+	if(!m_isForcedHidden)
+	{
+		Sound* goSound = AssetLoader::GetSound("uiGo");
+		if(goSound != nullptr)
+		{
+			m_loopingSoundSource->Play(goSound);
+		}
+	}
 }
 
 void UICombatZoneGoView::TransitionOut(bool isAnimating)
 {
 	m_currentViewState = UIView::ViewStates::NotVisible;
 	m_isActive = false;
+	m_loopingSoundSource->Stop();
 
 	if(m_goImage != nullptr)
 	{
@@ -98,6 +140,13 @@ void UICombatZoneGoView::TransitionOut(bool isAnimating)
 void UICombatZoneGoView::Shutdown()
 {
 	UIManager::UnregisterUIView(this);
+
+	if(m_loopingSoundSource != nullptr)
+	{
+		AudioEngine::Instance()->RemoveSoundSource(m_loopingSoundSource);
+		delete m_loopingSoundSource;
+		m_loopingSoundSource = nullptr;
+	}
 
 	delete m_goImage;
 	m_goImage = nullptr;

@@ -486,6 +486,12 @@
     "tag": "ui_assets"
   },
   {
+    "id": "s_uiGo",
+    "path": "assets\\sounds\\uiGo.wav",
+    "type": "audio",
+    "tag": "ui_assets"
+  },
+  {
     "id": "t_bar_fill_red",
     "path": "assets\\textures\\ui\\bar_fill_red.png",
     "type": "texture",
