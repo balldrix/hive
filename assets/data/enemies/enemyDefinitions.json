@@ -132,8 +132,8 @@
     "damageData": [
       {
         "name": "attackNormal",
-        "value": 2,
-        "hitStop": 0.1
+        "value": 5,
+        "hitStop": 0.2
       }
     ],
     "hp": 100,
@@ -146,6 +146,40 @@
     "hostileRange": 120,
     "fightRange": 100,
     "attackRange": 100,
+    "chargeRange": 0,
+    "chargeSpeed": 0
+  },
+  {
+    "id": "waste-boss",
+    "enemyType": "boss",
+    "spritesheetDataPath": "assets\\data\\spritesheets\\waste-boss_spritesheet.json",
+    "spriteOriginX": 65,
+    "spriteOriginY": 72,
+    "textureId": "t_waste-boss",
+    "shadowId": "t_shadow_boss",
+    "hitBoxDataPath": "assets\\data\\hitboxes\\waste-boss_hitbox.json",
+    "damageData": [
+      {
+        "name": "jab",
+        "value": 5,
+        "hitStop": 0.2
+      },
+      {
+        "name": "slam",
+        "value": 50,
+        "hitStop": 1
+      }
+    ],
+    "hp": 500,
+    "walkSpeed": 30,
+    "runningSpeed": 35,
+    "acceleration": 0.8,
+    "deceleration": 3.5,
+    "minStateChangeTime": 2,
+    "maxStateChangeTime": 5,
+    "hostileRange": 80,
+    "fightRange": 60,
+    "attackRange": 40,
     "chargeRange": 0,
     "chargeSpeed": 0
   }

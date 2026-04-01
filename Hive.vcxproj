@@ -373,9 +373,11 @@
     <Image Include="assets\textures\pixel.png" />
     <Image Include="assets\textures\player_spritesheet.png" />
     <Image Include="assets\textures\shadow.png" />
+    <Image Include="assets\textures\shadow_boss.png" />
     <Image Include="assets\textures\shadow_large.png" />
     <Image Include="assets\textures\shadow_standard.png" />
     <Image Include="assets\textures\ship-crashed.png" />
+    <Image Include="assets\textures\ui\arrow.png" />
     <Image Include="assets\textures\ui\bar-fill-green-dark.png" />
     <Image Include="assets\textures\ui\bar-fill-red-dark.png" />
     <Image Include="assets\textures\ui\bar-fill-yellow-dark.png" />
@@ -385,6 +387,7 @@
     <Image Include="assets\textures\ui\bar_frame_enemy.png" />
     <Image Include="assets\textures\ui\bar_frame_player_health.png" />
     <Image Include="assets\textures\ui\bar_frame_player_special.png" />
+    <Image Include="assets\textures\ui\go_sign.png" />
     <Image Include="assets\textures\ui\jungle-ape_portrait.png" />
     <Image Include="assets\textures\ui\lift-spider_portrait.png" />
     <Image Include="assets\textures\ui\loading_screen_bg.png" />
@@ -396,8 +399,11 @@
     <Image Include="assets\textures\ui\profile-frame.png" />
     <Image Include="assets\textures\ui\title_logo.png" />
     <Image Include="assets\textures\ui\title_screen_bg.png" />
+    <Image Include="assets\textures\ui\waste-boss_portrait.png" />
     <Image Include="assets\textures\ui\waste-dog_portrait.png" />
     <Image Include="assets\textures\ui\waste-lobster_portrait.png" />
+    <Image Include="assets\textures\waste-boss_spritesheet-sheet.png" />
+    <Image Include="assets\textures\waste-boss_spritesheet.png" />
     <Image Include="assets\textures\waste-box.png" />
     <Image Include="assets\textures\waste-dog_spritesheet.png" />
     <Image Include="assets\textures\waste-lobster_spritesheet.png" />
@@ -608,5 +614,3 @@
     </VisualStudio>
   </ProjectExtensions>
 </Project>
-
-

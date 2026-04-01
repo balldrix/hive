@@ -1145,6 +1145,7 @@
     <None Include="assets\data\spritesheets\crate_spritesheet.json">
       <Filter>Assets\Data\Spritesheets</Filter>
     </None>
+    <None Include="assets\data\spritesheets\lobster-spit_spritesheet.json" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\textures\mook_spritesheet.png">
@@ -1274,6 +1275,12 @@
       <Filter>Assets\Textures</Filter>
     </Image>
     <Image Include="assets\textures\lobster-spit_spritesheet.png" />
+    <Image Include="assets\textures\shadow_boss.png" />
+    <Image Include="assets\textures\waste-boss_spritesheet.png" />
+    <Image Include="assets\textures\waste-boss_spritesheet-sheet.png" />
+    <Image Include="assets\textures\ui\go_sign.png" />
+    <Image Include="assets\textures\ui\waste-boss_portrait.png" />
+    <Image Include="assets\textures\ui\arrow.png" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\sounds\swingNormal_001.wav">
@@ -1344,4 +1351,3 @@
     </Media>
   </ItemGroup>
 </Project>
-
