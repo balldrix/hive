@@ -149,5 +149,21 @@
         ]
       }
     ]
+  },
+  {
+    "name": "waste_boss_cutscene",
+    "steps": [
+      {
+        "events": [
+          {
+            "name": "ShowUI",
+            "target": "UIManager",
+            "arg": false,
+            "delay": 0.0,
+            "waitForCompletion": false
+          }
+        ]
+      }
+    ]
   }
 ]

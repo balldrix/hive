@@ -2,6 +2,7 @@
 
 #include "AABB.h"
 #include "CombatZoneManager.h"
+#include "CutsceneManager.h"
 #include "EnemySpawner.h"
 #include "EnemySpawnManager.h"
 #include "Logger.h"
@@ -16,7 +17,8 @@
 
 TriggerManager::TriggerManager() :
 	m_combatZoneManager(nullptr),
-	m_enemySpawnManager(nullptr)
+	m_enemySpawnManager(nullptr),
+	m_cutsceneManager(nullptr)
 {
 }
 
@@ -24,12 +26,13 @@ TriggerManager::~TriggerManager()
 {
 }
 
-void TriggerManager::Init(CombatZoneManager* combatZoneManager, EnemySpawnManager* enemySpawnManager)
+void TriggerManager::Init(CombatZoneManager* combatZoneManager, EnemySpawnManager* enemySpawnManager, CutsceneManager* cutsceneManager)
 {
 	Logger::LogInfo("Initialising Trigger Manager");
 
 	m_combatZoneManager = combatZoneManager;
 	m_enemySpawnManager = enemySpawnManager;
+	m_cutsceneManager = cutsceneManager;
 
 	m_triggerColliders.clear();
 
@@ -44,6 +47,7 @@ void TriggerManager::Init(CombatZoneManager* combatZoneManager, EnemySpawnManage
 				if(typeIt == obj.customProperties.end()) continue;
 
 				if(typeIt->second == "combatZone") type = TriggerType::CombatZoneSpawner;
+				if(typeIt->second == "cutscene") type = TriggerType::CutsceneTrigger;
 
 				TriggerColliderData data{};
 				Vector2 position = Vector2(obj.x, obj.y);
@@ -70,6 +74,11 @@ void TriggerManager::Init(CombatZoneManager* combatZoneManager, EnemySpawnManage
 				if(type == TriggerType::CombatZoneSpawner)
 				{
 					data.combatZoneId = obj.name;
+				}
+
+				if(type == TriggerType::CutsceneTrigger)
+				{
+					data.cutsceneId = obj.name;
 				}
 
 				collider.Init(type, data);
@@ -108,6 +117,9 @@ void TriggerManager::Update(const Vector2& playerPosition)
 				break;
 			case TriggerType::CombatZoneSpawner:
 				m_combatZoneManager->ActivateZone(it->GetCombatZoneId());
+				break;
+			case TriggerType::CutsceneTrigger:
+				m_cutsceneManager->StartCutscene(it->GetCutsceneId());
 				break;
 			default:
 				break;

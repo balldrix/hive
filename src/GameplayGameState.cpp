@@ -159,7 +159,8 @@ void GameplayGameState::Setup()
 	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_lift.json");
 	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_trailer-level-showcase.json");
 	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_demo.json");
-	TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_playground.json");
+	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_playground.json");
+	TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_boss.json");
 
 	GameDataManager::LoadAllEnemyDefinitions();
 	m_camera = new Camera();
@@ -184,7 +185,7 @@ void GameplayGameState::Setup()
 	m_pickupManager->Init(m_camera);
 	m_NPCManager->Init(m_camera, m_player, m_cutsceneManager, m_eventManager, m_projectileManager);
 	m_combatZoneManager->Init(m_camera, m_player, m_enemySpawnManager, m_NPCManager, m_levelRenderer);
-	m_triggerManager->Init(m_combatZoneManager, m_enemySpawnManager);
+	m_triggerManager->Init(m_combatZoneManager, m_enemySpawnManager, m_cutsceneManager);
 	LevelCollision::CreateBounds(m_levelRenderer);
 	m_projectileManager->Init(m_camera);
 
@@ -196,7 +197,7 @@ void GameplayGameState::Setup()
 
 	m_running = true;
 	//m_cutsceneManager->StartCutscene("intro");
-	m_combatZoneManager->ActivateZone("intro_01");
+	//m_combatZoneManager->ActivateZone("intro_01");
 }
 
 void GameplayGameState::Cleanup()
