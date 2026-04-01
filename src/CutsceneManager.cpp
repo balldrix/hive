@@ -35,7 +35,7 @@ void CutsceneManager::Init(const std::string& filepath, EventManager* eventManag
 
 	for(int i = 0; i < m_cutscenes.size(); i++)
 	{
-		m_cutsceneIndexByName[m_cutscenes[0].name] = i;
+		m_cutsceneIndexByName[m_cutscenes[i].name] = i;
 	}
 
 	m_eventManager->RegisterEvent("Wait", "CutsceneManager", new WaitEvent());
