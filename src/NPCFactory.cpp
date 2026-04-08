@@ -7,21 +7,24 @@
 #include "EnemyDefinition.h"
 #include "EnemyFallingState.h"
 #include "EnemyIdleState.h"
+#include "EventManager.h"
 #include "Logger.h"
 #include "NormalEnemyGlobalState.h"
 #include "NPCManager.h"
 #include "Player.h"
 #include "ProjectileManager.h"
 #include "RangedEnemy.h"
+#include "WasteBoss.h"
 
-#include <fmt/core.h>
+#include <fmt/format.h>
 #include <string>
 
 NPCFactory::NPCFactory() :
 	m_camera(nullptr),
 	m_player(nullptr),
 	m_cutsceneManager(nullptr),
-	m_eventManager(nullptr)
+	m_eventManager(nullptr),
+	m_projectileManager(nullptr)
 {
 }
 
@@ -44,6 +47,9 @@ Enemy* NPCFactory::GetEnemy(const std::string& id, EnemyDefinition definition)
 
 	if(definition.enemyType == EnemyType::Ranged)
 		return CreateRangedEnemy(id, definition, m_projectileManager);
+
+	if(definition.enemyType == EnemyType::Boss)
+		return CreateBossEnemy(id, definition);
 
 	Logger::LogWarning(fmt::format("[NPCFactory] No Enemy type {0} found.", EnemyTypeToString(definition.enemyType)));
 	return nullptr;
@@ -81,4 +87,15 @@ Enemy* NPCFactory::CreateRangedEnemy(const std::string& id, EnemyDefinition& def
 				NormalEnemyGlobalState::Instance(), EnemyIdleState::Instance(),
 				m_projectileManager);
 	return ranged;
+}
+
+Enemy* NPCFactory::CreateBossEnemy(const std::string& id, EnemyDefinition& definition)
+{
+	auto boss = new WasteBoss();
+	boss->Init(id, m_camera, m_player, m_cutsceneManager, m_eventManager,
+		definition,
+		NPCManager::Instance(),
+		AssetLoader::GetTexture(definition.shadowId),
+		NormalEnemyGlobalState::Instance(), EnemyIdleState::Instance());
+	return boss;
 }

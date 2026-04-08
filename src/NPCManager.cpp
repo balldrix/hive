@@ -75,6 +75,8 @@ void NPCManager::SpawnNPC(std::string id, std::string waveId, const Vector2& pos
 	{
 		enemy = s_instance->m_NPCFactory->GetEnemy(id, enemyDefinition);
 		s_instance->m_enemyList.push_back(enemy);
+		if(enemyDefinition.id.contains("boss"))
+			m_boss = enemy;
 	}
 
 	enemy->Reset(id);
@@ -125,6 +127,8 @@ void NPCManager::Reset()
 
 void NPCManager::DeleteAll()
 {
+	m_boss = nullptr;
+
 	for(const Enemy* i : m_enemyList)
 	{
 		delete i;

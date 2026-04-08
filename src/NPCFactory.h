@@ -28,6 +28,7 @@ private:
 	Enemy* CreateNormalEnemy(const std::string& id, EnemyDefinition& definition);
 	Enemy* CreateFallingEnemy(const std::string& id, EnemyDefinition& definition);
 	Enemy* CreateRangedEnemy(const std::string& id, EnemyDefinition& definition, ProjectileManager* projectileManager);
+	Enemy* CreateBossEnemy(const std::string& id, EnemyDefinition& definition);
 
 	Camera* m_camera;
 	Player* m_player;

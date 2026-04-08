@@ -47,6 +47,7 @@ public:
 	int GetAliveEnemyCountByWavePrefix(char wavePrefix, EnemyType enemyType) const;
 
 	std::vector<Enemy*> GetEnemyList() const { return m_enemyList; }
+	Enemy* GetBoss() const { return m_boss; }
 
 private:
 	struct WaveHostileHistory
@@ -70,6 +71,7 @@ private:
 	NPCFactory* m_NPCFactory;
 	std::vector<Enemy*> m_enemyList;
 	std::vector<Enemy*> m_hostileEnemyList;
+	Enemy* m_boss;
 	std::vector<WaveHostileHistory> m_previousHostilesByWave;
 	Player* m_player;
 	EventManager* m_eventManager;

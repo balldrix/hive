@@ -19,7 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\BeginBossCombatEvent.cpp" />
+    <ClCompile Include="src\BossEncounterController.cpp" />
     <ClCompile Include="src\FireProjectileEvent.cpp" />
+    <ClCompile Include="src\FocusCameraEvent.cpp" />
     <ClCompile Include="src\ProjectileManager.cpp" />
     <ClCompile Include="src\CombatZone.cpp" />
     <ClCompile Include="src\CombatZoneManager.cpp" />
@@ -46,6 +49,7 @@
     <ClCompile Include="src\Prop.cpp" />
     <ClCompile Include="src\PropManager.cpp" />
     <ClCompile Include="src\RangedEnemy.cpp" />
+    <ClCompile Include="src\RestoreCameraEvent.cpp" />
     <ClCompile Include="src\ScreenShakeEvent.cpp" />
     <ClCompile Include="src\SharedOptionsGameState.cpp" />
     <ClCompile Include="src\PausedGameState.cpp" />
@@ -55,6 +59,7 @@
     <ClCompile Include="src\ShowUIEvent.cpp" />
     <ClCompile Include="src\SpawnNPCEvent.cpp" />
     <ClCompile Include="src\SpecialPickup.cpp" />
+    <ClCompile Include="src\StartEncounterEvent.cpp" />
     <ClCompile Include="src\TilemapLoader.cpp" />
     <ClCompile Include="src\TriggerCollider.cpp" />
     <ClCompile Include="src\TriggerManager.cpp" />
@@ -91,9 +96,7 @@
     <ClCompile Include="src\RunningEnemy.cpp" />
     <ClCompile Include="src\RunningEnemyDeadState.cpp" />
     <ClCompile Include="src\Sound.cpp" />
-    <ClCompile Include="src\KingMook.cpp" />
-    <ClCompile Include="src\KingMookChargeState.cpp" />
-    <ClCompile Include="src\KingMookEnemyGlobalState.cpp" />
+    <ClCompile Include="src\WasteBoss.cpp" />
     <ClCompile Include="src\UIConfig.cpp" />
     <ClCompile Include="src\UIPlayerStatsView.cpp" />
     <ClCompile Include="src\UIPortraitView.cpp" />
@@ -107,7 +110,10 @@
     <ClCompile Include="src\Utils.h" />
     <ClCompile Include="src\UISprite.cpp" />
     <ClCompile Include="src\UICycleMenuItemView.h" />
+    <ClInclude Include="src\BeginBossCombatEvent.h" />
+    <ClInclude Include="src\BossEncounterController.h" />
     <ClInclude Include="src\FireProjectileEvent.h" />
+    <ClInclude Include="src\FocusCameraEvent.h" />
     <ClInclude Include="src\Projectile.h" />
     <ClInclude Include="src\ProjectileManager.h" />
     <ClInclude Include="src\CombatZone.h" />
@@ -122,6 +128,7 @@
     <ClInclude Include="src\PropManager.h" />
     <ClInclude Include="src\DustFXEvent.h" />
     <ClInclude Include="src\RangedEnemy.h" />
+    <ClInclude Include="src\RestoreCameraEvent.h" />
     <ClInclude Include="src\ShowUIEvent.h" />
     <ClInclude Include="src\ScreenShakeEvent.h" />
     <ClInclude Include="src\SpawnNPCEvent.h" />
@@ -140,6 +147,7 @@
     <ClInclude Include="src\EnemySpawnManager.h" />
     <ClInclude Include="src\ImpactFxPool.h" />
     <ClInclude Include="src\SpecialPickup.h" />
+    <ClInclude Include="src\StartEncounterEvent.h" />
     <ClInclude Include="src\TriggerCollider.h" />
     <ClInclude Include="src\TriggerManager.h" />
     <ClInclude Include="src\UIMenuView.h" />
@@ -193,7 +201,6 @@
     <ClInclude Include="src\SoundSource.h" />
     <ClInclude Include="src\Sound.h" />
     <ClInclude Include="src\AudioEngine.h" />
-    <ClInclude Include="src\KingMookEnemyGlobalState.h" />
     <ClCompile Include="src\NPCFactory.cpp" />
     <ClCompile Include="src\AudioEngine.cpp" />
     <ClCompile Include="src\SoundSource.cpp" />
@@ -263,8 +270,7 @@
     <ClInclude Include="src\GameStateNameLibrary.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\KingMook.h" />
-    <ClInclude Include="src\KingMookChargeState.h" />
+    <ClInclude Include="src\WasteBoss.h" />
     <ClInclude Include="src\NPCFactory.h" />
     <ClInclude Include="src\TilemapData.h" />
     <ClInclude Include="src\UIStackingView.h" />

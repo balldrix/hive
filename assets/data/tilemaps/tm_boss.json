@@ -1029,13 +1029,13 @@
                 {
                  "height":0,
                  "id":42,
-                 "name":"boss",
+                 "name":"spawner_boss_1",
                  "point":true,
                  "properties":[
                         {
                          "name":"enemyDefinitionId",
                          "type":"string",
-                         "value":"waste-lobster"
+                         "value":"waste-boss"
                         }, 
                         {
                          "name":"facing",
@@ -1137,7 +1137,7 @@
                         {
                          "name":"spawners",
                          "type":"string",
-                         "value":""
+                         "value":"spawner_boss_1"
                         }, 
                         {
                          "name":"type",

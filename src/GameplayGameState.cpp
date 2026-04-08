@@ -2,6 +2,7 @@
 
 #include "Animator.h"
 #include "AudioEngine.h"
+#include "BossEncounterController.h"
 #include "Camera.h"
 #include "Collider.h"
 #include "CombatZoneManager.h"
@@ -175,6 +176,7 @@ void GameplayGameState::Setup()
 	m_combatZoneManager = new CombatZoneManager();
 	m_triggerManager = new TriggerManager();
 	m_projectileManager = new ProjectileManager();
+	m_bossEncounterController = new BossEncounterController();
 
 	m_player->Init(m_controlSystem, m_cutsceneManager, m_eventManager);
 	m_player->SetCamera(m_camera);
@@ -188,6 +190,7 @@ void GameplayGameState::Setup()
 	m_triggerManager->Init(m_combatZoneManager, m_enemySpawnManager, m_cutsceneManager);
 	LevelCollision::CreateBounds(m_levelRenderer);
 	m_projectileManager->Init(m_camera);
+	m_bossEncounterController->Init(m_camera, m_cutsceneManager, m_combatZoneManager, m_NPCManager, m_player, m_gameStateManager, m_eventManager);
 
 	m_camera->Init(m_eventManager, GameWidth);
 
@@ -209,6 +212,9 @@ void GameplayGameState::Cleanup()
 
 	delete m_impactFxPool;
 	m_impactFxPool = nullptr;
+
+	delete m_bossEncounterController;
+	m_bossEncounterController = nullptr;
 
 	delete m_projectileManager;
 	m_projectileManager = nullptr;

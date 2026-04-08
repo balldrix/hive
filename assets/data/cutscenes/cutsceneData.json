@@ -156,11 +156,40 @@
       {
         "events": [
           {
+            "name": "StartEncounter",
+            "target": "BossEncounter",
+            "arg": "",
+            "delay": 0.0,
+            "waitForCompletion": false
+          }
+        ]
+      },
+      {
+        "events": [
+          {
             "name": "ShowUI",
             "target": "UIManager",
             "arg": false,
             "delay": 0.0,
             "waitForCompletion": false
+          },
+          {
+            "name": "FocusCamera",
+            "target": "BossEncounter",
+            "arg": "",
+            "delay": 0.5,
+            "waitForCompletion": true
+          }
+        ]
+      },
+      {
+        "events": [
+          {
+            "name": "RestoreCamera",
+            "target": "BossEncounter",
+            "arg": "",
+            "delay": 0.5,
+            "waitForCompletion": true
           }
         ]
       }

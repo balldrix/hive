@@ -43,9 +43,6 @@
     <ClCompile Include="src\EnemyWalkingState.cpp">
       <Filter>Game\Enemy\States</Filter>
     </ClCompile>
-    <ClCompile Include="src\KingMookEnemyGlobalState.cpp">
-      <Filter>Game\Enemy\States</Filter>
-    </ClCompile>
     <ClCompile Include="src\NormalEnemyGlobalState.cpp">
       <Filter>Game\Enemy\States</Filter>
     </ClCompile>
@@ -127,10 +124,7 @@
     <ClCompile Include="src\HitBoxManager.cpp">
       <Filter>Collision</Filter>
     </ClCompile>
-    <ClCompile Include="src\KingMookChargeState.cpp">
-      <Filter>Game\Enemy\States</Filter>
-    </ClCompile>
-    <ClCompile Include="src\KingMook.cpp">
+    <ClCompile Include="src\WasteBoss.cpp">
       <Filter>Game\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="src\GameObject.cpp">
@@ -427,7 +421,24 @@
     <ClCompile Include="src\ProjectileManager.cpp">
       <Filter>Game\Projectiles</Filter>
     </ClCompile>
-    <ClCompile Include="src\Projectile.cpp" />
+    <ClCompile Include="src\Projectile.cpp">
+      <Filter>Game\Projectiles</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BossEncounterController.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StartEncounterEvent.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BeginBossCombatEvent.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FocusCameraEvent.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RestoreCameraEvent.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -624,9 +635,6 @@
     <ClInclude Include="src\EnemyWalkingState.h">
       <Filter>Game\Enemy\States</Filter>
     </ClInclude>
-    <ClInclude Include="src\KingMookEnemyGlobalState.h">
-      <Filter>Game\Enemy\States</Filter>
-    </ClInclude>
     <ClInclude Include="src\NormalEnemyGlobalState.h">
       <Filter>Game\Enemy\States</Filter>
     </ClInclude>
@@ -717,7 +725,7 @@
     <ClInclude Include="src\ParticleSystem.h">
       <Filter>Graphics\VFX</Filter>
     </ClInclude>
-    <ClInclude Include="src\KingMook.h">
+    <ClInclude Include="src\WasteBoss.h">
       <Filter>Game\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="src\LevelRenderer.h">
@@ -827,9 +835,6 @@
     </ClInclude>
     <ClInclude Include="src\AnimatedSpriteData.h">
       <Filter>Graphics\Sprites\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="src\KingMookChargeState.h">
-      <Filter>Game\Enemy\States</Filter>
     </ClInclude>
     <ClInclude Include="src\AssetType.h">
       <Filter>System\Data</Filter>
@@ -1050,6 +1055,21 @@
     <ClInclude Include="src\FireProjectileEvent.h">
       <Filter>Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\BossEncounterController.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartEncounterEvent.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BeginBossCombatEvent.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FocusCameraEvent.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RestoreCameraEvent.h">
+      <Filter>Events</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\fonts\goodbye_despair_8pt.spritefont">
@@ -1145,7 +1165,9 @@
     <None Include="assets\data\spritesheets\crate_spritesheet.json">
       <Filter>Assets\Data\Spritesheets</Filter>
     </None>
-    <None Include="assets\data\spritesheets\lobster-spit_spritesheet.json" />
+    <None Include="assets\data\spritesheets\lobster-spit_spritesheet.json">
+      <Filter>Assets\Textures</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\textures\mook_spritesheet.png">
@@ -1274,13 +1296,27 @@
     <Image Include="assets\textures\crate_spritesheet.png">
       <Filter>Assets\Textures</Filter>
     </Image>
-    <Image Include="assets\textures\lobster-spit_spritesheet.png" />
-    <Image Include="assets\textures\shadow_boss.png" />
-    <Image Include="assets\textures\waste-boss_spritesheet.png" />
-    <Image Include="assets\textures\waste-boss_spritesheet-sheet.png" />
-    <Image Include="assets\textures\ui\go_sign.png" />
-    <Image Include="assets\textures\ui\waste-boss_portrait.png" />
-    <Image Include="assets\textures\ui\arrow.png" />
+    <Image Include="assets\textures\lobster-spit_spritesheet.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="assets\textures\shadow_boss.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="assets\textures\waste-boss_spritesheet.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="assets\textures\waste-boss_spritesheet-sheet.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="assets\textures\ui\arrow.png">
+      <Filter>Assets\Textures\UI</Filter>
+    </Image>
+    <Image Include="assets\textures\ui\go_sign.png">
+      <Filter>Assets\Textures\UI</Filter>
+    </Image>
+    <Image Include="assets\textures\ui\waste-boss_portrait.png">
+      <Filter>Assets\Textures\UI</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\sounds\swingNormal_001.wav">

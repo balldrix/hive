@@ -381,6 +381,12 @@ void GameObject::PlayImpactSound()
 	m_impactSoundSource->Play(sound);
 }
 
+void GameObject::ToggleCameraBounds(bool enabled)
+{
+	if(enabled) m_collisionMask |= CameraBounds;
+	else m_collisionMask &= ~CameraBounds;
+}
+
 DamageData GameObject::GetDamageData() const
 {
 	return DamageData();

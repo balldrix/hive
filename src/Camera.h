@@ -12,23 +12,34 @@ using namespace DirectX::SimpleMath;
 class EventManager;
 class GameObject;
 
-struct CameraLock {
+struct CameraControl {
 	bool active = false;
-	float minX = 0;
-	float maxX = 0;
 
 	// for smooth release
 	bool releasing = false;
 	float releaseT = 0;
-	float releaseDuration = 0.35f;
 
 	// for smooth lock-in
 	bool locking = false;
 	float lockT = 0;
-	float lockDuration = 0.2f;
+};
+
+struct CameraCutsceneFocus : CameraControl {
+	Vector2 position = Vector2::Zero;
+	float fromX = 0;
+	float toX = 0;
+	float focusDuration = 2.0f;
+};
+
+struct CameraLock : CameraControl {
+	float minX = 0;
+	float maxX = 0;
 
 	float fromMinX = 0, fromMaxX = 0;
 	float toMinX = 0, toMaxX = 0;
+
+	float releaseDuration = 0.35f;
+	float lockDuration = 0.2f;
 };
 
 class Camera
@@ -55,6 +66,11 @@ public:
 	void			ReleaseBoundsSmooth(float duration, float min, float max);
 	void			Reset();
 
+	void			BeginCutsceneFocus(float focusX);
+	void			ReleaseCutsceneFocus();
+	bool			IsCutsceneFocusLocked() const { return m_cutsceneFocus.locking; }
+	bool			IsCutsceneFocusReleasing() const { return m_cutsceneFocus.releasing; }
+
 private:
 	void			TrackTarget(float deltaTime);
 	void			ClampCameraToBoundary();
@@ -70,4 +86,5 @@ private:
 	ScreenShake		m_screenShake;
 	EventManager*	m_eventManager;
 	CameraLock		m_lock;
+	CameraCutsceneFocus m_cutsceneFocus;
 };

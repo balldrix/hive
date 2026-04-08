@@ -34,6 +34,18 @@ namespace
 
 		return t >= 1.0f;
 	}
+
+	bool UpdateFocusTransition(float deltaTime, float duration, float& elapsed, CameraCutsceneFocus& focus)
+	{
+		elapsed += deltaTime;
+		float safeDuration = (std::max)(duration, 0.001f);
+		float t = (std::min)(elapsed / safeDuration, 1.0f);
+		t = EaseInOut(t);
+
+		focus.position.x = std::lerp(focus.fromX, focus.toX, t);
+
+		return t >= 1.0f;
+	}
 }
 
 Camera::Camera() :
@@ -70,6 +82,28 @@ void Camera::Update(float deltaTime)
 	if(m_trackingTarget == nullptr)
 		return;
 
+	if(m_cutsceneFocus.active)
+	{
+		if(m_cutsceneFocus.releasing)
+		{
+			if(UpdateFocusTransition(deltaTime, m_cutsceneFocus.focusDuration, m_cutsceneFocus.releaseT, m_cutsceneFocus))
+			{
+				m_cutsceneFocus.releasing = false;
+				m_cutsceneFocus.active = false;
+			}
+		}
+		else if(m_cutsceneFocus.locking)
+		{
+			if(UpdateFocusTransition(deltaTime, m_cutsceneFocus.focusDuration, m_cutsceneFocus.lockT, m_cutsceneFocus))
+			{
+				m_cutsceneFocus.locking = false;
+			}
+		}
+
+		UpdatePosition(deltaTime, m_cutsceneFocus.position.x);
+		return;
+	}
+
 	if(m_lock.releasing)
 	{
 		if(UpdateBoundsTransition(deltaTime, m_lock.releaseDuration, m_lock.releaseT, m_lock))
@@ -90,6 +124,25 @@ void Camera::Update(float deltaTime)
 
 	TrackTarget(deltaTime);
 	ClampCameraToBoundary();
+}
+
+void Camera::BeginCutsceneFocus(float focusX)
+{
+	m_cutsceneFocus.active = true;
+	m_cutsceneFocus.releasing = false;
+	m_cutsceneFocus.locking = true;
+	m_cutsceneFocus.lockT = 0.0f;
+	m_cutsceneFocus.fromX = m_position.x;
+	m_cutsceneFocus.toX = focusX;
+}
+
+void Camera::ReleaseCutsceneFocus()
+{
+	m_cutsceneFocus.releasing = true;
+	m_cutsceneFocus.locking = false;
+	m_cutsceneFocus.releaseT = 0.0f;
+	m_cutsceneFocus.fromX = m_position.x;
+	m_cutsceneFocus.toX = m_trackingTarget->GetPositionX();
 }
 
 void Camera::TrackTarget(float deltaTime)

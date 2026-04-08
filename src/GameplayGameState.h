@@ -34,6 +34,7 @@ class PickupManager;
 class CombatZoneManager;
 class TriggerManager;
 class ProjectileManager;
+class BossEncounterController;
 
 class GameplayGameState : public GameState
 {
@@ -83,6 +84,7 @@ private:
 	CombatZoneManager* m_combatZoneManager;
 	TriggerManager* m_triggerManager;
 	ProjectileManager* m_projectileManager;
+	BossEncounterController* m_bossEncounterController;
 
 	bool m_canAttack;
 	bool m_running;

@@ -100,6 +100,7 @@ public:
 
 	void				DisplayDust(const Vector2& position);
 	virtual void		PlayImpactSound();
+	void				ToggleCameraBounds(bool enabled);
 
 protected:
 	std::string				m_id;
