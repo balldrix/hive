@@ -28,7 +28,9 @@ struct CameraCutsceneFocus : CameraControl {
 	Vector2 position = Vector2::Zero;
 	float fromX = 0;
 	float toX = 0;
-	float focusDuration = 2.0f;
+	float lockDuration = 2.0f;
+	float releaseDuration = 1.0f;
+	float initialX = 0;
 };
 
 struct CameraLock : CameraControl {
@@ -66,8 +68,8 @@ public:
 	void			ReleaseBoundsSmooth(float duration, float min, float max);
 	void			Reset();
 
-	void			BeginCutsceneFocus(float focusX);
-	void			ReleaseCutsceneFocus();
+	void			BeginCutsceneFocus(float focusX, float initalX);
+	void			ReleaseCutsceneFocus(bool resumeTracking);
 	bool			IsCutsceneFocusLocked() const { return m_cutsceneFocus.locking; }
 	bool			IsCutsceneFocusReleasing() const { return m_cutsceneFocus.releasing; }
 
@@ -87,4 +89,5 @@ private:
 	EventManager*	m_eventManager;
 	CameraLock		m_lock;
 	CameraCutsceneFocus m_cutsceneFocus;
+	bool			m_skipTracking;
 };

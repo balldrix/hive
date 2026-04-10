@@ -20,6 +20,7 @@ public :
 	void Init(Camera* camera, Player* player, EnemySpawnManager* spawnManager, NPCManager* npcManager, LevelRenderer* levelRenderer);
 	void ActivateZone(std::string id);
 	void Update(float deltaTime);
+	CombatZone* GetZoneById(std::string id) const;
 
 private:
 	void CleanUp();

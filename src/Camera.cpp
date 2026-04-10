@@ -54,7 +54,8 @@ Camera::Camera() :
 	m_width(0.0f),
 	m_boundary(0.0f),
 	m_threshold(0.0f),
-	m_eventManager(nullptr)
+	m_eventManager(nullptr),
+	m_skipTracking(false)
 {
 }
 
@@ -86,15 +87,17 @@ void Camera::Update(float deltaTime)
 	{
 		if(m_cutsceneFocus.releasing)
 		{
-			if(UpdateFocusTransition(deltaTime, m_cutsceneFocus.focusDuration, m_cutsceneFocus.releaseT, m_cutsceneFocus))
+			if(UpdateFocusTransition(deltaTime, m_cutsceneFocus.releaseDuration, m_cutsceneFocus.releaseT, m_cutsceneFocus))
 			{
+				m_position.x = m_cutsceneFocus.toX;
 				m_cutsceneFocus.releasing = false;
 				m_cutsceneFocus.active = false;
+				return;
 			}
 		}
 		else if(m_cutsceneFocus.locking)
 		{
-			if(UpdateFocusTransition(deltaTime, m_cutsceneFocus.focusDuration, m_cutsceneFocus.lockT, m_cutsceneFocus))
+			if(UpdateFocusTransition(deltaTime, m_cutsceneFocus.lockDuration, m_cutsceneFocus.lockT, m_cutsceneFocus))
 			{
 				m_cutsceneFocus.locking = false;
 			}
@@ -110,6 +113,7 @@ void Camera::Update(float deltaTime)
 		{
 			m_lock.releasing = false;
 			m_lock.active = false;
+			m_skipTracking = false;
 		}
 	}
 	else if(m_lock.locking)
@@ -122,11 +126,11 @@ void Camera::Update(float deltaTime)
 		}
 	}
 
-	TrackTarget(deltaTime);
+	if (!m_skipTracking) TrackTarget(deltaTime);
 	ClampCameraToBoundary();
 }
 
-void Camera::BeginCutsceneFocus(float focusX)
+void Camera::BeginCutsceneFocus(float focusX, float initialX)
 {
 	m_cutsceneFocus.active = true;
 	m_cutsceneFocus.releasing = false;
@@ -134,15 +138,18 @@ void Camera::BeginCutsceneFocus(float focusX)
 	m_cutsceneFocus.lockT = 0.0f;
 	m_cutsceneFocus.fromX = m_position.x;
 	m_cutsceneFocus.toX = focusX;
+	m_cutsceneFocus.initialX = initialX;
 }
 
-void Camera::ReleaseCutsceneFocus()
+void Camera::ReleaseCutsceneFocus(bool resumeTracking)
 {
+	m_cutsceneFocus.active = true;
 	m_cutsceneFocus.releasing = true;
 	m_cutsceneFocus.locking = false;
 	m_cutsceneFocus.releaseT = 0.0f;
 	m_cutsceneFocus.fromX = m_position.x;
-	m_cutsceneFocus.toX = m_trackingTarget->GetPositionX();
+	m_cutsceneFocus.toX = m_cutsceneFocus.initialX;
+	m_skipTracking = !resumeTracking;
 }
 
 void Camera::TrackTarget(float deltaTime)

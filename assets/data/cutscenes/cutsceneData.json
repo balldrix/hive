@@ -185,11 +185,47 @@
       {
         "events": [
           {
-            "name": "RestoreCamera",
-            "target": "BossEncounter",
-            "arg": "",
+            "name": "PlayAnimation",
+            "target": "waste-boss-boss_1_0",
+            "arg": "cry",
             "delay": 0.5,
             "waitForCompletion": true
+          },
+          {
+            "name": "ScreenShake",
+            "target": "Camera",
+            "arg": "1.0, 3.0",
+            "delay": 0.0,
+            "waitForCompletion": false
+          }
+        ]
+      },
+      {
+        "events": [
+          {
+            "name": "RestoreCamera",
+            "target": "BossEncounter",
+            "arg": false,
+            "delay": 0,
+            "waitForCompletion": true
+          }
+        ]
+      },
+      {
+        "events": [
+          {
+            "name": "ShowUI",
+            "target": "UIManager",
+            "arg": true,
+            "delay": 0.0,
+            "waitForCompletion": false
+          },
+          {
+            "name": "BeginBossCombat",
+            "target": "BossEncounter",
+            "arg": "",
+            "delay": 0,
+            "waitForCompletion": false
           }
         ]
       }

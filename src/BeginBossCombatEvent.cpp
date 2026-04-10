@@ -15,6 +15,9 @@ BeginBossCombatEvent::~BeginBossCombatEvent()
 
 void BeginBossCombatEvent::OnStart(EventArgument arg)
 {
+	m_bossEncounterController->BeginBossCombat();
+	m_hasStarted = true;
+	m_isComplete = true;
 }
 
 void BeginBossCombatEvent::OnUpdate(float deltaTime)

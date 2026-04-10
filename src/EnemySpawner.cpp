@@ -1,8 +1,9 @@
 #include "EnemySpawner.h"
 
+#include "EnemyDefinition.h"
 #include "NPCManager.h"
 
-#include <fmt/core.h>
+#include <fmt/format.h>
 #include <string>
 #include <string.h>
 
@@ -72,7 +73,12 @@ void EnemySpawner::Update(float deltaTime)
 	m_timer = seconds / m_spawnRate;
 }
 
-bool EnemySpawner::Spawn()
+Enemy* EnemySpawner::SpawnNow()
+{
+	return Spawn();
+}
+
+Enemy* EnemySpawner::Spawn()
 {
 	std::string spawnId = ExtractSpawnId(m_id);
 	std::string uniqueId = ExtractSpawnerId(m_id);
@@ -83,20 +89,19 @@ bool EnemySpawner::Spawn()
 	if(isAmbientNormalSpawner &&
 		NPCManager::Instance()->GetAliveEnemyCountByWavePrefix('A', EnemyType::Normal) >= ambientNormalEnemyCap)
 	{
-		return false;
+		return nullptr;
 	}
 
 	std::string npcId = fmt::format("{0}-{1}_{2}", m_enemyDefinition.id, uniqueId, m_spawnCount);
 	m_currentWaveId = fmt::format("{0}_{1}", spawnId, m_spawnCount);
-	NPCManager::Instance()->SpawnNPC(npcId,
+	m_spawnCount++;
+	return NPCManager::Instance()->SpawnNPC(npcId,
 		m_currentWaveId,
 		m_spawnPosition,
 		m_enemyDefinition,
 		m_startingVelocity,
 		m_facingDirection,
 		m_height);
-	m_spawnCount++;
-	return true;
 }
 
 std::string EnemySpawner::ExtractSpawnId(const std::string& spawnerId)

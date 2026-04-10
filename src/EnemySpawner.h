@@ -1,6 +1,7 @@
 #pragma once
 
 #include "EnemyDefinition.h"
+#include "NPCManager.h"
 
 #include <directxtk/SimpleMath.h>
 #include <string>
@@ -34,9 +35,10 @@ public:
 	std::string GetType() const { return m_type; }
 	std::string GetCurrentWaveId() const { return m_currentWaveId; }
 	bool IsDoneSpawning() const { return m_spawnCount >= m_maxSpawns; }
+	Enemy* SpawnNow();
 
 private:
-	bool Spawn();
+	Enemy* Spawn();
 	std::string ExtractSpawnId(const std::string& spawnerId);
 	std::string ExtractSpawnerId(const std::string& spawnerId);
 

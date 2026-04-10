@@ -149,3 +149,13 @@ void CombatZoneManager::Update(float deltaTime)
 
 	if(!anyZoneActive) m_camera->SetTarget(m_player);
 }
+
+CombatZone* CombatZoneManager::GetZoneById(std::string id) const
+{
+	for(auto* zone : m_combatZones)
+	{
+		if(zone->GetId() == id) return zone;
+	}
+
+	return nullptr;
+}

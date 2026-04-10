@@ -56,7 +56,7 @@ void NPCManager::Init(Camera* camera, Player* player, CutsceneManager* cutsceneM
 	RegisterEvents();
 }
 
-void NPCManager::SpawnNPC(std::string id, std::string waveId, const Vector2& position, const EnemyDefinition& enemyDefinition, const Vector2& velocity, const Vector2& direction, float height)
+Enemy* NPCManager::SpawnNPC(std::string id, std::string waveId, const Vector2& position, const EnemyDefinition& enemyDefinition, const Vector2& velocity, const Vector2& direction, float height)
 {
 	Enemy* enemy = nullptr;
 
@@ -75,8 +75,6 @@ void NPCManager::SpawnNPC(std::string id, std::string waveId, const Vector2& pos
 	{
 		enemy = s_instance->m_NPCFactory->GetEnemy(id, enemyDefinition);
 		s_instance->m_enemyList.push_back(enemy);
-		if(enemyDefinition.id.contains("boss"))
-			m_boss = enemy;
 	}
 
 	enemy->Reset(id);
@@ -90,11 +88,13 @@ void NPCManager::SpawnNPC(std::string id, std::string waveId, const Vector2& pos
 		enemy->SetPositionY(-height);
 		enemy->SetGrounded(false);
 	}
+
+	return enemy;
 }
 
-void NPCManager::SpawnNPC(SpawnNPCArgument argument)
+Enemy* NPCManager::SpawnNPC(SpawnNPCArgument argument)
 {
-	SpawnNPC(argument.id, "", argument.position, GameDataManager::GetEnemyDefinition(argument.definitionId));
+	return SpawnNPC(argument.id, "", argument.position, GameDataManager::GetEnemyDefinition(argument.definitionId));
 }
 
 void NPCManager::Render(Graphics* graphics)
@@ -127,8 +127,6 @@ void NPCManager::Reset()
 
 void NPCManager::DeleteAll()
 {
-	m_boss = nullptr;
-
 	for(const Enemy* i : m_enemyList)
 	{
 		delete i;

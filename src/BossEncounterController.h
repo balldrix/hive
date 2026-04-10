@@ -1,10 +1,11 @@
 #pragma once
 
+class Enemy;
 class Camera;
 class CutsceneManager;
 class CombatZoneManager;
+class EnemySpawnManager;
 class EventManager;
-class NPCManager;
 class Player;
 class GameStateManager;
 
@@ -28,7 +29,7 @@ public:
 		Camera* camera,
 		CutsceneManager* cutsceneManager,
 		CombatZoneManager* combatZoneManager,
-		NPCManager* npcManager,
+		EnemySpawnManager* spawnManager,
 		Player* player,
 		GameStateManager* gameStateManager,
 		EventManager* eventManager
@@ -37,14 +38,16 @@ public:
 
 	void FocusCamera();
 	void StartEncounter();
+	void BeginBossCombat();
 	bool HasFinishedFocus();
 
 private:
+	Enemy* m_boss;
 	BossEncounterPhase m_currentPhase;
 	Camera* m_camera;
 	CutsceneManager* m_cutsceneManager;
 	CombatZoneManager* m_combatZoneManager;
-	NPCManager* m_npcManager;
+	EnemySpawnManager* m_enemySpawnManager;
 	Player* m_player;
 	GameStateManager* m_gameStateManager;
 	EventManager* m_eventManager;

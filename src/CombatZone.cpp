@@ -67,7 +67,7 @@ bool CombatZone::IsSpawningComplete()
 		EnemySpawner* spawner = m_enemySpawnManager->GetSpawner(id);
 
 		if(spawner == nullptr) continue;
-		if(spawner->GetType() != "combat") continue;
+		if(spawner->GetType() != "combat" && spawner->GetType() != "boss") continue;
 
 		if(!spawner->IsDoneSpawning() || !m_NPCManager->IsWaveDead(spawner->GetCurrentWaveId()))
 		{

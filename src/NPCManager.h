@@ -27,8 +27,8 @@ public:
 	static	NPCManager* Instance() { return s_instance; }
 	void	Init(Camera* camera, Player* player, CutsceneManager* cutsceneManager, EventManager* eventManager, ProjectileManager* projectileManager);
 
-	void	SpawnNPC(std::string id, std::string waveId, const Vector2& position, const EnemyDefinition& enemyDefinition, const Vector2& velocity = Vector2::Zero, const Vector2& direction = Vector2(-1.0f, 0.0f), float height = 0.0f);
-	void	SpawnNPC(SpawnNPCArgument argument);
+	Enemy*	SpawnNPC(std::string id, std::string waveId, const Vector2& position, const EnemyDefinition& enemyDefinition, const Vector2& velocity = Vector2::Zero, const Vector2& direction = Vector2(-1.0f, 0.0f), float height = 0.0f);
+	Enemy*	SpawnNPC(SpawnNPCArgument argument);
 
 	void	Render(Graphics* graphics);
 	void	Update(float deltaTime);
@@ -47,7 +47,6 @@ public:
 	int GetAliveEnemyCountByWavePrefix(char wavePrefix, EnemyType enemyType) const;
 
 	std::vector<Enemy*> GetEnemyList() const { return m_enemyList; }
-	Enemy* GetBoss() const { return m_boss; }
 
 private:
 	struct WaveHostileHistory
@@ -71,7 +70,6 @@ private:
 	NPCFactory* m_NPCFactory;
 	std::vector<Enemy*> m_enemyList;
 	std::vector<Enemy*> m_hostileEnemyList;
-	Enemy* m_boss;
 	std::vector<WaveHostileHistory> m_previousHostilesByWave;
 	Player* m_player;
 	EventManager* m_eventManager;

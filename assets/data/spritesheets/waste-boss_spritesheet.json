@@ -163,21 +163,12 @@
    },
    {
     "filename": "cry-{filename",
-    "frame": { "x": 256, "y": 255, "w": 128, "h": 85 },
-    "rotated": false,
-    "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 128, "h": 85 },
-    "sourceSize": { "w": 128, "h": 85 },
-    "duration": 800
-   },
-   {
-    "filename": "dead-{filename",
     "frame": { "x": 384, "y": 255, "w": 128, "h": 85 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 128, "h": 85 },
     "sourceSize": { "w": 128, "h": 85 },
-    "duration": 800
+    "duration": 600
    },
    {
     "filename": "dead-{filename",
@@ -186,7 +177,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 128, "h": 85 },
     "sourceSize": { "w": 128, "h": 85 },
-    "duration": 100
+    "duration": 800
    },
    {
     "filename": "dead-{filename",
@@ -204,13 +195,21 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 128, "h": 85 },
     "sourceSize": { "w": 128, "h": 85 },
+    "duration": 100
+   },
+   {
+    "filename": "dead-{filename",
+    "frame": { "x": 256, "y": 340, "w": 128, "h": 85 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 128, "h": 85 },
+    "sourceSize": { "w": 128, "h": 85 },
     "duration": 800
    }
  ],
  "meta": {
   "app": "https://www.aseprite.org/",
   "version": "1.3.18-beta1-x64",
-  "image": "waste-boss_spritesheet.png",
   "format": "RGBA8888",
   "size": { "w": 640, "h": 425 },
   "scale": "1",
@@ -220,7 +219,7 @@
    { "name": "jab", "from": 12, "to": 13, "direction": "forward", "repeat": "1", "color": "#000000ff" },
    { "name": "slam", "from": 14, "to": 16, "direction": "forward", "color": "#000000ff" },
    { "name": "hurt", "from": 17, "to": 17, "direction": "forward", "color": "#000000ff" },
-   { "name": "cry", "from": 18, "to": 18, "direction": "forward", "color": "#000000ff" },
+   { "name": "cry", "from": 18, "to": 18, "direction": "forward", "repeat": "1", "color": "#000000ff" },
    { "name": "dead", "from": 19, "to": 22, "direction": "forward", "color": "#000000ff" }
   ],
   "layers": [
@@ -232,7 +231,10 @@
    { "name": "head", "opacity": 255, "blendMode": "normal" },
    { "name": "player shadow", "opacity": 179, "blendMode": "normal" },
    { "name": "player", "opacity": 255, "blendMode": "normal", "cels": [{ "frame": 16, "zIndex": 1 }] },
-   { "name": "fg claw", "opacity": 255, "blendMode": "normal" }
+   { "name": "fg claw", "opacity": 255, "blendMode": "normal" },
+   { "name": "pushbox", "opacity": 110, "blendMode": "normal", "color": "#f3ce52ff" },
+   { "name": "hurtbox", "opacity": 107, "blendMode": "normal", "color": "#57b9f2ff" },
+   { "name": "hitbox", "opacity": 107, "blendMode": "normal", "color": "#fe5b59ff" }
   ]
  }
 }

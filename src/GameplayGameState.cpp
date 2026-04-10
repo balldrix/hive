@@ -190,7 +190,7 @@ void GameplayGameState::Setup()
 	m_triggerManager->Init(m_combatZoneManager, m_enemySpawnManager, m_cutsceneManager);
 	LevelCollision::CreateBounds(m_levelRenderer);
 	m_projectileManager->Init(m_camera);
-	m_bossEncounterController->Init(m_camera, m_cutsceneManager, m_combatZoneManager, m_NPCManager, m_player, m_gameStateManager, m_eventManager);
+	m_bossEncounterController->Init(m_camera, m_cutsceneManager, m_combatZoneManager, m_enemySpawnManager, m_player, m_gameStateManager, m_eventManager);
 
 	m_camera->Init(m_eventManager, GameWidth);
 
