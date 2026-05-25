@@ -110,6 +110,10 @@
     <ClCompile Include="src\Utils.h" />
     <ClCompile Include="src\UISprite.cpp" />
     <ClCompile Include="src\UICycleMenuItemView.h" />
+    <ClCompile Include="src\WasteBossApproachState.cpp" />
+    <ClCompile Include="src\WasteBossGlobalState.cpp" />
+    <ClCompile Include="src\WasteBossJabState.cpp" />
+    <ClCompile Include="src\WasteBossSlamState.cpp" />
     <ClInclude Include="src\BeginBossCombatEvent.h" />
     <ClInclude Include="src\BossEncounterController.h" />
     <ClInclude Include="src\FireProjectileEvent.h" />
@@ -254,6 +258,8 @@
     <ClCompile Include="src\UIView.cpp" />
     <ClCompile Include="src\WaitEvent.cpp" />
     <ClCompile Include="src\WaitEvent.h" />
+    <ClCompile Include="src\WasteBossIdleState.cpp" />
+    <ClCompile Include="src\WastesBossHurtState.cpp" />
     <ClCompile Include="src\Window.cpp" />
     <ClInclude Include="src\UIConfig.h" />
     <ClInclude Include="src\UIPlayerStatsView.h" />
@@ -268,6 +274,11 @@
     <ClInclude Include="src\UISprite.h" />
     <ClInclude Include="src\UIOptionsView.h" />
     <ClInclude Include="src\GameStateNameLibrary.h" />
+    <ClInclude Include="src\WasteBossApproachState.h" />
+    <ClInclude Include="src\WasteBossGlobalState.h" />
+    <ClInclude Include="src\WasteBossJabState.h" />
+    <ClInclude Include="src\WasteBossSlamState.h" />
+    <ClInclude Include="src\WastesBossHurtState.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\WasteBoss.h" />
@@ -328,6 +339,7 @@
     <ClInclude Include="src\UISystemView.h" />
     <ClInclude Include="src\UIView.h" />
     <ClInclude Include="src\UnitVectors.h" />
+    <ClInclude Include="src\WasteBossIdleState.h" />
     <ClInclude Include="src\Window.h" />
   </ItemGroup>
   <ItemGroup>
@@ -539,7 +551,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_AMD64_; UNICODE</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_X86_;UNICODE;DIRECTX_TOOLKIT_IMPORT;USING_XINPUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
@@ -548,7 +560,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>vcpkg_installed\x64-windows\debug\lib\DirectXTK.lib;vcpkg_installed\x64-windows\debug\lib\OpenAL32.lib;vcpkg_installed\x64-windows\debug\lib\sndfile.lib;vcpkg_installed\x64-windows\debug\lib\fmtd.lib;xaudio2.lib;Winmm.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>DirectXTK.lib;OpenAL32.lib;sndfile.lib;spdlogd.lib;fmtd.lib;xaudio2.lib;Winmm.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -557,7 +569,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_AMD64_; UNICODE</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_AMD64_;UNICODE;DIRECTX_TOOLKIT_IMPORT;USING_XINPUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
@@ -566,7 +578,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>vcpkg_installed\x64-windows\debug\lib\DirectXTK.lib;vcpkg_installed\x64-windows\debug\lib\OpenAL32.lib;vcpkg_installed\x64-windows\debug\lib\sndfile.lib;vcpkg_installed\x64-windows\debug\lib\fmtd.lib;xaudio2.lib;Winmm.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>DirectXTK.lib;OpenAL32.lib;sndfile.lib;spdlogd.lib;fmtd.lib;xaudio2.lib;Winmm.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AssemblyDebug>true</AssemblyDebug>
     </Link>
   </ItemDefinitionGroup>
@@ -578,7 +590,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>_AMD64_; UNICODE</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_X86_;UNICODE;DIRECTX_TOOLKIT_IMPORT;USING_XINPUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <UseUtf8Encoding>Always</UseUtf8Encoding>
@@ -588,7 +600,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>vcpkg_installed\x64-windows\lib\DirectXTK.lib;vcpkg_installed\x64-windows\lib\OpenAL32.lib;vcpkg_installed\x64-windows\lib\sndfile.lib;vcpkg_installed\x64-windows\lib\fmt.lib;xaudio2.lib;Winmm.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>DirectXTK.lib;OpenAL32.lib;sndfile.lib;spdlog.lib;fmt.lib;xaudio2.lib;Winmm.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -599,7 +611,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>_AMD64_; UNICODE</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_AMD64_;UNICODE;DIRECTX_TOOLKIT_IMPORT;USING_XINPUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
@@ -610,7 +622,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>vcpkg_installed\x64-windows\lib\DirectXTK.lib;vcpkg_installed\x64-windows\lib\OpenAL32.lib;vcpkg_installed\x64-windows\lib\sndfile.lib;vcpkg_installed\x64-windows\lib\fmt.lib;xaudio2.lib;Winmm.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>DirectXTK.lib;OpenAL32.lib;sndfile.lib;spdlog.lib;fmt.lib;xaudio2.lib;Winmm.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -439,6 +439,22 @@
     <ClCompile Include="src\RestoreCameraEvent.cpp">
       <Filter>Events</Filter>
     </ClCompile>
+    <ClCompile Include="src\WasteBossJabState.cpp">
+      <Filter>Game\Enemy\States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WasteBossSlamState.cpp">
+      <Filter>Game\Enemy\States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WasteBossApproachState.cpp">
+      <Filter>Game\Enemy\States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WasteBossGlobalState.cpp">
+      <Filter>Game\Enemy\States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WasteBossIdleState.cpp">
+      <Filter>Game\Enemy\States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WastesBossHurtState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -1069,6 +1085,24 @@
     </ClInclude>
     <ClInclude Include="src\RestoreCameraEvent.h">
       <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WasteBossIdleState.h">
+      <Filter>Game\Enemy\States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WasteBossApproachState.h">
+      <Filter>Game\Enemy\States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WasteBossSlamState.h">
+      <Filter>Game\Enemy\States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WasteBossJabState.h">
+      <Filter>Game\Enemy\States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WasteBossGlobalState.h">
+      <Filter>Game\Enemy\States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WastesBossHurtState.h">
+      <Filter>Game\Enemy\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

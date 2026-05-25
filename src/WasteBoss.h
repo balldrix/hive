@@ -8,5 +8,8 @@ public:
 	WasteBoss() : Enemy() {}
 	virtual ~WasteBoss();
 
-	virtual void Attack();
+	virtual void Attack() override;
+
+private:
+	virtual void ApplyDamage(GameObject* source, const DamageData& damageData) override;
 };

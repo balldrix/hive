@@ -53,7 +53,6 @@ public:
 	std::string					GetWaveId() const { return m_waveId; }
 
 	virtual void				ApplyDamage(GameObject* source, const int& amount) override;
-	virtual void				ApplyDamage(GameObject* source, const DamageData& damageData);
 	void						Knockback(const Vector2& direction, const float& force);
 	void						Stun(float duration);
 	void						SetStunTimer(float duration) { m_stunTimer = duration; }
@@ -105,6 +104,7 @@ private:
 	Vector2						GetKnockbackDirectionFromSource(GameObject* source) const;
 	std::string					GetPreparedAttackName();
 	bool						ShouldFaceLeftAt(const Vector2& position) const;
+	virtual void				ApplyDamage(GameObject* source, const DamageData& damageData);
 
 	std::string					m_waveId;
 	std::string					m_preparedAttackName;

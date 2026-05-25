@@ -593,10 +593,12 @@ bool Enemy::ShouldRangedRetreat(float distanceToPlayer) const
 Vector2 Enemy::Seek() const
 {
 	Vector2 direction = Vector2::Zero;
-	Vector2 targetPosition = GetPlayerTarget()->GetPosition();
+	Vector2 playerPosition = GetPlayerTarget()->GetPosition();
 	Vector2 position = GetPosition();
+	direction = playerPosition - position;
 
-	direction = targetPosition - position;
+	float offsetX = direction.x < 0 ? 10.0f : -10.0f;
+	Vector2 targetPosition = playerPosition + Vector2(offsetX, 0.0f);
 
 	if(direction.Length() < m_enemyDefinition.attackRange)
 		direction = -direction;
@@ -649,7 +651,7 @@ Vector2 Enemy::Avoid(float minDistance, bool ignoreIfAttackingEnemy) const
 
 Vector2 Enemy::Strafe() const
 {
-	if(NPCManager::Instance()->IsAttackingEnemy(this)) return Vector2::Zero;
+	if(NPCManager::Instance()->IsAttackingEnemy(this) || m_enemyDefinition.enemyType == EnemyType::Boss) return Vector2::Zero;
 
 	auto toTarget = m_playerTarget->GetPosition() - GetPosition();
 	auto crossProduct = Vector2(toTarget.y, -toTarget.x);

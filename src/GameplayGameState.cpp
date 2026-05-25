@@ -623,7 +623,7 @@ void GameplayGameState::ProcessCollisions()
 					enemy->GetHitBoxManager()->GetHurtBox(),
 					enemy->GetPosition());
 
-				enemy->ApplyDamage(m_player, damageData);
+				enemy->ApplyDamage(m_player, damageData.amount);
 				enemy->ShowEnemyHud();
 
 				auto animation = m_player->GetAnimator()->GetAnimation();

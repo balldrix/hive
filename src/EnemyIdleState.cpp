@@ -3,7 +3,6 @@
 #include "Animator.h"
 #include "directxtk/SimpleMath.h"
 #include "Enemy.h"
-#include "EnemyRunningState.h"
 #include "EnemyWalkingState.h"
 #include "GameplayConstants.h"
 #include "HitBoxManager.h"

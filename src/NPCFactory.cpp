@@ -15,6 +15,8 @@
 #include "ProjectileManager.h"
 #include "RangedEnemy.h"
 #include "WasteBoss.h"
+#include "WasteBossGlobalState.h"
+#include "WasteBossIdleState.h"
 
 #include <fmt/format.h>
 #include <string>
@@ -96,6 +98,6 @@ Enemy* NPCFactory::CreateBossEnemy(const std::string& id, EnemyDefinition& defin
 		definition,
 		NPCManager::Instance(),
 		AssetLoader::GetTexture(definition.shadowId),
-		NormalEnemyGlobalState::Instance(), EnemyIdleState::Instance());
+		WasteBossGlobalState::Instance(), WasteBossIdleState::Instance());
 	return boss;
 }
