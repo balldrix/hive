@@ -291,6 +291,7 @@ void GameplayGameState::ProcessInput()
 	}
 
 #endif
+	if(!m_player->IsInputEnabled()) return;
 
 	if(m_input->IsKeyDown(PLAYER_UP_KEY) || gamePadState.IsDPadUpPressed() || gamePadState.IsLeftThumbStickUp() &&
 		!m_input->IsKeyDown(PLAYER_DOWN_KEY))

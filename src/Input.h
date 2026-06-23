@@ -39,11 +39,11 @@ public:
 	void Init();
 
 	void UpdateGamePad();
-	void SetKeyDown(WPARAM wParam); 
+	void SetKeyDown(WPARAM wParam);
 	void SetKeyUp(WPARAM wParam);
 	void SetMouseIn(LPARAM lParam);
 	void SetMouseX(UINT x);
-	void SetMouseY(UINT y);	
+	void SetMouseY(UINT y);
 
 	void SetMouseClicked(bool button);
 
@@ -51,7 +51,7 @@ public:
 	void ClearKeysPressed();
 	void ClearAll();
 
-	bool IsKeyDown(UCHAR key) const;	
+	bool IsKeyDown(UCHAR key) const;
 	bool WasKeyPressed(UCHAR key) const;
 	UINT GetMouseX() const { return m_mouseX; }
 	UINT GetMouseY() const { return m_mouseY; } 
@@ -68,10 +68,10 @@ public:
 
 private:
 	bool m_keysPressed[MAX_KEY_ARRAY];
-	bool m_keysDown[MAX_KEY_ARRAY]; 
-	UINT m_mouseX;					
-	UINT m_mouseY;					
-	bool m_mouseClicked;			
+	bool m_keysDown[MAX_KEY_ARRAY];
+	UINT m_mouseX;
+	UINT m_mouseY;
+	bool m_mouseClicked;
 	GamePad* m_gamePad;
 	GamePad::ButtonStateTracker m_buttons;
 };

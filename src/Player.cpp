@@ -63,7 +63,8 @@ Player::Player() :
 	m_hurtTimer(0.0f),
 	m_kills(0),
 	m_special(100),
-	m_cutsceneManager(nullptr)
+	m_cutsceneManager(nullptr),
+	m_inputEnabled(true)
 {
 }
 
@@ -577,6 +578,11 @@ void Player::RegisterEvents()
 void Player::PlaySound(const std::string& id)
 {
 	PlayAttackSound(id);
+}
+
+void Player::SetInputEnabled(bool enabled)
+{
+	m_inputEnabled = enabled;
 }
 
 void Player::PlayFootstepSound()

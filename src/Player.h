@@ -60,6 +60,9 @@ public:
 	bool								IsSpecialReady() const { return m_special == MaxSpecial; }
 	void								PlaySound(const std::string& id);
 
+	void								SetInputEnabled(bool enabled);
+	bool								IsInputEnabled() const { return m_inputEnabled; }
+
 private:
 	PlayerDefinition					LoadPlayerDefinition();
 	void								NormalAttack();
@@ -86,4 +89,5 @@ private:
 	float								m_special;
 	std::vector<std::string>			m_blockSounds;
 	CutsceneManager*					m_cutsceneManager;
+	bool								m_inputEnabled;
 };
