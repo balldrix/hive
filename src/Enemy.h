@@ -62,6 +62,7 @@ public:
 		
 	virtual void				Attack();
 	void						Kill();
+	virtual bool				TryHandleAttackHit(GameObject* target) { return false; }
 
 	void						ShowEnemyHud();
 	void						DeleteAll();

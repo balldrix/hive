@@ -31,7 +31,11 @@ void WasteBossApproachState::OnEnter(Enemy* boss)
 
 void WasteBossApproachState::Execute(Enemy* boss)
 {
-	if(boss->GetHealth() < 1) return;
+	if(boss->GetHealth() < 1 || boss->GetPlayerTarget()->GetHealth() < 1)
+	{
+		boss->Stop();
+		return;
+	}
 
 	const Vector2 bossPosition = boss->GetPosition();
 	const Vector2 playerPosition = boss->GetPlayerTarget()->GetPosition();

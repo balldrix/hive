@@ -561,7 +561,6 @@ void GameplayGameState::ProcessCollisions()
 					m_player->GetHitBoxManager()->GetHurtBox(),
 					m_player->GetPosition());
 
-				m_player->ApplyDamage(enemy, damageData.amount);
 				m_player->SetPositionX(m_player->GetPositionX() + enemyVelocity.x);
 				m_player->IncreaseSpecial();
 				m_camera->StartShake(1.0f, 2.0f);
@@ -580,7 +579,12 @@ void GameplayGameState::ProcessCollisions()
 				m_activeImpacts.push_back(impactFx);
 				impactFx->DisplayFx(impactPosition - m_camera->GetPosition());
 
-				if(m_player->GetStateMachine()->IsInState(*PlayerBlockState::Instance()))
+				const bool wasBlocked = m_player->GetStateMachine()->IsInState(*PlayerBlockState::Instance());
+				const bool startedSlam = !wasBlocked && enemy->TryHandleAttackHit(m_player);
+
+				if (!startedSlam) m_player->ApplyDamage(enemy, damageData.amount);
+
+				if (wasBlocked)
 				{
 					m_player->SetPositionX((m_player->GetGroundPosition() + Vector2(normalDirection * 2.0f)).x);
 				}

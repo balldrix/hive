@@ -39,6 +39,7 @@ void WasteBossSlamState::Execute(Enemy* boss)
 {
 	if(boss->GetAnimator()->IsDone())
 	{
+		boss->GetPlayerTarget()->ApplyDamage(boss, boss->GetDamageData().amount);
 		boss->GetStateMachine()->ChangeState(WasteBossIdleState::Instance());
 	}
 }
@@ -47,7 +48,6 @@ void WasteBossSlamState::OnExit(Enemy* boss)
 {
 	auto player = boss->GetPlayerTarget();
 	player->GetSprite()->EnableSprite();
-	player->ApplyDamage(boss, boss->GetDamageData().amount);
 	player->SetInputEnabled(true);
 }
 
