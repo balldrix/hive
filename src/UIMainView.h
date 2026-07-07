@@ -6,6 +6,7 @@
 
 class Graphics;
 class Input;
+class UIGameOverView;
 class UIHudView;
 class UIPauseMenuView;
 class UIScreenFlashFX;
@@ -25,4 +26,5 @@ private:
 	UIHudView* m_uiHudView;
 	UIScreenFlashFX* m_screenFlashFX;
 	UIPauseMenuView* m_uiPauseMenuView;
+	UIGameOverView* m_uiGameOverView;
 };

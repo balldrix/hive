@@ -454,7 +454,15 @@
     <ClCompile Include="src\WasteBossIdleState.cpp">
       <Filter>Game\Enemy\States</Filter>
     </ClCompile>
-    <ClCompile Include="src\WastesBossHurtState.cpp" />
+    <ClCompile Include="src\WastesBossHurtState.cpp">
+      <Filter>Game\Enemy\States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameOverGameState.cpp">
+      <Filter>Game\States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIGameOverView.cpp">
+      <Filter>UI\Gameplay</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -1104,6 +1112,12 @@
     <ClInclude Include="src\WastesBossHurtState.h">
       <Filter>Game\Enemy\States</Filter>
     </ClInclude>
+    <ClInclude Include="src\GameOverGameState.h">
+      <Filter>Game\States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIGameOverView.h">
+      <Filter>UI\Gameplay</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\fonts\goodbye_despair_8pt.spritefont">
@@ -1349,6 +1363,9 @@
       <Filter>Assets\Textures\UI</Filter>
     </Image>
     <Image Include="assets\textures\ui\waste-boss_portrait.png">
+      <Filter>Assets\Textures\UI</Filter>
+    </Image>
+    <Image Include="assets\textures\ui\gameover_bg.png">
       <Filter>Assets\Textures\UI</Filter>
     </Image>
   </ItemGroup>

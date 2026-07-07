@@ -25,10 +25,7 @@ public:
 	void TransitionIn(bool isAnimated) override;
 	void TransitionOut(bool isAnimated) override;
 
-	void OnConfirmPressed(int selectedIndex) override;
-	void OnCancelPressed() override;
-
-	virtual void Focus();
+	void OnCancelPressed();
 
 protected:
 	void DoTransition(float deltaTime) override;

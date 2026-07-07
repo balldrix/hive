@@ -12,4 +12,5 @@ namespace GameStateNameLibrary
 	static const std::string MainMenu = "MainMenu";
 	static const std::string Paused = "Paused";
 	static const std::string TitleScreen = "TitleScreen";
+	static const std::string GameOver = "GameOver";
 }

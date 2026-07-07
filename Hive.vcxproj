@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\GameOverGameState.cpp" />
     <ClCompile Include="src\BeginBossCombatEvent.cpp" />
     <ClCompile Include="src\BossEncounterController.cpp" />
     <ClCompile Include="src\FireProjectileEvent.cpp" />
@@ -64,6 +65,7 @@
     <ClCompile Include="src\TriggerCollider.cpp" />
     <ClCompile Include="src\TriggerManager.cpp" />
     <ClCompile Include="src\UICycleMenuItemView.cpp" />
+    <ClCompile Include="src\UIGameOverView.cpp" />
     <ClCompile Include="src\UIMenuView.cpp" />
     <ClCompile Include="src\UIOptionsView.cpp" />
     <ClCompile Include="src\UIPanelContainer.cpp" />
@@ -114,6 +116,7 @@
     <ClCompile Include="src\WasteBossGlobalState.cpp" />
     <ClCompile Include="src\WasteBossJabState.cpp" />
     <ClCompile Include="src\WasteBossSlamState.cpp" />
+    <ClInclude Include="src\GameOverGameState.h" />
     <ClInclude Include="src\BeginBossCombatEvent.h" />
     <ClInclude Include="src\BossEncounterController.h" />
     <ClInclude Include="src\FireProjectileEvent.h" />
@@ -279,6 +282,7 @@
     <ClInclude Include="src\WasteBossJabState.h" />
     <ClInclude Include="src\WasteBossSlamState.h" />
     <ClInclude Include="src\WastesBossHurtState.h" />
+    <ClInclude Include="src\UIGameOverView.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\WasteBoss.h" />
@@ -405,6 +409,7 @@
     <Image Include="assets\textures\ui\bar_frame_enemy.png" />
     <Image Include="assets\textures\ui\bar_frame_player_health.png" />
     <Image Include="assets\textures\ui\bar_frame_player_special.png" />
+    <Image Include="assets\textures\ui\gameover_bg.png" />
     <Image Include="assets\textures\ui\go_sign.png" />
     <Image Include="assets\textures\ui\jungle-ape_portrait.png" />
     <Image Include="assets\textures\ui\lift-spider_portrait.png" />

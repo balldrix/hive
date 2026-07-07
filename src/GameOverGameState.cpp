@@ -1,4 +1,4 @@
-#include "PausedGameState.h"
+#include "GameOverGameState.h"
 
 #include "GameState.h"
 #include "GameStateManager.h"
@@ -9,27 +9,27 @@
 
 using namespace GameStateNameLibrary;
 
-PausedGameState::PausedGameState() :
-	GameState(Paused)
+GameOverGameState::GameOverGameState() :
+	GameState(GameOver)
 {
 }
 
-PausedGameState::PausedGameState(GameStateManager* gameStateManager) : PausedGameState()
+GameOverGameState::GameOverGameState(GameStateManager* gameStateManager) : GameOverGameState()
 {
 	m_gameStateManager = gameStateManager;
 }
 
-PausedGameState::~PausedGameState()
+GameOverGameState::~GameOverGameState()
 {
 }
 
-void PausedGameState::Update(float deltaTime)
+void GameOverGameState::Update(float deltaTime)
 {
 	UIManager::Update(deltaTime);
 	MenuSystem::Update();
 }
 
-void PausedGameState::Render(Graphics* graphics)
+void GameOverGameState::Render(Graphics* graphics)
 {
 	GameState* gameplayState = m_gameStateManager->GetState(Gameplay);
 

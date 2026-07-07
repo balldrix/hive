@@ -1,8 +1,8 @@
 #pragma once
 
+#include "AABB.h"
 #include "EventManager.h"
 
-#include "AABB.h"
 #include <DirectXMath.h>
 #include <directxtk/SimpleMath.h>
 #include <nlohmann/json.hpp>

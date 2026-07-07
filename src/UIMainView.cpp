@@ -2,6 +2,7 @@
 
 #include "Input.h"
 #include "Logger.h"
+#include "UIGameOverView.h"
 #include "UIHudView.h"
 #include "UIPauseMenuView.h"
 #include "UIScreenFlashFX.h"
@@ -12,7 +13,8 @@
 UIMainView::UIMainView() :
 	m_uiHudView(nullptr),
 	m_screenFlashFX(nullptr),
-	m_uiPauseMenuView(nullptr)
+	m_uiPauseMenuView(nullptr),
+	m_uiGameOverView(nullptr)
 {
 }
 
@@ -38,11 +40,18 @@ void UIMainView::Init(std::string name, Input* input)
 	m_uiPauseMenuView = new UIPauseMenuView();
 	m_uiPauseMenuView->Init("UI Pause Menu View", input);
 	m_uiPauseMenuView->TransitionOut(false);
+
+	m_uiGameOverView = new UIGameOverView();
+	m_uiGameOverView->Init("UI Game Over View", input);
+	m_uiGameOverView->TransitionOut(false);
 }
 
 void UIMainView::Shutdown()
 {
 	Logger::LogInfo("Shutting down UI Main View");
+
+	delete m_uiGameOverView;
+	m_uiGameOverView = nullptr;
 
 	delete m_uiPauseMenuView;
 	m_uiPauseMenuView = nullptr;

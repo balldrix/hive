@@ -550,5 +550,11 @@
     "path": "assets\\sounds\\uiGo.wav",
     "type": "audio",
     "tag": "ui_assets"
+  },
+  {
+    "id": "t_gameover_bg",
+    "path": "assets\\textures\\ui\\gameover_bg.png",
+    "type": "texture",
+    "tag": "ui_assets"
   }
 ]

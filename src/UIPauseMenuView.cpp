@@ -69,26 +69,7 @@ void UIPauseMenuView::Init(std::string name, Input* input)
 		m_uiStackingView.AddView(item);
 	}
 
-	auto options = m_uiStackingView.GetMenuItems();
-
-	for(int i = 0; i < options.size(); i++)
-	{
-		int up = i == 0 ? -1 : i - 1;
-		int down = i + 1;
-
-		if(i == options.size() - 1)
-		{
-			down = -1;
-		}
-
-		UIMenuItemView::Navigation nav;
-		nav.up = up;
-		nav.down = down;
-		nav.left = -1;
-		nav.right = -1;
-
-		options[i]->SetNavigation(nav);
-	}
+	SetupNavigation();
 
 	Frame frame{};
 	frame.x = 20;
@@ -151,36 +132,9 @@ void UIPauseMenuView::TransitionOut(bool isAnimated)
 	if(!isAnimated)	m_panelContainer->SetActive(false);
 }
 
-void UIPauseMenuView::OnConfirmPressed(int selectedIndex)
-{
-	if(selectedIndex >= 0 && selectedIndex < m_menuOptions.size())
-	{
-		const auto& selectedOption = m_menuOptions[selectedIndex];
-		Logger::LogInfo(fmt::format("Calling OnConfirmPressed on {} functon", selectedOption->label));
-		selectedOption->OnConfirm(this);
-		return;
-	}
-
-	Logger::LogError(fmt::format("Calling OnConfirmPressed has no menu entry with index {}", selectedIndex));
-}
-
 void UIPauseMenuView::OnCancelPressed()
 {
 	Continue(this);
-}
-
-void UIPauseMenuView::Focus()
-{
-	MenuSystem::SetMenuItems(this, m_uiStackingView.GetMenuItems());
-
-	for(UIMenuItemView* item : m_uiStackingView.GetMenuItems())
-	{
-		item->ChangeSelectionState(UIMenuItemView::SelectionStates::UnSelected);
-	}
-
-	MenuSystem::SetSetSelectedIndex(m_previousSelectedIndex);
-	m_uiStackingView.GetMenuItems()[m_previousSelectedIndex]->ChangeSelectionState(UIMenuItemView::SelectionStates::Selected);
-	MenuSystem::EnableInput();
 }
 
 void UIPauseMenuView::DoTransition(float deltaTime)

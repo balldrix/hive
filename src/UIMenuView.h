@@ -26,13 +26,12 @@ public:
 	virtual void TransitionOut(bool isAnimated) override;
 
 	virtual void OnConfirmPressed(int selectedIndex) override;
-	virtual void OnCancelPressed() override {};
 	virtual bool IsMenuItemSelectionAllowed(Vector2 direction, int index) override;
 
 	Window* GetWindow() const { return m_window; }
 	Graphics* GetGraphics() const { return m_graphics; }
 
-	virtual void Focus() {};
+	void Focus();
 
 	struct MenuOptionBase {
 		std::string label;
@@ -52,6 +51,7 @@ public:
 
 protected:
 	virtual void DoTransition(float deltaTime) override;
+	void SetupNavigation();
 
 	UIStackingView m_uiStackingView;
 	std::vector<MenuOptionBase*> m_menuOptions;

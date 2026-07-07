@@ -185,3 +185,41 @@ void UIMenuView::DoTransition(float deltaTime)
 		break;
 	}
 }
+
+void UIMenuView::Focus()
+{
+	MenuSystem::SetMenuItems(this, m_uiStackingView.GetMenuItems());
+
+	for(UIMenuItemView* item : m_uiStackingView.GetMenuItems())
+	{
+		item->ChangeSelectionState(UIMenuItemView::SelectionStates::UnSelected);
+	}
+
+	MenuSystem::SetSetSelectedIndex(m_previousSelectedIndex);
+	m_uiStackingView.GetMenuItems()[m_previousSelectedIndex]->ChangeSelectionState(UIMenuItemView::SelectionStates::Selected);
+	MenuSystem::EnableInput();
+}
+
+void UIMenuView::SetupNavigation()
+{
+	auto options = m_uiStackingView.GetMenuItems();
+
+	for(int i = 0; i < options.size(); i++)
+	{
+		int up = i == 0 ? -1 : i - 1;
+		int down = i + 1;
+
+		if(i == options.size() - 1)
+		{
+			down = -1;
+		}
+
+		UIMenuItemView::Navigation nav;
+		nav.up = up;
+		nav.down = down;
+		nav.left = -1;
+		nav.right = -1;
+
+		options[i]->SetNavigation(nav);
+	}
+}

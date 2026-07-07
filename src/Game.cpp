@@ -6,6 +6,7 @@
 #include "CutsceneManager.h"
 #include "EventManager.h"
 #include "FadeTransitionGameState.h"
+#include "GameOverGameState.h"
 #include "GameplayGameState.h"
 #include "GameStateManager.h"
 #include "GameStateNameLibrary.h"
@@ -23,8 +24,6 @@
 #include "Window.h"
 
 #include <combaseapi.h>
-#include <fmt/core.h>
-#include <objbase.h>
 #include <synchapi.h>
 #include <Windows.h>
 
@@ -72,6 +71,7 @@ void Game::Init(Window* window, Graphics* graphics, Input* input, GameStateManag
 	m_gameStateManager->AddState(new SharedOptionsGameState(m_gameStateManager));
 	m_gameStateManager->AddState(new GameplayGameState(m_gameStateManager, m_input, m_cutsceneManager, m_eventManager));
 	m_gameStateManager->AddState(new PausedGameState(m_gameStateManager));
+	m_gameStateManager->AddState(new GameOverGameState(m_gameStateManager));
 	m_gameStateManager->SwitchState(InitialLoad);
 
 	m_timerFreq = m_timer.GetFrequency();
