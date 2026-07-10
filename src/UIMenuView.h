@@ -51,7 +51,7 @@ public:
 
 protected:
 	virtual void DoTransition(float deltaTime) override;
-	void SetupNavigation();
+	virtual void SetupNavigation();
 
 	UIStackingView m_uiStackingView;
 	std::vector<MenuOptionBase*> m_menuOptions;

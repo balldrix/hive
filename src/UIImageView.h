@@ -19,6 +19,7 @@ public:
 
 	void Init(std::string name);
 	void Init(std::string name, Texture* texture);
+	void Init(std::string name, Texture* texture, const Vector2& origin);
 	void Render(Graphics* graphics) override;
 
 	UISprite* GetSprite() const { return m_uiSprite; }

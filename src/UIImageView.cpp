@@ -31,6 +31,12 @@ void UIImageView::Init(std::string name, Texture* texture)
 	m_uiSprite->Init(texture);
 }
 
+void UIImageView::Init(std::string name, Texture* texture, const Vector2& origin)
+{
+	UIImageView::Init(name, texture);
+	m_uiSprite->SetOrigin(origin);
+}
+
 void UIImageView::Render(Graphics* graphics)
 {
 	if(m_isActive) m_uiSprite->Render(graphics);

@@ -7,6 +7,7 @@
 class Graphics;
 class Input;
 class UIImageView;
+class UISpriteText;
 
 class UIGameOverView : public UIMenuView
 {
@@ -21,11 +22,13 @@ public:
 
 protected:
 	virtual void TransitionIn(bool isAnimating) override;
+	virtual void SetupNavigation() override;
 
 private:
 	static void Retry(UIMenuView* owner);
 	static void Quit(UIMenuView* owner);
-	static void Wishlist(UIMenuView* owner);
 
 	UIImageView* m_backgroundImage;
+	UIImageView* m_overlayImage;
+	UISpriteText* m_gameOverTitle;
 };

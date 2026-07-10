@@ -2,6 +2,7 @@
 
 #include <directxtk/SimpleMath.h>
 #include <directxtk/SpriteBatch.h>
+#include <Windows.h>
 
 using namespace DirectX;
 using namespace SimpleMath;
