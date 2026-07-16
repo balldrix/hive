@@ -8,10 +8,12 @@
 #include "Input.h"
 #include "LoadingGameState.h"
 #include "Logger.h"
+#include "UIConfig.h"
 #include "UIImageView.h"
 #include "UIManager.h"
 #include "UIMenuItemView.h"
 #include "UIMenuView.h"
+#include "UISpriteText.h"
 #include "UIStackingView.h"
 #include "UITextMenuItemView.h"
 
@@ -64,6 +66,15 @@ void UIGameOverView::Init(std::string name, Input* input)
 	sprite->SetAlpha(0.2f);
 	sprite->SetDepth(0.25f);
 	m_overlayImage->TransitionOut(false);
+
+	m_gameOverTitle = new UISpriteText();
+	m_gameOverTitle->Init(UIConfig::GamerFont16);
+	m_gameOverTitle->SetColour(Color(0.96f, 0.91f, 0.91f));
+	m_gameOverTitle->SetOutline(true, Color(0.65f, 0.145f, 0.145f));
+	m_gameOverTitle->SetText("GAME OVER");
+	m_gameOverTitle->SetAlignment(UISpriteText::Alignments::Centre);
+	m_gameOverTitle->SetPosition(Vector2(GameWidth * 0.5f, GameHeight * 0.35f));
+	m_gameOverTitle->SetDepth(0.5f);
 
 	m_uiStackingView.Init("Game Over Stacking View");
 	m_uiStackingView.SetOrientation(UIStackingView::Orientations::Horizontal);
@@ -119,6 +130,7 @@ void UIGameOverView::Render(Graphics* graphics)
 
 	m_backgroundImage->Render(graphics);
 	m_overlayImage->Render(graphics);
+	m_gameOverTitle->Render(graphics);
 	UIMenuView::Render(graphics);
 }
 
@@ -127,6 +139,9 @@ void UIGameOverView::Shutdown()
 	Logger::LogInfo("Shutting down UI GameOver View.");
 
 	UIManager::UnregisterUIView(this);
+
+	delete m_gameOverTitle;
+	m_gameOverTitle = nullptr;
 
 	delete m_overlayImage;
 	m_overlayImage = nullptr;
@@ -140,6 +155,7 @@ void UIGameOverView::TransitionIn(bool isAnimating)
 	UIMenuView::TransitionIn(isAnimating);
 	m_backgroundImage->TransitionIn(isAnimating);
 	m_overlayImage->TransitionIn(isAnimating);
+	m_gameOverTitle->SetActive(true);
 }
 
 void UIGameOverView::SetupNavigation()
