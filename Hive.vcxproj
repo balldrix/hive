@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\DemoEndGameState.cpp" />
     <ClCompile Include="src\GameOverGameState.cpp" />
     <ClCompile Include="src\BeginBossCombatEvent.cpp" />
     <ClCompile Include="src\BossEncounterController.cpp" />
@@ -116,6 +117,7 @@
     <ClCompile Include="src\WasteBossGlobalState.cpp" />
     <ClCompile Include="src\WasteBossJabState.cpp" />
     <ClCompile Include="src\WasteBossSlamState.cpp" />
+    <ClInclude Include="src\DemoEndGameState.h" />
     <ClInclude Include="src\GameOverGameState.h" />
     <ClInclude Include="src\BeginBossCombatEvent.h" />
     <ClInclude Include="src\BossEncounterController.h" />

@@ -463,6 +463,9 @@
     <ClCompile Include="src\UIGameOverView.cpp">
       <Filter>UI\Gameplay</Filter>
     </ClCompile>
+    <ClCompile Include="src\DemoEndGameState.cpp">
+      <Filter>Game\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -1117,6 +1120,9 @@
     </ClInclude>
     <ClInclude Include="src\UIGameOverView.h">
       <Filter>UI\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DemoEndGameState.h">
+      <Filter>Game\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
