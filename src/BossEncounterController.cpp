@@ -12,6 +12,7 @@
 #include "EventManager.h"
 #include "FocusCameraEvent.h"
 #include "GameStateManager.h"
+#include "GameStateNameLibrary.h"
 #include "GlobalConstants.h"
 #include "Player.h"
 #include "PlayerIdleState.h"
@@ -19,6 +20,7 @@
 #include "StartEncounterEvent.h"
 #include "StateMachine.h"
 
+using namespace GameStateNameLibrary;
 using namespace GlobalConstants;
 
 BossEncounterController::BossEncounterController() :
@@ -56,6 +58,10 @@ void BossEncounterController::Init(Camera* camera, CutsceneManager* cutsceneMana
 
 void BossEncounterController::Update(float deltaTime)
 {
+	if(m_boss->GetHealth() > 0 || m_currentPhase != BossEncounterPhase::Combat) return;
+
+	m_currentPhase = BossEncounterPhase::Victory;
+	m_gameStateManager->SwitchState(DemoEnd);
 }
 
 void BossEncounterController::FocusCamera()

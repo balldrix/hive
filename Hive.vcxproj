@@ -66,6 +66,7 @@
     <ClCompile Include="src\TriggerCollider.cpp" />
     <ClCompile Include="src\TriggerManager.cpp" />
     <ClCompile Include="src\UICycleMenuItemView.cpp" />
+    <ClCompile Include="src\UIDemoEndView.cpp" />
     <ClCompile Include="src\UIGameOverView.cpp" />
     <ClCompile Include="src\UIMenuView.cpp" />
     <ClCompile Include="src\UIOptionsView.cpp" />
@@ -285,6 +286,7 @@
     <ClInclude Include="src\WasteBossSlamState.h" />
     <ClInclude Include="src\WastesBossHurtState.h" />
     <ClInclude Include="src\UIGameOverView.h" />
+    <ClInclude Include="src\UIDemoEndView.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\WasteBoss.h" />
