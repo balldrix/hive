@@ -466,6 +466,9 @@
     <ClCompile Include="src\DemoEndGameState.cpp">
       <Filter>Game\States</Filter>
     </ClCompile>
+    <ClCompile Include="src\UIDemoEndView.cpp">
+      <Filter>UI\Gameplay</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -1123,6 +1126,9 @@
     </ClInclude>
     <ClInclude Include="src\DemoEndGameState.h">
       <Filter>Game\States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIDemoEndView.h">
+      <Filter>UI\Gameplay</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

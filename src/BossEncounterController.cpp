@@ -58,7 +58,8 @@ void BossEncounterController::Init(Camera* camera, CutsceneManager* cutsceneMana
 
 void BossEncounterController::Update(float deltaTime)
 {
-	if(m_boss->GetHealth() > 0 || m_currentPhase != BossEncounterPhase::Combat) return;
+	if(m_boss == nullptr) return;
+	if(m_boss->IsActive() || m_currentPhase != BossEncounterPhase::Combat) return;
 
 	m_currentPhase = BossEncounterPhase::Victory;
 	m_gameStateManager->SwitchState(DemoEnd);

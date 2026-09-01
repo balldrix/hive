@@ -10,6 +10,7 @@ class UIGameOverView;
 class UIHudView;
 class UIPauseMenuView;
 class UIScreenFlashFX;
+class UIDemoEndView;
 
 class UIMainView : UIView
 {
@@ -27,4 +28,5 @@ private:
 	UIScreenFlashFX* m_screenFlashFX;
 	UIPauseMenuView* m_uiPauseMenuView;
 	UIGameOverView* m_uiGameOverView;
+	UIDemoEndView* m_uiDemoEndView;
 };

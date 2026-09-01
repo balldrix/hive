@@ -1,3 +1,5 @@
+#define DEMO 1
+
 #include "CombatZoneManager.h"
 
 #include "Camera.h"
@@ -137,6 +139,11 @@ void CombatZoneManager::Update(float deltaTime)
 		}
 
 		zone->Deactivate();
+
+#if DEMO
+		if(zone->GetId() == "combat_boss") continue;
+#endif
+
 		if(auto* goView = UIManager::GetView("Combat Zone Go View"))
 		{
 			goView->TransitionIn(true);

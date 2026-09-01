@@ -161,8 +161,8 @@ void GameplayGameState::Setup()
 	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_trailer-level-showcase.json");
 	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_demo.json");
 	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_playground.json");
-	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_boss.json");
-	TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_preview.json");
+	TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_boss.json");
+	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_preview.json");
 
 	GameDataManager::LoadAllEnemyDefinitions();
 	m_camera = new Camera();
@@ -447,6 +447,7 @@ void GameplayGameState::Tick(float deltaTime)
 	m_pickupManager->Update(deltaTime);
 	m_combatZoneManager->Update(deltaTime);
 	m_triggerManager->Update(m_player->GetGroundPosition());
+	m_bossEncounterController->Update(deltaTime);
 
 	if(m_stopTimer > 0)
 	{
