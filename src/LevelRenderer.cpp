@@ -61,7 +61,7 @@ void LevelRenderer::Render(Graphics* graphics)
 
 	for(auto i = layers.begin(); i != layers.end(); ++i)
 	{
-		if(i->data.size() == 0) continue;
+		if(i->data.size() == 0 || i->visibility == false) continue;
 
 		RenderLayer(graphics, *i);
 	}
