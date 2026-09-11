@@ -1289,7 +1289,7 @@
                         {
                          "name":"collider",
                          "type":"string",
-                         "value":"{ \"x\": 6, \"y\": 0, \"width\": 20, \"height\": 11 }"
+                         "value":"{ \"x\": 27, \"y\": 18, \"width\": 20, \"height\": 13 }"
                         }, 
                         {
                          "name":"isAnimated",
@@ -1317,7 +1317,7 @@
                         {
                          "name":"collider",
                          "type":"string",
-                         "value":"{ \"x\": 6, \"y\": 0, \"width\": 20, \"height\": 11 }"
+                         "value":"{ \"x\": 27, \"y\": 18, \"width\": 20, \"height\": 13 }"
                         }, 
                         {
                          "name":"isAnimated",
@@ -1345,7 +1345,7 @@
                         {
                          "name":"collider",
                          "type":"string",
-                         "value":"{ \"x\": 6, \"y\": 0, \"width\": 20, \"height\": 11 }"
+                         "value":"{ \"x\": 27, \"y\": 18, \"width\": 20, \"height\": 13 }"
                         }, 
                         {
                          "name":"isAnimated",
@@ -1373,7 +1373,7 @@
                         {
                          "name":"collider",
                          "type":"string",
-                         "value":"{ \"x\": 6, \"y\": 0, \"width\": 20, \"height\": 11 }"
+                         "value":"{ \"x\": 27, \"y\": 18, \"width\": 20, \"height\": 13 }"
                         }, 
                         {
                          "name":"isAnimated",
