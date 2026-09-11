@@ -161,8 +161,8 @@ void GameplayGameState::Setup()
 	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_trailer-level-showcase.json");
 	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_demo.json");
 	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_playground.json");
-	TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_boss.json");
-	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_preview.json");
+	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_boss.json");
+	TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_preview.json");
 
 	GameDataManager::LoadAllEnemyDefinitions();
 	m_camera = new Camera();
@@ -672,7 +672,7 @@ void GameplayGameState::ProcessCollisions()
 		{
 			prop->Break();
 			LevelCollision::RemoveCollider(prop->GetID());
-			auto impactPosition = GetImpactPosition(playerHitBox, m_player->GetPosition(), propCollider, prop->GetPosition());
+			auto impactPosition = GetImpactPosition(playerHitBox, m_player->GetPosition(), propCollider, Vector2::Zero);
 
 			m_pickupManager->TrySpawnPickup(dropPosition);
 

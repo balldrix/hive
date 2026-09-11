@@ -35,6 +35,7 @@ struct TilemapLayer
 	float scrollSpeedX = {};
 	float scrollSpeedY = {};
 	Vector2 scrollOffset;
+	bool visibility = {};
 };
 
 struct TilemapData
@@ -62,6 +63,7 @@ inline void ParseLayers(TilemapData& t, const json& layers)
 		TilemapLayer tilemapLayer;
 		tilemapLayer.name = layer.at("name");
 		tilemapLayer.id = layer.at("id");
+		tilemapLayer.visibility = layer.at("visible");
 
 		if(layer.contains("data"))
 		{

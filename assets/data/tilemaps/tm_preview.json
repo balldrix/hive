@@ -260,198 +260,6 @@
          "objects":[
                 {
                  "height":0,
-                 "id":7,
-                 "name":"spawner_C1_3",
-                 "point":true,
-                 "properties":[
-                        {
-                         "name":"enemyDefinitionId",
-                         "type":"string",
-                         "value":"waste-dog"
-                        }, 
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"left"
-                        }, 
-                        {
-                         "name":"height",
-                         "type":"float",
-                         "value":0
-                        }, 
-                        {
-                         "name":"maxSpawns",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"spawnRate",
-                         "type":"float",
-                         "value":-1
-                        }, 
-                        {
-                         "name":"startingVelocityX",
-                         "type":"float",
-                         "value":0
-                        }, 
-                        {
-                         "name":"startingVelocityY",
-                         "type":"float",
-                         "value":0
-                        }],
-                 "rotation":0,
-                 "type":"combat",
-                 "visible":true,
-                 "width":0,
-                 "x":264.363,
-                 "y":95.6538
-                }, 
-                {
-                 "height":0,
-                 "id":9,
-                 "name":"spawner_C1_4",
-                 "point":true,
-                 "properties":[
-                        {
-                         "name":"enemyDefinitionId",
-                         "type":"string",
-                         "value":"waste-dog"
-                        }, 
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"left"
-                        }, 
-                        {
-                         "name":"height",
-                         "type":"float",
-                         "value":0
-                        }, 
-                        {
-                         "name":"maxSpawns",
-                         "type":"string",
-                         "value":"1.0"
-                        }, 
-                        {
-                         "name":"spawnRate",
-                         "type":"float",
-                         "value":-1
-                        }, 
-                        {
-                         "name":"startingVelocityX",
-                         "type":"float",
-                         "value":0
-                        }, 
-                        {
-                         "name":"startingVelocityY",
-                         "type":"float",
-                         "value":0
-                        }],
-                 "rotation":0,
-                 "type":"combat",
-                 "visible":true,
-                 "width":0,
-                 "x":270.082,
-                 "y":102.988
-                }, 
-                {
-                 "height":0,
-                 "id":10,
-                 "name":"spawner_C1_2",
-                 "point":true,
-                 "properties":[
-                        {
-                         "name":"enemyDefinitionId",
-                         "type":"string",
-                         "value":"waste-dog"
-                        }, 
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"left"
-                        }, 
-                        {
-                         "name":"height",
-                         "type":"float",
-                         "value":0
-                        }, 
-                        {
-                         "name":"maxSpawns",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"spawnRate",
-                         "type":"float",
-                         "value":-1
-                        }, 
-                        {
-                         "name":"startingVelocityX",
-                         "type":"float",
-                         "value":0
-                        }, 
-                        {
-                         "name":"startingVelocityY",
-                         "type":"float",
-                         "value":0
-                        }],
-                 "rotation":0,
-                 "type":"combat",
-                 "visible":true,
-                 "width":0,
-                 "x":264.747,
-                 "y":82.4758
-                }, 
-                {
-                 "height":0,
-                 "id":11,
-                 "name":"spawner_C1_1",
-                 "point":true,
-                 "properties":[
-                        {
-                         "name":"enemyDefinitionId",
-                         "type":"string",
-                         "value":"waste-dog"
-                        }, 
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"left"
-                        }, 
-                        {
-                         "name":"height",
-                         "type":"float",
-                         "value":0
-                        }, 
-                        {
-                         "name":"maxSpawns",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"spawnRate",
-                         "type":"float",
-                         "value":-1
-                        }, 
-                        {
-                         "name":"startingVelocityX",
-                         "type":"float",
-                         "value":0
-                        }, 
-                        {
-                         "name":"startingVelocityY",
-                         "type":"float",
-                         "value":0
-                        }],
-                 "rotation":0,
-                 "type":"combat",
-                 "visible":true,
-                 "width":0,
-                 "x":273.11,
-                 "y":78
-                }, 
-                {
-                 "height":0,
                  "id":25,
                  "name":"spawner_boss_1",
                  "point":true,
@@ -509,28 +317,6 @@
          "id":35,
          "name":"triggers",
          "objects":[
-                {
-                 "height":136,
-                 "id":23,
-                 "name":"intro_01",
-                 "properties":[
-                        {
-                         "name":"spawners",
-                         "type":"string",
-                         "value":"spawner_C1_1, spawner_C1_2, spawner_C1_3, spawner_C1_4"
-                        }, 
-                        {
-                         "name":"type",
-                         "type":"string",
-                         "value":"combatZone"
-                        }],
-                 "rotation":0,
-                 "type":"trigger",
-                 "visible":true,
-                 "width":8,
-                 "x":152,
-                 "y":0
-                }, 
                 {
                  "height":136,
                  "id":26,
@@ -626,6 +412,146 @@
                  "width":64,
                  "x":0,
                  "y":40
+                }, 
+                {
+                 "gid":2053,
+                 "height":32,
+                 "id":28,
+                 "name":"crate",
+                 "properties":[
+                        {
+                         "name":"collider",
+                         "type":"string",
+                         "value":"{ \"x\": 27, \"y\": 18, \"width\": 20, \"height\": 13 }"
+                        }, 
+                        {
+                         "name":"isAnimated",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"isBreakable",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":80,
+                 "y":72
+                }, 
+                {
+                 "gid":2053,
+                 "height":32,
+                 "id":29,
+                 "name":"crate",
+                 "properties":[
+                        {
+                         "name":"collider",
+                         "type":"string",
+                         "value":"{ \"x\": 27, \"y\": 18, \"width\": 20, \"height\": 13 }"
+                        }, 
+                        {
+                         "name":"isAnimated",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"isBreakable",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":120,
+                 "y":72
+                }, 
+                {
+                 "gid":2053,
+                 "height":32,
+                 "id":30,
+                 "name":"crate",
+                 "properties":[
+                        {
+                         "name":"collider",
+                         "type":"string",
+                         "value":"{ \"x\": 27, \"y\": 18, \"width\": 20, \"height\": 13 }"
+                        }, 
+                        {
+                         "name":"isAnimated",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"isBreakable",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":160,
+                 "y":72
+                }, 
+                {
+                 "gid":2053,
+                 "height":32,
+                 "id":31,
+                 "name":"crate",
+                 "properties":[
+                        {
+                         "name":"collider",
+                         "type":"string",
+                         "value":"{ \"x\": 27, \"y\": 18, \"width\": 20, \"height\": 13 }"
+                        }, 
+                        {
+                         "name":"isAnimated",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"isBreakable",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":96,
+                 "y":48
+                }, 
+                {
+                 "gid":2053,
+                 "height":32,
+                 "id":32,
+                 "name":"crate",
+                 "properties":[
+                        {
+                         "name":"collider",
+                         "type":"string",
+                         "value":"{ \"x\": 27, \"y\": 18, \"width\": 20, \"height\": 13 }"
+                        }, 
+                        {
+                         "name":"isAnimated",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"isBreakable",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":144,
+                 "y":48
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -634,7 +560,7 @@
          "y":0
         }],
  "nextlayerid":36,
- "nextobjectid":28,
+ "nextobjectid":33,
  "orientation":"orthogonal",
  "renderorder":"left-up",
  "tiledversion":"1.11.2",
@@ -642,11 +568,11 @@
  "tilesets":[
         {
          "firstgid":1,
-         "source":"D:\/Google Drive\/Gamedev\/Projects\/Hive\/Tilemaps\/hive_master.tsx"
+         "source":"D:\/Google Drive\/Gamedev\/Projects\/Hive Runner\/Tilemaps\/hive_master.tsx"
         }, 
         {
          "firstgid":2049,
-         "source":"D:\/Google Drive\/Gamedev\/Projects\/Hive\/Tilemaps\/props.tsx"
+         "source":"D:\/Google Drive\/Gamedev\/Projects\/Hive Runner\/Tilemaps\/props.tsx"
         }],
  "tilewidth":8,
  "type":"map",

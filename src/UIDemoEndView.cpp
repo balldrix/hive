@@ -192,4 +192,11 @@ void UIDemoEndView::Quit(UIMenuView* owner)
 
 void UIDemoEndView::Wishlist(UIMenuView* owner)
 {
+	ShellExecute(
+		NULL,
+		L"open",
+		L"https://store.steampowered.com/app/1079260/Fireworks_Mania__An_Explosive_Simulator/#game_area_purchase",
+		NULL,
+		NULL,
+		SW_SHOWNORMAL);
 }
