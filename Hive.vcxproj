@@ -117,6 +117,7 @@
     <ClCompile Include="src\WasteBossApproachState.cpp" />
     <ClCompile Include="src\WasteBossGlobalState.cpp" />
     <ClCompile Include="src\WasteBossJabState.cpp" />
+    <ClCompile Include="src\WasteBossShockwaveState.cpp" />
     <ClCompile Include="src\WasteBossSlamState.cpp" />
     <ClInclude Include="src\DemoEndGameState.h" />
     <ClInclude Include="src\GameOverGameState.h" />
@@ -287,6 +288,7 @@
     <ClInclude Include="src\WastesBossHurtState.h" />
     <ClInclude Include="src\UIGameOverView.h" />
     <ClInclude Include="src\UIDemoEndView.h" />
+    <ClInclude Include="src\WasteBossShockwaveState.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\WasteBoss.h" />
@@ -369,6 +371,7 @@
     <None Include="assets\data\spritesheets\lobster-spit_spritesheet.json" />
     <None Include="assets\data\spritesheets\mook_spritesheet.json" />
     <None Include="assets\data\spritesheets\player_spritesheet.json" />
+    <None Include="assets\data\spritesheets\waste-boss_spritesheet.json" />
     <None Include="assets\data\spritesheets\waste-box_spritesheet.json" />
     <None Include="assets\data\spritesheets\waste-dog_spritesheet.json" />
     <None Include="assets\data\spritesheets\waste-lobster_spritesheet.json" />

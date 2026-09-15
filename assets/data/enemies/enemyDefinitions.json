@@ -168,6 +168,11 @@
         "name": "slam",
         "value": 50,
         "hitStop": 1
+      },
+      {
+        "name": "shock-wave",
+        "value": 80,
+        "hitStop": 1
       }
     ],
     "hp": 500,
