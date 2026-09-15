@@ -293,7 +293,7 @@
    { "name": "hurt", "from": 17, "to": 17, "direction": "forward", "repeat": "1", "color": "#000000ff" },
    { "name": "cry", "from": 18, "to": 18, "direction": "forward", "repeat": "1", "color": "#000000ff" },
    { "name": "dead", "from": 19, "to": 22, "direction": "forward", "repeat": "1", "color": "#000000ff" },
-   { "name": "shock-wave", "from": 23, "to": 30, "direction": "forward", "color": "#000000ff" }
+   { "name": "shock-wave", "from": 23, "to": 30, "direction": "forward", "repeat": "1", "color": "#000000ff" }
   ],
   "layers": [
    { "name": "BG legs", "opacity": 255, "blendMode": "normal" },

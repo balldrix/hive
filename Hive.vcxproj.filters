@@ -469,7 +469,9 @@
     <ClCompile Include="src\UIDemoEndView.cpp">
       <Filter>UI\Gameplay</Filter>
     </ClCompile>
-    <ClCompile Include="src\WasteBossShockwaveState.cpp" />
+    <ClCompile Include="src\WasteBossShockwaveState.cpp">
+      <Filter>Game\Enemy\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">

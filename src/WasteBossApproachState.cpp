@@ -7,6 +7,7 @@
 
 #include <cmath>
 #include <directxtk/SimpleMath.h>
+#include <string>
 
 using namespace DirectX::SimpleMath;
 using namespace GameplayConstants;
@@ -46,7 +47,7 @@ void WasteBossApproachState::Execute(Enemy* boss)
 	const float distance = (bossPosition - playerPosition).Length();
 	const float verticalDistance = fabs(deltaY);
 
-	if(boss->GetTimer() > 3.0f && distance <= boss->GetData().hostileRange && Randomiser::GetRandNumUniform(0.0f, 1.0f) > 0.8f)
+	if(boss->GetTimer() <= 0.0f && distance <= boss->GetData().hostileRange && Randomiser::GetRandNumUniform(0.0f, 1.0f) > 0.8f)
 	{
 		boss->ResetStateChangeTimer();
 		boss->GetStateMachine()->ChangeState(WasteBossShockwaveState::Instance());
