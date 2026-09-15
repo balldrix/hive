@@ -2,10 +2,15 @@
 
 #include "Animator.h"
 #include "HitBoxManager.h"
+#include "Logger.h"
 #include "Player.h"
 #include "PlayerDeadState.h"
+#include "PlayerIdleState.h"
 #include "StateMachine.h"
 #include "UnitVectors.h"
+
+#include <directxtk/SimpleMath.h>
+#include <string>
 
 PlayerKnockbackState* PlayerKnockbackState::Instance()
 {
@@ -38,8 +43,9 @@ void PlayerKnockbackState::Execute(Player* player)
 	player->DisplayDust(player->GetPosition());
 	player->ResetKnockoutTimer();
 
-	if(player->GetKnockbackCount() < 1 && player->GetHealth() <= 0)
+	if(player->GetKnockbackCount() < 1)
 	{
+		player->Stop();
 		player->GetStateMachine()->ChangeState(PlayerDeadState::Instance());
 	}
 	else

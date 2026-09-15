@@ -2,6 +2,7 @@
 
 #include "Enemy.h"
 #include "GameplayConstants.h"
+#include "PlayerKnockbackState.h"`
 #include "WasteBossApproachState.h"
 
 #include <cmath>
@@ -32,10 +33,12 @@ void WasteBossIdleState::OnEnter(Enemy* boss)
 
 void WasteBossIdleState::Execute(Enemy* boss)
 {
-	if(boss->GetHealth() < 1 || boss->GetPlayerTarget()->GetHealth() < 1) return;
+	auto player = boss->GetPlayerTarget();
 
-	auto verticalDistance = fabs(boss->GetPositionY() - boss->GetPlayerTarget()->GetPositionY());
-	auto distance = (boss->GetPosition() - boss->GetPlayerTarget()->GetPosition()).Length();
+	if(boss->GetHealth() < 1 || player->GetHealth() < 1 || player->GetStateMachine()->IsInState(*PlayerKnockbackState::Instance())) return;
+
+	auto verticalDistance = fabs(boss->GetPositionY() - player->GetPositionY());
+	auto distance = (boss->GetPosition() - player->GetPosition()).Length();
 
 	if(distance > boss->GetData().attackRange)
 	{

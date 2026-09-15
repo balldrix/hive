@@ -142,8 +142,8 @@ void GameplayGameState::OnEntry()
 	Setup();
 
 	// @TODO remove these test calls
-	m_player->SetHealth(5);
-	m_player->SetSpecial(40);
+	//m_player->SetHealth(5);
+	//m_player->SetSpecial(40);
 	m_pendingHudTransition = true;
 }
 
@@ -161,8 +161,8 @@ void GameplayGameState::Setup()
 	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_trailer-level-showcase.json");
 	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_demo.json");
 	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_playground.json");
-	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_boss.json");
-	TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_preview.json");
+	//TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_preview.json");
+	TilemapLoader::LoadTilemap("assets\\data\\tilemaps\\tm_boss.json");
 
 	GameDataManager::LoadAllEnemyDefinitions();
 	m_camera = new Camera();
